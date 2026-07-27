@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>個股小狐｜AVGO 完整報告（三模式）</title>
+<style>
+:root{
+  --bg:#0b0e14;--panel:#11151f;--panel2:#161b28;--border:#232a3a;
+  --text:#e6e9f0;--muted:#8b93a7;--accent:#76b9ff;--green:#3ddc84;
+  --red:#ff6b6b;--yellow:#ffc857;--purple:#b794f6;--orange:#ff9f43;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;line-height:1.6;}
+.hero{padding:40px 24px;background:linear-gradient(135deg,#0a1a3a,#1a1030,#0e2218 100%);border-bottom:1px solid var(--border);}
+.hero h1{margin:0 0 4px;font-size:28px;}
+.hero .tagline{color:var(--muted);font-size:13px;margin-bottom:14px;}
+.hero .stats{display:flex;gap:22px;flex-wrap:wrap;}
+.hero .stat .label{font-size:11px;color:var(--muted);}
+.hero .stat .val{font-size:19px;font-weight:700;}
+.mode-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-right:6px;}
+.mode1{background:rgba(118,185,255,0.15);color:var(--accent);}
+.mode2{background:rgba(255,200,87,0.15);color:var(--yellow);}
+.mode3{background:rgba(61,220,132,0.15);color:var(--green);}
+.toc{position:sticky;top:0;background:rgba(11,14,20,0.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:9px 24px;display:flex;gap:12px;flex-wrap:wrap;font-size:12px;z-index:10;}
+.toc a{color:var(--muted);text-decoration:none;white-space:nowrap;}
+.toc a:hover{color:var(--accent);}
+.toc .sep{color:var(--border);}
+.section{max-width:1080px;margin:0 auto;padding:32px 24px;}
+.mode-header{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.mode-header h2{margin:0;font-size:22px;}
+.section h3{font-size:18px;border-left:4px solid var(--accent);padding-left:10px;margin-bottom:14px;}
+.section h4{font-size:14px;color:var(--accent);margin-bottom:8px;}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;}
+th,td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:left;}
+th{color:var(--muted);font-weight:600;background:var(--panel2);}
+tr:hover{background:var(--panel2);}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;}
+.badge.ok{background:rgba(61,220,132,0.15);color:var(--green);}
+.badge.warn{background:rgba(255,200,87,0.15);color:var(--yellow);}
+.badge.bad{background:rgba(255,107,107,0.15);color:var(--red);}
+.badge.blue{background:rgba(118,185,255,0.15);color:var(--accent);}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.cards2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;}
+.card h5{margin:0 0 6px;font-size:13px;color:var(--text);}
+.card p{margin:0;font-size:12px;color:var(--muted);}
+.scenario-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;}
+.scenario-card.bear{border-top:3px solid var(--red);}
+.scenario-card.base{border-top:3px solid var(--accent);}
+.scenario-card.bull{border-top:3px solid var(--green);}
+.scenario-card h5{margin:0 0 8px;font-size:13px;}
+.scenario-card ul{padding-left:16px;margin:6px 0;font-size:12px;color:var(--muted);}
+.scenario-card .target{font-size:17px;font-weight:700;margin-top:8px;}
+.moat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px;}
+.moat-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;}
+.moat-card .mname{font-size:11px;color:var(--muted);margin-bottom:4px;}
+.moat-card .stars{font-size:16px;}
+.ratio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.ratio-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;}
+.ratio-card.ok{border-top:3px solid var(--green);}
+.ratio-card.warn{border-top:3px solid var(--yellow);}
+.ratio-card.bad{border-top:3px solid var(--red);}
+.ratio-card .rname{font-size:11px;color:var(--muted);margin-bottom:4px;}
+.ratio-card .rval{font-size:20px;font-weight:700;}
+.ratio-card .rwarn{font-size:11px;color:var(--muted);margin-top:4px;}
+.action-box{background:linear-gradient(135deg,#0e2a1d,#0e1e2e);border:1px solid var(--green);border-radius:12px;padding:20px;margin-top:12px;}
+.action-box h4{margin-top:0;color:var(--green);font-size:16px;}
+.action-box .row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--border);font-size:13px;gap:10px;}
+.action-box .row:last-child{border-bottom:none;}
+.action-box .row .lbl{color:var(--muted);white-space:nowrap;min-width:90px;}
+.note{background:var(--panel2);border-left:3px solid var(--purple);padding:9px 12px;border-radius:6px;font-size:12px;color:var(--muted);margin-top:8px;}
+.risk-card{background:var(--panel);border-left:4px solid var(--red);border-radius:8px;padding:11px 13px;margin-bottom:8px;}
+.risk-card h5{margin:0 0 3px;font-size:13px;color:var(--red);}
+.risk-card p{margin:0;font-size:12px;color:var(--muted);}
+.divider{border:none;border-top:2px solid var(--border);margin:10px 0 32px;}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;}
+.sum-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
+.sum-card .sval{font-size:20px;font-weight:700;color:var(--accent);}
+.sum-card .slabel{font-size:11px;color:var(--muted);margin-top:3px;}
+footer{padding:28px 24px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);max-width:1080px;margin:0 auto;}
+@media(max-width:760px){.cards3,.moat-grid,.ratio-grid{grid-template-columns:1fr 1fr;}.summary-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div style="margin-bottom:8px;">
+    <span class="mode-badge mode1">深度研究</span>
+    <span class="mode-badge mode2">財報解析</span>
+    <span class="mode-badge mode3">財務健檢</span>
+  </div>
+  <h1>Broadcom Inc. (AVGO) ｜個股小狐完整報告</h1>
+  <div class="tagline">分析日期：2026-06-29　｜　最新財報：Q2 FY2026（截至2026-05-04）　｜　Thesis 成立度：<span style="color:var(--green);font-weight:700;">4.5 / 5</span>　｜　象限：<span style="color:var(--accent);font-weight:700;">高速成長股（AI Compounder + 軟體轉型）</span></div>
+  <div class="stats" style="margin-top:16px;">
+    <div class="stat"><div class="label">現價（2026-06-29）</div><div class="val">$372.45</div></div>
+    <div class="stat"><div class="label">市值</div><div class="val">$1.76T</div></div>
+    <div class="stat"><div class="label">TTM PE</div><div class="val">~60x</div></div>
+    <div class="stat"><div class="label">Forward PE（FY2027E）</div><div class="val">~21x</div></div>
+    <div class="stat"><div class="label">FY2025 營收</div><div class="val">$63.9B</div></div>
+    <div class="stat"><div class="label">FCF（TTM）</div><div class="val">$32.8B</div></div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <span style="color:var(--accent);font-weight:700;">深度研究</span>
+  <a href="#intro">基本介紹</a>
+  <a href="#engine">業務引擎</a>
+  <a href="#thesis">核心Thesis</a>
+  <a href="#competition">競爭格局</a>
+  <a href="#moat">象限/護城河</a>
+  <span class="sep">｜</span>
+  <span style="color:var(--yellow);font-weight:700;">財報解析</span>
+  <a href="#beatmiss">Beat/Miss</a>
+  <a href="#guidance">指引</a>
+  <a href="#reaction">股價反應</a>
+  <a href="#dcf">DCF</a>
+  <a href="#eps">EPS/PE</a>
+  <a href="#comps">Comps</a>
+  <a href="#analyst">投行目標</a>
+  <span class="sep">｜</span>
+  <span style="color:var(--green);font-weight:700;">財務健檢</span>
+  <a href="#fsdata">財務數據</a>
+  <a href="#ratios">六大比率</a>
+  <a href="#debt">債務到期</a>
+  <a href="#capex">CapEx</a>
+  <a href="#peercomp">同業對比</a>
+  <a href="#diag">綜合診斷</a>
+</div>
+
+<!-- ================================================================
+     MODE 1 深度研究
+     ================================================================ -->
+<div class="section">
+  <div class="mode-header">
+    <span class="mode-badge mode1">MODE 1</span>
+    <h2>公司深度研究</h2>
+  </div>
+
+  <!-- 基本介紹 -->
+  <h3 id="intro">① 基本介紹</h3>
+  <div class="summary-grid">
+    <div class="sum-card"><div class="sval">$1.76T</div><div class="slabel">市值</div></div>
+    <div class="sum-card"><div class="sval">$63.9B</div><div class="slabel">FY2025 全年營收</div></div>
+    <div class="sum-card"><div class="sval">67.8%</div><div class="slabel">FY2025 毛利率</div></div>
+    <div class="sum-card"><div class="sval">$26.9B</div><div class="slabel">FY2025 FCF</div></div>
+    <div class="sum-card"><div class="sval">+24%</div><div class="slabel">FY2025 YoY</div></div>
+    <div class="sum-card"><div class="sval">~55-60%</div><div class="slabel">客製ASIC市場份額</div></div>
+    <div class="sum-card"><div class="sval">$15.1B</div><div class="slabel">Q2 FY26 AI半導體單季</div></div>
+    <div class="sum-card"><div class="sval">+143%</div><div class="slabel">Q2 FY26 AI YoY</div></div>
+  </div>
+  <p>Broadcom 成立於1961年，以半導體電子元件起家，歷經多次並購整合（2016年收購Broadcom Corp、2019年收購Symantec企業部、2023年以$690億收購VMware），演化為橫跨「AI客製晶片＋高速網路IC＋企業軟體」的複合型科技巨頭。核心客戶包括Google、Meta、Apple、Anthropic、OpenAI。財政年度截至每年10-11月。</p>
+
+  <!-- 業務引擎 -->
+  <h3 id="engine">② 業務引擎分析</h3>
+  <table>
+    <tr><th>業務線</th><th>Q2 FY2026 約當營收</th><th>佔比（估）</th><th>YoY（Q2 FY26）</th><th>核心護城河</th></tr>
+    <tr><td><b>AI半導體（ASIC + Networking）</b></td><td>$15.1B</td><td>68%</td><td>+143%</td><td>Google/Meta/OpenAI/Anthropic長約、系統整合壁壘、Ethernet交換機標準</td></tr>
+    <tr><td><b>Infrastructure Software（VMware）</b></td><td>~$7.1B（估）</td><td>~32%</td><td>~+29%（FY26 Q1同比）</td><td>VMware vSphere/vSAN企業虛擬化、轉訂閱制高黏性</td></tr>
+  </table>
+  <h4>優勢產品表</h4>
+  <table>
+    <tr><th>產品/平台</th><th>客戶</th><th>護城河說明</th></tr>
+    <tr><td>客製AI ASIC（XPU系列）</td><td>Google TPU、Meta MTIA、Apple Neural Engine、OpenAI、Anthropic</td><td>共同設計生態、5年合約慣例、替代成本極高（需重寫ML編譯器）</td></tr>
+    <tr><td>Tomahawk / Jericho 交換晶片</td><td>所有超大型資料中心</td><td>Ethernet標準地位、與ASIC組合銷售，「賣了A就賣B」</td></tr>
+    <tr><td>VMware Cloud Foundation（VCF）</td><td>全球80%以上Fortune500企業</td><td>vSphere市佔>70%，轉訂閱後ARPU大幅提升，替換工程成本數億美元</td></tr>
+    <tr><td>光纖通道 / 儲存HBA</td><td>企業儲存市場</td><td>市佔>80%，細分市場壁壘，維護性現金流</td></tr>
+  </table>
+  <h4>近4期歷史財務摘要（AVGO財政年度截至10-11月）</h4>
+  <table>
+    <tr><th>財政年度</th><th>總營收</th><th>YoY</th><th>毛利率</th><th>GAAP EPS</th><th>FCF</th></tr>
+    <tr><td>FY2022（截至2022-10）</td><td>$33.2B</td><td>+21%</td><td>66.6%</td><td>$2.65</td><td>$16.3B</td></tr>
+    <tr><td>FY2023（截至2023-10）</td><td>$35.8B</td><td>+8%</td><td>68.9%</td><td>$3.30</td><td>$17.6B</td></tr>
+    <tr><td>FY2024（截至2024-11）</td><td>$51.6B</td><td>+44%</td><td>63.0%（VMware攤提壓縮）</td><td>$1.23（含大量無形資產攤提）</td><td>$19.4B</td></tr>
+    <tr><td>FY2025（截至2025-11）</td><td>$63.9B</td><td>+24%</td><td>67.8%</td><td>$4.77</td><td>$26.9B</td></tr>
+  </table>
+  <div class="note">FY2024 GAAP EPS $1.23 因VMware收購後大量無形資產攤提（每年~$8-9B）而嚴重低估盈利能力，非GAAP EPS（排除攤提）實際高出數倍，是更合適的比較基準。</div>
+
+  <!-- 核心Thesis -->
+  <h3 id="thesis">③ 核心 Thesis 與未來性</h3>
+  <div class="cards2">
+    <div class="card"><h5><span class="badge ok">✅</span> 客製ASIC是超大客戶的第二條AI算力路線</h5><p>Hyperscalers用ASIC比GPU成本低30-40%（特定場景），Broadcom是唯一能系統整合ASIC+互連+封裝的供應商，形成「替代不了、還得綑綁」格局。</p></div>
+    <div class="card"><h5><span class="badge ok">✅</span> VMware訂閱轉型製造高品質軟體現金流</h5><p>VCF訂閱模式ARPU大幅提升，客戶流失率低，每季貢獻穩定FCF；Software段為整體估值提供「地板」。</p></div>
+    <div class="card"><h5><span class="badge ok">✅</span> 管理層執行力強、資本配置高效</h5><p>Hock Tan 歷史上每次收購都成功整合，FCF轉化率持續>45%，股息+回購持續。</p></div>
+    <div class="card"><h5><span class="badge ok">✅</span> 2027年>$100B晶片營收路線圖可見</h5><td>管理層明確表示對2027年晶片收入超$100B有「line of sight」，以當前AI加速軌跡看屬保守估計。</p></div>
+    <div class="card"><h5><span class="badge warn">⚠️</span> VMware整合仍在過渡期，客戶抵觸</h5><p>部分大型企業客戶對VMware大幅漲價感到不滿，有遷移至Nutanix、OpenShift等替代方案的案例，需持續監控流失率。</p></div>
+    <div class="card"><h5><span class="badge warn">⚠️</span> 客戶集中度風險</h5><p>Google單客戶貢獻約20%+AI半導體收入；若Google TPU自研能力大幅提升，訂單可能部分內化，影響成長動能。</p></div>
+  </div>
+  <h4>成長驅動力</h4>
+  <table>
+    <tr><th>驅動力</th><th>時間軸</th><th>量化潛力</th></tr>
+    <tr><td>AI推論ASIC需求擴大（OpenAI、Anthropic新合約）</td><td>FY2026-2028</td><td>管理層目標FY2027晶片收入>$100B</td></tr>
+    <tr><td>VMware Cloud Foundation全面訂閱化</td><td>FY2025-2027</td><td>軟體年化收入估計穩定成長15-20%</td></tr>
+    <tr><td>Ethernet AI組網（替代InfiniBand）</td><td>2026-2028</td><td>Ethernet Fabric需求隨ASIC叢集擴大倍增</td></tr>
+  </table>
+  <div class="risk-card"><h5>風險一：VMware客戶大規模流失</h5><p>觸發條件：兩季VMware NRR（淨收入留存率）低於100%；影響：軟體段收入下滑，整體估值地板坍塌。嚴重度：🟡 中</p></div>
+  <div class="risk-card"><h5>風險二：超大型客戶ASIC自研升級</h5><p>觸發條件：Google宣佈減少外採、加速TPU內製；影響：AI半導體成長率從100%+降至20-30%。嚴重度：🟡 中高</p></div>
+  <div class="risk-card"><h5>風險三：債務壓力（相對高槓桿）</h5><p>觸發條件：經濟衰退致FCF大幅收縮；影響：$45B淨負債需重新定價信用風險。嚴重度：🟢 低中（現有FCF覆蓋充裕）</p></div>
+
+  <!-- 競爭格局 -->
+  <h3 id="competition">④ 競爭格局</h3>
+  <table>
+    <tr><th>戰場</th><th>競爭者</th><th>優勢</th><th>對AVGO威脅度</th></tr>
+    <tr><td>AI客製ASIC</td><td>Marvell Technology</td><td>AWS Trainium、Microsoft Maia合作；封裝技術接近</td><td>🟡 中（定位補位，非正面競爭）</td></tr>
+    <tr><td>AI訓練/推論（GPU）</td><td>NVIDIA</td><td>通用性、CUDA生態壓倒性領先</td><td>🟢 低（互補關係，非替代）</td></tr>
+    <tr><td>企業虛擬化軟體</td><td>Nutanix、Red Hat（IBM）、VMware替代方案</td><td>開源生態、Kubernetes、超融合</td><td>🟡 中（VMware大漲價後遷移加速）</td></tr>
+    <tr><td>Ethernet網路晶片</td><td>Cisco（Nexus）、Arista（定製IC）</td><td>軟體定義網路、品牌認知</td><td>🟢 低（Broadcom是後端供應商）</td></tr>
+  </table>
+  <div class="note">AVGO與NVDA是「互補競爭」：ASIC更便宜但通用性低，GPU更貴但靈活；超大型客戶通常兩者並用。AVGO最主要的競爭威脅來自Marvell在ASIC領域的崛起，以及VMware客戶流失加速。</div>
+
+  <!-- 成長象限/護城河 -->
+  <h3 id="moat">⑤ 成長象限判斷與護城河評估</h3>
+  <table>
+    <tr><th>判斷依據</th><th>數據</th><th>結論</th></tr>
+    <tr><td>AI半導體成長速度</td><td>Q1 FY26 +106%、Q2 FY26 +143% YoY</td><td>高速成長段落</td></tr>
+    <tr><td>軟體段穩定性</td><td>VMware訂閱轉型，軟體段YoY+29%</td><td>穩定成長段落</td></tr>
+    <tr><td>FCF轉化率</td><td>FCF margin ~42-50%</td><td>極高資本效率</td></tr>
+  </table>
+  <p style="color:var(--accent);font-weight:600;">象限：<span style="color:var(--text);">高速成長 + 穩定成長「複合型」→ AI Compounder 兼具防禦性軟體地板</span></p>
+  <h4>護城河五維度</h4>
+  <div class="moat-grid">
+    <div class="moat-card"><div class="mname">不可替代性</div><div class="stars">⭐⭐⭐⭐½</div></div>
+    <div class="moat-card"><div class="mname">網路效應</div><div class="stars">⭐⭐⭐½</div></div>
+    <div class="moat-card"><div class="mname">客戶黏著度</div><div class="stars">⭐⭐⭐⭐½</div></div>
+    <div class="moat-card"><div class="mname">成本優勢</div><div class="stars">⭐⭐⭐⭐</div></div>
+    <div class="moat-card"><div class="mname">規模效應</div><div class="stars">⭐⭐⭐⭐</div></div>
+  </div>
+  <p style="text-align:center;color:var(--accent);font-weight:700;">護城河綜合評分：4.1 / 5 ★</p>
+</div>
+
+<hr class="divider">
+
+<!-- ================================================================
+     MODE 2 財報解析
+     ================================================================ -->
+<div class="section">
+  <div class="mode-header">
+    <span class="mode-badge mode2">MODE 2</span>
+    <h2>最新財報解析（Q2 FY2026）</h2>
+  </div>
+
+  <!-- Beat/Miss -->
+  <h3 id="beatmiss">① Beat / Miss 對照表</h3>
+  <table>
+    <tr><th>項目</th><th>實際值</th><th>市場預期</th><th>差異</th><th>YoY</th><th>判定</th></tr>
+    <tr><td>總營收</td><td>$22.187B</td><td>~$22.6B（共識）</td><td>-1.8%</td><td>+48%</td><td><span class="badge bad">❌ 輕微Miss</span></td></tr>
+    <tr><td>非GAAP EPS</td><td>$2.44</td><td>$2.32–$2.40</td><td>+1.7–5.2%</td><td>YoY大幅增長</td><td><span class="badge ok">✅ Beat</span></td></tr>
+    <tr><td>AI半導體營收</td><td>$15.1B（68%佔比）</td><td>—</td><td>—</td><td>+143%</td><td><span class="badge ok">✅ 超強</span></td></tr>
+    <tr><td>GAAP EPS</td><td>$1.91</td><td>—</td><td>—</td><td>—</td><td><span class="badge blue">— 含大量攤提</span></td></tr>
+  </table>
+  <div class="note">Q1 FY2026（截至2026-02-02）：營收$19.311B（+29% YoY），非GAAP EPS $2.05（beat $1.88），AI收入$8.4B（+106% YoY）——兩季連續AI加速，但Q2整體營收輕微未達共識。</div>
+
+  <!-- 指引 -->
+  <h3 id="guidance">② 指引變化</h3>
+  <table>
+    <tr><th>指標</th><th>Q1 FY26 實際</th><th>Q2 FY26 實際</th><th>Q3 FY26 指引（9月）</th><th>市場共識</th><th>方向</th></tr>
+    <tr><td>營收</td><td>$19.3B</td><td>$22.2B</td><td>~$29.9B（共識推估）</td><td>$29.9B</td><td><span class="badge ok">⬆ 成長軌道維持</span></td></tr>
+    <tr><td>AI段成長軌跡</td><td>+106% YoY</td><td>+143% YoY</td><td>加速趨勢延續</td><td>—</td><td><span class="badge ok">⬆ 正在加速</span></td></tr>
+    <tr><td>FY2027晶片目標</td><td colspan="4">管理層明確表示有>$100B chip revenue path（僅晶片，不含軟體）</td><td><span class="badge ok">⬆ 上調長期路線圖</span></td></tr>
+  </table>
+
+  <!-- 股價反應 -->
+  <h3 id="reaction">③ 股價反應（Q2 FY2026 財報後）</h3>
+  <table>
+    <tr><th>時間點</th><th>事件</th><th>股價反應</th><th>原因</th></tr>
+    <tr><td>2026-06-03 盤後</td><td>Q2 FY26 財報發布</td><td><span class="badge bad">約-12.6%（大幅下跌）</span></td><td>整體營收$22.2B輕微Miss共識$22.6B，市場情緒脆弱（高估值+高預期），獲利了結賣壓湧現</td></tr>
+    <tr><td>2026-06-04</td><td>分析師反應</td><td>Jefferies升目標至$550（「買入機會」）</td><td>EPS beat、AI段+143%遠超預期，分析師認為股價過度反應</td></tr>
+    <tr><td>截至2026-06-29</td><td>分析當日</td><td>$372.45（月跌幅仍明顯）</td><td>市場仍在消化高估值；Forward PE ~21x對應FY2027 $17.9E，估值已較峰值顯著收縮</td></tr>
+  </table>
+
+  <!-- DCF -->
+  <h3 id="dcf">④ 三情境 DCF 估值</h3>
+  <div class="cards3">
+    <div class="scenario-card bear">
+      <h5>🐻 熊市情境</h5>
+      <ul>
+        <li>FY26-28 AI半導體CAGR：30%（客戶自研加速）</li>
+        <li>VMware流失率升高，軟體段成長放緩至5%</li>
+        <li>EBITDA margin：45%</li>
+        <li>FCF margin：40%</li>
+        <li>WACC：11%，永續成長率：3%</li>
+      </ul>
+      <div class="target">目標價：$270–$310</div>
+    </div>
+    <div class="scenario-card base">
+      <h5>⚖️ 基準情境</h5>
+      <ul>
+        <li>FY26-28 AI半導體CAGR：65%（管理層路線圖）</li>
+        <li>VMware穩定，軟體段成長15-20%</li>
+        <li>EBITDA margin：52%</li>
+        <li>FCF margin：47%</li>
+        <li>WACC：10%，永續成長率：4%</li>
+      </ul>
+      <div class="target">目標價：$460–$530</div>
+    </div>
+    <div class="scenario-card bull">
+      <h5>🚀 牛市情境</h5>
+      <ul>
+        <li>FY26-28 AI半導體CAGR：90%（新客戶持續加入）</li>
+        <li>VMware訂閱轉型加速，軟體段25%+</li>
+        <li>EBITDA margin：57%</li>
+        <li>FCF margin：52%</li>
+        <li>WACC：9%，永續成長率：5%</li>
+      </ul>
+      <div class="target">目標價：$580–$650</div>
+    </div>
+  </div>
+  <div class="note">⚠️ 三情境為基於公開數據之合理推算。對估值影響最大的變數：AI半導體收入CAGR（牛/熊差距近100ppt）及VMware流失率（關係軟體段地板是否成立）。</div>
+
+  <!-- EPS + 歷史PE -->
+  <h3 id="eps">⑤ EPS 多年趨勢 ＋ 歷史本益比</h3>
+  <table>
+    <tr><th>年度（AVGO財政年度）</th><th>GAAP EPS</th><th>非GAAP EPS（估）</th><th>YoY</th><th>狀態</th></tr>
+    <tr><td>FY2023（截至2023-10）</td><td>$3.30</td><td>⚠️ 估~$11-12（含大量攤提差異）</td><td>+25%</td><td><span class="badge ok">A 實際</span></td></tr>
+    <tr><td>FY2024（截至2024-11）</td><td>$1.23（VMware攤提拖累）</td><td>⚠️ 估~$5-6</td><td>GAAP -63%，非GAAP成長</td><td><span class="badge ok">A 實際</span></td></tr>
+    <tr><td>FY2025（截至2025-11）</td><td>$4.77</td><td>⚠️ 估~$7.5-8</td><td>GAAP +288%，攤提基期回升</td><td><span class="badge ok">A 實際</span></td></tr>
+    <tr><td>FY2026（截至2026-11，進行中）</td><td>—</td><td>⚠️ 估~$11.60（BofA預估）</td><td>+45-55%</td><td><span class="badge warn">E 預估</span></td></tr>
+    <tr><td>FY2027（截至2027-11）</td><td>—</td><td>⚠️ ~$17.93（BofA預估）</td><td>~+54%</td><td><span class="badge warn">E 預估</span></td></tr>
+  </table>
+  <div class="note">AVGO GAAP EPS受VMware無形資產攤提（每年~$8-9B）嚴重壓低，非GAAP（剔除攤提）才是真實盈利能力參考。FY2023/2024非GAAP EPS估算基於公開季度非GAAP EPS加總，帶「⚠️估」標示。</div>
+
+  <h4>歷史本益比（TTM PE）</h4>
+  <table>
+    <tr><th>時間點</th><th>TTM PE</th><th>說明</th></tr>
+    <tr><td>5年平均（約2021-2026）</td><td>~52-68x（來源差異大）</td><td>AI爆發後盈利高速增長使PE壓縮，但歷史均值偏高</td></tr>
+    <tr><td>2022年10月修正低點</td><td>~19.4x ✅</td><td>半導體周期下行，股價腰斬，TTM PE壓縮至~19x，是近5年最低估值水位</td></tr>
+    <tr><td>2018年11月修正低點</td><td>~7.53x ✅</td><td>2018年底市場崩潰，股價$22（現在已10拆1+），PE降至7.53x，為10年最低</td></tr>
+    <tr><td>當前（2026-06-29）</td><td>~60x（TTM）</td><td>TTM PE因GAAP含大量攤提而虛高；以非GAAP Forward PE計算則約21x，合理</td></tr>
+  </table>
+  <div class="note">以Forward PE（非GAAP）~21x評估AVGO更合理：2022年低點Forward PE約15-17x，當前21x仍有20-30%收縮空間作為安全邊際底線參考。</div>
+
+  <!-- Comps -->
+  <h3 id="comps">⑥ 可比公司（Comps）</h3>
+  <table>
+    <tr><th>公司</th><th>市值</th><th>TTM PE</th><th>Forward PE</th><th>FCF Yield</th><th>成長定位</th></tr>
+    <tr><td><b>AVGO</b></td><td>$1.76T</td><td>~60x（GAAP含攤提）</td><td>~21x（非GAAP FY27）</td><td>~1.9%</td><td>AI ASIC + 軟體，+48% YoY</td></tr>
+    <tr><td>NVDA</td><td>$4.72T</td><td>29.5x</td><td>~21x</td><td>~2.1%</td><td>AI GPU龍頭，+85% YoY</td></tr>
+    <tr><td>Marvell（MRVL）</td><td>~$0.8T</td><td>—（虧損中）</td><td>~35-40x</td><td>—</td><td>AWS/MSFT ASIC，追趕者</td></tr>
+    <tr><td>TSM</td><td>$2.24T</td><td>37.8x</td><td>27.6x</td><td>—</td><td>晶圓代工，上游受益</td></tr>
+  </table>
+  <div class="note">AVGO非GAAP Forward PE（~21x）與NVDA相當，但成長率較低（+48% vs +85%），但AVGO多了軟體段地板（防禦性），整體定位為「成長性+防禦性」複合型，估值合理但非便宜。</div>
+
+  <!-- 投行目標 -->
+  <h3 id="analyst">⑦ 投行目標價與操作建議</h3>
+  <table>
+    <tr><th>機構/指標</th><th>評等</th><th>目標價</th><th>日期/備註</th></tr>
+    <tr><td>分析師共識（24-28家）</td><td>Strong Buy（24 Buy / 3 Hold / 0 Sell）</td><td>均值 ~$516-525</td><td>截至2026-06-29</td></tr>
+    <tr><td>Jefferies（Blayne Curtis）</td><td>Buy</td><td>$550（從$500上調）</td><td>2026-06-04，Q2後「視跌為買機」</td></tr>
+    <tr><td>BofA Securities（Vivek Arya）</td><td>—</td><td>FY2026E EPS $11.60 / FY2027E $17.93</td><td>最具代表性盈利預測</td></tr>
+    <tr><td>目標價區間</td><td>—</td><td>高$630 / 低$390</td><td>極寬，反映VMware整合不確定性</td></tr>
+  </table>
+  <table>
+    <tr><th>參考目標</th><th>對應目標價</th><th>距現價（$372.45）空間</th></tr>
+    <tr><td>分析師共識均值</td><td>~$520</td><td>+39.6%</td></tr>
+    <tr><td>DCF基準情境下緣</td><td>$460</td><td>+23.5%</td></tr>
+    <tr><td>Jefferies目標</td><td>$550</td><td>+47.7%</td></tr>
+  </table>
+  <div class="action-box">
+    <h4>🦊 個股小狐操作建議</h4>
+    <div class="row"><span class="lbl">整體定位</span><span>高速成長兼防禦性地板，適合中長期波段持有；Forward PE 21x已較近期高點顯著收縮</span></div>
+    <div class="row"><span class="lbl">建倉建議</span><span>現價$372.45接近分析師目標低端（$390），可視為合理分批建倉區；理想建倉區$340-360（接近2022低點Forward PE水位）</span></div>
+    <div class="row"><span class="lbl">加碼觸發</span><span>Q3 FY26 AI半導體收入確認>$18B（+120% YoY延續）；VMware NRR保持>100%</span></div>
+    <div class="row"><span class="lbl">停損警示</span><span>AI半導體連續兩季YoY跌破60%；VMware NRR低於100%；跌破$300（熊市情境區）</span></div>
+    <div class="row"><span class="lbl">每季監控</span><span>AI半導體YoY加速度、VMware流失率/NRR、新ASIC客戶披露（OpenAI/Anthropic量產進度）</span></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ================================================================
+     MODE 3 財務健檢
+     ================================================================ -->
+<div class="section">
+  <div class="mode-header">
+    <span class="mode-badge mode3">MODE 3</span>
+    <h2>財務風險健檢</h2>
+  </div>
+
+  <!-- 財務數據 -->
+  <h3 id="fsdata">① 財務數據（三期對照）</h3>
+  <table>
+    <tr><th>損益表</th><th>FY2023（截至2023-10）</th><th>FY2024（截至2024-11）</th><th>FY2025（截至2025-11）</th></tr>
+    <tr><td>總營收</td><td>$35.8B</td><td>$51.6B</td><td>$63.9B</td></tr>
+    <tr><td>毛利率</td><td>68.9%</td><td>63.0%</td><td>67.8%</td></tr>
+    <tr><td>GAAP EPS</td><td>$3.30</td><td>$1.23</td><td>$4.77</td></tr>
+    <tr><td>利息支出</td><td>⚠️ 估~$2.0B</td><td>⚠️ 估~$3.5B（VMware債務）</td><td>⚠️ 估~$3.3B</td></tr>
+    <tr><td>D&A（攤提）</td><td>⚠️ 估~$3B</td><td>⚠️ 估~$9B（VMware無形）</td><td>⚠️ 估~$8-9B</td></tr>
+  </table>
+  <table>
+    <tr><th>資產負債表</th><th>FY2024（2024-11）</th><th>FY2025（2025-11）</th><th>TTM（2026-05）</th></tr>
+    <tr><td>現金及等價物</td><td>~$10B（估）</td><td>$14.2B</td><td>$19.6B ✅</td></tr>
+    <tr><td>長期債務</td><td>—</td><td>$63.8B</td><td>$64.9B ✅</td></tr>
+    <tr><td>淨負債</td><td>—</td><td>~$49.6B</td><td>~$45.3B ✅</td></tr>
+    <tr><td>D/E ratio</td><td>~1.0x</td><td>~0.8x</td><td>~0.74x ✅（改善中）</td></tr>
+  </table>
+  <table>
+    <tr><th>現金流量</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>TTM</th></tr>
+    <tr><td>FCF</td><td>$17.6B</td><td>$19.4B</td><td>$26.9B</td><td>$32.8B ✅</td></tr>
+    <tr><td>CapEx</td><td>—</td><td>—</td><td>$0.623B</td><td>$0.860B ✅</td></tr>
+    <tr><td>OCF（估）</td><td>—</td><td>—</td><td>~$27.5B</td><td>~$33.6B ✅</td></tr>
+    <tr><td>FCF margin</td><td>~49%</td><td>~38%</td><td>~42%</td><td>~43%</td></tr>
+  </table>
+  <div class="note">利息支出為估算值（基於債務規模×平均成本）；D&A含大量VMware無形資產攤提，嚴重壓低GAAP EPS，非財務惡化訊號。建議查FY2025 10-K 確認精確數字。</div>
+
+  <!-- 六大比率 -->
+  <h3 id="ratios">② 六大比率診斷（基於TTM/FY2025數據）</h3>
+  <div class="ratio-grid">
+    <div class="ratio-card ok">
+      <div class="rname">① 利息覆蓋率（EBIT/Interest）</div>
+      <div class="rval" style="color:var(--green);">⚠️ 估~8-10x</div>
+      <div>EBIT（non-GAAP，剔除攤提）~$35B÷利息$3.3B</div>
+      <div class="rwarn">警戒：&lt;3x ｜ 優良：>5x</div>
+      <div style="margin-top:6px;"><span class="badge ok">✅ 安全</span><span class="badge warn" style="margin-left:4px;">⚠️ 需查原文確認</span></div>
+    </div>
+    <div class="ratio-card warn">
+      <div class="rname">② 負債比率</div>
+      <div class="rval" style="color:var(--yellow);">~60%（含VMware收購債）</div>
+      <div>總負債（估$100B+） ÷ 總資產</div>
+      <div class="rwarn">警戒：>70% ｜ 優良：&lt;40%</div>
+      <div style="margin-top:6px;"><span class="badge warn">⚠️ 偏高，但有計畫降槓桿</span></div>
+    </div>
+    <div class="ratio-card warn">
+      <div class="rname">③ 淨債務/EBITDA（non-GAAP）</div>
+      <div class="rval" style="color:var(--yellow);">~1.5x</div>
+      <div>淨負債~$45B ÷ EBITDA估~$30B（non-GAAP base）</div>
+      <div class="rwarn">警戒：>4x ｜ 優良：&lt;2x</div>
+      <div style="margin-top:6px;"><span class="badge ok">✅ 可接受</span><span class="badge warn" style="margin-left:4px;">⚠️ 仍高於NVDA</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="rname">④ OCF / 計息債務</div>
+      <div class="rval" style="color:var(--green);">~0.52x</div>
+      <div>OCF $33.6B ÷ 總計息債務$64.9B</div>
+      <div class="rwarn">警戒：&lt;0.2x ｜ 優良：>0.5x</div>
+      <div style="margin-top:6px;"><span class="badge ok">✅ 剛達優良線</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="rname">⑤ FCF 覆蓋比率</div>
+      <div class="rval" style="color:var(--green);">~7-9x</div>
+      <div>FCF $32.8B ÷ 年度利息+近期到期債務~$4-5B</div>
+      <div class="rwarn">警戒：&lt;1.2x ｜ 優良：>2x</div>
+      <div style="margin-top:6px;"><span class="badge ok">✅ 充裕</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="rname">⑥ 2年到期牆覆蓋</div>
+      <div class="rval" style="color:var(--green);">&gt;5x</div>
+      <div>現金$19.6B + 2年FCF~$66B vs 2年到期（規模小）</div>
+      <div class="rwarn">警戒：&lt;1.5x ｜ 優良：>3x</div>
+      <div style="margin-top:6px;"><span class="badge ok">✅ 無壓力</span></div>
+    </div>
+  </div>
+  <div class="note">AVGO是四大半導體中槓桿最高者（因VMware $69B收購），但FCF生成能力強，每年$27-33B FCF持續去槓桿；D/E已從1.0x降至0.74x，是「主動管理型高槓桿」而非被迫型。</div>
+
+  <!-- 債務到期 -->
+  <h3 id="debt">③ 債務到期時程</h3>
+  <table>
+    <tr><th>說明</th><th>金額（估）</th><th>備註</th></tr>
+    <tr><td>總長期債務（截至FY2025）</td><td>$63.8B</td><td>主要為VMware收購橋接貸款+公司債</td></tr>
+    <tr><td>近期到期（2025-2026）</td><td>⚠️ 估~$2-4B/年</td><td>需查FY2025 10-K「Long-term Debt Maturities」章節</td></tr>
+    <tr><td>還款進度</td><td>FY2025 D/E降至0.74x</td><td>已從VMware收購高峰持續去槓桿</td></tr>
+  </table>
+  <div class="note">⚠️ 精確債務到期時程請查閱 Broadcom FY2025 10-K（SEC EDGAR）「Debt Maturities」原文表格確認；現有FCF能力足以支撐任何合理到期規模。</div>
+
+  <!-- CapEx -->
+  <h3 id="capex">④ CapEx 分析</h3>
+  <table>
+    <tr><th>財政年度</th><th>CapEx</th><th>CapEx/營收</th><th>CapEx/OCF</th><th>FCF margin</th></tr>
+    <tr><td>FY2025</td><td>$623M</td><td>1.0%</td><td>~2.3%</td><td>~42%</td></tr>
+    <tr><td>TTM（2026-05）</td><td>$860M</td><td>~1.1%（TTM營收$75.5B）</td><td>~2.6%</td><td>~43%</td></tr>
+  </table>
+  <div style="margin-top:8px;">
+    <span class="badge ok">✅ 超輕資產</span> AVGO的CapEx/營收僅約1%，比NVDA（2.8%）更輕，是典型的「Fabless+純軟體」商業模式，資本支出幾乎全為研發工具與辦公設備，資本效率極高。
+  </div>
+
+  <!-- 同業對比 -->
+  <h3 id="peercomp">⑤ 同業財務對比</h3>
+  <table>
+    <tr><th>指標</th><th>AVGO</th><th>NVDA</th><th>TSM</th><th>Marvell（MRVL）</th></tr>
+    <tr><td>淨債務/EBITDA（non-GAAP）</td><td>~1.5x ⚠️</td><td>-0.02x（淨現金）✅</td><td>~0.2-0.5x ✅</td><td>⚠️ 估偏高</td></tr>
+    <tr><td>FCF margin</td><td>~43% ✅✅</td><td>~44.8% ✅✅</td><td>~30-35% ✅</td><td>—</td></tr>
+    <tr><td>CapEx/營收</td><td>~1%（超輕）✅</td><td>2.8%（輕）✅</td><td>~15-20%（重資產）</td><td>~2-3%</td></tr>
+    <tr><td>D/E</td><td>~0.74x ⚠️</td><td>極低</td><td>~0.3-0.4x ✅</td><td>偏高</td></tr>
+    <tr><td>ROE</td><td>—</td><td>114.3%</td><td>~25-30%</td><td>—</td></tr>
+  </table>
+
+  <!-- 綜合診斷 -->
+  <h3 id="diag">⑥ 綜合診斷</h3>
+  <div class="action-box" style="border-color:var(--yellow);">
+    <h4 style="color:var(--yellow);">🏥 財務健康等級：良好主動去槓桿型（B+/A-）</h4>
+    <div class="row"><span class="lbl">財務定性</span><span>因VMware $69B收購形成高槓桿，但每年$27-33B FCF持續去槓桿，D/E已從1.0x降至0.74x；屬「收購型高槓桿已改善」，而非財務壓力型</span></div>
+    <div class="row"><span class="lbl">最大財務風險</span><span>若AI需求突然收縮致FCF腰斬至$15-18B，同時債務到期集中，再融資風險可能上升；安全邊際：EBIT（non-GAAP）需下降 >60% 才觸及利息覆蓋警戒線</span></div>
+    <div class="row"><span class="lbl">改善路徑</span><span>按當前FCF速率，3-4年可將淨債務降至$20B以下，屆時財務健康等級可升至A</span></div>
+    <div class="row"><span class="lbl">操作意涵</span><span>財務槓桿是需觀察的「次要風險」，核心投資風險仍在AI ASIC成長能否持續及VMware流失率，而非破產或流動性危機</span></div>
+  </div>
+</div>
+
+<footer>
+  資料來源：✅ Broadcom Investor Relations（Q1/Q2 FY2026 8-K）、✅ SEC EDGAR、✅ stockanalysis.com（財務數據/分析師預估）、✅ marketbeat.com（分析師評等目標價）、⚠️ businessquant.com / fullratio.com（歷史PE）、⚠️ 利息支出/OCF為估算值。歷史PE：2018低點7.53x（Macrotrends）、2022低點19.4x（fullratio.com）。<br><br>
+  本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。<br>
+  產出時間：2026-06-29 ｜ 個股小狐 完整三模式報告
+</footer>
+</body>
+</html>

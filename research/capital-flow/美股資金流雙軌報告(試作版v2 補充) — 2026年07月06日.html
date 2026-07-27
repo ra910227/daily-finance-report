@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美股資金流雙軌報告 v2補充 — 2026年07月06日</title>
+<style>
+  :root {
+    --bg: #0f1117; --bg2: #1a1d27; --bg3: #222535; --border: #2e3250;
+    --text: #e2e8f0; --text2: #94a3b8; --accent: #6366f1; --accent2: #818cf8;
+    --red: #f87171; --green: #4ade80; --gold: #fbbf24; --orange: #fb923c;
+    --blue: #60a5fa; --purple: #c084fc; --teal: #2dd4bf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system,'PingFang TC','Microsoft JhengHei',sans-serif; font-size: 14px; line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #1e293b 100%); padding: 28px 32px 20px; border-bottom: 1px solid var(--accent); }
+  .header h1 { font-size: 21px; font-weight: 700; color: #fff; }
+  .header .meta { color: var(--text2); font-size: 12px; margin-top: 6px; }
+  .proto-badge { display:inline-block; background:#3a2200; border:1px solid var(--orange); color: var(--orange); font-size:11px; padding:2px 8px; border-radius:6px; margin-left:8px; font-weight:700; }
+  .summary-box { background: linear-gradient(90deg, #1e3a5f 0%, #1a1d27 100%); border-left: 4px solid var(--accent); margin: 20px 24px; padding: 14px 20px; border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 600; color: #e0e7ff; }
+  .container { padding: 0 24px 40px; }
+  .section { margin-bottom: 30px; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--accent2); padding: 8px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+  .qbox { background:#1a2040; border-left:3px solid var(--accent2); padding:8px 14px; margin-bottom:14px; font-size:12.5px; color:var(--text2); border-radius: 0 6px 6px 0; }
+  table { width: 100%; border-collapse: collapse; background: var(--bg2); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 10px;}
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  td { padding: 8px 10px; border-bottom: 1px solid #1a1d27; font-size: 12.5px; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #1e2233; }
+  .code { font-family: monospace; font-weight: 700; color: var(--blue); font-size: 13px; }
+  .up { color: var(--red); font-weight:700; }
+  .dn { color: var(--green); font-weight:700; }
+  .gap { color: var(--text2); font-style: italic; }
+  .badge { font-size: 10.5px; padding: 2px 7px; border-radius: 4px; display: inline-block; }
+  .b-warn { background: #3a1e1e; color: var(--red); }
+  .b-ok { background: #1e3a2f; color: var(--green); }
+  .b-mix { background: #2a2a3a; color: var(--gold); }
+  .b-gap { background: #1a1d27; color: var(--text2); border:1px dashed var(--border); }
+  .alert-box { background: #2a1a0a; border: 1px solid #7c4a15; border-radius: 10px; padding: 14px 16px; margin-top: 10px; }
+  .alert-box h4 { color: var(--orange); font-size: 13px; margin-bottom: 8px; }
+  .ok-box { background: #0f2a1a; border: 1px solid #1e5a3a; border-radius: 10px; padding: 14px 16px; margin-top: 10px; }
+  .ok-box h4 { color: var(--green); font-size: 13px; margin-bottom: 8px; }
+  .gap-box { background: #1a1d27; border: 1px dashed var(--border); border-radius: 10px; padding: 14px 16px; margin-top: 10px;}
+  .gap-box h4 { color: var(--text2); font-size: 13px; margin-bottom: 8px; }
+  .gap-box ul, .ok-box ul, .alert-box ul { padding-left: 18px; font-size: 12.5px; }
+  .gap-box li { color: var(--text2); padding: 3px 0; }
+  .footer { background: var(--bg3); border-top: 1px solid var(--border); padding: 14px 24px; font-size: 11px; color: var(--text2); }
+  .footer .warn { color: var(--orange); }
+  .src { font-size: 10.5px; color: var(--text2); margin-top: 4px; }
+  @media (max-width: 768px) { .container { padding: 0 12px 40px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>美股資金流雙軌報告 <span class="proto-badge">v2 補充 · 針對你的4個追問</span></h1>
+  <div class="meta">2026年07月06日｜資料擷取：美東07/06上午，各表已標示原始統計日期</div>
+</div>
+
+<div class="summary-box">
+  針對你上次的4個追問逐一查證：①ICI/FINRA/EPFR/IIF/外資買賣超都找到部分真實數據，但EPFR、IIF月度實際值抓不到（誠實列為缺口）②富途牛牛確認：資金分布/訂單流功能對ETF和個股都要求登入，未登入完全看不到數字，不是只有ETF沒有 ③七大巨頭Put/Call ratio全部抓到真實數據（全數偏多），13F拿到部分 ④COT抓到6週真實歷史（05/19–06/23），發現一個重要細節：這段期間剛好碰到6月季度合約到期展倉，數據有雜訊需要留意 ⑤QQQ有4份報告可交叉驗證，SOXX/SMH/XLK受限於資料源，暫時只能用你自己每日報告裡的個股成交額做替代驗證。
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <div class="section-title">① 美股整體資金流：ICI／FINRA／EPFR／IIF／外資買賣超</div>
+    <div class="qbox">你問：這部分沒看到——因為試作版只做了ETF+COT兩軌，這次補上。</div>
+    <table>
+      <tr><th>指標</th><th>最新數值</th><th>統計期間</th><th>狀態</th></tr>
+      <tr><td>ICI週報（共同基金+ETF週度淨流量）</td><td>合計<span class="dn">-$30.5億</span>／股票型<span class="dn">-$139.4億</span>／債券型<span class="up">+$122.3億</span>／ETF淨發行<span class="up">+$92.1億</span></td><td>當週至2026/06/24</td><td><span class="badge b-ok">真實數據</span></td></tr>
+      <tr><td>FINRA融資餘額(Margin Debt)</td><td><span class="up">$1.42兆美元</span>（單月+8.5%，年增+53.7%，歷史新高）</td><td>2026年5月</td><td><span class="badge b-ok">真實數據</span></td></tr>
+      <tr><td>台灣三大法人買賣超</td><td>外資<span class="dn">-777.8億元</span>／投信<span class="up">+75.0億</span>／自營商<span class="up">+28.3億</span>／合計<span class="dn">-735.4億元</span></td><td>2026/07/03</td><td><span class="badge b-ok">真實數據，官方即時</span></td></tr>
+      <tr><td>EPFR全球資金流（新聞引用）</td><td class="gap">抓不到2026年當期數據，搜尋只找到2025年7月舊資料</td><td>—</td><td><span class="badge b-gap">資料缺口</span></td></tr>
+      <tr><td>IIF新興市場資金流</td><td>僅有半年報預測值：2026年非居民資金流預估$935B(2025年$887B)，<b>非當月實際值</b></td><td>半年報周期</td><td><span class="badge b-gap">部分缺口</span></td></tr>
+    </table>
+    <div class="alert-box">
+      <h4>⚠️ 融資餘額創新高，是本表最值得留意的訊號</h4>
+      FINRA margin debt 5月+8.5%創歷史新高、年增53.7%——這是典型「高槓桿情緒」訊號，跟你診斷模式裡的「高位急漲警示」邏輯互補：融資餘額暴增通常領先或伴隨市場情緒過熱，值得放進你的模式一儀表板C欄位當作額外一項資金/流動性指標追蹤。
+    </div>
+    <div class="gap-box">
+      <h4>EPFR/IIF為什麼抓不到</h4>
+      <ul>
+        <li>EPFR是機構訂閱制數據(給Bloomberg/路透這類媒體用)，免費只能等財經媒體引用其數字的新聞稿，搜尋引擎目前索引到的最新引用是2025年的舊聞，代表「即時性」上這個管道本來就有落後性，不適合當「當週」數據源，比較適合當「當有媒體報導時」的補充參考。</li>
+        <li>IIF Capital Flows Tracker一年只發布兩次完整報告(以及不定期的月度簡訊，但月度簡訊在免費搜尋引擎中索引很差)，性質上跟FINRA/ICI这种週/月頻的公開統計不同，難以做成固定排程項目。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">② 富途牛牛：SPY/IWM/SMH每日資金流有沒有？</div>
+    <div class="qbox">你問：用富途牛牛API也沒有嗎？——已實際上網頁查證，答案如下。</div>
+    <div class="ok-box">
+      <h4>✅ 查證結果：不是只有ETF沒有，個股也一樣要登入</h4>
+      實際打開 futunn.com 的 SPY(ETF) 和 AAPL(個股) 頁面比對：兩者都有「資金分布」與「訂單流」欄位，但<b>未登入狀態下都顯示「單位：--」與「暫無數據」</b>。也就是說這不是ETF特有的限制，而是富途把這個功能整個鎖在登入牆後面（很可能還要達到一定帳戶等級/資產門檻才能看到完整數據）。你現有「每日板塊流動報告」能免登入抓到的，是熱力圖／成交額榜／熱議榜／概念板塊這幾個公開頁面——這些跟「資金分布/訂單流」是不同的頁面，公開與否互不影響。
+    </div>
+    <div class="gap-box">
+      <h4>下一步可能性</h4>
+      <ul>
+        <li>如果你本身有富途證券的登入帳號（不只是看行情，是有交易/資產的正式帳戶），資金分布這個欄位很可能會顯示數據——但這需要你親自登入查看，我不會也不該幫你輸入帳密登入。</li>
+        <li>若沒有帳號，SPY/IWM/SMH的每日資金流目前沒有找到免費乾淨管道，這點维持原判斷。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">③ 七大巨頭資金流代理指標整理</div>
+    <div class="qbox">你要求整理三個代理指標，以下是實際查到的數據。</div>
+    <table>
+      <tr><th>個股</th><th>Put/Call量比</th><th>Put/Call未平倉比</th><th>籌碼解讀</th><th>13F機構動向(最新可得季度)</th><th>近期成交額走勢(來自你的每日報告)</th></tr>
+      <tr><td class="code">NVDA</td><td class="up">0.48</td><td class="up">0.83</td><td><span class="badge b-ok">偏多</span></td><td>Q1'26持股比重↓6.04pp；423家新進/363家出清，1286家加碼/3872家減碼(減碼家數居多)</td><td>07/03成交額榜第6，短中期動能持續冷卻</td></tr>
+      <tr><td class="code">AAPL</td><td class="up">0.54</td><td class="up">0.69</td><td><span class="badge b-ok">偏多</span></td><td>2025/12持股比重61.6%(前值62.3%)，2514家加碼/2843家減碼</td><td>07/03/07/06成交額榜第7，唯一5/60日全面走揚，折疊機供應鏈題材撐盤</td></tr>
+      <tr><td class="code">MSFT</td><td class="up">0.26</td><td class="up">0.44</td><td><span class="badge b-ok">強烈偏多</span></td><td>Q1'26持股比重數字波動大(搜尋片段顯示降幅異常大，可信度中，建議之後直接查WhaleWisdom核實)</td><td>07/03成交額榜第9，短期反彈中期仍弱</td></tr>
+      <tr><td class="code">GOOGL</td><td class="up">0.52</td><td class="up">0.66</td><td><span class="badge b-ok">偏多</span></td><td class="gap">未查到明確季度加減碼數字</td><td>近期未進成交額榜前10(規模較小)</td></tr>
+      <tr><td class="code">AMZN</td><td class="up">0.46</td><td class="up">0.63</td><td><span class="badge b-ok">偏多</span></td><td class="gap">未查到明確季度加減碼數字</td><td>06/29曾進榜第4(576億)，近期未持續在前10</td></tr>
+      <tr><td class="code">META</td><td class="up">0.42</td><td class="up">0.42</td><td><span class="badge b-ok">強烈偏多</span></td><td class="gap">未查到明確季度加減碼數字</td><td>07/02曾+8.81%全面走揚(雲端題材)，07/03轉跌-4.90%(轉售算力敘事拖累)</td></tr>
+      <tr><td class="code">TSLA</td><td class="dn">0.64</td><td class="dn">0.72</td><td><span class="badge b-mix">溫和偏多</span></td><td class="gap">未查到明確季度加減碼數字</td><td>07/03成交額榜第5，Q2交付創新高但利多出盡重挫</td></tr>
+    </table>
+    <div class="src">Put/Call數據來源：Barchart.com（07/06查詢，屬即時盤中數據，會隨盤中變動）；13F數據來源：搜尋引擎索引之Fintel/MarketBeat/HedgeFollow片段，非直接查詢WhaleWisdom原始數字，精確度中等。</div>
+    <div class="alert-box">
+      <h4>⚠️ 解讀提醒：七檔全數Put/Call偏多，這件事本身要小心解讀</h4>
+      七大巨頭選擇權市場「全數」偏多（比值都遠低於1），這通常反映的是<b>結構性的股票+看漲期權組合策略(covered call賣方/win-win策略)盛行</b>，並非單純「散戶看多」——機構常態性賣covered call會拉低量比但不代表方向性樂觀。TSLA相對其他六檔比值最高(0.64/0.72)，是七檔中相對最不極端的一檔，值得注意其期權市場情緒沒有跟其他六檔一樣一致。13F部分建議之後排程時直接抓WhaleWisdom官方頁面數字，這次是拼湊搜尋片段，MSFT那個-20.35pp數字看起來異常大，我沒有把握它是準確的，先如實列出但不建議直接採信。
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">④ COT報告過去6週歷史數據（05/19 – 06/23）</div>
+    <div class="qbox">你問：能不能把前四週資料也找出來——已直接從CFTC官方Socrata API查到6週真實歷史。</div>
+    <table>
+      <tr><th>統計日</th><th>E-mini S&P500 未平倉</th><th>Leveraged Funds淨部位</th><th>週變化</th><th>Asset Manager淨部位</th></tr>
+      <tr><td>05/19</td><td>2,068,443</td><td class="dn">-401,554</td><td>—</td><td class="up">+1,005,420</td></tr>
+      <tr><td>05/26</td><td>2,093,621</td><td class="dn">-457,780</td><td class="dn">加空 -56,226</td><td class="up">+1,003,607</td></tr>
+      <tr><td>06/02</td><td>2,149,231</td><td class="dn">-500,732</td><td class="dn">加空 -42,952</td><td class="up">+981,859</td></tr>
+      <tr><td>06/09</td><td>2,203,164</td><td class="dn">-451,586</td><td class="up">回補 +49,146</td><td class="up">+984,086</td></tr>
+      <tr><td>06/16</td><td>2,579,920</td><td class="dn">-515,520</td><td class="dn">加空 -63,934</td><td class="up">+984,009</td></tr>
+      <tr><td>06/23</td><td>1,980,254</td><td class="dn">-373,468</td><td class="up">大幅回補 +142,052</td><td class="up">+992,729</td></tr>
+    </table>
+    <table>
+      <tr><th>統計日</th><th>Nasdaq Mini 未平倉</th><th>Leveraged Funds淨部位</th><th>週變化</th><th>Asset Manager淨部位</th></tr>
+      <tr><td>05/19</td><td>293,186</td><td class="dn">-45,371</td><td>—</td><td class="up">+92,301</td></tr>
+      <tr><td>05/26</td><td>302,990</td><td class="dn">-51,679</td><td class="dn">加空 -6,308</td><td class="up">+85,063</td></tr>
+      <tr><td>06/02</td><td>314,972</td><td class="dn">-53,650</td><td class="dn">加空 -1,971</td><td class="up">+79,091</td></tr>
+      <tr><td>06/09</td><td>305,568</td><td class="dn">-34,306</td><td class="up">回補 +19,344</td><td class="up">+83,367</td></tr>
+      <tr><td>06/16</td><td>344,441</td><td class="dn">-28,154</td><td class="up">續回補 +6,152</td><td class="up">+70,323</td></tr>
+      <tr><td>06/23</td><td>265,083</td><td class="dn">-51,062</td><td class="dn">再度轉空 -22,908</td><td class="up">+62,908</td></tr>
+    </table>
+    <div class="src">來源：CFTC Traders in Financial Futures官方Socrata API (publicreporting.cftc.gov/resource/gpe5-46if)，逐週查詢確認，非估算數字。</div>
+    <div class="alert-box">
+      <h4>⚠️ 重要雜訊警示：這6週剛好橫跨6月季度合約到期展倉</h4>
+      06/16→06/23這一週，兩份合約的未平倉量都暴跌約23%（S&P500從258萬口驟降至198萬口、Nasdaq從34.4萬口降至26.5萬口）——兩者跌幅幾乎一致，這是<b>6月季度合約到期展倉(quarterly rollover，6月IMM到期日約在6/19三巫日附近)的技術性效應</b>，不是真實部位的自然消長。所以06/23當週「S&P500 Leveraged Funds大幅回補+14萬口」這個數字，有相當比例可能只是「舊倉到期沒展到新倉」而非「主動回補做多」，解讀時需要打折扣。相較之下，Nasdaq同一週卻是「續加空」，跟S&P500方向相反——這個分歧在排除展倉雜訊後可能才是更真實的訊號，但需要下週(07/06公布，含07/07/14為報告日)數據出來後才能確認是雜訊消退還是真分歧。
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⑤ QQQ/SOXX/SMH/XLK週流量 × 每日板塊流動報告交叉驗證</div>
+    <div class="qbox">你要求追溯前四週週流量並對應最近幾篇每日板塊流動報告。以下是實際比對結果，含資料侷限說明。</div>
+    <table>
+      <tr><th>日期</th><th>QQQ當日%</th><th>QQQ成交額</th><th>5/20/60日趨勢</th><th>當日報告解讀</th></tr>
+      <tr><td>06/29</td><td class="dn">-1.38%</td><td>334億</td><td>-4.50%/-3.85%/+22.5%</td><td>科技權重指數同步走弱</td></tr>
+      <tr><td>06/30</td><td class="up">+2.49%</td><td>322.60億</td><td>+0.49%/+24.06%/+31.89%</td><td>大盤ETF反彈</td></tr>
+      <tr><td>07/02</td><td class="dn">-1.52%</td><td>—</td><td>+2.05%/-2.71%/+23.36%</td><td>科技ETF，不納入個股趨勢判斷</td></tr>
+      <tr><td>07/03</td><td class="dn">-1.73%</td><td>—</td><td>-0.53%/-4.14%/+21.20%</td><td>科技ETF</td></tr>
+      <tr><td>07/06(盤前)</td><td colspan="3" class="gap">沿用07/03數據(週一盤前，07/04假期後首個交易日尚未開盤)</td><td>—</td></tr>
+    </table>
+    <div class="gap-box">
+      <h4>SOXX/SMH/XLK為什麼無法做出同樣的4週表格</h4>
+      <ul>
+        <li>你現有每日板塊流動報告的成交額榜通常由NVDA/AAPL/MSFT/TSLA等個股與QQQ/SPY兩檔大盤ETF佔滿前10名，SOXX/SMH/XLK這幾檔規模較小，<b>從未進入過06/29–07/06這幾篇報告的成交額榜前10</b>，只有07/02那篇在「熱議榜」提到「SOXX #38 半導體ETF -6.41%」——代表SOXX有搜索熱度但沒有真金白銀資金確認，這其實印證了你潛力雷達方法論「熱議≠資金」的邏輯是對的。</li>
+        <li>外部ETF資金流數字部分：QQQ近5日+13.8億美元/近1個月+88.3億美元、XLK近5日-3.89億美元/近1個月-7.10億美元、SOXX 6月單月+41億美元——這些是「累計期間」快照，不是逐週序列，跟COT那種乾淨的逐週歷史不同（原因同上次說明：ETF.com/ETFDB的flow圖表是JS canvas畫的，抓不到底層逐週數值）。</li>
+        <li>結論：QQQ可以做到跟每日報告交叉驗證(如上表)，SOXX/SMH/XLK目前只能用「有沒有進入成交額榜」這個間接方式驗證資金是否真的關注半導體(答案：沒有，半導體資金目前主要體現在NVDA/MU/AVGO/AMD等個股，不是透過ETF)。</li>
+      </ul>
+    </div>
+    <div class="ok-box">
+      <h4>可行的解決方式：從今天開始建立週序列</h4>
+      既然抓不到SOXX/SMH/XLK的歷史逐週數字，比較實際的做法是從本週開始，把QQQ/SOXX/SMH/XLK這四檔的「當日%、成交額」固定加進你每日板塊流動報告的成交額榜（即使不在前10也強制列出），持續4-6週後就會有自己的乾淨序列，不用再依賴外部抓不到的flow圖表。
+    </div>
+  </div>
+
+</div>
+<div class="footer">
+  <span>本報告為原型延伸版，部分數據源自搜尋引擎片段，精確度標註於各表下方 · 財經小狐產出</span>
+  <span class="warn">⚠ COT數據請留意6月季度展倉雜訊；MSFT 13F降幅數字未經核實，僅供參考</span>
+</div>
+</body>
+</html>

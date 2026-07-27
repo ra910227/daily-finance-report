@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜NOW ServiceNow 2026-07-02</title>
+<style>
+  :root {
+    --bg: #0d1117; --bg2: #161b22; --bg3: #1f2937;
+    --border: #30363d; --border2: #3d4752;
+    --text: #e6edf3; --text2: #8b949e; --text3: #6e7681;
+    --blue: #58a6ff; --green: #3fb950; --yellow: #d29922;
+    --red: #f85149; --purple: #a371f7; --orange: #fb923c;
+    --teal: #2dd4bf; --pink: #f472b6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0f2942 0%, #1a3a5c 40%, #0d2035 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 32px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0; width: 500px; height: 100%;
+    background: radial-gradient(ellipse at right center, rgba(88,166,255,0.08) 0%, transparent 70%);
+  }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 700; color: var(--blue); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-change { font-size: 16px; color: var(--red); margin-top: 4px; }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .badge-blue { background: rgba(88,166,255,0.15); color: var(--blue); border: 1px solid rgba(88,166,255,0.3); }
+  .badge-green { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+  .badge-yellow { background: rgba(210,153,34,0.15); color: var(--yellow); border: 1px solid rgba(210,153,34,0.3); }
+  .badge-red { background: rgba(248,81,73,0.15); color: var(--red); border: 1px solid rgba(248,81,73,0.3); }
+  .badge-purple { background: rgba(163,113,247,0.15); color: var(--purple); border: 1px solid rgba(163,113,247,0.3); }
+  .badge-orange { background: rgba(251,146,60,0.15); color: var(--orange); border: 1px solid rgba(251,146,60,0.3); }
+  .badge-teal { background: rgba(45,212,191,0.15); color: var(--teal); border: 1px solid rgba(45,212,191,0.3); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 600; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+
+  /* Nav */
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .toc-inner a:hover { color: var(--blue); border-bottom-color: var(--blue); text-decoration: none; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+
+  /* Layout */
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: #000; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--blue); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--blue); padding: 0 0 4px 0; }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+
+  /* Cards */
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 600; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+
+  /* Indicators */
+  .ok { color: var(--green); }
+  .warn { color: var(--yellow); }
+  .bad { color: var(--red); }
+  .muted { color: var(--text2); }
+  .est { color: var(--yellow); font-size: 11px; }
+
+  /* Thesis grid */
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 600; }
+
+  /* DCF scenarios */
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); }
+  .scenario.base { border-top: 3px solid var(--blue); }
+  .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); }
+  .scenario.base h4 { color: var(--blue); }
+  .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .scenario .row:last-child { border-bottom: none; }
+
+  /* Moat radar */
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; }
+  .moat-score { font-size: 13px; font-weight: 600; color: var(--blue); margin-top: 4px; }
+
+  /* Action / Caution / Warning boxes */
+  .action-box { background: rgba(63,185,80,0.08); border: 1px solid rgba(63,185,80,0.3); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: rgba(210,153,34,0.08); border: 1px solid rgba(210,153,34,0.3); border-left: 4px solid var(--yellow); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--yellow); font-size: 15px; margin-bottom: 10px; }
+  .risk-card { background: rgba(248,81,73,0.08); border: 1px solid rgba(248,81,73,0.25); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .risk-card h4 { color: var(--red); font-size: 13px; margin-bottom: 4px; }
+
+  /* Rating orb */
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 22px; font-weight: 700; }
+  .health-aa { background: rgba(63,185,80,0.15); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(63,185,80,0.1); border: 3px solid rgba(63,185,80,0.6); color: var(--green); }
+  .health-b { background: rgba(210,153,34,0.12); border: 3px solid var(--yellow); color: var(--yellow); }
+
+  /* Comp table row highlight */
+  .comp-now { background: rgba(88,166,255,0.06); }
+  .comp-now td { font-weight: 600; }
+
+  /* Ratio bar */
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); }
+  .bar-yellow { background: var(--yellow); }
+  .bar-red { background: var(--red); }
+
+  /* Footer */
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">NOW</div>
+      <div class="hero-name">ServiceNow, Inc.</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-07-02　⚡ 5-for-1 股票分割後</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$103.00</div>
+      <div class="hero-change">▼ -36.0% YTD 2026 ⚠️</div>
+      <div class="hero-mktcap">市值 ~$106B　股數 ~10.3億（分割後）</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-blue">企業工作流自動化</span>
+    <span class="badge badge-purple">AI Agentic 轉型</span>
+    <span class="badge badge-green">零長期負債 ✅</span>
+    <span class="badge badge-red">YTD -36% 修正中</span>
+    <span class="badge badge-yellow">PE重估壓力</span>
+    <span class="badge badge-teal">Lynch：高速成長股</span>
+    <span class="badge badge-orange">分析師強力買入 83%</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價（分割後）</label><div class="val">$103.00</div><div class="sub">⚠️ 近似，2026-07-02</div></div>
+    <div class="meta-item"><label>FY2025 總營收</label><div class="val">$13.3B</div><div class="sub">YoY +20.9%</div></div>
+    <div class="meta-item"><label>FY2025 FCF</label><div class="val">$4.6B</div><div class="sub">FCF 利潤率 ~34.6%</div></div>
+    <div class="meta-item"><label>Forward PE（非GAAP）</label><div class="val">24.7x</div><div class="sub">FY2026E $4.17 EPS</div></div>
+    <div class="meta-item"><label>Thesis 成立度</label><div class="val">4.0 / 5</div><div class="sub">估值重估風險存在</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐⭐⭐½</div><div class="sub">企業黏著度極高</div></div>
+  </div>
+</div>
+
+<!-- ── TOC ── -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#mode1">模式一 深度研究</a>
+    <span class="toc-sep">·</span>
+    <a href="#biz">業務引擎</a>
+    <a href="#thesis">核心Thesis</a>
+    <a href="#competition">競爭格局</a>
+    <a href="#moat">成長象限</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode2">模式二 財報解析</a>
+    <span class="toc-sep">·</span>
+    <a href="#earnings">Q1 2026財報</a>
+    <a href="#eps">EPS與估值</a>
+    <a href="#dcf">DCF情境</a>
+    <a href="#targets">投行目標</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode3">模式三 財務健檢</a>
+    <span class="toc-sep">·</span>
+    <a href="#ratios">六大比率</a>
+    <a href="#capex">CapEx分析</a>
+    <a href="#comps">同業對比</a>
+    <a href="#health">綜合診斷</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════
+     模式一：深度研究
+══════════════════════════════════════ -->
+<div id="mode1" class="mode-divider">
+  <h2>◈ 模式一：公司深度研究</h2>
+  <p>業務引擎 · 核心Thesis · 競爭格局 · Peter Lynch成長象限 · 護城河五維評分</p>
+</div>
+
+<!-- 1. 公司基本介紹 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">公司基本介紹</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">ServiceNow（NYSE: NOW）成立於 2004 年，總部加州聖塔克拉拉，是全球最大的<strong>企業工作流自動化平台</strong>。核心產品為雲端原生平台 Now Platform，連結企業 IT、HR、客戶服務、財務、採購等部門，將原本孤島式的業務流程整合成可自動化的智能工作流。2026 年積極轉型為 <strong>Agentic AI</strong> 平台，從「工作流工具」升級為「自主 AI 代理編排中心」。</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$13.3B</div><div class="big-label">FY2025 總營收</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">+20.9%</div><div class="big-label">YoY 成長</div></div>
+        <div><div class="big-num" style="font-size:22px;">~80%</div><div class="big-label">訂閱毛利率 ⚠️</div></div>
+        <div><div class="big-num" style="font-size:22px;">$4.6B</div><div class="big-label">FY2025 FCF</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 近4期財務摘要 -->
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財務摘要</th>
+          <th class="num">FY2022</th>
+          <th class="num">FY2023</th>
+          <th class="num">FY2024</th>
+          <th class="num">FY2025 A</th>
+          <th class="num">Q1 FY2026</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$7.25B ⚠️</td><td class="num">$8.97B ⚠️</td><td class="num">$10.98B ⚠️</td><td class="num ok">$13.30B ✅</td><td class="num">$3.77B ✅</td></tr>
+        <tr><td>YoY 成長</td><td class="num">+23% ⚠️</td><td class="num">+24% ⚠️</td><td class="num">+22% ⚠️</td><td class="num ok">+21% ✅</td><td class="num">+19% ✅</td></tr>
+        <tr><td>訂閱營收</td><td class="num">— </td><td class="num">— </td><td class="num">~$10.6B ⚠️</td><td class="num ok">~$12.9B ✅</td><td class="num">$3.671B ✅</td></tr>
+        <tr><td>非GAAP 運營利潤率</td><td class="num">~24% ⚠️</td><td class="num">~28% ⚠️</td><td class="num">~30% ⚠️</td><td class="num">~31% ⚠️</td><td class="num ok">32% ✅</td></tr>
+        <tr><td>GAAP EPS（分割後）</td><td class="num">~$0.15 ⚠️</td><td class="num">~$0.60 ⚠️</td><td class="num ok">$1.39A ✅</td><td class="num ok">$1.69A ✅</td><td class="num">— </td></tr>
+        <tr><td>FCF</td><td class="num">~$1.8B ⚠️</td><td class="num">~$3.0B ⚠️</td><td class="num">~$3.4B ⚠️</td><td class="num ok">$4.6B ✅</td><td class="num">— </td></tr>
+        <tr><td>OCF</td><td class="num">— </td><td class="num">— </td><td class="num">$4.27B ✅</td><td class="num ok">$5.44B ✅</td><td class="num">— </td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 估算值｜✅ 已驗證　所有 EPS / 股數數字均為 2025 年 12 月 5-for-1 股票分割後調整值</p>
+</div>
+
+<!-- 2. 業務引擎分析 -->
+<div id="biz" class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">業務引擎分析</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🏗️ IT Service Management（ITSM）核心</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">全球 ITSM 市場龍頭，佔企業IT工作流管理約 <strong>38% 市佔</strong>（⚠️估）。Incident/Problem/Change/Asset 管理深植 Fortune 500 企業。平均合約年限 3-5 年，替換成本極高。每年頒發 ITIL 認證工程師超 60 萬人，形成人才生態護城河。</p>
+    </div>
+    <div class="card">
+      <h3>🤖 Now Assist（AI Layer）新引擎</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">2026 年 ACV 追蹤 <strong>$1.5B+</strong>（從原目標 $1B 上調）。整合 Moveworks 收購技術，提供企業搜索、Agentic AI 工作流編排。AI 功能溢價定價，高附加 SKU 提升 ARPU。已有 >1,000 家企業客戶部署 Now Assist。</p>
+    </div>
+    <div class="card">
+      <h3>🏢 Employee Workflows（HR/Finance/Legal）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">HR Service Delivery、Finance Close、Legal Service Delivery 等非 IT 模組快速擴展，佔整體平台使用量 <strong>~30-35%</strong>（⚠️估）。單一平台跨部門策略顯著降低客戶整合成本，形成「一站式工作流中樞」優勢。</p>
+    </div>
+    <div class="card">
+      <h3>🛡️ Security & Technology Workflows</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">Security Operations、Vulnerability Response、Armis（收購）帶入 IoT/OT 安全編排能力。IT Operations Management（ITOM）提供全棧可觀測性。與 Microsoft Sentinel、CrowdStrike 等 SIEM 平台深度整合。</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>核心產品</th><th>佔平台使用佔比</th><th>護城河來源</th><th>2026 成長動力</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>ITSM / ITOM</strong></td><td class="num">~45% ⚠️</td><td>高替換成本、ITIL 認證生態</td><td>AI 附加模組升級</td></tr>
+        <tr><td><strong>Now Assist（AI）</strong></td><td class="num">~10%→快速增長</td><td>平台原生、不依賴 ChatGPT</td><td>$1.5B ACV 目標 ✅</td></tr>
+        <tr><td><strong>Employee Workflows</strong></td><td class="num">~30% ⚠️</td><td>跨部門資料共享</td><td>HR Agentic 自動化</td></tr>
+        <tr><td><strong>Customer Workflows</strong></td><td class="num">~10% ⚠️</td><td>低程式碼整合</td><td>企業客服 AI 代理</td></tr>
+        <tr><td><strong>Security / IoT（Armis）</strong></td><td class="num">~5% ⚠️</td><td>網路資產可視化</td><td>OT/IoT 安全編排</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 3. 核心Thesis -->
+<div id="thesis" class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">核心 Thesis 與未來成長驅動</div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 1｜企業工作流 ITSM 壟斷性護城河</div>
+      <div class="content">超過 85% Fortune 500 企業是 NOW 客戶，平均使用年限 7 年+（⚠️）。ITSM 是 IT 部門「必裝」基礎設施，替換牽涉數百萬行設定與員工重訓，成本極高。即使大型競爭者推出替代品，客戶黏著度幾乎使其無從動搖現有合約。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 2｜Now Assist 打開 $600B TAM</div>
+      <div class="content">傳統 ITSM TAM 約 $90B，加入 Agentic AI 工作流編排後，IDC 估算可觸達 TAM 擴大至 $600B（⚠️）。Now Assist 目前 ACV 追蹤 $1.5B，遠超初始 $1B 目標。若 AI 附加 SKU 滲透率從 10% 升至 30%，未來 3 年 ARPU 可提升 40-60%。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 3｜FCF 複利機器 + 零負債</div>
+      <div class="content">FY2025 FCF $4.6B，現金 $3.7B，長期負債幾乎為零。FCF 利潤率 ~34.6%，持續用於回購與戰略收購（Moveworks $2.85B、Armis）。零負債結構在利率環境中是絕對優勢，財務槓桿風險極低，允許管理層更積極投資成長。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--yellow)">⚠️ 持續監控</div>
+      <div class="label">Thesis 4｜多雲中立性抵禦 Microsoft 競爭</div>
+      <div class="content">Microsoft Power Platform + Copilot 在已有 M365 授權的企業提供低價替代。NOW 的優勢是「多雲中立、跨系統整合」——Copilot 擅長 M365 生態內，NOW 擅長跨廠商複雜工作流。關鍵監控：企業是否開始用 Copilot 取代 ITSM 模組（目前尚未大規模發生）。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--yellow)">⚠️ 部分成立</div>
+      <div class="label">Thesis 5｜Moveworks + Armis 戰略整合</div>
+      <div class="content">Moveworks 收購帶入 enterprise search 與 agentic AI 能力，預計 2026 Q3-Q4 完整整合進 Now Platform。Armis 帶入 OT/IoT 安全編排（企業設備可視化）。整合成效尚待 Q2-Q3 2026 財報驗證，目前是⚠️狀態。核心風險：整合延誤或文化衝突可能拖慢交付速度。</div>
+    </div>
+  </div>
+
+  <!-- 核心成長驅動 & 監控風險 -->
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🚀 核心成長驅動力</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>AI 附加 SKU 滲透</strong>：Now Assist 每個帳戶平均 ARPU 提升潛力 30-50%（⚠️）</li>
+        <li><strong>國際市場擴展</strong>：歐洲/亞太仍各佔營收 ~20%（⚠️），尚有大量白地空間</li>
+        <li><strong>跨部門擴張</strong>：ITSM→HR→Finance→Legal，同一企業客戶購買模組持續增加</li>
+        <li><strong>政府/公共部門</strong>：美國聯邦 DOGE 效率化可能帶來大量工作流自動化採購</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 核心監控風險</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>Microsoft Copilot 替代</strong>：若 M365 整合能力大幅提升，中小企業 ITSM 需求可能流失</li>
+        <li><strong>AI 投資 ROI 延誤</strong>：企業 AI 支出若凍結（宏觀衰退），Now Assist 擴張放緩</li>
+        <li><strong>高估值壓縮</strong>：儘管 24.7x 非GAAP 已算合理，GAAP PE 仍 61x，機構升息預期回歸時仍承壓</li>
+        <li>觸發條件：訂閱收入成長 &lt;17% 或 cRPO 成長 &lt;18% → 考慮減倉</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 競爭格局 -->
+<div id="competition" class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">競爭格局</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>競爭者</th><th>核心戰場</th><th>優勢</th><th>對 NOW 威脅度</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Microsoft（Power Platform + Copilot）</strong></td><td>ITSM 替代、M365 生態</td><td>捆綁銷售、低增量成本、Copilot 整合</td><td>🔴 高｜中小企業 ITSM 市場風險最大</td></tr>
+        <tr><td><strong>Salesforce（Agentforce + Service Cloud）</strong></td><td>Customer Workflows</td><td>CRM 客戶基礎龐大、AI agent 野心</td><td>🟡 中｜聚焦在客服場景，與 ITSM 重疊小</td></tr>
+        <tr><td><strong>Atlassian（Jira Service Management）</strong></td><td>中型 ITSM</td><td>開發者友好、低價、雲原生</td><td>🟡 中｜針對中型企業，大型企業合規性弱</td></tr>
+        <tr><td><strong>BMC Helix / Remedy</strong></td><td>傳統大型企業 ITSM</td><td>多年合約、政府客戶</td><td>🟢 低｜市場份額持續被 NOW 侵蝕</td></tr>
+        <tr><td><strong>Freshservice（Freshworks）</strong></td><td>SMB ITSM</td><td>低價切入</td><td>🟢 低｜企業級市場影響極小</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box" style="margin-top:16px;">
+    <h3>⚠️ 競爭關鍵監控：Microsoft Copilot 整合深度</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">2026 年最值得關注的競爭威脅是 Microsoft Copilot 能否在 Azure/M365 環境內提供足夠的 ITSM 替代功能。目前 NOW 的護城河在於「多系統整合複雜度」——任何非純 Microsoft 環境的企業需要 NOW 的跨平台編排能力。但若 Microsoft 加速收購 ITSM 供應商（如 Freshworks）或 Copilot 推出 ITSM 模板，則威脅等級需上調至 🔴。每季監控：大型企業 RFP 中 Microsoft 替代 NOW 的案例數量。</p>
+  </div>
+</div>
+
+<!-- 5. 成長象限 & 護城河評分 -->
+<div id="moat" class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Peter Lynch 成長象限 & 護城河評分</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border:2px solid var(--purple);">
+      <h3 style="color:var(--purple)">📊 Lynch 象限判斷</h3>
+      <div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">高速成長股（Fast Grower）</div>
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <thead><tr><th>判斷標準</th><th>NOW 現況</th><th>判定</th></tr></thead>
+          <tbody>
+            <tr><td>營收 CAGR ≥20%</td><td>FY2025 +20.9%，Q1 2026 +19%</td><td class="ok">✅</td></tr>
+            <tr><td>TAM 尚未飽和</td><td>$600B AI 工作流 TAM 僅觸及早期</td><td class="ok">✅</td></tr>
+            <tr><td>可重複訂閱模式</td><td>訂閱佔收入 ~96%，NRR >120%⚠️</td><td class="ok">✅</td></tr>
+            <tr><td>非景氣循環依賴</td><td>企業 IT 預算相對剛性</td><td class="ok">✅</td></tr>
+            <tr><td>股價倍數高</td><td>GAAP PE 61x（重估壓力中）</td><td class="warn">⚠️</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 判定依據：持續 20%+ 收入成長 + 訂閱高黏著 + TAM 擴展至 $600B，符合 Lynch「高速成長股」框架。但需警惕成長放緩至 &lt;17% 時象限下移至「穩定成長股」。</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item">
+      <div class="moat-label">不可替代性</div>
+      <div class="moat-stars">★★★★★</div>
+      <div class="moat-score">5.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">核心 ITSM 替換成本極高</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">客戶黏著度</div>
+      <div class="moat-stars">★★★★★</div>
+      <div class="moat-score">4.8 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">平均合約 3-5 年，98%+ 續約⚠️</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">網路效應</div>
+      <div class="moat-stars">★★★½☆</div>
+      <div class="moat-score">3.5 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">工作流範本共享，但非病毒式</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">成本優勢</div>
+      <div class="moat-stars">★★★☆☆</div>
+      <div class="moat-score">3.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">SaaS 邊際成本低，但非壓倒性</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">規模效應</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">AI 訓練資料量+平台整合深度</div>
+    </div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--blue); margin-top:8px;">整體護城河評分：4.1 / 5 ⭐⭐⭐⭐</div>
+
+  <div class="action-box" style="margin-top:24px;">
+    <h3>✅ 建議動作（深度研究視角）</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+      <div>
+        <strong>當前建議：</strong>已修正 36% 的高護城河 SaaS，非GAAP PE 24.7x 是近 5 年最低。建議<span class="ok">分批建倉</span>（未持有者），或<span class="ok">核心池持有</span>（已持有者繼續持有）。<br><br>
+        <strong>加碼觸發：</strong>
+        <ul style="padding-left:16px;">
+          <li>Q2 2026 訂閱收入成長 ≥21%（維持加速跡象）</li>
+          <li>Now Assist ACV 確認突破 $2B</li>
+          <li>股價回測 $90-95（非GAAP PE 約 22-23x）</li>
+        </ul>
+      </div>
+      <div>
+        <strong>賣出觸發：</strong>
+        <ul style="padding-left:16px;">
+          <li>訂閱收入 YoY 連續兩季 &lt;17%</li>
+          <li>cRPO 成長跌破 18%（領先指標）</li>
+          <li>Microsoft 宣布大型 ITSM 收購，直接競爭</li>
+          <li>Now Assist ACV 停止成長或 &lt;$1B</li>
+        </ul>
+        <br>
+        <strong>每季監控指標：</strong>cRPO YoY CC 成長率、Now Assist ACV、非GAAP 運營利潤率、新增 ARR &gt;$1M 客戶數
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式二：財報解析
+══════════════════════════════════════ -->
+<div id="mode2" class="mode-divider">
+  <h2>◈ 模式二：最新財報解析</h2>
+  <p>Q1 FY2026 財報 · EPS 多年期表 · DCF 三情境 · 投行目標價 · 操作建議</p>
+</div>
+
+<!-- 6. Q1 2026 財報 Beat/Miss -->
+<div id="earnings" class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">Q1 FY2026 財報（2026-04-22）</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--red); margin-bottom:20px;">
+    <h3 style="color:var(--red)">⚠️ 財報後股價暴跌 -17.7%——業績符合但市場失望</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Q1 2026 財報數字本身並不差：總收入輕微超預期，cRPO 超預期 100bps，非GAAP 運營利潤率 32% 超預期。股價暴跌的核心原因是：<strong>①全年訂閱收入指引中位數稍低於部分投資人預期；②Now Assist AI 商業化速度（$1.5B ACV）被認為不夠快；③整體宏觀 SaaS 多重估值壓縮</strong>。這是典型的「預期管理失敗」而非基本面惡化。</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>指標</th><th class="num">實際值 ✅</th><th class="num">市場預期 ⚠️</th><th class="num">YoY 成長</th><th>判定</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>總收入</td><td class="num">$3.770B</td><td class="num">$3.750B</td><td class="num ok">+19%</td><td><span class="badge badge-green">輕微 Beat ✅</span></td></tr>
+        <tr><td>訂閱收入</td><td class="num">$3.671B</td><td class="num">~$3.655B ⚠️</td><td class="num ok">+19% CC</td><td><span class="badge badge-green">Beat ✅</span></td></tr>
+        <tr><td>非GAAP EPS（分割後）</td><td class="num">$0.97</td><td class="num">$0.97</td><td class="num">+YoY ⚠️</td><td><span class="badge badge-yellow">符合 ≈</span></td></tr>
+        <tr><td>非GAAP 運營利潤率</td><td class="num">32.0%</td><td class="num">31.5%</td><td class="num">+0.5ppt</td><td><span class="badge badge-green">Beat ✅</span></td></tr>
+        <tr><td>cRPO（未來12月合約收入）</td><td class="num">$12.64B</td><td class="num">$12.51B ⚠️</td><td class="num ok">+21% CC</td><td><span class="badge badge-green">Beat +100bps ✅</span></td></tr>
+        <tr><td>Now Assist ACV（AI）</td><td class="num">~$1.5B 追蹤</td><td class="num">$1.0B 原目標</td><td class="num ok">上調目標</td><td><span class="badge badge-green">超預期 ✅</span></td></tr>
+        <tr><td>財報後股價表現</td><td class="num ok" colspan="3">-17.7%（單日）— 預期管理失敗，非基本面惡化</td><td><span class="badge badge-red">股市失望</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Q2 指引 -->
+  <div class="card" style="margin-top:16px; border-left:3px solid var(--blue);">
+    <h3>Q2 FY2026 指引 & 全年展望</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; margin-top:10px;">
+      <div>
+        <strong>Q2 2026 訂閱收入指引</strong>：$3.865-3.870B（+19.5-20% YoY）⚠️<br>
+        <strong>Q2 非GAAP 運營利潤率</strong>：~32% ⚠️<br>
+        <strong>Q2 cRPO 成長</strong>：~+20.5% CC ⚠️
+      </div>
+      <div>
+        <strong>FY2026 全年訂閱收入</strong>：$15.53-15.57B（+20.5-21% YoY）✅<br>
+        <strong>FY2026 FCF 利潤率</strong>：~34-35% ⚠️<br>
+        <strong>FY2026 非GAAP 運營利潤率</strong>：~32% ⚠️
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. EPS 多年期表 & 估值 -->
+<div id="eps" class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">EPS 多年期表 & 歷史本益比（★必填欄位）</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財年</th>
+          <th class="num">GAAP EPS（分割後）</th>
+          <th class="num">非GAAP EPS（分割後）</th>
+          <th class="num">股價（年末⚠️）</th>
+          <th class="num">GAAP PE</th>
+          <th class="num">非GAAP PE</th>
+          <th>狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>FY2022</strong></td>
+          <td class="num">~$0.15 ⚠️</td>
+          <td class="num">~$1.30 ⚠️</td>
+          <td class="num">~$88⚠️（分割後）</td>
+          <td class="num warn">~587x ⚠️</td>
+          <td class="num">~68x ⚠️</td>
+          <td><span class="badge badge-yellow">估</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2023</strong></td>
+          <td class="num">~$0.60 ⚠️</td>
+          <td class="num">~$1.90 ⚠️</td>
+          <td class="num">~$140⚠️（分割後）</td>
+          <td class="num warn">~233x ⚠️</td>
+          <td class="num">~74x ⚠️</td>
+          <td><span class="badge badge-yellow">估</span></td>
+        </tr>
+        <tr style="background:rgba(88,166,255,0.04)">
+          <td><strong>FY2024 A</strong></td>
+          <td class="num ok">$1.39 ✅</td>
+          <td class="num">~$3.16 ⚠️</td>
+          <td class="num">~$165⚠️（分割後）</td>
+          <td class="num">~119x ⚠️</td>
+          <td class="num">~52x ⚠️</td>
+          <td><span class="badge badge-green">GAAP 已驗證</span></td>
+        </tr>
+        <tr style="background:rgba(88,166,255,0.06)">
+          <td><strong>FY2025 A</strong></td>
+          <td class="num ok">$1.69 ✅</td>
+          <td class="num">~$3.74 ⚠️</td>
+          <td class="num">~$155⚠️（分割後）</td>
+          <td class="num">~92x ⚠️</td>
+          <td class="num">~41x ⚠️</td>
+          <td><span class="badge badge-green">GAAP 已驗證</span></td>
+        </tr>
+        <tr style="background:rgba(63,185,80,0.04)">
+          <td><strong>FY2026 E</strong></td>
+          <td class="num">~$2.80 ⚠️</td>
+          <td class="num ok" style="color:var(--green)">$4.17 ✅共識</td>
+          <td class="num">$103（當前）</td>
+          <td class="num">~37x ⚠️</td>
+          <td class="num ok" style="color:var(--green)"><strong>24.7x</strong></td>
+          <td><span class="badge badge-green">非GAAP 預估</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2027 E</strong></td>
+          <td class="num">— </td>
+          <td class="num ok">$5.08 ✅共識</td>
+          <td class="num">—</td>
+          <td class="num">— </td>
+          <td class="num ok"><strong>20.3x</strong></td>
+          <td><span class="badge badge-blue">預估</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2028 E</strong></td>
+          <td class="num">— </td>
+          <td class="num ok">$6.16 ✅共識</td>
+          <td class="num">—</td>
+          <td class="num">— </td>
+          <td class="num ok"><strong>16.7x</strong></td>
+          <td><span class="badge badge-blue">預估</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 歷史 PE 參考 -->
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr><th colspan="4" style="color:var(--blue); font-size:13px;">★ 歷史本益比參考（GAAP 基準）</th></tr>
+        <tr><th>PE 指標</th><th class="num">數值</th><th>基準日</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>5年平均 TTM PE（GAAP）</strong></td>
+          <td class="num warn">~178-248x ⚠️</td>
+          <td>2021-2025 均值</td>
+          <td>GAAP EPS 因大量股票補償（SBC）長期偏低，使 GAAP PE 虛高</td>
+        </tr>
+        <tr>
+          <td><strong>5年平均 TTM PE（非GAAP）</strong></td>
+          <td class="num">~55-80x ⚠️</td>
+          <td>2021-2025 均值</td>
+          <td>非 GAAP 剔除 SBC/攤銷後，更能反映實際盈利能力</td>
+        </tr>
+        <tr>
+          <td><strong>2022年最低 PE（GAAP）</strong></td>
+          <td class="num bad">~389x ⚠️</td>
+          <td>2022年底（股市熊市）</td>
+          <td>⚠️ 股價跌但 GAAP 盈利更少，PE 反而「虛高」。以 GAAP 論 2022 從未便宜</td>
+        </tr>
+        <tr>
+          <td><strong>2022年最低 PE（非GAAP）</strong></td>
+          <td class="num">~45-55x ⚠️</td>
+          <td>2022年底</td>
+          <td>非GAAP 視角：2022 年底是近 5 年相對低點，約 45-55x</td>
+        </tr>
+        <tr>
+          <td><strong>近5年真正最低 PE（非GAAP）</strong></td>
+          <td class="num ok">~91x ⚠️（GAAP）</td>
+          <td>2023 年 12 月</td>
+          <td>GAAP PE 的近 5 年低點出現在 2023 年底（91x），非 2022 年</td>
+        </tr>
+        <tr>
+          <td><strong>2018年最低 PE</strong></td>
+          <td class="num">— ❌</td>
+          <td>2018年底市場修正</td>
+          <td>❌ NOW 於 2012 年上市，2018 年已為成長股，PE &gt;100x GAAP（估），非傳統「低本益比」可比。歷史底部無現實參考價值</td>
+        </tr>
+        <tr style="background:rgba(63,185,80,0.06)">
+          <td><strong>當前 PE（2026-07-02）</strong></td>
+          <td class="num ok">GAAP 61x ｜ 非GAAP 24.7x（Forward FY2026）</td>
+          <td>2026-07-02</td>
+          <td class="ok">⭐ 非GAAP 24.7x 是近 5 年最低估值水平——可能是歷史性買點</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box" style="margin-top:12px;">
+    <h3>📌 NOW 的 PE 解讀特別說明</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">ServiceNow 長期存在大量<strong>股票薪酬（SBC）</strong>，導致 GAAP EPS 遠低於現金盈利能力。FY2025 GAAP EPS $1.69 vs 非GAAP（估）~$3.74 相差超過 2 倍。正確的估值比較基準應使用<strong>非GAAP EPS 或 FCF/股</strong>。目前 FY2026 非GAAP 24.7x 對比歷史均值 55-80x，折價 50%+，且公司 20%+ 收入成長持續——若 AI 商業化兌現，存在「戴維斯雙擊」（EPS 上修 + 多重估值擴張）機會。</p>
+  </div>
+</div>
+
+<!-- 8. DCF 三情境 -->
+<div id="dcf" class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">DCF 三情境估值（5年 FCF 折現）</div>
+  </div>
+
+  <div class="scenario-row">
+    <div class="scenario bear">
+      <h4>🐻 熊市情境（25% 機率）</h4>
+      <div class="scenario-price" style="color:var(--red)">$68-82</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 當前 $103　下跌 -20% ~ -34%</div>
+      <div class="row"><span>收入 CAGR (5yr)</span><span>13-15%</span></div>
+      <div class="row"><span>FCF 利潤率</span><span>28-30%</span></div>
+      <div class="row"><span>終值 PE (非GAAP)</span><span>15-18x</span></div>
+      <div class="row"><span>折現率 (WACC)</span><span>11%</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：Microsoft 大規模替代 ITSM、宏觀衰退、Now Assist ACV 停滯在 $1B</div>
+    </div>
+    <div class="scenario base">
+      <h4>📊 基本情境（50% 機率）</h4>
+      <div class="scenario-price" style="color:var(--blue)">$128-158</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 當前 $103　上漲 +24% ~ +53%</div>
+      <div class="row"><span>收入 CAGR (5yr)</span><span>19-21%</span></div>
+      <div class="row"><span>FCF 利潤率</span><span>33-35%</span></div>
+      <div class="row"><span>終值 PE (非GAAP)</span><span>22-26x</span></div>
+      <div class="row"><span>折現率 (WACC)</span><span>10%</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：維持 20% 成長、Now Assist ACV $2B+、FCF 利潤率持續擴張</div>
+    </div>
+    <div class="scenario bull">
+      <h4>🐂 牛市情境（25% 機率）</h4>
+      <div class="scenario-price" style="color:var(--green)">$195-240</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 當前 $103　上漲 +89% ~ +133%</div>
+      <div class="row"><span>收入 CAGR (5yr)</span><span>24-27%</span></div>
+      <div class="row"><span>FCF 利潤率</span><span>38-42%</span></div>
+      <div class="row"><span>終值 PE (非GAAP)</span><span>32-38x</span></div>
+      <div class="row"><span>折現率 (WACC)</span><span>9%</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：Agentic AI 爆發、DOGE 政府採購大單、Moveworks 整合超預期</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--blue);">
+    <h3>加權平均公允價值</h3>
+    <div style="font-size:28px; font-weight:700; color:var(--blue); margin:8px 0;">$130-155 ⚠️</div>
+    <p style="font-size:13px; color:var(--text)">當前股價 $103 位於加權公允價值區間之<span class="ok">下方</span>，提供約 <strong>26-50% 潛在上行空間</strong>。分析師平均目標 $141-146 與本 DCF 基本情境上緣吻合。警告：本 DCF 基於高度成長假設，對折現率及終值 PE 敏感度極高，數字僅供參考。</p>
+  </div>
+</div>
+
+<!-- 9. 分析師目標價 -->
+<div id="targets" class="section">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">投行目標價與操作建議</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>機構</th><th>評級</th><th class="num">目標價</th><th class="num">vs 當前 $103</th><th>核心邏輯</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>市場共識均值（48家）⚠️</td><td><span class="badge badge-green">強力買入</span></td><td class="num">$141.48</td><td class="num ok">+37.4%</td><td>AI 商業化 + ITSM 護城河折現</td></tr>
+        <tr><td>市場共識均值（54家）⚠️</td><td><span class="badge badge-green">強力買入</span></td><td class="num">$146.80</td><td class="num ok">+42.5%</td><td>含更樂觀 AI 滲透假設</td></tr>
+        <tr><td>共識最低目標</td><td><span class="badge badge-yellow">持有/觀望</span></td><td class="num">$85.00</td><td class="num bad">-17.5%</td><td>成長放緩 / Microsoft 替代風險</td></tr>
+        <tr><td>共識最高目標</td><td><span class="badge badge-green">強力買入</span></td><td class="num">$236.00</td><td class="num ok">+129%</td><td>Agentic AI TAM 完整兌現</td></tr>
+        <tr><td>買入/持有/賣出比例</td><td><span class="badge badge-green">買入 83%</span></td><td class="num" colspan="3">買入 43家，持有 4家，賣出 1家（共 54家）✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="action-box" style="margin-top:16px;">
+    <h3>✅ 財報解析操作建議：當前 $103 具備中長期買入價值</h3>
+    <div style="font-size:13px; line-height:1.8; color:var(--text)">
+      <strong>核心邏輯</strong>：Q1 2026 財報數字正常（訂閱+19%、cRPO+21%、FCF 利潤率維持 34%+），股價 -17.7% 屬於市場過度反應。當前 $103 的非GAAP 24.7x 遠低於歷史均值 55-80x，且 83% 分析師評為「買入」、平均目標 $141+，提供 37%+ 上行空間。
+      <br><br>
+      <strong>波段操作建議</strong>（中長期投資人視角）：
+      <ul style="padding-left:16px; margin-top:6px;">
+        <li>$95-105 區間可<strong>分批建倉</strong>（3-4 批），每批等 cRPO 季報確認後再加</li>
+        <li>Q2 2026 財報（預計 2026-07 底）是關鍵催化劑：若 cRPO YoY ≥20% 且 Now Assist ACV 突破 $2B → 股價重評估機率高</li>
+        <li>停損參考：若股價跌破 $85（非GAAP PE &lt;20x）且訂閱收入成長跌至 &lt;16%，離場</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式三：財務健檢
+══════════════════════════════════════ -->
+<div id="mode3" class="mode-divider">
+  <h2>◈ 模式三：財務風險健檢</h2>
+  <p>財務三表 · 六大比率 · 債務時程 · CapEx 分析 · 同業對比 · 綜合診斷</p>
+</div>
+
+<!-- 10. 財務三表 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">財務三表數據</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>損益表 / 現金流</th>
+          <th class="num">FY2023 ⚠️</th>
+          <th class="num">FY2024 ⚠️</th>
+          <th class="num">FY2025 ✅</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總收入</td><td class="num">$8.97B</td><td class="num">$10.98B</td><td class="num ok">$13.30B</td></tr>
+        <tr><td>EBIT（估）</td><td class="num">~$0.7B ⚠️</td><td class="num">~$1.2B ⚠️</td><td class="num">~$1.8B ⚠️</td></tr>
+        <tr><td>利息支出</td><td class="num">~$30M ⚠️</td><td class="num">~$30M ⚠️</td><td class="num">~$30M ⚠️</td></tr>
+        <tr><td>EBITDA（非GAAP，估）</td><td class="num">~$3.0B ⚠️</td><td class="num">~$3.8B ⚠️</td><td class="num">~$4.8B ⚠️</td></tr>
+        <tr><td>GAAP 淨利（分割後 EPS 推算）</td><td class="num">~$0.62B ⚠️</td><td class="num">~$1.43B ✅</td><td class="num ok">~$1.74B ✅</td></tr>
+        <tr><td>OCF</td><td class="num">—</td><td class="num ok">$4.27B ✅</td><td class="num ok">$5.44B ✅</td></tr>
+        <tr><td>CapEx</td><td class="num">~$850M ⚠️</td><td class="num">$851M ✅</td><td class="num ok">$868M ✅</td></tr>
+        <tr><td>FCF</td><td class="num">~$3.0B ⚠️</td><td class="num ok">$3.42B ✅</td><td class="num ok">$4.60B ✅</td></tr>
+        <tr><td>FCF 利潤率</td><td class="num">—</td><td class="num">~31.1%</td><td class="num ok">34.6%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr>
+          <th>資產負債表</th>
+          <th class="num">FY2024 ⚠️</th>
+          <th class="num">FY2025 ✅</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>現金及短期投資</td><td class="num">~$3.3B ⚠️</td><td class="num ok">$3.7B ✅</td></tr>
+        <tr><td>總資產</td><td class="num">~$20B ⚠️</td><td class="num">—</td></tr>
+        <tr><td>長期債務</td><td class="num ok">~$0 ✅</td><td class="num ok">$0 ✅ ⭐</td></tr>
+        <tr><td>計息負債合計</td><td class="num ok">~$1.5B ⚠️（轉換公司債殘餘）</td><td class="num ok">~$1.0B ⚠️</td></tr>
+        <tr><td>淨現金/(淨負債)</td><td class="num ok">~淨現金 $1.8B ⚠️</td><td class="num ok">~淨現金 $2.7B ⚠️</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3); margin-top:4px;">⭐ ServiceNow 是極少數保持零長期債務的大型科技公司之一，以 FCF 自給自足並支付收購</p>
+</div>
+
+<!-- 11. 六大比率診斷 -->
+<div id="ratios" class="section">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">六大財務健康比率診斷</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>比率</th><th class="num">公式</th><th class="num">NOW FY2025</th><th>警戒標準</th><th>狀態</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. 利息覆蓋率</strong></td>
+          <td class="num">EBIT / 利息支出</td>
+          <td class="num ok">~60x ⚠️ ($1.8B / $30M)</td>
+          <td>&lt;3x 警戒</td>
+          <td><span class="badge badge-green">✅ 極優</span></td>
+        </tr>
+        <tr>
+          <td><strong>2. 負債比率</strong></td>
+          <td class="num">總負債 / 總資產</td>
+          <td class="num ok">~&lt;40% ⚠️</td>
+          <td>&gt;70% 警戒</td>
+          <td><span class="badge badge-green">✅ 健康</span></td>
+        </tr>
+        <tr>
+          <td><strong>3. 淨負債 / EBITDA</strong></td>
+          <td class="num">淨負債 / EBITDA</td>
+          <td class="num ok"><strong>負值（淨現金）</strong></td>
+          <td>&gt;3x 警戒</td>
+          <td><span class="badge badge-green">✅ 淨現金狀態</span></td>
+        </tr>
+        <tr>
+          <td><strong>4. OCF / 計息負債</strong></td>
+          <td class="num">OCF / 計息負債</td>
+          <td class="num ok">~5.4x ($5.44B / $1.0B)</td>
+          <td>&lt;0.5x 警戒</td>
+          <td><span class="badge badge-green">✅ 極優</span></td>
+        </tr>
+        <tr>
+          <td><strong>5. FCF 覆蓋比率</strong></td>
+          <td class="num">FCF / 利息支出</td>
+          <td class="num ok">~153x ($4.6B / $30M)</td>
+          <td>&lt;2x 警戒</td>
+          <td><span class="badge badge-green">✅ 近乎完美</span></td>
+        </tr>
+        <tr>
+          <td><strong>6. 兩年到期牆覆蓋倍數</strong></td>
+          <td class="num">現金 / 2年內到期債務</td>
+          <td class="num ok">N/A（無重大債務）</td>
+          <td>&lt;1x 警戒</td>
+          <td><span class="badge badge-green">✅ 無到期壓力</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px; background:rgba(63,185,80,0.05); border:1px solid rgba(63,185,80,0.3);">
+    <h3 style="color:var(--green)">🏆 六大比率一致優良——SaaS 輕資產模型的優越性</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">ServiceNow 六大比率全數達到「✅ 優良」狀態。最核心的亮點：<strong>零長期負債 + 淨現金 $2.7B + FCF $4.6B</strong>。這意味著即使面臨短期業績壓力，公司也無任何財務危機風險，且可隨時以 FCF 展開大型回購或收購。對中長期投資人而言，財務健康度消除了下行風險的底層擔憂。</p>
+  </div>
+</div>
+
+<!-- 12. 債務到期時程 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">債務到期時程</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--green)">
+    <h3 style="color:var(--green)">✅ 實際上無傳統長期債務 — 極為罕見</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">根據 FY2025 年報，ServiceNow 長期負債接近零（$0 ✅）。公司在 2022 年前曾發行過少量可轉換公司債，現已幾乎全數轉股或到期償還。目前的「負債」主要包括：遞延收入（$7-8B，是客戶預付款的會計認列義務，非付款義務）、租賃負債（辦公室/資料中心）約 $1-1.5B。無任何 2026-2030 年內的長期資本市場債務到期壓力。</p>
+  </div>
+</div>
+
+<!-- 13. CapEx 分析 -->
+<div id="capex" class="section">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">CapEx 分析</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>CapEx 指標</th><th class="num">FY2024</th><th class="num">FY2025 ✅</th><th>判讀</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>資本支出</td><td class="num">$851M ✅</td><td class="num">$868M ✅</td><td>穩定，幾乎持平（+2%）</td></tr>
+        <tr><td>CapEx / 總收入</td><td class="num">7.7%</td><td class="num">6.5%</td><td class="ok">下降趨勢 ✅（規模效應）</td></tr>
+        <tr><td>CapEx / OCF</td><td class="num">19.9%</td><td class="num ok">16.0%</td><td class="ok">FCF 轉換率提升 ✅</td></tr>
+        <tr><td>FCF 轉換率（FCF/EBITDA非GAAP）</td><td class="num">~90% ⚠️</td><td class="num ok">~96% ⚠️</td><td class="ok">接近 1：1，輕資產典範</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>📊 業務模式判讀：輕資產 SaaS（CapEx 主要為資料中心基礎設施）</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">CapEx/收入 6.5% 遠低於半導體（20-30%）或電信（15-25%）等重資產行業。NOW 的 CapEx 主要投入雲端資料中心（AWS/Azure/GCP 混合）和 RaptorDB Pro AI 原生資料庫基礎設施。隨著 AI 工作負載增加，CapEx 可能在 2026-2027 略升至 8-10%（⚠️），但仍屬輕資產範疇。與競爭者相比，CapEx/收入比率是行業最低之一，體現 SaaS 平台的高效資本利用率。</p>
+  </div>
+</div>
+
+<!-- 14. 同業對比 -->
+<div id="comps" class="section">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">同業財務健康對比</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>公司</th>
+          <th class="num">市值</th>
+          <th class="num">FCF 利潤率</th>
+          <th class="num">淨負債/EBITDA</th>
+          <th class="num">收入 YoY</th>
+          <th class="num">Forward PE（非GAAP⚠️）</th>
+          <th>財務健康</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now">
+          <td><strong>ServiceNow (NOW) ★</strong></td>
+          <td class="num">$106B</td>
+          <td class="num ok">34.6% ✅</td>
+          <td class="num ok">淨現金 ✅</td>
+          <td class="num ok">+21% ✅</td>
+          <td class="num ok">24.7x ✅</td>
+          <td><span class="badge badge-green">AA ⭐</span></td>
+        </tr>
+        <tr>
+          <td>Salesforce (CRM)</td>
+          <td class="num">~$230B ⚠️</td>
+          <td class="num">~31% ⚠️</td>
+          <td class="num">~0.5x ⚠️</td>
+          <td class="num">~+9% ⚠️</td>
+          <td class="num">~22x ⚠️</td>
+          <td><span class="badge badge-green">A+</span></td>
+        </tr>
+        <tr>
+          <td>Workday (WDAY)</td>
+          <td class="num">~$55B ⚠️</td>
+          <td class="num">~26% ⚠️</td>
+          <td class="num ok">淨現金 ⚠️</td>
+          <td class="num">~+16% ⚠️</td>
+          <td class="num">~19x ⚠️</td>
+          <td><span class="badge badge-green">A</span></td>
+        </tr>
+        <tr>
+          <td>Microsoft (MSFT)</td>
+          <td class="num">~$3.2T ⚠️</td>
+          <td class="num">~35% ⚠️</td>
+          <td class="num">~0.3x ⚠️</td>
+          <td class="num ok">~+16% ⚠️</td>
+          <td class="num">~27x ⚠️</td>
+          <td><span class="badge badge-green">AAA</span></td>
+        </tr>
+        <tr>
+          <td>Atlassian (TEAM)</td>
+          <td class="num">~$55B ⚠️</td>
+          <td class="num">~28% ⚠️</td>
+          <td class="num ok">淨現金 ⚠️</td>
+          <td class="num">~+18% ⚠️</td>
+          <td class="num">~32x ⚠️</td>
+          <td><span class="badge badge-green">A</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">競爭者數據皆為⚠️估算，僅供相對比較參考，請以各公司最新財報為準</p>
+
+  <div class="card" style="margin-top:12px;">
+    <h3>🏆 同業對比結論</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">ServiceNow 在同類 SaaS 企業中財務健康度名列前茅。特別是<strong>零長期負債 + 34.6% FCF 利潤率 + 20%+ 成長</strong>的三重組合，是稀缺的「高成長 + 零槓桿」典範。唯一落後於 Microsoft 的是絕對規模，但 NOW 成長速度快 5ppt+。相比 Salesforce（收購導致負債），NOW 的資本結構更為乾淨。</p>
+  </div>
+</div>
+
+<!-- 15. 綜合診斷 -->
+<div id="health" class="section">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-title">綜合財務診斷</div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:24px; margin-bottom:24px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:24px;">
+    <div class="health-badge health-aa">AA</div>
+    <div>
+      <div style="font-size:20px; font-weight:700; color:var(--green);">優良主動管理型 AA</div>
+      <div style="font-size:13px; color:var(--text2); margin-top:4px;">零長期負債｜FCF 複利機器｜強勁訂閱現金流結構</div>
+      <div style="font-size:13px; color:var(--text); margin-top:8px;">ServiceNow 財務健康度堪稱企業 SaaS 中的標杆。在 $106B 市值規模下依然保持零負債、$4.6B FCF、34.6% FCF 利潤率，且六大比率全數優良，無任何近期財務危機觸發風險。</div>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <div>
+      <div class="risk-card" style="background:rgba(63,185,80,0.06); border-color:rgba(63,185,80,0.3);">
+        <h4 style="color:var(--green)">✅ 三大財務優勢</h4>
+        <ul style="font-size:13px; line-height:1.8; padding-left:16px; color:var(--text);">
+          <li><strong>零長期負債</strong>：在利率波動環境中最大保護</li>
+          <li><strong>FCF 轉換率 ~96%</strong>：幾乎每 1 元 EBITDA 都變成現金</li>
+          <li><strong>遞延收入 $8B+</strong>：未來 12 個月收入能見度極高</li>
+        </ul>
+      </div>
+
+      <div class="risk-card">
+        <h4>⚠️ 財務結構注意點</h4>
+        <ul style="font-size:13px; line-height:1.8; padding-left:16px; color:var(--text);">
+          <li><strong>股票薪酬（SBC）</strong>：年度 SBC ~$2B+，稀釋 GAAP EPS，需用非GAAP 才能看清盈利能力</li>
+          <li><strong>收購整合風險</strong>：Moveworks $2.85B + Armis，短期攤銷增加 GAAP 費用</li>
+          <li><strong>CapEx 潛在上升</strong>：AI 基礎設施投入若加速，FCF 利潤率可能短期受壓</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="risk-card">
+        <h4>📊 安全邊際計算</h4>
+        <div style="font-size:13px; line-height:1.9; color:var(--text);">
+          <strong>EBIT 需下滑多少才觸及財務警戒？</strong><br>
+          ・利息支出 ~$30M（極低）<br>
+          ・EBIT 當前 ~$1.8B，需下滑 <strong>98%</strong> 才觸及利息覆蓋 &lt;3x<br>
+          ・實際上，即使全球 IT 支出凍結一年，NOW 的訂閱黏著度也能維持 80%+ 收入<br>
+          ・<span class="ok">安全邊際：極高，幾乎無財務危機風險</span>
+        </div>
+      </div>
+      <div class="card" style="margin-top:0; border-left:3px solid var(--blue);">
+        <h3>🎯 最大風險點（非財務）</h3>
+        <p style="font-size:13px; line-height:1.7; color:var(--text)">NOW 的最大風險並非財務風險，而是<strong>估值重評</strong>風險：若 AI 商業化不如預期（Now Assist ACV 停滯在 $1.5B），市場可能將其從「高速成長股（24-30x 非GAAP）」重評為「穩定成長股（15-18x 非GAAP）」，意味股價跌至 $62-75。這是核心監控場景，觸發條件：FY2026 全年訂閱收入成長 &lt;17% 且 ACV 不再上調。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 最終操作建議總結 ── -->
+<div class="action-box" style="margin-top:32px;">
+  <h3>✅ 個股小狐最終操作建議（三模式綜合）</h3>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; font-size:13px; line-height:1.8; color:var(--text); margin-top:8px;">
+    <div>
+      <strong>📊 股票定性</strong><br>
+      高速成長 SaaS｜企業工作流霸主｜Agentic AI 轉型期<br><br>
+      <strong>💰 估值判斷</strong><br>
+      非GAAP 24.7x（歷史最低區）<br>分析師目標 $141-146（+37-42%）<br>DCF 基本情境 $128-158（+24-53%）<br><br>
+      <strong>🏥 財務健康</strong><br>
+      AA 級：零負債、FCF $4.6B、淨現金
+    </div>
+    <div>
+      <strong>📈 未持有建議</strong><br>
+      $95-105 可<strong>分批建倉</strong>（3批）<br>第一批：今即可小倉位布局<br>第二批：Q2財報確認後<br>第三批：cRPO 再確認 ≥20%<br><br>
+      <strong>持有建議</strong><br>
+      中長期核心池持有，目標 $140+<br>停損：$85 以下 + 基本面惡化
+    </div>
+    <div>
+      <strong>🔍 每季必看指標</strong><br>
+      ①訂閱收入 YoY CC（目標 ≥19%）<br>
+      ②cRPO YoY CC（目標 ≥20%）<br>
+      ③Now Assist ACV（目標 $2B+）<br>
+      ④非GAAP 運營利潤率（目標 ≥32%）<br>
+      ⑤FCF 利潤率（目標 ≥34%）<br><br>
+      <strong>⚠️ 風險提示</strong><br>
+      Microsoft Copilot 進展、<br>宏觀 SaaS 估值壓縮、<br>Moveworks 整合進度
+    </div>
+  </div>
+</div>
+
+<!-- 資料來源 -->
+<div class="card" style="margin-top:40px;">
+  <h3>📚 資料來源 & 免責聲明</h3>
+  <div style="font-size:12px; color:var(--text2); line-height:2;">
+    <strong>已驗證來源：</strong><br>
+    · ServiceNow IR / SEC EDGAR Q1 FY2026 8-K (2026-04-22) ✅<br>
+    · ServiceNow FY2025 Annual Report / Form ARS ✅（OCF $5.44B, FCF $4.6B, CapEx $868M, 現金 $3.7B）<br>
+    · 分析師評級共識：MarketBeat / StockAnalysis（54家分析師，均值 $141-146, 買入 83%）✅<br>
+    · 5-for-1 股票分割：2025年12月 ✅<br><br>
+    <strong>估算來源（⚠️）：</strong>歷史 EPS（非GAAP 分割前換算）、競爭者財務數據、DCF 假設均為合理推算，非精確數字。請以公司最新官方公告為準。<br><br>
+    <span style="color:var(--red)"><strong>免責聲明：</strong>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</span>
+  </div>
+</div>
+
+</div><!-- end container -->
+
+<footer>
+  <p>個股小狐完整報告｜NOW ServiceNow, Inc.｜分析日期：2026-07-02</p>
+  <p>模式一 深度研究 · 模式二 財報解析 · 模式三 財務健檢 — 三模式合一</p>
+  <p style="margin-top:6px; color:var(--border2)">本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</footer>
+
+</body>
+</html>

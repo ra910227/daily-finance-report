@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜聯亞光電(3081) 最新財報解析</title>
+<style>
+:root{
+  --bg:#0b0e14; --bg2:#12161f; --card:#161b26; --border:#232939;
+  --text:#e6e9ef; --sub:#9aa4b5; --accent:#4fd1c5; --accent2:#f0b429;
+  --green:#3ecf8e; --red:#f2545b; --yellow:#f0b429; --blue:#5b9dff;
+  --purple:#b892ff;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
+  background:linear-gradient(180deg,#0b0e14 0%,#0d1017 100%); color:var(--text); line-height:1.65;
+}
+a{color:var(--accent); text-decoration:none;}
+.wrap{max-width:1080px; margin:0 auto; padding:0 20px 80px;}
+.hero{
+  background:linear-gradient(135deg,#151a27 0%,#1a1f2e 60%,#12222a 100%);
+  border-bottom:1px solid var(--border); padding:48px 20px 36px;
+}
+.hero-inner{max-width:1080px; margin:0 auto;}
+.hero-tag{display:inline-block; font-size:12px; letter-spacing:2px; color:var(--accent); background:rgba(79,209,197,.1); border:1px solid rgba(79,209,197,.35); padding:4px 10px; border-radius:20px; margin-bottom:14px;}
+.hero-title{font-size:30px; font-weight:800; margin:0 0 6px;}
+.hero-sub{color:var(--sub); font-size:14px; margin-bottom:22px;}
+.hero-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:18px;}
+.hero-stat{background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:10px; padding:14px 16px;}
+.hero-stat .label{font-size:11px; color:var(--sub); margin-bottom:4px;}
+.hero-stat .value{font-size:20px; font-weight:700;}
+.hero-stat .value.red{color:var(--red);}
+.hero-stat .value.green{color:var(--green);}
+.toc{
+  display:flex; flex-wrap:wrap; gap:8px; padding:16px 20px; background:var(--bg2);
+  border-bottom:1px solid var(--border); position:sticky; top:0; z-index:10; backdrop-filter:blur(8px);
+}
+.toc a{
+  font-size:12.5px; color:var(--sub); border:1px solid var(--border); padding:6px 12px; border-radius:20px;
+  white-space:nowrap;
+}
+.toc a:hover{color:var(--accent); border-color:var(--accent);}
+section{margin-top:44px;}
+h2{font-size:21px; border-left:4px solid var(--accent); padding-left:12px; margin-bottom:6px;}
+h2 .num{color:var(--accent); font-weight:800; margin-right:6px;}
+.section-desc{color:var(--sub); font-size:13px; margin-bottom:18px;}
+.card{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin-bottom:16px;}
+table{width:100%; border-collapse:collapse; font-size:13.5px;}
+th,td{padding:9px 10px; text-align:left; border-bottom:1px solid var(--border);}
+th{color:var(--sub); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.5px;}
+tr:last-child td{border-bottom:none;}
+td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+.badge{display:inline-block; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:6px;}
+.badge.beat{background:rgba(62,207,142,.15); color:var(--green); border:1px solid rgba(62,207,142,.4);}
+.badge.miss{background:rgba(242,84,91,.15); color:var(--red); border:1px solid rgba(242,84,91,.4);}
+.badge.warn{background:rgba(240,180,41,.15); color:var(--yellow); border:1px solid rgba(240,180,41,.4);}
+.badge.na{background:rgba(154,164,181,.15); color:var(--sub); border:1px solid rgba(154,164,181,.4);}
+.badge.verified{background:rgba(91,157,255,.15); color:var(--blue); border:1px solid rgba(91,157,255,.4);}
+.scenario-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;}
+.scenario-card{border-radius:12px; padding:20px; border:1px solid var(--border);}
+.scenario-card.bear{background:linear-gradient(160deg,rgba(242,84,91,.08),rgba(22,27,38,.4));}
+.scenario-card.base{background:linear-gradient(160deg,rgba(91,157,255,.08),rgba(22,27,38,.4));}
+.scenario-card.bull{background:linear-gradient(160deg,rgba(62,207,142,.08),rgba(22,27,38,.4));}
+.scenario-card h3{margin:0 0 4px; font-size:16px;}
+.scenario-card .tp{font-size:24px; font-weight:800; margin:8px 0;}
+.scenario-card ul{margin:10px 0 0; padding-left:18px; font-size:13px; color:var(--sub);}
+.scenario-card li{margin-bottom:5px;}
+.action-box{
+  border-radius:14px; padding:24px; border:1.5px solid var(--accent2);
+  background:linear-gradient(135deg,rgba(240,180,41,.08),rgba(22,27,38,.5));
+}
+.action-box h3{margin-top:0; color:var(--accent2); font-size:17px;}
+.action-box .row{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--border); font-size:13.5px;}
+.action-box .row:last-child{border-bottom:none;}
+.note{font-size:12px; color:var(--sub); margin-top:8px; padding:10px 12px; background:rgba(255,255,255,.02); border-left:3px solid var(--border); border-radius:4px;}
+.pill-row{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;}
+footer{margin-top:60px; padding:24px 20px; border-top:1px solid var(--border); color:var(--sub); font-size:12px;}
+footer .src{margin-bottom:10px;}
+footer a{color:var(--sub); text-decoration:underline;}
+.hl{color:var(--accent2); font-weight:700;}
+.small{font-size:12px; color:var(--sub);}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">個股小狐 · 最新財報解析</span>
+    <h1 class="hero-title">聯亞光電工業股份有限公司 (3081.TWO)</h1>
+    <div class="hero-sub">分析日期：2026年7月2日｜上櫃・光通訊／矽光子元件（磊晶基板／CPO光引擎）</div>
+    <div class="hero-grid">
+      <div class="hero-stat"><div class="label">股價 (2026/7/2)</div><div class="value red">1,940 元</div></div>
+      <div class="hero-stat"><div class="label">當日漲跌</div><div class="value red">-40.00 (-2.02%)</div></div>
+      <div class="hero-stat"><div class="label">市值</div><div class="value">約 1,794.8 億元</div></div>
+      <div class="hero-stat"><div class="label">TTM 本益比</div><div class="value">254.6 倍</div></div>
+      <div class="hero-stat"><div class="label">52週區間</div><div class="value">307 ~ 3,305 元</div></div>
+      <div class="hero-stat"><div class="label">最新季EPS (26Q1)</div><div class="value green">3.44 元</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="toc">
+  <a href="#beatmiss">① Beat/Miss</a>
+  <a href="#guidance">② 全年指引</a>
+  <a href="#pricereaction">③ 股價反應</a>
+  <a href="#dcf">④ 三情境DCF</a>
+  <a href="#valuation">⑤ 股價位階</a>
+  <a href="#comps">⑥ 可比公司</a>
+  <a href="#extra">⑦ 額外優勢/風險</a>
+  <a href="#targetprice">⑧ 目標價與建議</a>
+</div>
+
+<div class="wrap">
+
+<section id="beatmiss">
+  <h2><span class="num">①</span>Beat / Miss 對照表（2026Q1）</h2>
+  <p class="section-desc">台股法人對聯亞的正式共識預估資料極為有限，本表以「法說會後法人上修預估」及「歷年同期比較」雙軌判讀，避免臆測單一共識數字。</p>
+  <div class="card">
+    <table>
+      <thead><tr><th>項目</th><th class="num">26Q1 實際</th><th class="num">25Q1 (YoY基期)</th><th class="num">25Q4 (QoQ基期)</th><th class="num">YoY</th><th class="num">QoQ</th><th>判定</th></tr></thead>
+      <tbody>
+        <tr><td>單季EPS</td><td class="num hl">3.44 元</td><td class="num">0.46 元</td><td class="num">2.07 元</td><td class="num">+647.8%</td><td class="num">+67.2%</td><td><span class="badge beat">✅ Beat（歷史對比）</span></td></tr>
+        <tr><td>毛利率</td><td class="num">54.76%</td><td class="num">—</td><td class="num">48.67%（25Q4）</td><td class="num">⚠️估算擴張</td><td class="num">+6.1pp</td><td><span class="badge beat">✅ 三率三升</span></td></tr>
+        <tr><td>營業利益率</td><td class="num">41.27%</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="badge verified">✅ 已驗證</span></td></tr>
+        <tr><td>4月單月營收</td><td class="num">3.95 億元</td><td class="num">約1.83億元(推算)</td><td class="num">3.43億元(3月)</td><td class="num">+115.38%</td><td class="num">+15.16%</td><td><span class="badge beat">✅ Beat</span></td></tr>
+        <tr><td>累計營收(至4月)</td><td class="num">13.00 億元</td><td class="num">約6.38億元</td><td class="num">—</td><td class="num">+103.7%</td><td class="num">—</td><td><span class="badge beat">✅ Beat</span></td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <strong>判讀說明：</strong>聯亞並無廣泛法人共識預估資料庫（非台灣50/中型100成分股，外資／本土研究覆蓋家數少），故本表採「YoY/QoQ趨勢判讀」取代共識Beat/Miss。26Q1單季EPS 3.44元為<span class="hl">連續第5季成長，創近39季新高</span>（來源：財報狗），毛利率由基板尺寸自2吋升級至3吋帶動規模經濟效益，屬實質性結構改善而非單季波動。<br>
+      來源：<a href="https://statementdog.com/analysis/3081/eps" target="_blank">財報狗EPS頁</a>、<a href="https://statementdog.com/analysis/3081/eps-growth-rate" target="_blank">財報狗EPS成長率頁</a>、<a href="https://statementdog.com/analysis/3081/monthly-revenue-growth-rate" target="_blank">財報狗月營收頁</a>
+    </div>
+  </div>
+</section>
+
+<section id="guidance">
+  <h2><span class="num">②</span>全年指引變化</h2>
+  <div class="card">
+    <p><span class="badge na">— 該公司未提供正式財測指引</span></p>
+    <p class="small">聯亞光電未依台灣證交所「公開財測」制度發布正式全年營收/EPS財測。以下為 2026/4/22 法說會後，法人依公司資本支出計畫、產能規劃與訂單能見度所做的<strong>估算調整</strong>，非公司官方指引，需明確區分。</p>
+    <table>
+      <thead><tr><th>估算來源</th><th class="num">舊估(法說前)</th><th class="num">新估(法說後)</th><th>調整方向</th><th>依據</th></tr></thead>
+      <tbody>
+        <tr><td>美系外資 2026年EPS</td><td class="num">⚠️未揭露具體舊值</td><td class="num hl">19.57元 / 或17.6元(另一報導)</td><td><span class="badge beat">上調</span></td><td>規模經濟＋產品組合改善，低估獲利能力</td></tr>
+        <tr><td>美系外資 2027年EPS</td><td class="num">—</td><td class="num hl">28.8～40+元</td><td><span class="badge beat">上調</span></td><td>2027下半年訂單能見度轉強</td></tr>
+        <tr><td>美系外資 2028年EPS</td><td class="num">—</td><td class="num">50.6元</td><td><span class="badge beat">上調</span></td><td>CPO/矽光子放量假設</td></tr>
+        <tr><td>資本支出計畫</td><td class="num">原定規模</td><td class="num">擴大，未來可能再增1-2次投資</td><td><span class="badge beat">擴大</span></td><td>因應4-6吋基板擴產與住友電工5年InP長約</td></tr>
+      </tbody>
+    </table>
+    <div class="note">不同財經媒體引用的法人EPS估值存在差異（19元/19.57元/17.6元等版本），反映各家法人模型假設不同，非公司官方數字，投資人應視為區間參考而非精確共識。<br>
+    來源：<a href="https://fnc.ebc.net.tw/fncnews/stock/209639" target="_blank">東森財經-法人觀點</a>、<a href="https://wantrich.chinatimes.com/news/20260411900006-420101" target="_blank">旺得富-矽光子7劍客</a></div>
+  </div>
+</section>
+
+<section id="pricereaction">
+  <h2><span class="num">③</span>股價反應（財報/法說會前後）</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>時間點</th><th class="num">股價</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>2026/4/22 法說會當日</td><td class="num">—</td><td>董事會通過26Q1財報並召開法說會，公布1.6T/3.2T矽光子產品量產進度與住友電工InP基板5年長約</td></tr>
+        <tr><td>2026/4/23 法說會後翌日</td><td class="num">直奔漲停</td><td><span class="badge beat">正面反應</span> — 美系外資調升2026-2028年EPS預估並以2027年79倍PE估值同步調高目標價，本土法人喊價上看4,095元</td></tr>
+        <tr><td>52週高點</td><td class="num hl">3,305 元</td><td>2026/4/23 附近（法說會激勵後續攻高）</td></tr>
+        <tr><td>其後修正階段</td><td class="num">回落</td><td><span class="badge warn">⚠️ 轉折疑慮</span> — 市場開始檢視CPO族群整體位階是否過高，資金是否撤出；聯鈞、訊芯-KY等同族群股同步轉弱，題材股由輪漲轉入整理</td></tr>
+        <tr><td>2026/7/2（本次分析日）</td><td class="num red">1,940 元 (-2.02%)</td><td>已由高點回落約 <span class="hl">41.3%</span>（3,305→1,940），連3日下跌，振幅5.3%，處於整理階段</td></tr>
+      </tbody>
+    </table>
+    <div class="note">逐點解讀：法說會本身內容偏多（EPS估值大幅上修、長約鎖定原料、資本支出擴大代表訂單能見度），股價短線先反應至漲停並衝上3,305元高點；但隨後族群性估值疑慮（本益比動輒80-100倍以上）引發獲利了結賣壓，加上CPO題材股輪動降溫，導致股價自高點回落逾4成，目前仍在尋找支撐。<br>
+    來源：<a href="https://fnc.ebc.net.tw/fncnews/stock/209639" target="_blank">東森財經</a>、<a href="https://readmo.cmoney.tw/article/3215e43a-4f23-4030-b487-78a51b5039b8" target="_blank">CMoney-法說後大跌是真轉折嗎</a>、<a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3081" target="_blank">Goodinfo個股資料</a></div>
+  </div>
+</section>
+
+<section id="dcf">
+  <h2><span class="num">④</span>三情境 DCF 估值</h2>
+  <p class="section-desc">⚠️ 估算模型：聯亞為高成長轉折股（2023-2024年虧損、2025年翻正、2026年爆發），現金流波動大，DCF假設具高度不確定性，僅供框架參考，非精確目標價。基準情境採用法人EPS上修後之營收/獲利假設反推。</p>
+  <div class="scenario-grid">
+    <div class="scenario-card bear">
+      <h3>🐻 熊市情境</h3>
+      <div class="tp">目標價 850 ~ 1,100 元</div>
+      <ul>
+        <li>營收假設：2026年YoY成長趨緩至+60%（CPO/矽光子需求不如預期），2027年+30%</li>
+        <li>EBITDA margin：約35%（毛利率回落至45%附近，規模效應不如預期）</li>
+        <li>FCF conversion：約50%（資本支出持續擴大侵蝕自由現金流）</li>
+        <li>WACC：11%（小型股+高波動風險溢酬）</li>
+        <li>Terminal growth：2%</li>
+        <li>觸發情境：CPO商用化時程延後、族群估值修正、AI資本支出降溫</li>
+      </ul>
+    </div>
+    <div class="scenario-card base">
+      <h3>⚖️ 基準情境</h3>
+      <div class="tp">目標價 1,900 ~ 2,850 元</div>
+      <ul>
+        <li>營收假設：2026年YoY+141%達53.15億元（法人估算），2027年延續高速成長</li>
+        <li>EBITDA margin：約45-48%（毛利率51.8%、營益率41.7%，法人估算）</li>
+        <li>FCF conversion：約60-65%</li>
+        <li>WACC：10%</li>
+        <li>Terminal growth：2.5%</li>
+        <li>對應美系外資目標價2,850元（2027年79倍PE法）與另一報導2,750元區間一致</li>
+      </ul>
+    </div>
+    <div class="scenario-card bull">
+      <h3>🐂 牛市情境</h3>
+      <div class="tp">目標價 3,600 ~ 4,095 元</div>
+      <ul>
+        <li>營收假設：CPO由scale-out延伸至scale-up架構，1.6T/3.2T光模組需求超預期放量</li>
+        <li>EBITDA margin：50%以上（4-6吋基板規模經濟效益全面發酵）</li>
+        <li>FCF conversion：70%+（資本支出效益轉化為現金流）</li>
+        <li>WACC：9%（成長動能確立後風險溢酬下修）</li>
+        <li>Terminal growth：3%</li>
+        <li>對應本土法人目標價區間3,600~4,095元（買進評等）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px;">
+    <strong>敏感度說明：</strong>對本股估值影響最大的變數為<span class="hl">營收成長率假設</span>（CPO/矽光子滲透速度）與<span class="hl">terminal PE倍數</span>（美系外資採2027年79倍本益比法，屬明顯的成長股溢價估值法，而非傳統FCF折現終值），兩者共同決定目標價區間跨度可達近2.4倍（850元至4,095元）。次要敏感因子為毛利率能否維持50%以上（基板尺寸升級進度）。WACC變動對此類早期高成長股影響相對較小，但因公司過去兩年（2023-2024）曾出現營業利益率轉負紀錄，現金流不確定性仍需列入安全邊際考量。
+  </div>
+</section>
+
+<section id="valuation">
+  <h2><span class="num">⑤</span>股價位階評估</h2>
+  <div class="card">
+    <h3 style="margin-top:0;">絕對估值表</h3>
+    <table>
+      <thead><tr><th>指標</th><th class="num">數值</th><th>判讀</th></tr></thead>
+      <tbody>
+        <tr><td>TTM 本益比 (PE)</td><td class="num red">254.6 倍</td><td><span class="badge miss">❌ 極高</span> 同業平均56.91倍，聯亞溢價約4.5倍</td></tr>
+        <tr><td>股價淨值比 (PB)</td><td class="num red">42.34 倍</td><td><span class="badge miss">❌ 極高</span> 反映市場對未來獲利大幅重估預期</td></tr>
+        <tr><td>Forward PE (法人估算2026EPS 19.57元)</td><td class="num warn">約99倍</td><td><span class="badge warn">⚠️ 仍偏高</span> 以現價1,940元計算</td></tr>
+        <tr><td>PEG（以26Q1 YoY 647.8%粗算，失真）</td><td class="num">—</td><td><span class="badge na">❌ 不適用</span> 基期過低造成YoY失真，PEG計算意義有限，建議改用2026E→2027E成長率評估</td></tr>
+        <tr><td>Forward PEG（2026E→2027E EPS估算+80~150%）</td><td class="num warn">約0.66~1.24</td><td><span class="badge warn">⚠️ 估算值</span> 若2027年EPS達成法人估算(28.8~40元)，則Forward PEG仍具吸引力，但確定性依賴CPO放量時程</td></tr>
+      </tbody>
+    </table>
+    <div class="note">TTM本益比與PB極高是典型「轉折成長股」特徵——過去4季EPS基期極低（含2024年虧損），使TTM PE失真，市場實質是以Forward PE（隱含2026-2027年高速成長）在定價。此類股票安全邊際主要來自「成長是否兌現」而非「當前帳面便宜」。</div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">EPS成長趨勢表（近8季）</h3>
+    <table>
+      <thead><tr><th>季度</th><th class="num">EPS(元)</th><th class="num">QoQ</th><th class="num">YoY</th></tr></thead>
+      <tbody>
+        <tr><td>2024 Q2</td><td class="num red">-0.33</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>2024 Q3</td><td class="num">0.09</td><td class="num">轉正</td><td class="num">—</td></tr>
+        <tr><td>2024 Q4</td><td class="num">0.09</td><td class="num">持平</td><td class="num">—</td></tr>
+        <tr><td>2025 Q1</td><td class="num">0.46</td><td class="num">+411%</td><td class="num">—</td></tr>
+        <tr><td>2025 Q2</td><td class="num">1.05</td><td class="num">+128%</td><td class="num">大幅轉正</td></tr>
+        <tr><td>2025 Q3</td><td class="num">1.08</td><td class="num">+2.9%</td><td class="num">大幅轉正</td></tr>
+        <tr><td>2025 Q4</td><td class="num">2.07</td><td class="num">+91.7%</td><td class="num">大幅轉正</td></tr>
+        <tr><td>2026 Q1</td><td class="num green hl">3.44</td><td class="num green">+67.2%</td><td class="num green">+647.8%</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>戴維斯雙擊判讀：</strong>是。EPS連續5季環比成長，且本益比在此期間並未壓縮反而一度隨法說會樂觀預期擴張（股價由307元低點衝至3,305元高點，漲幅逾10倍），符合「獲利加速＋估值同步擴張」的典型戴維斯雙擊特徵。惟目前股價已從高點回落逾4成，顯示市場對「雙擊」的持續性出現分歧，後續能否延續取決於26Q2/Q3財報能否驗證法人估算的19-20元全年EPS路徑。<br>
+    來源：<a href="https://www.wantgoo.com/stock/3081/financial-statements/eps" target="_blank">玩股網-EPS</a>、<a href="https://statementdog.com/analysis/3081/eps-growth-rate" target="_blank">財報狗</a></div>
+  </div>
+</section>
+
+<section id="comps">
+  <h2><span class="num">⑥</span>可比公司 (Comps) 分析</h2>
+  <p class="section-desc">同屬台股矽光子／CPO概念族群，業務模式涵蓋光學元件、雷射磊晶與光模組整合，具產業鏈可比性。</p>
+  <div class="card">
+    <table>
+      <thead><tr><th>公司</th><th>代號</th><th class="num">2026E EPS</th><th class="num">對應PE</th><th class="num">毛利率/趨勢</th><th>備註</th></tr></thead>
+      <tbody>
+        <tr><td>聯亞光電</td><td>3081.TWO</td><td class="num hl">19.57元(法人估算)</td><td class="num">約99倍(現價)</td><td class="num">51.8%(法人估算)</td><td>矽光子磊晶基板+CPO光引擎，2026年營收估YoY+141.3%</td></tr>
+        <tr><td>光聖</td><td>—</td><td class="num">25元</td><td class="num">57倍</td><td class="num">毛利率突破4成</td><td>光通訊模組，法人族群比較中估值相對聯亞折價</td></tr>
+        <tr><td>波若威</td><td>3163.TWO</td><td class="num">—</td><td class="num">62倍</td><td class="num">—</td><td>雷射與光學元件廠</td></tr>
+        <tr><td>上詮</td><td>3363.TWO</td><td class="num">0.7元(2026E)→16.76元(2027E)</td><td class="num">—</td><td class="num">—</td><td>2025年EPS僅0.31元，屬更早期轉折股，2027年EPS估算爆發式成長</td></tr>
+        <tr><td>華星光</td><td>4979.TWO</td><td class="num">0.98元(近期)</td><td class="num">40.16倍</td><td class="num">—</td><td>光收發模組廠，估值相對聯亞明顯折價</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>溢價/折價合理性：</strong>聯亞在同族群中估值（TTM PE 254.6倍、對法人2026E EPS估算的Forward PE約99倍）明顯高於光聖(57倍)、波若威(62倍)、華星光(40.16倍)，主要因聯亞被市場定位為<span class="hl">「CPO五傑/矽光子7劍客」中訂單能見度最明確、與住友電工簽長約鎖定原料的指標股</span>，享有族群估值溢價。但也代表下修風險相對集中——族群性修正時，聯亞因位階最高、成交活絡度高，回檔幅度也最劇烈（本次已由高點回落逾41%）。上詮屬於更早期階段（2025年EPS僅0.31元），若2027年EPS估算兌現，其成長爆發性可能與聯亞形成競爭關係，投資人應留意族群內資金輪動。<br>
+    來源：<a href="https://wantrich.chinatimes.com/news/20260411900006-420101" target="_blank">旺得富-矽光子7劍客</a>、<a href="https://wantrich.chinatimes.com/news/20260129900004-420101" target="_blank">旺得富-CPO五傑</a>、<a href="https://tw.stock.yahoo.com/quote/3081.TWO/compare" target="_blank">Yahoo股市同業比較</a></div>
+  </div>
+</section>
+
+<section id="extra">
+  <h2><span class="num">⑦</span>額外優勢/風險</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>項目</th><th>內容</th><th>來源狀態</th></tr></thead>
+      <tbody>
+        <tr><td>股利政策</td><td>連續16年發放股利，合計74.00元；2025年度(Q4)配發現金股利3元+股票股利1元，除權息日2026/7/15；以現價1,940元計算現金殖利率僅約0.15%（成長股典型低殖利率）</td><td><span class="badge verified">✅</span></td></tr>
+        <tr><td>股本規模</td><td>股本9.25億元，已發行股數約9,251.73萬股，屬中小型股本，籌碼相對集中，波動性偏大</td><td><span class="badge verified">✅</span></td></tr>
+        <tr><td>董監持股</td><td>董監事及大股東持股比約8.9%</td><td><span class="badge verified">✅</span></td></tr>
+        <tr><td>外資持股</td><td>約20.11%</td><td><span class="badge verified">✅</span></td></tr>
+        <tr><td>庫藏股動態</td><td>近期無公開庫藏股買回公告資訊</td><td><span class="badge na">❌ 無法取得，標示「—」</span></td></tr>
+        <tr><td>內部人交易動態</td><td>本次查詢未取得近期董監事持股轉讓/申報轉讓公開資訊</td><td><span class="badge na">❌ 無法取得，標示「—」</span></td></tr>
+        <tr><td>原料長約優勢</td><td>與住友電工(Sumitomo Electric)簽訂5年InP基板供應長約，鎖定關鍵原料供應與價格穩定性，為擴產計畫提供支撐</td><td><span class="badge verified">✅</span></td></tr>
+        <tr><td>技術風險</td><td>1.6T/3.2T矽光子高階規格已進入量產，但CPO由scale-out延伸至scale-up架構的商用化時程仍待觀察，若技術轉換不如預期，法人樂觀EPS估算恐需下修</td><td><span class="badge warn">⚠️ 前瞻性風險</span></td></tr>
+        <tr><td>估值風險</td><td>族群性本益比普遍偏高（40~99倍區間），一旦AI資本支出敘事降溫或CPO商用化不如預期，估值收斂風險大</td><td><span class="badge warn">⚠️</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="targetprice">
+  <h2><span class="num">⑧</span>投行目標價與操作建議</h2>
+  <div class="card">
+    <h3 style="margin-top:0;">法人目標價彙總（無正式投行覆蓋，改採可得法人觀點彙整）</h3>
+    <table>
+      <thead><tr><th>機構類型</th><th class="num">目標價</th><th>評等</th><th>調整時間</th><th>理由</th></tr></thead>
+      <tbody>
+        <tr><td>本土法人 A</td><td class="num hl">4,095元</td><td><span class="badge beat">買進</span></td><td>2026/4/23後</td><td>2027年獲利估算大幅上修</td></tr>
+        <tr><td>本土法人 B</td><td class="num">3,600元</td><td><span class="badge beat">買進</span></td><td>2026/4/23後</td><td>同上，CPO scale-up題材</td></tr>
+        <tr><td>美系外資</td><td class="num">2,850元（原1,505元）</td><td><span class="badge warn">中立</span></td><td>2026/4/22法說後</td><td>2027年79倍PE法估值，承認先前低估獲利能力，但風險報酬已趨於平衡</td></tr>
+        <tr><td>另一媒體引述目標價</td><td class="num">2,750元</td><td>—</td><td>2026/4月</td><td>與美系外資估值區間相近</td></tr>
+      </tbody>
+    </table>
+    <div class="note">聯亞非台灣重點覆蓋大型股，缺乏MarketBeat/TipRanks等國際投行共識資料庫涵蓋，故本節以公開財經媒體引述之本土/外資法人觀點彙整替代正式投行覆蓋表，資料時效為2026年4月法說會後，可能未反映最新股價回落後的評等調整。</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0;">主要分歧點</h3>
+    <table>
+      <thead><tr><th>面向</th><th>樂觀派論點</th><th>謹慎派論點</th></tr></thead>
+      <tbody>
+        <tr><td>成長動能</td><td>CPO由scale-out延伸至scale-up，1.6T/3.2T量產放量，AI資料中心結構性需求剛起步</td><td>題材股輪動快，CPO商用化時程存在不確定性，2026-2027年EPS估算跨度極大(19~50元)反映高度不確定性</td></tr>
+        <tr><td>估值</td><td>用2027年PE法估值，成長兌現後目前股價屬合理甚至便宜</td><td>TTM PE 254.6倍、PB 42.34倍已遠超同業平均(PE 56.91倍)，安全邊際極薄</td></tr>
+        <tr><td>基本面驗證</td><td>26Q1毛利率54.76%、營益率41.27%已驗證三率三升，非畫大餅</td><td>公司2023-2024年曾連兩年營業利益率轉負，獲利穩定性歷史紀錄尚淺，需更多季度驗證</td></tr>
+        <tr><td>股價位階</td><td>已由高點回落逾4成，提供較佳進場點</td><td>回落可能是族群系統性重估的開始，而非單純拉回整理</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0;">上行空間彙總</h3>
+    <table>
+      <thead><tr><th>參考點</th><th class="num">目標價</th><th class="num">距現價(1,940元)空間</th></tr></thead>
+      <tbody>
+        <tr><td>DCF熊市情境上緣</td><td class="num">1,100元</td><td class="num red">-43.3%</td></tr>
+        <tr><td>美系外資目標價</td><td class="num">2,850元</td><td class="num green">+46.9%</td></tr>
+        <tr><td>DCF基準情境上緣</td><td class="num">2,850元</td><td class="num green">+46.9%</td></tr>
+        <tr><td>本土法人B目標價</td><td class="num">3,600元</td><td class="num green">+85.6%</td></tr>
+        <tr><td>本土法人A目標價（樂觀上緣）</td><td class="num">4,095元</td><td class="num green">+111.1%</td></tr>
+        <tr><td>52週高點（歷史參考）</td><td class="num">3,305元</td><td class="num green">+70.4%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="action-box">
+    <h3>🎯 最終操作建議</h3>
+    <div class="row"><span>目前狀態</span><span class="hl">觀察／小量分批，非重倉建議</span></div>
+    <div class="row"><span>若已持有</span><span>基本面(EPS/毛利率)確立向上趨勢，可續抱核心持股，但因估值已隱含高度樂觀假設，建議<strong>設定停利分批機制</strong>，非一次到位</span></div>
+    <div class="row"><span>考慮建倉觸發</span><span>股價回落至 <strong>1,100~1,500元</strong> 區間（DCF熊市~基準下緣），且26Q2財報確認營收/毛利率延續趨勢，方符合安全邊際原則再分批進場</span></div>
+    <div class="row"><span>加碼觸發</span><span>26Q2財報EPS QoQ持續正成長、毛利率維持50%以上，且股價站穩2,850元(美系外資目標價)之上不破，可視為趨勢確立訊號</span></div>
+    <div class="row"><span>停損/警示水位</span><span>若跌破 <strong>52週低點區間上緣（約1,500元，即高點回落逾55%）</strong>，或單季營益率重回轉負，應重新檢視CPO題材是否降溫，執行停損</span></div>
+    <div class="row"><span>核心風險提醒</span><span>本股波動度極高（52週振幅超過10倍），本益比、股價淨值比均遠高於同業平均，僅適合能承受高波動、且已充分理解矽光子/CPO產業週期的中長期投資人，倉位應嚴格控管於個人投資組合的「機會池」而非「核心池」</span></div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="src">
+      <strong>資料來源清單：</strong><br>
+      <a href="https://tw.stock.yahoo.com/quote/3081.TWO" target="_blank">Yahoo奇摩股市-聯亞(3081.TWO)</a>、
+      <a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3081" target="_blank">Goodinfo!台灣股市資訊網</a>、
+      <a href="https://goodinfo.tw/tw/StockBzPerformance.asp?STOCK_ID=3081&RPT_CAT=M_YEAR" target="_blank">Goodinfo歷年經營績效</a>、
+      <a href="https://statementdog.com/analysis/3081" target="_blank">財報狗-聯亞(3081)</a>、
+      <a href="https://www.wantgoo.com/stock/3081" target="_blank">玩股網-聯亞(3081)</a>、
+      <a href="https://fnc.ebc.net.tw/fncnews/stock/209639" target="_blank">東森財經新聞-法人觀點</a>、
+      <a href="https://wantrich.chinatimes.com/news/20260411900006-420101" target="_blank">旺得富理財網-矽光子7劍客</a>、
+      <a href="https://wantrich.chinatimes.com/news/20260129900004-420101" target="_blank">旺得富理財網-CPO五傑</a>、
+      <a href="https://readmo.cmoney.tw/article/3215e43a-4f23-4030-b487-78a51b5039b8" target="_blank">CMoney-法說後股價分析</a>、
+      <a href="https://winvest.tw/Stock/Symbol/Dividend/3081" target="_blank">Win投資-股利政策</a>
+    </div>
+    <div>報告資料多數擷取自2026年7月2日當日網頁查詢結果，部分法人預估數字來自2026年4月法說會後媒體報導，可能未反映最新市況。凡標示「⚠️估算/近似值」之數字均為合理推算並附計算依據，凡標示「—」或「❌無法取得」之欄位為本次查證未能取得可靠來源，禁止臆測填入。</div>
+    <div style="margin-top:10px; font-weight:600;">本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</div>
+  </div>
+</footer>
+
+</body>
+</html>

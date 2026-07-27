@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜聯亞光電(3081) 財務風險健檢報告</title>
+<style>
+:root{
+  --bg:#0d1117; --bg2:#161b22; --bg3:#1c2330; --card:#171d29;
+  --border:#2a3346; --text:#e6edf3; --text-dim:#9aa7bd; --text-mute:#6b7688;
+  --green:#3fb950; --green-bg:rgba(63,185,80,0.12);
+  --yellow:#d29922; --yellow-bg:rgba(210,153,34,0.12);
+  --red:#f85149; --red-bg:rgba(248,81,73,0.12);
+  --blue:#58a6ff; --blue-bg:rgba(88,166,255,0.12);
+  --purple:#bc8cff;
+  --accent:#e3b341;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
+  line-height:1.65; padding-bottom:60px;
+}
+a{color:var(--blue); text-decoration:none;}
+.container{max-width:1080px; margin:0 auto; padding:0 20px;}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#1a2138 0%, #0d1117 70%);
+  border-bottom:1px solid var(--border);
+  padding:44px 0 32px;
+}
+.hero-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;}
+.hero-title{font-size:13px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:8px; font-weight:600;}
+.hero-name{font-size:32px; font-weight:800; color:#fff; display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.hero-ticker{font-size:18px; color:var(--text-dim); font-weight:500;}
+.hero-badge{
+  display:inline-block; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700;
+  background:var(--yellow-bg); color:var(--yellow); border:1px solid rgba(210,153,34,0.35);
+}
+.hero-date{font-size:13px; color:var(--text-mute); margin-top:6px;}
+.hero-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:28px;}
+.hero-stat{background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px; padding:14px 16px;}
+.hero-stat-label{font-size:11px; color:var(--text-mute); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;}
+.hero-stat-value{font-size:20px; font-weight:700; color:#fff;}
+.hero-stat-sub{font-size:11px; color:var(--text-dim); margin-top:2px;}
+
+/* TOC */
+.toc{
+  position:sticky; top:0; z-index:50; background:rgba(13,17,23,0.92); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border); padding:10px 0;
+}
+.toc-list{display:flex; gap:4px; flex-wrap:wrap; list-style:none;}
+.toc-list a{
+  display:block; padding:7px 13px; border-radius:7px; font-size:13px; color:var(--text-dim);
+  border:1px solid transparent; white-space:nowrap;
+}
+.toc-list a:hover{background:var(--bg3); color:var(--text); border-color:var(--border);}
+
+/* SECTIONS */
+section{padding:40px 0 8px;}
+.section-title{
+  font-size:22px; font-weight:800; color:#fff; margin-bottom:6px; display:flex; align-items:center; gap:10px;
+  scroll-margin-top:64px;
+}
+.section-num{
+  display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:8px;
+  background:var(--blue-bg); color:var(--blue); font-size:14px; font-weight:800;
+}
+.section-desc{color:var(--text-dim); font-size:14px; margin-bottom:22px;}
+
+/* CARD */
+.card{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:22px; margin-bottom:18px;}
+.card-title{font-size:15px; font-weight:700; color:#fff; margin-bottom:14px;}
+
+/* TABLE */
+table{width:100%; border-collapse:collapse; font-size:13.5px;}
+th{
+  text-align:right; padding:10px 12px; color:var(--text-mute); font-weight:600; font-size:12px;
+  border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px;
+}
+th:first-child, td:first-child{text-align:left;}
+td{padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.04); text-align:right; color:var(--text);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,0.02);}
+.row-label{color:var(--text-dim); font-weight:500;}
+.est{color:var(--yellow); font-size:11px; font-weight:700;}
+.dash{color:var(--text-mute);}
+
+/* BADGES */
+.badge{display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:6px; font-size:12px; font-weight:700;}
+.badge-good{background:var(--green-bg); color:var(--green);}
+.badge-warn{background:var(--yellow-bg); color:var(--yellow);}
+.badge-bad{background:var(--red-bg); color:var(--red);}
+.badge-verified{background:var(--green-bg); color:var(--green); font-size:10px; padding:2px 7px;}
+.badge-est{background:var(--yellow-bg); color:var(--yellow); font-size:10px; padding:2px 7px;}
+.badge-na{background:rgba(255,255,255,0.06); color:var(--text-mute); font-size:10px; padding:2px 7px;}
+
+/* RATIO CARD */
+.ratio-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:16px;}
+.ratio-card{background:var(--bg3); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden;}
+.ratio-card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px;}
+.ratio-card.good::before{background:var(--green);}
+.ratio-card.warn::before{background:var(--yellow);}
+.ratio-card.bad::before{background:var(--red);}
+.ratio-name{font-size:13px; color:var(--text-dim); font-weight:600; margin-bottom:4px;}
+.ratio-value{font-size:26px; font-weight:800; color:#fff; margin-bottom:6px;}
+.ratio-formula{font-size:11.5px; color:var(--text-mute); font-family:"SF Mono",Menlo,monospace; margin-bottom:8px; line-height:1.5;}
+.ratio-threshold{font-size:12px; color:var(--text-dim); border-top:1px dashed var(--border); padding-top:8px; margin-top:4px;}
+
+/* RISK CARD */
+.risk-card{
+  border-radius:12px; padding:18px 20px; margin-bottom:14px; border:1px solid var(--border);
+  background:var(--bg3);
+}
+.risk-card.high{border-left:4px solid var(--red);}
+.risk-card.mid{border-left:4px solid var(--yellow);}
+.risk-card.low{border-left:4px solid var(--green);}
+.risk-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
+.risk-title{font-weight:700; color:#fff; font-size:14.5px;}
+
+/* CALLOUT */
+.callout{border-radius:10px; padding:16px 18px; margin:16px 0; font-size:13.5px; border:1px solid;}
+.callout.info{background:var(--blue-bg); border-color:rgba(88,166,255,0.3); color:var(--text);}
+.callout.warn{background:var(--yellow-bg); border-color:rgba(210,153,34,0.3); color:var(--text);}
+.callout.good{background:var(--green-bg); border-color:rgba(63,185,80,0.3); color:var(--text);}
+
+/* verdict box */
+.verdict-box{
+  background:linear-gradient(135deg, rgba(63,185,80,0.10), rgba(88,166,255,0.06));
+  border:1px solid rgba(63,185,80,0.3); border-radius:14px; padding:26px; text-align:center; margin-bottom:20px;
+}
+.verdict-label{font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:8px;}
+.verdict-value{font-size:28px; font-weight:800; color:var(--green);}
+.verdict-sub{font-size:13.5px; color:var(--text-dim); margin-top:8px; max-width:640px; margin-left:auto; margin-right:auto;}
+
+.two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+@media (max-width:720px){.two-col{grid-template-columns:1fr;} .hero-stats{grid-template-columns:repeat(2,1fr);}}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border); margin-top:50px; padding:30px 0; color:var(--text-mute); font-size:12.5px;}
+footer h4{color:var(--text-dim); font-size:13px; margin-bottom:10px;}
+footer ul{list-style:none; margin-bottom:16px;}
+footer li{margin-bottom:5px;}
+.disclaimer{background:var(--bg3); border-radius:10px; padding:14px 16px; margin-top:16px; border:1px solid var(--border);}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="container">
+    <div class="hero-top">
+      <div>
+        <div class="hero-title">個股小狐 · 財務風險健檢</div>
+        <div class="hero-name">聯亞光電 <span class="hero-ticker">3081.TWO（上櫃）</span> <span class="hero-badge">槓桿極低・週期反轉型</span></div>
+        <div class="hero-date">分析日期：2026年7月2日｜資料基準：2026Q1 財報 + 2025全年度財報</div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-label">股價 (2026/07/02)</div>
+        <div class="hero-stat-value">1,940 元</div>
+        <div class="hero-stat-sub">昨收1,980｜-2.02%</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">市值</div>
+        <div class="hero-stat-value">約1,795 億元</div>
+        <div class="hero-stat-sub">Goodinfo 07/02</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">本益比 / 股價淨值比</div>
+        <div class="hero-stat-value">254.6x / 42.3x</div>
+        <div class="hero-stat-sub">同業均值PER約56.9x（估）</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">52週高低</div>
+        <div class="hero-stat-value">3,305 / 307</div>
+        <div class="hero-stat-sub">高點2026/04/23，低點2025/07/08</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toc">
+  <div class="container">
+    <ul class="toc-list">
+      <li><a href="#data">① 財務數據</a></li>
+      <li><a href="#ratios">② 六大比率</a></li>
+      <li><a href="#maturity">③ 債務到期</a></li>
+      <li><a href="#capex">④ CapEx分析</a></li>
+      <li><a href="#peers">⑤ 同業對比</a></li>
+      <li><a href="#verdict">⑥ 綜合診斷</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- SECTION 1 -->
+<section id="data">
+  <h2 class="section-title"><span class="section-num">1</span>財務數據填表</h2>
+  <p class="section-desc">單位：新台幣億元，除EPS(元)外。資料來源：Goodinfo!財務報表(合併報表)，交叉比對Yahoo奇摩股市。2026Q1為最新單季，2025全年為累計四季驗證後數字。</p>
+
+  <div class="card">
+    <div class="card-title">損益表 <span class="badge-verified">✅ 已驗證</span></div>
+    <table>
+      <tr><th>項目</th><th>2026 Q1</th><th>2025 全年</th><th>2024 全年</th></tr>
+      <tr><td class="row-label">營業收入</td><td>9.04</td><td>22.03</td><td>12.08</td></tr>
+      <tr><td class="row-label">營業毛利</td><td>4.95</td><td>9.41</td><td>2.39</td></tr>
+      <tr><td class="row-label">營業利益 (EBIT)</td><td>3.73</td><td>5.09</td><td>-1.12</td></tr>
+      <tr><td class="row-label">利息費用</td><td>0.008</td><td>約0.064 <span class="est">估</span></td><td>約0.06~0.10 <span class="est">估</span></td></tr>
+      <tr><td class="row-label">折舊攤銷 (D&A)</td><td>0.71</td><td>3.08</td><td>— <span class="dash">未查得</span></td></tr>
+      <tr><td class="row-label">EBITDA (EBIT+D&A)</td><td>4.44</td><td>8.17</td><td>— <span class="dash">未查得</span></td></tr>
+      <tr><td class="row-label">稅前淨利</td><td>3.97</td><td>10.70<span class="est">注1</span></td><td>-0.68</td></tr>
+      <tr><td class="row-label">稅後淨利</td><td>3.18</td><td>4.28</td><td>-0.55</td></tr>
+      <tr><td class="row-label">EPS (元)</td><td>3.44</td><td>4.66</td><td>-0.59</td></tr>
+    </table>
+    <p style="font-size:11.5px;color:var(--text-mute);margin-top:10px;">注1：2025全年稅前淨利由四季加總(0.53+1.21+1.24+2.27=5.25億)與另一頁面累計數(10.70億)出現不一致，兩來源互相矛盾，判斷後者可能混入不同期間資料。本報告採四季加總法之稅前淨利 <b>5.25億元</b> 作為主要依據(與稅後淨利4.28億元、有效稅率約18.5%相符，邏輯自洽)；10.70億數字標示為存疑，建議查MOPS原始年報確認。EBIT 5.09億與OCF/CapEx/D&A季度加總數字均通過內部一致性檢查(EPS加總=4.66元，與年度EPS數據吻合)，視為✅已驗證。</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">資產負債表 <span class="badge-verified">✅ 已驗證(2026Q1)</span></div>
+    <table>
+      <tr><th>項目</th><th>2026 Q1</th><th>2025 Q4</th><th>2025 Q3</th></tr>
+      <tr><td class="row-label">總資產</td><td>56.78</td><td>50.08</td><td>47.57</td></tr>
+      <tr><td class="row-label">總負債</td><td>14.39</td><td>8.17</td><td>7.65</td></tr>
+      <tr><td class="row-label">　流動負債</td><td>11.01</td><td>— <span class="dash">未細分</span></td><td>— <span class="dash">未細分</span></td></tr>
+      <tr><td class="row-label">　非流動負債</td><td>3.38</td><td>— <span class="dash">未細分</span></td><td>— <span class="dash">未細分</span></td></tr>
+      <tr><td class="row-label">計息負債(銀行借款+租賃負債)</td><td>3.44 <span class="est">估</span></td><td>— <span class="dash">未查得</span></td><td>— <span class="dash">未查得</span></td></tr>
+      <tr><td class="row-label">　其中：一年內到期(流動租賃)</td><td>0.094</td><td>— <span class="dash">未查得</span></td><td>— <span class="dash">未查得</span></td></tr>
+      <tr><td class="row-label">現金及約當現金</td><td>7.62</td><td>7.03</td><td>5.43</td></tr>
+      <tr><td class="row-label">股東權益</td><td>42.40</td><td>41.91</td><td>39.92</td></tr>
+    </table>
+    <div class="callout good" style="margin-top:14px;">
+      <b>重要發現：</b>逐項檢視2026Q1資產負債表細項後確認，聯亞光電<b>幾乎無銀行借款或應付公司債</b>。流動負債11.01億元組成為：應付帳款0.48億、其他應付款9.07億、合約負債0.17億、本期所得稅負債1.18億、租賃負債(流動)0.094億；非流動負債3.38億幾乎全為租賃負債(IFRS16)3.35億。計息負債僅為租賃負債合計約3.44億元，<b>無短期借款、長期借款科目</b>。此為✅已驗證(直接讀取資產負債表細項科目)。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">現金流量表 <span class="badge-verified">✅ 已驗證</span></div>
+    <table>
+      <tr><th>項目</th><th>2026 Q1</th><th>2025 全年</th><th>2024 全年</th></tr>
+      <tr><td class="row-label">營業活動現金流 (OCF)</td><td>2.83</td><td>7.14</td><td>3.21</td></tr>
+      <tr><td class="row-label">資本支出 (CapEx)</td><td>0.43</td><td>0.85</td><td>0.63</td></tr>
+      <tr><td class="row-label">自由現金流 (FCF=OCF-CapEx)</td><td>2.40</td><td>6.29</td><td>2.58</td></tr>
+      <tr><td class="row-label">折舊攤銷 (D&A)</td><td>0.71</td><td>3.08</td><td>2.81 <span class="est">估(僅Q2-Q4加總)</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 2 -->
+<section id="ratios">
+  <h2 class="section-title"><span class="section-num">2</span>六大比率診斷</h2>
+  <p class="section-desc">以2025全年度(最近一個完整年度)為主要計算基礎，並附2026Q1單季年化參考。</p>
+
+  <div class="ratio-grid">
+    <div class="ratio-card good">
+      <div class="ratio-name">① 利息覆蓋率 (Interest Coverage)</div>
+      <div class="ratio-value">約 79.5x <span class="badge badge-good">✅ 極安全</span></div>
+      <div class="ratio-formula">EBIT ÷ 利息費用 = 5.09億 ÷ 0.064億(估)</div>
+      <div class="ratio-threshold">警戒標準：&lt;3x為高風險，&lt;1.5x瀕臨違約。聯亞的EBIT足以覆蓋利息支出近80倍，反映公司幾無財務槓桿壓力。⚠️ 利息費用為租賃負債利息之估算值，非銀行貸款利息，建議查財報附註「財務成本」明細確認。</div>
+    </div>
+
+    <div class="ratio-card good">
+      <div class="ratio-name">② 負債比率 (Debt Ratio)</div>
+      <div class="ratio-value">25.4% <span class="badge badge-good">✅ 低</span></div>
+      <div class="ratio-formula">總負債 ÷ 總資產 = 14.39億 ÷ 56.78億 (2026Q1)</div>
+      <div class="ratio-threshold">警戒標準：一般製造業&gt;60%需留意，&gt;70%高風險。聯亞負債比25.4%屬偏低水準，且負債幾乎不含金融負債，主要為營運性應付款與所得稅負債。</div>
+    </div>
+
+    <div class="ratio-card good">
+      <div class="ratio-name">③ 淨負債 / EBITDA</div>
+      <div class="ratio-value">淨現金，非淨負債 <span class="badge badge-good">✅ 極安全</span></div>
+      <div class="ratio-formula">(計息負債3.44億 - 現金7.62億) ÷ EBITDA 8.17億 = -0.51x</div>
+      <div class="ratio-threshold">警戒標準：&gt;3x需留意，&gt;5x高風險。聯亞現金部位(7.62億)已超過全部計息負債(約3.44億，且全數為租賃負債)，公司實質處於「淨現金」狀態，此比率為負值，顯示無槓桿風險。</div>
+    </div>
+
+    <div class="ratio-card good">
+      <div class="ratio-name">④ OCF / 總債務</div>
+      <div class="ratio-value">約207% <span class="badge badge-good">✅ 極強</span></div>
+      <div class="ratio-formula">2025全年OCF 7.14億 ÷ 總負債14.39億(2026Q1)</div>
+      <div class="ratio-threshold">警戒標準：&lt;20%為財務彈性不足警訊。聯亞年度OCF可覆蓋全部總負債(含營運性負債)兩倍以上，現金流創造能力極強，遠優於一般水準。</div>
+    </div>
+
+    <div class="ratio-card good">
+      <div class="ratio-name">⑤ 現金流覆蓋比率 (Cash Coverage)</div>
+      <div class="ratio-value">約111.6x <span class="badge badge-good">✅ 極安全</span></div>
+      <div class="ratio-formula">(OCF 7.14億 + 利息費用0.064億) ÷ 利息費用0.064億(估)</div>
+      <div class="ratio-threshold">警戒標準：&lt;2x需留意。因利息費用基數極小(僅租賃利息)，此比率數值極高，主要意義在於確認公司經營現金流遠超付息需求，非用於銀行債務評等情境。</div>
+    </div>
+
+    <div class="ratio-card good">
+      <div class="ratio-name">⑥ 兩年內到期牆覆蓋倍數</div>
+      <div class="ratio-value">約81x <span class="badge badge-good">✅ 無到期壓力</span></div>
+      <div class="ratio-formula">現金7.62億 ÷ 兩年內到期計息負債(估約0.094億，僅流動租賃)</div>
+      <div class="ratio-threshold">警戒標準：&lt;1x代表到期無法以現金覆蓋，需再融資。聯亞無銀行借款到期壓力，僅有小額租賃負債陸續到期，現金覆蓋倍數遠超所需，無到期牆風險。</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section id="maturity">
+  <h2 class="section-title"><span class="section-num">3</span>債務到期時程</h2>
+  <p class="section-desc">聯亞光電資產負債表未見銀行短期借款、長期借款或應付公司債科目，計息負債僅為IFRS16租賃負債。以下為租賃負債到期推估表。</p>
+
+  <div class="card">
+    <div class="card-title">計息負債到期時程（估算表） <span class="badge-est">⚠️ 估算值</span></div>
+    <table>
+      <tr><th>期間</th><th>租賃負債到期金額(估)</th><th>備註</th></tr>
+      <tr><td class="row-label">1年內 (流動)</td><td>0.094億</td><td>取自2026Q1資產負債表「租賃負債-流動」科目 ✅</td></tr>
+      <tr><td class="row-label">1~2年</td><td>— <span class="dash">未細分</span></td><td>財報未揭露分年到期明細</td></tr>
+      <tr><td class="row-label">2年以上 (非流動合計)</td><td>3.35億</td><td>取自「租賃負債-非流動」科目合計數 ✅，年度分佈未揭露</td></tr>
+    </table>
+    <div class="callout warn" style="margin-top:14px;">
+      ⚠️ 台股上櫃公司之財務報告附註通常會列示「租賃負債到期分析」表，惟本次以WebSearch/WebFetch工具查詢Goodinfo/Yahoo奇摩股市摘要頁，僅能取得流動/非流動合計數，無法取得逐年到期細項。<b>建議直接查閱聯亞光電最新季報/年報財務報表附註「租賃」章節（公開資訊觀測站 mops.twse.com.tw）</b>以取得精確逐年到期金額。由於公司無銀行借款，即便租賃負債到期明細缺漏，對整體債務風險判斷影響有限。
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section id="capex">
+  <h2 class="section-title"><span class="section-num">4</span>CapEx資本支出分析</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">CapEx強度指標</div>
+      <table>
+        <tr><th>指標</th><th>2026Q1</th><th>2025全年</th><th>2024全年</th></tr>
+        <tr><td class="row-label">CapEx / 營收</td><td>4.8%</td><td>3.9%</td><td>5.2%</td></tr>
+        <tr><td class="row-label">CapEx / OCF</td><td>15.2%</td><td>11.9%</td><td>19.6%</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">業務模式判讀</div>
+      <p style="font-size:13.5px;color:var(--text-dim);">
+        聯亞光電為砷化鎵(GaAs)光電半導體磊晶/元件製造商(LED晶粒、雷射二極體、光通訊元件)，理論上應屬<b>中重資產</b>產業(需自建磊晶爐、無塵室產能)。
+        但實測CapEx/營收僅3.9%~5.2%，遠低於典型半導體晶圓製造業(通常15%~40%)，顯示公司近3年處於<b>產能利用率爬升期，非新增大規模資本支出週期</b>，可能運用既有產能承接AI資料中心/光通訊訂單成長，尚未進入新一輪擴產。
+        CapEx/OCF維持在12%~20%的健康區間，代表公司現金流創造速度遠快於資本再投入需求，具備顯著財務餘裕，屬於「輕資本支出、高現金留存」的成長階段特徵。
+      </p>
+    </div>
+  </div>
+  <div class="callout info">
+    趨勢觀察：2025全年營收較2024年成長82%，但CapEx僅成長約35%(0.63億→0.85億)，顯示營收成長主要來自既有產能稼動率提升與產品組合優化(毛利率由19.8%大幅回升至42.7%)，而非資本擴張驅動。若後續進入新產能建置週期，CapEx/營收比率預期會上升，需持續追蹤。
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section id="peers">
+  <h2 class="section-title"><span class="section-num">5</span>同業對比</h2>
+  <p class="section-desc">選取台股光通訊/光電元件同業：上詮(3363，光收發模組)、華星光(4979，光通訊元件)。皆為✅已驗證數字，資料基準2026Q1單季/最新季度資產負債表。</p>
+
+  <div class="card">
+    <div class="card-title">六大比率同業對比表</div>
+    <table>
+      <tr><th>指標</th><th>聯亞 3081</th><th>上詮 3363</th><th>華星光 4979</th></tr>
+      <tr><td class="row-label">總資產(億)</td><td>56.78</td><td>63.05</td><td>58.31</td></tr>
+      <tr><td class="row-label">總負債(億)</td><td>14.39</td><td>5.71</td><td>16.98</td></tr>
+      <tr><td class="row-label">負債比率</td><td>25.4%</td><td>9.1%</td><td>29.1%</td></tr>
+      <tr><td class="row-label">現金(億)</td><td>7.62</td><td>43.71</td><td>23.41</td></tr>
+      <tr><td class="row-label">短期借款(億)</td><td>0（無此科目）</td><td>0.81</td><td>0（未揭露）</td></tr>
+      <tr><td class="row-label">2026Q1 EBIT(億)</td><td>3.73</td><td>-1.56 <span style="color:var(--red)">(虧損)</span></td><td>2.51</td></tr>
+      <tr><td class="row-label">2026Q1 利息費用(億)</td><td>0.008</td><td>0.021</td><td>0.043</td></tr>
+      <tr><td class="row-label">利息覆蓋率(2026Q1單季)</td><td>約466x</td><td>負值(虧損)</td><td>約58.4x</td></tr>
+      <tr><td class="row-label">本益比(PER)</td><td>254.6x</td><td>N/A(虧損)</td><td>80.8x</td></tr>
+      <tr><td class="row-label">股價淨值比(PBR)</td><td>42.3x</td><td>10.5x</td><td>15.3x</td></tr>
+      <tr><td class="row-label">市值(億)</td><td>~1,795</td><td>~601</td><td>~634</td></tr>
+    </table>
+  </div>
+  <div class="callout info">
+    對比觀察：三家公司財務體質皆屬穩健（負債比均低於30%，皆非高槓桿產業），符合台灣光電被動元件廠普遍輕負債特徵。但<b>聯亞的估值顯著偏離同業</b>：本益比254.6倍為三者最高(華星光80.8倍)，股價淨值比42.3倍亦遠高於上詮(10.5倍)與華星光(15.3倍)，反映市場已為其2025年營運反轉與AI/資料中心光通訊需求題材給予高度成長溢價，估值風險遠高於財務結構風險。上詮2026Q1單季轉虧(EBIT -1.56億)，顯示同業間營運波動度仍大，需留意產業景氣循環對聯亞後續季度的影響。
+  </div>
+</section>
+
+<!-- SECTION 6 -->
+<section id="verdict">
+  <h2 class="section-title"><span class="section-num">6</span>綜合診斷</h2>
+
+  <div class="verdict-box">
+    <div class="verdict-label">定性分類</div>
+    <div class="verdict-value">優良保守型資產負債表・淨現金・零銀行槓桿</div>
+    <div class="verdict-sub">聯亞光電財務結構屬於「輕槓桿、高現金留存」型態，公司幾無銀行借款或公司債，計息負債僅為會計準則下的租賃負債，現金部位可完全覆蓋所有計息負債。財務風險健檢角度而言，公司本身違約/流動性風險極低，主要風險並非來自資產負債表，而是來自營運波動性與市場估值。</div>
+  </div>
+
+  <div class="risk-card mid">
+    <div class="risk-head"><div class="risk-title">最大風險點① 估值與獲利成長不對稱（非資產負債表風險）</div><span class="badge badge-warn">⚠️ 中高</span></div>
+    <p style="font-size:13.5px;color:var(--text-dim);">本益比254.6倍、股價淨值比42.3倍，較同業(華星光PER 80.8倍、上詮PBR 10.5倍)有數倍溢價。市值(約1,795億)相對於2025年稅後淨利(4.28億)隱含極高成長預期，若後續季度營收/毛利成長動能不如市場預期(如2026Q1營收9.04億較2025Q4的6.42億雖季增但年增趨勢仍需驗證)，股價修正風險遠大於財務違約風險。52週股價自307元最高衝至3305元、現回落至1940元，波動度顯示市場情緒主導成分高。</p>
+  </div>
+
+  <div class="risk-card low">
+    <div class="risk-head"><div class="risk-title">最大風險點② 營運週期性歷史記錄（2023-2024曾連續虧損）</div><span class="badge badge-good">✅ 已改善但需追蹤</span></div>
+    <p style="font-size:13.5px;color:var(--text-dim);">2023年EPS -2.31元、2024年EPS -0.59元，公司曾連續兩年虧損(營業利益率分別為-26.4%、-9.25%)，2025年才轉為營業利益率23.1%、EPS 4.66元的高獲利年度。此為LED/光電磊晶產業景氣循環特性，顯示公司獲利波動度本質偏高，「淨現金」的財務體質正是支撐公司度過2023-2024虧損期的關鍵，但也提醒投資人不宜將2025-2026Q1的高獲利视為穩態常態。</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">安全邊際計算：EBIT需下滑多少%才觸及警戒線？</div>
+    <table>
+      <tr><th>比率</th><th>目前值</th><th>警戒線</th><th>EBIT需下滑幅度</th></tr>
+      <tr><td class="row-label">利息覆蓋率</td><td>79.5x</td><td>3x</td><td class="badge badge-good">需下滑約96.2%（EBIT降至約0.19億以下）</td></tr>
+      <tr><td class="row-label">淨負債/EBITDA轉正且超過3x</td><td>-0.51x(淨現金)</td><td>3x</td><td class="badge badge-good">即使EBITDA降至0，仍不會觸及3x警戒（因公司為淨現金部位，需先由淨現金轉為淨負債超過EBITDA的3倍，情境機率極低）</td></tr>
+    </table>
+    <div class="callout good" style="margin-top:14px;">
+      結論：以資產負債表/償債能力角度而言，聯亞光電的安全邊際極大——EBIT需衰退超過96%（幾近歸零）才會使利息覆蓋率觸及3x警戒線，且由於淨現金部位優勢，公司在可預見情境下皆不會出現流動性/償債危機。<b>真正需要投資人關注的安全邊際，是「股價相對於獲利成長預期」的邊際，而非「公司相對於債務」的邊際</b>——這是價值投資框架下必須清楚區分的兩種風險。
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <h4>資料來源清單</h4>
+    <ul>
+      <li>Goodinfo!台灣股市資訊網 - 股價/市值/本益比/PBR：<a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3081" target="_blank">goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3081</a></li>
+      <li>Goodinfo!台灣股市資訊網 - 季度損益表/資產負債表/現金流量表：StockFinDetail.asp (RPT_CAT=IS_M_QUAR / BS_M_QUAR / CF_M_QUAR, STOCK_ID=3081)</li>
+      <li>Goodinfo!台灣股市資訊網 - 歷年經營績效：<a href="https://goodinfo.tw/tw/StockBzPerformance.asp?STOCK_ID=3081&RPT_CAT=M_YEAR" target="_blank">StockBzPerformance.asp?STOCK_ID=3081</a></li>
+      <li>Yahoo奇摩股市 - 月營收/EPS彙總：<a href="https://tw.stock.yahoo.com/quote/3081.TWO/revenue" target="_blank">tw.stock.yahoo.com/quote/3081.TWO</a></li>
+      <li>同業對比數據：Goodinfo! 上詮(3363)、華星光(4979) 財務報表頁</li>
+      <li>公開資訊觀測站 MOPS（建議查證用）：<a href="https://mops.twse.com.tw" target="_blank">mops.twse.com.tw</a></li>
+    </ul>
+    <div class="disclaimer">
+      <b>免責聲明：</b>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。報告中標示「⚠️估」之數字為基於公開摘要頁面推算，未逐筆核對財報原文附註，如需精確數字請查閱聯亞光電於公開資訊觀測站(MOPS)公告之正式財務報告。
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

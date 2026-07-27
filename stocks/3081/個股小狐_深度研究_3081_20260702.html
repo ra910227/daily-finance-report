@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜聯亞光電(3081.TWO) 公司深度研究</title>
+<style>
+:root{
+  --bg:#0b0f14; --bg2:#111823; --card:#141c28; --card2:#182233;
+  --border:#233042; --text:#e6edf5; --text2:#9fb0c3; --text3:#6b7c91;
+  --accent:#3ecf8e; --accent2:#5b9dff; --warn:#f0b429; --danger:#f0554d;
+  --green:#3ecf8e; --yellow:#f0b429; --red:#f0554d;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:linear-gradient(180deg,var(--bg) 0%, #090c10 100%);
+  color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",Segoe UI,Helvetica,Arial,sans-serif;
+  line-height:1.65; font-size:15px;
+}
+a{color:var(--accent2);}
+.container{max-width:1080px; margin:0 auto; padding:0 24px 80px;}
+
+/* HERO */
+.hero{
+  background:radial-gradient(1200px 500px at 20% -10%, rgba(62,207,142,0.15), transparent),
+             radial-gradient(900px 400px at 90% 0%, rgba(91,157,255,0.12), transparent),
+             linear-gradient(180deg,#0d1420 0%, #0b0f14 100%);
+  border-bottom:1px solid var(--border);
+  padding:48px 24px 32px;
+}
+.hero-inner{max-width:1080px; margin:0 auto;}
+.hero-tag{
+  display:inline-block; font-size:12px; letter-spacing:1.5px; color:var(--accent);
+  border:1px solid rgba(62,207,142,0.4); border-radius:20px; padding:4px 12px; margin-bottom:16px;
+  background:rgba(62,207,142,0.06);
+}
+.hero-title{font-size:32px; font-weight:800; margin:0 0 4px; letter-spacing:0.5px;}
+.hero-sub{color:var(--text2); font-size:15px; margin-bottom:24px;}
+.hero-grid{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:20px;
+}
+.hero-stat{
+  background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 16px;
+}
+.hero-stat .label{font-size:11px; color:var(--text3); margin-bottom:6px; letter-spacing:0.5px;}
+.hero-stat .value{font-size:20px; font-weight:700;}
+.hero-stat .value.small{font-size:15px;}
+.hero-stat .sub{font-size:11px; color:var(--text3); margin-top:4px;}
+.thesis-score{color:var(--accent);}
+
+@media (max-width:900px){.hero-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* TOC */
+.toc{
+  position:sticky; top:0; z-index:50; background:rgba(11,15,20,0.92); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border); padding:12px 24px;
+}
+.toc-inner{max-width:1080px; margin:0 auto; display:flex; gap:6px; flex-wrap:wrap;}
+.toc a{
+  font-size:12.5px; color:var(--text2); text-decoration:none; padding:6px 12px;
+  border:1px solid var(--border); border-radius:20px; white-space:nowrap; transition:all .15s;
+}
+.toc a:hover{color:var(--accent); border-color:var(--accent);}
+
+/* SECTIONS */
+section{padding:44px 0 8px; border-top:1px solid var(--border);}
+section:first-of-type{border-top:none;}
+h2{font-size:22px; font-weight:800; margin:0 0 6px; display:flex; align-items:center; gap:10px;}
+h2 .num{
+  display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px;
+  background:var(--accent); color:#06120d; border-radius:8px; font-size:14px; font-weight:800;
+}
+.section-desc{color:var(--text3); font-size:13px; margin-bottom:22px;}
+h3{font-size:16px; font-weight:700; margin:28px 0 12px; color:var(--text);}
+
+/* CARDS */
+.card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px 22px; margin-bottom:16px;}
+.card-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+@media (max-width:800px){.card-grid{grid-template-columns:1fr;}}
+
+/* TABLES */
+table{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0 20px;}
+th{
+  text-align:left; padding:10px 12px; background:var(--bg2); color:var(--text2);
+  font-weight:600; font-size:12px; letter-spacing:0.3px; border-bottom:1px solid var(--border);
+}
+td{padding:10px 12px; border-bottom:1px solid var(--border); color:var(--text);}
+tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:rgba(255,255,255,0.02);}
+table.compact td, table.compact th{padding:8px 10px;}
+
+/* BADGES */
+.badge{display:inline-block; padding:3px 10px; border-radius:12px; font-size:11.5px; font-weight:700; letter-spacing:0.3px;}
+.badge-green{background:rgba(62,207,142,0.15); color:var(--green); border:1px solid rgba(62,207,142,0.35);}
+.badge-yellow{background:rgba(240,180,41,0.15); color:var(--yellow); border:1px solid rgba(240,180,41,0.35);}
+.badge-red{background:rgba(240,85,77,0.15); color:var(--red); border:1px solid rgba(240,85,77,0.35);}
+.badge-gray{background:rgba(155,170,190,0.12); color:var(--text2); border:1px solid var(--border);}
+.dot{font-size:13px;}
+
+/* RISK CARDS */
+.risk-card{
+  border:1px solid var(--border); border-left:4px solid var(--danger); border-radius:10px;
+  padding:14px 18px; margin-bottom:12px; background:rgba(240,85,77,0.04);
+}
+.risk-card.mid{border-left-color:var(--warn); background:rgba(240,180,41,0.04);}
+.risk-card .risk-title{font-weight:700; margin-bottom:4px; font-size:14.5px;}
+.risk-card .risk-trigger{font-size:13px; color:var(--text2); margin-top:6px;}
+.risk-card .risk-trigger b{color:var(--warn);}
+
+/* ACTION BOX */
+.action-box{
+  border:1px solid rgba(62,207,142,0.3); border-radius:14px; padding:22px 24px; margin:20px 0;
+  background:linear-gradient(135deg, rgba(62,207,142,0.08), rgba(91,157,255,0.05));
+}
+.action-box h4{margin:0 0 14px; font-size:15px; color:var(--accent);}
+.action-row{display:flex; gap:10px; padding:10px 0; border-bottom:1px dashed var(--border); align-items:flex-start;}
+.action-row:last-child{border-bottom:none;}
+.action-label{min-width:110px; font-size:12.5px; color:var(--text3); font-weight:700; padding-top:2px;}
+.action-value{flex:1; font-size:14px;}
+
+/* STARS */
+.stars{color:var(--yellow); letter-spacing:2px; font-size:15px;}
+.moat-row{display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border);}
+.moat-row:last-child{border-bottom:none;}
+.moat-label{font-size:13.5px; color:var(--text2);}
+
+/* SUMMARY CARDS */
+.summary-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin:20px 0;}
+@media (max-width:900px){.summary-grid{grid-template-columns:repeat(2,1fr);}}
+.summary-card{
+  background:var(--card2); border:1px solid var(--border); border-radius:12px; padding:16px;
+  text-align:center;
+}
+.summary-card .s-label{font-size:11px; color:var(--text3); margin-bottom:8px;}
+.summary-card .s-value{font-size:18px; font-weight:800; color:var(--accent);}
+
+/* SOURCE STATUS */
+.src{font-size:11px; padding:1px 6px; border-radius:5px; margin-left:6px; font-weight:700;}
+.src-v{background:rgba(62,207,142,0.15); color:var(--green);}
+.src-e{background:rgba(240,180,41,0.15); color:var(--warn);}
+.src-x{background:rgba(240,85,77,0.15); color:var(--danger);}
+
+footer{
+  border-top:1px solid var(--border); margin-top:60px; padding:30px 24px; color:var(--text3); font-size:12px;
+}
+footer .container{padding:0;}
+footer p{margin:6px 0;}
+.disclaimer{
+  margin-top:16px; padding:14px 16px; border:1px solid var(--border); border-radius:10px;
+  background:var(--card); color:var(--text2); font-size:12px;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">個股小狐 · 公司深度研究</span>
+    <h1 class="hero-title">聯亞光電工業股份有限公司 (3081.TWO)</h1>
+    <div class="hero-sub">上櫃 · 光通訊磊晶片（Epi-wafer）製造商 · 分析日期 2026/07/02</div>
+    <div class="hero-grid">
+      <div class="hero-stat">
+        <div class="label">股價 (2026/07/02)</div>
+        <div class="value">1,940 元</div>
+        <div class="sub">日跌 -2.02%（昨收1,980）</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">市值</div>
+        <div class="value">約 1,795 億元</div>
+        <div class="sub">流通股數約9,252萬股（估）</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">本益比 TTM</div>
+        <div class="value">約 254.6x</div>
+        <div class="sub">TTM EPS約7.64元</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">52週高低</div>
+        <div class="value small">3,305 / 307 元</div>
+        <div class="sub">2026/4/23高、2025/7/8低</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">Thesis 成立度</div>
+        <div class="value thesis-score">3.5 / 5</div>
+        <div class="sub">AI資料中心需求兌現中，估值已反映高預期</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#intro">① 基本介紹</a>
+    <a href="#engine">② 業務引擎</a>
+    <a href="#thesis">③ 核心Thesis</a>
+    <a href="#landscape">④ 競爭格局</a>
+    <a href="#quadrant">⑤ 成長象限與護城河</a>
+    <a href="#summary">綜合總結</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- 1. 基本介紹 -->
+<section id="intro">
+  <h2><span class="num">1</span>基本介紹</h2>
+  <div class="section-desc">公司名稱、市值、營收與獲利概況、產業定位</div>
+
+  <div class="card">
+    <p><b>聯亞光電</b>成立於1997年6月，主要從事以砷化鎵（GaAs）與磷化銦（InP）為基板的Ⅲ-Ⅴ族化合物半導體磊晶片（Epi-wafer）製造，是台灣少數同時具備 GaAs／InP 雙材料量產能力的專業磊晶廠。核心產品為雷射二極體（Laser Diode）與光探測器（Photodetector）用磊晶片，下游應用涵蓋光纖通訊、資料中心互連、3D感測、工業雷射與醫療美容等領域。2025年起受惠AI資料中心對800G／1.6T光模組的爆發性需求，公司營運自虧損谷底大幅反轉。 <span class="badge src-v">✅ 已驗證</span></p>
+  </div>
+
+  <table>
+    <tr><th>項目</th><th>數值</th><th>備註</th></tr>
+    <tr><td>市值</td><td>約 1,795 億元</td><td>2026/7/2，Goodinfo <span class="badge src-v">✅</span></td></tr>
+    <tr><td>TTM營收（2025/06–2026/05）</td><td>約 30.85 億元</td><td>近12個月月營收加總計算 <span class="badge src-e">⚠️估算</span></td></tr>
+    <tr><td>2025全年營收 / YoY</td><td>22.03 億元 / +82%</td><td>較2024年12.1億元大幅成長 <span class="badge src-v">✅</span></td></tr>
+    <tr><td>2026Q1營收 / YoY</td><td>9.04億元 / +157%</td><td>單季新高 <span class="badge src-v">✅</span></td></tr>
+    <tr><td>2026Q1毛利率</td><td>54.8%</td><td>連續多季攀升，創新高 <span class="badge src-v">✅</span></td></tr>
+    <tr><td>2026Q1營業利益率</td><td>41.3%</td><td><span class="badge src-v">✅</span></td></tr>
+    <tr><td>自由現金流（FCF）</td><td>—</td><td>公司聲明「以現有資金水位及營運現金流入評估可維持正FCF」，但無明確數字揭露 <span class="badge src-x">❌無法取得</span></td></tr>
+    <tr><td>所屬產業與定位</td><td>光通訊上游磊晶製造（Epitaxy），InP/GaAs專業磊晶廠</td><td>技術層次最高的磊晶階段，供應下游元件/模組廠 <span class="badge src-v">✅</span></td></tr>
+  </table>
+  <p style="font-size:12px;color:var(--text3);">註：聯亞股本結構未於公開頁面明確揭露流通股數，市值/股價/PE三者互相校驗（1,795億÷1,940元≈9,252萬股）為推算結果，非直接查得數字，故標示為估算。</p>
+</section>
+
+<!-- 2. 業務引擎分析 -->
+<section id="engine">
+  <h2><span class="num">2</span>業務引擎分析</h2>
+  <div class="section-desc">核心業務線拆解、優勢產品、近期財務表現</div>
+
+  <h3>核心業務線</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4 style="margin:0 0 8px;">① InP磊晶片（光通訊主力）</h4>
+      <p style="font-size:13.5px;color:var(--text2);">應用於2.5G/10G/25G FP/DFB雷射及25G/50G C-DFB/EML雷射磊晶片，為800G/1.6T光模組中CW雷射光源與矽光子（Silicon Photonics）方案的關鍵上游材料。客戶為下游光元件/光模組廠，終端對應北美雲端資料中心巨頭與電信系統商（如Huawei、Nokia、Ericsson等）。護城河來源：磊晶成長製程參數複雜、良率調校技術門檻高，且為Nvidia供應鏈EML雷射晶片的InP材料上游，目前呈現全球性缺貨。 <span class="badge src-v">✅ 已驗證（業務描述）</span></p>
+    </div>
+    <div class="card">
+      <h4 style="margin:0 0 8px;">② GaAs磊晶片（多元應用）</h4>
+      <p style="font-size:13.5px;color:var(--text2);">用於高功率雷射二極體（工業雷切、醫美設備）及VCSEL（垂直共振腔面射型雷射，應用3D感測、LiDAR）。相對InP產品線，此業務線成長性與AI敘事關聯度較低，屬於較成熟且分散的應用市場。 <span class="badge src-v">✅ 已驗證（業務描述）</span></p>
+    </div>
+  </div>
+  <div class="card">
+    <h4 style="margin:0 0 8px;">③ 矽光子（Silicon Photonics）CW雷射與next-gen產品線（成長引擎）</h4>
+    <p style="font-size:13.5px;color:var(--text2);">2026年為公司定調的「矽光子技術商轉元年」，主力產品自800G規格轉向1.6T，並已進入1.6T高階產品量產、預計下半年放量；同時規劃3.2T世代產品。此業務線為當前股價與Thesis的核心驅動，也是外資調升目標價的主要依據。惟各業務線精確營收佔比公司未於公開資訊完整揭露分部別數字。 <span class="badge src-v">✅（產品進度）</span> <span class="badge src-x">❌（分部營收佔比未揭露）</span></p>
+  </div>
+
+  <h3>優勢產品表</h3>
+  <table>
+    <tr><th>產品</th><th>估計佔營收</th><th>護城河說明</th></tr>
+    <tr><td>InP系雷射磊晶片（含CW雷射、EML）</td><td>— <span class="badge src-x">❌未揭露</span></td><td>技術門檻高，全球純磊晶代工廠稀少；受惠Nvidia供應鏈鎖定EML雷射晶片產能導致的InP材料缺貨行情</td></tr>
+    <tr><td>矽光子相關CW雷射（800G/1.6T）</td><td>— <span class="badge src-x">❌未揭露</span></td><td>公司主力成長引擎，法說會強調1.6T已量產、2027年矽光子營收佔比可望逾九成（外資預估）</td></tr>
+    <tr><td>GaAs高功率LD / VCSEL</td><td>— <span class="badge src-x">❌未揭露</span></td><td>應用分散（工業/醫美/3D感測），技術成熟度高但成長性較低</td></tr>
+  </table>
+  <p style="font-size:12px;color:var(--text3);">註：公司未公開揭露各產品線精確營收佔比，故佔比欄位標示「—」，禁止臆測填入。</p>
+
+  <h3>近4期財務摘要（單季）</h3>
+  <table>
+    <tr><th>期別</th><th>營收(億元)</th><th>YoY</th><th>毛利率</th><th>營業利益率</th><th>EPS(元)</th><th>FCF</th></tr>
+    <tr><td>2026Q1</td><td>9.04</td><td>+157%</td><td>54.8%</td><td>41.3%</td><td>3.44</td><td>— <span class="badge src-x">❌</span></td></tr>
+    <tr><td>2025Q4</td><td>6.42</td><td>+34.7%</td><td>48.7%</td><td>32.8%</td><td>2.07</td><td>— <span class="badge src-x">❌</span></td></tr>
+    <tr><td>2025Q3</td><td>5.53</td><td>+38.9%</td><td>43.6%</td><td>18.8%</td><td>1.08</td><td>— <span class="badge src-x">❌</span></td></tr>
+    <tr><td>2025Q2</td><td>5.53</td><td>+15.7%</td><td>43.3%</td><td>26.9%</td><td>1.05</td><td>— <span class="badge src-x">❌</span></td></tr>
+  </table>
+  <p style="font-size:12px;color:var(--text3);">資料來源：Goodinfo歷年經營績效（合併報表）。EBITDA margin公司未單獨揭露，故以營業利益率替代呈現；FCF公司未逐季公開揭露，欄位標示「—」。</p>
+
+  <h3>近5年全年財務摘要</h3>
+  <table>
+    <tr><th>年度</th><th>營收(億元)</th><th>毛利率</th><th>營業利益率</th><th>稅後淨利(億元)</th><th>EPS(元)</th></tr>
+    <tr><td>2025</td><td>22.0</td><td>42.7%</td><td>23.1%</td><td>4.28</td><td>4.66</td></tr>
+    <tr><td>2024</td><td>12.1</td><td>19.8%</td><td>-9.25%</td><td>-0.55</td><td>-0.59</td></tr>
+    <tr><td>2023</td><td>10.6</td><td>13.1%</td><td>-26.4%</td><td>-2.12</td><td>-2.31</td></tr>
+    <tr><td>2022</td><td>23.8</td><td>31.9%</td><td>14.0%</td><td>3.30</td><td>3.61</td></tr>
+    <tr><td>2021</td><td>18.7</td><td>41.0%</td><td>22.0%</td><td>3.38</td><td>3.71</td></tr>
+  </table>
+  <p style="font-size:12.5px;color:var(--text2);">觀察：2023-2024年因光通訊景氣循環低谷與稼動率不足，公司連續兩年虧損；2025年在AI資料中心光模組需求爆發下營運強勁反轉，毛利率與營益率均創近5年新高，顯示此業務具有明顯的景氣循環屬性。</p>
+</section>
+
+<!-- 3. 核心Thesis -->
+<section id="thesis">
+  <h2><span class="num">3</span>核心Thesis與未來性</h2>
+  <div class="section-desc">投資論點支柱、成長驅動力、監控風險</div>
+
+  <h3>投資論點支柱</h3>
+  <div class="card">
+    <p><span class="badge badge-green">✅ 成立</span> <b>AI資料中心帶動800G/1.6T光模組需求爆發，直接拉動InP磊晶片出貨</b><br>
+    <span style="color:var(--text2);font-size:13.5px;">證據：2026年1-5月營收年增率介於89%~159%，2026Q1營收9.04億元創單季新高，毛利率攀升至54.8%；法說會證實1.6T產品已進入量產。</span></p>
+  </div>
+  <div class="card">
+    <p><span class="badge badge-green">✅ 成立</span> <b>矽光子（CPO/Silicon Photonics）技術升級為公司帶來規格轉換紅利</b><br>
+    <span style="color:var(--text2);font-size:13.5px;">證據：外資報告指出2027年矽光子營收佔比可望突破九成，公司資本支出大幅上修至13.15億元，用於MOCVD與E-beam曝光顯影產能擴充，聚焦矽光製程放量。</span></p>
+  </div>
+  <div class="card">
+    <p><span class="badge badge-yellow">⚠️ 部分成立</span> <b>Nvidia供應鏈鎖定EML雷射晶片產能，導致InP材料結構性缺貨、聯亞受惠漲價</b><br>
+    <span style="color:var(--text2);font-size:13.5px;">證據：市場論述（社群/研究報告）提及Nvidia戰略性壟斷EML雷射晶片供應商產能，交期已排至2027年後，磷化銦供應偏緊；惟此說法多來自市場評論而非公司official財報揭露的具體漲價幅度或合約證據，需持續追蹤驗證。</span></p>
+  </div>
+  <div class="card">
+    <p><span class="badge badge-yellow">⚠️ 部分成立</span> <b>現金水位與自有資金可支應資本擴張，財務結構穩健</b><br>
+    <span style="color:var(--text2);font-size:13.5px;">證據：公司聲明可用自有資金支應資本支出與配息；但同時於2026年初通過私募普通股（上限4,500張，約合5%~10%股本稀釋）用於充實資本支出、研發與營運資金，顯示成長速度已超出純內生現金流所能負擔的規模，存在股權稀釋風險。</span></p>
+  </div>
+  <div class="card">
+    <p><span class="badge badge-red">❌ 未兌現</span> <b>當前市場估值（PE ~255倍）隱含的長期高成長性尚未被實際財報數字完全驗證</b><br>
+    <span style="color:var(--text2);font-size:13.5px;">證據：外資雖上修2026-2028年EPS預估至17.6/28.8/50.6元並以2027年79倍本益比評價上修目標價，但這仍是預估值而非已實現財報數字；以TTM EPS 7.64元計算的現價本益比高達約255倍，遠高於外資預估的2027年目標本益比，顯示股價目前是提前反映未來2-3年高速成長預期，兌現節奏與力度仍需逐季驗證。</span></p>
+  </div>
+
+  <h3>核心成長驅動力</h3>
+  <table>
+    <tr><th>驅動力</th><th>說明</th></tr>
+    <tr><td>AI資料中心光模組規格升級（800G→1.6T→3.2T）</td><td>每一次規格躍進均需要更高規格的雷射光源磊晶片，帶動單位用量與單價同步成長</td></tr>
+    <tr><td>矽光子/CPO技術滲透率提升</td><td>2026年被公司定調為矽光子商轉元年，若滲透率如期提升，將支撐營收結構性上移</td></tr>
+    <tr><td>InP供應鏈結構性缺貨與漲價</td><td>Nvidia供應鏈鎖定上游產能，若缺貨行情延續，聯亞議價能力與毛利率有望持續受惠</td></tr>
+  </table>
+
+  <h3>需監控風險</h3>
+  <div class="risk-card">
+    <div class="risk-title">估值過高、預期落空的下修風險</div>
+    <div>目前TTM本益比約255倍，遠高於歷史均值與同業水準，股價已隱含未來2-3年高速成長；一旦月營收年增率或毛利率出現連續放緩，市場可能大幅重評估。</div>
+    <div class="risk-trigger">觸發條件：<b>連續2個月營收年增率降至50%以下，或單季毛利率季減超過3個百分點</b></div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-title">光通訊產業的強景氣循環屬性</div>
+    <div>2023-2024年公司曾因光通訊景氣低谷連續虧損兩年，顯示此業務對下游資本支出週期高度敏感，AI資料中心需求若放緩，公司獲利能力可能重演2023-2024年的劇烈波動。</div>
+    <div class="risk-trigger">觸發條件：<b>主要雲端資本支出(hyperscaler capex)guidance下修，或公司單季營業利益率轉負</b></div>
+  </div>
+  <div class="risk-card mid">
+    <div class="risk-title">股權稀釋風險（私募增資）</div>
+    <div>公司規劃私募普通股（上限4,500張）用於資本支出與研發，將對現有股東EPS產生稀釋效果，實際稀釋幅度需視最終私募價格與股數而定。</div>
+    <div class="risk-trigger">觸發條件：<b>私募案正式定價與股數公告後，重新試算稀釋後EPS與估值</b></div>
+  </div>
+</section>
+
+<!-- 4. 競爭格局 -->
+<section id="landscape">
+  <h2><span class="num">4</span>競爭格局</h2>
+  <div class="section-desc">磊晶片市場主要參與者與威脅程度</div>
+  <table>
+    <tr><th>公司</th><th>市佔/定位</th><th>優勢</th><th>對聯亞威脅度</th></tr>
+    <tr><td>II-VI (Coherent)、Lumentum、Broadcom等IDM大廠</td><td>— <span class="badge src-x">❌未查得精確市佔數字</span></td><td>垂直整合（磊晶+元件+模組一條龍），資金與客戶關係深厚</td><td><span class="badge badge-yellow">🟡 中</span> IDM廠通常自用磊晶為主，較少對外銷售，直接競爭有限但長期具垂直整合優勢</td></tr>
+    <tr><td>日系Sumitomo Electric、Mitsubishi Electric</td><td>— <span class="badge src-x">❌</span></td><td>技術資歷深、與日系電信/系統商關係緊密</td><td><span class="badge badge-yellow">🟡 中</span> 同屬IDM垂直整合型，對純磊晶代工市場侵蝕有限</td></tr>
+    <tr><td>IQE plc（英國）</td><td>— <span class="badge src-x">❌</span></td><td>全球最大獨立化合物半導體磊晶代工廠之一，產品線涵蓋GaAs/InP/GaN多元應用</td><td><span class="badge badge-red">🔴 高</span> 屬同類型專業磊晶代工商，產品線與客群有較高重疊度</td></tr>
+    <tr><td>IntelliEPI（美國）</td><td>— <span class="badge src-x">❌</span></td><td>專業磊晶代工，主力產品偏向微波元件（HBT/HEMT）</td><td><span class="badge badge-green">🟢 低</span> 產品定位與聯亞的光通訊聚焦有所區隔，直接重疊度較低</td></tr>
+    <tr><td>AXT Inc.（美國，InP基板供應商）</td><td>— <span class="badge src-x">❌</span></td><td>全球主要InP單晶基板供應商之一，為聯亞等磊晶廠的上游原料商而非直接競爭者</td><td><span class="badge badge-green">🟢 低（屬上游供應商）</span> 若基板供應吃緊，反而可能推升聯亞的議價能力與行業門檻</td></tr>
+  </table>
+  <p style="font-size:12px;color:var(--text3);">註：市佔率數字台股與國際化合物半導體磊晶代工市場均無公開統一統計來源，本次查詢未取得精確市佔百分比，依規則一律標示「—」，不臆測填入。聯亞的差異化定位在於：專業磊晶代工商中，僅聯亞是「專注光通訊/資料中心應用」，而非分散於微波元件等其他領域，具備一定利基性。</p>
+</section>
+
+<!-- 5. 成長象限與護城河 -->
+<section id="quadrant">
+  <h2><span class="num">5</span>成長象限判斷與護城河評估</h2>
+
+  <h3>Peter Lynch 五象限判斷</h3>
+  <table>
+    <tr><th>象限</th><th>判斷依據</th></tr>
+    <tr><td><b>景氣循環股（Cyclical）為主，疊加短期高速成長特徵</b></td><td>
+      • 2021-2022年獲利穩定（EPS 3.61-3.71元）<br>
+      • 2023-2024年因光通訊景氣低谷連續虧損（EPS -2.31、-0.59元）<br>
+      • 2025-2026年因AI資料中心需求爆發強勁反轉（2026Q1 YoY營收+157%）<br>
+      綜合來看，公司營運高度連動於光通訊/資料中心資本支出週期，具備典型景氣循環股的「大起大落」特徵；但當前所處的AI驅動規格升級階段，短期呈現高速成長股（High-growth）的營收/獲利加速特徵。建議以「景氣循環股中的上升週期」看待，而非視為結構性、可持續穿越週期的高速成長股。
+    </td></tr>
+  </table>
+
+  <h3>護城河五維度評分</h3>
+  <div class="card">
+    <div class="moat-row"><span class="moat-label">不可替代性</span><span class="stars">★★★☆☆</span></div>
+    <div class="moat-row"><span class="moat-label">網路效應</span><span class="stars">★☆☆☆☆</span></div>
+    <div class="moat-row"><span class="moat-label">客戶黏著度</span><span class="stars">★★★☆☆</span></div>
+    <div class="moat-row"><span class="moat-label">成本優勢</span><span class="stars">★★☆☆☆</span></div>
+    <div class="moat-row"><span class="moat-label">規模效應</span><span class="stars">★★☆☆☆</span></div>
+  </div>
+  <p style="font-size:12.5px;color:var(--text2);">說明：磊晶成長製程具技術門檻（不可替代性尚可），且與下游光元件/模組客戶存在合格認證關係帶來一定黏著度；但化合物半導體磊晶產業不具網路效應，且相較IDM大廠聯亞規模仍偏小、成本優勢有限，護城河整體評級為中等偏弱，主要依賴技術門檻與當前供給吃緊的產業紅利，而非結構性壟斷地位。</p>
+
+  <div class="action-box">
+    <h4>建議動作 Action Box</h4>
+    <div class="action-row"><div class="action-label">當前建議</div><div class="action-value">觀察為主，不建議在當前估值（TTM PE約255倍）追高新建倉；若已持有，可依既定持股計畫分批獲利了結部分部位，保留核心倉位參與矽光子放量趨勢</div></div>
+    <div class="action-row"><div class="action-label">加碼觸發</div><div class="action-value">股價回檔至月營收年增率仍維持100%以上、且本益比修正至100倍以下區間；或1.6T量產出貨規模化後單季營業利益率穩定站上35%</div></div>
+    <div class="action-row"><div class="action-label">賣出觸發</div><div class="action-value">連續2個月營收年增率降至50%以下；單季毛利率季減超過3個百分點；或主要雲端資本支出guidance明確下修</div></div>
+    <div class="action-row"><div class="action-label">每季監控指標</div><div class="action-value">月營收YoY、單季毛利率/營業利益率、私募增資定價與稀釋幅度、資本支出進度與新產能開出時程、外資EPS預估調整方向</div></div>
+  </div>
+</section>
+
+<!-- 綜合總結 -->
+<section id="summary">
+  <h2>綜合總結</h2>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis成立度</div><div class="s-value">3.5 / 5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-value">★★☆☆☆~★★★☆☆</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-value">景氣循環股(上升期)</div></div>
+    <div class="summary-card"><div class="s-label">TTM本益比</div><div class="s-value">約255x</div></div>
+    <div class="summary-card"><div class="s-label">近5年獲利波動</div><div class="s-value">大（2年虧損→強勁反轉）</div></div>
+  </div>
+
+  <div class="action-box">
+    <h4>最終操作建議</h4>
+    <p style="font-size:14px;">聯亞光電是台灣少數專攻InP/GaAs磊晶片的純材料廠，在AI資料中心光模組規格升級（800G→1.6T→3.2T）與矽光子技術轉換的浪潮下，近4季營運強勁反轉，月營收年增率屢創新高，毛利率與營業利益率同步走升。惟公司本質上仍屬景氣循環股，2023-2024年連續兩年虧損的歷史記錄顯示其獲利對下游資本支出週期高度敏感；當前TTM本益比約255倍已大幅提前反映市場對2026-2028年EPS高速成長（外資預估17.6/28.8/50.6元）的樂觀預期，安全邊際偏薄。對於中長期波段投資人，建議：<b>未持有者暫緩追高新建倉，等待估值消化或回檔至更合理區間；已持有者可依紀律分批減碼鎖利，保留核心部位參與矽光子放量趨勢，並嚴格依每季監控指標（營收YoY、毛利率、私募稀釋、資本支出進度）動態調整部位</b>，投資期間建議以1-2年為主要觀察窗口而非長期3-5年buy-and-hold，因產業循環特性使然。</p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p><b>資料來源</b>：Yahoo奇摩股市 (tw.stock.yahoo.com/quote/3081.TWO)、Goodinfo!台灣股市資訊網 (goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3081)、鉅亨網台股 (cnyes.com/twstock/3081)、Win投資 (winvest.tw)、TechNews科技新報、股市爆料同學會、Dcard股票板、聯亞光電公司官網 (lmoc.com.tw)、財報狗 (statementdog.com/analysis/3081)。查詢日期：2026年7月2日。</p>
+    <p>本報告財務數字主要取自Goodinfo歷年經營績效頁與Yahoo股市營收表之公開統計，若與公司正式財報（MOPS公開資訊觀測站）數字有出入，請以公司正式申報財報為準。</p>
+    <div class="disclaimer">
+      本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

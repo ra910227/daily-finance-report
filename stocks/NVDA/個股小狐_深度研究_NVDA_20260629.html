@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>個股小狐｜NVDA 公司深度研究</title>
+<style>
+:root{
+  --bg:#0b0e14;--panel:#11151f;--panel2:#161b28;--border:#232a3a;
+  --text:#e6e9f0;--muted:#8b93a7;--accent:#76b9ff;--green:#3ddc84;
+  --red:#ff6b6b;--yellow:#ffc857;--purple:#b794f6;--orange:#ff9f43;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;line-height:1.6;}
+.hero{padding:40px 24px;background:linear-gradient(135deg,#0e1f3a,#1a1228 70%);border-bottom:1px solid var(--border);}
+.hero h1{margin:0 0 6px;font-size:28px;}
+.hero .sub{color:var(--muted);font-size:14px;}
+.hero .stats{display:flex;gap:24px;margin-top:18px;flex-wrap:wrap;}
+.hero .stat .label{font-size:12px;color:var(--muted);}
+.hero .stat .val{font-size:20px;font-weight:700;}
+.toc{position:sticky;top:0;background:rgba(11,14,20,0.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px;z-index:10;}
+.toc a{color:var(--muted);text-decoration:none;}
+.toc a:hover{color:var(--accent);}
+.section{max-width:1080px;margin:0 auto;padding:36px 24px;}
+.section h2{font-size:20px;border-left:4px solid var(--accent);padding-left:10px;margin-bottom:16px;}
+.section h3{font-size:15px;color:var(--accent);margin-bottom:10px;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:18px;}
+th,td{padding:9px 10px;border-bottom:1px solid var(--border);text-align:left;}
+th{color:var(--muted);font-weight:600;background:var(--panel2);}
+tr:hover{background:var(--panel2);}
+.badge{display:inline-block;padding:2px 9px;border-radius:12px;font-size:12px;font-weight:600;}
+.badge.ok{background:rgba(61,220,132,0.15);color:var(--green);}
+.badge.warn{background:rgba(255,200,87,0.15);color:var(--yellow);}
+.badge.bad{background:rgba(255,107,107,0.15);color:var(--red);}
+.badge.blue{background:rgba(118,185,255,0.15);color:var(--accent);}
+.moat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px;}
+.moat-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
+.moat-card .name{font-size:12px;color:var(--muted);margin-bottom:6px;}
+.moat-card .stars{font-size:18px;}
+.moat-card .score{font-size:13px;color:var(--text);margin-top:4px;}
+.thesis-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.thesis-item{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;}
+.thesis-item h4{margin:0 0 6px;font-size:14px;}
+.thesis-item p{margin:0;font-size:13px;color:var(--muted);}
+.action-box{background:linear-gradient(135deg,#0e2a1d,#0e2236);border:1px solid var(--green);border-radius:12px;padding:22px;margin-top:12px;}
+.action-box h3{margin-top:0;color:var(--green);}
+.action-box .row{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--border);font-size:14px;gap:12px;}
+.action-box .row:last-child{border-bottom:none;}
+.action-box .row .label{color:var(--muted);white-space:nowrap;min-width:90px;}
+.summary-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.sum-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;}
+.sum-card .val{font-size:22px;font-weight:700;color:var(--accent);}
+.sum-card .label{font-size:12px;color:var(--muted);margin-top:4px;}
+.note{background:var(--panel2);border-left:3px solid var(--purple);padding:10px 14px;border-radius:6px;font-size:13px;color:var(--muted);margin-top:10px;}
+.risk-card{background:var(--panel);border-left:4px solid var(--red);border-radius:8px;padding:12px 14px;margin-bottom:10px;}
+.risk-card h4{margin:0 0 4px;font-size:14px;color:var(--red);}
+.risk-card p{margin:0;font-size:13px;color:var(--muted);}
+footer{padding:30px 24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);max-width:1080px;margin:0 auto;}
+@media(max-width:760px){.moat-grid{grid-template-columns:repeat(3,1fr);}.thesis-grid{grid-template-columns:1fr;}.summary-cards{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>NVIDIA Corporation (NVDA) <span style="color:var(--muted);font-size:16px;">／公司深度研究</span></h1>
+  <div class="sub">分析日期：2026-06-29　｜　Thesis成立度：<span style="color:var(--green);font-weight:700;">4.5 / 5</span>　｜　象限：<span style="color:var(--accent);font-weight:700;">高速成長股（AI Compounder）</span></div>
+  <div class="stats">
+    <div class="stat"><div class="label">現價（2026-06-28）</div><div class="val">$192.71</div></div>
+    <div class="stat"><div class="label">市值</div><div class="val">$4.72T</div></div>
+    <div class="stat"><div class="label">FY2026 總營收</div><div class="val">$215.9B</div></div>
+    <div class="stat"><div class="label">YoY</div><div class="val" style="color:var(--green);">+65%</div></div>
+    <div class="stat"><div class="label">毛利率（FY26）</div><div class="val">71.1%</div></div>
+    <div class="stat"><div class="label">FCF（FY26 全年）</div><div class="val">~$96.7B</div></div>
+  </div>
+</div>
+
+<div class="toc">
+  <a href="#intro">①基本介紹</a>
+  <a href="#engine">②業務引擎</a>
+  <a href="#thesis">③核心Thesis</a>
+  <a href="#competition">④競爭格局</a>
+  <a href="#moat">⑤成長象限&護城河</a>
+  <a href="#eps">⑥EPS/PE歷史</a>
+  <a href="#rec">⑦操作建議</a>
+</div>
+
+<!-- ① 基本介紹 -->
+<div class="section" id="intro">
+  <h2>① 基本介紹</h2>
+  <div class="summary-cards">
+    <div class="sum-card"><div class="val">$4.72T</div><div class="label">市值（2026-06-28）</div></div>
+    <div class="sum-card"><div class="val">$215.9B</div><div class="label">FY2026 TTM 營收</div></div>
+    <div class="sum-card"><div class="val">71.1%</div><div class="label">FY2026 毛利率（GAAP）</div></div>
+    <div class="sum-card"><div class="val">~$96.7B</div><div class="label">FY2026 自由現金流</div></div>
+    <div class="sum-card"><div class="val">+65%</div><div class="label">FY2026 營收YoY</div></div>
+    <div class="sum-card"><div class="val">#1</div><div class="label">全球AI加速晶片市佔（>80%）</div></div>
+  </div>
+  <p>NVIDIA 創立於1993年，最初專注繪圖晶片（GPU）。2016年後藉由CUDA生態系轉型為AI運算基礎設施龍頭，目前是全球市值第一的半導體公司（同時競逐全球市值第一大企業席次）。自FY2024起進入AI爆炸性成長周期，FY2026全年營收$215.9B，Data Center佔比近90%。</p>
+  <div class="note">資料來源：✅ NVIDIA Newsroom（Q4 FY2026 8-K）、✅ stockdividendscreener.com 分部統計</div>
+</div>
+
+<!-- ② 業務引擎 -->
+<div class="section" id="engine">
+  <h2>② 業務引擎分析</h2>
+  <table>
+    <tr><th>業務線</th><th>FY2026 營收</th><th>佔總收入</th><th>YoY</th><th>核心護城河</th></tr>
+    <tr><td><b>Data Center</b></td><td>$193.7B</td><td>89.7%</td><td>+135%+</td><td>CUDA鎖定生態、Blackwell架構、NVLink/InfiniBand全棧</td></tr>
+    <tr><td><b>Gaming（含Edge）</b></td><td>$16.0B</td><td>7.4%</td><td>+47% (Q1 FY27)</td><td>GeForce品牌忠誠度、DLSS/RTX生態</td></tr>
+    <tr><td><b>Professional Visualization</b></td><td>$3.2B</td><td>1.5%</td><td>強勁YoY正成長</td><td>Omniverse/RTX工作站、企業授權</td></tr>
+    <tr><td><b>Automotive</b></td><td>$2.4B</td><td>1.1%</td><td>+6% (Q1 FY27)</td><td>DRIVE平台、Mercedes/Aurora合作</td></tr>
+  </table>
+  <div class="note">⚠️ 自Q1 FY2027起，NVIDIA將業務重組為「Data Center」＋「Edge Computing」兩大類，未來Gaming/Pro Viz/Auto/OEM數字需與新口徑對照。</div>
+
+  <h3>優勢產品表</h3>
+  <table>
+    <tr><th>產品/平台</th><th>大致佔營收</th><th>護城河說明</th></tr>
+    <tr><td>Blackwell GPU（H100/H200/B100/B200）</td><td>Data Center絕大部分</td><td>全球最快AI訓練/推論晶片，需求>供給，台積電CoWoS先進封裝排產鎖定</td></tr>
+    <tr><td>CUDA生態系</td><td>無直接收入但支撐所有GPU溢價</td><td>1500萬+開發者，15年先發優勢，切換成本極高（軟體資產大量投入）</td></tr>
+    <tr><td>NVLink / InfiniBand 互連</td><td>DC網路佔Q1 FY27~$15B</td><td>GPU叢集互連標準，競爭者難以複製整體生態</td></tr>
+    <tr><td>GeForce RTX（Gaming）</td><td>~7-8%</td><td>PC遊戲市場份額超80%，DLSS生態牢固</td></tr>
+    <tr><td>DRIVE Orin / Thor（Auto）</td><td>~1%但成長中</td><td>自動駕駛全棧方案，TSLA等競爭者自研中</td></tr>
+  </table>
+
+  <h3>近5期歷史財務摘要</h3>
+  <table>
+    <tr><th>財政年度</th><th>總營收</th><th>YoY</th><th>毛利率（GAAP）</th><th>非GAAP EPS</th><th>FCF（全年）</th></tr>
+    <tr><td>FY2023（截至2023-01）</td><td>$26.9B</td><td>+0.2%</td><td>56.9%</td><td>$1.74</td><td>$7.1B</td></tr>
+    <tr><td>FY2024（截至2024-01）</td><td>$60.9B</td><td>+126%</td><td>72.7%</td><td>$2.97</td><td>$16.8B</td></tr>
+    <tr><td>FY2025（截至2025-01）</td><td>$130.5B</td><td>+114%</td><td>74.6%</td><td>$4.93⚠️</td><td>~$22.1B</td></tr>
+    <tr><td>FY2026（截至2026-01）</td><td>$215.9B</td><td>+65%</td><td>71.1%</td><td>$4.77（GAAP $4.90）</td><td>~$96.7B</td></tr>
+    <tr><td>FY2027 Q1（截至2026-04）</td><td>$81.6B（單季）</td><td>+85% YoY</td><td>74.9%</td><td>$1.87（單季）</td><td>$49B（單季）</td></tr>
+  </table>
+  <div class="note">FCF數據來源混合（fullratio.com、businessquant.com），FY2025數字存在不同口徑，以「~」標示估算；FY2026全年FCF $96.7B含季度加總估算，與Q4 FY26 8-K交叉驗證中。EPS均為非GAAP稀釋EPS。</div>
+</div>
+
+<!-- ③ 核心Thesis -->
+<div class="section" id="thesis">
+  <h2>③ 核心 Thesis 與未來性</h2>
+  <div class="thesis-grid">
+    <div class="thesis-item">
+      <h4><span class="badge ok">✅ 成立</span> CUDA護城河無可複製</h4>
+      <p>超過1500萬名開發者、數百萬個以CUDA編寫的模型與工具庫形成極高切換成本。AMD ROCm、Intel oneAPI在生態系廣度上仍落後5-10年。</p>
+    </div>
+    <div class="thesis-item">
+      <h4><span class="badge ok">✅ 成立</span> Agentic AI進入需求拋物線</h4>
+      <p>CEO黃仁勳表示「需求已呈拋物線式成長」，來自AI Agent、推論、主權AI三重驅動；Q2 FY27指引$91B（高於共識$87B），延續加速態勢。</p>
+    </div>
+    <div class="thesis-item">
+      <h4><span class="badge ok">✅ 成立</span> 全棧方案鎖定超大規模資料中心</h4>
+      <p>Blackwell + NVLink + InfiniBand + CUDA形成「買了A買B再買C」的生態鎖定，超大型雲端客戶（AWS/Azure/GCP/Meta）資本支出持續上調。</p>
+    </div>
+    <div class="thesis-item">
+      <h4><span class="badge ok">✅ 成立</span> FCF能力超強，資本配置轉積極</h4>
+      <p>FY27 Q1單季FCF $49B，ROIC達104.7%，$800億新增回購授權+25x股息增長，顯示管理層對現金流的高度信心。</p>
+    </div>
+    <div class="thesis-item">
+      <h4><span class="badge warn">⚠️ 部分成立</span> 中國市場長期流失風險</h4>
+      <p>CEO坦承「中國AI市場已基本讓給華為」，短期由中東/東南亞主權AI彌補，但長期能否完全替代仍需觀察（需監控中國市場占比）。</p>
+    </div>
+    <div class="thesis-item">
+      <h4><span class="badge warn">⚠️ 部分成立</span> 超大客戶自研ASIC競爭加劇</h4>
+      <p>Google TPU、Amazon Trainium2、Microsoft Maia等已服役，但目前仍以NVIDIA補位為主，ASIC的通用性不足限制其上限。短期威脅有限，3-5年需持續追蹤。</p>
+    </div>
+  </div>
+
+  <h3>核心成長驅動力</h3>
+  <table>
+    <tr><th>驅動力</th><th>時間軸</th><th>量化規模</th></tr>
+    <tr><td>Blackwell → Rubin GPU世代接棒</td><td>FY2026-FY2028</td><td>Rubin架構2026年末量產，每個世代性能目標3-5倍提升</td></tr>
+    <tr><td>推論市場爆發（Agentic AI）</td><td>2026-2028</td><td>AI推論需求預估2025-2027年CAGR >60%，GPU推論比訓練更需要高吞吐</td></tr>
+    <tr><td>主權AI（政府/非美企業）</td><td>2026-2028</td><td>沙烏地、UAE、日本、東南亞政府AI建設需求快速增長</td></tr>
+  </table>
+
+  <h3>核心風險監控</h3>
+  <div class="risk-card">
+    <h4>風險一：AI資本支出周期性收縮</h4>
+    <p>觸發條件：若三大超大型雲端商（AWS/Azure/GCP）連續兩季資本支出指引下調，或AI商業化ROI不如預期；影響：Data Center YoY增速可能從90%急降至20-30%，估值面臨重估。嚴重度：⚠️ 高</p>
+  </div>
+  <div class="risk-card">
+    <h4>風險二：中國禁令升級</h4>
+    <p>觸發條件：美國商務部進一步限制出口至中國的晶片（H20等替代品也被禁）；影響：中國市場收入全面歸零，短期缺口需3-4季才能由主權AI填補。嚴重度：🔴 中高</p>
+  </div>
+  <div class="risk-card">
+    <h4>風險三：台積電供應鏈集中風險</h4>
+    <p>觸發條件：台海緊張局勢升溫或台積電CoWoS先進封裝產能受限；影響：H/B系列GPU出貨延遲，直接壓縮季度營收能力。嚴重度：⚠️ 中</p>
+  </div>
+</div>
+
+<!-- ④ 競爭格局 -->
+<div class="section" id="competition">
+  <h2>④ 競爭格局</h2>
+  <table>
+    <tr><th>戰場</th><th>競爭者</th><th>估計市佔</th><th>核心優勢</th><th>對NVDA威脅度</th></tr>
+    <tr><td>AI訓練加速晶片</td><td>AMD（MI300X系列）</td><td>~10%</td><td>ROCm生態逐步改善，性價比</td><td>🟡 中（短期有限）</td></tr>
+    <tr><td>AI推論加速晶片</td><td>Google（TPU v5）</td><td>部分內部</td><td>GCP專屬，訓練效率高</td><td>🟡 中（限制於自用）</td></tr>
+    <tr><td>客製化ASIC</td><td>Broadcom（Xpediant）</td><td>5-8%（ASIC市場）</td><td>超大型客戶定制，成本低</td><td>🟡 中（通用性受限）</td></tr>
+    <tr><td>邊緣AI晶片</td><td>Qualcomm（Snapdragon X）</td><td>—</td><td>ARM架構、功耗優勢、手機端</td><td>🟢 低（市場不重疊）</td></tr>
+    <tr><td>網通/互連</td><td>Intel（Gaudi 3）</td><td>~3%</td><td>成本敏感企業，降本替代</td><td>🟢 低</td></tr>
+    <tr><td>自動駕駛算力</td><td>Mobileye、Tesla DOJO、高通</td><td>分散</td><td>各有OEM綁定</td><td>🟡 中（長期需關注）</td></tr>
+  </table>
+  <div class="note">NVDA在AI訓練領域市佔超過80%，短中期護城河由CUDA生態鎖定保護。最大威脅來自超大型客戶自研ASIC（Google/Amazon/Microsoft/Meta），但通用性不足限制其對外擴張，與NVDA形成互補而非完全替代的格局。</div>
+</div>
+
+<!-- ⑤ 成長象限 & 護城河 -->
+<div class="section" id="moat">
+  <h2>⑤ 成長象限判斷與護城河評估</h2>
+  <h3>Peter Lynch 成長象限</h3>
+  <table>
+    <tr><th>判斷依據</th><th>數據支撐</th><th>結論</th></tr>
+    <tr><td>營收成長速度</td><td>FY2024 +126%、FY2025 +114%、FY2026 +65%、FY27 Q1 +85%</td><td>高速成長（Fast Grower）</td></tr>
+    <tr><td>市場可尋址空間</td><td>AI基礎設施市場預估2025-2030年CAGR >30%，總額數兆美元</td><td>TAM仍大，尚未飽和</td></tr>
+    <tr><td>毛利率趨勢</td><td>FY2023 56.9% → FY2026 71.1%，毛利率持續擴張</td><td>正向飛輪，非景氣循環型</td></tr>
+    <tr><td>EPS成長</td><td>過去3年平均EPS成長201.4%/年</td><td>遠超成長股門檻（>20%）</td></tr>
+  </table>
+  <p style="color:var(--accent);font-weight:600;">象限定義：<span style="color:var(--text);">高速成長股（Fast Grower）→ AI Compounder，適合中長期持有，波段加碼操作</span></p>
+
+  <h3>護城河五維度評分</h3>
+  <div class="moat-grid">
+    <div class="moat-card">
+      <div class="name">不可替代性</div>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <div class="score">CUDA生態15年壁壘</div>
+    </div>
+    <div class="moat-card">
+      <div class="name">網路效應</div>
+      <div class="stars">⭐⭐⭐⭐½</div>
+      <div class="score">開發者生態1500萬+</div>
+    </div>
+    <div class="moat-card">
+      <div class="name">客戶黏著度</div>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <div class="score">切換成本極高</div>
+    </div>
+    <div class="moat-card">
+      <div class="name">成本優勢</div>
+      <div class="stars">⭐⭐⭐⭐</div>
+      <div class="score">台積電先進封裝優先權</div>
+    </div>
+    <div class="moat-card">
+      <div class="name">規模效應</div>
+      <div class="stars">⭐⭐⭐⭐½</div>
+      <div class="score">研發投入持續擴大領先</div>
+    </div>
+  </div>
+  <p style="text-align:center;color:var(--accent);font-weight:700;">護城河綜合評分：4.8 / 5 ★</p>
+</div>
+
+<!-- ⑥ EPS 與歷史PE -->
+<div class="section" id="eps">
+  <h2>⑥ EPS 多年趨勢 ＋ 歷史本益比</h2>
+  <h3>EPS（非GAAP稀釋EPS，以NVIDIA財政年度為準）</h3>
+  <table>
+    <tr><th>年度</th><th>EPS</th><th>YoY</th><th>狀態</th></tr>
+    <tr><td>FY2024（截至2024-01）</td><td>$2.97</td><td>+145.5%</td><td><span class="badge ok">A 實際</span></td></tr>
+    <tr><td>FY2025（截至2025-01）</td><td>$4.93</td><td>+66%</td><td><span class="badge ok">A 實際</span></td></tr>
+    <tr><td>FY2026（截至2026-01）</td><td>$4.77</td><td>-3%（GAAP口徑$4.90）</td><td><span class="badge ok">A 實際</span></td></tr>
+    <tr><td>FY2027（截至2027-01）</td><td>~$9.09（共識均值）</td><td>~+91%</td><td><span class="badge warn">E 預估</span></td></tr>
+    <tr><td>FY2028（截至2028-01）</td><td>~$12.95（共識均值）</td><td>~+42%</td><td><span class="badge warn">E 預估</span></td></tr>
+  </table>
+  <div class="note">FY2026非GAAP EPS $4.77較FY2025 $4.93略降，主因股票薪酬費用調整口徑與一次性項目；GAAP EPS $4.90則較FY2025成長。FY2027/FY2028預估來自分析師共識（stockanalysis.com/marketbeat），區間FY2027為$8.04-$10.06，FY2028為$9.46-$16.80。</div>
+
+  <h3>歷史本益比（TTM PE）參考</h3>
+  <table>
+    <tr><th>時間點</th><th>TTM PE</th><th>背景說明</th></tr>
+    <tr><td>5年均值（約2021-2026）</td><td>~77x</td><td>包含AI爆發前高估值時期（2021年~200x+）與後來EPS快速成長壓縮，整體均值偏高</td></tr>
+    <tr><td>2022年熊市PE（TTM）</td><td>⚠️ 估算~100-177x</td><td>2022年Gaming/加密崩潰致EPS大降，股價雖跌但TTM PE反而偏高；若以Forward PE衡量則約30-40x</td></tr>
+    <tr><td>2018/2019年修正低點（TTM）</td><td>~23-24x</td><td>2018年底半導體修正，股價腰斬，TTM PE降至約23-24x（Jan 2019低點），是近10年最低估值區</td></tr>
+    <tr><td>2026年1月（AI爆發後壓縮）</td><td>~40.8x</td><td>EPS高速增長使PE自然收斂，為5年新低，但仍高於2018/19年低點</td></tr>
+    <tr><td>現值（2026-06-28）</td><td>~29.5x</td><td>目前已低於5年均值77x超60%，接近「業績驗證後估值正常化」水位</td></tr>
+  </table>
+  <div class="note">2022年「低點」的PE反常高企，因為那是盈利崩潰年（TTM分母縮小），不宜作為安全邊際估值參考；真正的「便宜買點PE」參考應看2018/19年修正低點（~23-24x）與現值（~29-30x）的對比。</div>
+</div>
+
+<!-- ⑦ 操作建議 -->
+<div class="section" id="rec">
+  <h2>⑦ 操作建議</h2>
+  <div class="action-box">
+    <h3>🦊 個股小狐操作建議</h3>
+    <div class="row"><span class="label">象限定位</span><span>高速成長股（AI Compounder）；適合中長期波段持有，非純定存型</span></div>
+    <div class="row"><span class="label">目前建議</span><span>現價$192.71已處估值低位（TTM PE 29.5x，低於5年均值60%+），已持有者續抱；未持有者可在$170-185分批建倉</span></div>
+    <div class="row"><span class="label">加碼觸發</span><span>① Q2 FY27 DC營收確認 >$80B（延續加速）；② 股價拉回至$170以下且市場整體無系統性風險</span></div>
+    <div class="row"><span class="label">賣出觸發</span><span>① DC營收YoY連續兩季跌破40%；② 三大超大型雲端商資本支出指引連續下調；③ 股價跌破$150（熊市情境下緣）</span></div>
+    <div class="row"><span class="label">每季監控</span><span>Data Center YoY增速、毛利率趨勢（目標維持74%+）、中國市場占比、Rubin出貨時程</span></div>
+    <div class="row"><span class="label">核心催化劑</span><span>2026年Rubin架構量產消息、Q2 FY27財報（約2026年8月）Data Center數字</span></div>
+  </div>
+</div>
+
+<footer>
+  資料來源：✅ NVIDIA Newsroom／SEC EDGAR 8-K、✅ stockdividendscreener.com 分部營收、✅ stockanalysis.com 分析師預估、⚠️ fullratio.com / businessquant.com（FCF估算）、⚠️ macrotrends.net 歷史PE（部分數據間接取得）。<br><br>
+  本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。<br>
+  產出時間：2026-06-29 ｜ 個股小狐｜深度研究模式
+</footer>
+</body>
+</html>

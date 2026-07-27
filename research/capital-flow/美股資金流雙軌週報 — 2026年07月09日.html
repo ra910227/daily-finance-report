@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美股資金流雙軌週報 — 2026年07月09日</title>
+<style>
+  :root {
+    --bg: #0f1117; --bg2: #1a1d27; --bg3: #222535; --border: #2e3250;
+    --text: #e2e8f0; --text2: #94a3b8; --accent: #6366f1; --accent2: #818cf8;
+    --red: #f87171; --green: #4ade80; --gold: #fbbf24; --orange: #fb923c;
+    --blue: #60a5fa; --purple: #c084fc; --teal: #2dd4bf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system,'PingFang TC','Microsoft JhengHei',sans-serif; font-size: 14px; line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #1e293b 100%); padding: 28px 32px 20px; border-bottom: 1px solid var(--accent); }
+  .header h1 { font-size: 22px; font-weight: 700; color: #fff; letter-spacing:0.3px;}
+  .header .meta { color: var(--text2); font-size: 12px; margin-top: 6px; }
+  .nav { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+  .nav a { font-size:11px; color: var(--accent2); background:#1a1d3a; border:1px solid var(--border); padding:4px 10px; border-radius:6px; text-decoration:none; }
+  .summary-box { background: linear-gradient(90deg, #1e3a5f 0%, #1a1d27 100%); border-left: 4px solid var(--accent); margin: 20px 24px; padding: 16px 20px; border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 600; color: #e0e7ff; }
+  .container { padding: 0 24px 40px; }
+  .section { margin-bottom: 32px; scroll-margin-top: 16px; }
+  .section-title { font-size: 16px; font-weight: 700; color: var(--accent2); padding: 10px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; display:flex; align-items:center; gap:8px;}
+  .section-num { background: var(--accent); color:#fff; width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0;}
+  table { width: 100%; border-collapse: collapse; background: var(--bg2); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 10px;}
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  td { padding: 8px 10px; border-bottom: 1px solid #1a1d27; font-size: 12.5px; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #1e2233; }
+  .code { font-family: monospace; font-weight: 700; color: var(--blue); font-size: 13px; }
+  .up { color: var(--red); font-weight:700; }
+  .dn { color: var(--green); font-weight:700; }
+  .gap { color: var(--text2); font-style: italic; }
+  .badge { font-size: 10.5px; padding: 2px 7px; border-radius: 4px; display: inline-block; white-space:nowrap;}
+  .b-warn { background: #3a1e1e; color: var(--red); }
+  .b-ok { background: #1e3a2f; color: var(--green); }
+  .b-mix { background: #2a2a3a; color: var(--gold); }
+  .b-gap { background: #1a1d27; color: var(--text2); border:1px dashed var(--border); }
+  .b-new { background:#1a2040; color: var(--accent2); border:1px solid var(--accent2);}
+  .alert-box { background: #2a1a0a; border: 1px solid #7c4a15; border-radius: 10px; padding: 14px 16px; margin-top: 10px; }
+  .alert-box h4 { color: var(--orange); font-size: 13px; margin-bottom: 8px; }
+  .ok-box { background: #0f2a1a; border: 1px solid #1e5a3a; border-radius: 10px; padding: 14px 16px; margin-top: 10px; }
+  .ok-box h4 { color: var(--green); font-size: 13px; margin-bottom: 8px; }
+  .gap-box { background: #1a1d27; border: 1px dashed var(--border); border-radius: 10px; padding: 14px 16px; margin-top: 10px;}
+  .gap-box h4 { color: var(--text2); font-size: 13px; margin-bottom: 8px; }
+  .gap-box ul, .ok-box ul, .alert-box ul { padding-left: 18px; font-size: 12.5px; }
+  .gap-box li { color: var(--text2); padding: 3px 0; }
+  .interp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .interp-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .interp-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--accent2); }
+  .interp-card p { font-size: 12.5px; color: var(--text2); }
+  .verdict-box { background: linear-gradient(90deg,#1a0a2a,#0f1117); border:1px solid var(--purple); border-radius:10px; padding:16px 20px; margin-top:14px;}
+  .verdict-box h4 { color: var(--purple); font-size:14px; margin-bottom:10px;}
+  .verdict-box p { font-size:13px; color:var(--text); line-height:1.8;}
+  .src { font-size: 10.5px; color: var(--text2); margin-top: 4px; }
+  .footer { background: var(--bg3); border-top: 1px solid var(--border); padding: 14px 24px; font-size: 11px; color: var(--text2); }
+  .footer .warn { color: var(--orange); }
+  @media (max-width: 768px) { .interp-grid { grid-template-columns: 1fr; } .container { padding: 0 12px 40px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>美股資金流雙軌週報 <span class="badge b-new">首發週報版</span></h1>
+  <div class="meta">2026年07月09日｜每週固定報告，取代原每日試作版｜資料擷取：美東07/08收盤，各表已標示原始統計日期</div>
+  <div class="nav">
+    <a href="#s1">①總體資金流</a><a href="#s2">②ETF資金流</a><a href="#s3">③CFTC COT</a><a href="#s4">④台灣外資</a><a href="#s5">⑤七大巨頭</a><a href="#s6">⑥綜合研判</a><a href="#s7">⑦方法論</a>
+  </div>
+</div>
+
+<div class="summary-box">
+  本期最需留意：①ICI股票型基金連續第2週流出，方向轉折仍在觀察期 ②CFTC COT最新一週(06/30)出現明確分歧——S&P500持續回補、Nasdaq持續加空，且已排除展倉雜訊確認為真訊號 ③台灣外資07/02-07/03連續2日觸發700億「注意」閾值後賣壓收斂，07/08已降至380億 ④美國實質利率為負(-0.58%)但中國為正(+2.0%)，四大央行政策分歧擴大 ⑤金融/能源/關鍵金屬ETF今日起納入追蹤。
+</div>
+
+<div class="container">
+
+  <div class="section" id="s1">
+    <div class="section-title"><span class="section-num">1</span>美股整體資金流</div>
+    <table>
+      <tr><th>週結束日</th><th>總淨流量</th><th>股票型</th><th>債券型</th><th>ETF淨發行</th><th>備註</th></tr>
+      <tr><td>06/03</td><td class="up">+386.5億</td><td class="up">+67.5億</td><td class="up">+315.5億</td><td class="gap">—</td><td></td></tr>
+      <tr><td>06/10</td><td class="up">+315.3億</td><td class="up">+166.6億</td><td class="up">+182.1億</td><td class="gap">—</td><td></td></tr>
+      <tr><td>06/17</td><td class="up">+663.3億</td><td class="up">+559.7億</td><td class="up">+164.6億</td><td class="gap">—</td><td>股票型5週最高</td></tr>
+      <tr><td>06/24</td><td class="dn">-18.9億</td><td class="dn">-130.1億</td><td class="up">+124.6億</td><td class="gap">—</td><td><span class="badge b-warn">股票型轉折第1週</span></td></tr>
+      <tr><td>07/01</td><td class="up">+34.3億</td><td class="dn">-102.2億</td><td class="up">+186.8億</td><td class="up">+323.0億</td><td><span class="badge b-warn">股票型連續第2週流出</span></td></tr>
+    </table>
+    <div class="alert-box">
+      <h4>⚠️ 股票型基金連續2週流出，但ETF淨發行同時大增——訊號不純粹</h4>
+      06/17當週股票型基金才創5週最大流入(+559.7億)，隨即連續2週轉為流出，是本期最明確的方向轉折。但同一週ETF淨發行卻暴增至323.0億美元（5週最高），代表資金可能只是從「主動型共同基金」轉往「被動型ETF」，而非真正離開股市——這種「基金轉ETF」的內部轉移在稅務季或再平衡期很常見，不宜直接解讀為看空。建議下週(07/08當週數據，約07/15公布)確認股票型是否連續第3週流出，若是則轉折訊號會更可信。
+    </div>
+    <table>
+      <tr><th>指標</th><th>最新數值</th><th>統計期間</th></tr>
+      <tr><td>FINRA融資餘額(Margin Debt)</td><td class="up">$1.42兆美元（單月+8.5%，年增+53.7%，歷史新高）</td><td>2026年5月</td></tr>
+      <tr><td>美國M2貨幣供給</td><td>$23.05兆美元</td><td>2026年5月</td></tr>
+      <tr><td>融資餘額／美國M2</td><td class="up">6.16%</td><td>2026年5月，比率創近年新高，槓桿相對貨幣基礎偏熱</td></tr>
+      <tr><td>美股總市值(Wilshire5000)</td><td>$75.06兆美元</td><td>2026/07/02</td></tr>
+      <tr><td>四大央行(Fed/ECB/BOJ/PBOC)M2合計</td><td>約$98.6兆美元（估算，各國口徑不一+匯率波動，僅供參考）</td><td>2026年上半年</td></tr>
+      <tr><td>美股市值／四大央行M2</td><td>約76.1%</td><td>全球流動性角度的另一種「巴菲特指標」，越高代表美股相對全球流動性被推得越高</td></tr>
+    </table>
+    <table>
+      <tr><th>央行</th><th>政策利率</th><th>CPI年增率</th><th>實質利率</th><th>解讀</th></tr>
+      <tr><td>Fed(美國)</td><td>3.50–3.75%</td><td>4.2%(5月)</td><td class="dn">約-0.58%</td><td>負實質利率，寬鬆傾向</td></tr>
+      <tr><td>ECB(歐元區)</td><td>2.25%</td><td>2.8%(6月)</td><td class="dn">約-0.55%</td><td>負實質利率</td></tr>
+      <tr><td>BOJ(日本)</td><td>1.00%</td><td>1.6%(東京核心CPI，6月，全國值落後約2-3週未公布)</td><td class="dn">約-0.60%</td><td>負實質利率，仍屬歷史最緊但仍為負</td></tr>
+      <tr><td>PBOC(中國)</td><td>1年期LPR 3.00%</td><td>1.0%(6月)</td><td class="up">約+2.00%</td><td>唯一正實質利率，四大央行政策分歧擴大</td></tr>
+    </table>
+    <div class="src">政策利率/CPI來源：各國央行官網、BLS、Eurostat、投行綜整報導，07/09查詢；美股市值/四大央行M2為估算比率，精確度中等，建議日後有更權威數據源時替換。已依你指示移除EPFR全球資金流與IIF新興市場資金流兩項（訂閱制/半年報頻率不適合週報）。</div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-title"><span class="section-num">2</span>ETF資金流（第1週，新序列起點）</div>
+    <table>
+      <tr><th>ETF</th><th>類別</th><th>今日%</th><th>成交額</th><th>備註</th></tr>
+      <tr><td class="code">QQQ</td><td>大盤/科技</td><td class="up">+0.28%</td><td>248.0億</td><td>來自每日板塊流動報告</td></tr>
+      <tr><td class="code">SPY</td><td>大盤</td><td class="dn">-0.31%</td><td>326.1億</td><td>來自每日板塊流動報告</td></tr>
+      <tr><td class="code">IWM</td><td>大盤(小型股)</td><td class="dn">-0.91%</td><td>69.2億</td><td>新增追蹤</td></tr>
+      <tr><td class="code">SOXX</td><td>半導體</td><td class="up">+1.87%</td><td>40.4億</td><td>新增追蹤，未進當日成交額榜前10</td></tr>
+      <tr><td class="code">SMH</td><td>半導體</td><td class="up">+1.99%</td><td>55.5億</td><td>新增追蹤，未進當日成交額榜前10</td></tr>
+      <tr><td class="code">XLK</td><td>科技</td><td class="up">+1.24%</td><td>19.1億</td><td>新增追蹤</td></tr>
+      <tr><td class="code">XLF</td><td>金融</td><td class="dn">-1.53%</td><td>13.8億</td><td>本期新增板塊</td></tr>
+      <tr><td class="code">XLE</td><td>能源</td><td class="up">+1.76%</td><td>22.1億</td><td>本期新增板塊</td></tr>
+      <tr><td class="code">COPX</td><td>關鍵金屬(銅礦)</td><td class="dn">-2.13%</td><td>1.97億</td><td>本期新增板塊</td></tr>
+      <tr><td class="code">REMX</td><td>關鍵金屬(稀土)</td><td class="dn">-2.54%</td><td>0.71億</td><td>本期新增板塊</td></tr>
+    </table>
+    <div class="ok-box">
+      <h4>✅ 金融/能源/關鍵金屬ETF挑選邏輯</h4>
+      金融選XLF（S&P500金融股，涵蓋銀行+支付+保險，最具代表性的單一金融板塊ETF）；能源選XLE（S&P500能源股，前兩大持股ExxonMobil/Chevron即占約35%，油氣龍頭代理性最強）；關鍵金屬因主題較分散，選兩檔互補：COPX(銅礦，對應AI資料中心電網建設與電動車需求)、REMX(稀土及戰略金屬，對應中國出口管制與國防/半導體供應鏈題材)。若之後想再精簡，COPX+REMX可考慮合併看PICK(全球金屬礦業綜合ETF)，但會失去銅/稀土各自的主題辨識度，建議先維持兩檔分開追蹤。
+    </div>
+    <div class="alert-box">
+      <h4>⚠️ 這是新序列第1筆，趨勢判讀要等下週才有意義</h4>
+      本表只有今天(07/09)一筆數據，尚無法判斷淨流量趨勢。從今天起，每日板塊流動報告會固定把這10檔的當日%與成交額寫入 <code>ETF週序列追蹤.csv</code>，累積4-6週後這裡才會顯示週對週的資金流向變化。今日唯一能看的訊號是「今日誰漲誰跌」：半導體(SOXX/SMH)與科技(XLK)今日走強，金融(XLF)與關鍵金屬(COPX/REMX)走弱，小型股(IWM)也走弱——顯示今日資金偏好集中在AI/科技鏈，防禦性/景氣循環類資產相對弱勢。
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-title"><span class="section-num">3</span>CFTC COT期貨部位 × 指數關係（7週歷史）</div>
+    <table>
+      <tr><th>統計日</th><th>SPY收盤</th><th>SPY週漲跌</th><th>S&P500 Lev Funds淨部位</th><th>週變化</th></tr>
+      <tr><td>05/19</td><td>733.73</td><td>—</td><td class="dn">-401,554</td><td>—</td></tr>
+      <tr><td>05/26</td><td>750.59</td><td class="up">+2.30%</td><td class="dn">-457,780</td><td class="dn">加空 -56,226</td></tr>
+      <tr><td>06/02</td><td>759.57</td><td class="up">+1.20%</td><td class="dn">-500,732</td><td class="dn">加空 -42,952</td></tr>
+      <tr><td>06/09</td><td>737.05</td><td class="dn">-2.97%</td><td class="dn">-451,586</td><td class="up">回補 +49,146</td></tr>
+      <tr><td>06/16</td><td>750.33</td><td class="up">+1.80%</td><td class="dn">-515,520</td><td class="dn">加空 -63,934</td></tr>
+      <tr><td>06/23</td><td>733.58</td><td class="dn">-2.23%</td><td class="dn">-373,468</td><td class="up">大幅回補 +142,052<br><span class="badge b-warn">展倉雜訊</span></td></tr>
+      <tr><td>06/30</td><td>746.77</td><td class="up">+1.80%</td><td class="dn">-360,469</td><td class="up">續回補 +12,999</td></tr>
+    </table>
+    <table>
+      <tr><th>統計日</th><th>QQQ收盤</th><th>QQQ週漲跌</th><th>Nasdaq Lev Funds淨部位</th><th>週變化</th></tr>
+      <tr><td>05/19</td><td>701.53</td><td>—</td><td class="dn">-45,371</td><td>—</td></tr>
+      <tr><td>05/26</td><td>730.28</td><td class="up">+4.10%</td><td class="dn">-51,679</td><td class="dn">加空 -6,308</td></tr>
+      <tr><td>06/02</td><td>746.16</td><td class="up">+2.17%</td><td class="dn">-53,650</td><td class="dn">加空 -1,971</td></tr>
+      <tr><td>06/09</td><td>707.83</td><td class="dn">-5.14%</td><td class="dn">-34,306</td><td class="up">回補 +19,344</td></tr>
+      <tr><td>06/16</td><td>729.86</td><td class="up">+3.11%</td><td class="dn">-28,154</td><td class="up">續回補 +6,152</td></tr>
+      <tr><td>06/23</td><td>713.65</td><td class="dn">-2.22%</td><td class="dn">-51,062</td><td class="dn">加空 -22,908<br><span class="badge b-warn">展倉雜訊</span></td></tr>
+      <tr><td>06/30</td><td>736.40</td><td class="up">+3.19%</td><td class="dn">-68,617</td><td class="dn">加空 -17,555</td></tr>
+    </table>
+    <div class="src">來源：CFTC官方Socrata API逐週查詢 + SPY/QQQ週收盤價。06/30為最新一期（07/07當週報告尚未公布，CFTC通常延後3-4個交易日發布）。</div>
+    <div class="alert-box">
+      <h4>⚠️ 最新一週(06/30)出現明確分歧：S&P500續回補、Nasdaq續加空，且已排除展倉雜訊</h4>
+      06/30當週兩份合約未平倉量都已回歸正常區間（S&P500 197萬口、Nasdaq 27.9萬口），證實06/23那週的巨幅波動確實是6月季度展倉雜訊，06/30數據才是「乾淨」讀數。乾淨數據顯示：<b>S&P500 Leveraged Funds連續2週回補空單（+142,052、+12,999），Nasdaq卻連續2週加碼空單（-22,908、-17,555）</b>，即便兩者對應的SPY/QQQ都在06/30當週同步上漲——這代表槓桿基金對大盤與科技股的態度出現真實分歧，不是雜訊。
+    </div>
+    <div class="gap-box">
+      <h4>解讀時的重要提醒：Leveraged Funds淨空不等於「看空」</h4>
+      觀察整個7週窗口會發現一個規律：S&P500的Leveraged Funds經常在SPY上漲週加空、下跌週回補（05/26、06/02、06/16皆是「漲週加空」），這個模式更符合「股票多空基金用期指做市場中性對沖」的結構性行為——基金經理人的個股多頭部位增加時，會同步加大期指空頭來對沖市場beta，未必代表方向性看空大盤。相較之下，06/30這週Nasdaq在QQQ大漲情況下仍逆勢加空，且是連續第2週背離獨立於S&P500模式之外，這種「該對沖時沒對沖、不該加空時加空」的異常，才是真正值得留意的訊號，建議下期(07/07當週，約07/14公布)持續追蹤是否延續。
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-title"><span class="section-num">4</span>台灣外資買賣超週紀錄</div>
+    <table>
+      <tr><th>日期</th><th>外資買賣超</th><th>3日累計</th><th>閾值標註</th><th>備註</th></tr>
+      <tr><td>07/01</td><td class="up">+323.76億</td><td>—</td><td>—</td><td>月初資金回補</td></tr>
+      <tr><td>07/02</td><td class="dn">-890.47億</td><td>—</td><td><span class="badge b-warn">注意</span></td><td>單日大賣，觸發700億注意閾值</td></tr>
+      <tr><td>07/03</td><td class="dn">-777.80億</td><td class="dn">-1344.51億</td><td><span class="badge b-warn">注意</span></td><td>連續第2日觸發注意閾值</td></tr>
+      <tr><td>07/07</td><td class="dn">-547.31億</td><td class="dn">-2215.58億</td><td></td><td>賣超力道收斂，07/04-05為假日</td></tr>
+      <tr><td>07/08</td><td class="dn">-379.49億</td><td class="dn">-1704.60億</td><td></td><td>賣超力道持續收斂，連續4個交易日淨賣超</td></tr>
+    </table>
+    <div class="ok-box">
+      <h4>✅ 閾值規則已建立：700億=注意／1100億=趨勢改變</h4>
+      本週兩日(07/02、07/03)觸發700億「注意」閾值，但都未達1100億「趨勢改變」閾值，且07/07、07/08賣壓已明顯收斂（從890億降至380億），屬於「短線獲利了結後降溫」而非「趨勢性撤離」的訊號組合。累積CSV已建立在 <code>台灣外資買賣超週紀錄.csv</code>，之後每週固定append，滿4-6週後可以看出季節性/趨勢性買賣超規律（例如是否每月初回補、月中出貨的週期模式）。
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-title"><span class="section-num">5</span>七大巨頭資金流代理指標（07/06查詢，沿用上期）</div>
+    <table>
+      <tr><th>個股</th><th>Put/Call量比</th><th>Put/Call未平倉比</th><th>籌碼解讀</th><th>13F機構動向</th></tr>
+      <tr><td class="code">NVDA</td><td class="up">0.48</td><td class="up">0.83</td><td><span class="badge b-ok">偏多</span></td><td>Q1'26持股比重↓6.04pp；減碼家數(3872)遠多於加碼(1286)</td></tr>
+      <tr><td class="code">AAPL</td><td class="up">0.54</td><td class="up">0.69</td><td><span class="badge b-ok">偏多</span></td><td>2025/12持股比重61.6%(前值62.3%)</td></tr>
+      <tr><td class="code">MSFT</td><td class="up">0.26</td><td class="up">0.44</td><td><span class="badge b-ok">強烈偏多</span></td><td class="gap">數字未核實不採信</td></tr>
+      <tr><td class="code">GOOGL</td><td class="up">0.52</td><td class="up">0.66</td><td><span class="badge b-ok">偏多</span></td><td class="gap">未查到</td></tr>
+      <tr><td class="code">AMZN</td><td class="up">0.46</td><td class="up">0.63</td><td><span class="badge b-ok">偏多</span></td><td class="gap">未查到</td></tr>
+      <tr><td class="code">META</td><td class="up">0.42</td><td class="up">0.42</td><td><span class="badge b-ok">強烈偏多</span></td><td class="gap">未查到</td></tr>
+      <tr><td class="code">TSLA</td><td class="dn">0.64</td><td class="dn">0.72</td><td><span class="badge b-mix">溫和偏多</span></td><td class="gap">未查到</td></tr>
+    </table>
+    <div class="src">此表為07/06數據延續使用，Put/Call會隨盤中變動，下週報告將重新查詢更新。</div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-title"><span class="section-num">6</span>綜合研判</div>
+    <div class="interp-grid">
+      <div class="interp-card">
+        <h4>總體資金面</h4>
+        <p>ICI股票型基金連續2週流出但ETF淨發行同步大增，較可能是資金結構轉移而非離場；融資餘額/M2比率創新高顯示槓桿情緒仍熱，兩者合看是「表面謹慎、底層仍熱」。</p>
+      </div>
+      <div class="interp-card">
+        <h4>期貨部位面</h4>
+        <p>排除展倉雜訊後，最新一週S&P500與Nasdaq的Leveraged Funds部位方向真實分歧：大盤持續回補、科技持續加空，且Nasdaq這次是「漲週加空」打破先前的對沖模式，值得下週確認是否延續。</p>
+      </div>
+      <div class="interp-card">
+        <h4>全球流動性面</h4>
+        <p>四大央行僅中國維持正實質利率(+2.0%)，美歐日均為負，政策分歧可能持續支撐風險資產；美股市值/四大央行M2約76%，處於歷史相對高檔，是額外一個「非GDP基礎」的估值警示角度。</p>
+      </div>
+      <div class="interp-card">
+        <h4>台灣外資面</h4>
+        <p>07月初出現2日「注意」等級賣超後迅速收斂，尚未觸及「趨勢改變」閾值，暫判讀為短線出貨而非中期撤離，需持續累積週紀錄才能確認季節性規律。</p>
+      </div>
+    </div>
+    <div class="verdict-box">
+      <h4>🦊 財經小狐總結</h4>
+      <p>本期最值得放進觀察清單的是COT期貨部位的「大盤回補、科技加空」分歧——這是7週以來首次看到兩者背離且已排除雜訊干擾，若下期(07/14公布)延續，可能代表機構開始對科技股估值轉趨謹慎，即便價格仍在創高。搭配ICI股票型基金連續流出、融資餘額創新高但比率同樣來到高檔，總體圖像是「槓桿與估值都在高檔，但機構籌碼開始出現分歧」，屬於需要提高警覺但尚未達到明確轉空訊號的階段。</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-title"><span class="section-num">7</span>方法論與追蹤檔案</div>
+    <table>
+      <tr><th>追蹤檔案</th><th>用途</th><th>更新頻率</th></tr>
+      <tr><td>ETF週序列追蹤.csv</td><td>SPY/IWM/QQQ/SOXX/SMH/XLK/XLF/XLE/COPX/REMX每日%與成交額</td><td>每日（隨每日板塊流動報告）</td></tr>
+      <tr><td>台灣外資買賣超週紀錄.csv</td><td>外資買賣超逐日紀錄+閾值標註(700億注意/1100億趨勢改變)</td><td>每週報告時累積</td></tr>
+      <tr><td>ICI週報歷史.csv</td><td>ICI週度淨流量歷史，供連續週方向性判斷</td><td>每週（ICI週五公布）</td></tr>
+      <tr><td>CFTC_COT歷史.csv</td><td>E-mini S&P500/Nasdaq Mini週度部位歷史，供多空轉折判斷</td><td>每週（CFTC週五公布）</td></tr>
+    </table>
+    <div class="gap-box">
+      <h4>已依指示調整的項目</h4>
+      <ul>
+        <li>移除EPFR全球資金流、IIF新興市場資金流兩項（訂閱制/半年報頻率，不適合週報）。</li>
+        <li>FINRA融資餘額已同步併入模式一診斷儀表板C欄位（C4），以後「診斷」觸發詞會自動包含此項。</li>
+        <li>每日板塊流動報告排程已更新，今日起強制列出10檔指標ETF，累積4-6週後即可在此週報顯示真正的週度淨流量趨勢，不再需要依賴抓不到的外部flow圖表。</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<div class="footer">
+  <span>本報告為每週固定報告第1期，取代先前的每日試作版 · 財經小狐產出</span>
+  <span class="warn">⚠ 請勿作為單一決策依據，部分數據源自搜尋引擎片段，精確度已標註</span>
+</div>
+</body>
+</html>

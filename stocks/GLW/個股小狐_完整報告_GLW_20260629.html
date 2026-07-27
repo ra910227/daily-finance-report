@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>個股小狐｜GLW 完整報告（三模式）</title>
+<style>
+:root{
+  --bg:#0b0e14;--panel:#11151f;--panel2:#161b28;--border:#232a3a;
+  --text:#e6e9f0;--muted:#8b93a7;--accent:#76b9ff;--green:#3ddc84;
+  --red:#ff6b6b;--yellow:#ffc857;--purple:#b794f6;--orange:#ff9f43;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;line-height:1.6;}
+.hero{padding:40px 24px;background:linear-gradient(135deg,#1a0e2a,#0a1e3a,#0e2a18 100%);border-bottom:1px solid var(--border);}
+.hero h1{margin:0 0 4px;font-size:27px;}
+.hero .tagline{color:var(--muted);font-size:13px;margin-bottom:14px;}
+.hero .stats{display:flex;gap:22px;flex-wrap:wrap;}
+.hero .stat .label{font-size:11px;color:var(--muted);}
+.hero .stat .val{font-size:18px;font-weight:700;}
+.warning-banner{background:rgba(255,107,107,0.12);border:1px solid var(--red);border-radius:8px;padding:10px 16px;margin:12px 24px 0;max-width:1032px;font-size:13px;color:var(--red);}
+.mode-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-right:6px;}
+.mode1{background:rgba(118,185,255,0.15);color:var(--accent);}
+.mode2{background:rgba(255,200,87,0.15);color:var(--yellow);}
+.mode3{background:rgba(61,220,132,0.15);color:var(--green);}
+.toc{position:sticky;top:0;background:rgba(11,14,20,0.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:9px 24px;display:flex;gap:12px;flex-wrap:wrap;font-size:12px;z-index:10;}
+.toc a{color:var(--muted);text-decoration:none;white-space:nowrap;}
+.toc a:hover{color:var(--accent);}
+.toc .sep{color:var(--border);}
+.section{max-width:1080px;margin:0 auto;padding:30px 24px;}
+.mode-header{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.mode-header h2{margin:0;font-size:22px;}
+.section h3{font-size:17px;border-left:4px solid var(--accent);padding-left:10px;margin-bottom:12px;}
+.section h4{font-size:13px;color:var(--accent);margin-bottom:8px;}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:14px;}
+th,td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:left;}
+th{color:var(--muted);font-weight:600;background:var(--panel2);}
+tr:hover{background:var(--panel2);}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;}
+.badge.ok{background:rgba(61,220,132,0.15);color:var(--green);}
+.badge.warn{background:rgba(255,200,87,0.15);color:var(--yellow);}
+.badge.bad{background:rgba(255,107,107,0.15);color:var(--red);}
+.badge.blue{background:rgba(118,185,255,0.15);color:var(--accent);}
+.badge.orange{background:rgba(255,159,67,0.15);color:var(--orange);}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;}
+.cards2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px;}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px;}
+.card h5{margin:0 0 5px;font-size:13px;}
+.card p{margin:0;font-size:12px;color:var(--muted);}
+.scenario-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px;}
+.scenario-card.bear{border-top:3px solid var(--red);}
+.scenario-card.base{border-top:3px solid var(--accent);}
+.scenario-card.bull{border-top:3px solid var(--green);}
+.scenario-card h5{margin:0 0 7px;font-size:13px;}
+.scenario-card ul{padding-left:16px;margin:5px 0;font-size:12px;color:var(--muted);}
+.scenario-card .target{font-size:16px;font-weight:700;margin-top:7px;}
+.moat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px;}
+.moat-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:11px;text-align:center;}
+.moat-card .mname{font-size:11px;color:var(--muted);margin-bottom:3px;}
+.moat-card .stars{font-size:15px;}
+.ratio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;}
+.ratio-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px;}
+.ratio-card.ok{border-top:3px solid var(--green);}
+.ratio-card.warn{border-top:3px solid var(--yellow);}
+.ratio-card.bad{border-top:3px solid var(--red);}
+.ratio-card .rname{font-size:11px;color:var(--muted);margin-bottom:4px;}
+.ratio-card .rval{font-size:19px;font-weight:700;}
+.ratio-card .rwarn{font-size:11px;color:var(--muted);margin-top:4px;}
+.action-box{background:linear-gradient(135deg,#0e2a1d,#0e1e2e);border:1px solid var(--green);border-radius:12px;padding:18px;margin-top:10px;}
+.action-box h4{margin-top:0;color:var(--green);font-size:15px;}
+.action-box .row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--border);font-size:13px;gap:10px;}
+.action-box .row:last-child{border-bottom:none;}
+.action-box .row .lbl{color:var(--muted);white-space:nowrap;min-width:90px;}
+.caution-box{background:linear-gradient(135deg,#2a0e0e,#1e120e);border:1px solid var(--red);border-radius:12px;padding:18px;margin-top:10px;}
+.caution-box h4{margin-top:0;color:var(--red);font-size:15px;}
+.caution-box .row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--border);font-size:13px;gap:10px;}
+.caution-box .row:last-child{border-bottom:none;}
+.caution-box .row .lbl{color:var(--muted);white-space:nowrap;min-width:90px;}
+.note{background:var(--panel2);border-left:3px solid var(--purple);padding:9px 12px;border-radius:6px;font-size:12px;color:var(--muted);margin-top:8px;}
+.risk-card{background:var(--panel);border-left:4px solid var(--red);border-radius:8px;padding:10px 12px;margin-bottom:8px;}
+.risk-card h5{margin:0 0 3px;font-size:13px;color:var(--red);}
+.risk-card p{margin:0;font-size:12px;color:var(--muted);}
+.divider{border:none;border-top:2px solid var(--border);margin:10px 0 28px;}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.sum-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px;text-align:center;}
+.sum-card .sval{font-size:19px;font-weight:700;color:var(--accent);}
+.sum-card .slabel{font-size:11px;color:var(--muted);margin-top:3px;}
+footer{padding:26px 24px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);max-width:1080px;margin:0 auto;}
+@media(max-width:760px){.cards3,.moat-grid,.ratio-grid{grid-template-columns:1fr 1fr;}.summary-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div style="margin-bottom:8px;">
+    <span class="mode-badge mode1">深度研究</span>
+    <span class="mode-badge mode2">財報解析</span>
+    <span class="mode-badge mode3">財務健檢</span>
+  </div>
+  <h1>Corning Incorporated (GLW) ｜個股小狐完整報告</h1>
+  <div class="tagline">分析日期：2026-06-29　｜　最新財報：Q1 2026（2026-04-28）　｜　象限：<span style="color:var(--orange);font-weight:700;">轉型成長股（傳統製造→AI光纖基礎設施）</span>　｜　Thesis：<span style="color:var(--yellow);font-weight:700;">3.5 / 5⚠️（故事成立但估值過熱）</span></div>
+  <div class="stats" style="margin-top:14px;">
+    <div class="stat"><div class="label">現價（2026-06-29）</div><div class="val" style="color:var(--orange);">$255（歷史高點）</div></div>
+    <div class="stat"><div class="label">市值</div><div class="val">~$215B</div></div>
+    <div class="stat"><div class="label">TTM PE（GAAP）</div><div class="val" style="color:var(--red);">82x</div></div>
+    <div class="stat"><div class="label">分析師均目標價</div><div class="val" style="color:var(--red);">~$202（低於現價25%！）</div></div>
+    <div class="stat"><div class="label">52週高/低</div><div class="val">$258.8 / $51.3</div></div>
+    <div class="stat"><div class="label">近1年漲幅</div><div class="val" style="color:var(--green);">+288%</div></div>
+  </div>
+</div>
+<div class="warning-banner">
+  ⚠️ <strong>估值警示：</strong>現價$255較分析師共識目標$202高出約26%，TTM PE 82x、Forward PE ~77x均處歷史高位。本報告將完整呈現AI光纖需求的真實性，同時客觀評估估值過熱風險。
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <span style="color:var(--accent);font-weight:700;">深度研究</span>
+  <a href="#intro">基本介紹</a><a href="#engine">業務引擎</a><a href="#thesis">Thesis</a><a href="#competition">競爭</a><a href="#moat">象限/護城河</a>
+  <span class="sep">｜</span>
+  <span style="color:var(--yellow);font-weight:700;">財報解析</span>
+  <a href="#beatmiss">Beat/Miss</a><a href="#guidance">指引</a><a href="#reaction">股價反應</a><a href="#dcf">DCF</a><a href="#eps">EPS/PE</a><a href="#comps">Comps</a><a href="#analyst">投行目標</a>
+  <span class="sep">｜</span>
+  <span style="color:var(--green);font-weight:700;">財務健檢</span>
+  <a href="#fsdata">財務數據</a><a href="#ratios">六大比率</a><a href="#debt">債務</a><a href="#capex">CapEx</a><a href="#peercomp">同業</a><a href="#diag">診斷</a>
+</div>
+
+<!-- ================================================================
+     MODE 1 深度研究
+     ================================================================ -->
+<div class="section">
+  <div class="mode-header"><span class="mode-badge mode1">MODE 1</span><h2>公司深度研究</h2></div>
+
+  <h3 id="intro">① 基本介紹</h3>
+  <div class="summary-grid">
+    <div class="sum-card"><div class="sval">~$215B</div><div class="slabel">市值</div></div>
+    <div class="sum-card"><div class="sval">$16.41B</div><div class="slabel">2025 年度核心營收</div></div>
+    <div class="sum-card"><div class="sval">20.2%</div><div class="slabel">Q1 2026 核心營業利益率</div></div>
+    <div class="sum-card"><div class="sval">$1.72B</div><div class="slabel">2025 FCF（調整後）</div></div>
+    <div class="sum-card"><div class="sval">$6B+</div><div class="slabel">Meta超大型協議（多年）</div></div>
+    <div class="sum-card"><div class="sval">$3.2B</div><div class="slabel">NVIDIA投資/合作協議</div></div>
+    <div class="sum-card"><div class="sval">+288%</div><div class="slabel">近1年股價漲幅</div></div>
+    <div class="sum-card"><div class="sval">$30B</div><div class="slabel">Springboard 2028年目標營收</div></div>
+  </div>
+  <p>Corning 創立於1851年，是擁有170年歷史的特殊玻璃與陶瓷材料製造商。產品涵蓋光纖/光纜、LCD玻璃基板、藥用玻璃、汽車觸媒基材等。近年藉由AI資料中心對高速光纖連接的爆炸性需求，從「景氣循環型工業股」快速轉型為「AI基礎設施受益股」，2026年股價大漲288%，催化劑為NVIDIA $3.2B投資協議與Meta $6B超大型合約。</p>
+
+  <h3 id="engine">② 業務引擎分析</h3>
+  <table>
+    <tr><th>業務線</th><th>Q1 2026 營收</th><th>YoY</th><th>佔比</th><th>護城河</th></tr>
+    <tr><td><b>Optical Communications</b></td><td>$1.85B</td><td><b>+36%</b></td><td>~43%</td><td>光纖技術60年積累、NVIDIA/Meta/Amazon長約、3新廠NC+TX</td></tr>
+    <tr><td><b>Glass Innovations（Display+Specialty）</b></td><td>$1.42B</td><td>+1%</td><td>~33%</td><td>OLED/LCD玻璃基板寡頭、Gorilla Glass品牌（Apple/三星）</td></tr>
+    <tr><td><b>Solar</b></td><td>$370M</td><td><b>+80%</b></td><td>~8%</td><td>Hemlock多晶矽；太陽能矽晶圓製造</td></tr>
+    <tr><td><b>Automotive</b></td><td>$437M</td><td>-1%</td><td>~10%</td><td>觸媒轉化器基材市佔第一、汽車顯示玻璃</td></tr>
+    <tr><td><b>Life Sciences & Other</b></td><td>~$250M（估）</td><td>—</td><td>~6%</td><td>藥品玻璃容器、實驗器皿</td></tr>
+  </table>
+  <h4>近4年財務摘要（年度，核心/非GAAP數據）</h4>
+  <table>
+    <tr><th>年度</th><th>核心營收</th><th>YoY</th><th>核心營業利益率</th><th>核心EPS</th><th>FCF（調整後）</th></tr>
+    <tr><td>2022</td><td>~$14.5B（估）</td><td>—</td><td>~17%</td><td>⚠️ 估~$1.80</td><td>—</td></tr>
+    <tr><td>2023</td><td>~$13.0B（估）</td><td>-10%（低谷）</td><td>~16%</td><td>⚠️ 估~$1.65</td><td>⚠️ 估~$0.9B</td></tr>
+    <tr><td>2024</td><td>~$14.5B（估）</td><td>回升</td><td>~18%</td><td>~$1.94（GAAP $1.87）</td><td>⚠️ 估~$1.3B</td></tr>
+    <tr><td>2025</td><td>$16.41B</td><td>+13%</td><td>20.2%（Q4+）</td><td>$2.52（核心）/ $1.87（GAAP）</td><td>$1.72B ✅</td></tr>
+  </table>
+  <div class="note">2022-2023年為Corning的低谷期（顯示器需求大幅下滑、光纖需求疲軟）；2024年起受惠於AI資料中心光纖需求復甦，2025年大幅加速。核心EPS指剔除股票薪酬、攤提等調整後數字。</div>
+
+  <h3 id="thesis">③ 核心 Thesis 與未來性</h3>
+  <div class="cards2">
+    <div class="card"><h5><span class="badge ok">✅</span> AI資料中心光纖需求是真實且長期的結構性需求</h5><p>每個GPU叢集機架需要數千條光纖連接；NVIDIA NVLink轉向光互連是確定性趨勢。Corning 60年光纖技術積累無法複製。</p></div>
+    <div class="card"><h5><span class="badge ok">✅</span> 超大型合約提供可見度</h5><p>Meta $6B多年合約、NVIDIA $3.2B投資協議（含股份收購）、Q1 2026再簽兩家規模相當的hyperscaler合約——收入可見度超過3年。</p></div>
+    <div class="card"><h5><span class="badge ok">✅</span> Springboard計畫：$30B 2028、$40B 2030</h5><p>從$16.4B（2025）到$30B（2028）=3年CAGR約22%，並推出「光子學市場接入平台（MAP）」定位AI光纖標準基礎設施供應商。</p></div>
+    <div class="card"><h5><span class="badge warn">⚠️</span> 估值已過度透支未來3年的成長</h5><p>PE 82x、Forward PE 77x、股價高於分析師共識目標25%。市場已將Springboard計畫「全部兌現」定價，不容任何訂單延遲或需求放緩。</p></div>
+    <div class="card"><h5><span class="badge warn">⚠️</span> 顯示器玻璃端仍是拖累</h5><p>Glass Innovations（前Display段）Q1 2026僅+1%，全球LCD需求疲軟，中國友達/群創競爭持續壓縮毛利，為整體成長的拖累段。</p></div>
+    <div class="card"><h5><span class="badge bad">❌</span> 新建產能投入期將壓縮短期FCF</h5><p>3座新廠NC+TX建設成本龐大，未來2年CapEx大增，FCF短期承壓，與高PE形成矛盾（成長中無法同時擁有高FCF Yield）。</p></div>
+  </div>
+  <div class="risk-card"><h5>風險一：AI光纖需求前置或延遲</h5><p>觸發條件：超大型客戶資本支出計畫延遲或削減光纖採購；影響：Optical Communications YoY從+36%驟降至個位數，股價可能腰斬。嚴重度：🔴 高（高估值放大下行風險）</p></div>
+  <div class="risk-card"><h5>風險二：顯示器玻璃端持續拖累</h5><p>觸發條件：OLED/LCD市場需求再度下滑；影響：Glass Innovations段侵蝕整體毛利率，壓縮盈利成長。嚴重度：🟡 中</p></div>
+  <div class="risk-card"><h5>風險三：中國光纖廠低價競爭</h5><p>觸發條件：中國廠商（長飛、烽火）以低價搶攻美國以外市場；影響：Optical Communications毛利率壓縮，難以維持高定價能力。嚴重度：🟡 中</p></div>
+
+  <h3 id="competition">④ 競爭格局</h3>
+  <table>
+    <tr><th>戰場</th><th>競爭者</th><th>競爭者優勢</th><th>對GLW威脅度</th></tr>
+    <tr><td>光纖/光纜</td><td>長飛光纖（中國）、CommScope、Prysmian</td><td>成本優勢（中國廠）；Prysmian歐洲規模</td><td>🟡 中（美國本土製造政策保護）</td></tr>
+    <tr><td>LCD玻璃基板</td><td>NEG（日本）、AGC（日本）、彩虹光電（中國）</td><td>中日廠商低成本生產，韓廠技術同水平</td><td>🟡 中（已面臨毛利壓縮）</td></tr>
+    <tr><td>藥品玻璃</td><td>Schott AG（德）、SGD Pharma</td><td>歐洲品質認證標準</td><td>🟢 低（GLW市佔穩定）</td></tr>
+    <tr><td>汽車觸媒基材</td><td>NGK Insulators（日本）</td><td>日本技術積累</td><td>🟢 低（雙寡頭市場）</td></tr>
+  </table>
+
+  <h3 id="moat">⑤ 成長象限與護城河</h3>
+  <table>
+    <tr><th>判斷依據</th><th>說明</th><th>評分</th></tr>
+    <tr><td>成長動能</td><td>Optical +36%、Solar +80%，但Display僅+1%，整體加權YoY ~+18%</td><td>轉型成長段加速</td></tr>
+    <tr><td>週期性</td><td>顯示器玻璃高度週期性，光纖段受制資本支出週期</td><td>複合型（周期+成長）</td></tr>
+    <tr><td>估值特性</td><td>PE 82x，股價定價轉型成功，不符合傳統價值框架</td><td>高風險成長型定價</td></tr>
+  </table>
+  <p style="color:var(--orange);font-weight:600;">象限：<span style="color:var(--text);">轉型成長股（Turnaround + Growth）→ 需光纖需求長期兌現方能支撐估值；以當前PE看，不符合安全邊際框架</span></p>
+  <div class="moat-grid">
+    <div class="moat-card"><div class="mname">不可替代性</div><div class="stars">⭐⭐⭐⭐</div></div>
+    <div class="moat-card"><div class="mname">網路效應</div><div class="stars">⭐⭐½</div></div>
+    <div class="moat-card"><div class="mname">客戶黏著度</div><div class="stars">⭐⭐⭐½</div></div>
+    <div class="moat-card"><div class="mname">成本優勢</div><div class="stars">⭐⭐⭐</div></div>
+    <div class="moat-card"><div class="mname">規模效應</div><div class="stars">⭐⭐⭐½</div></div>
+  </div>
+  <p style="text-align:center;color:var(--accent);font-weight:700;">護城河綜合評分：3.3 / 5 ★（相對光纖技術壁壘強，但顯示器端護城河一般）</p>
+</div>
+
+<hr class="divider">
+
+<!-- ================================================================
+     MODE 2 財報解析
+     ================================================================ -->
+<div class="section">
+  <div class="mode-header"><span class="mode-badge mode2">MODE 2</span><h2>最新財報解析（Q1 2026）</h2></div>
+
+  <h3 id="beatmiss">① Beat / Miss 對照表</h3>
+  <table>
+    <tr><th>項目</th><th>實際值</th><th>市場預期</th><th>差異</th><th>YoY</th><th>判定</th></tr>
+    <tr><td>核心總營收</td><td>$4.35B</td><td>$4.29B</td><td>+1.4%</td><td>+18%</td><td><span class="badge ok">✅ Beat</span></td></tr>
+    <tr><td>核心EPS</td><td>$0.70</td><td>$0.69</td><td>+1.4%</td><td>+30%</td><td><span class="badge ok">✅ Beat（輕微）</span></td></tr>
+    <tr><td>Optical Communications</td><td>$1.85B</td><td>—</td><td>—</td><td>+36%</td><td><span class="badge ok">✅ 強勁</span></td></tr>
+    <tr><td>Solar</td><td>$370M</td><td>—</td><td>—</td><td>+80%</td><td><span class="badge ok">✅ 超強</span></td></tr>
+    <tr><td>Glass Innovations</td><td>$1.42B</td><td>—</td><td>—</td><td>+1%</td><td><span class="badge warn">⚠️ 平淡</span></td></tr>
+    <tr><td>核心營業利益率</td><td>20.2%</td><td>—</td><td>+220bps YoY</td><td>—</td><td><span class="badge ok">✅ 擴張中</span></td></tr>
+  </table>
+  <div class="note">Q1 2026特大事件：①又新增兩家超大型hyperscaler簽署與Meta規模相當的長期協議；②NVIDIA $3.2B投資協議（2026-05-06公告，含$500M股份購買協議）。</div>
+
+  <h3 id="guidance">② 指引變化</h3>
+  <table>
+    <tr><th>指標</th><th>Q1 2026 實際</th><th>Q2 2026 指引</th><th>YoY（Q2）</th><th>全年Springboard目標</th></tr>
+    <tr><td>核心營收</td><td>$4.35B</td><td>~$4.6B</td><td>+14%</td><td>$20B run rate（2026年底）</td></tr>
+    <tr><td>核心EPS</td><td>$0.70</td><td>$0.73-$0.77</td><td>+25%</td><td>$30B by 2028，$40B by 2030</td></tr>
+    <tr><td>Springboard升級</td><td colspan="4">由原$8B增量目標升級為$11B增量目標（截至2028年底）；Photonics MAP平台正式對外發布</td></tr>
+  </table>
+
+  <h3 id="reaction">③ 股價反應</h3>
+  <table>
+    <tr><th>時間點</th><th>事件</th><th>股價</th><th>說明</th></tr>
+    <tr><td>2025年底</td><td>AI光纖需求爆發期前</td><td>~$55-60區間</td><td>股價仍在傳統工業股評估框架</td></tr>
+    <tr><td>2026年初-Q1財報前</td><td>Meta $6B協議披露</td><td>快速上漲</td><td>市場重新定位為AI基礎設施受益股</td></tr>
+    <tr><td>2026-04-28（Q1財報）</td><td>業績小幅beat，新增兩個hyperscaler大單</td><td>繼續上漲</td><td>Springboard升級提振市場信心</td></tr>
+    <tr><td>2026-05-06</td><td>NVIDIA $3.2B投資協議</td><td>大漲</td><td>最重要催化劑，驗證AI光纖需求</td></tr>
+    <tr><td>2026-06-29（分析當日）</td><td>歷史高點</td><td>$255（52週高$258.80）</td><td>近1年漲幅+288%，遠超分析師目標</td></tr>
+  </table>
+
+  <h3 id="dcf">④ 三情境 DCF 估值</h3>
+  <div class="cards3">
+    <div class="scenario-card bear">
+      <h5>🐻 熊市情境</h5>
+      <ul>
+        <li>AI光纖需求延遲/減緩，Optical YoY降至15%</li>
+        <li>Springboard實現$20B（僅2026目標）而非$30B</li>
+        <li>Display持續拖累，整體CAGR 10%</li>
+        <li>EBITDA margin：22%；WACC：11%；永續成長：2.5%</li>
+      </ul>
+      <div class="target">目標價：$120–$150（較現價下跌40-53%）</div>
+    </div>
+    <div class="scenario-card base">
+      <h5>⚖️ 基準情境</h5>
+      <ul>
+        <li>Springboard實現$25-28B（2028）</li>
+        <li>Optical CAGR 25%，Display持平，Solar 30%+</li>
+        <li>EBITDA margin：24%；WACC：10%；永續成長：3%</li>
+        <li>3-4年FCF年均$3-4B（新廠投產後）</li>
+      </ul>
+      <div class="target">目標價：$180–$220（較現價下跌14-29%）</div>
+    </div>
+    <div class="scenario-card bull">
+      <h5>🚀 牛市情境</h5>
+      <ul>
+        <li>Springboard全面兌現$30B（2028）</li>
+        <li>光子學MAP平台開啟$40B 2030路線圖</li>
+        <li>EBITDA margin：28%+；WACC：9%；永續成長：4%</li>
+      </ul>
+      <div class="target">目標價：$280–$340（較現價平至+33%）</div>
+    </div>
+  </div>
+  <div class="note">⚠️ 三情境均基於合理推算。敏感度：Optical Communications成長率是最大估值驅動變數；WACC每降1%對估值影響約+15%。<b>現價$255已完全定價基準情境，需兌現牛市情境才有上行空間。</b></div>
+
+  <h3 id="eps">⑤ EPS 多年趨勢 ＋ 歷史本益比</h3>
+  <table>
+    <tr><th>年度（日曆年）</th><th>GAAP EPS</th><th>核心EPS（非GAAP）</th><th>YoY（核心）</th><th>狀態</th></tr>
+    <tr><td>2024</td><td>$1.87</td><td>⚠️ 估~$1.94</td><td>回升期</td><td><span class="badge ok">A 實際</span></td></tr>
+    <tr><td>2025</td><td>$1.87（GAAP年度）</td><td>$2.52（核心）</td><td>+29%</td><td><span class="badge ok">A 實際</span></td></tr>
+    <tr><td>2026（進行中）</td><td>—</td><td>⚠️ 估~$2.90-3.10（Q1$0.70+Q2$0.75中值×4）</td><td>~+22%</td><td><span class="badge warn">E 預估</span></td></tr>
+    <tr><td>2027</td><td>—</td><td>⚠️ 估~$3.50-4.20（Springboard CAGR外推）</td><td>~+20-35%</td><td><span class="badge warn">E 預估</span></td></tr>
+    <tr><td>2028</td><td>—</td><td>⚠️ 估~$5.00-6.50（$30B run rate×~18-22% margin）</td><td>~+30-55%</td><td><span class="badge warn">E 預估（高不確定性）</span></td></tr>
+  </table>
+  <div class="note">GLW EPS歷史上受Display玻璃週期與一次性項目影響大（2022年Q4甚至出現虧損，PE為負）；「核心EPS」（non-GAAP）才是可比指標。2027-2028預估高度依賴Springboard兌現程度，不確定性極大。</div>
+
+  <h4>歷史本益比（TTM PE）</h4>
+  <table>
+    <tr><th>時間點</th><th>TTM PE（約）</th><th>說明</th></tr>
+    <tr><td>5年均值（2021-2026）</td><td>~54-67x</td><td>包含2022年負PE期，均值被扭曲，參考性有限</td></tr>
+    <tr><td>2022年底修正（GAAP PE）</td><td>負值（虧損期）</td><td>Display需求崩潰、光纖庫存去化，Q4 2022 GAAP虧損；TTM PE無意義</td></tr>
+    <tr><td>2018年修正低點</td><td>⚠️ 估~11-15x</td><td>2018年底股價$25區間，核心EPS估~$1.5-1.8，Forward PE約11-15x；未能從精確來源取得</td></tr>
+    <tr><td>當前（2026-06-29）</td><td>82x（GAAP）</td><td>史上最高，前所未有；核心PE（$255/$2.52）= 101x，估值極度過熱</td></tr>
+  </table>
+  <div class="note">以核心EPS $2.52計算，GLW現在的「真實」PE高達101x。分析師普遍認為股價已超越目標，上行需要Springboard長期目標的早期兌現訊號（如2026年底宣告$20B run rate達成）。</div>
+
+  <h3 id="comps">⑥ 可比公司（Comps）</h3>
+  <table>
+    <tr><th>公司</th><th>市值</th><th>Forward PE</th><th>FCF Yield</th><th>成長定位</th></tr>
+    <tr><td><b>GLW（Corning）</b></td><td>~$215B</td><td>~77x（GAAP）/ ~83x（核心）</td><td>~0.8%</td><td>AI光纖轉型，+18% YoY</td></tr>
+    <tr><td>Prysmian（電纜）</td><td>—</td><td>—</td><td>—</td><td>歐洲纜線，電網+海底纜線</td></tr>
+    <tr><td>CommScope（COMM）</td><td>~$2-3B</td><td>—</td><td>—</td><td>光纖分銷，高槓桿型</td></tr>
+    <tr><td>II-VI / Coherent（COHR）</td><td>—</td><td>—</td><td>—</td><td>光學元件，同為AI光互連受益</td></tr>
+  </table>
+  <div class="note">GLW在AI光纖受益股中估值最貴，因其市值規模大（$215B）、品牌認知度高、超大型合約背書；但Coherent等光學元件股同樣受惠，Forward PE普遍在25-40x，遠低於GLW，說明GLW存在品牌溢價。</div>
+
+  <h3 id="analyst">⑦ 投行目標價與操作建議</h3>
+  <table>
+    <tr><th>機構/指標</th><th>評等</th><th>目標價</th><th>備註</th></tr>
+    <tr><td>分析師共識（21家）</td><td>Buy（79%）</td><td>均值 ~$202（高$230 / 低$150）</td><td><strong style="color:var(--red);">⚠️ 現價$255已超過分析師最高目標$230</strong></td></tr>
+  </table>
+  <table>
+    <tr><th>參考目標</th><th>水位</th><th>距現價（$255）</th></tr>
+    <tr><td>分析師最高目標</td><td>$230</td><td>-9.8%（現價已超過！）</td></tr>
+    <tr><td>分析師共識均值</td><td>$202</td><td>-20.8%</td></tr>
+    <tr><td>DCF基準情境上緣</td><td>$220</td><td>-13.7%</td></tr>
+    <tr><td>DCF牛市情境上緣</td><td>$340</td><td>+33.3%</td></tr>
+  </table>
+  <div class="caution-box">
+    <h4>⚠️ 個股小狐操作建議（估值過熱警示）</h4>
+    <div class="row"><span class="lbl">核心警示</span><span>現價$255高於分析師最高目標$230（~10%），遠超均值$202（~26%）；股價已完全定價基準情境，錯誤容忍度為零</span></div>
+    <div class="row"><span class="lbl">已持有者</span><span>考慮在$240-255分批減倉至核心倉位（保留30-50%），等待回撤至更合理估值再補回</span></div>
+    <div class="row"><span class="lbl">未持有者</span><span>⛔ 現價不宜追入；等待回撤至$180-200（對應合理DCF估值）再考慮建倉</span></div>
+    <div class="row"><span class="lbl">重新進場觸發</span><span>①股價回落至$180-200；②同時Q2/Q3 2026業績確認Optical +30%以上YoY延續；③Springboard $20B run rate宣告達成</span></div>
+    <div class="row"><span class="lbl">停損警示</span><span>Optical Communications YoY跌破+15%；任一超大型合約取消或延遲；Glass Innovations出現季度GAAP虧損</span></div>
+    <div class="row"><span class="lbl">每季監控</span><span>Optical Communications YoY增速（核心指標）；Glass Innovations毛利率；新hyperscaler合約披露；新廠建設進度</span></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ================================================================
+     MODE 3 財務健檢
+     ================================================================ -->
+<div class="section">
+  <div class="mode-header"><span class="mode-badge mode3">MODE 3</span><h2>財務風險健檢</h2></div>
+
+  <h3 id="fsdata">① 財務數據（三期對照）</h3>
+  <table>
+    <tr><th>損益表（核心/調整後）</th><th>2023</th><th>2024</th><th>2025</th></tr>
+    <tr><td>核心營收</td><td>~$13.0B（估）</td><td>~$14.5B（估）</td><td>$16.41B ✅</td></tr>
+    <tr><td>核心營業利益率</td><td>~16%</td><td>~18%</td><td>20.2%（Q4起）</td></tr>
+    <tr><td>核心EPS</td><td>⚠️ 估~$1.65</td><td>⚠️ 估~$1.94</td><td>$2.52 ✅</td></tr>
+    <tr><td>利息支出</td><td>⚠️ 估~$330M</td><td>⚠️ 估~$336M</td><td>~$336M ✅（推算）</td></tr>
+    <tr><td>EBIT（核心）</td><td>⚠️ 估~$2.1B</td><td>⚠️ 估~$2.5B</td><td>⚠️ 估~$3.0B</td></tr>
+  </table>
+  <table>
+    <tr><th>資產負債表</th><th>Q1 2025</th><th>2025年底（估）</th><th>Q1 2026（2026-03）</th></tr>
+    <tr><td>總資產</td><td>$30.98B ✅</td><td>—</td><td>—</td></tr>
+    <tr><td>總負債</td><td>$18.67B ✅</td><td>—</td><td>~$8.97B 計息債務 ✅</td></tr>
+    <tr><td>長期債務</td><td>—</td><td>$7.41B（2025-09）</td><td>~$8.5B（含新增）</td></tr>
+    <tr><td>現金</td><td>—</td><td>⚠️ 估~$1-2B（偏低）</td><td>—</td></tr>
+  </table>
+  <table>
+    <tr><th>現金流量</th><th>2023</th><th>2024</th><th>2025</th></tr>
+    <tr><td>FCF（調整後）</td><td>⚠️ 估~$0.9B</td><td>⚠️ 估~$1.3B</td><td>$1.72B ✅（近乎翻倍）</td></tr>
+    <tr><td>CapEx</td><td>—</td><td>—</td><td>⚠️ 估~$1.5-2.0B（新廠建設開始）</td></tr>
+    <tr><td>FCF margin（核心）</td><td>~7%（估）</td><td>~9%（估）</td><td>~10.5%</td></tr>
+  </table>
+  <div class="note">GLW的FCF相對於$215B市值極低（FCF yield僅~0.8%）；NVIDIA投資帶來的$500M股份購買以及後續潛在$3.2B投資將改善資本結構，CapEx預計2026-2027年大幅提升（新廠建設），FCF短期承壓。請查GLW最新10-K/10-Q確認精確數字。</div>
+
+  <h3 id="ratios">② 六大比率診斷</h3>
+  <div class="ratio-grid">
+    <div class="ratio-card ok">
+      <div class="rname">① 利息覆蓋率</div>
+      <div class="rval" style="color:var(--green);">7.3x</div>
+      <div>EBIT $2.1B ÷ 利息$336M（官方披露）</div>
+      <div class="rwarn">警戒：&lt;3x ｜ 優良：>5x</div>
+      <div style="margin-top:5px;"><span class="badge ok">✅ 安全</span></div>
+    </div>
+    <div class="ratio-card warn">
+      <div class="rname">② 負債比率</div>
+      <div class="rval" style="color:var(--yellow);">~60%（估）</div>
+      <div>總負債$18.67B ÷ 總資產$30.98B（Q1 2025）</div>
+      <div class="rwarn">警戒：>70% ｜ 優良：&lt;40%</div>
+      <div style="margin-top:5px;"><span class="badge warn">⚠️ 中等偏高</span></div>
+    </div>
+    <div class="ratio-card warn">
+      <div class="rname">③ 淨債務/EBITDA</div>
+      <div class="rval" style="color:var(--yellow);">~2-3x（估）</div>
+      <div>淨債務估~$6-7B ÷ EBITDA估~$2.5-3.5B</div>
+      <div class="rwarn">警戒：>4x ｜ 優良：&lt;2x</div>
+      <div style="margin-top:5px;"><span class="badge warn">⚠️ 可接受但需監控</span></div>
+    </div>
+    <div class="ratio-card warn">
+      <div class="rname">④ OCF/計息債務</div>
+      <div class="rval" style="color:var(--yellow);">~0.2x（估）</div>
+      <div>OCF估~$1.8-2B ÷ 計息債務~$8.5B</div>
+      <div class="rwarn">警戒：&lt;0.2x ｜ 優良：>0.5x</div>
+      <div style="margin-top:5px;"><span class="badge warn">⚠️ 偏低，需FCF持續增長</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="rname">⑤ FCF覆蓋比率</div>
+      <div class="rval" style="color:var(--green);">~4-5x</div>
+      <div>FCF $1.72B ÷ 年利息$336M</div>
+      <div class="rwarn">警戒：&lt;1.2x ｜ 優良：>2x</div>
+      <div style="margin-top:5px;"><span class="badge ok">✅ 充裕（FCF雖小但債務不大）</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="rname">⑥ 2年到期牆覆蓋</div>
+      <div class="rval" style="color:var(--green);">&gt;3x（估）</div>
+      <div>無近期重大到期牆（需查10-K）</div>
+      <div class="rwarn">警戒：&lt;1.5x ｜ 優良：>3x</div>
+      <div style="margin-top:5px;"><span class="badge ok">✅ 尚可</span></div>
+    </div>
+  </div>
+
+  <h3 id="debt">③ 債務到期時程</h3>
+  <table>
+    <tr><th>說明</th><th>金額</th><th>備註</th></tr>
+    <tr><td>長期債務（2025-09）</td><td>$7.41B</td><td>主要為公司債</td></tr>
+    <tr><td>Q1 2026計息債務</td><td>~$8.97B</td><td>較2025-09略增，CapEx驅動</td></tr>
+    <tr><td>精確到期分佈</td><td colspan="2">⚠️ 請查GLW 10-K「Debt Maturities」章節；未能從公開摘要取得逐年細項</td></tr>
+    <tr><td>NVIDIA $500M股份購買</td><td>$500M</td><td>2026-05-06公告，為股票不為債務，改善資本結構</td></tr>
+  </table>
+
+  <h3 id="capex">④ CapEx 分析</h3>
+  <table>
+    <tr><th>期間</th><th>CapEx（估）</th><th>CapEx/營收</th><th>說明</th></tr>
+    <tr><td>2025</td><td>⚠️ 估~$1.5-2.0B</td><td>~9-12%（中重資產）</td><td>新廠建設開始投入</td></tr>
+    <tr><td>2026-2027</td><td>⚠️ 估~$2.5-3.5B/年</td><td>~12-17%（高CapEx期）</td><td>NC+TX三座新廠大規模建設，FCF將受壓</td></tr>
+  </table>
+  <div style="margin-top:8px;">
+    <span class="badge warn">⚠️ 中重資產轉型</span> GLW正從輕資產LCD玻璃切換至大規模光纖擴廠，CapEx/營收未來2年預計達12-17%，高於傳統定義的「輕資產」企業。這是成長所必須，但短期壓縮FCF yield，對高估值投資人是雙重壓力（高PE + 低FCF yield）。
+  </div>
+
+  <h3 id="peercomp">⑤ 同業財務對比</h3>
+  <table>
+    <tr><th>指標</th><th>GLW</th><th>NVDA（參考）</th><th>AVGO（參考）</th></tr>
+    <tr><td>淨債務/EBITDA</td><td>~2-3x ⚠️</td><td>-0.02x（淨現金）✅</td><td>~1.5x ⚠️</td></tr>
+    <tr><td>FCF margin</td><td>~10.5% ⚠️（偏低）</td><td>~44.8% ✅</td><td>~43% ✅</td></tr>
+    <tr><td>CapEx/營收</td><td>~9-17%（重資產）⚠️</td><td>~2.8%（輕）✅</td><td>~1%（超輕）✅</td></tr>
+    <tr><td>利息覆蓋率</td><td>7.3x ✅</td><td>~384x ✅</td><td>~8-10x ✅</td></tr>
+    <tr><td>核心成長驅動</td><td>光纖+Solar（週期性）</td><td>Data Center GPU（高確定性）</td><td>ASIC+VMware（中確定性）</td></tr>
+  </table>
+
+  <h3 id="diag">⑥ 綜合診斷</h3>
+  <div class="action-box" style="border-color:var(--yellow);">
+    <h4 style="color:var(--yellow);">🏥 財務健康等級：中等（B）— 適中槓桿，FCF仍在爬坡期</h4>
+    <div class="row"><span class="lbl">財務定性</span><span>利息覆蓋7.3x屬安全，但FCF margin僅~10%、FCF yield僅0.8%，相對$215B市值極低；正進入重資產建廠週期，FCF短期承壓</span></div>
+    <div class="row"><span class="lbl">最大財務風險</span><span>如果Optical Communications需求出現訂單延遲，新廠CapEx已支出但收入未能對應增長，FCF可能轉負；EBIT需下降>85%才觸及利息覆蓋警戒線</span></div>
+    <div class="row"><span class="lbl">核心觀察</span><span>每季追蹤FCF成長趨勢（從$1.72B→$3B+是基準情境必要條件）；新廠建設進度與客戶提前付款安排（預付金可緩解CapEx壓力）</span></div>
+    <div class="row"><span class="lbl">操作意涵</span><span>財務健康本身問題不大（不是破產風險）；最大風險是「高PE + 低FCF + 重CapEx」的三重壓縮情境——若成長不能兌現，估值修正幅度可能高達40-50%</span></div>
+  </div>
+</div>
+
+<footer>
+  資料來源：✅ Corning Investor Relations（Q1 2026 8-K、2025全年業績公告）、✅ SEC EDGAR、✅ CNBC（NVIDIA合作協議）、✅ stocktitan.net（Q1 2026 10-Q）、✅ marketbeat.com（分析師目標價）、✅ gurufocus.com（PE數據）、✅ fullratio.com（歷史PE）、⚠️ CapEx/FCF歷史估算基於間接資料推算。歷史PE：2022低點為負值（虧損期）；2018低點⚠️估~11-15x（未能從精確來源取得）。<br><br>
+  本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。<br>
+  產出時間：2026-06-29 ｜ 個股小狐 完整三模式報告
+</footer>
+</body>
+</html>

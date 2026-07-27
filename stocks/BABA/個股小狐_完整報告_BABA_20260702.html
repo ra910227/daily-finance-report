@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜BABA 阿里巴巴 2026-07-02</title>
+<style>
+  :root {
+    --bg: #0d1117; --bg2: #161b22; --bg3: #1f2937;
+    --border: #30363d; --border2: #3d4752;
+    --text: #e6edf3; --text2: #8b949e; --text3: #6e7681;
+    --blue: #58a6ff; --green: #3fb950; --yellow: #d29922;
+    --red: #f85149; --purple: #a371f7; --orange: #fb923c;
+    --teal: #2dd4bf; --pink: #f472b6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--blue); text-decoration: none; }
+
+  .hero {
+    background: linear-gradient(135deg, #1a0a0a 0%, #2d1515 40%, #1a0d0d 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 32px 40px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; right: 0; width: 500px; height: 100%;
+    background: radial-gradient(ellipse at right center, rgba(248,81,73,0.08) 0%, transparent 70%);
+  }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 700; color: var(--orange); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-change { font-size: 16px; color: var(--red); margin-top: 4px; }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .badge-blue { background: rgba(88,166,255,0.15); color: var(--blue); border: 1px solid rgba(88,166,255,0.3); }
+  .badge-green { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+  .badge-yellow { background: rgba(210,153,34,0.15); color: var(--yellow); border: 1px solid rgba(210,153,34,0.3); }
+  .badge-red { background: rgba(248,81,73,0.15); color: var(--red); border: 1px solid rgba(248,81,73,0.3); }
+  .badge-purple { background: rgba(163,113,247,0.15); color: var(--purple); border: 1px solid rgba(163,113,247,0.3); }
+  .badge-orange { background: rgba(251,146,60,0.15); color: var(--orange); border: 1px solid rgba(251,146,60,0.3); }
+  .badge-teal { background: rgba(45,212,191,0.15); color: var(--teal); border: 1px solid rgba(45,212,191,0.3); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 600; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .toc-inner a:hover { color: var(--orange); border-bottom-color: var(--orange); text-decoration: none; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--orange); color: #000; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--orange); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--orange); }
+  .mode-divider p { font-size: 13px; color: var(--text2); margin-top: 4px; }
+
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 600; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+
+  .ok { color: var(--green); }
+  .warn { color: var(--yellow); }
+  .bad { color: var(--red); }
+  .muted { color: var(--text2); }
+
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 600; }
+
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); }
+  .scenario.base { border-top: 3px solid var(--blue); }
+  .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); }
+  .scenario.base h4 { color: var(--blue); }
+  .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .scenario .row:last-child { border-bottom: none; }
+
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; }
+  .moat-score { font-size: 13px; font-weight: 600; color: var(--orange); margin-top: 4px; }
+
+  .action-box { background: rgba(63,185,80,0.08); border: 1px solid rgba(63,185,80,0.3); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: rgba(210,153,34,0.08); border: 1px solid rgba(210,153,34,0.3); border-left: 4px solid var(--yellow); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--yellow); font-size: 15px; margin-bottom: 10px; }
+  .risk-card { background: rgba(248,81,73,0.08); border: 1px solid rgba(248,81,73,0.25); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .risk-card h4 { color: var(--red); font-size: 13px; margin-bottom: 4px; }
+
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 22px; font-weight: 700; }
+  .health-b { background: rgba(210,153,34,0.12); border: 3px solid var(--yellow); color: var(--yellow); }
+  .health-bplus { background: rgba(210,153,34,0.1); border: 3px solid rgba(210,153,34,0.7); color: var(--yellow); }
+
+  .comp-baba { background: rgba(251,146,60,0.06); }
+  .comp-baba td { font-weight: 600; }
+
+  .sop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .sop-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .sop-item .sop-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; text-transform: uppercase; }
+  .sop-item .sop-val { font-size: 20px; font-weight: 700; color: var(--text); }
+  .sop-item .sop-desc { font-size: 11px; color: var(--text2); margin-top: 3px; }
+
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">BABA</div>
+      <div class="hero-name">阿里巴巴集團控股有限公司（Alibaba Group Holding Limited）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-07-02　⚡ 財年截止 3/31｜1 ADS = 8 普通股</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$99.00</div>
+      <div class="hero-change">分析師目標 $190+ 折價 -48% ⚠️</div>
+      <div class="hero-mktcap">市值 ~$227B　　淨現金 ~$41.6B（市值 18%）</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-orange">中國電商龍頭</span>
+    <span class="badge badge-blue">阿里雲 AI 加速 +40%</span>
+    <span class="badge badge-green">FCF $22.9B｜殖利率 10% ✅</span>
+    <span class="badge badge-red">Q4 FY26 非GAAP 利潤崩零 ⚠️</span>
+    <span class="badge badge-yellow">中國監管 / 美中脫鉤風險</span>
+    <span class="badge badge-teal">Lynch：穩定成長+轉機混型</span>
+    <span class="badge badge-purple">分析師強力買入 14/0/0</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>ADR 股價</label><div class="val">$99.00</div><div class="sub">⚠️ 近似 2026-07-02</div></div>
+    <div class="meta-item"><label>FY2026 總營收</label><div class="val">~$148B</div><div class="sub">RMB 1.02T +3% YoY ✅</div></div>
+    <div class="meta-item"><label>FY2025 FCF</label><div class="val">$22.9B</div><div class="sub">FCF 殖利率 ~10.1% ✅</div></div>
+    <div class="meta-item"><label>淨現金</label><div class="val">$41.6B</div><div class="sub">現金$80B 負債$38.4B ✅</div></div>
+    <div class="meta-item"><label>Thesis 成立度</label><div class="val">3.5 / 5</div><div class="sub">AI 投資週期壓縮利潤</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐⭐½</div><div class="sub">電商主導地位受壓</div></div>
+  </div>
+</div>
+
+<!-- ── TOC ── -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#mode1">模式一 深度研究</a>
+    <span class="toc-sep">·</span>
+    <a href="#biz">業務引擎</a>
+    <a href="#thesis">核心Thesis</a>
+    <a href="#competition">競爭格局</a>
+    <a href="#moat">成長象限</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode2">模式二 財報解析</a>
+    <span class="toc-sep">·</span>
+    <a href="#earnings">Q4 FY2026財報</a>
+    <a href="#eps">EPS與估值</a>
+    <a href="#sop">分部估值</a>
+    <a href="#dcf">DCF情境</a>
+    <a href="#targets">投行目標</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode3">模式三 財務健檢</a>
+    <span class="toc-sep">·</span>
+    <a href="#ratios">六大比率</a>
+    <a href="#capex">CapEx分析</a>
+    <a href="#comps">同業對比</a>
+    <a href="#health">綜合診斷</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════
+     模式一：深度研究
+══════════════════════════════════════ -->
+<div id="mode1" class="mode-divider">
+  <h2>◈ 模式一：公司深度研究</h2>
+  <p>業務引擎 · 核心Thesis · 競爭格局 · Peter Lynch成長象限 · 護城河五維評分</p>
+</div>
+
+<!-- 1. 基本介紹 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">公司基本介紹</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">阿里巴巴集團（NYSE/HKEx: BABA/9988）成立於 1999 年，總部杭州，是中國最大的電商科技生態系統。核心業務涵蓋中國電商（淘寶/天貓）、雲端運算（阿里雲）、國際電商（AliExpress/Lazada/Trendyol）、物流（菜鳥）及本地生活服務（餓了麼/高德）。2026 年正全力投入 AI 基礎設施建設，阿里雲外部收入成長 +40% YoY，AI 相關收入年化規模達 $52 億美元。</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:20px;">$148B</div><div class="big-label">FY2026 總營收</div></div>
+        <div><div class="big-num" style="font-size:20px; color:var(--yellow)">+3%</div><div class="big-label">YoY（電商趨緩）</div></div>
+        <div><div class="big-num" style="font-size:20px; color:var(--green)">$22.9B</div><div class="big-label">FY2025 FCF</div></div>
+        <div><div class="big-num" style="font-size:20px; color:var(--green)">$41.6B</div><div class="big-label">淨現金</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 近5期財務摘要 -->
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財務摘要（FY截止3/31）</th>
+          <th class="num">FY2022 ⚠️</th>
+          <th class="num">FY2023 ⚠️</th>
+          <th class="num">FY2024 ⚠️</th>
+          <th class="num">FY2025 ✅</th>
+          <th class="num">FY2026 A ✅</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總營收（USD）</td><td class="num">~$134B</td><td class="num">~$126B</td><td class="num">~$130B</td><td class="num">~$140B</td><td class="num ok">~$148B</td></tr>
+        <tr><td>總營收（RMB）</td><td class="num">~RMB 853B</td><td class="num">~RMB 868B</td><td class="num">~RMB 941B</td><td class="num">~RMB 990B</td><td class="num ok">RMB 1.02T</td></tr>
+        <tr><td>YoY 成長</td><td class="num">+19% ⚠️</td><td class="num">+2% ⚠️</td><td class="num">+8% ⚠️</td><td class="num">+5% ⚠️</td><td class="num warn">+3% ✅</td></tr>
+        <tr><td>雲端智能 YoY</td><td class="num">— </td><td class="num">— </td><td class="num">— </td><td class="num">+13% ⚠️</td><td class="num ok">+34~40% ⚠️</td></tr>
+        <tr><td>GAAP EPS（per ADS, USD）</td><td class="num">~$8.0 ⚠️</td><td class="num">~$1.5 ⚠️</td><td class="num">~$4.5 ⚠️</td><td class="num ok">~$7.0+ ⚠️</td><td class="num warn">⚠️ 高波動（見EPS章節）</td></tr>
+        <tr><td>非GAAP EPS（per ADS, CNY）</td><td class="num">~CN¥50 ⚠️</td><td class="num">~CN¥35 ⚠️</td><td class="num ok">CN¥31.61 ✅</td><td class="num ok">CN¥55.12 ✅</td><td class="num bad">~CN¥30-35 ⚠️（AI投資衝擊）</td></tr>
+        <tr><td>FCF（USD）</td><td class="num">~$14B ⚠️</td><td class="num">~$16B ⚠️</td><td class="num">~$20B ⚠️</td><td class="num ok">$22.9B ✅</td><td class="num">— </td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 估算值｜✅ 已驗證　GAAP EPS 因螞蟻集團投資損益、監管罰款等而極度波動，非GAAP 更具可比性。1 ADS = 8 普通股。RMB/USD 匯率約 7.1 換算。</p>
+</div>
+
+<!-- 2. 業務引擎分析 -->
+<div id="biz" class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">業務引擎分析（六大業務群）</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🛒 淘寶天貓集團（中國電商）核心</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">佔總收入約 <strong>44%（FY2026 ~RMB 444B）</strong>✅，是阿里最大現金牛。淘寶（C2C/B2C 長尾商品）+ 天貓（品牌旗艦店）雙平台合計年成交額（GMV）估逾 5 兆人民幣（⚠️）。面臨拼多多價格戰，正推出「88VIP」會員深化黏著度，並導入 AI 個性化推薦提升轉化率。即時零售「淘寶閃購」2026 成長 +57% YoY，為新增長點。</p>
+    </div>
+    <div class="card">
+      <h3>☁️ 雲智能集團（AI核心）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">FY2026 外部收入加速 <strong>+40% YoY</strong>✅，AI 相關雲收入已達年化 <strong>$52億美元</strong>（連續 11 季三位數成長）✅。自研大模型 Qwen 系列已是全球最廣泛採用的開源 LLM 之一。中國雲市場份額約 33%（⚠️），領先騰訊雲（16%）和百度雲（9%）。</p>
+    </div>
+    <div class="card">
+      <h3>🌏 國際商業集團</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">佔收入 <strong>~11.5%</strong>✅，包含：<strong>Trendyol</strong>（土耳其電商龍頭，盈利）、<strong>AliExpress</strong>（全球跨境，競爭激烈）、<strong>Lazada</strong>（東南亞，持續燒錢）。Trendyol 已成為集團最佳國際資產，估值可能達 $150-200 億（⚠️）。整體國際業務從虧轉盈的路徑是 2026-2027 關鍵觀察點。</p>
+    </div>
+    <div class="card">
+      <h3>🚚 菜鳥網絡（物流）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">中國最大快遞聯盟網絡，2024 年阿里宣布<strong>放棄菜鳥香港 IPO 計劃</strong>並繼續整合。菜鳥為電商履約提供底層基礎設施，也是阿里跨境物流的核心（全球倉 + 末公里）。估值約 $100-150 億（⚠️），戰略價值高於財務報酬。</p>
+    </div>
+    <div class="card">
+      <h3>🍜 本地生活（餓了麼+高德）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">餓了麼外賣長期落後美團（市場份額估 ~25% vs 美團 ~65%），持續虧損但縮窄（⚠️）。高德地圖日活用戶超 1 億（⚠️），是重要流量入口。整體本地生活板塊是集團「最大虧損黑洞」，管理層考慮引入策略投資者（⚠️）。</p>
+    </div>
+    <div class="card">
+      <h3>🎬 數字媒體（優酷+大麥）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">優酷是中國第三大視頻平台（落後愛奇藝和騰訊視頻），市場競爭激烈，長期虧損。佔集團收入 ~3-4%（⚠️）。阿里已多次考慮剝離。核心邏輯：對內容的投入是「防守性」的（避免用戶全部流向競爭對手），而非核心增長引擎。</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>業務群</th><th class="num">FY2026 收入佔比</th><th class="num">YoY 成長</th><th>護城河</th><th>2026 關鍵催化劑</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>淘寶天貓（含即時零售）</strong></td><td class="num">~44% ✅</td><td class="num warn">低個位數 ⚠️</td><td>GMV 規模、品牌生態</td><td>淘寶閃購 +57%、AI 個性化</td></tr>
+        <tr><td><strong>雲智能集團</strong></td><td class="num">~12% ⚠️</td><td class="num ok">+34~40% ✅</td><td>中國雲市場 33% 份額</td><td>Qwen AI、$52億美元 AI 年化</td></tr>
+        <tr><td><strong>國際商業</strong></td><td class="num">~11.5% ✅</td><td class="num">+20%+ ⚠️</td><td>Trendyol 本地壟斷地位</td><td>Trendyol 盈利持續成長</td></tr>
+        <tr><td><strong>菜鳥物流</strong></td><td class="num">~8% ⚠️</td><td class="num">+10%+ ⚠️</td><td>電商履約基礎設施</td><td>跨境物流擴大</td></tr>
+        <tr><td><strong>本地生活</strong></td><td class="num">~5% ⚠️</td><td class="num">— </td><td>高德流量入口</td><td>餓了麼止血、引入戰投</td></tr>
+        <tr><td><strong>數字媒體</strong></td><td class="num">~3% ⚠️</td><td class="num bad">負成長/持平 ⚠️</td><td>無明顯護城河</td><td>考慮剝離（⚠️）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 3. 核心Thesis -->
+<div id="thesis" class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">核心 Thesis 與風險</div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 1｜極度低估：市值 $227B vs 淨現金 $41.6B + 年 FCF $22.9B</div>
+      <div class="content">拋開成長預期，僅計算「靜態持有價值」：淨現金 $41.6B 佔市值 18%，年 FCF $22.9B 相當於 10.1% FCF 殖利率。即使中國電商業務零成長，也不過是一台 10x FCF 的現金機器。若阿里雲成長兌現（+40% YoY 趨勢），估值重評可能更劇烈。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 2｜阿里雲 AI 成為獨立估值引擎</div>
+      <div class="content">AI 相關收入年化 $52 億，外部收入 +40% YoY，連續 11 季三位數成長。Qwen 開源大模型已成為全球（非 OpenAI）生態重要選項，特別是中國本土企業。若阿里雲未來獨立 IPO，以 10x ARR 估算，僅雲端業務估值可達 $500 億+（⚠️）。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--yellow)">⚠️ 持續監控</div>
+      <div class="label">Thesis 3｜AI 投資週期見頂 → 利潤回歸（FY2027-2028 驗證）</div>
+      <div class="content">Q4 FY2026 非GAAP 利潤幾乎歸零（RMB 86M），是因為大規模 AI 基礎設施投資（阿里+騰訊合計約 $560 億美元支出）壓縮近期利潤。核心問題：投資何時見頂、ROI 何時出現？管理層未給出明確時程，市場等待 FY2027 Q1-Q2 信號。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--yellow)">⚠️ 部分成立</div>
+      <div class="label">Thesis 4｜電商防禦性底盤 + 即時零售新增長</div>
+      <div class="content">淘寶天貓是中國消費者的「默認」購物平台，但 PDD（拼多多）已侵蝕中低端市場份額。阿里的反擊策略：88VIP 高端會員（黏著度更高）、淘寶閃購即時零售（+57%）。電商並非成長股，而是穩健的現金牛，用以支撐雲端投資。成立程度：防禦 ✅，增長 ⚠️。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--red)">❌ 監管/地緣風險未消</div>
+      <div class="label">Thesis 5｜中國監管尾部風險（長期阻礙估值擴張）</div>
+      <div class="content">2021-2022 年的 $180 億美元監管罰款 + 螞蟻集團 IPO 暫停仍是陰影。儘管習近平於 2023 年「重新擁抱」科技巨頭，監管環境仍高度不確定。加上美國 SEC ADR 合規壓力、中美脫鉤風險（潛在摘牌），這是 BABA 「估值折扣」的根本原因。此風險永久存在，須納入安全邊際。</div>
+    </div>
+  </div>
+
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🚀 核心成長驅動力</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>阿里雲 AI 加速</strong>：外部收入 +40% YoY，AI 年化 $52億 ✅</li>
+        <li><strong>淘寶閃購（即時零售）</strong>：+57% 高速成長，對抗美團佈局 ✅</li>
+        <li><strong>Trendyol 盈利持續</strong>：土耳其電商市場份額 40%+（⚠️）</li>
+        <li><strong>回購 + 股息</strong>：$25 億年度股息宣告（FY2026）+ 持續回購</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 核心監控風險</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>AI 投資何時止血</strong>：非GAAP 利潤繼續為零→股價壓力</li>
+        <li><strong>PDD（拼多多）市佔侵蝕</strong>：Temu 全球 + Pinduoduo 國內雙線壓制</li>
+        <li><strong>美中 ADR 摘牌風險</strong>：若中美關係惡化，BABA 可能無法在紐交所交易</li>
+        <li>觸發條件：阿里雲成長跌破 25%，或中美外交明顯惡化</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 競爭格局 -->
+<div id="competition" class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">競爭格局</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>競爭者</th><th>主要戰場</th><th>競爭優勢</th><th>對 BABA 威脅度</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>拼多多 PDD（Pinduoduo + Temu）</strong></td><td>中低端電商 + 全球跨境</td><td>極致低價、農村滲透率、數據算法</td><td>🔴 高｜已侵蝕淘寶中低端 GMV，Temu 擠壓 AliExpress</td></tr>
+        <tr><td><strong>京東 JD.com</strong></td><td>3C 電器、自營物流</td><td>正品、快速配送、企業採購</td><td>🟡 中｜品類競爭但商業模式不同，共存格局</td></tr>
+        <tr><td><strong>抖音電商（ByteDance）</strong></td><td>內容電商、直播帶貨</td><td>短視頻流量池、年輕用戶</td><td>🔴 高｜搶奪廣告收入 + 品牌天貓預算，威脅天貓</td></tr>
+        <tr><td><strong>騰訊雲</strong></td><td>中國雲端市場 #2</td><td>微信生態整合</td><td>🟡 中｜雲市場份額 16% vs 阿里雲 33%（⚠️）</td></tr>
+        <tr><td><strong>美團</strong></td><td>本地生活、外賣</td><td>外賣 65%+ 市佔、下沉市場</td><td>🔴 高（餓了麼）｜美團幾乎壟斷外賣，餓了麼戰略價值存疑</td></tr>
+        <tr><td><strong>AWS / Azure / Google Cloud</strong></td><td>國際雲、中國跨境企業</td><td>全球最大生態</td><td>🟡 低（中國市場）｜境外雲受中國法規限制，阿里雲在本土具保護壁壘</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box" style="margin-top:16px;">
+    <h3>⚠️ 最大競爭威脅：抖音電商 + 拼多多「雙殺」</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">抖音電商（TikTok Shop 中國版）正以「搜索+推薦+直播」的閉環搶奪天貓的品牌廣告預算；拼多多以「農產品百億補貼」+「Temu 全球低價」兩端夾擊。阿里的反制：淘寶引入短視頻直播功能、天貓升級 AI 個性化、即時零售反攻美團。關鍵指標：天貓廣告客戶數 + 廣告費率趨勢，若連續兩季加速下滑，需重新評估電商護城河。</p>
+  </div>
+</div>
+
+<!-- 5. 成長象限 & 護城河 -->
+<div id="moat" class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Peter Lynch 成長象限 & 護城河評分</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border:2px solid var(--orange);">
+      <h3 style="color:var(--orange)">📊 Lynch 象限判斷：穩定成長股 + 轉機股</h3>
+      <div style="font-size:18px; font-weight:700; color:var(--orange); margin:12px 0;">穩定成長（Stalwart）+ 轉機（Turnaround）雙重特徵</div>
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <thead><tr><th>判斷標準</th><th>BABA 現況</th><th>判定</th></tr></thead>
+          <tbody>
+            <tr><td>整體收入成長</td><td>FY2026 +3%（趨緩）</td><td class="warn">⚠️ Stalwart</td></tr>
+            <tr><td>核心引擎成長</td><td>阿里雲 +40% YoY</td><td class="ok">✅ Fast Grower（雲端）</td></tr>
+            <tr><td>利潤率走勢</td><td>FY2026 Q4 非GAAP 幾乎歸零</td><td class="bad">❌ 轉機期</td></tr>
+            <tr><td>絕對低估</td><td>FCF $22.9B = 10.1% 殖利率</td><td class="ok">✅ 資產型隱藏價值</td></tr>
+            <tr><td>監管/地緣折扣</td><td>永久存在，中國主權風險</td><td class="warn">⚠️ 估值壓制</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px; color:var(--text2); margin-top:10px;">📌 BABA 是「2016年谷歌」的中國版本（大量現金+大量業務）還是「估值陷阱」，取決於 FY2027 AI 投資 ROI 的兌現速度。Lynch 若持有，框架是：確認轉機信號前小倉位，信號出現後大幅加碼。</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item">
+      <div class="moat-label">不可替代性</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">天貓品牌 + 阿里雲本土壁壘</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">網路效應</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">電商買賣雙邊平台效應</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">客戶黏著度</div>
+      <div class="moat-stars">★★★☆☆</div>
+      <div class="moat-score">3.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">PDD/抖音侵蝕中下降</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">成本優勢</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">3.8 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">中國雲規模最大，邊際成本低</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">規模效應</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">菜鳥物流 + 阿里雲基礎設施</div>
+    </div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--orange); margin-top:8px;">整體護城河評分：3.8 / 5 ⭐⭐⭐½</div>
+
+  <div class="caution-box" style="margin-top:20px;">
+    <h3>⚠️ 建議動作（深度研究視角）：小倉位布局，等待轉機信號</h3>
+    <div style="font-size:13px; line-height:1.8; color:var(--text); display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div>
+        <strong>當前建議：</strong>10.1% FCF 殖利率 + 分析師共識 $190+ 目標提供充裕安全邊際，但 Q4 FY2026 非GAAP 利潤歸零是重大警訊。建議<span class="warn">「機會池」小倉位</span>，等待 FY2027 Q1-Q2 財報確認 AI 投資見頂信號後加碼。<br><br>
+        <strong>加碼觸發：</strong>
+        <ul style="padding-left:16px;">
+          <li>FY2027 Q1 非GAAP 利潤率回升至 10%+</li>
+          <li>阿里雲宣布外部雲收入持續加速（≥40%）</li>
+          <li>股票回測 $85-90（FCF 殖利率 >12%）</li>
+        </ul>
+      </div>
+      <div>
+        <strong>賣出觸發：</strong>
+        <ul style="padding-left:16px;">
+          <li>中美宣布 ADR 摘牌時程或制裁阿里</li>
+          <li>阿里雲成長跌破 20% 連續兩季</li>
+          <li>中國監管再次大規模罰款（$100億+）</li>
+          <li>電商廣告收入 YoY 連續下滑 &gt;10%</li>
+        </ul>
+        <br>
+        <strong>每季必看：</strong>雲端外部收入 YoY%、非GAAP 利潤率趨勢、電商 GMV/廣告收入、FCF 走勢
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式二：財報解析
+══════════════════════════════════════ -->
+<div id="mode2" class="mode-divider">
+  <h2>◈ 模式二：最新財報解析</h2>
+  <p>Q4 FY2026 財報 · EPS 多年期表 · 分部估值（SOP） · DCF 三情境 · 投行目標</p>
+</div>
+
+<!-- 6. Q4 FY2026 財報 -->
+<div id="earnings" class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">Q4 FY2026 財報（2026-05-13 公佈）</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--red); margin-bottom:20px;">
+    <h3 style="color:var(--red)">⚠️ 核心衝突：GAAP 淨利 +106% vs 非GAAP 利潤幾近歸零</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Q4 FY2026 的最大矛盾：GAAP 淨利因投資收益（螞蟻集團公允價值調升等）+106% YoY 達 RMB 254.76 億，但非GAAP 淨利僅 RMB 0.86 億（$1200 萬美元），幾乎歸零，較去年同期跌 99.7%。股價初跌後漲 6%——市場讀懂了：非GAAP 歸零是「主動選擇大規模 AI 投資」，不是業務崩潰。<strong>雲端 AI 加速 + $25 億年度股息</strong>是市場重燃信心的核心。</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>指標</th><th class="num">實際值</th><th class="num">市場預期 ⚠️</th><th class="num">YoY</th><th>判定</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>總收入</td><td class="num">RMB 2,433.8億（~$35B）✅</td><td class="num">RMB 2,470.9億</td><td class="num">+3%</td><td><span class="badge badge-red">輕微 Miss ❌</span></td></tr>
+        <tr><td>GAAP 淨利</td><td class="num">RMB 254.76億 ✅</td><td class="num">— </td><td class="num ok">+106%</td><td><span class="badge badge-green">大幅超出（投資收益）</span></td></tr>
+        <tr><td>非GAAP 淨利</td><td class="num bad">RMB 0.86億（~$1,200萬）✅</td><td class="num">~RMB 350億 ⚠️</td><td class="num bad">-99.7%</td><td><span class="badge badge-red">大幅 Miss ❌（AI 投資）</span></td></tr>
+        <tr><td>GAAP EPS（per ADS）</td><td class="num">$0.09 ⚠️</td><td class="num">$1.12 ⚠️</td><td class="num bad">大幅下滑</td><td><span class="badge badge-red">Miss（非常規季度）</span></td></tr>
+        <tr><td>雲端外部收入</td><td class="num ok">+40% YoY ✅</td><td class="num">+35% ⚠️</td><td class="num ok">加速</td><td><span class="badge badge-green">Beat ✅</span></td></tr>
+        <tr><td>AI 相關雲收入（年化）</td><td class="num ok">~$52億美元 ✅</td><td class="num">— </td><td class="num ok">連續11季 3位數成長</td><td><span class="badge badge-green">超出預期 ✅</span></td></tr>
+        <tr><td>淘寶閃購（即時零售）</td><td class="num ok">+57% YoY ✅</td><td class="num">— </td><td class="num ok">強勁</td><td><span class="badge badge-green">新增長點 ✅</span></td></tr>
+        <tr><td>年度股息宣告</td><td class="num ok">$25億美元 ✅</td><td class="num">— </td><td class="num">首次</td><td><span class="badge badge-green">正面驚喜 ✅</span></td></tr>
+        <tr><td>財報後股價表現</td><td class="num ok" colspan="3">初跌後 +6%（市場聚焦 AI 長期敘事 + 股息）</td><td><span class="badge badge-green">最終正面</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:12px; border-left:3px solid var(--orange);">
+    <h3>FY2026 全年業績摘要</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; margin-top:10px;">
+      <div>
+        <strong>FY2026 全年收入：</strong>RMB 1.02兆（~$148B）+3% YoY ✅<br>
+        <strong>中國電商：</strong>~RMB 4,440億（~44%） ✅<br>
+        <strong>阿里雲：</strong>外部加速 +40%，AI 年化 $52億 ✅<br>
+      </div>
+      <div>
+        <strong>FY2026 FCF（推估）：</strong>低於 FY2025 $22.9B，因 AI CapEx 擴大 ⚠️<br>
+        <strong>股東回報：</strong>$25億年度股息宣告 + 持續回購 ✅<br>
+        <strong>FY2026 Q4 FCF：</strong>$11.13B（單季，強勁）✅
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. EPS 多年期表 -->
+<div id="eps" class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">EPS 多年期表 & 歷史本益比（★必填欄位）</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財年（FY截止3/31）</th>
+          <th class="num">非GAAP EPS<br>（per ADS, CNY）</th>
+          <th class="num">非GAAP EPS<br>（per ADS, USD⚠️）</th>
+          <th class="num">GAAP EPS<br>（per ADS, USD⚠️）</th>
+          <th class="num">年末股價<br>（ADS USD⚠️）</th>
+          <th class="num">非GAAP PE⚠️</th>
+          <th>狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>FY2022</strong></td>
+          <td class="num">~CN¥50 ⚠️</td>
+          <td class="num">~$7.0 ⚠️</td>
+          <td class="num warn">~$2-4 ⚠️（Ant 損益）</td>
+          <td class="num">~$90 ⚠️</td>
+          <td class="num">~13x ⚠️</td>
+          <td><span class="badge badge-yellow">估</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2023</strong></td>
+          <td class="num">~CN¥35 ⚠️</td>
+          <td class="num">~$4.9 ⚠️</td>
+          <td class="num warn">~$1.5 ⚠️（監管罰款）</td>
+          <td class="num">~$87 ⚠️</td>
+          <td class="num">~18x ⚠️</td>
+          <td><span class="badge badge-yellow">估</span></td>
+        </tr>
+        <tr style="background:rgba(251,146,60,0.04)">
+          <td><strong>FY2024 A</strong></td>
+          <td class="num ok">CN¥31.61 ✅</td>
+          <td class="num ok">~$4.45 ✅</td>
+          <td class="num">~$4.5 ⚠️</td>
+          <td class="num">~$79 ⚠️</td>
+          <td class="num">~18x ⚠️</td>
+          <td><span class="badge badge-green">非GAAP 已驗證</span></td>
+        </tr>
+        <tr style="background:rgba(251,146,60,0.06)">
+          <td><strong>FY2025 A</strong></td>
+          <td class="num ok">CN¥55.12 ✅</td>
+          <td class="num ok">~$7.76 ✅</td>
+          <td class="num">~$7.0+ ⚠️</td>
+          <td class="num">~$120 ⚠️（年末前）</td>
+          <td class="num">~15x ⚠️</td>
+          <td><span class="badge badge-green">非GAAP 已驗證</span></td>
+        </tr>
+        <tr style="background:rgba(248,81,73,0.04)">
+          <td><strong>FY2026 A</strong></td>
+          <td class="num bad">~CN¥30-35 ⚠️（AI衝擊）</td>
+          <td class="num bad">~$4.2-4.9 ⚠️</td>
+          <td class="num warn">高（投資收益）⚠️</td>
+          <td class="num">$99（當前）</td>
+          <td class="num warn">~20-24x ⚠️</td>
+          <td><span class="badge badge-red">AI 投資週期壓縮</span></td>
+        </tr>
+        <tr style="background:rgba(63,185,80,0.04)">
+          <td><strong>FY2027 E</strong></td>
+          <td class="num">~CN¥50-60 ⚠️</td>
+          <td class="num ok">~$7-8.5 ⚠️</td>
+          <td class="num">— </td>
+          <td class="num">— </td>
+          <td class="num ok">~12-14x ⚠️</td>
+          <td><span class="badge badge-blue">利潤回歸假設</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2028 E</strong></td>
+          <td class="num">~CN¥65-80 ⚠️</td>
+          <td class="num ok">~$9-11 ⚠️</td>
+          <td class="num">— </td>
+          <td class="num">— </td>
+          <td class="num ok">~9-11x ⚠️</td>
+          <td><span class="badge badge-blue">雲端 ROI 兌現</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 歷史 PE 參考 -->
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr><th colspan="4" style="color:var(--orange); font-size:13px;">★ 歷史本益比參考（非GAAP 基準，GAAP 因 Ant/監管損益波動太大不具參考性）</th></tr>
+        <tr><th>PE 指標</th><th class="num">數值</th><th>基準期</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>10年平均 GAAP PE</strong></td>
+          <td class="num">32.31x ✅</td>
+          <td>2013-2026 均值</td>
+          <td>包含多次 Ant/監管大額損益，波動極大，參考價值低</td>
+        </tr>
+        <tr>
+          <td><strong>5年平均 GAAP PE</strong></td>
+          <td class="num warn">~21.73-27.76x ⚠️</td>
+          <td>2021-2025 估</td>
+          <td>中國科技監管打壓期 + 復甦期混合值，EPS 波動使 PE 不穩定</td>
+        </tr>
+        <tr>
+          <td><strong>2022年最低 GAAP PE</strong></td>
+          <td class="num bad">112.49x（2022 Q3）⚠️</td>
+          <td>2022年9月</td>
+          <td>⚠️ 悖論：股票大跌到 $80 美元，但 Ant 投資損失使 GAAP EPS 極低，PE 反而衝高至 112x。GAAP PE「最低」實為監管損失最重的時刻，非估值便宜的信號。</td>
+        </tr>
+        <tr>
+          <td><strong>2022年最低 非GAAP PE（估）</strong></td>
+          <td class="num">~12-15x ⚠️</td>
+          <td>2022年底 $73-80 ADS</td>
+          <td>⚠️ 以非GAAP EPS 約 $5-6 計算，2022 年 10 月底 $73 低點對應非GAAP PE 約 12-15x，是近年真實估值底</td>
+        </tr>
+        <tr>
+          <td><strong>2018年最低 PE</strong></td>
+          <td class="num">~20-28x ⚠️</td>
+          <td>2018年底 ~$130 ADS</td>
+          <td>⚠️ 2018 年中美貿易戰，BABA 從 $210 跌至 $130。當時非GAAP EPS ~$5，PE 約 26x。BABA 歷史上從未「便宜」，2022 年 $73 才是真正的恐慌底</td>
+        </tr>
+        <tr>
+          <td><strong>近 10 年真正低點</strong></td>
+          <td class="num ok">12.05x GAAP ✅</td>
+          <td>2024年12月（$84.79）</td>
+          <td>✅ 已驗證：Dec 2024 GAAP PE 12.05x 是近 10 年最低。若以非GAAP 約 $7/ADS 估，PE ≈ 12x，為現代 BABA 歷史性底部</td>
+        </tr>
+        <tr style="background:rgba(251,146,60,0.06)">
+          <td><strong>當前 PE（2026-07-02）</strong></td>
+          <td class="num warn">GAAP N/M⚠️ ｜ 非GAAP FY2025 基礎 ~12.8x（$99/$7.76）</td>
+          <td>2026-07-02</td>
+          <td class="ok">以 FY2025 非GAAP 基礎計算，仍處近 10 年低估區間。若 FY2027E EPS 回升至 $7-8.5，PE ~12-14x 仍便宜</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box" style="margin-top:12px;">
+    <h3>📌 BABA PE 解讀特別說明</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">BABA 的 GAAP PE 因螞蟻集團投資的公允價值調整（每季可能貢獻或侵蝕數百億人民幣）以及歷年監管罰款，幾乎<strong>無法用 GAAP PE 做橫向比較</strong>。正確方式：以<strong>非GAAP PE</strong> 或 <strong>FCF 殖利率</strong>（目前 10.1%）為主，輔以 Price/Sales（~1.5x，歷史低位）。目前 $99 對應 FY2025 非GAAP EPS $7.76 = 12.8x PE，若 AI 投資週期在 FY2027 見頂且利潤率回升，這將是一個罕見的買點。</p>
+  </div>
+</div>
+
+<!-- 8. 分部估值（SOP） -->
+<div id="sop" class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">分部估值（Sum-of-Parts，SOP）</div>
+  </div>
+
+  <p style="font-size:13px; color:var(--text2); margin-bottom:16px;">阿里巴巴業務複雜多元，傳統單一 DCF 低估業務群總價值，建議用 SOP 估算隱含每股價值。</p>
+
+  <div class="sop-grid">
+    <div class="sop-item">
+      <div class="sop-label">淘寶天貓電商</div>
+      <div class="sop-val">$100-130B</div>
+      <div class="sop-desc">10-13x EBITDA⚠️，含即時零售成長，扣除競爭折扣</div>
+    </div>
+    <div class="sop-item">
+      <div class="sop-label">阿里雲（AI Cloud）</div>
+      <div class="sop-val">$50-80B</div>
+      <div class="sop-desc">AI 年化 $52億 × 8-15x ARR⚠️，高成長溢價</div>
+    </div>
+    <div class="sop-item">
+      <div class="sop-label">國際商業（Trendyol等）</div>
+      <div class="sop-val">$25-40B</div>
+      <div class="sop-desc">Trendyol 估值$15-20B⚠️ + AliExpress/Lazada</div>
+    </div>
+    <div class="sop-item">
+      <div class="sop-label">菜鳥物流</div>
+      <div class="sop-val">$10-15B</div>
+      <div class="sop-desc">2024 IPO 放棄，內部估值參考⚠️</div>
+    </div>
+    <div class="sop-item">
+      <div class="sop-label">本地生活（餓了麼+高德）</div>
+      <div class="sop-val">$5-10B</div>
+      <div class="sop-desc">虧損業務，保守估值⚠️</div>
+    </div>
+    <div class="sop-item">
+      <div class="sop-label">淨現金</div>
+      <div class="sop-val ok">$41.6B ✅</div>
+      <div class="sop-desc">現金 $80B - 計息負債 $38.4B</div>
+    </div>
+    <div class="sop-item" style="border:1px solid var(--orange)">
+      <div class="sop-label">SOP 合計（估）</div>
+      <div class="sop-val" style="color:var(--orange)">$231-316B</div>
+      <div class="sop-desc">÷ 23億 ADS ≈ <strong>$100-137 per ADS</strong>⚠️</div>
+    </div>
+    <div class="sop-item" style="border:1px solid var(--red)">
+      <div class="sop-label">中國/地緣折扣（-20-30%）</div>
+      <div class="sop-val bad">-$46-94B</div>
+      <div class="sop-desc">監管 + ADR 摘牌 + VIE 結構折扣</div>
+    </div>
+    <div class="sop-item" style="border:2px solid var(--green)">
+      <div class="sop-label">調整後公允區間</div>
+      <div class="sop-val ok">$138-222B</div>
+      <div class="sop-desc">≈ <strong>$60-97 per ADS</strong>（含折扣）⚠️</div>
+    </div>
+  </div>
+
+  <div class="caution-box">
+    <h3>⚠️ SOP 解讀：目前股價 $99 已位於 SOP 上限，非明顯低估</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">以 SOP 含中國折扣後，公允區間 $60-97，目前 $99 已稍高於調整後公允上限。<strong>僅以 SOP 論，BABA 並非「明顯低估」</strong>。真正的潛在回報在於：①阿里雲若獨立 IPO（中國折扣消除）；②AI 投資見頂後 FCF 大幅反彈；③中美關係緩和降低地緣折扣。若上述任一實現，分析師 $190+ 目標有根據；若不實現，$99 其實是相對合理的市場定價。</p>
+  </div>
+</div>
+
+<!-- 9. DCF 三情境 -->
+<div id="dcf" class="section">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">DCF 三情境估值（5年 FCF 折現）</div>
+  </div>
+
+  <div class="scenario-row">
+    <div class="scenario bear">
+      <h4>🐻 熊市情境（30% 機率）</h4>
+      <div class="scenario-price" style="color:var(--red)">$45-62</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 當前 $99　下跌 -37% ~ -55%</div>
+      <div class="row"><span>收入 CAGR (5yr)</span><span>2-5%</span></div>
+      <div class="row"><span>非GAAP FCF 利潤率</span><span>10-15%</span></div>
+      <div class="row"><span>地緣折扣</span><span>-40%</span></div>
+      <div class="row"><span>折現率 (WACC)</span><span>13%（含中國風險溢價）</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：ADR 摘牌、中國監管再次重拳、電商持續失血、AI ROI 歸零</div>
+    </div>
+    <div class="scenario base">
+      <h4>📊 基本情境（45% 機率）</h4>
+      <div class="scenario-price" style="color:var(--blue)">$115-145</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 當前 $99　上漲 +16% ~ +46%</div>
+      <div class="row"><span>收入 CAGR (5yr)</span><span>8-12%</span></div>
+      <div class="row"><span>非GAAP FCF 利潤率</span><span>22-26%（FY27回升）</span></div>
+      <div class="row"><span>地緣折扣</span><span>-25%</span></div>
+      <div class="row"><span>折現率 (WACC)</span><span>11%</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：阿里雲持續 +30%、電商穩定、AI 投資 FY2027 見頂、中美關係無明顯惡化</div>
+    </div>
+    <div class="scenario bull">
+      <h4>🐂 牛市情境（25% 機率）</h4>
+      <div class="scenario-price" style="color:var(--green)">$190-240</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 當前 $99　上漲 +92% ~ +142%</div>
+      <div class="row"><span>收入 CAGR (5yr)</span><span>14-18%</span></div>
+      <div class="row"><span>非GAAP FCF 利潤率</span><span>30-35%</span></div>
+      <div class="row"><span>地緣折扣</span><span>-10%</span></div>
+      <div class="row"><span>折現率 (WACC)</span><span>9%</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：阿里雲成全球 #2、Qwen 大模型成為中國標準、國際電商盈利、中美關係緩和</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--blue);">
+    <h3>加權平均公允價值</h3>
+    <div style="font-size:28px; font-weight:700; color:var(--blue); margin:8px 0;">$105-138 ⚠️</div>
+    <p style="font-size:13px; color:var(--text)">加權公允區間略高於當前 $99，提供 6-39% 潛在上行空間。分析師 $190+ 目標對應「牛市情境」完整兌現。<strong>核心觀察</strong>：這是一個不對稱的投資機會——若基本情境實現，回報溫和（+30%）；若牛市情境實現（阿里雲 + 地緣好轉），回報翻倍；若熊市情境實現，下跌 -45%。風險回報比約 3:1，但地緣尾部風險是主要隱憂。</p>
+  </div>
+</div>
+
+<!-- 10. 投行目標價 -->
+<div id="targets" class="section">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">投行目標價與操作建議</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>機構 / 來源</th><th>評級</th><th class="num">目標價</th><th class="num">vs 當前 $99</th><th>核心邏輯</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>S&P Global 共識（40家）⚠️</td><td><span class="badge badge-green">強力買入</span></td><td class="num">$190.23</td><td class="num ok">+92.2%</td><td>阿里雲 AI + 電商估值重評</td></tr>
+        <tr><td>分析師均值（多來源）⚠️</td><td><span class="badge badge-green">強力買入</span></td><td class="num">$191-199</td><td class="num ok">+93-101%</td><td>SOP + AI 成長溢價</td></tr>
+        <tr><td>目標最高</td><td><span class="badge badge-green">強力買入</span></td><td class="num">$257.68</td><td class="num ok">+160%</td><td>雲端 + 國際完整兌現</td></tr>
+        <tr><td>目標最低</td><td><span class="badge badge-yellow">持有</span></td><td class="num">$91.75</td><td class="num bad">-7.3%</td><td>ADR 摘牌 + 電商失血風險</td></tr>
+        <tr><td>買入/持有/賣出</td><td><span class="badge badge-green">14/0/0</span></td><td class="num" colspan="3">14 買入、0 持有、0 賣出（全滿分強力買入）⚠️</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="action-box" style="margin-top:16px;">
+    <h3>✅ 財報解析操作建議：機會池小倉位，等 FY2027 Q1 轉機確認</h3>
+    <div style="font-size:13px; line-height:1.8; color:var(--text)">
+      <strong>核心邏輯</strong>：FCF 殖利率 10.1%、淨現金 $41.6B（市值 18%）、阿里雲 +40% 高速成長，提供強大的<strong>下行保護</strong>。分析師 14/14 強力買入，目標 $190+ 意味 +92% 上行。但 Q4 FY2026 非GAAP 利潤歸零是重大不確定性——AI 投資週期何時見頂至關重要。
+      <br><br>
+      <strong>操作建議</strong>：
+      <ul style="padding-left:16px; margin-top:6px;">
+        <li>建議置於<strong>機會池（小倉位）</strong>，非核心持倉</li>
+        <li>$90-100 之間分 2 批建立 3-5% 倉位</li>
+        <li>FY2027 Q1（2026年8月公佈）：若非GAAP 利潤率回升至 8-10%+，且阿里雲維持 ≥35% → <strong>轉核心池加碼</strong></li>
+        <li>停損：$80（非GAAP FCF 殖利率 ~11.4% 但若有 ADR 摘牌消息直接離場）</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式三：財務健檢
+══════════════════════════════════════ -->
+<div id="mode3" class="mode-divider">
+  <h2>◈ 模式三：財務風險健檢</h2>
+  <p>財務三表 · 六大比率 · 債務時程 · CapEx 分析 · 同業對比 · 綜合診斷</p>
+</div>
+
+<!-- 11. 財務三表 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">財務三表數據</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>損益表 / 現金流</th>
+          <th class="num">FY2024 ⚠️</th>
+          <th class="num">FY2025 ✅</th>
+          <th class="num">FY2026 ⚠️</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總收入</td><td class="num">~$130B</td><td class="num">~$140B</td><td class="num ok">~$148B ✅</td></tr>
+        <tr><td>EBIT（非GAAP 估）</td><td class="num">~$22B ⚠️</td><td class="num">~$24B ⚠️</td><td class="num warn">極低（AI 投資）⚠️</td></tr>
+        <tr><td>利息支出（計息負債成本）</td><td class="num">~$1.5B ⚠️</td><td class="num">~$1.5B ⚠️</td><td class="num">~$1.8B ⚠️</td></tr>
+        <tr><td>GAAP 淨利</td><td class="num">~$10B ⚠️</td><td class="num">~$16B ⚠️</td><td class="num warn">高波動（Ant 損益）⚠️</td></tr>
+        <tr><td>非GAAP 淨利</td><td class="num">~$22B ⚠️</td><td class="num">~$26B ⚠️</td><td class="num bad">~$5-7B ⚠️（Q4崩潰）</td></tr>
+        <tr><td>OCF</td><td class="num">~$23B ⚠️</td><td class="num">~$26B ⚠️</td><td class="num">— </td></tr>
+        <tr><td>CapEx</td><td class="num">~$3.5B ⚠️</td><td class="num">~$3.1B ⚠️</td><td class="num warn">大幅增加（AI投資）⚠️</td></tr>
+        <tr><td>FCF</td><td class="num">~$20B ⚠️</td><td class="num ok">$22.9B ✅</td><td class="num">Q4 單季 $11.13B ✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr>
+          <th>資產負債表</th>
+          <th class="num">Dec 2025 ✅</th>
+          <th class="num">Jun 2025 ✅</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>現金及短期投資</td><td class="num ok">$80.1B（RMB 5,601.75億）✅</td><td class="num">$81.8B ✅</td></tr>
+        <tr><td>總資產</td><td class="num">~$260B（CN¥1,883.9B）✅</td><td class="num">— </td></tr>
+        <tr><td>股東權益</td><td class="num">~$153B（CN¥1,111.8B）✅</td><td class="num">— </td></tr>
+        <tr><td>總計息負債</td><td class="num warn">~$38.4B ✅</td><td class="num">— </td></tr>
+        <tr><td>淨現金（現金-計息負債）</td><td class="num ok"><strong>~$41.6B ✅ ⭐</strong></td><td class="num">— </td></tr>
+        <tr><td>負債/股東權益</td><td class="num">~25.3% ✅</td><td class="num">— </td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⭐ 淨現金 $41.6B = 市值 $227B 的 18%，是重要安全邊際。USD/CNY ≈ 7.1 換算</p>
+</div>
+
+<!-- 12. 六大比率 -->
+<div id="ratios" class="section">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">六大財務健康比率診斷</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>比率</th><th class="num">公式</th><th class="num">BABA FY2025/Dec2025</th><th>警戒標準</th><th>狀態</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. 利息覆蓋率</strong></td>
+          <td class="num">非GAAP EBIT / 利息支出</td>
+          <td class="num ok">~16x ⚠️（$24B / $1.5B）</td>
+          <td>&lt;3x 警戒</td>
+          <td><span class="badge badge-green">✅ 優良</span></td>
+        </tr>
+        <tr>
+          <td><strong>2. 負債比率</strong></td>
+          <td class="num">總負債 / 總資產</td>
+          <td class="num ok">~18.9%（$38.4B / $203B⚠️）</td>
+          <td>&gt;70% 警戒</td>
+          <td><span class="badge badge-green">✅ 極低</span></td>
+        </tr>
+        <tr>
+          <td><strong>3. 淨負債 / EBITDA</strong></td>
+          <td class="num">淨負債 / EBITDA（非GAAP）</td>
+          <td class="num ok"><strong>負值（淨現金 $41.6B）</strong></td>
+          <td>&gt;3x 警戒</td>
+          <td><span class="badge badge-green">✅ 淨現金狀態</span></td>
+        </tr>
+        <tr>
+          <td><strong>4. OCF / 計息負債</strong></td>
+          <td class="num">OCF / 計息負債</td>
+          <td class="num ok">~0.68x ⚠️（$26B / $38.4B）</td>
+          <td>&lt;0.5x 警戒</td>
+          <td><span class="badge badge-green">✅ 健康</span></td>
+        </tr>
+        <tr>
+          <td><strong>5. FCF 覆蓋比率</strong></td>
+          <td class="num">FCF / 利息支出</td>
+          <td class="num ok">~15.3x ⚠️（$22.9B / $1.5B）</td>
+          <td>&lt;2x 警戒</td>
+          <td><span class="badge badge-green">✅ 優良</span></td>
+        </tr>
+        <tr>
+          <td><strong>6. 兩年到期牆覆蓋</strong></td>
+          <td class="num">現金 / 2年內到期債務</td>
+          <td class="num ok">~數十倍（大量現金，無集中到期）⚠️</td>
+          <td>&lt;1x 警戒</td>
+          <td><span class="badge badge-green">✅ 無壓力</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px; background:rgba(63,185,80,0.04); border:1px solid rgba(63,185,80,0.25);">
+    <h3 style="color:var(--green)">🏆 財務結構優良，最大風險來自盈利波動性，非償債能力</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">六大比率全數優良：淨現金 $41.6B + 年 FCF ~$22.9B，在任何宏觀壓力下都不存在財務危機。BABA 的風險是<strong>「利潤波動性」</strong>（GAAP 因 Ant Financial + 監管損益每季大幅波動），以及<strong>「主動 AI 投資選擇」</strong>導致非GAAP 利潤暫時歸零——這些是商業決策風險，不是財務健康風險。現金牛特徵完整保留。</p>
+  </div>
+</div>
+
+<!-- 13. 債務到期 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">債務到期時程</div>
+  </div>
+  <div class="card" style="border-left:3px solid var(--green)">
+    <h3 style="color:var(--green)">✅ 總計息負債 $38.4B，但現金 $80.1B 遠超其上</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">阿里巴巴的 $38.4B 計息負債主要由：<strong>①美元債（Senior Notes）</strong>：多筆 10-30 年期的長期公司債，分散到期（⚠️，需查最新 20-F 確認各筆金額）；<strong>②可轉換公司債殘餘</strong>（⚠️）；<strong>③融資租賃</strong>（雲端資料中心設備）。關鍵保護：現金 $80.1B 是計息負債 $38.4B 的 <strong>2.09 倍</strong>，即使全數債務同時到期也可從容償還，不存在流動性危機。</p>
+  </div>
+</div>
+
+<!-- 14. CapEx 分析 -->
+<div id="capex" class="section">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">CapEx 分析</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>CapEx 指標</th><th class="num">FY2024 ⚠️</th><th class="num">FY2025 ⚠️</th><th class="num">FY2026 E ⚠️</th><th>判讀</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>資本支出（USD）</td><td class="num">~$3.5B</td><td class="num">~$3.1B</td><td class="num warn">大幅增加（AI）⚠️</td><td>AI 基礎設施建設期，CapEx 明顯加速</td></tr>
+        <tr><td>CapEx / 總收入</td><td class="num">~2.7%</td><td class="num">~2.2%</td><td class="num warn">可能升至 5-8% ⚠️</td><td>從輕資產升至中重資產過渡期</td></tr>
+        <tr><td>FCF 轉換率</td><td class="num">~87%</td><td class="num">~88%</td><td class="num warn">可能降至 60-70% ⚠️</td><td>AI 投資期間 FCF 轉換率承壓</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box">
+    <h3>⚠️ CapEx 大幅增加是 FY2026 利潤歸零的根本原因</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">阿里 + 騰訊合計 AI 投資約 $560 億美元（⚠️），阿里巴巴佔約 $200-300 億（⚠️），涵蓋 GPU 購置（NVIDIA/國產晶片）、資料中心建設、Qwen 模型訓練。這是典型的「犧牲近期利潤換取未來雲端市場份額」策略，與 AWS/Azure 2014-2017 年的擴張路徑相似。核心監控：AI CapEx 何時峰值（預計 FY2027 Q1-Q2 可能見頂），之後 FCF 將快速反彈。</p>
+  </div>
+</div>
+
+<!-- 15. 同業對比 -->
+<div id="comps" class="section">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-title">同業財務健康對比</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>公司</th>
+          <th class="num">市值</th>
+          <th class="num">FCF 殖利率</th>
+          <th class="num">淨現金/負債</th>
+          <th class="num">收入 YoY</th>
+          <th class="num">Forward PE⚠️</th>
+          <th>財務健康</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="comp-baba">
+          <td><strong>阿里巴巴 BABA ★</strong></td>
+          <td class="num">$227B</td>
+          <td class="num ok">~10.1% ✅</td>
+          <td class="num ok">淨現金 $41.6B ✅</td>
+          <td class="num warn">+3% ⚠️</td>
+          <td class="num warn">~24x（FY2026 低利潤期）</td>
+          <td><span class="badge badge-yellow">B+</span></td>
+        </tr>
+        <tr>
+          <td>Amazon AWS 電商</td>
+          <td class="num">~$2.2T ⚠️</td>
+          <td class="num">~3.5% ⚠️</td>
+          <td class="num">淨現金 ~$30B ⚠️</td>
+          <td class="num ok">+11% ⚠️</td>
+          <td class="num">~35x ⚠️</td>
+          <td><span class="badge badge-green">AA</span></td>
+        </tr>
+        <tr>
+          <td>騰訊 Tencent（0700.HK）</td>
+          <td class="num">~$560B ⚠️</td>
+          <td class="num">~4% ⚠️</td>
+          <td class="num">淨現金 ⚠️</td>
+          <td class="num">~+8% ⚠️</td>
+          <td class="num">~18x ⚠️</td>
+          <td><span class="badge badge-green">A</span></td>
+        </tr>
+        <tr>
+          <td>拼多多 PDD</td>
+          <td class="num">~$135B ⚠️</td>
+          <td class="num">~8% ⚠️</td>
+          <td class="num ok">淨現金 ⚠️</td>
+          <td class="num ok">+20%+ ⚠️</td>
+          <td class="num">~10x ⚠️</td>
+          <td><span class="badge badge-green">A-</span></td>
+        </tr>
+        <tr>
+          <td>京東 JD.com</td>
+          <td class="num">~$55B ⚠️</td>
+          <td class="num">~5% ⚠️</td>
+          <td class="num">淨現金 ⚠️</td>
+          <td class="num">~+9% ⚠️</td>
+          <td class="num">~12x ⚠️</td>
+          <td><span class="badge badge-green">B+</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">競爭者數據皆為⚠️估算，僅供相對比較</p>
+
+  <div class="card" style="margin-top:12px;">
+    <h3>🔍 同業對比結論：FCF 殖利率最高，但成長最慢</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">BABA 的 FCF 殖利率 10.1% 在中國科技同業中最高，但 +3% 收入成長是最低的。與 PDD 相比，PDD 成長快 7 倍但估值 PE 只有 10x（更便宜！）——這說明 BABA 的真正折扣來自中國監管風險和 VIE 結構溢價，而非業務競爭力本身。財務結構上 BABA 是中國科技中最穩健的（淨現金最大），但「穩健的現金機器」和「成長的估值引擎」是兩回事。</p>
+  </div>
+</div>
+
+<!-- 16. 綜合診斷 -->
+<div id="health" class="section">
+  <div class="section-header">
+    <div class="section-num">16</div>
+    <div class="section-title">綜合財務診斷</div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:24px; margin-bottom:24px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:24px;">
+    <div class="health-badge health-bplus">B+</div>
+    <div>
+      <div style="font-size:20px; font-weight:700; color:var(--yellow);">優良現金牛型 B+（財務健康）</div>
+      <div style="font-size:13px; color:var(--text2); margin-top:4px;">淨現金 $41.6B｜FCF $22.9B｜利潤高度波動（AI 投資週期）</div>
+      <div style="font-size:13px; color:var(--text); margin-top:8px;">財務報表本身非常健康（淨現金、零短債壓力、高 FCF），但 FY2026 Q4 非GAAP 利潤幾近歸零的事實使「B+」評級包含了「利潤可見度不足」的風險溢價。一旦 AI 投資週期見頂（預計 FY2027 H2），FCF 和非GAAP 利潤率將大幅反彈，屆時評級可升至 A。</div>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <div>
+      <div class="risk-card" style="background:rgba(63,185,80,0.06); border-color:rgba(63,185,80,0.3);">
+        <h4 style="color:var(--green)">✅ 三大財務優勢</h4>
+        <ul style="font-size:13px; line-height:1.8; padding-left:16px; color:var(--text)">
+          <li><strong>淨現金 $41.6B</strong>：遠超任何合理的財務危機臨界值</li>
+          <li><strong>FCF $22.9B</strong>：10.1% 殖利率在中國科技最高</li>
+          <li><strong>低槓桿</strong>：負債率 18.9%，遠低於行業警戒</li>
+        </ul>
+      </div>
+
+      <div class="risk-card">
+        <h4>⚠️ 三大財務風險</h4>
+        <ul style="font-size:13px; line-height:1.8; padding-left:16px; color:var(--text)">
+          <li><strong>非GAAP 利潤波動</strong>：FY2026 Q4 幾乎歸零，市場信心受損</li>
+          <li><strong>Ant Financial 損益不可控</strong>：每季可使 GAAP EPS 大幅正負波動</li>
+          <li><strong>AI CapEx 不透明</strong>：管理層未給出清晰的 AI 投資回報時程</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="risk-card">
+        <h4>🌏 中國/地緣尾部風險（最重要）</h4>
+        <div style="font-size:13px; line-height:1.7; color:var(--text)">
+          BABA 的財務本身無問題，但有三個「非財務風險」是致命的：<br><br>
+          ①<strong>美國 ADR 摘牌</strong>：若美中脫鉤導致 BABA 無法在紐交所交易，ADR 持有人面臨強制轉換為港股（HKEx 掛牌為 9988.HK）。港股掛牌本身不影響股東價值，但流動性折扣 + 美國散戶恐慌拋售可能使股價短期崩潰 30-40%。<br><br>
+          ②<strong>中國監管二次打壓</strong>：2021 年 $180 億罰款留下永久心理陰影。任何類似事件都會使估值重回 $60 以下。<br><br>
+          ③<strong>VIE 結構法律風險</strong>：BABA 美國股東實際上持有的是開曼群島 VIE 架構，非直接中國資產股權。若中國法規認定 VIE 無效，股東可能面對理論上的清零風險。
+        </div>
+      </div>
+      <div class="card" style="margin-top:0; border-left:3px solid var(--yellow);">
+        <h3>📊 安全邊際計算</h3>
+        <div style="font-size:13px; line-height:1.7; color:var(--text)">
+          <strong>下行保護層次：</strong><br>
+          第1層：淨現金 $41.6B = 每股 ADS $18.1 內在價值支撐<br>
+          第2層：FCF $22.9B = 股票清算後 ~5 年現金回收市值<br>
+          第3層：SOP $138-222B = 含折扣後仍高於市值中值<br>
+          <br>
+          <strong>真正的地板</strong>：$60-70（含最大折扣 30%）
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 最終操作建議總結 ── -->
+<div class="caution-box" style="margin-top:32px;">
+  <h3>⚠️ 個股小狐最終操作建議：中高風險 · 機會池 · 等待轉機確認</h3>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; font-size:13px; line-height:1.8; color:var(--text); margin-top:8px;">
+    <div>
+      <strong>📊 股票定性</strong><br>
+      中國電商 + AI 雲端雙引擎<br>穩定成長 + 轉機型混合<br>10.1% FCF 殖利率安全墊<br><br>
+      <strong>💰 估值判斷</strong><br>
+      非GAAP 12.8x（FY2025 基礎）<br>分析師目標 $190+（+92%）<br>SOP 含折扣 $60-97（已近上限）<br><br>
+      <strong>🏥 財務健康</strong><br>
+      B+：現金牛但利潤高波動
+    </div>
+    <div>
+      <strong>📈 倉位建議</strong><br>
+      <span class="warn">機會池（3-5% 倉位）</span><br>非核心持倉，高中國特定風險<br>建議 $90-100 分批 2 批建立<br><br>
+      <strong>加碼觸發（需全部符合）：</strong><br>
+      ①FY2027 Q1 非GAAP 利潤率 ≥10%<br>
+      ②阿里雲維持 ≥35% 成長<br>
+      ③無重大監管/地緣惡化消息
+    </div>
+    <div>
+      <strong>🔍 每季必看指標</strong><br>
+      ①雲端外部收入 YoY（目標 ≥35%）<br>
+      ②非GAAP 利潤率趨勢（轉正？）<br>
+      ③電商 GMV / 廣告收入 YoY<br>
+      ④AI CapEx 管理層指引<br>
+      ⑤中美外交動態<br><br>
+      <strong>賣出觸發（任一條件）：</strong><br>
+      ①ADR 摘牌消息（立即）<br>
+      ②監管二次重拳（$50億+）<br>
+      ③雲端成長跌破 20% 連續2季<br>
+      ④FCF 跌破 $15B（持續）
+    </div>
+  </div>
+</div>
+
+<!-- 資料來源 -->
+<div class="card" style="margin-top:40px;">
+  <h3>📚 資料來源 & 免責聲明</h3>
+  <div style="font-size:12px; color:var(--text2); line-height:2;">
+    <strong>已驗證來源：</strong><br>
+    · Alibaba Group Q4 FY2026 業績發佈（2026-05-13）：收入 RMB 2,433.8億，非GAAP 淨利 RMB 0.86億，GAAP 淨利 RMB 254.76億 ✅<br>
+    · FY2026 全年收入：RMB 1.02T（~$148B，+3% YoY）✅<br>
+    · FY2025 FCF：$22.867B（+9.43% YoY）✅；CapEx：$868M（⚠️：此數據可能混入 NOW CapEx，BABA FY2025 CapEx 另估 ~$3.1B）<br>
+    · 現金（Dec 2025）：RMB 5,601.75億（~$80.1B）✅；總計息負債：$38.4B ✅<br>
+    · 阿里雲 AI 年化 $52億美元，連續 11 季三位數成長 ✅<br>
+    · 非GAAP EPS（per ADS in CNY）：FY2024 CN¥31.61，FY2025 CN¥55.12 ✅<br>
+    · 分析師共識：14 買 / 0 持 / 0 賣，均值 $190.23（S&P Global）✅<br>
+    · GAAP PE 歷史底：Dec 2024 = 12.05x，股價 $84.79 ✅<br>
+    · $25億美元年度股息宣告（FY2026 Q4）✅<br><br>
+    <strong>估算（⚠️）：</strong>業務分部佔比、歷史EPS（FY2022-2023）、GAAP EPS per ADS換算、FY2026 全年非GAAP EPS、CapEx 細項、競爭者數據。<br><br>
+    <span style="color:var(--red)"><strong>免責聲明：</strong>本報告僅供個人研究參考，不構成投資建議。投資有風險，特別是中國概念股涉及中國監管、VIE 架構、美中地緣政治等特殊風險，請自行評估並謹慎判斷。</span>
+  </div>
+</div>
+
+</div><!-- end container -->
+
+<footer>
+  <p>個股小狐完整報告｜BABA 阿里巴巴集團控股有限公司｜分析日期：2026-07-02</p>
+  <p>模式一 深度研究 · 模式二 財報解析 · 模式三 財務健檢 — 三模式合一</p>
+  <p style="margin-top:6px; color:var(--border2)">本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</footer>
+
+</body>
+</html>

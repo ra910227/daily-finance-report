@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日板塊流動報告 — 2026年07月08日</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg2: #1a1d27;
+    --bg3: #222535;
+    --border: #2e3250;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --accent: #6366f1;
+    --accent2: #818cf8;
+    --red: #f87171;
+    --green: #4ade80;
+    --gold: #fbbf24;
+    --orange: #fb923c;
+    --blue: #60a5fa;
+    --purple: #c084fc;
+    --teal: #2dd4bf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system,'PingFang TC','Microsoft JhengHei',sans-serif; font-size: 14px; line-height: 1.6; }
+
+  .header { background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #1e293b 100%); padding: 28px 32px 20px; border-bottom: 1px solid var(--accent); }
+  .header h1 { font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+  .header .meta { color: var(--text2); font-size: 12px; margin-top: 4px; }
+  .header .indices { display: flex; gap: 24px; margin-top: 16px; flex-wrap: wrap; }
+  .idx { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 8px 16px; }
+  .idx .name { font-size: 11px; color: var(--text2); }
+  .idx .val { font-size: 16px; font-weight: 700; color: var(--text); }
+  .idx .chg { font-size: 12px; }
+
+  .summary-box { background: linear-gradient(90deg, #1e3a5f 0%, #1a1d27 100%); border-left: 4px solid var(--accent); margin: 20px 24px; padding: 14px 20px; border-radius: 0 8px 8px 0; font-size: 15px; font-weight: 600; color: #e0e7ff; }
+
+  .container { padding: 0 24px 40px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--accent2); padding: 8px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title .icon { font-size: 18px; }
+
+  .dual-card { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+  .card.inflow { border-top: 3px solid var(--red); }
+  .card.outflow { border-top: 3px solid var(--green); }
+  .card h3 { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+  .card h3.in { color: var(--red); }
+  .card h3.out { color: var(--green); }
+  .flow-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #1e2233; }
+  .flow-item:last-child { border-bottom: none; }
+  .flow-name { color: var(--text); font-size: 13px; }
+  .flow-pct { font-weight: 700; font-size: 14px; }
+  .up { color: var(--red); }
+  .dn { color: var(--green); }
+
+  table { width: 100%; border-collapse: collapse; background: var(--bg2); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  td { padding: 8px 10px; border-bottom: 1px solid #1a1d27; font-size: 13px; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #1e2233; }
+  .code { font-family: monospace; font-weight: 700; color: var(--blue); font-size: 13px; }
+  .name-cn { color: var(--text2); font-size: 11px; }
+  .trend-badge { font-size: 11px; padding: 2px 6px; border-radius: 4px; display: inline-block; }
+  .trend-strong { background: #1e3a2f; color: var(--green); }
+  .trend-end { background: #3a1e1e; color: var(--red); }
+  .trend-flat { background: #2a2a3a; color: var(--text2); }
+
+  .alert-box { background: #2a1a0a; border: 1px solid #7c4a15; border-radius: 10px; padding: 14px 16px; margin-top: 14px; }
+  .alert-box h4 { color: var(--orange); font-size: 13px; margin-bottom: 8px; }
+  .etf-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .etf-tag { background: #3a2200; border: 1px solid #7c4a15; border-radius: 6px; padding: 4px 10px; font-size: 12px; color: var(--orange); font-family: monospace; }
+
+  .cat-rank { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+  .cat-row { display: flex; align-items: center; gap: 10px; }
+  .cat-bar-bg { flex: 1; background: #1e2233; border-radius: 4px; height: 18px; overflow: hidden; }
+  .cat-bar { height: 100%; background: var(--accent); border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; color: #fff; font-weight: 600; }
+  .cat-label { width: 160px; font-size: 12px; color: var(--text); text-align: right; }
+  .cat-count { width: 24px; font-size: 12px; color: var(--accent2); font-weight: 700; text-align: center; }
+
+  .cross-table { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .cross-col { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .cross-col .col-header { background: var(--bg3); padding: 8px 12px; font-size: 12px; font-weight: 700; color: var(--accent2); }
+  .cross-item { display: flex; justify-content: space-between; padding: 6px 12px; border-bottom: 1px solid #1a1d27; font-size: 12px; }
+  .cross-item:last-child { border-bottom: none; }
+  .cross-diff { font-weight: 700; font-size: 13px; }
+  .diff-pos { color: #fbbf24; }
+  .diff-neg { color: #a78bfa; }
+
+  .radar-table th { background: #1a2040; }
+  .state-new { background: #0f2a1a; color: #4ade80; font-size: 11px; padding: 2px 6px; border-radius: 4px; display: inline-block; }
+  .state-precursor { background: #1a1a0a; color: var(--gold); font-size: 11px; padding: 2px 6px; border-radius: 4px; display: inline-block; border: 1px solid var(--gold); }
+  .state-grad { background: #1a0a2a; color: var(--purple); font-size: 11px; padding: 2px 6px; border-radius: 4px; display: inline-block; }
+  .state-return { background: #2a1a0a; color: var(--orange); font-size: 11px; padding: 2px 6px; border-radius: 4px; display: inline-block; }
+  .state-cool { background: #1a1a2a; color: var(--text2); font-size: 11px; padding: 2px 6px; border-radius: 4px; display: inline-block; }
+  .state-warn { background: #3a1e1e; color: var(--red); font-size: 11px; padding: 2px 6px; border-radius: 4px; display: inline-block; }
+  .arrow-up { color: var(--red); font-weight: 700; }
+  .arrow-dn { color: var(--green); font-weight: 700; }
+  .arrow-flat { color: var(--text2); }
+
+  .precursor-notice { background: linear-gradient(90deg, #2a2000, #1a1a0a); border: 1px solid var(--gold); border-radius: 10px; padding: 14px 16px; margin-top: 14px; }
+  .precursor-notice h4 { color: var(--gold); margin-bottom: 8px; font-size: 13px; }
+  .precursor-list { display: flex; flex-direction: column; gap: 6px; }
+  .precursor-item { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+  .star { color: var(--gold); font-size: 16px; }
+
+  .conclusion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .concl-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .concl-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+  .concl-card ul { list-style: none; padding: 0; }
+  .concl-card li { font-size: 12px; color: var(--text2); padding: 4px 0; border-bottom: 1px solid #1a1d27; }
+  .concl-card li:last-child { border-bottom: none; }
+  .concl-card li::before { content: '▸ '; color: var(--accent2); }
+
+  .reco-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .reco-card { background: var(--bg2); border-radius: 10px; padding: 16px; }
+  .reco-card.risk { border: 1px solid #7c1d1d; border-top: 3px solid var(--green); }
+  .reco-card.oppo { border: 1px solid #1d3a7c; border-top: 3px solid var(--blue); }
+  .reco-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+  .reco-card h4.risk-h { color: var(--green); }
+  .reco-card h4.oppo-h { color: var(--blue); }
+  .reco-item { font-size: 12px; color: var(--text2); padding: 5px 0; border-bottom: 1px solid #1a1d27; }
+  .reco-item:last-child { border-bottom: none; }
+  .tag { font-size: 10px; padding: 1px 5px; border-radius: 3px; display: inline-block; margin-left: 4px; }
+  .tag-warn { background: #3a1e1e; color: var(--red); }
+  .tag-oppo { background: #1e3a1e; color: var(--teal); }
+
+  .news-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .news-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .news-box h4 { font-size: 13px; color: var(--text2); margin-bottom: 8px; }
+  .news-unavail { color: var(--text2); font-size: 12px; font-style: italic; background: var(--bg3); padding: 10px; border-radius: 6px; }
+
+  .footer { background: var(--bg3); border-top: 1px solid var(--border); padding: 14px 24px; font-size: 11px; color: var(--text2); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .footer .warn { color: var(--orange); }
+
+  .rank-num { color: var(--text2); font-size: 12px; font-weight: 700; }
+  .days-badge { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 11px; color: var(--text2); }
+  .days-badge.days2 { border-color: var(--blue); color: var(--blue); background: #0a1a2a; }
+  .days-badge.days3 { border-color: var(--gold); color: var(--gold); background: #1a1a0a; }
+  .days-badge.days4 { border-color: var(--red); color: var(--red); background: #2a0a0a; }
+  .days-badge.days5 { border-color: var(--purple); color: var(--purple); background: #1a0a2a; }
+
+  @media (max-width: 768px) {
+    .dual-card, .cross-table, .conclusion-grid, .reco-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 12px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>📊 今日板塊流動報告</h1>
+  <div class="meta">2026年07月08日 ｜ 資料快照：2026-07-07（二）收盤 ~20:47 美東時間 ｜ 數據來源：富途牛牛</div>
+  <div class="indices">
+    <div class="idx"><div class="name">道瓊斯</div><div class="val">52,925.15</div><div class="chg dn">-130.76 -0.25%</div></div>
+    <div class="idx"><div class="name">納斯達克</div><div class="val">25,818.69</div><div class="chg dn">-302.47 -1.16%</div></div>
+    <div class="idx"><div class="name">標普500</div><div class="val">7,503.85</div><div class="chg dn">-33.58 -0.45%</div></div>
+  </div>
+</div>
+
+<!-- ONE-SENTENCE SUMMARY -->
+<div class="summary-box">
+  🎯 大盤全面收黑（那指-1.16%領跌），存儲/半導體晶片股全面重挫（INTC -9.66%、SNDK -7.26%、MU -4.71%、AMD -6.51%、槓桿SOXL單日-15.09%），惟NVDA逆勢+0.71%意外抗跌、資訊熱度91全榜居次；資金同時明顯轉向油氣鏈避險（美國恢復對伊朗石油制裁並展開軍事打擊，WTI原油漲近3%），行業熱力圖前三大流入板塊全為油氣主題（油氣勘探+3.49%、綜合油氣+3.47%、化學製品+3.45%），與晶片股崩跌形成鮮明資金蹺蹺板；SKHY(SK海力士)連續第4日在雷達且搜索熱度連4日走升(34→36→42→48)，週五Nasdaq掛牌倒數，為本輪唯一仍滿足嚴格前兆條件標的；AAOI原本連3日搜索攀升的前兆訊號今日逆轉降溫，光通訊主線熱度需留意是否退燒；IBM已擠進成交額前50正式畢業，企業AI雲主題資金確認進場。
+</div>
+
+<div class="container">
+
+<!-- SECTION 1: HEATMAP -->
+<div class="section">
+  <div class="section-title"><span class="icon">🌡️</span>第一層｜行業熱力圖（市值加權，資金流向）</div>
+  <div class="dual-card">
+    <div class="card inflow">
+      <h3 class="in">🔺 流入前三（漲幅最大板塊）</h3>
+      <div class="flow-item"><span class="flow-name">油氣勘探與開發（代表股：Battalion Oil +25.35%）</span><span class="flow-pct up">+3.49%</span></div>
+      <div class="flow-item"><span class="flow-name">綜合油氣（代表股：Sky Quarry +41.51%）</span><span class="flow-pct up">+3.47%</span></div>
+      <div class="flow-item"><span class="flow-name">化學製品（代表股：歐林 +5.01%）</span><span class="flow-pct up">+3.45%</span></div>
+    </div>
+    <div class="card outflow">
+      <h3 class="out">🔻 流出前三（跌幅最大板塊）</h3>
+      <div class="flow-item"><span class="flow-name">機場和航空服務（代表股：Volato Group +0.49%）</span><span class="flow-pct dn">-6.51%</span></div>
+      <div class="flow-item"><span class="flow-name">半導體設備與材料（代表股：大全新能源 -1.14%）</span><span class="flow-pct dn">-6.05%</span></div>
+      <div class="flow-item"><span class="flow-name">白銀（代表股：First Majestic Silver -4.97%）</span><span class="flow-pct dn">-5.70%</span></div>
+    </div>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">
+    延伸觀察：電氣設備及零件-5.62%、抵押貸款金融-5.48%、其他貴金屬和採礦-4.58%、電子元件-4.51%、航空航天與國防-4.48%、可再生能源公用事業-4.39%、計算機硬件-4.10%皆位居跌幅前段；半導體板塊本身-2.69%（上漲4檔/下跌67檔，代表股聰鏈集團+3.42%），與第2-3層晶片股全面重挫呼應。頁岩油+3.85%、天然氣+3.62%等概念同步走強，與油氣鏈行業板塊互相印證，美伊軍事衝突升級為明確催化劑。
+  </div>
+</div>
+
+<!-- SECTION 2: TOP TURNOVER -->
+<div class="section">
+  <div class="section-title"><span class="icon">💰</span>第二層｜成交額榜前10（含多日漲跌趨勢分析）</div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>代碼</th><th>類別</th><th>今日</th><th>5日</th><th>20日</th><th>60日</th><th>趨勢判斷</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rank-num">1</td>
+        <td><span class="code">MU</span><div class="name-cn">美光科技</div></td>
+        <td>記憶體/HBM</td>
+        <td class="dn">-4.71%</td>
+        <td class="dn">-18.05%</td>
+        <td class="up">+8.62%</td>
+        <td class="up">+122.66%</td>
+        <td><span class="trend-badge trend-end">60日巨幅漲後近期急殺，趨勢末端未歇</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">2</td>
+        <td><span class="code">SPY</span><div class="name-cn">標普500ETF-SPDR</div></td>
+        <td>大盤ETF</td>
+        <td class="dn">-0.48%</td>
+        <td class="up">+0.91%</td>
+        <td class="up">+1.64%</td>
+        <td class="up">+10.26%</td>
+        <td><span class="trend-badge trend-flat">大盤ETF</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">3</td>
+        <td><span class="code">QQQ</span><div class="name-cn">納指100ETF-Invesco QQQ Trust</div></td>
+        <td>科技ETF</td>
+        <td class="dn">-1.85%</td>
+        <td class="dn">-2.02%</td>
+        <td class="up">+0.73%</td>
+        <td class="up">+16.39%</td>
+        <td><span class="trend-badge trend-flat">科技ETF，短線轉弱</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">4</td>
+        <td><span class="code">NVDA</span><div class="name-cn">英偉達</div></td>
+        <td>AI晶片</td>
+        <td class="up">+0.71%</td>
+        <td class="up">+1.01%</td>
+        <td class="dn">-3.98%</td>
+        <td class="up">+7.20%</td>
+        <td><span class="trend-badge trend-strong">晶片股全面重挫中逆勢抗跌</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">5</td>
+        <td><span class="code">SNDK</span><div class="name-cn">閃迪</div></td>
+        <td>NAND/儲存</td>
+        <td class="dn">-7.26%</td>
+        <td class="dn">-21.10%</td>
+        <td class="up">+3.74%</td>
+        <td class="up">+89.97%</td>
+        <td><span class="trend-badge trend-end">60日巨幅漲後急殺，與MU同慣性</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">6</td>
+        <td><span class="code">INTC</span><div class="name-cn">英特爾</div></td>
+        <td>半導體/CPU</td>
+        <td class="dn">-9.66%</td>
+        <td class="dn">-16.19%</td>
+        <td class="up">+11.31%</td>
+        <td class="up">+78.86%</td>
+        <td><span class="trend-badge trend-end">今日跌幅居前10之冠，趨勢末端明確</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">7</td>
+        <td><span class="code">TSLA</span><div class="name-cn">特斯拉</div></td>
+        <td>電動車</td>
+        <td class="dn">-4.02%</td>
+        <td class="dn">-2.17%</td>
+        <td class="up">+3.04%</td>
+        <td class="up">+16.57%</td>
+        <td><span class="trend-badge trend-flat">短線轉弱，中長期仍偏多</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">8</td>
+        <td><span class="code">AMD</span><div class="name-cn">美國超微公司</div></td>
+        <td>半導體/AI晶片</td>
+        <td class="dn">-6.51%</td>
+        <td class="dn">-4.33%</td>
+        <td class="up">+10.66%</td>
+        <td class="up">+118.10%</td>
+        <td><span class="trend-badge trend-end">跟隨晶片股賣壓，60日巨幅漲後修正</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">9</td>
+        <td><span class="code">AAPL</span><div class="name-cn">蘋果</div></td>
+        <td>消費電子/硬體</td>
+        <td class="dn">-0.64%</td>
+        <td class="up">+10.26%</td>
+        <td class="up">+1.08%</td>
+        <td class="up">+19.37%</td>
+        <td><span class="trend-badge trend-strong">5日逆勢大漲，與晶片股走勢脫鉤</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">10</td>
+        <td><span class="code">SOXL</span><div class="name-cn">三倍做多半導體ETF-Direxion</div></td>
+        <td>槓桿ETF（3x半導體）</td>
+        <td class="dn">-15.09%</td>
+        <td class="dn">-30.12%</td>
+        <td class="dn">-9.46%</td>
+        <td class="up">+129.62%</td>
+        <td><span class="trend-badge trend-end">槓桿放大半導體崩跌，5日近腰斬</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">
+    <strong style="color:var(--accent2);">趨勢解讀：</strong>成交額前10中有6檔為記憶體/半導體相關（MU/SNDK/INTC/AMD/SOXL+QQQ科技ETF），今日跌幅普遍在4.7%-15%，5日累計跌幅更深（MU -18%、SNDK -21%、INTC -16%、SOXL近-30%），呈現典型「60日巨幅漲後近期急殺」趨勢末端格局；NVDA是明顯例外，今日+0.71%抗跌且5日仍正，資訊熱度91全榜居次，短期或成資金避風港；AAPL 5日+10.26%與晶片股走勢脫鉤，值得留意其獨立性是否延續。
+  </div>
+</div>
+
+<!-- SECTION 3: HOT DISCUSSION -->
+<div class="section">
+  <div class="section-title"><span class="icon">🔥</span>第三層｜熱議榜前20（真實個股）+ 槓桿ETF警示</div>
+
+  <!-- ETF Alert -->
+  <div class="alert-box">
+    <h4>⚠️ 槓桿/反向/大盤ETF警示（佔熱議榜前20共7席，應剔除）</h4>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:8px;">以下標的排名靠前，但屬放大同一主題（半導體/記憶體）或大盤/科技ETF，並非獨立趨勢：</div>
+    <div class="etf-tags">
+      <span class="etf-tag">SOXL #6 ×3半導體 -15.09%</span>
+      <span class="etf-tag">QQQ #7 納指ETF -1.85%</span>
+      <span class="etf-tag">DRAM #8 記憶體主題ETF -6.44%</span>
+      <span class="etf-tag">SNXX #9 ×2 SNDK -14.02%</span>
+      <span class="etf-tag">SOXS #14 ×3做空半導體 +15.11%</span>
+      <span class="etf-tag">MUU #18 ×2 MU -9.39%</span>
+      <span class="etf-tag">TQQQ #20 ×3納指 -5.48%</span>
+    </div>
+    <div style="font-size:11px;color:#7c5a00;margin-top:8px;">延伸觀察（21-50名）：VOO(#26 標普500ETF)、SOXX(#29 半導體ETF)、SPCH(#30 ×2 SpaceX -13.17%)、KORU(#32 ×3韓國 -12.78%)、SNDQ(#36 ×2做空SNDK +14.57%)、SQQQ(#37 ×3做空納指 +5.49%)、MULL(#44 ×2 MU -9.37%)、SMH(#45 半導體ETF)、RAM(#47 ×2 DRAM -12.45%)、SPY(#50 標普500ETF)。記憶體主題一次出現3檔不同槓桿方向ETF(SNXX/MULL/SNDQ)，加上SOXL/SOXS同日對做，反映半導體/記憶體賣壓下投機性槓桿交易極度活躍，波動風險需留意。</div>
+  </div>
+
+  <div style="margin-top:14px;">
+  <table>
+    <thead>
+      <tr>
+        <th>榜位</th><th>代碼</th><th>今日漲跌</th><th>綜合熱度</th><th>搜索</th><th>資訊</th><th>主題標籤</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="rank-num">1</td><td><span class="code">MU</span><div class="name-cn">美光科技</div></td><td class="dn">-4.71%</td><td>86</td><td>100</td><td>59</td><td><span style="color:var(--red)">記憶體/HBM龍頭</span></td></tr>
+      <tr><td class="rank-num">2</td><td><span class="code">SPCX</span><div class="name-cn">SpaceX</div></td><td class="dn">-6.83%</td><td>83</td><td>52</td><td>100</td><td><span style="color:var(--purple)">太空（算力合約斷供疑慮，創上市新低）</span></td></tr>
+      <tr><td class="rank-num">3</td><td><span class="code">NVDA</span><div class="name-cn">英偉達</div></td><td class="up">+0.71%</td><td>53</td><td>33</td><td>91</td><td><span style="color:var(--red)">AI晶片龍頭（晶片股重挫中逆勢抗跌）</span></td></tr>
+      <tr><td class="rank-num">4</td><td><span class="code">SNDK</span><div class="name-cn">閃迪</div></td><td class="dn">-7.26%</td><td>49</td><td>58</td><td>35</td><td><span style="color:var(--red)">記憶體/儲存</span></td></tr>
+      <tr><td class="rank-num">5</td><td><span class="code">INTC</span><div class="name-cn">英特爾</div></td><td class="dn">-9.66%</td><td>42</td><td>28</td><td>47</td><td><span style="color:var(--red)">半導體/CPU（今日跌幅居冠）</span></td></tr>
+      <tr><td class="rank-num">10</td><td><span class="code">MRVL</span><div class="name-cn">邁威爾科技</div></td><td class="dn">-7.45%</td><td>22</td><td>18</td><td>10</td><td><span style="color:var(--red)">CPO/AI網路晶片</span></td></tr>
+      <tr><td class="rank-num">11</td><td><span class="code">TSLA</span><div class="name-cn">特斯拉</div></td><td class="dn">-4.02%</td><td>20</td><td>21</td><td>14</td><td><span style="color:var(--teal)">電動車</span></td></tr>
+      <tr><td class="rank-num">12</td><td><span class="code">META</span><div class="name-cn">Meta Platforms</div></td><td class="up">+2.55%</td><td>20</td><td>22</td><td>28</td><td><span style="color:var(--accent2)">軟體/社交</span></td></tr>
+      <tr><td class="rank-num">13</td><td><span class="code">MSFT</span><div class="name-cn">微軟</div></td><td class="up">+0.54%</td><td>18</td><td>23</td><td>16</td><td><span style="color:var(--accent2)">雲端/軟體</span></td></tr>
+      <tr style="background:#1a1a0a;"><td class="rank-num">15</td><td><span class="code">SKHY</span><div class="name-cn">SK海力士</div></td><td>0.00%</td><td>18</td><td>48</td><td>5</td><td><span style="color:var(--gold)">記憶體/HBM（連續第4日，搜索連4日升，週五掛牌倒數）</span></td></tr>
+      <tr><td class="rank-num">16</td><td><span class="code">TSM</span><div class="name-cn">台積電</div></td><td class="dn">-4.25%</td><td>18</td><td>22</td><td>7</td><td><span style="color:var(--red)">半導體代工</span></td></tr>
+      <tr><td class="rank-num">17</td><td><span class="code">AMD</span><div class="name-cn">美國超微公司</div></td><td class="dn">-6.51%</td><td>15</td><td>22</td><td>5</td><td><span style="color:var(--red)">半導體/AI晶片</span></td></tr>
+      <tr><td class="rank-num">19</td><td><span class="code">GLW</span><div class="name-cn">康寧</div></td><td class="dn">-4.84%</td><td>15</td><td>20</td><td>5</td><td><span style="color:var(--blue)">光通訊/CPO（連續第2日在雷達）</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- Category Ranking -->
+  <div style="margin-top:16px;">
+    <div style="font-size:13px;font-weight:700;color:var(--accent2);margin-bottom:10px;">真實個股類別數量排名（前20剔除槓桿/大盤ETF後，共13支）</div>
+    <div class="cat-rank">
+      <div class="cat-row">
+        <div class="cat-label">半導體/記憶體晶片</div>
+        <div class="cat-count">8</div>
+        <div class="cat-bar-bg"><div class="cat-bar" style="width:100%;background:var(--red);">MU/NVDA/SNDK/INTC/MRVL/SKHY/TSM/AMD</div></div>
+      </div>
+      <div class="cat-row">
+        <div class="cat-label">軟體/雲端</div>
+        <div class="cat-count">2</div>
+        <div class="cat-bar-bg"><div class="cat-bar" style="width:25%;background:var(--accent);">META/MSFT</div></div>
+      </div>
+      <div class="cat-row">
+        <div class="cat-label">太空</div>
+        <div class="cat-count">1</div>
+        <div class="cat-bar-bg"><div class="cat-bar" style="width:13%;background:var(--purple);">SPCX</div></div>
+      </div>
+      <div class="cat-row">
+        <div class="cat-label">電動車</div>
+        <div class="cat-count">1</div>
+        <div class="cat-bar-bg"><div class="cat-bar" style="width:13%;background:var(--teal);">TSLA</div></div>
+      </div>
+      <div class="cat-row">
+        <div class="cat-label">光通訊/CPO</div>
+        <div class="cat-count">1</div>
+        <div class="cat-bar-bg"><div class="cat-bar" style="width:13%;background:var(--blue);">GLW</div></div>
+      </div>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:var(--text2);">→ <strong style="color:var(--red)">主主線仍是半導體/記憶體晶片</strong>（8/13 = 62%，MU/NVDA/SNDK/INTC/MRVL/SKHY/TSM/AMD），惟今日方向與昨日截然不同——晶片股從全面走強轉為全面重挫，僅NVDA逆勢抗跌；<strong style="color:var(--accent2)">軟體/雲端居次</strong>（2/13 = 15%，META/MSFT），META逆勢+2.55%表現最佳；太空(SPCX)因算力合約斷供疑慮創上市新低，為本日晶片股外最受矚目的個股風險事件。</div>
+  </div>
+</div>
+
+<!-- SECTION 4: SEARCH vs INFO CROSS TABLE -->
+<div class="section">
+  <div class="section-title"><span class="icon">🔍</span>搜索熱度 vs 資訊熱度交叉對比（差值 = 搜索 − 資訊）</div>
+  <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">正差值大 → 散戶自發搜索多、新聞報導少（可能反映消息面尚未跟上）；負差值大 → 事件/新聞驅動（媒體先行）。今日SKHY差值+43為前20真實個股最大正差值，對應週五Nasdaq掛牌倒數的散戶自發關注；NVDA/SPCX則資訊遠高於搜索，反映機構級新聞（產品傳聞、算力合約風險）先行帶動散戶討論。</div>
+  <div class="cross-table">
+    <div class="cross-col">
+      <div class="col-header">散戶主動搜索型（搜索 >> 資訊，正差值）</div>
+      <div class="cross-item"><span><span class="code">SKHY</span> SK海力士 0.00%</span><span class="cross-diff diff-pos">差+43 (搜48/資5)</span></div>
+      <div class="cross-item"><span><span class="code">MU</span> 美光科技 -4.71%</span><span class="cross-diff diff-pos">差+41 (搜100/資59)</span></div>
+      <div class="cross-item"><span><span class="code">SNDK</span> 閃迪 -7.26%</span><span class="cross-diff diff-pos">差+23 (搜58/資35)</span></div>
+      <div class="cross-item"><span><span class="code">AMD</span> 美國超微 -6.51%</span><span class="cross-diff diff-pos">差+17 (搜22/資5)</span></div>
+      <div class="cross-item"><span><span class="code">TSM</span> 台積電 -4.25%</span><span class="cross-diff diff-pos">差+15 (搜22/資7)</span></div>
+      <div class="cross-item"><span><span class="code">GLW</span> 康寧 -4.84%</span><span class="cross-diff diff-pos">差+15 (搜20/資5)</span></div>
+    </div>
+    <div class="cross-col">
+      <div class="col-header">相對新聞驅動型（資訊佔比較高，負差值）</div>
+      <div class="cross-item"><span><span class="code">NVDA</span> 英偉達 +0.71%</span><span class="cross-diff diff-neg">差-58 (搜33/資91)</span></div>
+      <div class="cross-item"><span><span class="code">SPCX</span> SpaceX -6.83%</span><span class="cross-diff diff-neg">差-48 (搜52/資100)</span></div>
+      <div class="cross-item"><span><span class="code">INTC</span> 英特爾 -9.66%</span><span class="cross-diff diff-neg">差-19 (搜28/資47)</span></div>
+      <div class="cross-item"><span><span class="code">META</span> Meta -2.55%</span><span class="cross-diff diff-neg">差-6 (搜22/資28)</span></div>
+      <div class="cross-item"><span><span class="code">MSFT</span> 微軟 +0.54%</span><span class="cross-diff diff-neg">差+7 (搜23/資16)</span></div>
+      <div class="cross-item"><span><span class="code">TSLA</span> 特斯拉 -4.02%</span><span class="cross-diff diff-neg">差+7 (搜21/資14)</span></div>
+    </div>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:var(--text2);">
+    <strong style="color:var(--gold)">重點：</strong>NVDA資訊熱度91遠高於搜索33（差-58，全榜最大負差值），顯示今日晶片股重挫中，市場對NVDA的關注多來自機構/媒體分析其抗跌韌性，而非散戶自發搜索；SPCX資訊100/搜索52，對應450億算力合約斷供疑慮的新聞事件先行；SKHY則呈現相反格局，搜索遠高於資訊，反映週五掛牌前的散戶自發預熱尚未被媒體充分報導，與其連續4日雷達前兆訊號相互印證。
+  </div>
+</div>
+
+<!-- SECTION 5: POTENTIAL RADAR -->
+<div class="section">
+  <div class="section-title"><span class="icon">💎</span>潛力雷達（熱議榜中，不在成交額前50且非槓桿ETF）｜10日以上連續追蹤</div>
+
+  <table class="radar-table">
+    <thead>
+      <tr>
+        <th>代碼</th><th>名稱</th><th>今日</th><th>搜索</th><th>資訊</th><th>搜索日變化</th><th>連續受關注天數</th><th>潛在主題</th><th>狀態</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#1a1a0a;">
+        <td><span class="code">SKHY</span><div class="name-cn">SK海力士</div></td>
+        <td>SK海力士</td>
+        <td>0.00%</td>
+        <td>48</td>
+        <td>5</td>
+        <td><span class="arrow-up">↑+6</span><div style="font-size:10px;color:var(--text2);">34→36→42→48</div></td>
+        <td><span class="days-badge days4">4天</span></td>
+        <td>記憶體/HBM</td>
+        <td><span class="state-precursor">連續4日且搜索連4日升，滿足嚴格前兆條件，週五Nasdaq掛牌倒數</span></td>
+      </tr>
+      <tr>
+        <td><span class="code">GLW</span><div class="name-cn">康寧</div></td>
+        <td>康寧</td>
+        <td class="dn">-4.84%</td>
+        <td>20</td>
+        <td>5</td>
+        <td><span class="arrow-dn">↓-14</span><div style="font-size:10px;color:var(--text2);">34→20</div></td>
+        <td><span class="days-badge days2">2天</span></td>
+        <td>光通訊/CPO</td>
+        <td><span class="state-cool">連續第2日在榜，首日高熱度未能延續，大幅降溫</span></td>
+      </tr>
+      <tr style="background:#2a1a0a;">
+        <td><span class="code">AAOI</span><div class="name-cn">Applied Optoelectronics</div></td>
+        <td>Applied Optoelectronics</td>
+        <td class="dn">-7.26%</td>
+        <td>11</td>
+        <td>2</td>
+        <td><span class="arrow-dn">↓-8</span><div style="font-size:10px;color:var(--text2);">12→16→19→11</div></td>
+        <td><span class="days-badge days4">4天</span></td>
+        <td>光通訊/CPO</td>
+        <td><span class="state-warn">原連續3日搜索升溫的前兆訊號今日逆轉，光通訊主線疑降溫</span></td>
+      </tr>
+      <tr>
+        <td><span class="code">RKLB</span><div class="name-cn">Rocket Lab</div></td>
+        <td>Rocket Lab</td>
+        <td class="dn">-10.40%</td>
+        <td>8</td>
+        <td>9</td>
+        <td><span class="arrow-dn">↓-4</span><div style="font-size:10px;color:var(--text2);">12→8</div></td>
+        <td><span class="days-badge days4">5天</span></td>
+        <td>太空</td>
+        <td><span class="state-cool">本輪連續第5日在雷達，搜索續降</span></td>
+      </tr>
+      <tr>
+        <td><span class="code">BABA</span><div class="name-cn">阿里巴巴</div></td>
+        <td>阿里巴巴</td>
+        <td class="up">+0.23%</td>
+        <td>10</td>
+        <td>11</td>
+        <td><span class="arrow-dn">↓-5</span><div style="font-size:10px;color:var(--text2);">15→10</div></td>
+        <td><span class="days-badge days5">8天（追蹤史最長）</span></td>
+        <td>中概/電商/AI雲</td>
+        <td><span class="state-cool">連續8天在榜，並列追蹤史最長，搜索續降</span></td>
+      </tr>
+      <tr>
+        <td><span class="code">NOK</span><div class="name-cn">諾基亞</div></td>
+        <td>諾基亞</td>
+        <td class="dn">-5.28%</td>
+        <td>9</td>
+        <td>2</td>
+        <td><span class="arrow-dn">↓-3</span><div style="font-size:10px;color:var(--text2);">12→9</div></td>
+        <td><span class="days-badge days5">8天（並列追蹤史最長）</span></td>
+        <td>電信/光網路基建</td>
+        <td><span class="state-cool">連續8天在榜，搜索續降</span></td>
+      </tr>
+      <tr>
+        <td><span class="code">CRCL</span><div class="name-cn">Circle</div></td>
+        <td>Circle</td>
+        <td class="dn">-5.10%</td>
+        <td>9</td>
+        <td>16</td>
+        <td><span class="arrow-dn">↓-5</span><div style="font-size:10px;color:var(--text2);">14→9</div></td>
+        <td><span class="days-badge days5">6天</span></td>
+        <td>穩定幣/加密支付</td>
+        <td><span class="state-cool">連續第6日在榜，搜索續降但資訊熱度逆勢躍升6→16，留意是否有新聞事件驅動</span></td>
+      </tr>
+      <tr>
+        <td><span class="code">MSTR</span><div class="name-cn">Strategy</div></td>
+        <td>Strategy</td>
+        <td class="dn">-3.38%</td>
+        <td>9</td>
+        <td>11</td>
+        <td><span class="arrow-dn">↓-9</span><div style="font-size:10px;color:var(--text2);">18→9</div></td>
+        <td><span class="days-badge days2">2天</span></td>
+        <td>比特幣持倉</td>
+        <td><span class="state-cool">07-07重返後連續第2日在雷達，搜索大幅降溫</span></td>
+      </tr>
+      <tr>
+        <td><span class="code">NOW</span><div class="name-cn">ServiceNow</div></td>
+        <td>ServiceNow</td>
+        <td class="up">+2.59%</td>
+        <td>8</td>
+        <td>2</td>
+        <td>重返</td>
+        <td><span class="days-badge">1天（非連續重返）</span></td>
+        <td>企業AI軟體</td>
+        <td><span class="state-return">07-06曾出現、07-07中斷後今日再度重返雷達</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Already graduated - still in turnover -->
+  <div style="margin-top:10px;background:#1a0a2a;border:1px solid #4c1d7c;border-radius:8px;padding:12px 16px;">
+    <div style="font-size:12px;font-weight:700;color:var(--purple);margin-bottom:6px;">✅ 已畢業標的（前期雷達 → 今日已擠進成交額榜）</div>
+    <div style="font-size:12px;color:var(--text2);display:flex;flex-direction:column;gap:4px;">
+      <span class="state-grad">IBM 昨日(07-07)首日新進雷達，今日已擠進成交額前50（熱議榜第40名，搜索9/資訊7），企業AI/雲端主題資金確認進場＝畢業訊號</span>
+      <span class="state-grad">NBIS 連續多日穩居成交額前50，AI雲算力主線資金流入延續（今日已跌出熱議榜前50，但成交額端資金流入持續）</span>
+    </div>
+  </div>
+
+  <div class="precursor-notice">
+    <h4>⭐ 連續追蹤建議（資金入場前兆標的）</h4>
+    <div class="precursor-list">
+      <div class="precursor-item">
+        <span class="star">⭐</span>
+        <div>
+          <strong style="color:var(--gold)">SKHY（SK海力士）</strong>｜連續第4個交易日在雷達，搜索熱度連4日走升（34→36→42→48），本輪追蹤以來唯一持續強化的標的；本週五即將以美股史上最大規模海外公司IPO之姿登陸納斯達克。<strong>本輪唯一仍滿足「連續≥3日且搜索持續升」嚴格前兆條件</strong>，維持最優先觀察評級。<span class="tag tag-oppo">優先觀察</span>
+        </div>
+      </div>
+      <div class="precursor-item">
+        <span class="star">⚠️</span>
+        <div>
+          <strong style="color:var(--red)">AAOI（Applied Optoelectronics）</strong>｜昨日原本連續3日搜索攀升滿足前兆條件，今日搜索熱度自19驟降至11，訊號逆轉；同日康寧(GLW)搜索也由34大幅降至20，光通訊/CPO主線今日整體降溫，建議降級觀察，留意是否僅為短線雜訊或主線退燒訊號。
+        </div>
+      </div>
+      <div class="precursor-item">
+        <span class="star">★</span>
+        <div>
+          <strong style="color:var(--purple)">BABA／NOK</strong>｜並列連續8天在榜（追蹤系統啟用以來最長紀錄），兩者搜索熱度同步走降（BABA 15→10、NOK 12→9），長線降溫格局延續，建議持續觀察是否即將跌出雷達。
+        </div>
+      </div>
+      <div class="precursor-item">
+        <span class="star">★</span>
+        <div>
+          <strong style="color:var(--orange)">CRCL（Circle）</strong>｜搜索續降但資訊熱度逆勢由6躍升至16，兩項指標出現分歧，可能有特定新聞事件驅動，建議留意穩定幣/加密支付相關消息面。
+        </div>
+      </div>
+      <div class="precursor-item">
+        <span class="star">★</span>
+        <div>
+          <strong style="color:var(--gold)">IBM</strong>｜連續第2日在雷達，今日已正式畢業擠進成交額前50，企業AI/雲端主線資金與熱度雙重確認，為本輪雷達名單首個完整走完「新進→畢業」週期的標的。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4b: CONCEPT THEMES -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏷️</span>第四層｜概念板塊（僅貼標籤，含小市值不單獨採信）</div>
+  <div class="card">
+    <div style="font-size:12px;color:var(--text2);">今日漲幅前列概念主題：頁岩油+3.85%、天然氣+3.62%、外賣概念+3.07%、社交媒體+2.51%、CAR-T療法+2.21%、減肥藥概念+2.07%、避險資產+2.07%、軟體外包+1.98%、抗癌醫藥+1.96%、猴痘概念+1.81%、流行病診療+1.69%、槍械製造+1.68%、China's Terrific+1.47%、AI應用軟體股+1.32%、雙十一+0.77%、品牌服飾+0.72%、體育博彩+0.69%、雲計算服務商+0.58%、美國知名零售商+0.56%、聖誕節概念+0.51%、可再生能源+0.41%、阿里概念+0.33%、黑色星期五概念+0.24%、SaaS概念+0.24%、區塊鏈概念+0.16%。</div>
+    <div style="margin-top:8px;font-size:12px;color:var(--text2);">→ 「頁岩油」「天然氣」雙雙居首，與第1層油氣勘探/綜合油氣行業板塊互相印證，美伊軍事衝突升級為明確催化劑；概念榜漲幅前25完全不見半導體/記憶體相關主題，反向印證第2-3層晶片股全面重挫的資金撤離力道；「減肥藥概念」「CAR-T療法」「抗癌醫藥」三項生技題材同步走強，與行業熱力圖生物技術板塊呼應，防禦性資金布局跡象浮現；「社交媒體」呼應META熱議榜逆勢+2.55%的表現。</div>
+  </div>
+</div>
+
+<!-- SECTION 6: FOUR LAYER CONCLUSION -->
+<div class="section">
+  <div class="section-title"><span class="icon">🔗</span>四層交叉比對結論</div>
+  <div class="conclusion-grid">
+    <div class="concl-card">
+      <h4 style="color:var(--red)">主主線：存儲/半導體晶片全面重挫，NVDA意外抗跌</h4>
+      <ul>
+        <li>熱議榜真實個股62%（8/13）屬半導體/記憶體晶片，INTC/SNDK/AMD/MU今日皆跌逾4.7%，SOXL槓桿ETF單日-15.09%</li>
+        <li>成交額前10半導體/記憶體相關佔6席，5日累計跌幅普遍-16%至-30%，呈現「60日巨幅漲後近期急殺」趨勢末端格局</li>
+        <li>NVDA今日+0.71%逆勢抗跌，資訊熱度91全榜居次，成為晶片股重挫中唯一亮點；行業熱力圖半導體設備與材料板塊-6.05%，顯示上游供應鏈同步承壓</li>
+        <li>概念板塊漲幅前25完全不見半導體主題，多層資料交叉確認資金明確撤離</li>
+      </ul>
+    </div>
+    <div class="concl-card">
+      <h4 style="color:var(--gold)">資金蹺蹺板：油氣鏈成避險資金新去處</h4>
+      <ul>
+        <li>行業熱力圖前三大流入板塊全為油氣鏈（油氣勘探+3.49%、綜合油氣+3.47%、化學製品+3.45%），與晶片股重挫形成鮮明對比</li>
+        <li>概念板塊「頁岩油」+3.85%、「天然氣」+3.62%同步居首，美國恢復對伊朗石油制裁並展開軍事打擊、WTI原油漲近3%為明確催化劑</li>
+        <li>「避險資產」概念+2.07%同步走強，惟白銀(-5.70%)、其他貴金屬(-4.58%)等傳統避險資產板塊卻同步重挫，訊號出現矛盾，需留意資金真實流向</li>
+      </ul>
+    </div>
+    <div class="concl-card">
+      <h4 style="color:var(--teal)">記憶體雷達分歧：SKHY持續強化，AAOI訊號逆轉</h4>
+      <ul>
+        <li>SKHY連續第4日在雷達、搜索連4日走升(34→36→42→48)，週五Nasdaq掛牌倒數，為本輪唯一仍滿足嚴格前兆條件標的</li>
+        <li>AAOI原連續3日搜索攀升前兆訊號今日驟降(19→11)，同日GLW搜索亦大幅降溫(34→20)，光通訊/CPO主線是否退燒需持續觀察</li>
+        <li>IBM完整走完「首日新進→連續第2日→今日畢業擠進成交額前50」週期，企業AI雲主線資金與熱度雙重確認</li>
+      </ul>
+    </div>
+    <div class="concl-card">
+      <h4 style="color:var(--purple)">中概/加密持續降溫，SpaceX爆發個股風險事件</h4>
+      <ul>
+        <li>BABA/NOK並列連續8天在雷達（追蹤史最長紀錄再刷新），惟兩者搜索熱度同步下降，長線降溫格局未變</li>
+        <li>MSTR重返雷達後連續第2日，搜索大幅降溫(18→9)；CRCL搜索續降但資訊熱度逆勢躍升(6→16)，指標分歧值得留意</li>
+        <li>SpaceX(SPCX)熱議#2、成交額前列，因450億算力合同斷供疑慮股價-6.83%創上市以來新低，為本日晶片股外最大個股風險事件</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: RECOMMENDATIONS -->
+<div class="section">
+  <div class="section-title"><span class="icon">🎯</span>建議注意板塊/個股</div>
+  <div class="reco-grid">
+    <div class="reco-card risk">
+      <h4 class="risk-h">⚠️ 風險側（需注意）</h4>
+      <div class="reco-item">MU/SNDK/INTC/AMD 60日累積漲幅78%-123%後今日單日重挫4.7%-9.7%，5日跌幅更深達-16%至-21%<span class="tag tag-warn">趨勢末端，慎防持續修正</span></div>
+      <div class="reco-item">SOXL(-15.09%)與SOXS(+15.11%)同日劇烈對做，半導體槓桿ETF多空分歧達到極端<span class="tag tag-warn">波動風險放大</span></div>
+      <div class="reco-item">SpaceX(SPCX)因450億算力合同斷供疑慮創上市新低(-6.83%)<span class="tag tag-warn">個股風險事件，留意後續合約進展</span></div>
+      <div class="reco-item">半導體設備與材料板塊-6.05%，顯示晶片產業鏈上游同步承壓，非僅終端晶片股<span class="tag tag-warn">供應鏈全線降溫</span></div>
+      <div class="reco-item">AAOI/GLW光通訊主線搜索熱度同日大幅降溫，原3日前兆訊號逆轉<span class="tag tag-warn">慎防主線退燒</span></div>
+      <div class="reco-item">白銀-5.70%、其他貴金屬-4.58%，與「避險資產」概念+2.07%訊號矛盾<span class="tag tag-warn">留意資金真實流向</span></div>
+    </div>
+    <div class="reco-card oppo">
+      <h4 class="oppo-h">✅ 輪動機會側（觀察）</h4>
+      <div class="reco-item">油氣勘探/綜合油氣/化學製品行業板塊+化學品概念全面走強，美伊衝突升級為明確催化劑<span class="tag tag-oppo">油氣避險鏈優先觀察</span></div>
+      <div class="reco-item">NVDA在晶片股全面重挫中逆勢+0.71%，資訊熱度91全榜居次<span class="tag tag-oppo">抗跌韌性值得留意</span></div>
+      <div class="reco-item">SKHY連續4日搜索持續走升，本輪唯一仍滿足嚴格前兆條件<span class="tag tag-oppo">記憶體/HBM優先觀察，週五掛牌倒數</span></div>
+      <div class="reco-item">IBM完整走完新進→畢業週期，企業AI雲資金確認進場<span class="tag tag-oppo">已畢業，資金持續性待驗證</span></div>
+      <div class="reco-item">減肥藥/CAR-T/抗癌醫藥生技題材同步走強，META逆勢+2.55%<span class="tag tag-oppo">防禦性資金布局跡象</span></div>
+      <div class="reco-item">AAPL 5日+10.26%與晶片股走勢脫鉤<span class="tag tag-oppo">獨立性是否延續值得追蹤</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8: NEWS -->
+<div class="section">
+  <div class="section-title"><span class="icon">📰</span>熱門新聞（今日重要事件）</div>
+  <div class="news-grid">
+    <div class="news-box">
+      <h4>富途新聞頭條（news.futunn.com）</h4>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);">📌 <strong>美恢復對伊石油制裁並開始一系列打擊，WTI原油漲近3%</strong><span style="color:var(--gold);font-size:11px;"> → 直接對應第1層油氣勘探/綜合油氣行業板塊居前三大流入</span></div>
+        <div style="font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);">📌 <strong>三星開始量產先進固態硬盤</strong><span style="color:var(--text2);font-size:11px;"> → 記憶體產業供給端動態，與SNDK/MU股價走勢背景相關</span></div>
+        <div style="font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);">📌 <strong>報道稱DeepSeek、智谱將自研AI芯片</strong><span style="color:var(--text2);font-size:11px;"> → AI晶片供應鏈長線競爭格局變化</span></div>
+        <div style="font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);">📌 <strong>高盛：AI敘事日益複雜、投機槓桿加劇</strong><span style="color:var(--orange);font-size:11px;"> → 呼應本日SOXL/SOXS等槓桿ETF劇烈對做的市場觀察</span></div>
+        <div style="font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);">📌 <strong>SpaceX跌近7%創上市來新低，450億算力合同面臨「斷供」風險</strong><span style="color:var(--red);font-size:11px;"> → 直接對應SPCX熱議#2、資訊熱度全榜居冠(100)</span></div>
+        <div style="font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);">📌 <strong>英特爾跌近10%，閃迪跌超7%</strong><span style="color:var(--red);font-size:11px;"> → 直接對應成交額#6 INTC、#5 SNDK今日重挫</span></div>
+        <div style="font-size:12px;padding:5px 0;">📌 <strong>半導體板塊重挫5%，但英偉達逆勢收漲</strong><span style="color:var(--gold);font-size:11px;"> → 直接對應NVDA熱議#3、成交額#4逆勢+0.71%的抗跌表現</span></div>
+      </div>
+    </div>
+    <div class="news-box">
+      <h4>Investing.com 熱門新聞（宏觀情緒）</h4>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);">📌 <strong>AI半導體回調背後不只是去槓桿與"獲利了結"！15.7萬人才缺口暴露美國半導體迴流硬約束</strong><span style="color:var(--red);font-size:11px;"> → 為本日半導體重挫提供結構性背景解讀，非單純短線獲利了結</span></div>
+        <div style="font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);">📌 <strong>隔夜美股｜美國對伊朗發動一系列打擊 三大指數收跌 存儲芯片股繼續下挫</strong><span style="color:var(--text2);font-size:11px;"> → 總覽本日大盤全貌，地緣政治與晶片股雙重壓力並存</span></div>
+        <div style="font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);">📌 <strong>看漲情緒高漲！半導體板塊重挫之際 英偉達(NVDA.US)獲期權資金大舉押注</strong><span style="color:var(--gold);font-size:11px;"> → 強化NVDA抗跌表現的期權市場證據，呼應資訊熱度91全榜居次</span></div>
+        <div style="font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);">📌 <strong>AI融資"轟炸"債市！亞馬遜(AMZN.US)250億美元發債引發科技債拋售</strong><span style="color:var(--orange);font-size:11px;"> → AI資本支出融資壓力浮現，科技板塊資金面待觀察</span></div>
+        <div style="font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);">📌 <strong>美股AI交易邏輯突變：Mag 7變成"Lag 7"，存儲芯片股成權力更迭下"新王"</strong><span style="color:var(--text2);font-size:11px;"> → 點出市場敘事轉變，惟今日存儲芯片股反而重挫，短線與長線敘事出現落差</span></div>
+        <div style="font-size:12px;padding:5px 0;">📌 <strong>港股概念追蹤｜美伊談判添變數 伊朗石油制裁撤銷攪動全球油市神經 油氣股又迎投資機會？</strong><span style="color:var(--gold);font-size:11px;"> → 直接對應第1層油氣鏈行業板塊全面走強</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">
+    <strong style="color:var(--accent2);">新聞×板塊交叉解讀：</strong>美國恢復對伊朗石油制裁並展開軍事打擊，是本日行業熱力圖油氣鏈全面居前三大流入的直接催化劑，WTI原油漲近3%與「頁岩油」「天然氣」概念雙雙居首互相印證；「AI半導體回調背後不只是去槓桿」一文點出15.7萬人才缺口的結構性約束，暗示本輪晶片股重挫或非單純短線獲利了結，值得留意後續財報季是否進一步發酵；英偉達獲期權資金大舉押注的新聞，強化其在熱議榜資訊熱度91全榜居次、成交額#4逆勢+0.71%的抗跌表現並非偶然；「存儲芯片股成權力更迭下新王」的長線敘事與今日INTC/SNDK/MU全面重挫的短線走勢形成鮮明反差，顯示市場正處於敘事與價格的拉鋸階段。
+  </div>
+</div>
+
+</div><!-- end container -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>資料來源：富途牛牛（futunn.com）行業熱力圖、成交額榜、熱議榜、概念板塊 ｜ Investing.com、富途新聞 ｜ 快照時間：2026-07-07（二）~20:47 美東時間（收盤）</div>
+  <div class="warn">⚠️ 本報告為盤中/收盤快照，僅供研究參考，非投資建議。所有資料均為過去數據，不代表未來表現。</div>
+</div>
+
+</body>
+</html>

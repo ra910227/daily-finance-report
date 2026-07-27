@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美股資金流雙軌報告(試作版) — 2026年07月06日</title>
+<style>
+  :root {
+    --bg: #0f1117; --bg2: #1a1d27; --bg3: #222535; --border: #2e3250;
+    --text: #e2e8f0; --text2: #94a3b8; --accent: #6366f1; --accent2: #818cf8;
+    --red: #f87171; --green: #4ade80; --gold: #fbbf24; --orange: #fb923c;
+    --blue: #60a5fa; --purple: #c084fc; --teal: #2dd4bf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system,'PingFang TC','Microsoft JhengHei',sans-serif; font-size: 14px; line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #1e293b 100%); padding: 28px 32px 20px; border-bottom: 1px solid var(--accent); }
+  .header h1 { font-size: 21px; font-weight: 700; color: #fff; }
+  .header .meta { color: var(--text2); font-size: 12px; margin-top: 6px; }
+  .proto-badge { display:inline-block; background:#3a2200; border:1px solid var(--orange); color: var(--orange); font-size:11px; padding:2px 8px; border-radius:6px; margin-left:8px; font-weight:700; }
+  .summary-box { background: linear-gradient(90deg, #1e3a5f 0%, #1a1d27 100%); border-left: 4px solid var(--accent); margin: 20px 24px; padding: 14px 20px; border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 600; color: #e0e7ff; }
+  .container { padding: 0 24px 40px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--accent2); padding: 8px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  table { width: 100%; border-collapse: collapse; background: var(--bg2); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  td { padding: 9px 10px; border-bottom: 1px solid #1a1d27; font-size: 13px; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #1e2233; }
+  .code { font-family: monospace; font-weight: 700; color: var(--blue); font-size: 13px; }
+  .up { color: var(--red); font-weight:700; }
+  .dn { color: var(--green); font-weight:700; }
+  .gap { color: var(--text2); font-style: italic; }
+  .badge { font-size: 11px; padding: 2px 7px; border-radius: 4px; display: inline-block; }
+  .b-warn { background: #3a1e1e; color: var(--red); }
+  .b-ok { background: #1e3a2f; color: var(--green); }
+  .b-mix { background: #2a2a3a; color: var(--gold); }
+  .alert-box { background: #2a1a0a; border: 1px solid #7c4a15; border-radius: 10px; padding: 14px 16px; margin-top: 14px; }
+  .alert-box h4 { color: var(--orange); font-size: 13px; margin-bottom: 8px; }
+  .gap-box { background: #1a1d27; border: 1px dashed var(--border); border-radius: 10px; padding: 14px 16px; }
+  .gap-box h4 { color: var(--text2); font-size: 13px; margin-bottom: 8px; }
+  .gap-box ul { padding-left: 18px; color: var(--text2); font-size: 12.5px; }
+  .gap-box li { padding: 3px 0; }
+  .interp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .interp-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .interp-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--accent2); }
+  .interp-card p { font-size: 12.5px; color: var(--text2); }
+  .footer { background: var(--bg3); border-top: 1px solid var(--border); padding: 14px 24px; font-size: 11px; color: var(--text2); }
+  .footer .warn { color: var(--orange); }
+  @media (max-width: 768px) { .interp-grid { grid-template-columns: 1fr; } .container { padding: 0 12px 40px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>美股資金流雙軌報告<span class="proto-badge">試作版 · 待你回饋</span></h1>
+  <div class="meta">2026年07月06日｜資料擷取時間：美東時間07/06上午（各項數據時效不同，詳見各表註記）</div>
+</div>
+
+<div class="summary-box">
+  這是根據你上次問題做的原型：把「ETF申贖資金流」與「CFTC期貨部位（含CTA代理指標）」補進資金流拼圖。部分欄位目前免費管道抓不到乾淨數字，已誠實標示為資料缺口，見文末說明。
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <div class="section-title">① ETF資金流總覽（申贖資金，最貼近「真金白銀」進出）</div>
+    <table>
+      <tr><th>ETF</th><th>追蹤標的</th><th>AUM</th><th>近5日淨流量</th><th>近1個月淨流量</th><th>判讀</th></tr>
+      <tr><td class="code">QQQ</td><td>那斯達克100</td><td>$480.5B</td><td class="up">+$13.8億</td><td class="up">+$88.3億</td><td><span class="badge b-ok">買盤延續</span></td></tr>
+      <tr><td class="code">XLK</td><td>科技類股(SPDR)</td><td class="gap">資料缺口</td><td class="dn">-$3.89億</td><td class="dn">-$7.10億</td><td><span class="badge b-warn">持續流出</span></td></tr>
+      <tr><td class="code">SOXX</td><td>費城半導體指數</td><td class="gap">資料缺口</td><td class="gap">資料缺口</td><td class="up">6月合計 +$41億</td><td><span class="badge b-ok">單月強勢</span></td></tr>
+      <tr><td class="code">SMH</td><td>半導體(VanEck)</td><td>$720億</td><td class="gap">資料缺口</td><td class="gap">資料缺口</td><td><span class="badge b-mix">待補</span></td></tr>
+      <tr><td class="code">SPY</td><td>S&P 500</td><td class="gap">資料缺口</td><td class="gap">資料缺口</td><td class="gap">資料缺口</td><td><span class="badge b-mix">待補</span></td></tr>
+      <tr><td class="code">IWM</td><td>羅素2000(小型股)</td><td class="gap">資料缺口</td><td class="gap">資料缺口</td><td class="gap">資料缺口</td><td><span class="badge b-mix">待補</span></td></tr>
+    </table>
+    <div class="alert-box">
+      <h4>⚠️ 值得留意：QQQ 與 XLK 資金流背離</h4>
+      同屬科技曝險，QQQ 近1個月淨流入 +88.3億美元，XLK 卻淨流出 -7.1億美元。可能原因：QQQ含輝達等權值科技股比重更高、資金更偏好「巨頭集中」而非「科技類股全體」；也可能只是單一機構調倉的雜訊。建議連續觀察2-3週再下結論，不要用單期數據下判斷。
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">② CFTC COT期貨部位（Leveraged Funds＝CTA/避險基金代理指標）</div>
+    <table>
+      <tr><th>契約</th><th>未平倉量</th><th>Leveraged Funds淨部位</th><th>Asset Manager淨部位</th><th>解讀</th></tr>
+      <tr><td class="code">E-mini S&P 500</td><td>1,980,254口</td><td class="dn">-373,468（偏空）</td><td class="up">+992,729（偏多）</td><td><span class="badge b-mix">趨勢基金空、法人多</span></td></tr>
+      <tr><td class="code">Nasdaq-100 Mini</td><td>265,083口</td><td class="dn">-51,062（偏空）</td><td class="up">+62,908（偏多）</td><td><span class="badge b-mix">同樣分歧，規模較小</span></td></tr>
+    </table>
+    <div style="font-size:11px; color:var(--text2); margin-top:8px;">
+      ※ 上表為最新公布數據（統計截至2026/06/23當週）。因07/04國定假日順延，本週報告預計今日(07/06)美東15:30公布，屆時可更新。COT為週頻資料，性質上不適合塞進「每日」報告。
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">③ 綜合解讀</div>
+    <div class="interp-grid">
+      <div class="interp-card">
+        <h4>期貨部位怎麼看</h4>
+        <p>Leveraged Funds（含CTA）在兩大指數期貨都是淨空、Asset Manager淨多——這是常態性分歧（法人偏長線buy&hold，槓桿基金偏短線趨勢/避險），單週水位參考價值有限。真正有意義的訊號是「淨部位的週對週變化方向」：如果Leveraged Funds空單連續2-3週加碼，且指數同時創高，屬於「軋空風險」訊號；如果轉為回補，則屬於順勢加碼訊號。這需要連續蒐集4週以上COT數據才能建立比較基準。</p>
+      </div>
+      <div class="interp-card">
+        <h4>ETF資金流怎麼看</h4>
+        <p>QQQ買盤持續、SOXX單月強勢流入，顯示科技+半導體仍是資金偏好方向；但XLK流出與SOXX流入同時存在，暗示資金可能在「科技類股」內部做輪動而非整體撤出。建議之後固定追蹤QQQ/SOXX/SMH/XLK四檔的週流量變化，搭配你現有的「每日板塊流動報告」成交額排名交叉驗證，比單看一個指標更可靠。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">④ 資料缺口與下一步（誠實揭露，這版只是原型）</div>
+    <div class="gap-box">
+      <h4>目前抓不到乾淨數字的原因</h4>
+      <ul>
+        <li>ETF.com / ETFDB.com 的 Fund Flows 頁面用 JS canvas 畫圖表，數字沒有暴露成文字或DOM屬性，WebFetch/瀏覽器抓取都拿不到底層數值，只能抓到搜尋引擎摘要偶爾透露的片段數字（本報告的QQQ/XLK/SOXX數字就是這樣拼湊來的，可信度中等，非官方逐日快照）。</li>
+        <li>SPY、IWM、SMH這幾檔目前完全沒抓到近期flow數字。</li>
+        <li>CFTC COT官方頁面本身是文字報告，抓取穩定，但為週頻資料，跟你現有的「每日」板塊流動報告排程性質不同。</li>
+      </ul>
+      <h4 style="margin-top:10px;">可行的下一步（想聽你想法）</h4>
+      <ul>
+        <li>方案A：ETF資金流部分改成「每週」而非「每日」更新，人工挑週五或週一查一次，跟COT報告同步發布，降低抓取失敗的頻率壓力。</li>
+        <li>方案B：如果你有Bloomberg/Wind/富途Pro等付費終端機的資金流頁面，我可以直接幫你解析截圖或匯出檔，數字會準確很多。</li>
+        <li>方案C：先只做「CFTC COT週報」這個穩定可信的部分，ETF資金流暫緩，等找到更好的免費資料源再補。</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<div class="footer">
+  <span>本報告為原型試作，數據時效與可信度不一，請勿作為單一決策依據 · 財經小狐產出</span>
+  <span class="warn">⚠ 部分ETF資金流數字來自搜尋引擎摘要片段，非官方逐日快照，正式版本前需更穩定的資料源</span>
+</div>
+</body>
+</html>

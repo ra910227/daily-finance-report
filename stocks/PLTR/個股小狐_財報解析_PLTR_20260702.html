@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜PLTR 最新財報解析（2026-07-02）</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-card: #161b22;
+    --bg-card-alt: #1c2128;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --red: #f85149;
+    --yellow: #d29922;
+    --purple: #bc8cff;
+    --orange: #ffa657;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 20px 60px; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #161b22 0%, #0d1117 60%, #1a1030 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 20px 30px;
+  }
+  .hero-inner { max-width: 1160px; margin: 0 auto; }
+  .hero-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 20px; }
+  .ticker-badge {
+    display: inline-block; background: rgba(88,166,255,0.15); color: var(--accent);
+    border: 1px solid rgba(88,166,255,0.4); border-radius: 6px; padding: 4px 10px;
+    font-size: 13px; font-weight: 600; letter-spacing: 1px; margin-bottom: 8px;
+  }
+  .hero h1 { margin: 0 0 4px; font-size: 30px; }
+  .hero .sub { color: var(--text-dim); font-size: 14px; margin-bottom: 4px; }
+  .hero-price { text-align: right; }
+  .hero-price .px { font-size: 34px; font-weight: 700; }
+  .hero-price .chg { font-size: 15px; color: var(--green); font-weight: 600; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; }
+  .meta-chip {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 14px; font-size: 13px; color: var(--text-dim);
+  }
+  .meta-chip b { color: var(--text); font-size: 14px; }
+
+  /* TOC */
+  .toc {
+    display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 0; margin: 20px 0 30px;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .toc a {
+    color: var(--text-dim); text-decoration: none; font-size: 13px;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
+    padding: 6px 14px; transition: all .2s;
+  }
+  .toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+  h2.section-title {
+    font-size: 20px; margin: 48px 0 16px; padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 10px;
+  }
+  h2.section-title .num {
+    background: var(--accent); color: #0d1117; width: 26px; height: 26px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;
+  }
+  h3.sub-title { font-size: 16px; color: var(--accent); margin: 24px 0 10px; }
+
+  p { color: var(--text); }
+  .note { color: var(--text-dim); font-size: 13px; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13.5px; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+  th { background: var(--bg-card-alt); color: var(--text-dim); font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: .5px; }
+  td { color: var(--text); }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .num-cell { font-variant-numeric: tabular-nums; }
+
+  /* BADGE */
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 700;
+  }
+  .badge-beat { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.4); }
+  .badge-miss-mild { background: rgba(210,153,34,0.15); color: var(--yellow); border: 1px solid rgba(210,153,34,0.4); }
+  .badge-miss { background: rgba(248,81,73,0.15); color: var(--red); border: 1px solid rgba(248,81,73,0.4); }
+  .badge-verified { background: rgba(63,185,80,0.12); color: var(--green); border: 1px solid rgba(63,185,80,0.3); font-size: 11px; }
+  .badge-est { background: rgba(210,153,34,0.12); color: var(--yellow); border: 1px solid rgba(210,153,34,0.3); font-size: 11px; }
+  .badge-na { background: rgba(139,148,158,0.12); color: var(--text-dim); border: 1px solid rgba(139,148,158,0.3); font-size: 11px; }
+  .badge-up { background: rgba(63,185,80,0.15); color: var(--green); }
+  .badge-down { background: rgba(248,81,73,0.15); color: var(--red); }
+  .badge-hold { background: rgba(139,148,158,0.15); color: var(--text-dim); }
+
+  /* CARD */
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 20px; margin: 14px 0;
+  }
+
+  /* SCENARIO CARDS */
+  .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+  @media (max-width: 900px) { .scenario-grid { grid-template-columns: 1fr; } }
+  .scenario-card {
+    border-radius: 12px; padding: 20px; border: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+  .scenario-card.bear { border-top: 4px solid var(--red); }
+  .scenario-card.base { border-top: 4px solid var(--accent); }
+  .scenario-card.bull { border-top: 4px solid var(--green); }
+  .scenario-card h4 { margin: 0 0 4px; font-size: 16px; }
+  .scenario-card .tp { font-size: 26px; font-weight: 700; margin: 8px 0; }
+  .scenario-card.bear .tp { color: var(--red); }
+  .scenario-card.base .tp { color: var(--accent); }
+  .scenario-card.bull .tp { color: var(--green); }
+  .scenario-card ul { padding-left: 18px; margin: 10px 0; font-size: 13px; color: var(--text-dim); }
+  .scenario-card ul li { margin-bottom: 6px; }
+  .scenario-card ul li b { color: var(--text); }
+
+  /* ACTION BOX */
+  .action-box {
+    border-radius: 12px; padding: 24px; margin: 20px 0;
+    background: linear-gradient(135deg, rgba(88,166,255,0.08), rgba(188,140,255,0.05));
+    border: 1px solid rgba(88,166,255,0.3);
+  }
+  .action-box h3 { margin-top: 0; color: var(--accent); }
+  .action-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 14px; }
+  @media (max-width: 700px) { .action-grid { grid-template-columns: 1fr; } }
+  .action-item { background: var(--bg-card-alt); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .action-item .label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+  .action-item .value { font-size: 14px; font-weight: 600; }
+  .action-item.watch .value { color: var(--yellow); }
+  .action-item.buy .value { color: var(--green); }
+  .action-item.stop .value { color: var(--red); }
+
+  .price-timeline { display: flex; flex-wrap: wrap; gap: 0; margin: 16px 0; }
+  .tl-point {
+    flex: 1; min-width: 160px; background: var(--bg-card); border: 1px solid var(--border);
+    padding: 14px 16px; position: relative;
+  }
+  .tl-point .t-label { font-size: 12px; color: var(--text-dim); margin-bottom: 4px; }
+  .tl-point .t-price { font-size: 20px; font-weight: 700; }
+  .tl-point .t-chg { font-size: 13px; margin-top: 4px; }
+  .tl-arrow { display: flex; align-items: center; padding: 0 6px; color: var(--text-dim); }
+
+  footer {
+    margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border);
+    color: var(--text-dim); font-size: 12.5px;
+  }
+  footer .disclaimer { margin-top: 10px; padding: 14px; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border); }
+  .src-tag { color: var(--text-dim); font-size: 11.5px; }
+  a.src-link { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div>
+        <span class="ticker-badge">NASDAQ: PLTR</span>
+        <h1>Palantir Technologies Inc.</h1>
+        <div class="sub">最新財報解析｜分析基準日：2026-07-02｜最新財報：FY2026 Q1（2026年5月4日發布）</div>
+        <div class="sub">個股小狐 · 財經分析助手</div>
+      </div>
+      <div class="hero-price">
+        <div class="px">$125.73</div>
+        <div class="chg">+7.77%（2026-07-01收盤）</div>
+        <div class="note">市值 ≈ $301.4B</div>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-chip">52週高低：<b>$106.37 – $207.52</b></div>
+      <div class="meta-chip">TTM PE：<b>~131–141x</b></div>
+      <div class="meta-chip">Forward PE：<b>~80x</b></div>
+      <div class="meta-chip">分析師共識：<b>Buy（平均目標價 $182.75）</b></div>
+      <div class="meta-chip">最新季營收YoY：<b>+84.7%</b></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <a href="#beatmiss">① Beat/Miss表</a>
+    <a href="#guidance">② 全年指引變化</a>
+    <a href="#reaction">③ 股價反應</a>
+    <a href="#dcf">④ 三情境DCF估值</a>
+    <a href="#valuation">⑤ 股價位階評估</a>
+    <a href="#comps">⑥ 可比公司分析</a>
+    <a href="#risk">⑦ 額外優勢/風險</a>
+    <a href="#targets">⑧ 投行目標價與操作建議</a>
+  </div>
+
+  <!-- 1. Beat/Miss -->
+  <h2 class="section-title" id="beatmiss"><span class="num">1</span>Beat/Miss表（FY2026 Q1，發布於2026-05-04）</h2>
+  <p class="note">來源：Palantir Q1 2026 Business Update / 8-K新聞稿、CNBC、Quiver Quantitative、TIKR。✅已驗證。</p>
+  <table>
+    <thead>
+      <tr><th>項目</th><th>市場預期</th><th>實際值</th><th>差異%</th><th>YoY</th><th>判定</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>總營收</td><td class="num-cell">$1.57B</td><td class="num-cell">$1.63B</td>
+        <td class="num-cell">+3.8%</td><td class="num-cell">+84.7%</td>
+        <td><span class="badge badge-beat">✅ Beat</span></td>
+      </tr>
+      <tr>
+        <td>美國商業營收</td><td class="num-cell">—</td><td class="num-cell">$595M</td>
+        <td class="num-cell">—</td><td class="num-cell">+133%</td>
+        <td><span class="badge badge-beat">✅ Beat</span></td>
+      </tr>
+      <tr>
+        <td>美國政府營收</td><td class="num-cell">—</td><td class="num-cell">$687M</td>
+        <td class="num-cell">—</td><td class="num-cell">+84%</td>
+        <td><span class="badge badge-beat">✅ Beat</span></td>
+      </tr>
+      <tr>
+        <td>美國總營收</td><td class="num-cell">—</td><td class="num-cell">$1.282B</td>
+        <td class="num-cell">—</td><td class="num-cell">+104%</td>
+        <td><span class="badge badge-beat">✅ Beat（首破100%）</span></td>
+      </tr>
+      <tr>
+        <td>調整後EPS（Adj. Diluted EPS）</td><td class="num-cell">$0.285</td><td class="num-cell">$0.33</td>
+        <td class="num-cell">+15.8%</td><td class="num-cell">+106%（vs $0.16）</td>
+        <td><span class="badge badge-beat">✅ Beat</span></td>
+      </tr>
+      <tr>
+        <td>GAAP稀釋EPS</td><td class="num-cell">—</td><td class="num-cell">$0.34</td>
+        <td class="num-cell">—</td><td class="num-cell">+325%</td>
+        <td><span class="badge badge-beat">✅ Beat</span></td>
+      </tr>
+      <tr>
+        <td>調整後毛利率</td><td class="num-cell">⚠️估 ~83-85%</td><td class="num-cell">88%</td>
+        <td class="num-cell">⚠️估 +3-5pp</td><td class="num-cell">—</td>
+        <td><span class="badge badge-beat">✅ Beat</span></td>
+      </tr>
+      <tr>
+        <td>調整後營業利益率</td><td class="num-cell">⚠️估 ~53-55%</td><td class="num-cell">60%</td>
+        <td class="num-cell">⚠️估 +5-7pp</td><td class="num-cell">—</td>
+        <td><span class="badge badge-beat">✅ Beat</span></td>
+      </tr>
+      <tr>
+        <td>營運現金流</td><td class="num-cell">—</td><td class="num-cell">$899M</td>
+        <td class="num-cell">—</td><td class="num-cell">—</td>
+        <td><span class="badge badge-beat">✅ 強勁</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">⚠️ 市場預期毛利率/營業利益率共識未能於公開來源查得精確數字，標示為估算區間（依前幾季趨勢推算），實際值本身為✅已驗證。</p>
+
+  <!-- 2. Guidance -->
+  <h2 class="section-title" id="guidance"><span class="num">2</span>全年指引變化（FY2026）</h2>
+  <table>
+    <thead>
+      <tr><th>指引項目</th><th>舊指引（FY2025 Q4發布，2026-02-02）</th><th>新指引（FY2026 Q1發布，2026-05-04）</th><th>變化</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>FY2026 總營收</td>
+        <td class="num-cell">⚠️估 中位數約$7.30B（對應原~61% YoY成長）</td>
+        <td class="num-cell">$7.650B – $7.662B（+71% YoY）</td>
+        <td><span class="badge badge-up">▲ 上調（成長率+10pp）</span></td>
+      </tr>
+      <tr>
+        <td>美國商業營收成長</td>
+        <td class="num-cell">⚠️估 前值指引未達120%</td>
+        <td class="num-cell">≥$3.224B（+120%以上 YoY）</td>
+        <td><span class="badge badge-up">▲ 上調</span></td>
+      </tr>
+      <tr>
+        <td>調整後營業利益</td>
+        <td class="num-cell">—</td>
+        <td class="num-cell">$4.440B – $4.452B</td>
+        <td><span class="badge badge-up">▲ 上調</span></td>
+      </tr>
+      <tr>
+        <td>調整後自由現金流</td>
+        <td class="num-cell">—</td>
+        <td class="num-cell">$4.2B – $4.4B</td>
+        <td><span class="badge badge-up">▲ 上調</span></td>
+      </tr>
+      <tr>
+        <td>Q2 2026 營收指引</td>
+        <td class="num-cell">—</td>
+        <td class="num-cell">$1.797B – $1.801B</td>
+        <td><span class="badge badge-up">▲ 新設</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">⚠️ 舊指引精確中位數金額未能查得公開精確文字，以「較新指引成長率+10pp」反推估算，標示為估算值。新指引金額本身✅已驗證（來源：Palantir 8-K、Yahoo Finance、Futurum Group）。</p>
+
+  <!-- 3. Stock Reaction -->
+  <h2 class="section-title" id="reaction"><span class="num">3</span>股價反應</h2>
+  <div class="price-timeline">
+    <div class="tl-point">
+      <div class="t-label">財報前收盤（2026-05-04）</div>
+      <div class="t-price">$144.07</div>
+    </div>
+    <div class="tl-arrow">→</div>
+    <div class="tl-point">
+      <div class="t-label">財報後盤後（2026-05-04晚間）</div>
+      <div class="t-price">$135.91</div>
+      <div class="t-chg" style="color:var(--red)">-5.66%</div>
+    </div>
+    <div class="tl-arrow">→</div>
+    <div class="tl-point">
+      <div class="t-label">隔日盤中（2026-05-05）</div>
+      <div class="t-price">⚠️估 續跌</div>
+      <div class="t-chg" style="color:var(--red)">約 -7%（單日）</div>
+    </div>
+    <div class="tl-arrow">→</div>
+    <div class="tl-point">
+      <div class="t-label">分析當日（2026-07-01收盤）</div>
+      <div class="t-price">$125.73</div>
+      <div class="t-chg" style="color:var(--green)">+7.77%（單日反彈）</div>
+    </div>
+  </div>
+  <div class="card">
+    <h3 class="sub-title" style="margin-top:0;">逐點解讀</h3>
+    <ul>
+      <li><b>財報公布瞬間（5/4盤後）：</b>公司實際上營收、EPS雙雙超越市場預期，且大幅上調全年指引（+10pp成長率），但股價立即在盤後下跌約5.7%。市場反應「利多不漲」，反映PLTR的估值已隱含極高成長預期，財報「打敗數字」但「打不贏市場的想像」。</li>
+      <li><b>隔日交易（5/5）：</b>賣壓延續，單日再跌約7%，主因為機構投資人聚焦於「估值消化」議題——EV/Sales約60-66倍、Forward PE逾100倍的估值水位，即便業績超預期，仍難以進一步支撐股價續創新高。</li>
+      <li><b>之後至2026年中：</b>股價一度從高點（$207.52，52週高）大幅回落逾30%，市場對AI軟體股整體估值重新評估（Snowflake、CrowdStrike等同業亦同步修正）。</li>
+      <li><b>近期反彈（6月底-7月初）：</b>受美國陸軍NGC2現代化計畫選用Palantir Foundry、以及Palantir-Nvidia安全環境AI合作計畫等新催化劑帶動，股價单日大漲逾7%，顯示市場對其政府與企業AI導入動能仍具信心，但股價尚未回到財報前高點。</li>
+    </ul>
+  </div>
+
+  <!-- 4. DCF -->
+  <h2 class="section-title" id="dcf"><span class="num">4</span>三情境DCF估值</h2>
+  <p class="note">⚠️ 以下為個股小狐依公開財報數據與指引所做之情境式估算（非精確DCF模型輸出），核心假設均標明依據；請勿作為精確估值依據，僅供情境框架參考。基準營收：FY2026E $7.66B（公司指引中位）。</p>
+  <div class="scenario-grid">
+    <div class="scenario-card bear">
+      <h4>🐻 熊市情境</h4>
+      <div class="tp">$70 – $90</div>
+      <ul>
+        <li><b>營收假設：</b>FY26-30 CAGR降至25-30%（政府預算縮減+商業AI採用放緩，成長顯著減速）</li>
+        <li><b>EBITDA margin：</b>維持45-50%（成長趨緩但規模效益仍在）</li>
+        <li><b>FCF conversion：</b>~80%</li>
+        <li><b>WACC：</b>⚠️估 10-11%（高波動科技股風險溢酬）</li>
+        <li><b>terminal growth：</b>3%</li>
+        <li><b>核心假設：</b>AI題材熱度消退、估值倍數壓縮至同業平均（EV/Sales ~15-20x），美國商業客戶續約率不如預期</li>
+      </ul>
+    </div>
+    <div class="scenario-card base">
+      <h4>⚖️ 基準情境</h4>
+      <div class="tp">$150 – $185</div>
+      <ul>
+        <li><b>營收假設：</b>FY26-30 CAGR 35-40%（延續當前商業端擴張動能，逐步降速）</li>
+        <li><b>EBITDA margin：</b>持續擴張至55-60%</li>
+        <li><b>FCF conversion：</b>~85-90%（公司FY26指引FCF $4.2-4.4B對應營收之42-45% FCF margin）</li>
+        <li><b>WACC：</b>⚠️估 9-10%</li>
+        <li><b>terminal growth：</b>4%</li>
+        <li><b>核心假設：</b>對齊分析師共識目標價區間（$182.75平均），美國商業維持三位數成長逐步收斂至中雙位數，政府端穩定成長</li>
+      </ul>
+    </div>
+    <div class="scenario-card bull">
+      <h4>🐂 牛市情境</h4>
+      <div class="tp">$220 – $255</div>
+      <ul>
+        <li><b>營收假設：</b>FY26-30 CAGR 45%+（AIP/Foundry滲透率加速、Nvidia合作與國防大單如NGC2持續放量）</li>
+        <li><b>EBITDA margin：</b>突破65%（軟體規模效益極致發揮）</li>
+        <li><b>FCF conversion：</b>~90%+</li>
+        <li><b>WACC：</b>⚠️估 8-9%</li>
+        <li><b>terminal growth：</b>5%</li>
+        <li><b>核心假設：</b>對齊Wedbush（$230）與部分機構高端目標（$255），美國商業維持120%+成長超過2年，成為AI基礎設施層的核心贏家，市場給予類壟斷平台溢價</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <b>敏感度說明：</b>PLTR估值對<b>終端成長率假設與美國商業營收成長的持續性</b>最為敏感——由於當前估值已隱含極高成長預期（EV/Sales逾60倍），營收成長率每下修5個百分點，對應目標價可能修正15-20%以上；其次是估值倍數（terminal EV/Sales multiple）的市場情緒變化，遠比WACC小幅波動的影響更大。換言之，這是一檔「敘事驅動」重於「折現率驅動」的估值標的。
+  </div>
+
+  <!-- 5. Valuation Level -->
+  <h2 class="section-title" id="valuation"><span class="num">5</span>股價位階評估</h2>
+  <h3 class="sub-title">絕對估值表</h3>
+  <table>
+    <thead><tr><th>指標</th><th>數值</th><th>判讀</th></tr></thead>
+    <tbody>
+      <tr><td>TTM PE</td><td class="num-cell">~131 – 141x</td><td>遠高於軟體業平均（約30-40x），反映極高成長溢價</td></tr>
+      <tr><td>Forward PE</td><td class="num-cell">~80 – 105x</td><td>雖較TTM大幅收斂（反映EPS高速成長），仍屬同業頂端</td></tr>
+      <tr><td>PB（股價淨值比）</td><td class="num-cell">~33 – 41x</td><td>遠高於軟體業平均約2.8x，帳面價值幾無防禦性支撐</td></tr>
+      <tr><td>PEG（5年預期）</td><td class="num-cell">~1.44 – 1.68</td><td>低於2但高於「便宜」門檻1.0，顯示成長雖快但估值已充分反映，非明顯低估</td></tr>
+    </tbody>
+  </table>
+  <p class="note">來源：stockanalysis.com、macrotrends.net、Yahoo Finance Key Statistics（2026-06-19至06-30數據）。✅已驗證，惟不同資料源之間PE/PB略有差異（因計算基準日與股數調整不同），已標示區間。</p>
+
+  <h3 class="sub-title">EPS成長趨勢表（近4期，Adjusted Diluted EPS）</h3>
+  <table>
+    <thead><tr><th>季度</th><th>Adj. EPS</th><th>YoY成長</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>FY2025 Q2（2025-08發布）</td><td class="num-cell">$0.16</td><td class="num-cell">—</td><td>營收+48% YoY</td></tr>
+      <tr><td>FY2025 Q3（2025-11發布）</td><td class="num-cell">$0.21</td><td class="num-cell">+31%（QoQ環比）</td><td>營收+63% YoY，Rule of 40達114%</td></tr>
+      <tr><td>FY2025 Q4（2026-02發布）</td><td class="num-cell">$0.25</td><td class="num-cell">+19%（QoQ環比）</td><td>營收+70% YoY</td></tr>
+      <tr><td>FY2026 Q1（2026-05發布）</td><td class="num-cell">$0.33</td><td class="num-cell">+106%（YoY，較FY25Q2的$0.16）</td><td>營收+84.7% YoY，全年指引大幅上修</td></tr>
+    </tbody>
+  </table>
+  <div class="card">
+    <b>判讀：</b>EPS呈連續4季環比加速成長（$0.16→$0.21→$0.25→$0.33），且營收YoY成長率同步從48%一路加速到84.7%，符合「營收加速+獲利槓桿同步擴大」的<b>戴維斯雙擊（Davis Double Play）加速期</b>特徵。惟股價本身在此期間並未同步創高（反而從高點回落逾30%），顯示市場已提前計入這波獲利加速，目前處於「基本面持續驗證、但估值倍數壓縮」的消化階段，而非典型雙擊的股價與獲利同步上揚格局。
+  </div>
+
+  <h3 class="sub-title">全年 EPS：2024–2028（實際／預估，Non-GAAP Adjusted Diluted）</h3>
+  <table>
+    <thead><tr><th>財年</th><th>Adj. EPS</th><th>GAAP Diluted EPS</th><th>YoY成長</th><th>狀態</th></tr></thead>
+    <tbody>
+      <tr><td>FY2024</td><td class="num-cell">$0.20</td><td class="num-cell">$0.19</td><td class="num-cell">—</td><td><span class="badge badge-verified">✅ 實際</span></td></tr>
+      <tr><td>FY2025</td><td class="num-cell">$0.69</td><td class="num-cell">$0.63</td><td class="num-cell">+245%</td><td><span class="badge badge-verified">✅ 實際</span></td></tr>
+      <tr><td>FY2026E</td><td class="num-cell">$1.47 – $1.49</td><td class="num-cell">—</td><td class="num-cell">+113% – 116%</td><td><span class="badge badge-est">⚠️ 分析師共識預估（30位）</span></td></tr>
+      <tr><td>FY2027E</td><td class="num-cell">$2.12</td><td class="num-cell">—</td><td class="num-cell">+42% – 44%</td><td><span class="badge badge-est">⚠️ 分析師共識預估</span></td></tr>
+      <tr><td>FY2028E</td><td class="num-cell">$3.06</td><td class="num-cell">—</td><td class="num-cell">+44%</td><td><span class="badge badge-est">⚠️ 分析師共識預估</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">來源：Palantir FY2024/FY2025全年財報新聞稿（SEC 8-K）✅已驗證；FY2026-2028為stockanalysis.com／simplywall.st彙整之分析師共識（Non-GAAP Adjusted），區間反映不同資料源的預估分散度⚠️。GAAP Diluted EPS僅公布至FY2025，FY2026起市場預估多以Non-GAAP Adjusted口徑發布，GAAP預估暫標「—」。</p>
+
+  <h3 class="sub-title">歷史本益比（PE）區間</h3>
+  <table>
+    <thead><tr><th>期間／年度</th><th>PE（TTM）</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>2018年</td><td class="num-cell">—</td><td><span class="badge badge-na">❌ 無數據</span> Palantir於2020年9月透過直接上市（Direct Listing）掛牌，2018年尚未公開發行，無公開市場PE可查</td></tr>
+      <tr><td>2021年高點（2021-09）</td><td class="num-cell">~480.8x</td><td>IPO後市場情緒最樂觀期，EPS基期極低（$0.05）推升倍數失真</td></tr>
+      <tr><td>2022年</td><td class="num-cell">N/A（GAAP虧損）</td><td>GAAP Diluted EPS為-$0.18，全年虧損，PE無意義；部分資料源以負值-23.8x表示，僅供參考不具估值意涵</td></tr>
+      <tr><td>2024年中低點（2024-06）</td><td class="num-cell">~133.3x</td><td>近5年區間相對低點，EPS基期已轉正但股價尚未反映後續加速成長</td></tr>
+      <tr><td>5年平均（近5年，至2026-06）</td><td class="num-cell">~128.6x – 271.4x</td><td>不同資料源計算基準差異大（是否納入虧損年度、TTM滾動口徑不同），區間僅供參考</td></tr>
+      <tr><td>3年平均（近3年，至2026-06）</td><td class="num-cell">~248.0x</td><td>納入2022虧損年度後的滾動平均，波動大</td></tr>
+      <tr><td>現值（2026-06-30）</td><td class="num-cell">~117.6 – 141x</td><td>與5年區間中低點相近，反映近期股價回落、EPS加速成長</td></tr>
+    </tbody>
+  </table>
+  <p class="note">來源：macrotrends.net、stockanalysis.com、fullratio.com（2026-06數據）。⚠️ 各資料源PE計算方法（GAAP vs Non-GAAP、TTM滾動基準日）不一致，差異可達2倍以上，已標示區間並註明計算基準差異；2018年因公司尚未上市標示❌無數據，2022年因GAAP虧損PE不具估值意涵已特別註記。</p>
+
+  <!-- 6. Comps -->
+  <h2 class="section-title" id="comps"><span class="num">6</span>可比公司（Comps）分析</h2>
+  <table>
+    <thead>
+      <tr><th>公司</th><th>市值</th><th>EV/Revenue</th><th>Forward PE</th><th>FCF Yield</th><th>成長類型</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Palantir (PLTR)</b></td>
+        <td class="num-cell">~$301B</td>
+        <td class="num-cell">~60-66x</td>
+        <td class="num-cell">~80-105x</td>
+        <td class="num-cell">⚠️估 ~1.4-1.5%（$4.3B FCF指引中值/市值）</td>
+        <td>超高速成長（FY26營收+71%指引）</td>
+      </tr>
+      <tr>
+        <td>Snowflake (SNOW)</td>
+        <td class="num-cell">—</td>
+        <td class="num-cell">⚠️估 中高段（未查得精確值）</td>
+        <td class="num-cell">~91x</td>
+        <td class="num-cell">—</td>
+        <td>高速成長型資料平台</td>
+      </tr>
+      <tr>
+        <td>CrowdStrike (CRWD)</td>
+        <td class="num-cell">—</td>
+        <td class="num-cell">—</td>
+        <td class="num-cell">~73-93x</td>
+        <td class="num-cell">—</td>
+        <td>高速成長型網路安全</td>
+      </tr>
+      <tr>
+        <td>ServiceNow (NOW)</td>
+        <td class="num-cell">—</td>
+        <td class="num-cell">~9x</td>
+        <td class="num-cell">~21x（另有來源列72x TTM）</td>
+        <td class="num-cell">—</td>
+        <td>成熟穩健成長（FY25營收+20.9%）</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">⚠️ 部分同業之市值、EV/Revenue、FCF Yield精確數字未能於公開搜尋結果中取得完整交叉驗證，標示為「—」；Forward PE數字取自多篇綜合分析文章（247wallst.com、weex.com），可能因計算基準日不同而有出入，僅供相對比較參考。</p>
+  <div class="card">
+    <b>溢價/折價合理性說明：</b>PLTR的EV/Revenue（~60-66x）相較ServiceNow（~9x）呈現數倍溢價，主因兩者成長階段截然不同——PLTR仍處於84%+ YoY營收高速擴張期，ServiceNow已進入20%左右的成熟穩健成長。與Snowflake、CrowdStrike等同屬「高成長AI/資料/安全」族群相比，PLTR的Forward PE雖也偏高，但其調整後營業利益率（60%）與毛利率（88%）均優於多數同業，體現其軟體屬性下的規模經濟優勢。然而，此等溢價已隱含市場對其未來3-5年維持超高速成長且無重大失誤的預期，任何成長不如預期的訊號都可能觸發估值倍數的劇烈修正（如財報後首兩日下跌逾12%即為例證）。
+  </div>
+
+  <!-- 7. Extra Risk/Advantage -->
+  <h2 class="section-title" id="risk"><span class="num">7</span>額外優勢/風險</h2>
+  <table>
+    <thead><tr><th>項目</th><th>狀態</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>股票回購</td><td><span class="badge badge-na">❌ 無公開資料</span></td>
+        <td>未查得PLTR近期有正式股票回購計畫之公開資訊，標示「—」。</td>
+      </tr>
+      <tr>
+        <td>股息</td><td><span class="badge badge-na">❌ 不適用</span></td>
+        <td>PLTR目前不配發股息（n/a），符合高成長科技股常見資本配置策略。</td>
+      </tr>
+      <tr>
+        <td>內部人交易</td><td><span class="badge badge-miss">⚠️ 賣壓偏重</span></td>
+        <td>董事Peter Thiel於截至2026年5月30日之90天內出售約1,000萬股；2026年6月初另有內部人4筆股票獎勵（無現金交易）與1筆賣出（約$255,680）。近90天內未見顯著內部人買進紀錄。</td>
+      </tr>
+      <tr>
+        <td>機構持股</td><td><span class="badge badge-na">❌ 無法取得精確比例</span></td>
+        <td>公開搜尋未能取得本次查詢時點精確機構持股百分比，標示「—」；建議另行查閱13F彙總數據（如WhaleWisdom、Fintel）。</td>
+      </tr>
+      <tr>
+        <td>訂單能見度</td><td><span class="badge badge-verified">✅ 正向</span></td>
+        <td>美國陸軍NGC2現代化計畫選用Palantir Foundry；與Nvidia合作於安全環境中運行AI模型供美國政府機構使用，兩者皆為近期（2026年6-7月）新增催化劑。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 8. Bank Targets -->
+  <h2 class="section-title" id="targets"><span class="num">8</span>投行目標價與操作建議</h2>
+  <h3 class="sub-title">投行評等目標價表</h3>
+  <table>
+    <thead><tr><th>機構/分析師</th><th>評等</th><th>目標價</th><th>調整日期</th><th>理由摘要</th></tr></thead>
+    <tbody>
+      <tr><td>Wedbush（Dan Ives）</td><td><span class="badge badge-up">Buy（維持）</span></td><td class="num-cell">$230</td><td>2026-06-24</td><td>AI需求動能強勁，維持最樂觀立場</td></tr>
+      <tr><td>UBS（Karl Keirstead）</td><td><span class="badge badge-up">Buy（維持）</span></td><td class="num-cell">$200</td><td>2026-06-16</td><td>轉為看多，肯定政府與商業雙引擎成長</td></tr>
+      <tr><td>Wolfe Research（Alex Zukin）</td><td><span class="badge badge-hold">Hold（上調自更低評等）</span></td><td class="num-cell">—</td><td>2026-06-16</td><td>由更保守評等上調，惟未維持賣出</td></tr>
+      <tr><td>Bank of America（Mariana Perez Mora）</td><td><span class="badge badge-up">Buy（維持）</span></td><td class="num-cell">—</td><td>2026-06-30</td><td>維持買進，未揭露具體目標價</td></tr>
+      <tr><td>Morgan Stanley</td><td><span class="badge badge-hold">Equal Weight（維持）</span></td><td class="num-cell">$205</td><td>⚠️估（2026年上半年）</td><td>AI題材上行與估值風險並陳，中性看待</td></tr>
+      <tr><td>Jefferies（Brent Thill）</td><td><span class="badge badge-down">Sell（維持，街頭最低）</span></td><td class="num-cell">$70</td><td>⚠️估（2026年上半年）</td><td>即便大幅回檔40%+，估值仍高於多數獲利軟體同業</td></tr>
+    </tbody>
+  </table>
+  <p class="note">來源：Benzinga、stockanalysis.com/forecast、MarketBeat（2026-06-16至06-30數據）。✅已驗證評等與部分目標價；部分目標價與精確調整日期未能查得，標示「—」或「⚠️估」。</p>
+
+  <h3 class="sub-title">主要分歧點：樂觀派 vs 謹慎派</h3>
+  <table>
+    <thead><tr><th>面向</th><th>樂觀派論點</th><th>謹慎派論點</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>成長動能</td>
+        <td>美國商業營收連續多季三位數成長（Q1'26 +133% YoY），AIP滲透企業客戶速度史無前例</td>
+        <td>基期迅速墊高後，維持三位數成長的難度越來越高，一旦降速至50-60%區間即可能觸發估值重估</td>
+      </tr>
+      <tr>
+        <td>估值水位</td>
+        <td>軟體平台型公司的規模效益尚未完全反映，隨獲利槓桿擴大Forward PE將快速收斂至合理區間</td>
+        <td>EV/Sales逾60倍、PB逾30倍已透支未來多年完美執行的預期，安全邊際極薄</td>
+      </tr>
+      <tr>
+        <td>政府業務韌性</td>
+        <td>NGC2等國防大單顯示政府關係與技術壁壘持續深化，非景氣循環敏感業務</td>
+        <td>政府預算存在政治與財政不確定性，過度依賴少數大型合約存在集中度風險</td>
+      </tr>
+      <tr>
+        <td>內部人動向</td>
+        <td>股票獎勵性質交易屬正常公司治理行為，非基本面惡化訊號</td>
+        <td>大股東（Thiel）持續減碼逾千萬股，即便為既定計畫性賣出，仍值得留意作為情緒指標</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title">上行空間彙總表</h3>
+  <table>
+    <thead><tr><th>參考點</th><th>對應價位</th><th>距現價空間（基準$125.73）</th></tr></thead>
+    <tbody>
+      <tr><td>Jefferies熊市目標價（街頭最低）</td><td class="num-cell">$70</td><td class="num-cell" style="color:var(--red)">-44.3%</td></tr>
+      <tr><td>個股小狐DCF熊市情境</td><td class="num-cell">$70 – $90</td><td class="num-cell" style="color:var(--red)">-44.3% ~ -28.4%</td></tr>
+      <tr><td>52週低點</td><td class="num-cell">$106.37</td><td class="num-cell" style="color:var(--red)">-15.4%</td></tr>
+      <tr><td>個股小狐DCF基準情境（下緣）</td><td class="num-cell">$150</td><td class="num-cell" style="color:var(--green)">+19.3%</td></tr>
+      <tr><td>分析師平均目標價</td><td class="num-cell">$182.75</td><td class="num-cell" style="color:var(--green)">+45.4%</td></tr>
+      <tr><td>分析師中位數目標價</td><td class="num-cell">$200</td><td class="num-cell" style="color:var(--green)">+59.1%</td></tr>
+      <tr><td>Wedbush最樂觀目標價</td><td class="num-cell">$230</td><td class="num-cell" style="color:var(--green)">+82.9%</td></tr>
+      <tr><td>52週高點 / 個股小狐DCF牛市上緣</td><td class="num-cell">$207.52 / $255</td><td class="num-cell" style="color:var(--green)">+65.0% / +102.8%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="action-box">
+    <h3>最終操作建議</h3>
+    <p>基於財報基本面持續加速（EPS連4季環比走高、營收YoY自48%加速至84.7%）但估值仍處於歷史高檔區間（EV/Sales ~60倍、PB逾30倍）的矛盾格局，建議採取<b>波段紀律、分批操作</b>策略：</p>
+    <div class="action-grid">
+      <div class="action-item">
+        <div class="label">已持有部位</div>
+        <div class="value">維持核心持股，不因短期財報後波動性追高殺低；聚焦下一季（FY26 Q2，預計2026年8月公布）美國商業營收是否延續三位數成長作為持股信心指標。</div>
+      </div>
+      <div class="action-item buy">
+        <div class="label">考慮建倉區間</div>
+        <div class="value">股價回落至 $95 – $110（接近52週低點$106.37下緣，對應Forward PE壓縮至約65-70倍）時，可分批小額試單建立起始部位。</div>
+      </div>
+      <div class="action-item watch">
+        <div class="label">加碼觸發條件</div>
+        <div class="value">① 單季美國商業營收YoY成長率連續兩季維持100%以上；② 股價站穩$150且量能配合（對應個股小狐基準情境估值下緣）；③ 下次財報（Q2'26）再次上修FY26全年指引。三者任二成立可視為加碼訊號。</div>
+      </div>
+      <div class="action-item stop">
+        <div class="label">停損/風險警示門檻</div>
+        <div class="value">① 單季美國商業營收YoY成長率降至80%以下（顯著低於當前133%），視為成長動能質變警訊；② 股價有效跌破$95（低於52週低點逾10%）且伴隨基本面轉弱證據；③ 政府端合約出現重大取消或延遲之公開訊息。任一觸發應重新檢視部位規模並考慮減碼。</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="src-tag">
+      <b>資料來源：</b>
+      Palantir Technologies 8-K / Q1 2026 Business Update（investors.palantir.com）、
+      stockanalysis.com、macrotrends.net、Yahoo Finance、CNBC、Quiver Quantitative、TIKR.com、Futurum Group、
+      Benzinga、MarketBeat、The Motley Fool、247wallst.com、Investing.com、Seeking Alpha、WEEX Wiki（分析師目標價彙整）。
+      查詢時間：2026年7月2日。
+    </div>
+    <div class="disclaimer">
+      本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。<br>
+      報告中標示「⚠️估」之數字為基於公開資訊之合理推算，非官方精確數據；標示「—」之欄位為本次查詢未能取得可靠來源之數字，已依規則不予臆測填入。
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

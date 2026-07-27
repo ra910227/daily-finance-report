@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜財務風險健檢 PLTR Palantir Technologies</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg-card:#161b22;
+    --bg-card2:#1c2129;
+    --border:#30363d;
+    --text:#e6edf3;
+    --text-dim:#8b949e;
+    --accent:#58a6ff;
+    --green:#3fb950;
+    --green-bg:rgba(63,185,80,0.12);
+    --yellow:#d29922;
+    --yellow-bg:rgba(210,153,34,0.12);
+    --red:#f85149;
+    --red-bg:rgba(248,81,73,0.12);
+    --gray:#8b949e;
+    --gray-bg:rgba(139,148,158,0.12);
+    --purple:#a371f7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.6;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 20px 60px;}
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(135deg,#161b22 0%,#0d1117 100%);
+    border-bottom:1px solid var(--border);
+    padding:44px 20px 32px;
+  }
+  .hero-inner{max-width:1100px;margin:0 auto;}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px;}
+  .ticker-block{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  .ticker{font-size:2.4rem;font-weight:800;letter-spacing:1px;color:#fff;}
+  .company-name{font-size:1.05rem;color:var(--text-dim);}
+  .hero-meta{font-size:0.85rem;color:var(--text-dim);margin-top:6px;}
+  .price-block{text-align:right;}
+  .price{font-size:2rem;font-weight:700;color:#fff;}
+  .price-sub{font-size:0.85rem;color:var(--text-dim);margin-top:4px;}
+  .hero-stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:14px;
+    margin-top:28px;
+  }
+  .stat-chip{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px 14px;
+  }
+  .stat-chip .label{font-size:0.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;}
+  .stat-chip .value{font-size:1.15rem;font-weight:700;color:#fff;margin-top:4px;}
+  .stat-chip .note{font-size:0.7rem;color:var(--text-dim);margin-top:2px;}
+
+  /* TOC */
+  .toc{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:16px 20px;
+    background:var(--bg-card2);
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:10;
+    backdrop-filter:blur(6px);
+  }
+  .toc a{
+    color:var(--text-dim);
+    text-decoration:none;
+    font-size:0.82rem;
+    padding:6px 12px;
+    border:1px solid var(--border);
+    border-radius:20px;
+    white-space:nowrap;
+    transition:all .15s;
+  }
+  .toc a:hover{color:var(--accent);border-color:var(--accent);}
+
+  section{margin-top:44px;}
+  h2{
+    font-size:1.35rem;
+    color:#fff;
+    border-left:4px solid var(--accent);
+    padding-left:12px;
+    margin-bottom:6px;
+  }
+  .section-sub{color:var(--text-dim);font-size:0.85rem;margin-bottom:18px;padding-left:16px;}
+
+  .card{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:16px;
+  }
+
+  table{width:100%;border-collapse:collapse;font-size:0.88rem;}
+  th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--border);}
+  th:first-child,td:first-child{text-align:left;color:var(--text-dim);}
+  th{color:var(--text-dim);font-weight:600;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.4px;}
+  tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:rgba(255,255,255,0.02);}
+
+  .badge{
+    display:inline-block;
+    padding:3px 10px;
+    border-radius:20px;
+    font-size:0.75rem;
+    font-weight:700;
+  }
+  .badge-green{background:var(--green-bg);color:var(--green);}
+  .badge-yellow{background:var(--yellow-bg);color:var(--yellow);}
+  .badge-red{background:var(--red-bg);color:var(--red);}
+  .badge-gray{background:var(--gray-bg);color:var(--gray);}
+
+  .tag{
+    display:inline-block;
+    font-size:0.68rem;
+    padding:1px 7px;
+    border-radius:4px;
+    margin-left:6px;
+    font-weight:600;
+  }
+  .tag-verified{background:var(--green-bg);color:var(--green);}
+  .tag-est{background:var(--yellow-bg);color:var(--yellow);}
+  .tag-na{background:var(--gray-bg);color:var(--gray);}
+
+  .risk-card{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-left:4px solid var(--accent);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:14px;
+  }
+  .risk-card.green{border-left-color:var(--green);}
+  .risk-card.yellow{border-left-color:var(--yellow);}
+  .risk-card.red{border-left-color:var(--red);}
+  .risk-card h3{margin:0 0 8px;font-size:1.02rem;color:#fff;display:flex;align-items:center;gap:10px;}
+  .risk-card .formula{
+    font-family:"SF Mono",Monaco,monospace;
+    font-size:0.8rem;
+    color:var(--text-dim);
+    background:rgba(255,255,255,0.03);
+    padding:8px 12px;
+    border-radius:6px;
+    margin:8px 0;
+  }
+  .risk-card .result-line{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px;}
+  .result-num{font-size:1.4rem;font-weight:800;color:#fff;}
+  .threshold{font-size:0.8rem;color:var(--text-dim);}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr;}.hero-stats{grid-template-columns:repeat(2,1fr);}}
+
+  .callout{
+    background:var(--bg-card2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px 18px;
+    font-size:0.88rem;
+    color:var(--text-dim);
+  }
+  .callout.warn{border-color:rgba(210,153,34,0.35);background:var(--yellow-bg);color:#e3b341;}
+  .callout strong{color:#fff;}
+
+  .verdict-box{
+    background:linear-gradient(135deg,rgba(63,185,80,0.10),rgba(88,166,255,0.06));
+    border:1px solid rgba(63,185,80,0.35);
+    border-radius:14px;
+    padding:26px;
+    text-align:center;
+    margin-bottom:20px;
+  }
+  .verdict-box .label{font-size:0.8rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;}
+  .verdict-box .verdict{font-size:1.6rem;font-weight:800;color:var(--green);margin:8px 0;}
+
+  footer{
+    margin-top:60px;
+    padding-top:24px;
+    border-top:1px solid var(--border);
+    color:var(--text-dim);
+    font-size:0.8rem;
+    line-height:1.8;
+  }
+  footer .disclaimer{
+    margin-top:12px;
+    padding:14px 16px;
+    background:var(--bg-card2);
+    border-radius:8px;
+    color:#e3b341;
+    font-weight:600;
+  }
+  .src-note{font-size:0.72rem;color:var(--text-dim);margin-top:6px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="ticker-block">
+        <span class="ticker">PLTR</span>
+        <span class="company-name">Palantir Technologies Inc.</span>
+      </div>
+      <div class="price-block">
+        <div class="price">$125.73</div>
+        <div class="price-sub">2026-07-01 收盤 ｜ 較52週高點 -39.4%</div>
+      </div>
+    </div>
+    <div class="hero-meta">分析日期：2026-07-02　｜　報告類型：財務風險健檢　｜　資料期間：FY2025 Q3 ~ FY2026 Q1（最新一期10-Q，截至2026-03-31）</div>
+
+    <div class="hero-stats">
+      <div class="stat-chip">
+        <div class="label">市值</div>
+        <div class="value">$301.4B <span class="tag tag-verified">✅</span></div>
+        <div class="note">stockanalysis.com 2026-07-01</div>
+      </div>
+      <div class="stat-chip">
+        <div class="label">本益比 (TTM)</div>
+        <div class="value">141.3x</div>
+        <div class="note">Forward PE 79.6x</div>
+      </div>
+      <div class="stat-chip">
+        <div class="label">股價淨值比</div>
+        <div class="value">35.7x</div>
+        <div class="note">PB Ratio</div>
+      </div>
+      <div class="stat-chip">
+        <div class="label">52週區間</div>
+        <div class="value">$106.37–$207.52</div>
+        <div class="note">現價落於區間下段</div>
+      </div>
+      <div class="stat-chip">
+        <div class="label">計息債務</div>
+        <div class="value">~$212M</div>
+        <div class="note">主要為租賃負債，無傳統公司債</div>
+      </div>
+      <div class="stat-chip">
+        <div class="label">現金+短期投資</div>
+        <div class="value">$8.03B</div>
+        <div class="note">淨現金部位極大</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toc">
+  <a href="#data">① 財務數據填表</a>
+  <a href="#ratios">② 六大比率診斷</a>
+  <a href="#maturity">③ 債務到期時程</a>
+  <a href="#capex">④ CapEx分析</a>
+  <a href="#peers">⑤ 同業對比</a>
+  <a href="#verdict">⑥ 綜合診斷</a>
+</div>
+
+<div class="container">
+
+<div class="callout warn" style="margin-top:28px;">
+  <strong>重要提醒：Palantir 屬於淨現金型公司。</strong> 公司幾乎無傳統有息負債（無公司債、無銀行貸款），資產負債表上僅有的「計息債務」約2.12億美元，主要來自辦公室租賃相關的財務性負債。現金與短期投資高達80億美元，遠超總負債。因此本報告中「利息覆蓋率」「淨負債/EBITDA」等傳統槓桿比率將呈現極端值（N/A或負值代表淨現金），這是**正面訊號**而非計算錯誤，將於各節詳細說明，避免公式套用產生失真結論。
+</div>
+
+<!-- 1. 財務數據填表 -->
+<section id="data">
+  <h2>① 財務數據填表</h2>
+  <div class="section-sub">近3期對照（FY2025 Q3、FY2025 Q4、FY2026 Q1）｜ 單位：百萬美元，除另有標示</div>
+
+  <div class="card">
+    <h3 style="margin-top:0;color:#fff;font-size:1rem;">損益表</h3>
+    <table>
+      <thead><tr><th>項目</th><th>2025 Q3</th><th>2025 Q4</th><th>2026 Q1</th><th>狀態</th></tr></thead>
+      <tbody>
+        <tr><td>營收</td><td>$1,181M</td><td>$1,407M</td><td>$1,633M</td><td><span class="tag tag-verified">✅</span></td></tr>
+        <tr><td>毛利</td><td>$973.8M</td><td>$1,191M</td><td>$1,417M</td><td><span class="tag tag-verified">✅</span></td></tr>
+        <tr><td>營業利益 (EBIT)</td><td>$393.3M</td><td>$575.4M</td><td>$754.0M</td><td><span class="tag tag-verified">✅</span></td></tr>
+        <tr><td>利息支出</td><td>~$0</td><td>~$0</td><td>~$0</td><td><span class="tag tag-verified">✅</span></td></tr>
+        <tr><td>EBITDA（估）</td><td>$399.2M</td><td>$582.4M</td><td>$760.8M</td><td><span class="tag tag-est">⚠️估</span></td></tr>
+        <tr><td>D&A</td><td>—</td><td>—</td><td>—</td><td><span class="tag tag-na">❌</span></td></tr>
+        <tr><td>淨利</td><td>$475.6M</td><td>$608.7M</td><td>$870.5M</td><td><span class="tag tag-verified">✅</span></td></tr>
+      </tbody>
+    </table>
+    <div class="src-note">來源：stockanalysis.com 財報頁（2026-05-04資料截止），對應SEC 10-Q。D&A未單獨揭露於摘要損益表，EBITDA為 EBIT + 估算D&A 之近似值，非公司官方定義口徑，標示⚠️估算。</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0;color:#fff;font-size:1rem;">資產負債表</h3>
+    <table>
+      <thead><tr><th>項目</th><th>2025 Q3</th><th>2025 Q4</th><th>2026 Q1</th><th>狀態</th></tr></thead>
+      <tbody>
+        <tr><td>總資產</td><td>$8,114M</td><td>$8,900M</td><td>$10,199M</td><td><span class="tag tag-verified">✅</span></td></tr>
+        <tr><td>總負債</td><td>$1,426M</td><td>$1,412M</td><td>$1,643M</td><td><span class="tag tag-verified">✅</span></td></tr>
+        <tr><td>計息債務（含租賃負債）</td><td>$235.4M</td><td>$229.3M</td><td>$212.0M</td><td><span class="tag tag-est">⚠️估</span></td></tr>
+        <tr><td>現金及約當現金</td><td>$1,616M</td><td>$1,424M</td><td>$2,292M</td><td><span class="tag tag-verified">✅</span></td></tr>
+        <tr><td>現金+短期投資</td><td>$6,438M</td><td>$7,177M</td><td>$8,026M</td><td><span class="tag tag-verified">✅</span></td></tr>
+        <tr><td>股東權益</td><td>—</td><td>—</td><td>$8,556M</td><td><span class="tag tag-verified">✅</span></td></tr>
+        <tr><td>一年內到期債務細項</td><td colspan="3">—（原文無獨立揭露短期到期債務明細）</td><td><span class="tag tag-na">❌</span></td></tr>
+      </tbody>
+    </table>
+    <div class="src-note">來源：stockanalysis.com 資產負債表（季度）、SEC EDGAR 10-Q（截至2026-03-31，Accession 000132165526000028）。「計息債務」欄位由第三方資料庫（stockanalysis.com）依其口徑歸類，主要對應財務性租賃負債，因公司本身未在10-Q摘要中以「Total Debt」單一數字揭露，故標示⚠️估算，建議查10-Q附註原文確認精確組成。</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0;color:#fff;font-size:1rem;">現金流量表</h3>
+    <table>
+      <thead><tr><th>項目</th><th>2025 Q3</th><th>2025 Q4</th><th>2026 Q1</th><th>狀態</th></tr></thead>
+      <tbody>
+        <tr><td>營業現金流 (OCF)</td><td>$507.7M</td><td>$777.3M</td><td>$899.2M</td><td><span class="tag tag-verified">✅</span></td></tr>
+        <tr><td>資本支出 (CapEx)</td><td>$6.8M</td><td>$13.3M</td><td>$7.4M</td><td><span class="tag tag-verified">✅</span></td></tr>
+        <tr><td>自由現金流 (FCF)</td><td>$500.9M</td><td>$764.0M</td><td>$891.8M</td><td><span class="tag tag-verified">✅</span></td></tr>
+      </tbody>
+    </table>
+    <div class="src-note">來源：stockanalysis.com 現金流量表（季度），對應SEC 10-Q。</div>
+  </div>
+</section>
+
+<!-- 2. 六大比率診斷 -->
+<section id="ratios">
+  <h2>② 六大比率診斷</h2>
+  <div class="section-sub">以最新一期（2026 Q1）數據為主；Palantir 為淨現金部位，多項槓桿比率呈現「安全側極端值」，逐項說明原因</div>
+
+  <div class="risk-card green">
+    <h3>1. 利息覆蓋率 (Interest Coverage Ratio) <span class="badge badge-green">✅ 極安全</span></h3>
+    <div class="formula">EBIT ÷ 利息支出 = $754.0M ÷ ~$0M</div>
+    <div class="result-line">
+      <span class="result-num">N/A（實質無息負債）</span>
+      <span class="threshold">警戒標準：&lt;3x 為風險，&lt;1.5x 為危險</span>
+    </div>
+    <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:0;">Palantir利息支出趨近於零（10-Q未見顯著利息費用項目），公式分母趨近0導致比率無意義。這並非資料缺失，而是反映公司幾乎無需承擔利息負擔的事實——正面訊號，非風險。</p>
+  </div>
+
+  <div class="risk-card green">
+    <h3>2. 負債比率 (Total Liabilities / Total Assets) <span class="badge badge-green">✅ 極低</span></h3>
+    <div class="formula">總負債 ÷ 總資產 = $1,643M ÷ $10,199M</div>
+    <div class="result-line">
+      <span class="result-num">16.1%</span>
+      <span class="threshold">警戒標準：&gt;60% 需留意，&gt;80% 高風險</span>
+    </div>
+    <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:0;">總負債中多數為遞延營收、應付帳款及租賃負債，非傳統金融負債，資產負債結構非常保守。</p>
+  </div>
+
+  <div class="risk-card green">
+    <h3>3. 淨負債/EBITDA (Net Debt / EBITDA) <span class="badge badge-green">✅ 淨現金</span></h3>
+    <div class="formula">(計息債務 − 現金及約當現金) ÷ EBITDA(TTM估) = ($212M − $2,292M) ÷ ~$2,318M(估)</div>
+    <div class="result-line">
+      <span class="result-num">約 -0.9x（淨現金）</span>
+      <span class="threshold">警戒標準：&gt;3x 需留意，&gt;5x 高風險</span>
+    </div>
+    <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:0;">負值代表公司持有的現金已能覆蓋全部計息債務並仍有結餘，屬於「淨現金」狀態。TTM EBITDA以近四季EBIT加總概估（⚠️估算，未含官方D&A細項），約$2,318M（=$393.3+$575.4+$754.0+前一年同期估算值，此處僅取最近三季合計年化參考，建議以10-K年度數據覆核）。</p>
+  </div>
+
+  <div class="risk-card green">
+    <h3>4. OCF / 總債務 (Operating Cash Flow / Total Debt) <span class="badge badge-green">✅ 遠超覆蓋</span></h3>
+    <div class="formula">OCF(季) ÷ 計息債務 = $899.2M ÷ $212.0M</div>
+    <div class="result-line">
+      <span class="result-num">4.2x（單季）</span>
+      <span class="threshold">警戒標準：&lt;0.2x（年化）為風險</span>
+    </div>
+    <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:0;">即使僅用單季OCF，已可覆蓋全部計息債務逾4倍；年化後覆蓋倍數更高，顯示公司現金創造能力遠超其極小規模的負債。</p>
+  </div>
+
+  <div class="risk-card green">
+    <h3>5. 現金流覆蓋比率 (Cash + OCF / Total Debt) <span class="badge badge-green">✅ 極安全</span></h3>
+    <div class="formula">(現金+短期投資 + 季OCF) ÷ 計息債務 = ($8,026M + $899.2M) ÷ $212.0M</div>
+    <div class="result-line">
+      <span class="result-num">42.1x</span>
+      <span class="threshold">警戒標準：&lt;1x 為風險</span>
+    </div>
+    <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:0;">流動性儲備對負債的覆蓋倍數極高，違約風險在可預見未來幾乎可忽略。</p>
+  </div>
+
+  <div class="risk-card yellow">
+    <h3>6. 兩年內到期牆覆蓋倍數 (2-Yr Debt Wall Coverage) <span class="badge badge-yellow">⚠️ 估算</span></h3>
+    <div class="formula">現金+短期投資 ÷ 估計未來兩年到期債務</div>
+    <div class="result-line">
+      <span class="result-num">— (估算前提不成立)</span>
+      <span class="threshold">10-Q未單獨揭露到期時程明細</span>
+    </div>
+    <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:0;">Palantir 10-Q摘要未提供傳統「Debt Maturities」時程表（因無公司債/定期貸款）。計息債務主要為租賃負債，通常按月/年攤銷而非到期一次性償還，故「到期牆」概念在此不適用傳統意義。以現金儲備規模（$8,026M）對比全部計息債務（$212M）仍高達38倍，可確認即使全部負債同時到期亦無流動性壓力。⚠️此結論為合理推估，非官方到期時程數字，建議查10-K附註「Leases」章節確認精確年度攤銷金額。</p>
+  </div>
+
+  <table style="margin-top:20px;">
+    <thead><tr><th>比率</th><th>結果</th><th>狀態</th><th>警戒線</th></tr></thead>
+    <tbody>
+      <tr><td>利息覆蓋率</td><td>N/A（近乎無息）</td><td><span class="badge badge-green">✅</span></td><td>&lt;3x</td></tr>
+      <tr><td>負債比率</td><td>16.1%</td><td><span class="badge badge-green">✅</span></td><td>&gt;60%</td></tr>
+      <tr><td>淨負債/EBITDA</td><td>約 -0.9x（淨現金）</td><td><span class="badge badge-green">✅</span></td><td>&gt;3x</td></tr>
+      <tr><td>OCF/總債務</td><td>4.2x（單季）</td><td><span class="badge badge-green">✅</span></td><td>&lt;0.2x年化</td></tr>
+      <tr><td>現金流覆蓋比率</td><td>42.1x</td><td><span class="badge badge-green">✅</span></td><td>&lt;1x</td></tr>
+      <tr><td>兩年到期牆覆蓋</td><td>約38x（估，概念不完全適用）</td><td><span class="badge badge-yellow">⚠️</span></td><td>—</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 3. 債務到期時程 -->
+<section id="maturity">
+  <h2>③ 債務到期時程</h2>
+  <div class="section-sub">逐年到期金額</div>
+  <div class="callout warn">
+    <strong>❌ 無法取得逐年到期金額細項。</strong>
+    公開資料（stockanalysis.com、10-Q摘要）未提供Palantir傳統意義上的「Debt Maturities Schedule」，原因是公司資產負債表上並無公司債或銀行定期貸款——計息負債欄位主要對應財務性租賃義務（finance lease liabilities），此類負債通常在10-K「Leases」附註中以租賃到期年度表呈現，而非「Debt Maturities」章節。<br><br>
+    <strong>建議：</strong>如需精確逐年租賃到期/攤銷金額，請查閱最新10-K（FY2025，SEC EDGAR CIK 0001321655）之「Leases」附註原文。本報告不臆測具體逐年數字，欄位一律標示「—」。
+  </div>
+  <table style="margin-top:16px;">
+    <thead><tr><th>年度</th><th>估計到期金額</th><th>狀態</th></tr></thead>
+    <tbody>
+      <tr><td>2026</td><td>—</td><td><span class="tag tag-na">❌</span></td></tr>
+      <tr><td>2027</td><td>—</td><td><span class="tag tag-na">❌</span></td></tr>
+      <tr><td>2028</td><td>—</td><td><span class="tag tag-na">❌</span></td></tr>
+      <tr><td>2029及以後</td><td>—</td><td><span class="tag tag-na">❌</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 4. CapEx分析 -->
+<section id="capex">
+  <h2>④ CapEx分析</h2>
+  <div class="section-sub">近3期趨勢與業務模式判讀</div>
+
+  <div class="grid-3">
+    <div class="card" style="text-align:center;">
+      <div style="color:var(--text-dim);font-size:0.8rem;">CapEx / 營收（2026 Q1）</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#fff;margin-top:6px;">0.45%</div>
+      <div class="src-note">$7.4M ÷ $1,633M</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="color:var(--text-dim);font-size:0.8rem;">CapEx / OCF（2026 Q1）</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#fff;margin-top:6px;">0.82%</div>
+      <div class="src-note">$7.4M ÷ $899.2M</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="color:var(--text-dim);font-size:0.8rem;">業務模式判讀</div>
+      <div style="font-size:1.2rem;font-weight:800;color:var(--green);margin-top:6px;">極輕資產型</div>
+      <div class="src-note">軟體/SaaS型企業</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead><tr><th>期別</th><th>CapEx</th><th>CapEx/營收</th><th>CapEx/OCF</th></tr></thead>
+      <tbody>
+        <tr><td>2025 Q3</td><td>$6.8M</td><td>0.57%</td><td>1.34%</td></tr>
+        <tr><td>2025 Q4</td><td>$13.3M</td><td>0.94%</td><td>1.71%</td></tr>
+        <tr><td>2026 Q1</td><td>$7.4M</td><td>0.45%</td><td>0.82%</td></tr>
+      </tbody>
+    </table>
+    <p style="color:var(--text-dim);font-size:0.85rem;margin-top:12px;margin-bottom:0;">
+      CapEx長期維持在營收的1%以下，屬於典型「輕資產」軟體平台商業模式，幾乎不需要持續性重資本投入即可維持營運與成長，這也是FCF轉換率極高（近三季FCF/OCF均逾97%）的主要原因。此結構意味著即便營收成長趨緩，公司也無沉重的固定資產維護資本支出壓力，屬於現金流品質的正面因素。
+    </p>
+  </div>
+</section>
+
+<!-- 5. 同業對比 -->
+<section id="peers">
+  <h2>⑤ 同業對比</h2>
+  <div class="section-sub">Snowflake (SNOW)、C3.ai (AI) — 最新一期報告數據</div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>比率</th><th>PLTR</th><th>SNOW</th><th>C3.ai (AI)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>利息覆蓋率</td><td>N/A（無息）</td><td>負值（EBIT為負）</td><td>N/A（無息）</td></tr>
+        <tr><td>負債比率</td><td>16.1%</td><td>77.4%（$6,615M/$8,554M）</td><td>19.9%（$162.5M/$816.3M）</td></tr>
+        <tr><td>淨負債/EBITDA</td><td>約 -0.9x（淨現金）</td><td>約 -3.1x（淨現金，但EBITDA為負，比率意義有限）</td><td>N/A（EBITDA接近打平/估）</td></tr>
+        <tr><td>OCF/總債務</td><td>4.2x（單季）</td><td>0.09x（單季，$243.2M/$2,772M）</td><td>N/A（近乎無計息債務）</td></tr>
+        <tr><td>現金+STI/總債務</td><td>38x</td><td>1.07x（$2,955M/$2,772M）</td><td>極高（幾乎無計息負債）</td></tr>
+        <tr><td>當期營業利益(EBIT)</td><td>$754.0M（正、成長中）</td><td>-$326.2M（虧損）</td><td>—（⚠️需查最新10-Q確認精確值）</td></tr>
+      </tbody>
+    </table>
+    <div class="src-note">來源：stockanalysis.com（SNOW: FY2027 Q1，截至2026-04-30；C3.ai: FY2026 Q4，截至2026-04-30），SEC 8-K/10-Q。C3.ai部分EBIT/EBITDA數字未於本次查詢中精確取得，標示為「—」，避免臆測。</div>
+  </div>
+
+  <div class="callout">
+    <strong>解讀：</strong>三家公司同屬企業級數據/AI分析平台賽道，但資產負債體質差異顯著。Palantir與C3.ai同屬淨現金、低槓桿結構，Snowflake則背負較高計息債務（約$27.7億，主要為可轉債），且當期EBIT/EBITDA為負，槓桿比率意義受限。Palantir在三者中唯一同時具備「正EBIT + 高速成長 + 淨現金」的組合，財務體質在同業比較中屬於最穩健之列。
+  </div>
+</section>
+
+<!-- 6. 綜合診斷 -->
+<section id="verdict">
+  <h2>⑥ 綜合診斷</h2>
+
+  <div class="verdict-box">
+    <div class="label">定性分類</div>
+    <div class="verdict">優良淨現金型（低槓桿高成長）</div>
+    <div style="color:var(--text-dim);font-size:0.85rem;">Financially Conservative / Net-Cash Growth Company</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="risk-card yellow">
+      <h3>最大風險點：非資產負債表槓桿，而是估值風險</h3>
+      <p style="color:var(--text-dim);font-size:0.85rem;">
+        Palantir的財務結構本身極為穩健（淨現金、負債比率16.1%、CapEx輕），傳統「財務風險」意義上的違約/流動性風險極低。真正的風險集中在<strong style="color:#fff;">估值倍數過高</strong>：本益比(TTM) 141倍、股價淨值比35.7倍，遠高於軟體業平均水準。若成長動能放緩（如營收成長率從目前高速回落至20%以下）或市場風險偏好轉向，股價修正幅度可能遠大於基本面惡化幅度——這是估值風險而非資產負債表風險。
+      </p>
+    </div>
+    <div class="risk-card green">
+      <h3>安全邊際計算：EBIT需下滑多少才觸及警戒線？</h3>
+      <p style="color:var(--text-dim);font-size:0.85rem;">
+        由於Palantir實質無息負債，「利息覆蓋率跌破3x」這類傳統警戒情境<strong style="color:#fff;">在當前資本結構下幾乎不可能觸發</strong>——即使EBIT大幅下滑甚至轉負，只要利息支出維持趨近於零，覆蓋率公式本身即無意義。<br><br>
+        改以更務實的情境測試：若EBIT較2026 Q1的$754M下滑<strong style="color:#fff;">100%（轉為零或轉虧）</strong>，公司仍握有$8,026M現金及短期投資可支應營運與租賃負債，覆蓋倍數仍達38倍以上。換言之，Palantir的資產負債表可承受營運利益「完全消失」的極端情境仍不致產生流動性風險，安全邊際極高。
+      </p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3 style="margin-top:0;color:#fff;font-size:1rem;">結論摘要</h3>
+    <ul style="color:var(--text-dim);font-size:0.88rem;padding-left:20px;">
+      <li>資產負債表體質：<span class="badge badge-green">✅ 優良</span> — 淨現金部位、負債比率16.1%、無傳統公司債</li>
+      <li>現金流品質：<span class="badge badge-green">✅ 優良</span> — OCF/FCF快速成長，CapEx佔營收不到1%，轉換率高</li>
+      <li>債務到期風險：<span class="badge badge-gray">— 不適用</span> — 無顯著到期牆，但原文缺乏逐年細項需查10-K確認</li>
+      <li>相對同業：<span class="badge badge-green">✅ 領先</span> — 唯一同時具備正EBIT、高成長、淨現金的同業</li>
+      <li>主要留意項目：<span class="badge badge-yellow">⚠️ 估值</span> — 高本益比/高股價淨值比反映市場高度樂觀預期，非資產負債表風險，但需納入中長期波段操作的安全邊際考量</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div><strong>資料來源：</strong></div>
+  <div>· SEC EDGAR — Palantir Technologies Inc. 10-Q (FY2026 Q1, 截至2026-03-31, Accession 000132165526000028)</div>
+  <div>· stockanalysis.com — 損益表/資產負債表/現金流量表（季度）、統計數據頁</div>
+  <div>· stockanalysis.com — Snowflake (SNOW)、C3.ai (AI) 同業比較數據</div>
+  <div>· Palantir Investor Relations — Q1 2026 Business Update</div>
+  <div>· 查詢日期：2026-07-02</div>
+
+  <div class="disclaimer">
+    本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

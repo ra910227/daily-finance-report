@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>個股小狐｜NVDA 財務風險健檢</title>
+<style>
+:root{
+  --bg:#0b0e14;--panel:#11151f;--panel2:#161b28;--border:#232a3a;
+  --text:#e6e9f0;--muted:#8b93a7;--accent:#76b9ff;--green:#3ddc84;
+  --red:#ff6b6b;--yellow:#ffc857;--purple:#b794f6;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;line-height:1.6;}
+.hero{padding:40px 24px;background:linear-gradient(135deg,#0e3a1a,#0e1228 70%);border-bottom:1px solid var(--border);}
+.hero h1{margin:0 0 6px;font-size:28px;}
+.hero .sub{color:var(--muted);font-size:14px;}
+.hero .stats{display:flex;gap:24px;margin-top:18px;flex-wrap:wrap;}
+.hero .stat .label{font-size:12px;color:var(--muted);}
+.hero .stat .val{font-size:20px;font-weight:700;}
+.toc{position:sticky;top:0;background:rgba(11,14,20,0.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px;z-index:10;}
+.toc a{color:var(--muted);text-decoration:none;}.toc a:hover{color:var(--accent);}
+.section{max-width:1080px;margin:0 auto;padding:36px 24px;}
+.section h2{font-size:20px;border-left:4px solid var(--green);padding-left:10px;margin-bottom:16px;}
+.section h3{font-size:15px;color:var(--accent);margin-bottom:10px;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:18px;}
+th,td{padding:9px 10px;border-bottom:1px solid var(--border);text-align:left;}
+th{color:var(--muted);font-weight:600;background:var(--panel2);}
+tr:hover{background:var(--panel2);}
+.badge{display:inline-block;padding:2px 9px;border-radius:12px;font-size:12px;font-weight:600;}
+.badge.ok{background:rgba(61,220,132,0.15);color:var(--green);}
+.badge.warn{background:rgba(255,200,87,0.15);color:var(--yellow);}
+.badge.bad{background:rgba(255,107,107,0.15);color:var(--red);}
+.badge.blue{background:rgba(118,185,255,0.15);color:var(--accent);}
+.ratio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px;}
+.ratio-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px;}
+.ratio-card .name{font-size:12px;color:var(--muted);margin-bottom:4px;}
+.ratio-card .val{font-size:22px;font-weight:700;}
+.ratio-card .warn-std{font-size:11px;color:var(--muted);margin-top:6px;}
+.ratio-card.ok{border-top:3px solid var(--green);}
+.ratio-card.warn{border-top:3px solid var(--yellow);}
+.ratio-card.bad{border-top:3px solid var(--red);}
+.diag-box{background:linear-gradient(135deg,#0e2a1d,#0e1e2e);border:1px solid var(--green);border-radius:12px;padding:22px;margin-top:12px;}
+.diag-box h3{margin-top:0;color:var(--green);}
+.diag-box .row{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--border);font-size:14px;gap:12px;}
+.diag-box .row:last-child{border-bottom:none;}
+.diag-box .row .label{color:var(--muted);white-space:nowrap;min-width:110px;}
+.note{background:var(--panel2);border-left:3px solid var(--purple);padding:10px 14px;border-radius:6px;font-size:13px;color:var(--muted);margin-top:10px;}
+footer{padding:30px 24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);max-width:1080px;margin:0 auto;}
+@media(max-width:760px){.ratio-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>NVIDIA Corporation (NVDA) <span style="color:var(--muted);font-size:16px;">／財務風險健檢</span></h1>
+  <div class="sub">分析日期：2026-06-29　｜　財報期間：FY2026（截至2026-01-25）＋ Q1 FY2027（截至2026-04-26）　｜　整體財務健康：<span style="color:var(--green);font-weight:700;">優良（淨現金、近零槓桿）</span></div>
+  <div class="stats">
+    <div class="stat"><div class="label">現價（2026-06-28）</div><div class="val">$192.71</div></div>
+    <div class="stat"><div class="label">市值</div><div class="val">$4.72T</div></div>
+    <div class="stat"><div class="label">總資產（FY2026）</div><div class="val">$206.8B</div></div>
+    <div class="stat"><div class="label">淨現金部位</div><div class="val" style="color:var(--green);">+$2.1B（舊債前）</div></div>
+    <div class="stat"><div class="label">FY2026 FCF</div><div class="val" style="color:var(--green);">$96.7B</div></div>
+  </div>
+</div>
+
+<div class="toc">
+  <a href="#data">①財務數據</a>
+  <a href="#ratios">②六大比率</a>
+  <a href="#debt">③債務到期</a>
+  <a href="#capex">④CapEx分析</a>
+  <a href="#peers">⑤同業對比</a>
+  <a href="#diag">⑥綜合診斷</a>
+</div>
+
+<!-- ① 財務數據 -->
+<div class="section" id="data">
+  <h2>① 財務數據填表（三期對照）</h2>
+
+  <h3>損益表摘要</h3>
+  <table>
+    <tr><th>項目</th><th>FY2024（截至2024-01）</th><th>FY2025（截至2025-01）</th><th>FY2026（截至2026-01）</th></tr>
+    <tr><td>總營收</td><td>$60.9B</td><td>$130.5B</td><td>$215.9B</td></tr>
+    <tr><td>毛利率</td><td>72.7%</td><td>74.6%</td><td>71.1%</td></tr>
+    <tr><td>EBITDA</td><td>⚠️ 估~$44B</td><td>⚠️ 估~$97B</td><td>$133.2B ✅</td></tr>
+    <tr><td>EBIT（= EBITDA - D&A）</td><td>⚠️ 估~$42B</td><td>⚠️ 估~$95B</td><td>⚠️ 估~$130.4B（EBITDA $133.2B - D&A $2.84B）</td></tr>
+    <tr><td>D&A</td><td>—</td><td>—</td><td>$2.84B ✅</td></tr>
+    <tr><td>利息支出</td><td>⚠️ 估~$0.26B</td><td>⚠️ 估~$0.30B</td><td>⚠️ 估~$0.34B（舊債~$8.5B × ~4%）</td></tr>
+    <tr><td>非GAAP EPS</td><td>$2.97</td><td>$4.93</td><td>$4.77</td></tr>
+  </table>
+
+  <h3>資產負債表摘要</h3>
+  <table>
+    <tr><th>項目</th><th>FY2024（2024-01）</th><th>FY2025（2025-01）</th><th>FY2026（2026-01）</th><th>Q1 FY2027（2026-04）</th></tr>
+    <tr><td>總資產</td><td>$65.7B</td><td>$111.6B</td><td>$206.8B</td><td>$259.5B</td></tr>
+    <tr><td>總負債</td><td>$22.8B</td><td>$32.3B</td><td>$49.5B</td><td>—</td></tr>
+    <tr><td>長期債務</td><td>$8.46B</td><td>$8.46B</td><td>$7.47B</td><td>$7.47B（＋6月新發$25B）</td></tr>
+    <tr><td>短期到期債務</td><td>$1.25B</td><td>—</td><td>—</td><td>$1.0B</td></tr>
+    <tr><td>現金及等價物</td><td>—</td><td>—</td><td>$10.6B</td><td>$13.2B</td></tr>
+    <tr><td>股東權益</td><td>$42.9B</td><td>$79.3B</td><td>$157.3B</td><td>—</td></tr>
+  </table>
+  <div class="note">⚠️ 2026年6月NVIDIA新發行$25B債券（七檔，2028-2056年到期），主要用途為股票回購與一般企業用途，不代表財務壓力，而是主動利用低成本資本放大股東報酬。加計後總計息債務將升至約$33.5B，需以新口徑重算各比率。</div>
+
+  <h3>現金流量摘要</h3>
+  <table>
+    <tr><th>項目</th><th>FY2024</th><th>FY2025</th><th>FY2026</th></tr>
+    <tr><td>OCF（營業現金流）</td><td>⚠️ 估~$19B</td><td>⚠️ 估~$25B</td><td>⚠️ 估~$102.8B（FCF + CapEx）</td></tr>
+    <tr><td>CapEx（資本支出）</td><td>—</td><td>$3.4B</td><td>$6.1B ✅</td></tr>
+    <tr><td>FCF（自由現金流）</td><td>$16.8B</td><td>~$22.1B</td><td>~$96.7B ✅</td></tr>
+    <tr><td>FCF margin</td><td>~27.6%</td><td>~16.9%</td><td>~44.8%</td></tr>
+  </table>
+  <div class="note">OCF估算 = FCF + CapEx，為估算值；FCF數據來源 fullratio.com + businessquant.com，FY2025數字存在口徑差異，以「~」標示。</div>
+</div>
+
+<!-- ② 六大比率 -->
+<div class="section" id="ratios">
+  <h2>② 六大比率診斷（基於FY2026數據）</h2>
+  <div class="ratio-grid">
+    <div class="ratio-card ok">
+      <div class="name">① 利息覆蓋率</div>
+      <div class="val" style="color:var(--green);">~384x</div>
+      <div>公式：EBIT ÷ 利息支出 = $130.4B ÷ $0.34B</div>
+      <div class="warn-std">警戒線：&lt;3x ｜ 優良：>5x</div>
+      <div style="margin-top:6px;"><span class="badge ok">✅ 極度安全</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="name">② 負債比率</div>
+      <div class="val" style="color:var(--green);">23.9%</div>
+      <div>公式：總負債 ÷ 總資產 = $49.5B ÷ $206.8B</div>
+      <div class="warn-std">警戒線：>70% ｜ 優良：&lt;40%</div>
+      <div style="margin-top:6px;"><span class="badge ok">✅ 健康</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="name">③ 淨債務/EBITDA</div>
+      <div class="val" style="color:var(--green);">-0.02x</div>
+      <div>公式：(計息債務 - 現金) ÷ EBITDA = ($7.47B - $10.6B) ÷ $133.2B</div>
+      <div class="warn-std">警戒線：>4x ｜ 優良：&lt;2x ｜ 負值=淨現金</div>
+      <div style="margin-top:6px;"><span class="badge ok">✅ 淨現金部位</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="name">④ OCF / 總計息債務</div>
+      <div class="val" style="color:var(--green);">~13.8x</div>
+      <div>公式：OCF ÷ 計息債務 = $102.8B ÷ $7.47B</div>
+      <div class="warn-std">警戒線：&lt;0.2x ｜ 優良：>0.5x</div>
+      <div style="margin-top:6px;"><span class="badge ok">✅ 極度充裕</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="name">⑤ FCF覆蓋比率</div>
+      <div class="val" style="color:var(--green);">~51x</div>
+      <div>公式：FCF ÷ (年度利息+到期本金) = $96.7B ÷ ~$1.9B</div>
+      <div class="warn-std">警戒線：&lt;1.2x ｜ 優良：>2x</div>
+      <div style="margin-top:6px;"><span class="badge ok">✅ 無壓力</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="name">⑥ 2年內到期牆覆蓋</div>
+      <div class="val" style="color:var(--green);">>60x</div>
+      <div>公式：(現金+年度FCF) ÷ 2年到期債務；2年內到期規模極小（&lt;$1.5B估）</div>
+      <div class="warn-std">警戒線：&lt;1.5x ｜ 優良：>3x</div>
+      <div style="margin-top:6px;"><span class="badge ok">✅ 毫無壓力</span></div>
+    </div>
+  </div>
+  <div class="note">⚠️ 以上比率基於FY2026期末舊債結構（$7.47B長期債務）。2026年6月新發$25B債券後，計息債務升至~$33.5B，淨債務/EBITDA將升至約+0.17x，利息覆蓋率將降至~100x，仍屬極度安全，無財務壓力。</div>
+</div>
+
+<!-- ③ 債務到期 -->
+<div class="section" id="debt">
+  <h2>③ 債務到期時程</h2>
+  <h3>舊有債務（$8.47B，FY2026期末）</h3>
+  <table>
+    <tr><th>到期年份</th><th>金額（估）</th><th>說明</th></tr>
+    <tr><td>2026</td><td>~$1.0B</td><td>短期到期（Q1 FY27 Balance Sheet顯示$1.0B短期計息債務）</td></tr>
+    <tr><td>2028</td><td>到期金額</td><td>⚠️ 舊有notes到期時程，請查FY2026 10-K「Debt Maturities」章節原文確認</td></tr>
+    <tr><td>2030</td><td>峰值 ~$1.9B</td><td>全週期最大到期年份（估），相對現金流極為可控</td></tr>
+  </table>
+  <h3>2026年6月新發行債券（$25B，主動融資）</h3>
+  <table>
+    <tr><th>票面利率</th><th>金額</th><th>到期年份</th></tr>
+    <tr><td>4.250%</td><td>$3.5B</td><td>2028-06-15</td></tr>
+    <tr><td>4.350%</td><td>$3.5B</td><td>2029-06-15</td></tr>
+    <tr><td>4.500%</td><td>$4.0B</td><td>2031-06-15</td></tr>
+    <tr><td>4.750%</td><td>$3.5B</td><td>2033-06-15</td></tr>
+    <tr><td>4.950%</td><td>$4.0B</td><td>2036-06-15</td></tr>
+    <tr><td>5.550%</td><td>$3.0B</td><td>2046-06-15</td></tr>
+    <tr><td>5.625%</td><td>$3.5B</td><td>2056-06-15</td></tr>
+  </table>
+  <div class="note">新發$25B為主動資本管理（支持$800億回購計畫），到期期限長（最長至2056年），平均加權成本約4.7%，以當前FCF規模每年輕鬆覆蓋。這是「財務自信」的展現，而非融資需求。</div>
+</div>
+
+<!-- ④ CapEx分析 -->
+<div class="section" id="capex">
+  <h2>④ CapEx 分析</h2>
+  <table>
+    <tr><th>財政年度</th><th>CapEx</th><th>CapEx/營收</th><th>CapEx/OCF</th><th>FCF margin</th></tr>
+    <tr><td>FY2025</td><td>$3.4B</td><td>2.6%</td><td>⚠️ 估~13.6%</td><td>~16.9%</td></tr>
+    <tr><td>FY2026</td><td>$6.1B</td><td>2.8%</td><td>⚠️ 估~5.9%</td><td>~44.8%</td></tr>
+  </table>
+  <div style="margin-top:10px;">
+    <span class="badge ok">✅ 輕資產型</span> NVIDIA的CapEx/營收比僅2.8%，遠低於台積電（~15-20%）或記憶體廠（>30%），屬於典型「輕資產fab-less設計公司」——研發費用遠高於硬體資本支出（FY2026研發費用約$12.9B，是CapEx的2倍以上）。
+  </div>
+  <div class="note">CapEx絕對值從FY2025 $3.4B增至FY2026 $6.1B（+79%），主要用於數據中心基礎設施、測試與研發設施擴建，屬支持超高速成長的必要投入，而非資本密集本質改變。</div>
+</div>
+
+<!-- ⑤ 同業對比 -->
+<div class="section" id="peers">
+  <h2>⑤ 同業財務對比</h2>
+  <table>
+    <tr><th>指標</th><th>NVDA</th><th>AMD</th><th>AVGO（Broadcom）</th><th>TSM（台積電）</th></tr>
+    <tr><td>負債比率</td><td>23.9% ✅</td><td>⚠️ 估~30-35%</td><td>~60%（含大量收購債）⚠️</td><td>~35% ✅</td></tr>
+    <tr><td>淨債務/EBITDA</td><td>-0.02x（淨現金）✅</td><td>⚠️ 估輕微淨負債</td><td>~3-4x ⚠️（VMware整合後遺症）</td><td>~0.2-0.5x ✅</td></tr>
+    <tr><td>FCF margin</td><td>~44.8% ✅✅</td><td>—</td><td>—</td><td>~30-35%</td></tr>
+    <tr><td>CapEx/營收</td><td>2.8%（輕資產）✅</td><td>~2-3%（輕資產）</td><td>~3-4%</td><td>~15-20%（重資產）</td></tr>
+    <tr><td>ROE</td><td>114.3% ✅✅</td><td>—</td><td>—</td><td>~25-30%</td></tr>
+  </table>
+  <div class="note">NVDA在同業中財務狀況最為優異：FCF margin最高、槓桿最低、ROIC遠超同業。AVGO因收購VMware背負大量債務（淨債務/EBITDA ~3-4x），是四者中槓桿最高的；TSM因晶圓廠重資產特性CapEx高企，但現金流仍穩健。</div>
+</div>
+
+<!-- ⑥ 綜合診斷 -->
+<div class="section" id="diag">
+  <h2>⑥ 綜合診斷</h2>
+  <div class="diag-box">
+    <h3>🏥 財務健康等級：優良主動管理型（A+）</h3>
+    <div class="row"><span class="label">財務定性</span><span>「超級現金機器」：FY2026 FCF ~$97B，FCF margin 44.8%，淨現金部位，幾乎零財務壓力</span></div>
+    <div class="row"><span class="label">最大財務風險點</span><span>新發$25B債（主動，非被迫）將計息債務升至~$33.5B；若AI需求急速收縮導致FCF腰斬，仍可輕鬆覆蓋；EBIT需下滑 <b>97%+</b> 才觸及利息覆蓋率警戒線 — 安全邊際極高</span></div>
+    <div class="row"><span class="label">安全邊際計算</span><span>警戒線為利息覆蓋率 &lt;3x；當前EBIT ~$130.4B 需降至 ~$1B（降幅 >99%）才觸及，在任何合理情境下幾乎不可能發生</span></div>
+    <div class="row"><span class="label">值得留意</span><span>$25B新債若市場對AI前景悲觀，可能對信用評等產生象徵性壓力，但實質財務風險極低；主要風險仍是<b>業務/市場風險</b>（AI需求週期），而非財務槓桿風險</span></div>
+    <div class="row"><span class="label">操作意涵</span><span>財務健全度不是NVDA的投資風險來源；需重點監控的是 Data Center 需求持續性、中國市場流失速度，而非資產負債表</span></div>
+  </div>
+</div>
+
+<footer>
+  資料來源：✅ NVIDIA Newsroom／SEC EDGAR 10-K（FY2026）、✅ 10-Q（Q1 FY2027）、✅ stockdividendscreener.com（資產負債表）、✅ gurufocus.com（CapEx）、✅ TechRepublic（$25B新債）、⚠️ fullratio.com / businessquant.com（OCF/FCF估算）。利息支出與部分OCF為推算值，建議查FY2026 10-K現金流量表原文確認。<br><br>
+  本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。<br>
+  產出時間：2026-06-29 ｜ 個股小狐｜財務風險健檢模式
+</footer>
+</body>
+</html>

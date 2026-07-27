@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜台光電(2383.TW) 完整報告</title>
+<style>
+:root{
+  --bg:#0b0f14; --bg2:#111823; --bg3:#1c2330; --card:#141c28; --card2:#182233;
+  --border:#233042; --text:#e6edf5; --text2:#9fb0c3; --text3:#6b7c91;
+  --accent:#3ecf8e; --accent2:#5b9dff; --warn:#f0b429; --danger:#f0554d;
+  --green:#3ecf8e; --yellow:#f0b429; --red:#f0554d; --blue:#5b9dff; --purple:#b892ff;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:linear-gradient(180deg,var(--bg) 0%, #090c10 100%);
+  color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",Segoe UI,Helvetica,Arial,sans-serif;
+  line-height:1.65; font-size:15px;
+}
+a{color:var(--accent2); text-decoration:none;}
+.container{max-width:1100px; margin:0 auto; padding:0 24px 80px;}
+.hero{
+  background:radial-gradient(1200px 500px at 20% -10%, rgba(62,207,142,0.15), transparent),
+             radial-gradient(900px 400px at 90% 0%, rgba(91,157,255,0.12), transparent),
+             linear-gradient(180deg,#0d1420 0%, #0b0f14 100%);
+  border-bottom:1px solid var(--border);
+  padding:48px 24px 32px;
+}
+.hero-inner{max-width:1100px; margin:0 auto;}
+.hero-tag{
+  display:inline-block; font-size:12px; letter-spacing:1.5px; color:var(--accent);
+  border:1px solid rgba(62,207,142,0.4); border-radius:20px; padding:4px 12px; margin-bottom:16px;
+  background:rgba(62,207,142,0.06);
+}
+.hero-title{font-size:32px; font-weight:800; margin:0 0 4px; letter-spacing:0.5px;}
+.hero-sub{color:var(--text2); font-size:15px; margin-bottom:24px;}
+.hero-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:20px;}
+.hero-stat{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 16px;}
+.hero-stat .label{font-size:11px; color:var(--text3); margin-bottom:6px; letter-spacing:0.5px;}
+.hero-stat .value{font-size:20px; font-weight:700;}
+.hero-stat .value.small{font-size:15px;}
+.hero-stat .value.red{color:var(--red);}
+.hero-stat .value.green{color:var(--green);}
+.hero-stat .sub{font-size:11px; color:var(--text3); margin-top:4px;}
+.thesis-score{color:var(--accent);}
+@media (max-width:900px){.hero-grid{grid-template-columns:repeat(2,1fr);}}
+.mode-nav{
+  position:sticky; top:0; z-index:60; background:rgba(11,15,20,0.97); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border); padding:10px 24px;
+}
+.mode-nav-inner{max-width:1100px; margin:0 auto; display:flex; gap:8px; flex-wrap:wrap;}
+.mode-nav a{
+  font-size:13px; font-weight:700; color:var(--text2); padding:7px 16px;
+  border:1px solid var(--border); border-radius:20px; white-space:nowrap; transition:all .15s;
+}
+.mode-nav a:hover{color:var(--accent); border-color:var(--accent);}
+.toc{background:rgba(255,255,255,0.02); border-bottom:1px solid var(--border); padding:10px 0; margin-bottom:8px;}
+.toc-inner{display:flex; gap:6px; flex-wrap:wrap;}
+.toc a{
+  font-size:12px; color:var(--text3); text-decoration:none; padding:5px 11px;
+  border:1px solid var(--border); border-radius:16px; white-space:nowrap; transition:all .15s;
+}
+.toc a:hover{color:var(--accent); border-color:var(--accent);}
+.part-header{padding:56px 0 20px; scroll-margin-top:60px;}
+.part-eyebrow{font-size:12px; letter-spacing:2px; color:var(--accent2); text-transform:uppercase; font-weight:700; margin-bottom:8px;}
+.part-title{font-size:26px; font-weight:800; margin:0 0 8px;}
+.part-desc{color:var(--text2); font-size:13.5px; margin-bottom:4px; max-width:760px;}
+section{padding:36px 0 8px; border-top:1px solid var(--border);}
+section.no-border{border-top:none;}
+h2{font-size:21px; font-weight:800; margin:0 0 6px; display:flex; align-items:center; gap:10px; scroll-margin-top:60px;}
+h2 .num{
+  display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px;
+  background:var(--accent); color:#06120d; border-radius:8px; font-size:14px; font-weight:800;
+}
+.section-desc{color:var(--text3); font-size:13px; margin-bottom:22px;}
+h3{font-size:16px; font-weight:700; margin:28px 0 12px; color:var(--text);}
+h4{font-size:14.5px; font-weight:700; margin:0 0 8px; color:#fff;}
+.card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px 22px; margin-bottom:16px;}
+.card-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+.two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+@media (max-width:800px){.card-grid{grid-template-columns:1fr;} .two-col{grid-template-columns:1fr;} .hero-grid{grid-template-columns:repeat(2,1fr);}}
+table{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0 20px;}
+th{text-align:left; padding:10px 12px; background:var(--bg2); color:var(--text2); font-weight:600; font-size:12px; letter-spacing:0.3px; border-bottom:1px solid var(--border);}
+td{padding:10px 12px; border-bottom:1px solid var(--border); color:var(--text);}
+tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:rgba(255,255,255,0.02);}
+td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+.badge{display:inline-block; padding:3px 10px; border-radius:12px; font-size:11.5px; font-weight:700; letter-spacing:0.3px;}
+.badge-green{background:rgba(62,207,142,0.15); color:var(--green); border:1px solid rgba(62,207,142,0.35);}
+.badge-yellow{background:rgba(240,180,41,0.15); color:var(--yellow); border:1px solid rgba(240,180,41,0.35);}
+.badge-red{background:rgba(240,85,77,0.15); color:var(--red); border:1px solid rgba(240,85,77,0.35);}
+.badge-gray{background:rgba(155,170,190,0.12); color:var(--text2); border:1px solid var(--border);}
+.badge.beat{background:rgba(62,207,142,.15); color:var(--green); border:1px solid rgba(62,207,142,.4);}
+.badge.miss{background:rgba(242,84,91,.15); color:var(--red); border:1px solid rgba(242,84,91,.4);}
+.badge.warn{background:rgba(240,180,41,.15); color:var(--yellow); border:1px solid rgba(240,180,41,.4);}
+.badge.na{background:rgba(154,164,181,.15); color:var(--text3); border:1px solid rgba(154,164,181,.4);}
+.badge.verified{background:rgba(91,157,255,.15); color:var(--blue); border:1px solid rgba(91,157,255,.4);}
+.est{color:var(--yellow); font-size:11px; font-weight:700;}
+.dash{color:var(--text3);}
+.risk-card{border:1px solid var(--border); border-left:4px solid var(--danger); border-radius:10px; padding:14px 18px; margin-bottom:12px; background:rgba(240,85,77,0.04);}
+.risk-card.mid{border-left-color:var(--warn); background:rgba(240,180,41,0.04);}
+.risk-card.low{border-left-color:var(--green); background:rgba(62,207,142,0.04);}
+.risk-card .risk-title{font-weight:700; margin-bottom:4px; font-size:14.5px;}
+.risk-card .risk-trigger{font-size:13px; color:var(--text2); margin-top:6px;}
+.risk-card .risk-trigger b{color:var(--warn);}
+.ratio-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:16px;}
+.ratio-card{background:var(--bg3); border:1px solid var(--border); border-radius:12px; padding:18px 20px; position:relative; overflow:hidden;}
+.ratio-card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px;}
+.ratio-card.good::before{background:var(--green);}
+.ratio-card.warn::before{background:var(--yellow);}
+.ratio-card.bad::before{background:var(--red);}
+.ratio-name{font-size:13px; color:var(--text2); font-weight:600; margin-bottom:4px;}
+.ratio-value{font-size:24px; font-weight:800; color:#fff; margin-bottom:6px;}
+.ratio-formula{font-size:11.5px; color:var(--text3); font-family:"SF Mono",Menlo,monospace; margin-bottom:8px; line-height:1.5;}
+.ratio-threshold{font-size:12px; color:var(--text2); border-top:1px dashed var(--border); padding-top:8px; margin-top:4px;}
+.scenario-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;}
+.scenario-card{border-radius:12px; padding:20px; border:1px solid var(--border);}
+.scenario-card.bear{background:linear-gradient(160deg,rgba(242,84,91,.08),rgba(22,27,38,.4));}
+.scenario-card.base{background:linear-gradient(160deg,rgba(91,157,255,.08),rgba(22,27,38,.4));}
+.scenario-card.bull{background:linear-gradient(160deg,rgba(62,207,142,.08),rgba(22,27,38,.4));}
+.scenario-card h3{margin:0 0 4px; font-size:16px;}
+.scenario-card .tp{font-size:22px; font-weight:800; margin:8px 0;}
+.scenario-card ul{margin:10px 0 0; padding-left:18px; font-size:13px; color:var(--text2);}
+.scenario-card li{margin-bottom:5px;}
+.action-box{border:1px solid rgba(62,207,142,0.3); border-radius:14px; padding:22px 24px; margin:20px 0; background:linear-gradient(135deg, rgba(62,207,142,0.08), rgba(91,157,255,0.05));}
+.action-box h4{margin:0 0 14px; font-size:15px; color:var(--accent);}
+.action-row{display:flex; gap:10px; padding:10px 0; border-bottom:1px dashed var(--border); align-items:flex-start;}
+.action-row:last-child{border-bottom:none;}
+.action-label{min-width:120px; font-size:12.5px; color:var(--text3); font-weight:700; padding-top:2px;}
+.action-value{flex:1; font-size:14px;}
+.stars{color:var(--yellow); letter-spacing:2px; font-size:15px;}
+.moat-row{display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border);}
+.moat-row:last-child{border-bottom:none;}
+.moat-label{font-size:13.5px; color:var(--text2);}
+.summary-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin:20px 0;}
+@media (max-width:900px){.summary-grid{grid-template-columns:repeat(2,1fr);}}
+.summary-card{background:var(--card2); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center;}
+.summary-card .s-label{font-size:11px; color:var(--text3); margin-bottom:8px;}
+.summary-card .s-value{font-size:16px; font-weight:800; color:var(--accent);}
+.callout{border-radius:10px; padding:16px 18px; margin:16px 0; font-size:13.5px; border:1px solid;}
+.callout.info{background:rgba(88,166,255,0.08); border-color:rgba(88,166,255,0.3); color:var(--text);}
+.callout.warn{background:rgba(210,153,34,0.08); border-color:rgba(210,153,34,0.3); color:var(--text);}
+.callout.good{background:rgba(63,185,80,0.08); border-color:rgba(63,185,80,0.3); color:var(--text);}
+.verdict-box{background:linear-gradient(135deg, rgba(63,185,80,0.10), rgba(88,166,255,0.06)); border:1px solid rgba(63,185,80,0.3); border-radius:14px; padding:26px; text-align:center; margin-bottom:20px;}
+.verdict-label{font-size:12px; color:var(--text3); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:8px;}
+.verdict-value{font-size:24px; font-weight:800; color:var(--green);}
+.verdict-sub{font-size:13.5px; color:var(--text2); margin-top:8px; max-width:700px; margin-left:auto; margin-right:auto;}
+.hl{color:var(--warn); font-weight:700;}
+.note{font-size:12px; color:var(--text3); margin-top:8px; padding:10px 12px; background:rgba(255,255,255,.02); border-left:3px solid var(--border); border-radius:4px;}
+.src{font-size:11px; padding:1px 6px; border-radius:5px; margin-left:6px; font-weight:700;}
+.src-v{background:rgba(62,207,142,0.15); color:var(--green);}
+.src-e{background:rgba(240,180,41,0.15); color:var(--warn);}
+.src-x{background:rgba(240,85,77,0.15); color:var(--danger);}
+footer{border-top:1px solid var(--border); margin-top:60px; padding:30px 24px; color:var(--text3); font-size:12px;}
+footer .container{padding:0;}
+footer h4{color:var(--text2); font-size:13px; margin-bottom:10px;}
+footer p{margin:6px 0;}
+footer ul{list-style:none; margin-bottom:16px; padding:0;}
+footer li{margin-bottom:5px;}
+.disclaimer{margin-top:16px; padding:14px 16px; border:1px solid var(--border); border-radius:10px; background:var(--card); color:var(--text2); font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">個股小狐 · 三合一完整報告</span>
+    <h1 class="hero-title">台光電子股份有限公司 (2383.TW)</h1>
+    <div class="hero-sub">上市・全球高速/高頻銅箔基板(CCL)龍頭，AI伺服器/800G-1.6T交換器/低軌衛星關鍵材料 ｜ 分析日期 2026/07/03 ｜ 涵蓋：公司深度研究 + 最新財報解析 + 財務風險健檢</div>
+    <div class="hero-grid">
+      <div class="hero-stat">
+        <div class="label">股價 (2026/07/03)</div>
+        <div class="value green">6,080 元</div>
+        <div class="sub">日漲 +7.52%（昨收5,655），連3漲12.80%</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">市值</div>
+        <div class="value small">約 2,140~2,180 億元 <span class="est">估</span></div>
+        <div class="sub">不同平台估算略有出入，見備註</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">本益比 TTM / PB</div>
+        <div class="value small">約122.7~131.9x / 42.3~45.4x</div>
+        <div class="sub">同業平均PE約84.34倍，明顯溢價</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">52週高低</div>
+        <div class="value small">6,080 / 1,530 元</div>
+        <div class="sub">2026/7/3高（當日再創新高）、2026/1/7低</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">財務體質 / Thesis</div>
+        <div class="value thesis-score">體質健康・4/5</div>
+        <div class="sub">獲利能力強但估值已大幅超越所有法人目標價</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mode-nav">
+  <div class="mode-nav-inner">
+    <a href="#part1">📘 模式一・公司深度研究</a>
+    <a href="#part2">📊 模式二・最新財報解析</a>
+    <a href="#part3">🛡️ 模式三・財務風險健檢</a>
+    <a href="#overall">🦊 個股小狐總結</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============ PART 1: 深度研究 ============ -->
+<div class="part-header" id="part1">
+  <div class="part-eyebrow">Part 1 / 3</div>
+  <h1 class="part-title">📘 公司深度研究</h1>
+  <p class="part-desc">業務引擎、投資Thesis、競爭格局、成長象限與護城河評分</p>
+</div>
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#intro">① 基本介紹</a>
+    <a href="#engine">② 業務引擎</a>
+    <a href="#thesis">③ 核心Thesis</a>
+    <a href="#landscape">④ 競爭格局</a>
+    <a href="#quadrant">⑤ 成長象限與護城河</a>
+  </div>
+</div>
+
+<section id="intro" class="no-border">
+  <h2><span class="num">1</span>基本介紹</h2>
+  <div class="section-desc">公司名稱、市值、營收與獲利概況、產業定位</div>
+  <div class="card">
+    <p><b>台光電子</b>（台光電，2383）成立於1992年，1998年上市，是全球高速/高頻銅箔基板（Copper Clad Laminate, CCL）市占率龍頭，同時是全球無鹵環保基板最大供應商。產品主要應用於伺服器主機板、AI伺服器（GPU/ASIC平台）、高速網路交換器（400G/800G/1.6T）、低軌衛星、車用雷達與手機等高階電子設備。客戶涵蓋NVIDIA、AMD、Intel等晶片廠與其伺服器供應鏈，以及Meta、Amazon、Google等雲端服務供應商（CSP）的自研ASIC平台，消費性電子端Apple亦為重要客戶。 <span class="badge src-v">✅ 已驗證</span></p>
+  </div>
+  <table>
+    <tr><th>項目</th><th>數值</th><th>備註</th></tr>
+    <tr><td>市值</td><td>約 2,140~2,180 億元</td><td>2026/7/3盤中估算，玩股網2,140.97億元(股價5,975元時)、Yahoo股市另引用193.49億元(6/23舊資料，已過時) <span class="badge src-e">⚠️估算，不同平台落差大</span></td></tr>
+    <tr><td>2025全年營收 / YoY</td><td>943億元 / +46.4%</td><td>歷史新高 <span class="badge src-v">✅</span></td></tr>
+    <tr><td>2026Q1營收 / QoQ</td><td>330.67億元 / +32.66%</td><td>單季新平台 <span class="badge src-v">✅</span></td></tr>
+    <tr><td>2026Q1毛利率</td><td>29.42%</td><td>季增0.84個百分點 <span class="badge src-v">✅</span></td></tr>
+    <tr><td>2025全年EPS（TTM近12個月）</td><td>41.67元</td><td>2025全年稀釋後EPS，創歷史新高 <span class="badge src-v">✅</span></td></tr>
+    <tr><td>自由現金流（FCF）</td><td>❌ 未查得具體數字</td><td>公司正處三年擴產高峰期，資本支出處於高峰，OCF強但FCF空間被壓縮（見Part 3） <span class="badge src-x">❌</span></td></tr>
+    <tr><td>所屬產業與定位</td><td>CCL（銅箔基板）全球市占冠軍，全球市占率18.9%</td><td>AI伺服器供應鏈中材料端關鍵一環，M9等級材料全球唯一/領先認證 <span class="badge src-v">✅</span></td></tr>
+  </table>
+  <p style="font-size:12px;color:var(--text3);">註：市值因股價短期內劇烈波動（單日漲幅可達7.5%以上），不同平台快照時間點不同導致估算數字有落差，建議以查詢當下即時報價為準。</p>
+</section>
+
+<section id="engine">
+  <h2><span class="num">2</span>業務引擎分析</h2>
+  <div class="section-desc">核心業務線拆解、優勢產品、近期財務表現</div>
+  <h3>核心業務線</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>① AI伺服器高階CCL（M7/M8/M9系列）</h4>
+      <p style="font-size:13.5px;color:var(--text2);">因應NVIDIA GB200等平台散熱與訊號完整性要求，材料等級自M7升級至M8（二代布），M8滲透率持續提升；M9等級材料全球唯一/領先取得客戶認證，預計2026下半年開始量產，是公司當前技術制高點與最大成長引擎。客戶涵蓋GPU（NVIDIA/AMD）與ASIC（Meta、Amazon、Google自研晶片）兩大陣營，產品與客戶組合相對分散，對單一案量依賴度低。 <span class="badge src-v">✅ 已驗證（業務描述與技術進度）</span></p>
+    </div>
+    <div class="card">
+      <h4>② 網通交換器CCL（800G/1.6T Switch）</h4>
+      <p style="font-size:13.5px;color:var(--text2);">供應資料中心800G與1.6Tbps高速網路交換器所需之高頻高速CCL，與AI伺服器業務共享同一批高階材料技術平台，是2025-2026年營收成長的另一大動能來源。 <span class="badge src-v">✅ 已驗證</span></p>
+    </div>
+  </div>
+  <div class="card">
+    <h4>③ 低軌衛星／車用雷達／消費性電子（分散型業務）</h4>
+    <p style="font-size:13.5px;color:var(--text2);">低軌衛星（LEO）通訊終端與車用毫米波雷達為新興應用，另有傳統手機板材業務（Apple供應鏈）。此三類業務成長性與AI敘事關聯度較低，屬相對成熟或早期階段的分散型應用，公司未於公開資訊完整揭露各業務線分部營收佔比。 <span class="badge src-x">❌（分部營收佔比未揭露）</span></p>
+  </div>
+  <h3>優勢產品表</h3>
+  <table>
+    <tr><th>產品</th><th>估計佔營收</th><th>護城河說明</th></tr>
+    <tr><td>M7/M8高階AI伺服器CCL</td><td>— <span class="badge src-x">❌未揭露</span></td><td>技術門檻高，樹脂配方與製程掌握全球領先，M8滲透率持續提升為主要成長貢獻</td></tr>
+    <tr><td>M9新一代CCL</td><td>— <span class="badge src-x">❌未揭露</span></td><td>全球唯一/領先取得客戶認證，2026下半年量產，未來1-2年最大差異化優勢</td></tr>
+    <tr><td>800G/1.6T交換器CCL</td><td>— <span class="badge src-x">❌未揭露</span></td><td>與AI伺服器共用材料平台，資料中心網通升級直接受惠</td></tr>
+    <tr><td>低軌衛星/車用雷達CCL</td><td>— <span class="badge src-x">❌未揭露</span></td><td>早期階段業務，長期成長選擇權，非當前主要營收貢獻</td></tr>
+  </table>
+  <h3>近5期單季財務摘要</h3>
+  <table>
+    <tr><th>期別</th><th class="num">營收(億元)</th><th class="num">QoQ/YoY</th><th class="num">毛利率</th><th class="num">單季EPS(元)</th></tr>
+    <tr><td>2026Q1</td><td class="num">330.67</td><td class="num">QoQ+32.66%</td><td class="num">29.42%</td><td class="num">約10.34（另一來源引述14.90，見Part 2分歧說明）</td></tr>
+    <tr><td>2025Q4</td><td class="num">249</td><td class="num">歷史次高</td><td class="num">— <span class="badge src-x">❌</span></td><td class="num">10.44</td></tr>
+    <tr><td>2025Q2</td><td class="num">— <span class="badge src-x">❌</span></td><td class="num">YoY+45.69%</td><td class="num">— <span class="badge src-x">❌</span></td><td class="num">10.02</td></tr>
+    <tr><td>2025全年</td><td class="num">943</td><td class="num">YoY+46.4%</td><td class="num">— <span class="badge src-x">❌單季未細分</span></td><td class="num">41.67（全年）</td></tr>
+  </table>
+  <h3>近2年全年財務摘要</h3>
+  <table>
+    <tr><th>年度</th><th class="num">營收(億元)</th><th class="num">YoY</th><th class="num">EPS(元)</th></tr>
+    <tr><td>2025</td><td class="num">943</td><td class="num">+46.4%</td><td class="num">41.67</td></tr>
+    <tr><td>2024</td><td class="num">— <span class="badge src-x">❌未查得精確營收</span></td><td class="num">—</td><td class="num">27.81 <span class="badge src-e">⚠️次級來源</span></td></tr>
+  </table>
+  <p style="font-size:12.5px;color:var(--text2);">觀察：2024→2025 EPS由27.81元躍升至41.67元（YoY +49.9%），2026Q1營收又較2025Q4大幅季增32.66%，顯示AI伺服器與800G/1.6T交換器需求自2025年下半年起明顯加速，屬結構性成長而非單季波動。</p>
+</section>
+
+<section id="thesis">
+  <h2><span class="num">3</span>核心Thesis與未來性</h2>
+  <div class="section-desc">投資論點支柱、成長驅動力、監控風險</div>
+  <h3>投資論點支柱</h3>
+  <div class="card">
+    <p><span class="badge badge-green">✅ 成立</span> <b>AI伺服器規格升級（M7→M8→M9）直接拉動高階CCL單價與用量</b><br>
+    <span style="color:var(--text2);font-size:13.5px;">證據：2026Q1營收季增32.66%達330.67億元，毛利率29.42%續創高；M8滲透率持續提升，M9預計下半年量產，公司計畫2026Q2調漲售價至少10%反映原物料成本上漲，顯示議價能力強。</span></p>
+  </div>
+  <div class="card">
+    <p><span class="badge badge-green">✅ 成立</span> <b>全球CCL市占率龍頭地位，產能持續擴張以鞏固領先</b><br>
+    <span style="color:var(--text2);font-size:13.5px;">證據：全球市占18.9%，於高速資料中心CCL領域與台燿、聯茂合計約六成市占；公司執行三年擴產計畫，2026年月產能目標約750萬張，較2024年增加約七成。</span></p>
+  </div>
+  <div class="card">
+    <p><span class="badge badge-yellow">⚠️ 部分成立</span> <b>M9材料全球唯一/領先認證帶來長期技術獨佔優勢</b><br>
+    <span style="color:var(--text2);font-size:13.5px;">證據：多篇產業報告指出台光電M9材料全球領先或唯一通過主要客戶認證，但截至分析日尚未實際量產出貨（規劃2026下半年），實際良率、出貨規模與是否維持獨家地位仍需下半年財報驗證。</span></p>
+  </div>
+  <div class="card">
+    <p><span class="badge badge-red">❌ 未兌現</span> <b>目前股價（6,080元、TTM PE約122.7~131.9倍）隱含的長期高速成長已完全被市場定價，甚至已超越所有法人目標價</b><br>
+    <span style="color:var(--text2);font-size:13.5px;">證據：外資最高目標價（摩根大通3,600元、高盛最新4,020元）與本土法人樂觀目標價（5,900元）均<b>低於</b>當前股價6,080元，顯示市場實際交易價格已跑在所有已知法人預估之前，股價的支撐邏輯已脫離現有法人研究覆蓋範圍（詳見Part 2估值歷史錨點）。</span></p>
+  </div>
+  <h3>核心成長驅動力</h3>
+  <table>
+    <tr><th>驅動力</th><th>說明</th></tr>
+    <tr><td>AI伺服器材料規格升級（M7→M8→M9）</td><td>每一次材料等級躍進均帶動單位用量與單價同步提升，M9下半年量產為下一波催化劑</td></tr>
+    <tr><td>800G→1.6T網通交換器滲透率提升</td><td>與AI伺服器共用高階材料平台，資料中心網通升級直接受惠</td></tr>
+    <tr><td>產能擴張鞏固市占率</td><td>2026年月產能目標較2024年增加約七成，若需求延續，規模效應可望持續強化領先地位</td></tr>
+  </table>
+  <h3>需監控風險</h3>
+  <div class="risk-card">
+    <div class="risk-title">估值已超越所有已知法人目標價，泡沫化風險高</div>
+    <div>當前股價6,080元已高於本土法人最樂觀目標價5,900元與所有外資目標價（1,800~4,020元），股價完全靠市場情緒與本益比擴張支撐，一旦AI資本支出敘事降溫，回檔幅度可能劇烈（詳見Part 2反推試算）。</div>
+    <div class="risk-trigger">觸發條件：<b>連續2個月營收QoQ轉負，或單季毛利率季減超過2個百分點，或主要CSP資本支出guidance下修</b></div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-title">CCL產業本質仍具電子代工業景氣循環屬性</div>
+    <div>CCL為零組件材料業，歷史上隨伺服器/網通資本支出週期波動，若AI資料中心建置速度不如預期，公司在2026年高峰期新增產能可能面臨稼動率下滑風險。</div>
+    <div class="risk-trigger">觸發條件：<b>2026年月產能大幅開出後，稼動率若低於80%，毛利率恐面臨壓縮</b></div>
+  </div>
+  <div class="risk-card mid">
+    <div class="risk-title">匯率風險</div>
+    <div>公司主要出貨以美元計價，新台幣兌美元波動對毛利率有一定敏感度，具體敏感度數字本次未能查證到台光電官方揭露資料，需持續留意法說會相關說明。</div>
+    <div class="risk-trigger">觸發條件：<b>新台幣單季升值超過3%，須留意毛利率季度表現是否受侵蝕</b></div>
+  </div>
+</section>
+
+<section id="landscape">
+  <h2><span class="num">4</span>競爭格局</h2>
+  <div class="section-desc">CCL（銅箔基板）市場主要參與者與威脅程度</div>
+  <table>
+    <tr><th>公司</th><th>市佔/定位</th><th>優勢</th><th>對台光電威脅度</th></tr>
+    <tr><td>台燿（6274）</td><td>高速資料中心CCL領域與台光電、聯茂合計約六成市佔 <span class="badge src-v">✅</span></td><td>M8等級材料切入ASIC伺服器主板與800G交換器供應鏈，積極追趕，在高階玻纖布供應吃緊期切入部分台光電釋出的二供訂單</td><td><span class="badge badge-yellow">🟡 中</span> 直接同業競爭者，產品線高度重疊，本益比亦已達122倍高檔</td></tr>
+    <tr><td>聯茂（6213）</td><td>高Tg/中高階CCL市場有一定份額 <span class="badge src-v">✅</span></td><td>市值約1,003億元，本益比66.35倍，估值相對台光電/台燿仍有折價</td><td><span class="badge badge-yellow">🟡 中</span> 定位偏中高階，於最高階M8/M9材料領域滲透度較低</td></tr>
+    <tr><td>生益科技（中國，未上市股票代號）</td><td>— <span class="badge src-x">❌未查得</span></td><td>中國廠開發高頻高速CCL，具備規模與成本優勢</td><td><span class="badge badge-green">🟢 低（現階段）</span> 高階產品仍以國際廠供貨為主，短期內尚難切入M8/M9最高階市場</td></tr>
+    <tr><td>Panasonic（日商）</td><td>— <span class="badge src-x">❌未查得</span></td><td>技術資歷深，仍是台光電在技術高點上的主要競爭者之一</td><td><span class="badge badge-red">🔴 高</span> 技術層次對標最高階材料，長期需留意其M9等級以上材料開發進度</td></tr>
+  </table>
+  <p style="font-size:12px;color:var(--text3);">註：CCL三雄（台光電/台燿/聯茂）合計市佔約六成的統計為高速資料中心細分市場，非CCL全市場口徑；全球CCL市場台光電以18.9%領先。</p>
+</section>
+
+<section id="quadrant">
+  <h2><span class="num">5</span>成長象限判斷與護城河評估</h2>
+  <h3>Peter Lynch 五象限判斷</h3>
+  <table>
+    <tr><th>象限</th><th>判斷依據</th></tr>
+    <tr><td><b>高速成長股（Fast Grower），疊加電子材料業的景氣循環底色</b></td><td>
+      • 2025全年營收YoY+46.4%，EPS由27.81元(2024)躍升至41.67元(2025)，YoY近50%<br>
+      • 2026Q1營收再季增32.66%，顯示成長動能持續加速，非單一季度脈衝<br>
+      • 產業長期而言隨伺服器/網通資本支出週期波動，具備電子代工業典型的景氣循環特徵，但當前受惠AI資料中心結構性建置週期，短中期呈現高速成長股特徵<br>
+      綜合來看，建議以「高速成長股（AI基礎建設材料供應鏈上升週期）」看待，須留意規格升級紅利若減弱，公司獲利節奏可能回歸傳統CCL產業的循環性波動。
+    </td></tr>
+  </table>
+  <h3>護城河五維度評分</h3>
+  <div class="card">
+    <div class="moat-row"><span class="moat-label">不可替代性</span><span class="stars">★★★★☆</span></div>
+    <div class="moat-row"><span class="moat-label">網路效應</span><span class="stars">★☆☆☆☆</span></div>
+    <div class="moat-row"><span class="moat-label">客戶黏著度</span><span class="stars">★★★★☆</span></div>
+    <div class="moat-row"><span class="moat-label">成本優勢</span><span class="stars">★★★★☆</span></div>
+    <div class="moat-row"><span class="moat-label">規模效應</span><span class="stars">★★★★☆</span></div>
+  </div>
+  <p style="font-size:12.5px;color:var(--text2);">說明：台光電作為全球CCL市占冠軍，在M7/M8高階材料具技術領先，M9材料更取得全球唯一/領先認證，客戶因材料規格認證流程冗長而具高黏著度，且規模最大帶來成本與產能優勢；但CCL材料本質不具網路效應，護城河主要建立在技術領先＋規模＋客戶認證鎖定三者疊加，屬中高等級護城河，惟需持續投入資本支出維持技術領先地位。</p>
+  <div class="action-box">
+    <h4>建議動作 Action Box</h4>
+    <div class="action-row"><div class="action-label">當前建議</div><div class="action-value">觀察為主，不建議在當前股價（已超越所有法人目標價）追高新建倉；若已持有，建議依既定持股計畫分批獲利了結部分部位，保留核心倉位參與M9放量與規格升級趨勢</div></div>
+    <div class="action-row"><div class="action-label">加碼觸發</div><div class="action-value">股價回檔至法人目標價區間上緣（約4,000~4,020元，高盛最新目標價）附近，且季報確認營收/毛利率延續趨勢，本益比修正至90倍以下</div></div>
+    <div class="action-row"><div class="action-label">賣出觸發</div><div class="action-value">連續2個月營收QoQ轉負；單季毛利率季減超過2個百分點；或主要CSP資本支出guidance明確下修</div></div>
+    <div class="action-row"><div class="action-label">每季監控指標</div><div class="action-value">月營收YoY/QoQ、單季毛利率、M9量產進度與出貨規模、產能利用率、法人目標價調整方向（尤其股價是否重新落回目標價區間內）</div></div>
+  </div>
+</section>
+
+<!-- ============ PART 2: 財報解析 ============ -->
+<div class="part-header" id="part2">
+  <div class="part-eyebrow">Part 2 / 3</div>
+  <h1 class="part-title">📊 最新財報解析</h1>
+  <p class="part-desc">Beat/Miss對照、三情境DCF估值、股價位階與目標價</p>
+</div>
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#beatmiss">① Beat/Miss</a>
+    <a href="#guidance">② 全年指引</a>
+    <a href="#pricereaction">③ 股價反應</a>
+    <a href="#dcf">④ 三情境DCF</a>
+    <a href="#valuation">⑤ 股價位階</a>
+    <a href="#comps">⑥ 可比公司</a>
+    <a href="#extra">⑦ 額外優勢/風險</a>
+    <a href="#targetprice">⑧ 目標價與建議</a>
+    <a href="#historicalpe">⑨ 估值歷史錨點</a>
+  </div>
+</div>
+
+<section id="beatmiss" class="no-border">
+  <h2><span class="num">①</span>Beat / Miss 對照表（2026Q1）</h2>
+  <p class="section-desc">台光電2026Q1單季EPS數字於不同平台間出現顯著分歧（10.34元 vs 14.90元），本表逐一列出來源，不臆測單一數字。</p>
+  <div class="card">
+    <table>
+      <thead><tr><th>項目</th><th class="num">26Q1 實際</th><th class="num">25Q4 (QoQ基期)</th><th class="num">QoQ</th><th>判定</th></tr></thead>
+      <tbody>
+        <tr><td>單季EPS（財報狗換算）</td><td class="num hl">約10.34元</td><td class="num">10.44元</td><td class="num">約-1%</td><td><span class="badge warn">⚠️來源分歧，見下方說明</span></td></tr>
+        <tr><td>單季EPS（nStock引述）</td><td class="num hl">14.90元</td><td class="num">—</td><td class="num">YoY+48.85%</td><td><span class="badge warn">⚠️與上列數字差距達44%</span></td></tr>
+        <tr><td>營收</td><td class="num">330.67億元</td><td class="num">249億元</td><td class="num">+32.66%</td><td><span class="badge beat">✅ Beat（QoQ大幅成長）</span></td></tr>
+        <tr><td>毛利率</td><td class="num">29.42%</td><td class="num">28.58%(推算)</td><td class="num">+0.84pp</td><td><span class="badge beat">✅ 續升</span></td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>重要分歧說明：</b>財報狗依稅後淨利53.39億元換算單季EPS約10.34元；另一平台nStock則引述「2026Q1EPS為14.90元」。兩者差距達44%，可能源於股本認列基準（母公司/合併）或平均股數計算方式不同。本報告不臆測何者正確，提醒使用者查閱MOPS公開資訊觀測站2026Q1合併財報原文「基本每股盈餘」欄位以確認精確數字。台光電並無廣泛揭露的單季市場共識EPS預估資料庫，故本表無法提供嚴謹Beat/Miss對照，僅能以QoQ趨勢判讀。</div>
+  </div>
+</section>
+
+<section id="guidance">
+  <h2><span class="num">②</span>全年指引變化</h2>
+  <div class="card">
+    <p style="font-size:12px;color:var(--text3);">台光電未依證交所「公開財測」制度發布正式全年營收/EPS財測。以下為法說會（2026/3/12）後法人依公司展望所做的估算調整，非公司官方指引。</p>
+    <table>
+      <thead><tr><th>指標</th><th>法說會揭露内容</th><th>調整方向</th></tr></thead>
+      <tbody>
+        <tr><td>2026Q1營運展望</td><td>公司預期在AI伺服器、800G交換器等基礎設施產品強勁帶動下，營收將呈雙位數季增（法說會2026/3/12）</td><td><span class="badge beat">已兌現</span> 實際Q1營收QoQ+32.66%</td></tr>
+        <tr><td>售價政策</td><td>因應原物料成本上漲，公司計畫於2026Q2調漲售價至少10%</td><td><span class="badge beat">正向</span> 顯示議價能力強，若順利調漲有助毛利率</td></tr>
+        <tr><td>產能擴張計畫</td><td>三年擴產計畫持續執行，2026年月產能目標約750萬張，較2024年增加約七成</td><td><span class="badge beat">維持並持續執行</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="pricereaction">
+  <h2><span class="num">③</span>股價反應（近期趨勢）</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>時間點</th><th class="num">股價</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>2026/1/7（52週低點）</td><td class="num">1,530元</td><td>年初相對低點</td></tr>
+        <tr><td>2026/3/12法說會後</td><td class="num">—</td><td>公司揭露2025 EPS 41.67元創高，AI大幅上修產能擴張計畫，市場反應正向</td></tr>
+        <tr><td>2026/6/23</td><td class="num">約5,655元(昨收基準)</td><td>CCL三雄（台光電/台燿/聯茂）漲聲再起，比價效應帶動</td></tr>
+        <tr><td>2026/7/3（本次分析日）</td><td class="num green hl">6,080 元 (+7.52%)</td><td>連3日上漲，累計漲幅12.80%，當日再創52週新高，成交量放大</td></tr>
+      </tbody>
+    </table>
+    <div class="note">股價自年初低點1,530元至今（6,080元）漲幅近3倍，近期在CCL三雄比價與AI資料中心規格升級題材延續下持續創高，短線動能強勁，但漲幅已明顯超越基本面（EPS）成長幅度，估值持續墊高。</div>
+  </div>
+</section>
+
+<section id="dcf">
+  <h2><span class="num">④</span>三情境 DCF 估值</h2>
+  <p class="section-desc">⚠️ 估算框架：台光電未公開WACC/終值成長率等模型細節，本報告以法人目標價與EPS預估反推情境框架，非精確DCF模型，僅供參考。</p>
+  <div class="scenario-grid">
+    <div class="scenario-card bear">
+      <h3>🐻 熊市情境</h3>
+      <div class="tp">目標價 1,800 ~ 2,840 元</div>
+      <ul>
+        <li>營收假設：AI伺服器規格升級放緩，2026年營收YoY回落至30%左右，M9量產遞延</li>
+        <li>EBITDA margin：毛利率回落至25%左右</li>
+        <li>對應高盛最早目標價1,800元、麥格理原目標價1,900元(後上修至2,840元)</li>
+        <li>觸發情境：CSP資本支出guidance下修、CCL族群比價行情降溫、稼動率不如預期</li>
+      </ul>
+    </div>
+    <div class="scenario-card base">
+      <h3>⚖️ 基準情境</h3>
+      <div class="tp">目標價 3,200 ~ 4,020 元</div>
+      <ul>
+        <li>營收假設：2026年營收約1,687.7億元(本土法人估)，2027年延續高速成長</li>
+        <li>EPS假設：2026E EPS約83.94~95.59元（見⑨估值歷史錨點分歧說明）</li>
+        <li>對應高盛最新目標價4,020元、摩根大通3,600元、麥格理上修後2,840元</li>
+        <li>M8滲透率穩定提升，M9材料下半年順利量產放量</li>
+      </ul>
+    </div>
+    <div class="scenario-card bull">
+      <h3>🐂 牛市情境</h3>
+      <div class="tp">目標價 5,115 ~ 5,900 元</div>
+      <ul>
+        <li>營收假設：2027年營收上看2,757億元(樂觀法人估算)，毛利率擴張至38.1%</li>
+        <li>EPS假設：2027E EPS上看136~187元、2028E EPS上看221.53元</li>
+        <li>對應FactSet共識目標價5,115元、本土法人樂觀目標價5,900元</li>
+        <li>M9材料維持全球獨佔地位、CSP自研ASIC滲透率超預期</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px;">
+    <strong>敏感度說明：</strong>對估值影響最大的變數為<span class="hl">M9材料實際量產時程與良率</span>，其次為<span class="hl">CSP資本支出延續力度</span>與<span class="hl">終端本益比倍數假設</span>。三情境目標價區間為1,800~5,900元，跨度逾3倍，反映法人模型假設分歧極大。<b style="color:var(--red);">關鍵警訊：目前股價6,080元已高於牛市情境上緣（本土法人5,900元），代表市場實際定價已超越所有已知法人樂觀假設</b>，安全邊際極薄。
+  </div>
+</section>
+
+<section id="valuation">
+  <h2><span class="num">⑤</span>股價位階評估</h2>
+  <div class="card">
+    <h3 style="margin-top:0;">絕對估值表</h3>
+    <table>
+      <thead><tr><th>指標</th><th class="num">數值</th><th>判讀</th></tr></thead>
+      <tbody>
+        <tr><td>TTM 本益比 (PE)</td><td class="num red">約122.7~131.9倍</td><td><span class="badge miss">❌ 極高</span> 不同平台快照數字略有出入，同業平均PE約84.34倍，溢價逾45%~57%</td></tr>
+        <tr><td>股價淨值比 (PB)</td><td class="num red">約42.3~45.4倍</td><td><span class="badge miss">❌ 極高</span> 不同平台快照數字有出入（見備註）</td></tr>
+        <tr><td>Forward PE（以2026E EPS 83.94元估算，FactSet共識）</td><td class="num warn">約72.4倍</td><td><span class="badge warn">⚠️ 仍偏高</span> 以現價6,080元計算</td></tr>
+        <tr><td>Forward PE（以2026E EPS 95.59元估算，本土法人樂觀值）</td><td class="num warn">約63.6倍</td><td><span class="badge warn">⚠️ 仍偏高</span> 即使用最樂觀預估，PE仍逾60倍</td></tr>
+        <tr><td>PEG（2025 EPS YoY約49.9% ÷ TTM PE 122.7~131.9）</td><td class="num">約2.5~2.6</td><td><span class="badge miss">❌ 偏高</span> PEG&gt;2通常視為成長性未能支撐估值</td></tr>
+      </tbody>
+    </table>
+    <div class="note">PB相關數字在不同平台間落差顯著（42.3倍 vs 45.4倍，對應BPS 141.36元 vs 133.8元），可能因每股淨值計算基準期不同（2025Q4 vs 2026Q1）。TTM PE、PB均遠高於同業平均，顯示市場已為M9材料放量與規格升級題材給予高度成長溢價。</div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">EPS成長趨勢表（近4期）</h3>
+    <table>
+      <thead><tr><th>期別</th><th class="num">EPS(元)</th><th class="num">QoQ</th><th class="num">備註</th></tr></thead>
+      <tbody>
+        <tr><td>2025 Q2</td><td class="num">10.02</td><td class="num">+0.1%</td><td class="num">近四季EPS合計34.36元</td></tr>
+        <tr><td>2025 Q4</td><td class="num">10.44</td><td class="num">—</td><td class="num">單季創高</td></tr>
+        <tr><td>2025 全年</td><td class="num green">41.67</td><td class="num">YoY+49.9%(較2024年27.81元)</td><td class="num">歷史新高</td></tr>
+        <tr><td>2026 Q1</td><td class="num green hl">10.34 或 14.90（來源分歧）</td><td class="num green">營收QoQ+32.66%</td><td class="num">見①Beat/Miss分歧說明</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>戴維斯雙擊判讀：</strong>是。EPS由2024年27.81元大幅成長至2025年41.67元，股價同期由低點大幅走高並持續創新高，本益比不僅未壓縮反而擴張至122.7~131.9倍的歷史相對高檔，符合「獲利加速＋估值同步擴張」的典型戴維斯雙擊特徵。但當前股價已超越所有已知法人目標價，雙擊是否能延續高度取決於M9材料能否如期放量兌現。</div>
+  </div>
+</section>
+
+<section id="comps">
+  <h2><span class="num">⑥</span>可比公司 (Comps) 分析</h2>
+  <p class="section-desc">同屬台股CCL（銅箔基板）族群，與台光電構成「CCL三雄」比價結構。</p>
+  <div class="card">
+    <table>
+      <thead><tr><th>公司</th><th>代號</th><th class="num">本益比(PE)</th><th class="num">同業平均PE</th><th>備註</th></tr></thead>
+      <tbody>
+        <tr><td>台光電</td><td>2383.TW</td><td class="num hl">約122.7~131.9倍</td><td class="num">84.34倍</td><td>CCL全球市佔冠軍(18.9%)，M9材料全球唯一/領先認證</td></tr>
+        <tr><td>台燿</td><td>6274.TWO</td><td class="num">122.11倍</td><td class="num">118.52倍</td><td>M8等級材料切入ASIC/800G供應鏈，估值已與台光電相當</td></tr>
+        <tr><td>聯茂</td><td>6213.TW</td><td class="num">66.35倍</td><td class="num">66.21倍</td><td>市值約1,003億元，定位中高階CCL，估值相對台光電/台燿明顯折價</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>溢價/折價合理性：</strong>台光電本益比122.7~131.9倍與台燿122.11倍接近，兩者同屬CCL最高階材料領先者，享有族群估值溢價；聯茂本益比66.35倍明顯低於前兩者，反映其技術定位偏中高階、尚未全面切入M8/M9最高階材料市場。CCL三雄本益比普遍遠高於各自「同業平均」，顯示整個高階CCL族群目前皆處於題材股估值階段，非個股獨有現象，但也意味著一旦AI資料中心資本支出敘事降溫，族群性估值修正風險同步存在。</div>
+  </div>
+</section>
+
+<section id="extra">
+  <h2><span class="num">⑦</span>額外優勢/風險</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>項目</th><th>內容</th><th>來源狀態</th></tr></thead>
+      <tbody>
+        <tr><td>股利政策</td><td>2024年度現金股利16.58元，最新現金股利殖利率約1.32%（以較早股價基準計算，現價6,080元下殖利率將更低）</td><td><span class="badge verified">✅</span></td></tr>
+        <tr><td>庫藏股動態</td><td>本次查詢未取得近期公開庫藏股買回公告資訊</td><td><span class="badge na">❌ 無法取得，標示「—」</span></td></tr>
+        <tr><td>內部人交易動態</td><td>本次查詢未取得近期董監事持股轉讓公開資訊</td><td><span class="badge na">❌ 無法取得，標示「—」</span></td></tr>
+        <tr><td>擴產與資本支出優勢</td><td>三年擴產計畫執行中，2026年月產能目標較2024年增加約七成，鞏固全球市占領先地位</td><td><span class="badge verified">✅</span></td></tr>
+        <tr><td>售價調漲能力</td><td>因應原物料成本上漲，計畫2026Q2調漲售價至少10%，反映公司議價能力與供需吃緊</td><td><span class="badge verified">✅</span></td></tr>
+        <tr><td>技術風險</td><td>M9材料尚未實際量產（規劃2026下半年），全球唯一/領先認證地位是否能延續尚待驗證</td><td><span class="badge warn">⚠️ 前瞻性風險</span></td></tr>
+        <tr><td>估值風險</td><td>股價已超越所有已知外資與本土法人目標價（最高5,900元 vs 現價6,080元），估值收斂/修正風險顯著</td><td><span class="badge miss">❌ 高度警示</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="targetprice">
+  <h2><span class="num">⑧</span>投行目標價與操作建議</h2>
+  <div class="card">
+    <h3 style="margin-top:0;">法人目標價彙總（逐一列出各機構，不取單一共識數字）</h3>
+    <table>
+      <thead><tr><th>機構</th><th class="num">目標價</th><th>評等</th><th>備註</th></tr></thead>
+      <tbody>
+        <tr><td>高盛(Goldman Sachs)</td><td class="num hl">4,020元（原3,500元，另有引述最初1,800元、後升至3,200元的階段性數字）</td><td><span class="badge beat">買進</span></td><td>調升2026-2028年盈餘預估值17%~29%；不同時間點文章引用的高盛目標價差異大，反映多次調整歷程，非單次不一致</td></tr>
+        <tr><td>摩根大通(JPMorgan)</td><td class="num">3,600元</td><td>—</td><td>維持目標價</td></tr>
+        <tr><td>麥格理(Macquarie)</td><td class="num">2,840元（原1,900元）</td><td>—</td><td>由1,900元上調至2,840元</td></tr>
+        <tr><td>FactSet共識（17位分析師）</td><td class="num">5,115元</td><td>—</td><td>依2026E EPS共識中位數83.94元反推，隱含約60.9倍PE；此EPS數字由73.96元上修而來</td></tr>
+        <tr><td>本土法人（樂觀值）</td><td class="num hl">5,900元</td><td>—</td><td>依2026年營收預估約1,687.7億元、EPS預估約95.59元反推，隱含約61.7倍PE</td></tr>
+      </tbody>
+    </table>
+    <div class="callout warn"><b>關鍵警訊：</b>目前股價6,080元已高於<b>所有</b>上表列出的法人目標價（最高者為本土法人5,900元），代表市場交易價格已跑在全部已知法人研究覆蓋之前，缺乏任何現成的法人目標價可作為估值錨點支撐，投資人須自行承擔「無人區」估值風險。</div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">主要分歧點</h3>
+    <table>
+      <thead><tr><th>面向</th><th>樂觀派論點</th><th>謹慎派論點</th></tr></thead>
+      <tbody>
+        <tr><td>成長動能</td><td>M9材料全球唯一認證，下半年量產放量，AI資料中心與800G/1.6T交換器需求剛起步</td><td>M9材料尚未實際量產，各家EPS估算跨度極大（2027年136~187元），成長兌現存在不確定性</td></tr>
+        <tr><td>估值</td><td>成長股應以Forward PE / 未來EPS評價，即便用最樂觀2026E EPS 95.59元，仍隱含成長溢價合理性</td><td>TTM PE 122.7~131.9倍、PB 42.3~45.4倍遠超同業平均(84.34倍)，且股價已超越所有法人目標價，安全邊際趨近於零</td></tr>
+        <tr><td>基本面驗證</td><td>2025全年EPS 41.67元創高，2026Q1營收QoQ+32.66%，三率三升趨勢明確</td><td>2026Q1單季EPS數字本身存在10.34元vs14.90元的來源分歧，需查證原始財報數字確認真實獲利水準</td></tr>
+        <tr><td>股價位階</td><td>CCL三雄比價行情延續，短線動能強勁，族群性重估仍在進行中</td><td>近3日連漲12.80%屬短線急拉，籌碼追高風險高，任何利多鈍化都可能引發獲利了結賣壓</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">上行空間彙總（現價6,080元）</h3>
+    <table>
+      <thead><tr><th>參考點</th><th class="num">目標價</th><th class="num">距現價空間</th></tr></thead>
+      <tbody>
+        <tr><td>DCF熊市情境下緣</td><td class="num">1,800元</td><td class="num red">-70.4%</td></tr>
+        <tr><td>麥格理目標價</td><td class="num">2,840元</td><td class="num red">-53.3%</td></tr>
+        <tr><td>摩根大通目標價</td><td class="num">3,600元</td><td class="num red">-40.8%</td></tr>
+        <tr><td>高盛最新目標價</td><td class="num">4,020元</td><td class="num red">-33.9%</td></tr>
+        <tr><td>FactSet共識目標價</td><td class="num">5,115元</td><td class="num red">-15.9%</td></tr>
+        <tr><td>本土法人樂觀目標價（所有法人中最高）</td><td class="num">5,900元</td><td class="num red">-3.0%</td></tr>
+      </tbody>
+    </table>
+    <div class="note">現價已高於全部6個參考目標價，「距現價空間」全數為負值，這是本報告最重要的估值警訊——投資人在此價位進場，等同於押注股價會突破所有現有法人研究模型的樂觀假設上限。</div>
+  </div>
+  <div class="action-box">
+    <h4>🎯 財報解析：操作建議</h4>
+    <div class="action-row"><div class="action-label">目前狀態</div><div class="action-value">不建議追高新建倉，股價已無任何法人目標價可作為估值支撐</div></div>
+    <div class="action-row"><div class="action-label">若已持有</div><div class="action-value">基本面（營收/毛利率）向上趨勢確立，可續抱核心持股，但強烈建議設定分批停利機制，嚴禁重倉持有於當前高位</div></div>
+    <div class="action-row"><div class="action-label">考慮建倉觸發</div><div class="action-value">股價回落至4,000~4,020元區間（高盛目標價附近）以下，且季報確認M9量產與稼動率延續趨勢，方符合安全邊際原則</div></div>
+    <div class="action-row"><div class="action-label">加碼觸發</div><div class="action-value">2026Q2財報營收QoQ持續正成長、毛利率因售價調漲而擴張，且股價回落至FactSet共識目標價5,115元以下整理</div></div>
+    <div class="action-row"><div class="action-label">停損/警示水位</div><div class="action-value">若單季營收QoQ轉負，或M9量產時程明確延後，應重新檢視題材是否降溫，執行停損</div></div>
+  </div>
+</section>
+
+<section id="historicalpe">
+  <h2><span class="num">⑨</span>估值歷史錨點</h2>
+  <div class="section-desc">EPS實際值與各家預估值區間比較，以及歷史本益比錨點——用於判斷目前估值偏離歷史常態的幅度</div>
+
+  <h3>EPS：實際值 vs 各家預估值（2024-2028）</h3>
+  <div class="card">
+    <table>
+      <thead><tr><th>年度</th><th class="num">EPS(元)</th><th>性質</th><th>來源</th></tr></thead>
+      <tbody>
+        <tr><td>2024</td><td class="num">27.81</td><td><span class="badge warn">⚠️ 實際值，次級來源引述</span></td><td>HiStock/相關財經平台搜尋結果彙整，建議查MOPS年報確認</td></tr>
+        <tr><td>2025</td><td class="num green">41.67</td><td><span class="badge verified">✅ 實際</span></td><td>2026/3/12法說會揭露，全年稀釋後EPS</td></tr>
+        <tr><td>2026</td><td class="num hl">83.94 ～ 95.59</td><td><span class="badge warn">⚠️ 預估，區間跨度大</span></td><td>FactSet共識(17位分析師)83.94元／本土法人95.59元</td></tr>
+        <tr><td>2027</td><td class="num hl">136.04 ～ 187</td><td><span class="badge warn">⚠️ 預估，區間跨度極大</span></td><td>本土法人A 136.04元／另一分析師依營收2,757億元、毛利率38.1%、稅後純益670.2億元反推187元</td></tr>
+        <tr><td>2028</td><td class="num">221.53</td><td><span class="badge warn">⚠️ 預估，僅單一來源</span></td><td>本土法人，依稅後純益1,031億元反推，無其他券商交叉驗證</td></tr>
+      </tbody>
+    </table>
+    <div class="note">2026年估值兩來源差距約14%（83.94~95.59元），2027年差距高達37.5%（136.04~187元），反映各家法人對M9放量時程與毛利率假設分歧極大，應視為區間參考而非單一精確共識。2028年僅單一來源，樣本數不足。</div>
+  </div>
+
+  <h3>歷史本益比錨點</h3>
+  <div class="card">
+    <table>
+      <thead><tr><th>項目</th><th class="num">數值</th><th>依據</th></tr></thead>
+      <tbody>
+        <tr><td>近5年(2021-2026)本益比區間 最低</td><td class="num">9.18倍</td><td>Goodinfo本益比河流圖(週)區間統計</td></tr>
+        <tr><td>近5年(2021-2026)本益比區間 最高</td><td class="num">24.88倍</td><td>Goodinfo本益比河流圖(週)區間統計</td></tr>
+        <tr><td>近5年平均本益比</td><td class="num">約23倍</td><td>Goodinfo本益比河流圖(週)區間統計</td></tr>
+        <tr><td>2022年最低本益比</td><td class="num dash">— 無法查證到精確年度對應數值</td><td>Goodinfo僅提供5年區間彙總值，未拆分逐年最低點；不臆測填入</td></tr>
+        <tr><td>2018年最低本益比</td><td class="num dash">— 無法查證到精確年度對應數值</td><td>超出Goodinfo提供的5年統計區間，本次查詢未取得可靠來源；不臆測填入</td></tr>
+        <tr><td>目前TTM本益比</td><td class="num red">約122.7~131.9倍</td><td>各平台快照，見⑤股價位階評估</td></tr>
+      </tbody>
+    </table>
+    <div class="callout warn">
+      <b>反推試算與結論：</b>以近5年歷史平均本益比（約23倍）× 2026年保守EPS估算（FactSet共識83.94元）反推，對應股價約為 <b>1,931元</b>；若採更嚴格的近5年最低本益比（9.18倍）× 同一EPS，對應股價僅約 <b>771元</b>。兩者皆遠低於目前股價6,080元（差距達3.2倍至7.9倍）。<br><br>
+      這代表台光電目前的股價<b style="color:var(--red);">幾乎完全建立在「本益比倍數大幅擴張」（成長股題材溢價）之上，而非傳統本益比框架下「歷史正常估值 × EPS成長」的合理結果</b>。歷史上台光電本益比僅落在9.18~24.88倍區間（反映其CCL製造業本質），而目前122.7~131.9倍的估值水準是過去5年正常區間的5~14倍，即便用市場最樂觀的2028年EPS預估221.53元（本身僅單一來源、尚未經多方驗證）搭配歷史平均PE 23倍計算，反推股價也僅約5,095元，仍低於目前6,080元的股價。此為判斷本檔個股題材股泡沫化程度的關鍵訊號，投資人須清楚認知目前買進等同於押注一套全新的、尚未被歷史驗證的估值邏輯能夠延續。
+    </div>
+  </div>
+</section>
+
+<!-- ============ PART 3: 財務健檢 ============ -->
+<div class="part-header" id="part3">
+  <div class="part-eyebrow">Part 3 / 3</div>
+  <h1 class="part-title">🛡️ 財務風險健檢</h1>
+  <p class="part-desc">六大比率診斷、債務到期時程與同業對比</p>
+</div>
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#data">① 財務數據</a>
+    <a href="#ratios">② 六大比率</a>
+    <a href="#maturity">③ 債務到期</a>
+    <a href="#capex">④ CapEx分析</a>
+    <a href="#peers">⑤ 同業對比</a>
+    <a href="#verdict">⑥ 綜合診斷</a>
+  </div>
+</div>
+
+<section id="data" class="no-border">
+  <h2><span class="num">1</span>財務數據填表</h2>
+  <p class="section-desc">單位：新台幣億元，除EPS(元)外。本次查詢受限於未接入Futu OpenD/公司原始財報附註，多項細項數字無法取得，明確標示「❌」而非臆測填入。</p>
+  <div class="card">
+    <div class="card-title" style="font-weight:700;margin-bottom:10px;">損益表 <span class="badge warn">⚠️ 部分已驗證</span></div>
+    <table>
+      <tr><th>項目</th><th class="num">2026 Q1</th><th class="num">2025 全年</th><th class="num">2024 全年</th></tr>
+      <tr><td>營業收入</td><td class="num">330.67</td><td class="num">943</td><td class="num dash">— 未查得精確值</td></tr>
+      <tr><td>毛利率</td><td class="num">29.42%</td><td class="num dash">— 未查得全年值</td><td class="num dash">—</td></tr>
+      <tr><td>稅後淨利</td><td class="num">53.39</td><td class="num dash">— 未查得</td><td class="num dash">—</td></tr>
+      <tr><td>EPS (元)</td><td class="num">10.34或14.90(分歧)</td><td class="num">41.67</td><td class="num">27.81 <span class="est">⚠️次級來源</span></td></tr>
+      <tr><td>利息費用 / EBIT / EBITDA / D&A</td><td class="num dash">❌ 未查得</td><td class="num dash">❌ 未查得</td><td class="num dash">❌ 未查得</td></tr>
+    </table>
+    <div class="callout warn">⚠️ 本次分析未能取得台光電損益表中利息費用、EBIT、EBITDA、折舊攤銷等細項數字（公開網頁搜尋摘要未涵蓋），下方六大比率診斷中涉及此類項目者將明確標示「❌無法取得」，強烈建議查閱MOPS公開資訊觀測站原始財務報表確認。</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="font-weight:700;margin-bottom:10px;">資產負債表 <span class="badge warn">⚠️ 部分已驗證，多為2023年舊數據</span></div>
+    <table>
+      <tr><th>項目</th><th>數值</th><th>資料時點</th></tr>
+      <tr><td>負債比率（總負債/總資產）</td><td>約50%</td><td>2023年底 <span class="badge src-e">⚠️舊資料，需更新</span></td></tr>
+      <tr><td>負債結構特徵</td><td>含相當比重合約負債（客戶預付款），屬正向訊號</td><td>2023年底 <span class="badge src-e">⚠️</span></td></tr>
+      <tr><td>ROE</td><td>2023年約21% → 2025年約33%</td><td>杜邦分析顯示主要由淨利率提升與資產週轉加快驅動，非拉高槓桿 <span class="badge src-v">✅</span></td></tr>
+      <tr><td>存貨週轉天數</td><td>73.84天</td><td><span class="badge src-v">✅</span></td></tr>
+      <tr><td>應收帳款週轉天數</td><td>113.96天</td><td><span class="badge src-v">✅</span></td></tr>
+      <tr><td>計息負債(短期借款/長期借款)、現金部位</td><td class="dash">❌ 未查得精確金額</td><td>建議查MOPS原文</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="ratios">
+  <h2><span class="num">2</span>六大比率診斷</h2>
+  <p class="section-desc">因本次未能取得利息費用、EBITDA、計息負債等原始數字，多項比率無法精確計算，以下按可得資訊誠實標示。</p>
+  <div class="ratio-grid">
+    <div class="ratio-card warn">
+      <div class="ratio-name">① 利息覆蓋率 (Interest Coverage)</div>
+      <div class="ratio-value">❌ 無法取得</div>
+      <div class="ratio-formula">EBIT ÷ 利息費用</div>
+      <div class="ratio-threshold">兩項原始數字皆未查得，不臆測填入；建議查MOPS財報損益表附註。</div>
+    </div>
+    <div class="ratio-card warn">
+      <div class="ratio-name">② 負債比率 (Debt Ratio)</div>
+      <div class="ratio-value">約 50% <span class="badge badge-yellow">⚠️ 中等，資料偏舊</span></div>
+      <div class="ratio-formula">總負債 ÷ 總資產（2023年底資料）</div>
+      <div class="ratio-threshold">警戒標準：一般製造業&gt;60%需留意。惟此為2023年舊數據，含較高比重合約負債（客戶預付款），實質財務槓桿風險可能低於表面數字，需查最新一期資產負債表確認。</div>
+    </div>
+    <div class="ratio-card warn">
+      <div class="ratio-name">③ 淨負債 / EBITDA</div>
+      <div class="ratio-value">❌ 無法取得</div>
+      <div class="ratio-formula">(計息負債－現金) ÷ EBITDA</div>
+      <div class="ratio-threshold">計息負債、現金、EBITDA三項原始數字均未查得，不臆測填入。</div>
+    </div>
+    <div class="ratio-card warn">
+      <div class="ratio-name">④ OCF / 總債務</div>
+      <div class="ratio-value">❌ 無法取得</div>
+      <div class="ratio-formula">營業活動現金流 ÷ 總負債</div>
+      <div class="ratio-threshold">OCF原始數字未查得，不臆測填入。</div>
+    </div>
+    <div class="ratio-card warn">
+      <div class="ratio-name">⑤ 現金流覆蓋比率 (Cash Coverage)</div>
+      <div class="ratio-value">❌ 無法取得</div>
+      <div class="ratio-formula">(OCF + 利息費用) ÷ 利息費用</div>
+      <div class="ratio-threshold">兩項原始數字均未查得，不臆測填入。</div>
+    </div>
+    <div class="ratio-card good">
+      <div class="ratio-name">⑥ 獲利能力（ROE，替代性佐證指標）</div>
+      <div class="ratio-value">33% <span class="badge badge-green">✅ 優良</span></div>
+      <div class="ratio-formula">2025年ROE，較2023年21%提升，主要由淨利率提升與資產週轉加快驅動</div>
+      <div class="ratio-threshold">ROE非典型債務比率，但可佐證公司獲利能力持續改善且非靠槓桿堆疊，屬正向訊號。</div>
+    </div>
+  </div>
+  <div class="callout warn">⚠️ 因償債能力核心比率（利息覆蓋率、淨負債/EBITDA、OCF/總債務、現金流覆蓋比率）之原始數字本次未能取得，本報告無法對台光電的短期償債風險做出精確量化判斷，僅能透過負債比率(約50%，2023年舊資料)與ROE(33%，持續改善)做間接佐證，判斷公司財務結構「大致穩健但非零風險」。強烈建議查閱MOPS最新一期財務報表附註以取得精確數字。</div>
+</section>
+
+<section id="maturity">
+  <h2><span class="num">3</span>債務到期時程</h2>
+  <div class="card">
+    <div class="callout warn">
+      ❌ 本次查詢未能取得台光電計息負債逐年到期時程明細。台股上市公司財務報告附註通常會列示「借款到期分析」表，建議直接查閱MOPS公開資訊觀測站最新財報附註「長短期借款」章節確認精確逐年到期金額。不臆測填入任何到期金額數字。
+    </div>
+  </div>
+</section>
+
+<section id="capex">
+  <h2><span class="num">4</span>CapEx資本支出分析</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title" style="font-weight:700;margin-bottom:10px;">CapEx強度指標</div>
+      <table>
+        <tr><th>指標</th><th>數值</th></tr>
+        <tr><td>CapEx / 營收、CapEx / OCF</td><td class="dash">❌ 未查得精確比率</td></tr>
+        <tr><td>擴產計畫規模</td><td>三年擴產計畫，2026年月產能目標約750萬張，較2024年增加約七成</td></tr>
+        <tr><td>資本支出趨勢</td><td>處於高峰期，公司揭露「資本支出處於高峰，OCF雖強但FCF空間被壓縮」</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title" style="font-weight:700;margin-bottom:10px;">業務模式判讀</div>
+      <p style="font-size:13.5px;color:var(--text2);">台光電為CCL（銅箔基板）製造商，屬<b>中重資產</b>產業，需持續投入資本支出擴充壓合產能與維持材料技術領先地位。當前正處於三年擴產計畫高峰期，月產能目標較2024年大幅增加約七成，顯示公司對AI伺服器與網通長期需求抱持高度信心，但也意味著若需求不如預期，新增產能稼動率下滑將直接侵蝕毛利率。</p>
+    </div>
+  </div>
+  <div class="callout info">
+    趨勢觀察：公司明確揭露資本支出正處於高峰，且OCF雖強但FCF空間被壓縮，顯示現階段現金流優先用於支持擴產而非股東回饋（現金殖利率僅約1.32%，屬典型成長股低配息特徵）。需持續追蹤新產能開出後的稼動率與毛利率變化，判斷擴產是否能如期轉化為營收與獲利成長。
+  </div>
+</section>
+
+<section id="peers">
+  <h2><span class="num">5</span>同業對比</h2>
+  <p class="section-desc">選取CCL同業台燿(6274)、聯茂(6213)，資料基準為可查得之最新公開數字。</p>
+  <div class="card">
+    <table>
+      <tr><th>指標</th><th class="num">台光電 2383</th><th class="num">台燿 6274</th><th class="num">聯茂 6213</th></tr>
+      <tr><td>本益比(PER)</td><td class="num red">約122.7~131.9倍</td><td class="num red">122.11倍</td><td class="num">66.35倍</td></tr>
+      <tr><td>同業平均PE</td><td class="num">84.34倍</td><td class="num">118.52倍</td><td class="num">66.21倍</td></tr>
+      <tr><td>市值(億)</td><td class="num">約2,140~2,180</td><td class="num dash">❌未查得</td><td class="num">約1,003</td></tr>
+      <tr><td>ROE</td><td class="num">33%(2025)</td><td class="num dash">❌未查得</td><td class="num dash">❌未查得</td></tr>
+      <tr><td>負債比率</td><td class="num">約50%(2023，需更新)</td><td class="num dash">❌未查得</td><td class="num dash">❌未查得</td></tr>
+      <tr><td>市場地位</td><td class="num">全球CCL市佔冠軍18.9%，M9材料唯一/領先認證</td><td class="num">高速資料中心CCL第二陣營，積極追趕M8</td><td class="num">中高階CCL，估值折價明顯</td></tr>
+    </table>
+  </div>
+  <div class="callout info">
+    對比觀察：台光電與台燿本益比皆逾120倍，是CCL三雄中估值最貴的兩家，反映市場給予高階材料領先者顯著溢價；聯茂估值相對理性(66倍)。三者財務結構細項（負債比率、現金部位）因公開資料有限，多數未能取得精確可比數字，建議如需嚴謹信用風險評估，應直接查閱各公司MOPS財報。就已知資訊而言，台光電財務體質（ROE 33%、負債比約50%含高比重合約負債）尚屬健康，主要風險集中在<b>估值面</b>而非資產負債表結構性風險。
+  </div>
+</section>
+
+<section id="verdict">
+  <h2><span class="num">6</span>綜合診斷</h2>
+  <div class="verdict-box">
+    <div class="verdict-label">定性分類</div>
+    <div class="verdict-value">獲利能力優良・資產負債表細節資料不足以完整驗證，估值面風險遠高於財務結構風險</div>
+    <div class="verdict-sub">台光電ROE由2023年21%提升至2025年33%，主要由淨利率提升與資產週轉加快驅動而非槓桿堆疊，屬正向訊號；惟本次查詢未能取得利息覆蓋率、淨負債/EBITDA、OCF/總債務等核心償債能力比率原始數字，無法對短期流動性風險做出精確量化結論。就已知資訊判斷，公司經營面/獲利面體質健康，但真正的風險並非資產負債表，而是股價已大幅超越所有法人研究覆蓋範圍所隱含的估值風險。</div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-title">最大風險點① 估值與已知法人樂觀假設脫鉤（非資產負債表風險） <span class="badge badge-red">❌ 高</span></div>
+    <p style="font-size:13.5px;color:var(--text2);">股價6,080元已高於本土法人最樂觀目標價5,900元，本益比122.7~131.9倍遠超歷史區間（9.18~24.88倍）逾5倍。市值約2,140~2,180億元相對於2025年稅後淨利隱含極高成長預期，若M9材料放量不如預期或CSP資本支出降溫，股價修正風險遠大於財務違約風險。</p>
+  </div>
+  <div class="risk-card mid">
+    <div class="risk-title">最大風險點② 資料完整性不足，無法完整驗證償債能力 <span class="badge badge-yellow">⚠️ 中</span></div>
+    <p style="font-size:13.5px;color:var(--text2);">本次查詢未能取得台光電利息費用、EBITDA、計息負債、現金部位等關鍵原始數字，六大比率中僅負債比率(約50%，2023年舊資料)與ROE(33%)可供參考。建議投資人在做出重大部位調整前，先查閱MOPS最新一期財報附註取得精確數字，補齊本報告的資料缺口。</p>
+  </div>
+  <div class="card">
+    <div class="card-title" style="font-weight:700;margin-bottom:10px;">安全邊際計算</div>
+    <div class="callout warn">
+      因利息覆蓋率、淨負債/EBITDA等核心比率原始數字未能取得，本報告無法計算「EBIT需下滑多少%才觸及警戒線」的精確數字。以間接指標判斷：公司負債比率約50%（2023年資料）且含高比重客戶預付合約負債，非典型銀行借款槓桿，加上ROE持續改善至33%，初步判斷財務結構安全邊際尚可，但<b>建議投資人自行查證MOPS最新財報以確認精確償債能力數字</b>，不宜僅憑本報告間接判斷做出高槓桿部位決策。<b style="color:var(--warn);">真正需要投資人關注的安全邊際，是「股價相對於獲利成長預期」的邊際（見Part 2估值歷史錨點反推試算），而非「公司相對於債務」的邊際</b>。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 個股小狐總結 ============ -->
+<div class="part-header" id="overall">
+  <div class="part-eyebrow">個股小狐 · Overall</div>
+  <h1 class="part-title">🦊 三合一完整總結</h1>
+  <p class="part-desc">整合公司深度研究、財報解析、財務健檢三個模式的核心結論</p>
+</div>
+<section class="no-border">
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis成立度</div><div class="s-value">3 / 5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-value">★★★★☆</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-value">高速成長股(景氣循環底色)</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-value">獲利優良・資料不足以完整驗證槓桿</div></div>
+    <div class="summary-card"><div class="s-label">TTM本益比/PB</div><div class="s-value">約123~132x / 42~45x</div></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px;">三個模式的一致結論</h4>
+    <p style="font-size:14px;color:var(--text2);">三份分析從不同角度指向同一核心矛盾：<b style="color:var(--text);">「公司基本面與護城河確實優異，但股價已跑在所有已知法人研究模型之前，估值安全邊際趨近於零」</b>。</p>
+    <ul style="font-size:13.5px;color:var(--text2);padding-left:20px;line-height:1.9;">
+      <li><b style="color:var(--text);">深度研究（Part 1）</b>：台光電是全球CCL市占冠軍（18.9%），M9材料全球唯一/領先認證，客戶認證黏著度高、規模效應強，護城河屬中高等級（4/5星）；成長動能由AI伺服器材料規格升級（M7→M8→M9）與800G/1.6T交換器驅動，2025年EPS大幅躍升，但2026下半年M9實際量產與良率仍待驗證。</li>
+      <li><b style="color:var(--text);">財報解析（Part 2）</b>：2026Q1營收QoQ+32.66%延續強勁動能，惟單季EPS數字存在10.34元vs14.90元的來源分歧待查證。最關鍵發現是<b style="color:var(--red);">目前股價6,080元已高於所有已知外資與本土法人目標價</b>（最高本土法人5,900元），且反推試算顯示以歷史平均本益比(23倍)計算合理股價僅約1,931元，目前估值幾乎完全靠本益比倍數擴張支撐。</li>
+      <li><b style="color:var(--text);">財務健檢（Part 3）</b>：ROE由21%(2023)提升至33%(2025)，獲利能力持續改善且非靠槓桿堆疊；惟核心償債能力比率（利息覆蓋率、淨負債/EBITDA等）原始數字本次未能取得，無法完整量化短期流動性風險，建議查MOPS原始財報補齊。<b style="color:var(--warn);">真正的風險不在資產負債表，而在估值本身已脫離歷史常態與所有法人覆蓋範圍</b>。</li>
+    </ul>
+  </div>
+
+  <div class="action-box">
+    <h4>🦊 個股小狐最終建議</h4>
+    <div class="action-row"><div class="action-label">未持有者</div><div class="action-value">不建議在當前估值（股價已超越所有法人目標價，TTM PE 122.7~131.9倍）追高新建倉。等待股價回落至高盛目標價4,020元以下、且季報確認M9量產進度與稼動率延續趨勢後再考慮分批進場，方符合安全邊際原則</div></div>
+    <div class="action-row"><div class="action-label">已持有者</div><div class="action-value">基本面向上趨勢已確立，可續抱核心部位參與M9放量與規格升級趨勢，但應設定分批停利機制，倉位應嚴格控管於「機會池」而非「核心池」，且應避免於當前近3日急拉12.80%的高點加碼</div></div>
+    <div class="action-row"><div class="action-label">加碼觸發</div><div class="action-value">股價回落至法人目標價區間（4,000~5,115元）整理，且2026Q2財報確認營收/毛利率延續趨勢、M9量產如期出貨</div></div>
+    <div class="action-row"><div class="action-label">賣出/停損觸發</div><div class="action-value">連續2個月營收QoQ轉負；單季毛利率季減超過2個百分點；M9量產時程明確延後；或主要CSP資本支出guidance明確下修</div></div>
+    <div class="action-row"><div class="action-label">每季必查指標</div><div class="action-value">月營收YoY/QoQ、單季毛利率、M9量產進度與出貨規模、產能利用率、法人目標價調整方向（尤其股價是否重新落回目標價區間內）、MOPS原始財報以確認EPS與償債能力比率精確數字</div></div>
+    <div class="action-row"><div class="action-label">投資期間定位</div><div class="action-value">建議以中期1-2年為觀察窗口而非立即長期3-5年buy-and-hold重倉——因目前股價已脫離歷史估值常態，需先觀察M9放量與估值消化後，再決定是否納入核心池長期持有</div></div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <h4>資料來源清單</h4>
+    <ul>
+      <li>Yahoo奇摩股市：<a href="https://tw.stock.yahoo.com/quote/2383.TW" target="_blank">tw.stock.yahoo.com/quote/2383.TW</a></li>
+      <li>Goodinfo!台灣股市資訊網：<a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2383" target="_blank">goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2383</a>（股價/PE/PB/本益比河流圖）</li>
+      <li>玩股網：<a href="https://www.wantgoo.com/stock/2383" target="_blank">wantgoo.com/stock/2383</a></li>
+      <li>財報狗：<a href="https://statementdog.com/analysis/2383" target="_blank">statementdog.com/analysis/2383</a></li>
+      <li>富果直送法說會重點備忘錄（2026/3/12）：<a href="https://blog.fugle.tw/post/earnings-call-2383-2026-03-12" target="_blank">blog.fugle.tw</a></li>
+      <li>鉅亨網、口袋學堂、旺得富理財網、理財周刊、工商時報：法人目標價與產業報導</li>
+      <li>公開資訊觀測站 MOPS（建議查證用）：<a href="https://mops.twse.com.tw" target="_blank">mops.twse.com.tw</a></li>
+      <li>同業對比：台燿(6274.TWO)、聯茂(6213.TW) 相關財經平台本益比頁</li>
+    </ul>
+    <p style="font-size:11.5px;">本報告因未接入Futu OpenD等即時金融數據API，完全依賴WebSearch公開網頁搜尋結果彙整，部分數字（尤其利息費用/EBITDA/計息負債等資產負債表細項、2026Q1單季EPS）存在來源分歧或無法取得，均已明確標示「⚠️估算/分歧」或「❌無法取得」，未臆測填入。市值、PE、PB等即時數字因股價短期波動劇烈，不同平台快照時間點不同可能造成落差，建議以查詢當下即時報價為準，重大決策前請查證MOPS公開資訊觀測站原始財務報表。查詢日期：2026年7月3日。</p>
+    <div class="disclaimer">
+      本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>個股小狐｜NVDA 最新財報解析</title>
+<style>
+:root{
+  --bg:#0b0e14; --panel:#11151f; --panel2:#161b28; --border:#232a3a;
+  --text:#e6e9f0; --muted:#8b93a7; --accent:#76b9ff; --green:#3ddc84;
+  --red:#ff6b6b; --yellow:#ffc857; --purple:#b794f6;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;line-height:1.6;}
+.hero{padding:40px 24px;background:linear-gradient(135deg,#0e2a47,#1a1530 70%);border-bottom:1px solid var(--border);}
+.hero h1{margin:0 0 6px;font-size:28px;}
+.hero .sub{color:var(--muted);font-size:14px;}
+.hero .stats{display:flex;gap:28px;margin-top:18px;flex-wrap:wrap;}
+.hero .stat .label{font-size:12px;color:var(--muted);}
+.hero .stat .val{font-size:22px;font-weight:700;}
+.up{color:var(--green);} .down{color:var(--red);}
+.toc{position:sticky;top:0;background:rgba(11,14,20,0.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px;z-index:10;}
+.toc a{color:var(--muted);text-decoration:none;}
+.toc a:hover{color:var(--accent);}
+.section{max-width:1080px;margin:0 auto;padding:36px 24px;}
+.section h2{font-size:20px;border-left:4px solid var(--accent);padding-left:10px;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:18px;}
+th,td{padding:9px 10px;border-bottom:1px solid var(--border);text-align:left;}
+th{color:var(--muted);font-weight:600;background:var(--panel2);}
+tr:hover{background:var(--panel2);}
+.badge{display:inline-block;padding:2px 9px;border-radius:12px;font-size:12px;font-weight:600;}
+.badge.beat{background:rgba(61,220,132,0.15);color:var(--green);}
+.badge.miss{background:rgba(255,107,107,0.15);color:var(--red);}
+.badge.line{background:rgba(255,200,87,0.15);color:var(--yellow);}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.scenario-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px;}
+.scenario-card.bear{border-top:3px solid var(--red);}
+.scenario-card.base{border-top:3px solid var(--accent);}
+.scenario-card.bull{border-top:3px solid var(--green);}
+.scenario-card h3{margin:0 0 10px;font-size:15px;}
+.scenario-card ul{padding-left:18px;margin:8px 0;font-size:13px;color:var(--muted);}
+.scenario-card .target{font-size:18px;font-weight:700;color:var(--text);margin-top:10px;}
+.note{background:var(--panel2);border-left:3px solid var(--purple);padding:10px 14px;border-radius:6px;font-size:13px;color:var(--muted);margin-top:10px;}
+.action-box{background:linear-gradient(135deg,#102a1d,#0e2236);border:1px solid var(--green);border-radius:12px;padding:22px;margin-top:10px;}
+.action-box h3{margin-top:0;color:var(--green);}
+.action-box .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--border);font-size:14px;}
+.action-box .row:last-child{border-bottom:none;}
+.src{color:var(--muted);font-size:12px;}
+footer{padding:30px 24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);max-width:1080px;margin:0 auto;}
+@media(max-width:760px){.cards{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>NVIDIA Corporation (NVDA) <span style="color:var(--muted);font-size:16px;">／最新財報解析</span></h1>
+  <div class="sub">分析日期：2026-06-29　｜　財報期間：FY2027 Q1（截至2026-04-26）　｜　財報發布：2026-05-20</div>
+  <div class="stats">
+    <div class="stat"><div class="label">現價 (2026-06-28)</div><div class="val">$192.71</div></div>
+    <div class="stat"><div class="label">市值</div><div class="val">$4.72T</div></div>
+    <div class="stat"><div class="label">TTM PE</div><div class="val">29.5x</div></div>
+    <div class="stat"><div class="label">Forward PE</div><div class="val">19.4–21.6x</div></div>
+    <div class="stat"><div class="label">財報後首日股價</div><div class="val down">-2.0%</div></div>
+  </div>
+</div>
+
+<div class="toc">
+  <a href="#beatmiss">①Beat/Miss</a>
+  <a href="#guidance">②指引變化</a>
+  <a href="#reaction">③股價反應</a>
+  <a href="#dcf">④三情境DCF</a>
+  <a href="#valuation">⑤股價位階</a>
+  <a href="#comps">⑥可比公司</a>
+  <a href="#extra">⑦額外優勢/風險</a>
+  <a href="#rec">⑧投行目標價與建議</a>
+</div>
+
+<div class="section" id="beatmiss">
+  <h2>① Beat / Miss 對照表</h2>
+  <table>
+    <tr><th>項目</th><th>實際值</th><th>市場預期</th><th>差異</th><th>YoY</th><th>判定</th></tr>
+    <tr><td>總營收</td><td>$81.6B</td><td>$78.5B（Visible Alpha共識）</td><td>+4.0%</td><td>+85%</td><td><span class="badge beat">✅ Beat</span></td></tr>
+    <tr><td>Data Center 營收</td><td>$75.2B</td><td>~$72.7B（市場預估）</td><td>+3.4%</td><td>+92%</td><td><span class="badge beat">✅ Beat</span></td></tr>
+    <tr><td>Gaming 營收</td><td>$3.7B</td><td>—</td><td>—</td><td>+47%</td><td><span class="badge line">— 無共識可比</span></td></tr>
+    <tr><td>非GAAP EPS</td><td>$1.87</td><td>$1.76–$1.77</td><td>+5.4~6.3%</td><td>—</td><td><span class="badge beat">✅ Beat</span></td></tr>
+    <tr><td>GAAP EPS</td><td>$2.39</td><td>—</td><td>—</td><td>+211.7%（對比去年同期約$0.76區間）</td><td><span class="badge beat">✅ Beat</span></td></tr>
+    <tr><td>GAAP 毛利率</td><td>74.9%</td><td>~75%區間</td><td>約持平</td><td>—</td><td><span class="badge line">符合預期</span></td></tr>
+    <tr><td>非GAAP 毛利率</td><td>75.0%</td><td>~75%區間</td><td>約持平</td><td>—</td><td><span class="badge line">符合預期</span></td></tr>
+    <tr><td>自由現金流 (FCF)</td><td>$49B</td><td>—</td><td>季增+40%（上季$35B）</td><td>—</td><td><span class="badge beat">✅ Beat（環比大幅提升）</span></td></tr>
+  </table>
+  <div class="note">營收與EPS皆優於共識，但因股價在財報前已大漲（自2月財報以來+13.7%，遠期PE一度逼近30x），市場原本期待「超大幅度」的beat，本次屬於「穩健而非戲劇性」的超預期，導致財報後股價不漲反跌。</div>
+  <div class="src">資料來源：<a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027" style="color:var(--accent);">NVIDIA Newsroom 8-K</a>、<a href="https://www.cnbc.com/2026/05/20/nvidia-nvda-earnings-report-q1-2027.html" style="color:var(--accent);">CNBC</a></div>
+</div>
+
+<div class="section" id="guidance">
+  <h2>② 全年/下季指引變化</h2>
+  <table>
+    <tr><th>指標</th><th>上季給出之Q1指引（已實現對照）</th><th>本次Q1實際</th><th>本次給出之Q2指引</th><th>市場Q2共識</th><th>方向</th></tr>
+    <tr><td>營收</td><td>~$75B (±2%)</td><td>$81.6B（大幅超指引）</td><td>~$91B (±2%)</td><td>$86.84B</td><td><span class="badge beat">⬆ 上調且優於共識</span></td></tr>
+    <tr><td>GAAP 毛利率</td><td>—</td><td>74.9%</td><td>74.9%</td><td>—</td><td><span class="badge line">維持</span></td></tr>
+    <tr><td>非GAAP 毛利率</td><td>—</td><td>75.0%</td><td>75.0%</td><td>—</td><td><span class="badge line">維持</span></td></tr>
+  </table>
+  <div class="note">值得留意：NVIDIA自Q1 FY2027起將業務分類由五類（Data Center/Gaming/Pro Viz/Auto/OEM）簡化為兩大類（Data Center / Edge Computing），未來對比舊分類需留意口徑變化。CEO黃仁勳並提及「中國AI晶片市場已基本讓給華為」，這是潛在的營收天花板訊號，需持續追蹤。</div>
+</div>
+
+<div class="section" id="reaction">
+  <h2>③ 股價反應</h2>
+  <table>
+    <tr><th>時間點</th><th>股價</th><th>變動</th><th>說明</th></tr>
+    <tr><td>財報前收盤（2026-05-20常規盤）</td><td>約$220區間</td><td>—</td><td>財報前股價已反映高度樂觀預期，自2月財報以來累積上漲13.7%</td></tr>
+    <tr><td>財報後盤後</td><td>$223.63</td><td><span class="up">+1.37%</span></td><td>盤後初期反應正面，市場肯定營收/EPS雙重beat</td></tr>
+    <tr><td>次日（分析日）常規盤</td><td>—</td><td><span class="down">約-2.0%</span></td><td>正式交易日轉跌，為連續第4個季度財報後下跌；主因「預期過高」——遠期PE近30x時，市場要的是「巨幅」超預期而非「穩健」超預期，獲利了結賣壓出現</td></tr>
+  </table>
+  <div class="note">截至分析日（2026-06-29）股價已回落至$192.71，較財報後高點修正約13~14%，本質上是「估值消化」而非基本面轉差——Data Center營收仍以92% YoY高速增長，且公司給出優於共識的Q2指引。</div>
+</div>
+
+<div class="section" id="dcf">
+  <h2>④ 三情境 DCF 估值</h2>
+  <div class="cards">
+    <div class="scenario-card bear">
+      <h3>🐻 熊市情境</h3>
+      <ul>
+        <li>FY27-29營收CAGR：25%（中國市場流失、AI資本支出放緩）</li>
+        <li>EBITDA margin：58%（競爭加劇侵蝕毛利）</li>
+        <li>FCF conversion：60%</li>
+        <li>WACC：11.5%</li>
+        <li>永續成長率：3%</li>
+      </ul>
+      <div class="target">目標價區間：$150–$170</div>
+    </div>
+    <div class="scenario-card base">
+      <h3>⚖️ 基準情境</h3>
+      <ul>
+        <li>FY27-29營收CAGR：38%（延續Blackwell/Rubin世代AI需求）</li>
+        <li>EBITDA margin：64%</li>
+        <li>FCF conversion：68%</li>
+        <li>WACC：10%</li>
+        <li>永續成長率：4%</li>
+      </ul>
+      <div class="target">目標價區間：$220–$260</div>
+    </div>
+    <div class="scenario-card bull">
+      <h3>🚀 牛市情境</h3>
+      <ul>
+        <li>FY27-29營收CAGR：50%+（Agentic AI需求加速、邊緣運算放量）</li>
+        <li>EBITDA margin：68%</li>
+        <li>FCF conversion：72%</li>
+        <li>WACC：9%</li>
+        <li>永續成長率：5%</li>
+      </ul>
+      <div class="target">目標價區間：$320–$380</div>
+    </div>
+  </div>
+  <div class="note">⚠️ 以上為依公開財報數據與市場成長預期推導之估算情境（非單一資料源直接提供），用於框定合理估值區間，非精確預測。敏感度：對估值影響最大的單一變數為「Data Center營收CAGR」，其次為「WACC假設」（NVDA屬高Beta成長股，WACC每變動0.5%對目標價影響可達5~8%）；「中國市場流失程度」是熊市/基準情境分歧的關鍵catalyst。</div>
+</div>
+
+<div class="section" id="valuation">
+  <h2>⑤ 股價位階評估</h2>
+  <table>
+    <tr><th>指標</th><th>數值</th><th>判讀</th></tr>
+    <tr><td>TTM PE</td><td>29.49x</td><td>低於12個月均值45.95x，估值已明顯收斂</td></tr>
+    <tr><td>Forward PE</td><td>19.37x（另一來源21.59x）</td><td>對比AI龍頭同業（AVGO 24.3x）並不貴，反映市場對成長放緩有一定保留</td></tr>
+    <tr><td>PEG Ratio</td><td>0.28–0.43（各家計算不同）</td><td>遠低於1，顯示在成長調整後估值偏低</td></tr>
+    <tr><td>EV/EBITDA</td><td>27.93x</td><td>中高水位，但對應104.7% ROIC屬合理溢價</td></tr>
+    <tr><td>ROE / ROIC</td><td>114.3% / 104.7%</td><td>資本效率極高，遠超半導體同業平均</td></tr>
+  </table>
+  <table>
+    <tr><th>期別</th><th>非GAAP EPS</th><th>YoY成長</th></tr>
+    <tr><td>FY26 Q4</td><td>$1.62</td><td>—</td></tr>
+    <tr><td>FY27 Q1（本季）</td><td>$1.87</td><td>約+136%（對比FY26 Q1）</td></tr>
+    <tr><td>過去3年平均EPS成長</td><td colspan="2">201.4% / 年</td></tr>
+    <tr><td>過去5年平均EPS成長</td><td colspan="2">93.9% / 年</td></tr>
+  </table>
+  <div class="note">EPS成長率近三年呈現典型「戴維斯雙擊」加速期（業績加速＋估值同步擴張），但近兩季PE已從高點顯著收斂（45.95x→29.5x），意味著市場開始將高成長「正常化」看待，估值雙擊動能轉弱、進入「業績驗證期」。</div>
+</div>
+
+<div class="section" id="comps">
+  <h2>⑥ 可比公司 (Comps) 分析</h2>
+  <table>
+    <tr><th>公司</th><th>市值</th><th>TTM PE</th><th>Forward PE</th><th>EV/EBITDA</th><th>成長定位</th></tr>
+    <tr><td><b>NVDA</b></td><td>$4.72T</td><td>29.5x</td><td>19.4–21.6x</td><td>27.9x</td><td>AI運算龍頭，營收YoY +85%</td></tr>
+    <tr><td>AMD</td><td>—</td><td>173.9x</td><td>59.8x</td><td>113.3x</td><td>追趕者，營收YoY +38%，估值明顯溢價於成長</td></tr>
+    <tr><td>AVGO（Broadcom）</td><td>$1.80T</td><td>63.6x</td><td>24.3x</td><td>44.0x</td><td>客製化ASIC＋網通，營收CAGR 48%</td></tr>
+    <tr><td>TSM（台積電）</td><td>$2.24T</td><td>37.8x</td><td>27.6x</td><td>—</td><td>晶圓代工上游，受惠全產業AI資本支出</td></tr>
+  </table>
+  <div class="note">NVDA的Forward PE（19~22x）在四者中反而最低，但成長速度（YoY+85%）與資本效率（ROIC 104.7%）最高，呈現「全產業鏈中估值最不貴的龍頭」格局——市場對其估值的保留主要來自中國市場流失與「預期已極高」的隱性溢價，而非基本面定價過高。AMD的高PE反映市場給予的轉機期望值，尚未被營收兌現。</div>
+</div>
+
+<div class="section" id="extra">
+  <h2>⑦ 額外優勢/風險</h2>
+  <table>
+    <tr><th>項目</th><th>內容</th><th>意義</th></tr>
+    <tr><td>股票回購</td><td>新增$800億授權（無到期日），加上前次剩餘約$385億，合計授權約$1,185億</td><td>顯示管理層對長期現金流信心強，且具備持續支撐EPS的工具</td></tr>
+    <tr><td>股息</td><td>季度股息由$0.01上調至$0.25（25倍），6/26已派發</td><td>股息規模仍小（殖利率低），象徵意義大於實質回報，顯示帳上現金充裕</td></tr>
+    <tr><td>單季股東回饋</td><td>本季合計約$200億（回購+股息）</td><td>創歷史新高，資本配置轉趨積極</td></tr>
+    <tr><td>中國市場風險</td><td>CEO坦言中國AI晶片市場「已基本讓給華為」</td><td>長期天花板議題，需留意後續中國營收占比變化</td></tr>
+    <tr><td>連續四季財報後下跌</td><td>近四次財報公布後股價皆收跌</td><td>顯示市場對「超預期幅度」的敏感度持續提高，須留意預期管理風險</td></tr>
+  </table>
+</div>
+
+<div class="section" id="rec">
+  <h2>⑧ 投行目標價與操作建議</h2>
+  <table>
+    <tr><th>機構</th><th>評等</th><th>目標價</th><th>日期/備註</th></tr>
+    <tr><td>分析師共識（38家）</td><td>Strong Buy（76 Buy / 1 Hold / 0 Sell）</td><td>均值約$275–$309</td><td>截至2026-06-28，無近期下調紀錄</td></tr>
+    <tr><td>China Renaissance</td><td>Buy（新覆蓋）</td><td>$319</td><td>2026-06-05</td></tr>
+    <tr><td>目標價區間（高/低）</td><td>—</td><td>高$500 / 低$210–250</td><td>區間極寬，反映對AI需求持續性的分歧</td></tr>
+  </table>
+  <table>
+    <tr><th>分歧點</th><th>樂觀派論點</th><th>謹慎派論點</th></tr>
+    <tr><td>需求持續性</td><td>Agentic AI「需求已呈拋物線式成長」(CEO語)，Rubin世代將接續Blackwell動能</td><td>連續四季財報後股價下跌，顯示「預期已過度透支」，任何不及「戲劇性beat」的結果都會被賣出</td></tr>
+    <tr><td>地緣政治</td><td>非中國市場（美國、中東、東南亞主權AI）足以彌補中國缺口</td><td>中國曾是重要成長引擎，管理層已承認基本讓出市場，長期可能侵蝕全球份額敘事</td></tr>
+    <tr><td>估值</td><td>PEG&lt;0.5，相對成長嚴重低估，Forward PE為同業最低</td><td>TTM PE仍近30x，且EV/EBITDA高於台積電，若成長放緩估值修正空間大</td></tr>
+  </table>
+  <table>
+    <tr><th>參考基準</th><th>對應目標價</th><th>距現價（$192.71）空間</th></tr>
+    <tr><td>DCF基準情境下緣</td><td>$220</td><td>+14.2%</td></tr>
+    <tr><td>分析師共識均值</td><td>~$290</td><td>+50.5%</td></tr>
+    <tr><td>DCF基準情境上緣</td><td>$260</td><td>+35.0%</td></tr>
+    <tr><td>分析師最高目標價</td><td>$500</td><td>+159.5%</td></tr>
+  </table>
+
+  <div class="action-box">
+    <h3>✅ 最終操作建議</h3>
+    <div class="row"><span>持倉狀態</span><span>適合中長期波段：已持有者建議續抱，未持有者可分批建倉</span></div>
+    <div class="row"><span>建倉觸發點</span><span>股價回落至 <b>$170–$185</b>（對應Forward PE約18x、接近熊市情境上緣）可視為較佳分批進場區</span></div>
+    <div class="row"><span>加碼觸發點</span><span>若Data Center營收YoY增速連續2季維持70%以上且股價回測$165以下，可視為加碼訊號</span></div>
+    <div class="row"><span>停損/警示水位</span><span>跌破 <b>$150</b>（熊市情境下緣）且伴隨Data Center YoY增速跌破40%，應重新評估持股邏輯</span></div>
+    <div class="row"><span>核心觀察指標</span><span>下次財報（約2026年8月）之Data Center營收YoY增速、中國營收占比變化、Rubin架構出貨時程</span></div>
+  </div>
+</div>
+
+<footer>
+  資料來源：NVIDIA Newsroom／SEC EDGAR 8-K（Q1 FY2027 Q4 FY2026）、CNBC、StockAnalysis.com、MacroTrends、GuruFocus、FullRatio、MarketBeat、FinanceCharts。部分估值情境（DCF三情境）為依公開財務數據之合理推算，已標示為估算值，非單一資料源直接提供。<br><br>
+  本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。<br>
+  產出時間：2026-06-29
+</footer>
+
+</body>
+</html>
