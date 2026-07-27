@@ -15,6 +15,9 @@ SITE = Path("/Users/vovo/Desktop/VOVO/財經投資/daily-finance-report-site")
 # 永遠置頂、不參與日期排序的報告（檔名關鍵字比對）
 PINNED_FIRST = ["長期研究資料庫索引"]
 
+# 這些報告類型（檔名前綴）會在列表卡片上附帶自動摘要
+SUMMARY_TYPES = ["投資機構研究摘要", "產業趨勢研究摘要", "投行研究摘要", "元大投顧研究報告摘要"]
+
 
 def date_from_name(name):
     m = re.search(r'(\d{4})[-年](\d{2})[-月](\d{2})', name)
@@ -24,6 +27,30 @@ def date_from_name(name):
     if m:
         return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
     return "0000-00-00"
+
+
+def extract_summary(path, min_len=20, max_len=50):
+    """從報告HTML的 summary-box 區塊抽取一段純文字摘要（20-50字）。找不到則回傳空字串。"""
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError:
+        return ""
+    m = re.search(r'<div class="summary-box">(.*?)</div>\s*(?:</div>|<!--|\n<div)', text, re.S)
+    if not m:
+        m = re.search(r'<div class="summary-box">(.*?)</div>', text, re.S)
+    if not m:
+        return ""
+    block = m.group(1)
+    # 去掉標題行（本期重點總覽 / 本期綜合總結 等 h2/h4）
+    block = re.sub(r'<h[2-4][^>]*>.*?</h[2-4]>', ' ', block, flags=re.S)
+    plain = re.sub(r'<[^>]+>', '', block)
+    plain = html.unescape(plain)
+    plain = re.sub(r'\s+', '', plain).strip('：:　 ')
+    if not plain:
+        return ""
+    if len(plain) <= max_len:
+        return plain if len(plain) >= min_len else plain
+    return plain[:max_len] + "…"
 
 
 def _copy_new(src_glob_dir, pattern, dst):
@@ -72,8 +99,12 @@ def sync_files():
     return copied
 
 
-def link(href, label, date):
-    return f'<li><a href="{quote(href)}"><span class="d">{date}</span>{html.escape(label)}</a></li>'
+def link(href, label, date, summary=""):
+    summary_html = f'<span class="s">{html.escape(summary)}</span>' if summary else ""
+    return (f'<li><a href="{quote(href)}">'
+            f'<span class="d">{date}</span>'
+            f'<span class="t">{html.escape(label)}</span>'
+            f'{summary_html}</a></li>')
 
 
 def build_index():
@@ -83,7 +114,7 @@ def build_index():
     items = []
     for f in sorted((SITE / "reports").glob("*.html")):
         d = date_from_name(f.name)
-        items.append((d, link(f"reports/{f.name}", f"{d} 財經日報", d)))
+        items.append((d, link(f"reports/{f.name}", "財經日報", d)))
     items.sort(key=lambda x: x[0], reverse=True)
     sections.append(("daily", "📰 財經日報", "每日8來源交叉比對國際財經重點、產業報告、今日焦點解讀、LWP組合觀察",
                       "\n".join(i for _, i in items) if items else '<li class="empty">尚無報告</li>',
@@ -116,10 +147,10 @@ def build_index():
     items = []
     for f in sorted((SITE / "research/sector-flow").glob("*.html")):
         d = date_from_name(f.name)
-        items.append((d, link(f"research/sector-flow/{f.name}", f"{d} 今日板塊流動報告", d)))
+        items.append((d, link(f"research/sector-flow/{f.name}", "今日板塊流動報告", d)))
     for f in sorted((SITE / "research/capital-flow").glob("*.html")):
         d = date_from_name(f.name)
-        label = f.stem.split("—")[0].strip() + f"（{d}）"
+        label = f.stem.split("—")[0].strip()
         items.append((d, link(f"research/capital-flow/{f.name}", label, d)))
     items.sort(key=lambda x: x[0], reverse=True)
     sections.append(("flow", "📊 板塊與資金流", "每日板塊流動報告（四層漏斗+潛力雷達）與美股資金流雙軌週報",
@@ -131,18 +162,19 @@ def build_index():
     dated_items = []
     for f in sorted((SITE / "research/institutions").glob("*.html")):
         d = date_from_name(f.name)
-        dated_items.append((d, link(f"research/institutions/{f.name}", f"{d} 投資機構研究摘要", d)))
+        dated_items.append((d, link(f"research/institutions/{f.name}", "投資機構研究摘要", d, extract_summary(f))))
     for f in sorted((SITE / "research/industry-trends").glob("*.html")):
         d = date_from_name(f.name)
-        dated_items.append((d, link(f"research/industry-trends/{f.name}", f"{d} 產業趨勢研究摘要", d)))
+        dated_items.append((d, link(f"research/industry-trends/{f.name}", "產業趨勢研究摘要", d, extract_summary(f))))
     for f in sorted((SITE / "research/long-term").glob("*.html")):
         d = date_from_name(f.name)
         title = re.sub(r'_\d{8}$|_\d{4}[-年]\d{2}[-月]\d{2}日?$', '', f.stem)
         href = f"research/long-term/{f.name}"
+        summary = extract_summary(f) if any(title.startswith(t) for t in SUMMARY_TYPES) else ""
         if any(k in f.name for k in PINNED_FIRST):
-            pinned.append(link(href, f"⭐ {title}", d))
+            pinned.append(link(href, f"⭐ {title}", d, summary))
         else:
-            dated_items.append((d, link(href, title, d)))
+            dated_items.append((d, link(href, title, d, summary)))
     dated_items.sort(key=lambda x: x[0], reverse=True)
     research_html = "\n".join(pinned) + "\n" + "\n".join(i for _, i in dated_items)
     total_research = len(pinned) + len(dated_items)
@@ -198,9 +230,11 @@ h3{{font-size:0.95rem; margin:18px 0 8px; color:var(--sub);}}
 .desc{{color:var(--sub); font-size:0.85rem; margin:8px 0 14px;}}
 .list{{list-style:none; padding:0; margin:0;}}
 .list li{{margin-bottom:8px;}}
-.list a{{display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:11px 16px; text-decoration:none; color:var(--text); font-weight:600; font-size:0.92rem; transition:border-color .15s;}}
+.list a{{display:flex; flex-direction:column; gap:3px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:11px 16px; text-decoration:none; color:var(--text); transition:border-color .15s;}}
 .list a:hover{{border-color:var(--accent);}}
-.list .d{{color:var(--sub); font-weight:400; font-size:0.8rem; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; flex-shrink:0;}}
+.list .d{{color:var(--sub); font-weight:400; font-size:0.78rem; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}}
+.list .t{{font-weight:600; font-size:0.92rem; color:var(--text);}}
+.list .s{{color:var(--sub); font-weight:400; font-size:0.82rem; line-height:1.55;}}
 .list .empty, p.empty{{color:var(--sub); font-size:0.88rem; font-style:italic;}}
 </style>
 </head>
