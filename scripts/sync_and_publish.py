@@ -58,8 +58,9 @@ def sync_files():
         dst = SITE / "stocks" / ticker_dir.name
         copied += _copy_new(ticker_dir, "*.html", dst)
 
-    # 研究摘要：投資機構研究摘要(六大機構週報) + 長期研究(熊市手冊/長期索引/元大投顧等)
+    # 研究摘要：投資機構研究摘要(六大機構週報) + 產業趨勢研究摘要(科技媒體週報) + 長期研究(熊市手冊/長期索引/元大投顧等)
     copied += _copy_new(SRC / "研究報告/投資機構研究摘要", "*.html", SITE / "research/institutions")
+    copied += _copy_new(SRC / "研究報告/產業趨勢研究摘要", "產業趨勢研究摘要*.html", SITE / "research/industry-trends")
     copied += _copy_new(SRC / "研究報告/長期研究", "*.html", SITE / "research/long-term")
 
     # 今日板塊流動報告
@@ -131,6 +132,9 @@ def build_index():
     for f in sorted((SITE / "research/institutions").glob("*.html")):
         d = date_from_name(f.name)
         dated_items.append((d, link(f"research/institutions/{f.name}", f"{d} 投資機構研究摘要", d)))
+    for f in sorted((SITE / "research/industry-trends").glob("*.html")):
+        d = date_from_name(f.name)
+        dated_items.append((d, link(f"research/industry-trends/{f.name}", f"{d} 產業趨勢研究摘要", d)))
     for f in sorted((SITE / "research/long-term").glob("*.html")):
         d = date_from_name(f.name)
         title = re.sub(r'_\d{8}$|_\d{4}[-年]\d{2}[-月]\d{2}日?$', '', f.stem)
