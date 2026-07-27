@@ -69,6 +69,9 @@ def sync_files():
     # 美股資金流雙軌週報/報告
     copied += _copy_new(SRC / "研究報告/產業趨勢研究摘要", "美股資金流雙軌*.html", SITE / "research/capital-flow")
 
+    # 市場診斷（模式一風險診斷＋模式四三池策略合併報告）
+    copied += _copy_new(SRC / "研究報告/市場診斷", "*.html", SITE / "research/market-diagnosis")
+
     return copied
 
 
@@ -115,7 +118,17 @@ def build_index():
     sections.append(("stocks", "🦊 個股小狐", "個別股票深度研究、財報解析、財務健檢報告，依公司分類",
                       stocks_html, stock_count))
 
-    # 3. 板塊與資金流
+    # 3. 市場診斷
+    items = []
+    for f in sorted((SITE / "research/market-diagnosis").glob("*.html")):
+        d = date_from_name(f.name)
+        items.append((d, link(f"research/market-diagnosis/{f.name}", "市場診斷＋三池策略", d)))
+    items.sort(key=lambda x: x[0], reverse=True)
+    sections.append(("diagnosis", "🎯 市場診斷", "21項指標市場風險診斷＋三池資金策略狀態，含機會池四層觸發進度",
+                      "\n".join(i for _, i in items) if items else '<li class="empty">尚無報告</li>',
+                      len(items)))
+
+    # 4. 板塊與資金流
     items = []
     for f in sorted((SITE / "research/sector-flow").glob("*.html")):
         d = date_from_name(f.name)
@@ -129,7 +142,7 @@ def build_index():
                       "\n".join(i for _, i in items) if items else '<li class="empty">尚無報告</li>',
                       len(items)))
 
-    # 4. 研究摘要（機構週報 + 長期研究，長期研究資料庫索引永遠置頂）
+    # 5. 研究摘要（機構週報 + 長期研究，長期研究資料庫索引永遠置頂）
     pinned = []
     dated_items = []
     for f in sorted((SITE / "research/institutions").glob("*.html")):
