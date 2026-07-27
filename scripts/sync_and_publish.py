@@ -12,6 +12,9 @@ from urllib.parse import quote
 SRC = Path("/Users/vovo/Desktop/VOVO/財經投資")
 SITE = Path("/Users/vovo/Desktop/VOVO/財經投資/daily-finance-report-site")
 
+# 永遠置頂、不參與日期排序的報告（檔名關鍵字比對）
+PINNED_FIRST = ["長期研究資料庫索引"]
+
 
 def date_from_name(name):
     m = re.search(r'(\d{4})[-年](\d{2})[-月](\d{2})', name)
@@ -23,60 +26,47 @@ def date_from_name(name):
     return "0000-00-00"
 
 
+def _copy_new(src_glob_dir, pattern, dst):
+    copied = []
+    dst.mkdir(parents=True, exist_ok=True)
+    for f in src_glob_dir.glob(pattern):
+        target = dst / f.name
+        if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
+            shutil.copy2(f, target)
+            copied.append(str(target))
+    return copied
+
+
 def sync_files():
     """Copy new/updated source files into the site repo's categorized folders."""
     copied = []
 
-    # 財經日報
+    # 財經日報 (normalize filenames to YYYY-MM-DD.html)
     dst = SITE / "reports"
     dst.mkdir(parents=True, exist_ok=True)
     for f in (SRC / "財經日報").glob("*.html"):
-        target = dst / re.sub(r'_財經日報', '', f.name).replace('財經日報_', '')
-        # normalize to YYYY-MM-DD.html
         d = date_from_name(f.name)
         target = dst / f"{d}.html"
         if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
             shutil.copy2(f, target)
             copied.append(str(target))
 
-    # 個股小狐
+    # 個股小狐（每個ticker一個子資料夾，原樣保留）
     for ticker_dir in (SRC / "個股小狐").iterdir():
         if not ticker_dir.is_dir():
             continue
         dst = SITE / "stocks" / ticker_dir.name
-        dst.mkdir(parents=True, exist_ok=True)
-        for f in ticker_dir.glob("*.html"):
-            target = dst / f.name
-            if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
-                shutil.copy2(f, target)
-                copied.append(str(target))
+        copied += _copy_new(ticker_dir, "*.html", dst)
 
-    # 投資機構研究摘要
-    dst = SITE / "research/institutions"
-    dst.mkdir(parents=True, exist_ok=True)
-    for f in (SRC / "研究報告/投資機構研究摘要").glob("*.html"):
-        target = dst / f.name
-        if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
-            shutil.copy2(f, target)
-            copied.append(str(target))
+    # 研究摘要：投資機構研究摘要(六大機構週報) + 長期研究(熊市手冊/長期索引/元大投顧等)
+    copied += _copy_new(SRC / "研究報告/投資機構研究摘要", "*.html", SITE / "research/institutions")
+    copied += _copy_new(SRC / "研究報告/長期研究", "*.html", SITE / "research/long-term")
 
     # 今日板塊流動報告
-    dst = SITE / "research/sector-flow"
-    dst.mkdir(parents=True, exist_ok=True)
-    for f in (SRC / "研究報告/產業趨勢研究摘要").glob("今日板塊流動報告*.html"):
-        target = dst / f.name
-        if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
-            shutil.copy2(f, target)
-            copied.append(str(target))
+    copied += _copy_new(SRC / "研究報告/產業趨勢研究摘要", "今日板塊流動報告*.html", SITE / "research/sector-flow")
 
     # 美股資金流雙軌週報/報告
-    dst = SITE / "research/capital-flow"
-    dst.mkdir(parents=True, exist_ok=True)
-    for f in (SRC / "研究報告/產業趨勢研究摘要").glob("美股資金流雙軌*.html"):
-        target = dst / f.name
-        if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
-            shutil.copy2(f, target)
-            copied.append(str(target))
+    copied += _copy_new(SRC / "研究報告/產業趨勢研究摘要", "美股資金流雙軌*.html", SITE / "research/capital-flow")
 
     return copied
 
@@ -88,26 +78,40 @@ def link(href, label, date):
 def build_index():
     sections = []
 
+    # 1. 財經日報
     items = []
     for f in sorted((SITE / "reports").glob("*.html")):
         d = date_from_name(f.name)
         items.append((d, link(f"reports/{f.name}", f"{d} 財經日報", d)))
     items.sort(key=lambda x: x[0], reverse=True)
-    sections.append(("daily", "📰 財經日報", "每日8來源交叉比對國際財經重點、產業報告、今日焦點解讀、LWP組合觀察", items))
+    sections.append(("daily", "📰 財經日報", "每日8來源交叉比對國際財經重點、產業報告、今日焦點解讀、LWP組合觀察",
+                      "\n".join(i for _, i in items) if items else '<li class="empty">尚無報告</li>',
+                      len(items)))
 
-    items = []
+    # 2. 個股小狐（依公司分子區塊）
+    stock_count = 0
+    ticker_blocks = []
     for ticker_dir in sorted((SITE / "stocks").iterdir()):
         if not ticker_dir.is_dir():
             continue
         ticker = ticker_dir.name
+        t_items = []
         for f in sorted(ticker_dir.glob("*.html")):
             d = date_from_name(f.name)
             m = re.search(r'個股小狐_(.+?)_' + re.escape(ticker), f.name)
             rtype = m.group(1) if m else "報告"
-            items.append((d, link(f"stocks/{ticker}/{f.name}", f"{ticker}｜{rtype}", d)))
-    items.sort(key=lambda x: x[0], reverse=True)
-    sections.append(("stocks", "🦊 個股小狐", "個別股票深度研究、財報解析、財務健檢報告", items))
+            t_items.append((d, link(f"stocks/{ticker}/{f.name}", rtype, d)))
+        if not t_items:
+            continue
+        t_items.sort(key=lambda x: x[0], reverse=True)
+        stock_count += len(t_items)
+        lis = "\n".join(i for _, i in t_items)
+        ticker_blocks.append(f'<h3>{html.escape(ticker)}</h3>\n<ul class="list">\n{lis}\n</ul>')
+    stocks_html = "\n".join(ticker_blocks) if ticker_blocks else '<p class="empty">尚無報告</p>'
+    sections.append(("stocks", "🦊 個股小狐", "個別股票深度研究、財報解析、財務健檢報告，依公司分類",
+                      stocks_html, stock_count))
 
+    # 3. 板塊與資金流
     items = []
     for f in sorted((SITE / "research/sector-flow").glob("*.html")):
         d = date_from_name(f.name)
@@ -117,33 +121,45 @@ def build_index():
         label = f.stem.split("—")[0].strip() + f"（{d}）"
         items.append((d, link(f"research/capital-flow/{f.name}", label, d)))
     items.sort(key=lambda x: x[0], reverse=True)
-    sections.append(("flow", "📊 板塊與資金流", "每日板塊流動報告（四層漏斗+潛力雷達）與美股資金流雙軌週報", items))
+    sections.append(("flow", "📊 板塊與資金流", "每日板塊流動報告（四層漏斗+潛力雷達）與美股資金流雙軌週報",
+                      "\n".join(i for _, i in items) if items else '<li class="empty">尚無報告</li>',
+                      len(items)))
 
-    items = []
+    # 4. 研究摘要（機構週報 + 長期研究，長期研究資料庫索引永遠置頂）
+    pinned = []
+    dated_items = []
     for f in sorted((SITE / "research/institutions").glob("*.html")):
         d = date_from_name(f.name)
-        items.append((d, link(f"research/institutions/{f.name}", f"{d} 投資機構研究摘要", d)))
-    items.sort(key=lambda x: x[0], reverse=True)
-    sections.append(("institutions", "📚 機構研究摘要", "六大機構（JPM/GS/UBS/BlackRock/Apollo/Allianz）觀點彙整", items))
+        dated_items.append((d, link(f"research/institutions/{f.name}", f"{d} 投資機構研究摘要", d)))
+    for f in sorted((SITE / "research/long-term").glob("*.html")):
+        d = date_from_name(f.name)
+        title = re.sub(r'_\d{8}$|_\d{4}[-年]\d{2}[-月]\d{2}日?$', '', f.stem)
+        href = f"research/long-term/{f.name}"
+        if any(k in f.name for k in PINNED_FIRST):
+            pinned.append(link(href, f"⭐ {title}", d))
+        else:
+            dated_items.append((d, link(href, title, d)))
+    dated_items.sort(key=lambda x: x[0], reverse=True)
+    research_html = "\n".join(pinned) + "\n" + "\n".join(i for _, i in dated_items)
+    total_research = len(pinned) + len(dated_items)
+    sections.append(("research", "📚 研究摘要", "六大機構觀點彙整、長期研究資料庫索引、熊市歷史研究、券商投顧報告",
+                      research_html, total_research))
 
-    all_dates = [it[0] for _, _, _, its in sections for it in its]
-    latest = max(all_dates) if all_dates else "—"
+    all_html_dates = re.findall(r'<span class="d">(\d{4}-\d{2}-\d{2})</span>', "".join(s[3] for s in sections))
+    latest = max(all_html_dates) if all_html_dates else "—"
 
     nav_html = "\n".join(
-        f'<a href="#{key}" class="navlink">{title} <span class="count">{len(its)}</span></a>'
-        for key, title, _, its in sections
+        f'<a href="#{key}" class="navlink">{title} <span class="count">{count}</span></a>'
+        for key, title, _, _, count in sections
     )
 
     section_html = ""
-    for key, title, desc, items in sections:
-        lis = "\n".join(i for _, i in items) if items else '<li class="empty">尚無報告</li>'
+    for key, title, desc, body_html, count in sections:
         section_html += f'''
 <section id="{key}">
-<h2>{title} <span class="count">· {len(items)} 篇</span></h2>
+<h2>{title} <span class="count">· {count} 篇</span></h2>
 <div class="desc">{desc}</div>
-<ul class="list">
-{lis}
-</ul>
+{body_html}
 </section>
 '''
 
@@ -174,19 +190,20 @@ nav{{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px; position:sticky;
 section{{margin-bottom:40px;}}
 h2{{font-size:1.15rem; margin:0 0 4px; padding-bottom:8px; border-bottom:2px solid var(--accent); color:var(--accent); display:flex; align-items:baseline; gap:8px;}}
 h2 .count{{font-size:0.8rem; color:var(--sub); font-weight:400;}}
+h3{{font-size:0.95rem; margin:18px 0 8px; color:var(--sub);}}
 .desc{{color:var(--sub); font-size:0.85rem; margin:8px 0 14px;}}
 .list{{list-style:none; padding:0; margin:0;}}
 .list li{{margin-bottom:8px;}}
 .list a{{display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:11px 16px; text-decoration:none; color:var(--text); font-weight:600; font-size:0.92rem; transition:border-color .15s;}}
 .list a:hover{{border-color:var(--accent);}}
 .list .d{{color:var(--sub); font-weight:400; font-size:0.8rem; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; flex-shrink:0;}}
-.list .empty{{color:var(--sub); font-size:0.88rem; font-style:italic;}}
+.list .empty, p.empty{{color:var(--sub); font-size:0.88rem; font-style:italic;}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <h1>財經小狐｜投資研究專欄</h1>
-<div class="sub">國際財經重點 · 個股深度研究 · 板塊資金流 · 機構研究摘要</div>
+<div class="sub">國際財經重點 · 個股深度研究 · 板塊資金流 · 研究摘要</div>
 <div class="updated">最新 <b>{latest}</b> 更新於 {latest}</div>
 <nav>
 {nav_html}

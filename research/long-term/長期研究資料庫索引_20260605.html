@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>長期研究資料庫索引｜2026</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --accent1: #4f8ef7;   /* 總體經濟 */
+    --accent2: #e8a838;   /* 產業研究 */
+    --accent3: #52c98e;   /* 財經書籍知識 */
+    --accent4: #e05c7a;   /* 投資展望 */
+    --text: #e2e4ef;
+    --muted: #7a7e99;
+    --tag-bg: #252836;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'PingFang TC', system-ui, sans-serif; font-size: 13px; }
+
+  header { padding: 28px 32px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  header h1 { font-size: 20px; font-weight: 700; letter-spacing: .04em; }
+  header span { color: var(--muted); font-size: 12px; }
+
+  .toolbar { padding: 14px 32px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
+  .toolbar input {
+    background: var(--card); border: 1px solid var(--border); color: var(--text);
+    border-radius: 6px; padding: 7px 12px; width: 280px; font-size: 13px; outline: none;
+  }
+  .toolbar input:focus { border-color: var(--accent1); }
+  .filter-btn {
+    background: var(--tag-bg); border: 1px solid var(--border); color: var(--muted);
+    border-radius: 6px; padding: 6px 14px; cursor: pointer; font-size: 12px; transition: .15s;
+  }
+  .filter-btn:hover, .filter-btn.active { color: #fff; border-color: currentColor; }
+  .filter-btn[data-cat="all"].active     { border-color: var(--accent1); color: var(--accent1); }
+  .filter-btn[data-cat="總體經濟"].active  { border-color: var(--accent1); color: var(--accent1); }
+  .filter-btn[data-cat="產業研究"].active  { border-color: var(--accent2); color: var(--accent2); }
+  .filter-btn[data-cat="財經書籍知識"].active { border-color: var(--accent3); color: var(--accent3); }
+  .filter-btn[data-cat="投資展望"].active  { border-color: var(--accent4); color: var(--accent4); }
+
+  .stats { padding: 10px 32px; display: flex; gap: 20px; border-bottom: 1px solid var(--border); }
+  .stat-item { font-size: 12px; color: var(--muted); }
+  .stat-item strong { color: var(--text); }
+
+  .section { padding: 18px 32px 0; }
+  .section-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  }
+  .section-header .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .section-header .count { font-size: 11px; color: var(--muted); font-weight: 400; }
+  .section-header .desc { font-size: 11px; color: var(--muted); font-weight: 400; font-style: italic; }
+
+  .cat-總體經濟  .dot { background: var(--accent1); }
+  .cat-產業研究  .dot { background: var(--accent2); }
+  .cat-財經書籍知識 .dot { background: var(--accent3); }
+  .cat-投資展望  .dot { background: var(--accent4); }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+  thead th {
+    background: var(--card); color: var(--muted); font-size: 11px; font-weight: 600;
+    text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border);
+    letter-spacing: .06em; position: sticky; top: 0; z-index: 1;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+  tbody tr:hover { background: var(--card); }
+  tbody td { padding: 9px 10px; vertical-align: top; line-height: 1.5; }
+
+  .col-date   { width: 82px; color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .col-author { width: 110px; font-size: 12px; }
+  .col-title  { min-width: 200px; font-weight: 500; }
+  .col-keys   { width: 230px; }
+  .col-summary{ }
+
+  .cat-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 600; white-space: nowrap;
+  }
+  .badge-總體經濟  { background: #1a2a4a; color: var(--accent1); }
+  .badge-產業研究  { background: #312a14; color: var(--accent2); }
+  .badge-財經書籍知識 { background: #152a22; color: var(--accent3); }
+  .badge-投資展望  { background: #2d1520; color: var(--accent4); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag {
+    background: var(--tag-bg); color: var(--muted); border-radius: 4px;
+    padding: 2px 7px; font-size: 11px;
+  }
+
+  .hidden { display: none !important; }
+  .highlight { background: #4f8ef720; border-radius: 2px; }
+
+  footer { padding: 20px 32px; color: var(--muted); font-size: 11px; border-top: 1px solid var(--border); margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📚 長期研究資料庫索引</h1>
+  <span>最後更新：2026-06-05｜共 59 份文件</span>
+</header>
+
+<div class="toolbar">
+  <input type="text" id="searchInput" placeholder="搜尋關鍵字、標題、作者…">
+  <button class="filter-btn active" data-cat="all">全部 (59)</button>
+  <button class="filter-btn" data-cat="總體經濟">總體經濟 (16)</button>
+  <button class="filter-btn" data-cat="產業研究">產業研究 (9)</button>
+  <button class="filter-btn" data-cat="財經書籍知識">財經書籍知識 (26)</button>
+  <button class="filter-btn" data-cat="投資展望">投資展望 (8)</button>
+</div>
+
+<div class="stats">
+  <div class="stat-item">顯示中：<strong id="visCount">59</strong> 份</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     總體經濟
+════════════════════════════════════════════ -->
+<div class="section cat-總體經濟" id="section-總體經濟">
+  <div class="section-header">
+    <span class="dot"></span>
+    <span>總體經濟</span>
+    <span class="count">16 份</span>
+    <span class="desc">— 影響「中期」「全球」投資環境的內容</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th class="col-date">發布時間</th>
+      <th class="col-author">發表人</th>
+      <th class="col-title">標題</th>
+      <th class="col-keys">重要關鍵字</th>
+      <th class="col-summary">一段話摘要</th>
+    </tr></thead>
+    <tbody>
+
+      <tr data-cat="總體經濟" data-text="james mimi 美聯儲貨幣政策的囚犯困境 fed 利率 通膨 升降息兩難 賽局理論 20241107">
+        <td class="col-date">2024-11</td>
+        <td class="col-author">James Mimi</td>
+        <td class="col-title">美聯儲貨幣政策的囚犯困境</td>
+        <td class="col-keys"><div class="tags"><span class="tag">Fed</span><span class="tag">升降息兩難</span><span class="tag">囚犯困境</span><span class="tag">賽局理論</span><span class="tag">通膨</span></div></td>
+        <td>以囚犯困境框架分析Fed在高通膨與衰退風險之間的政策困境，說明為何兩難局面難以自行解套</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="mckinsey out of balance growth wealth debt 全球失衡 債務 成長瓶頸 財富分配 202412">
+        <td class="col-date">2024-12</td>
+        <td class="col-author">McKinsey</td>
+        <td class="col-title">Out of Balance: What's Next for Growth, Wealth and Debt</td>
+        <td class="col-keys"><div class="tags"><span class="tag">全球失衡</span><span class="tag">債務</span><span class="tag">成長瓶頸</span><span class="tag">財富分配</span><span class="tag">McKinsey</span></div></td>
+        <td>McKinsey全球研究院探討全球成長、財富與債務的結構性失衡，及未來情境與政策選項</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="元大 中美貿易戰後世界供應鏈的可能新秩序 供應鏈重組 關稅 友岸外包 印度 墨西哥 20250421">
+        <td class="col-date">2025-04</td>
+        <td class="col-author">元大</td>
+        <td class="col-title">中美貿易戰後世界供應鏈的可能新秩序</td>
+        <td class="col-keys"><div class="tags"><span class="tag">供應鏈重組</span><span class="tag">關稅</span><span class="tag">友岸外包</span><span class="tag">印度</span><span class="tag">墨西哥</span></div></td>
+        <td>分析中美貿易戰後全球供應鏈重組趨勢，評估東南亞、印度、墨西哥承接機會及受益產業</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="ft 台灣如何成為默默無聞的債券市場超級大國 台灣壽險 海外債券 超額儲蓄 外匯儲備 20250506">
+        <td class="col-date">2025-05</td>
+        <td class="col-author">Financial Times</td>
+        <td class="col-title">台灣如何成為默默無聞的債券市場超級大國</td>
+        <td class="col-keys"><div class="tags"><span class="tag">台灣壽險</span><span class="tag">海外債券</span><span class="tag">超額儲蓄</span><span class="tag">外匯儲備</span><span class="tag">7000億美元</span></div></td>
+        <td>揭示台灣壽險業持有逾7,000億美元海外債券，成為全球最大隱性債券投資者的結構性原因</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="元大 美國第三季融資計畫 TGA 美國公債 季度融資 流動性 財政部 20250730">
+        <td class="col-date">2025-07</td>
+        <td class="col-author">元大</td>
+        <td class="col-title">美國第三季融資計畫</td>
+        <td class="col-keys"><div class="tags"><span class="tag">TGA</span><span class="tag">美債發行</span><span class="tag">流動性</span><span class="tag">財政部QRA</span></div></td>
+        <td>分析美國財政部Q3融資計畫規模與發債期限結構，評估對市場流動性及短端利率的影響</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="元大 TGA流動性危機 TGA 財政帳戶 流動性收縮 準備金 聯準會 20250815">
+        <td class="col-date">2025-08</td>
+        <td class="col-author">元大</td>
+        <td class="col-title">TGA流動性危機</td>
+        <td class="col-keys"><div class="tags"><span class="tag">TGA</span><span class="tag">準備金收縮</span><span class="tag">流動性驟緊</span><span class="tag">聯準會</span></div></td>
+        <td>深入解析TGA餘額驟降如何造成銀行準備金緊縮及市場流動性危機，對短期利率的傳導機制</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="元大 全球儲蓄過剩 儲蓄過剩2.0 安全資產 美元霸權 資金流動 超額儲蓄 美國4.56兆 20251201">
+        <td class="col-date">2025-12</td>
+        <td class="col-author">元大</td>
+        <td class="col-title">全球儲蓄過剩 2.0</td>
+        <td class="col-keys"><div class="tags"><span class="tag">儲蓄過剩2.0</span><span class="tag">全球失衡</span><span class="tag">安全資產短缺</span><span class="tag">美元</span><span class="tag">美國4.56兆第一</span></div></td>
+        <td>追蹤2014–2025年全球資金吸收規模排名（美國4.56兆居首），分析超額儲蓄流向與中國資金外溢</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="元大 高估值是因為安全資產的失衡 安全資產短缺 估值 美國國債 全球資金 溢價 20260112">
+        <td class="col-date">2026-01</td>
+        <td class="col-author">元大</td>
+        <td class="col-title">高估值是因為安全資產的失衡</td>
+        <td class="col-keys"><div class="tags"><span class="tag">安全資產短缺</span><span class="tag">美股高估值</span><span class="tag">全球資金</span><span class="tag">期限溢價</span></div></td>
+        <td>主張美股高估值根源是全球安全資產供不應求，而非單純投機泡沫，提出利率溢價重估邏輯</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="notebooklm 日債殖利率波動及影響 JGB 日本國債 殖利率 日圓套利 YCC退出 20260124">
+        <td class="col-date">2026-01</td>
+        <td class="col-author">NotebookLM</td>
+        <td class="col-title">日債殖利率波動及影響</td>
+        <td class="col-keys"><div class="tags"><span class="tag">JGB</span><span class="tag">日本央行</span><span class="tag">YCC退出</span><span class="tag">日圓套利回流</span><span class="tag">全球資金</span></div></td>
+        <td>日本央行退出YCC後，日債殖利率上升對全球套利交易平倉、資金回流日本及美債拋售的衝擊鏈</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="g7 關於全球失衡的g7經濟學家備忘錄 全球失衡 經常帳赤字 美國NIIP 政策建議 20260328">
+        <td class="col-date">2026-03</td>
+        <td class="col-author">G7</td>
+        <td class="col-title">關於全球失衡的G7經濟學家備忘錄</td>
+        <td class="col-keys"><div class="tags"><span class="tag">G7</span><span class="tag">全球失衡</span><span class="tag">經常帳赤字</span><span class="tag">美國NIIP -90%</span><span class="tag">結構性調整</span></div></td>
+        <td>G7內部備忘錄，以IMF框架量化各國失衡程度，主張結構性政策調整優於關稅報復措施</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="imf 理解全球失衡 全球失衡 儲蓄率 投資率 貿易逆差 調整路徑 202604">
+        <td class="col-date">2026-04</td>
+        <td class="col-author">IMF</td>
+        <td class="col-title">理解全球失衡</td>
+        <td class="col-keys"><div class="tags"><span class="tag">IMF</span><span class="tag">儲蓄率</span><span class="tag">貿易逆差</span><span class="tag">美中德失衡</span><span class="tag">調整路徑</span></div></td>
+        <td>IMF正式報告，系統解析美國、中國、德國宏觀失衡成因，關稅無法解決失衡，根源是宏觀政策</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="fed efficient effective central banking 央行 資產負債表 貨幣政策 fed改革 利率走廊 20260514">
+        <td class="col-date">2026-05</td>
+        <td class="col-author">Fed</td>
+        <td class="col-title">Efficient and Effective Central Banking: Beyond the Balance Sheet</td>
+        <td class="col-keys"><div class="tags"><span class="tag">央行框架</span><span class="tag">資產負債表</span><span class="tag">貨幣政策傳導</span><span class="tag">Fed改革</span></div></td>
+        <td>Fed官員演講，探討超越資產負債表管理的有效央行政策設計，評估利率走廊與準備金付息機制</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="群益 中國經濟的三個錯覺與三個機會 中國經濟 通縮 內需 完全融通 人民幣 20260324">
+        <td class="col-date">2026-03</td>
+        <td class="col-author">群益</td>
+        <td class="col-title">中國經濟的三個錯覺與三個機會</td>
+        <td class="col-keys"><div class="tags"><span class="tag">中國通縮</span><span class="tag">內需</span><span class="tag">完全融通模式</span><span class="tag">人民幣</span><span class="tag">政策刺激</span></div></td>
+        <td>破解中國經濟常見三大誤解（樓市、消費、出口），指出政策刺激的真實機會窗口與時程</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="自整理 三份報告整合分析 全球碎片化與資產配置 imf g7 元大 20260529">
+        <td class="col-date">2026-05</td>
+        <td class="col-author">自整理</td>
+        <td class="col-title">三份報告整合分析：全球碎片化與資產配置</td>
+        <td class="col-keys"><div class="tags"><span class="tag">全球碎片化</span><span class="tag">資產配置框架</span><span class="tag">IMF+G7+元大</span><span class="tag">失衡調整</span></div></td>
+        <td>整合IMF、G7備忘錄、元大儲蓄過剩三份報告核心結論，建立失衡→資產配置決策邏輯鏈</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="自整理 長期研究整合摘要 LTCMA 三池策略 資產配置 通膨 黃金 20260529">
+        <td class="col-date">2026-05</td>
+        <td class="col-author">自整理</td>
+        <td class="col-title">長期研究整合摘要（跨報告彙整 .md）</td>
+        <td class="col-keys"><div class="tags"><span class="tag">LTCMA</span><span class="tag">三池策略</span><span class="tag">資產配置</span><span class="tag">通膨框架</span><span class="tag">黃金5.5%</span></div></td>
+        <td>本資料夾所有報告跨主題整合摘要，含10–15年回報預測表、全球失衡、通膨框架、黃金配置策略</td>
+      </tr>
+
+      <tr data-cat="總體經濟" data-text="jpm 岑博智 michael cembalest 關於科技估值 科技股估值 pe 七大科技 ai泡沫 歷史比較 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">JPM 岑博智</td>
+        <td class="col-title">關於科技估值</td>
+        <td class="col-keys"><div class="tags"><span class="tag">科技股估值</span><span class="tag">P/E歷史比較</span><span class="tag">七大科技</span><span class="tag">AI泡沫辯論</span><span class="tag">1999比較</span></div></td>
+        <td>Michael Cembalest深度分析科技股估值歷史，比較當前七大科技公司估值與1999年網路泡沫的異同點</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ════════════════════════════════════════════
+     產業研究
+════════════════════════════════════════════ -->
+<div class="section cat-產業研究" id="section-產業研究">
+  <div class="section-header">
+    <span class="dot"></span>
+    <span>產業研究</span>
+    <span class="count">9 份</span>
+    <span class="desc">— 深入研究「特定產業」與「未來十年關鍵發展領域」</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th class="col-date">發布時間</th>
+      <th class="col-author">發表人</th>
+      <th class="col-title">標題</th>
+      <th class="col-keys">重要關鍵字</th>
+      <th class="col-summary">一段話摘要</th>
+    </tr></thead>
+    <tbody>
+
+      <tr data-cat="產業研究" data-text="摩根士丹利 tw semicon 台灣半導體產業研究 tsmc cowos ai晶片 先進封裝 20250101">
+        <td class="col-date">2025-01</td>
+        <td class="col-author">摩根士丹利</td>
+        <td class="col-title">台灣半導體產業研究（TW Semicon 2025）</td>
+        <td class="col-keys"><div class="tags"><span class="tag">TSMC</span><span class="tag">CoWoS</span><span class="tag">AI晶片</span><span class="tag">先進封裝</span><span class="tag">台灣半導體</span></div></td>
+        <td>摩根士丹利深度報告，分析台灣半導體生態系在AI算力需求驅動下的供需結構與主要個股評等</td>
+      </tr>
+
+      <tr data-cat="產業研究" data-text="散熱產業 熱導材料升級 水冷板鍍金成為趨勢 水冷板 液冷 ai伺服器散熱 20260102">
+        <td class="col-date">2026-01</td>
+        <td class="col-author">—</td>
+        <td class="col-title">散熱產業：熱導材料升級，水冷板鍍金成為趨勢</td>
+        <td class="col-keys"><div class="tags"><span class="tag">水冷板</span><span class="tag">液冷</span><span class="tag">AI伺服器散熱</span><span class="tag">鍍金工藝</span><span class="tag">熱導材料</span></div></td>
+        <td>AI伺服器功耗上升推動散熱產業升級，深入分析水冷板鍍金工藝的成本、技術門檻與供應鏈格局</td>
+      </tr>
+
+      <tr data-cat="產業研究" data-text="jpm 2026 corporate compass 企業資本支出 ai採用 供應鏈策略 企業信心 20260120">
+        <td class="col-date">2026-01</td>
+        <td class="col-author">JPM</td>
+        <td class="col-title">2026 Corporate Compass</td>
+        <td class="col-keys"><div class="tags"><span class="tag">企業資本支出</span><span class="tag">AI採用速度</span><span class="tag">供應鏈策略</span><span class="tag">企業信心調查</span><span class="tag">500家企業</span></div></td>
+        <td>JPM彙整500家企業主管問卷，追蹤AI資本支出意願、供應鏈重組策略與各產業投資優先次序</td>
+      </tr>
+
+      <tr data-cat="產業研究" data-text="ark big ideas 2026 顛覆性創新 ai 機器人 能源儲存 基因組學 202601">
+        <td class="col-date">2026-01</td>
+        <td class="col-author">ARK</td>
+        <td class="col-title">Big Ideas 2026</td>
+        <td class="col-keys"><div class="tags"><span class="tag">顛覆性創新</span><span class="tag">AI</span><span class="tag">機器人</span><span class="tag">能源儲存</span><span class="tag">基因組學</span><span class="tag">市場規模預測</span></div></td>
+        <td>ARK年度大想法報告，預測AI、機器人、能源儲存、基因組學等技術的十年市場規模與投資機會</td>
+      </tr>
+
+      <tr data-cat="產業研究" data-text="未知 2026年全球半導體產業10大技術趨勢分析 gaa hbm 先進封裝 3nm 202602">
+        <td class="col-date">2026-02</td>
+        <td class="col-author">—</td>
+        <td class="col-title">2026年全球半導體產業10大技術趨勢分析</td>
+        <td class="col-keys"><div class="tags"><span class="tag">GAA電晶體</span><span class="tag">HBM</span><span class="tag">先進封裝</span><span class="tag">3nm</span><span class="tag">AI加速器</span></div></td>
+        <td>盤點2026年半導體產業十大技術趨勢，涵蓋製程演進、先進封裝、HBM記憶體與AI加速器</td>
+      </tr>
+
+      <tr data-cat="產業研究" data-text="群益 ai基建投資持續 agentic ai physical ai實踐加速 機器人 資本支出 20260324">
+        <td class="col-date">2026-03</td>
+        <td class="col-author">群益</td>
+        <td class="col-title">AI基建投資持續，Agentic AI及Physical AI實踐加速</td>
+        <td class="col-keys"><div class="tags"><span class="tag">Agentic AI</span><span class="tag">Physical AI</span><span class="tag">AI基建</span><span class="tag">機器人</span><span class="tag">資本支出6500億</span></div></td>
+        <td>追蹤2026年AI基建投資趨勢，重點分析Agentic AI與Physical AI的商業化時程與受益供應鏈</td>
+      </tr>
+
+      <tr data-cat="產業研究" data-text="伊朗戰爭看軍工與石油 伊朗 霍爾木茲 油價 軍工股 地緣政治 20260324">
+        <td class="col-date">2026-03</td>
+        <td class="col-author">—</td>
+        <td class="col-title">伊朗戰爭看軍工與石油</td>
+        <td class="col-keys"><div class="tags"><span class="tag">伊朗</span><span class="tag">霍爾木茲</span><span class="tag">油價</span><span class="tag">軍工股</span><span class="tag">地緣政治</span><span class="tag">石油供應</span></div></td>
+        <td>分析美以打擊伊朗情境下霍爾木茲海峽關閉的油價衝擊，評估軍工產業受益股與能源新興市場影響</td>
+      </tr>
+
+      <tr data-cat="產業研究" data-text="tpuv7 ai運算霸權挑戰者 tpu google nvidia競爭 算力 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">—</td>
+        <td class="col-title">TPUv7：AI運算霸權挑戰者</td>
+        <td class="col-keys"><div class="tags"><span class="tag">TPU</span><span class="tag">Google</span><span class="tag">NVIDIA競爭</span><span class="tag">算力</span><span class="tag">AI晶片</span></div></td>
+        <td>分析Google TPUv7架構優勢與效能指標，評估其對NVIDIA GPU在AI訓練推理市場的挑戰潛力</td>
+      </tr>
+
+      <tr data-cat="產業研究" data-text="創業者手冊 構建ai原生創業公司 llm ai原生 商業模式 產品設計 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">—</td>
+        <td class="col-title">創業者手冊：構建AI原生創業公司</td>
+        <td class="col-keys"><div class="tags"><span class="tag">LLM應用</span><span class="tag">AI原生</span><span class="tag">商業模式</span><span class="tag">產品設計</span><span class="tag">組織架構</span></div></td>
+        <td>中文版AI原生創業完整手冊，指導如何以LLM為核心構建產品、商業模式、定價策略與組織</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ════════════════════════════════════════════
+     財經書籍知識
+════════════════════════════════════════════ -->
+<div class="section cat-財經書籍知識" id="section-財經書籍知識">
+  <div class="section-header">
+    <span class="dot"></span>
+    <span>財經書籍知識</span>
+    <span class="count">26 份</span>
+    <span class="desc">— 特定「金融議題」的「長時間 / 歷史研究」報告與工具書</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th class="col-date">發布時間</th>
+      <th class="col-author">發表人</th>
+      <th class="col-title">標題</th>
+      <th class="col-keys">重要關鍵字</th>
+      <th class="col-summary">一段話摘要</th>
+    </tr></thead>
+    <tbody>
+
+      <tr data-cat="財經書籍知識" data-text="美國二房問題探討 房利美 房地美 次貸危機 mbs 政府擔保 200809">
+        <td class="col-date">2008</td>
+        <td class="col-author">—</td>
+        <td class="col-title">美國二房問題探討</td>
+        <td class="col-keys"><div class="tags"><span class="tag">房利美</span><span class="tag">房地美</span><span class="tag">次貸危機</span><span class="tag">MBS</span><span class="tag">政府接管</span></div></td>
+        <td>探討2008年美國二房崩潰根源，分析MBS市場崩潰機制與政府接管始末，經典金融危機案例</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="moodys corporate default recovery rates 1920 2008 公司債違約率 回收率 信用評等 歷史數據 200901">
+        <td class="col-date">2009</td>
+        <td class="col-author">Moodys</td>
+        <td class="col-title">Corporate Default and Recovery Rates, 1920–2008</td>
+        <td class="col-keys"><div class="tags"><span class="tag">公司債違約率</span><span class="tag">回收率</span><span class="tag">信用評等</span><span class="tag">88年歷史數據</span><span class="tag">穆迪</span></div></td>
+        <td>穆迪官方報告，彙整1920–2008年公司債違約率與回收率完整數據，分評等、分產業深度分析</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="corporate bond default risk 150 year perspective 公司債違約 歷史研究 信用週期 風險溢價 20100324">
+        <td class="col-date">2010</td>
+        <td class="col-author">學術研究</td>
+        <td class="col-title">Corporate Bond Default Risk: A 150-Year Perspective</td>
+        <td class="col-keys"><div class="tags"><span class="tag">公司債違約率</span><span class="tag">150年歷史</span><span class="tag">信用週期</span><span class="tag">風險溢價預測</span></div></td>
+        <td>150年跨度學術研究，分析公司債違約率歷史規律與信用週期特徵，信用利差的違約預測能力</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="tlac 總損失吸收能力 系統重要性銀行 g-sibs 清償機制 fsb 2018 上海商業儲蓄銀行">
+        <td class="col-date">2018</td>
+        <td class="col-author">上海商業儲蓄銀行</td>
+        <td class="col-title">總損失吸收能力 TLAC 介紹</td>
+        <td class="col-keys"><div class="tags"><span class="tag">TLAC</span><span class="tag">G-SIBs</span><span class="tag">清償機制</span><span class="tag">FSB</span><span class="tag">損失吸收資本</span></div></td>
+        <td>介紹TLAC監管框架核心概念，說明G-SIBs必須持有的損失吸收資本要求、清償層級與豁免條件</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="tlac監管制度與發展 tlac監管演進 台灣適用 發債 資本工具 201911 彰銀資金營運處">
+        <td class="col-date">2019-11</td>
+        <td class="col-author">彰銀資金營運處</td>
+        <td class="col-title">TLAC監管制度與發展</td>
+        <td class="col-keys"><div class="tags"><span class="tag">TLAC</span><span class="tag">監管演進</span><span class="tag">台灣本土化</span><span class="tag">資本工具</span></div></td>
+        <td>系統梳理TLAC監管制度從FSB標準到各國實施的演進脈絡，包含台灣適用情況與發債策略</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="nber getting to the core inflation risks 核心通膨 能源通膨 tips tips對沖 60/40失效 資產β值 202206">
+        <td class="col-date">2022-06</td>
+        <td class="col-author">NBER</td>
+        <td class="col-title">Getting to the Core: Inflation Risks Within and Across Asset Classes</td>
+        <td class="col-keys"><div class="tags"><span class="tag">核心通膨β -5.60股票</span><span class="tag">TIPS最佳對沖</span><span class="tag">60/40失效</span><span class="tag">能源通膨</span><span class="tag">兩種通膨分離</span></div></td>
+        <td>NBER區分核心通膨vs能源通膨對各資產的差異衝擊，證明TIPS是核心通膨最佳對沖，股票核心β=-5.60</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="霍華馬克斯 巨變 sea change 利率範式轉移 信用週期 低利率結束 橡樹資本 202212">
+        <td class="col-date">2022-12</td>
+        <td class="col-author">霍華馬克斯</td>
+        <td class="col-title">巨變（Sea Change）</td>
+        <td class="col-keys"><div class="tags"><span class="tag">Sea Change</span><span class="tag">利率範式轉移</span><span class="tag">信用週期</span><span class="tag">低利率結束</span><span class="tag">固定收益回歸</span></div></td>
+        <td>霍華馬克斯著名備忘錄，宣告投資範式巨變：低利率時代終結，固定收益重獲競爭力，信用市場重估</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="丹麥金融監理局 歐洲bbd清償順位分析 歐洲銀行 bail-in 清償順位 高級非優先債 20230330">
+        <td class="col-date">2023-03</td>
+        <td class="col-author">丹麥金融監理局</td>
+        <td class="col-title">歐洲BBD清償順位分析</td>
+        <td class="col-keys"><div class="tags"><span class="tag">歐洲銀行</span><span class="tag">Bail-In</span><span class="tag">清償順位</span><span class="tag">高級非優先債</span><span class="tag">監管資本層級</span></div></td>
+        <td>分析歐洲銀行BBD清償順位架構，比較各層資本工具在危機中的損失承擔順序與投資者保護差異</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="金融人類學徒 這些銀行怎麼突然說倒了 資本適足率假象 流動性風險 svb 監管漏洞 20230424">
+        <td class="col-date">2023-04</td>
+        <td class="col-author">金融人類學徒</td>
+        <td class="col-title">這些銀行怎麼突然說倒了：資本適足率的假象</td>
+        <td class="col-keys"><div class="tags"><span class="tag">資本適足率假象</span><span class="tag">流動性風險</span><span class="tag">SVB</span><span class="tag">帳面資本vs流動性</span></div></td>
+        <td>解析高資本適足率銀行仍會突然倒閉的結構性落差，揭示帳面資本與實際流動性之間的根本矛盾</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="at1債券揭密 高殖利率背後隱藏的風險 coco債 額外一級資本 強制轉換 瑞信事件 20231221">
+        <td class="col-date">2023-12</td>
+        <td class="col-author">—</td>
+        <td class="col-title">AT1債券揭密：高殖利率背後隱藏的風險</td>
+        <td class="col-keys"><div class="tags"><span class="tag">AT1債券</span><span class="tag">CoCo債</span><span class="tag">強制轉換觸發</span><span class="tag">瑞信歸零</span><span class="tag">清償順位</span></div></td>
+        <td>透過瑞信AT1債券歸零事件深入剖析高殖利率陷阱，詳解條件觸發機制與清償順位風險</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="處理銀行倒閉經驗對退場機制之省思 svb 銀行倒閉 退場機制 存款保險 fdic 202312">
+        <td class="col-date">2023-12</td>
+        <td class="col-author">—</td>
+        <td class="col-title">處理銀行倒閉經驗對退場機制之省思</td>
+        <td class="col-keys"><div class="tags"><span class="tag">SVB</span><span class="tag">銀行倒閉</span><span class="tag">退場機制</span><span class="tag">存款保險</span><span class="tag">FDIC</span><span class="tag">台灣監管</span></div></td>
+        <td>從2023年SVB等銀行倒閉事件反思台灣金融退場機制，提出存款保險上限與清算程序改革建議</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="citi investing in gold 黃金 配置比例 通膨對沖 去美元化 202506">
+        <td class="col-date">2025-06</td>
+        <td class="col-author">Citi</td>
+        <td class="col-title">Investing in Gold</td>
+        <td class="col-keys"><div class="tags"><span class="tag">黃金配置比例</span><span class="tag">通膨對沖</span><span class="tag">去美元化</span><span class="tag">Citi目標價</span><span class="tag">央行購金</span></div></td>
+        <td>Citi黃金投資深度報告，分析最佳黃金配置比例、通膨對沖效果限制與去美元化結構性需求驅動</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="jpm is it a golden era for gold 黃金 央行購金 6000目標 地緣政治 20260209">
+        <td class="col-date">2026-02</td>
+        <td class="col-author">JPM</td>
+        <td class="col-title">Is It a Golden Era for Gold?</td>
+        <td class="col-keys"><div class="tags"><span class="tag">黃金黃金時代</span><span class="tag">央行購金1082噸</span><span class="tag">$6000–$6300目標</span><span class="tag">地緣政治</span><span class="tag">去美元化</span></div></td>
+        <td>JPM評估黃金是否進入黃金時代，深入分析央行購金歷史新高、去美元化與目標價$6,000–$6,300驅動因素</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="stablebread 三份財務報表如何關聯 財報 損益表 資產負債表 現金流量表 關聯 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">StableBread</td>
+        <td class="col-title">三份財務報表如何關聯</td>
+        <td class="col-keys"><div class="tags"><span class="tag">財報三表關聯</span><span class="tag">淨利→保留盈餘</span><span class="tag">現金流連動</span></div></td>
+        <td>說明三大財報的內在邏輯關聯，用具體案例示範淨利→保留盈餘→現金流的連動關係</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="stablebread 如何有效分析公司債務 公司債務 d/e 利息覆蓋率 槓桿 信用分析 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">StableBread</td>
+        <td class="col-title">如何有效分析公司債務</td>
+        <td class="col-keys"><div class="tags"><span class="tag">D/E比率</span><span class="tag">利息覆蓋率</span><span class="tag">EBITDA/利息</span><span class="tag">槓桿分析</span></div></td>
+        <td>系統介紹企業債務健康度關鍵指標（D/E、EBITDA/利息等），並說明各指標在信用分析中的實際應用</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="stablebread 如何閱讀和分析損益表 損益表 收入 毛利率 eps 獲利品質 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">StableBread</td>
+        <td class="col-title">如何閱讀和分析損益表</td>
+        <td class="col-keys"><div class="tags"><span class="tag">損益表</span><span class="tag">毛利率趨勢</span><span class="tag">EPS</span><span class="tag">獲利品質</span><span class="tag">非經常性項目</span></div></td>
+        <td>逐項拆解損益表各科目，重點講解收入品質辨別、毛利率趨勢分析與非經常性項目的正確處理方式</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="stablebread 如何閱讀和分析資產負債表 流動比率 速動比率 有形淨值 資產結構 負債 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">StableBread</td>
+        <td class="col-title">如何閱讀和分析資產負債表</td>
+        <td class="col-keys"><div class="tags"><span class="tag">流動比率</span><span class="tag">速動比率</span><span class="tag">有形淨值</span><span class="tag">資產結構</span></div></td>
+        <td>教導如何從資產負債表判斷企業財務穩健性，重點指標包含流動比率、速動比率、負債比與有形淨值</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="stablebread 如何閱讀與分析現金流量表 fcf 自由現金流 資本支出 營業現金 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">StableBread</td>
+        <td class="col-title">如何閱讀與分析現金流量表</td>
+        <td class="col-keys"><div class="tags"><span class="tag">FCF自由現金流</span><span class="tag">資本支出</span><span class="tag">營業現金</span><span class="tag">三大現金活動</span></div></td>
+        <td>說明現金流量表三大部分（營業/投資/融資），強調FCF才是企業真實獲利的最佳衡量指標</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="吳志忠 不懂這些先別進場 投資基礎 技術分析 資金管理 風險控制 台股 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">吳志忠</td>
+        <td class="col-title">不懂這些先別進場</td>
+        <td class="col-keys"><div class="tags"><span class="tag">台股入門</span><span class="tag">風險控制</span><span class="tag">資金管理</span><span class="tag">常見誤區</span></div></td>
+        <td>台灣投資人必讀入門書，系統性介紹進場前必備基本概念，澄清新手常見誤區並建立正確投資框架</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="彼得林奇 成功投資 10倍股 成長股 基本面選股 麥哲倫基金 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">彼得林奇</td>
+        <td class="col-title">成功投資（One Up On Wall Street）</td>
+        <td class="col-keys"><div class="tags"><span class="tag">10倍股</span><span class="tag">成長股</span><span class="tag">生活選股法</span><span class="tag">麥哲倫基金</span><span class="tag">基本面</span></div></td>
+        <td>彼得林奇分享管理麥哲倫基金的選股哲學，強調從日常生活觀察尋找10倍股的實戰方法</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="tlac mrel 銀行家工具說明 tlac計算 mrel 監管工具差異 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">—</td>
+        <td class="col-title">TLAC/MREL 銀行家工具說明</td>
+        <td class="col-keys"><div class="tags"><span class="tag">TLAC計算</span><span class="tag">MREL</span><span class="tag">監管工具差異</span><span class="tag">銀行資本</span></div></td>
+        <td>實務工具說明文件，解釋TLAC與MREL的計算方式、監管要求差異及銀行應對資本充足策略</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="債券知識基礎 債券 殖利率 存續期間 信用評等 利率風險 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">—</td>
+        <td class="col-title">債券知識基礎</td>
+        <td class="col-keys"><div class="tags"><span class="tag">債券定價</span><span class="tag">存續期間</span><span class="tag">信用評等</span><span class="tag">殖利率</span><span class="tag">利率風險</span></div></td>
+        <td>債券投資基礎知識彙整，涵蓋債券定價機制、存續期間計算、信用風險分析與利率風險管理</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="貨幣金融學 貨幣政策 銀行體系 貨幣乘數 is-lm 中央銀行 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">—</td>
+        <td class="col-title">貨幣金融學</td>
+        <td class="col-keys"><div class="tags"><span class="tag">IS-LM</span><span class="tag">貨幣乘數</span><span class="tag">中央銀行</span><span class="tag">貨幣政策傳導</span></div></td>
+        <td>學術教材，系統介紹貨幣銀行學理論框架，涵蓋貨幣供需、銀行創造貨幣機制與貨幣政策傳導路徑</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="稅捐稽徵法講義 稅法 稅捐稽徵 申報 罰則 台灣稅務 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">—</td>
+        <td class="col-title">稅捐稽徵法講義</td>
+        <td class="col-keys"><div class="tags"><span class="tag">台灣稅法</span><span class="tag">申報程序</span><span class="tag">稽查權限</span><span class="tag">罰則</span></div></td>
+        <td>台灣稅捐稽徵法條文與解析講義，涵蓋申報程序、稅務稽查權限範圍與相關行政罰則說明</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="空手的勇氣 空手等待 現金部位 心理素質 時機 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">—</td>
+        <td class="col-title">空手的勇氣</td>
+        <td class="col-keys"><div class="tags"><span class="tag">空手等待</span><span class="tag">現金部位</span><span class="tag">投資心理</span><span class="tag">時機選擇</span></div></td>
+        <td>探討「持有現金不出手」的投資心理與策略邏輯，強調等待最佳時機的重要性與心理建設方法</td>
+      </tr>
+
+      <tr data-cat="財經書籍知識" data-text="柯蒂斯費思 海龜交易法則 趨勢追蹤 停損 部位管理 系統交易 海龜實驗 未知">
+        <td class="col-date">—</td>
+        <td class="col-author">柯蒂斯費思</td>
+        <td class="col-title">海龜交易法則</td>
+        <td class="col-keys"><div class="tags"><span class="tag">趨勢追蹤</span><span class="tag">海龜實驗</span><span class="tag">停損設定</span><span class="tag">部位管理</span><span class="tag">系統交易</span></div></td>
+        <td>記錄里奇·丹尼斯「海龜實驗」完整交易規則，涵蓋進場訊號、停損、部位大小與資金管理核心原則</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ════════════════════════════════════════════
+     投資展望
+════════════════════════════════════════════ -->
+<div class="section cat-投資展望" id="section-投資展望">
+  <div class="section-header">
+    <span class="dot"></span>
+    <span>投資展望</span>
+    <span class="count">8 份</span>
+    <span class="desc">— 看「一年左右」的投資方向</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th class="col-date">發布時間</th>
+      <th class="col-author">發表人</th>
+      <th class="col-title">標題</th>
+      <th class="col-keys">重要關鍵字</th>
+      <th class="col-summary">一段話摘要</th>
+    </tr></thead>
+    <tbody>
+
+      <tr data-cat="投資展望" data-text="james mimi 利用統計方法預測nvda股價及佈局方法 nvda 季節性統計 選擇權佈局 20240901">
+        <td class="col-date">2024-09</td>
+        <td class="col-author">James Mimi</td>
+        <td class="col-title">利用統計方法預測NVDA股價及佈局方法</td>
+        <td class="col-keys"><div class="tags"><span class="tag">NVDA</span><span class="tag">季節性統計</span><span class="tag">選擇權佈局</span><span class="tag">技術分析</span></div></td>
+        <td>利用歷史統計規律預測NVDA九月行情，結合選擇權工具提出具體進出場策略與風險管理</td>
+      </tr>
+
+      <tr data-cat="投資展望" data-text="james mimi 利用工具建立投資風險報酬比與新etf介紹 風險報酬比 kelly公式 etf篩選 20241006">
+        <td class="col-date">2024-10</td>
+        <td class="col-author">James Mimi</td>
+        <td class="col-title">利用工具建立投資風險報酬比與新ETF介紹</td>
+        <td class="col-keys"><div class="tags"><span class="tag">風險報酬比</span><span class="tag">Kelly公式</span><span class="tag">ETF篩選標準</span><span class="tag">量化工具</span></div></td>
+        <td>介紹如何量化個人投資的風險報酬比，並以具體工具示範評估新發行ETF的選擇標準與資產配置應用</td>
+      </tr>
+
+      <tr data-cat="投資展望" data-text="james mimi q3財報季如何利用預期股操作 財報季 預期差 eps盈餘驚喜 選股策略 20241014">
+        <td class="col-date">2024-10</td>
+        <td class="col-author">James Mimi</td>
+        <td class="col-title">Q3財報季即將展開，如何利用「預期」股</td>
+        <td class="col-keys"><div class="tags"><span class="tag">財報季</span><span class="tag">預期差</span><span class="tag">盈餘驚喜</span><span class="tag">預期管理</span><span class="tag">個股操作</span></div></td>
+        <td>財報季前後預期管理交易策略，說明如何利用「預期差」而非結果本身來做個股進出場決策</td>
+      </tr>
+
+      <tr data-cat="投資展望" data-text="gs 2026年投資展望 高盛 美股估值 利率路徑 新興市場 202601">
+        <td class="col-date">2026-01</td>
+        <td class="col-author">Goldman Sachs</td>
+        <td class="col-title">GS 2026年投資展望</td>
+        <td class="col-keys"><div class="tags"><span class="tag">高盛2026展望</span><span class="tag">美股估值</span><span class="tag">利率路徑</span><span class="tag">新興市場</span><span class="tag">跨資產</span></div></td>
+        <td>高盛年度投資展望，評估2026年主要資產類別機會，重點關注美股估值壓力、利率路徑與新興市場</td>
+      </tr>
+
+      <tr data-cat="投資展望" data-text="jpm 2026年投資展望 jpm 股票 債券 跨資產策略 202601">
+        <td class="col-date">2026-01</td>
+        <td class="col-author">JPM</td>
+        <td class="col-title">JPM 2026年投資展望</td>
+        <td class="col-keys"><div class="tags"><span class="tag">JPM 2026</span><span class="tag">股票債券跨資產</span><span class="tag">EM機會</span><span class="tag">尾部風險</span></div></td>
+        <td>JPM年度投資展望，涵蓋股票、固定收益、大宗商品跨資產配置建議，標注主要尾部風險</td>
+      </tr>
+
+      <tr data-cat="投資展望" data-text="jpm 長期資本市場假設 ltcma 2026 10–15年回報 私募市場 去美元化 202601">
+        <td class="col-date">2026-01</td>
+        <td class="col-author">JPM</td>
+        <td class="col-title">JPM 長期資本市場假設 LTCMA 2026</td>
+        <td class="col-keys"><div class="tags"><span class="tag">LTCMA第30屆</span><span class="tag">10–15年回報</span><span class="tag">私募股權10.2%</span><span class="tag">去美元化</span><span class="tag">EM 7.8%最高</span></div></td>
+        <td>JPM第30屆LTCMA，核心三力量：經濟民族主義+財政主義+AI。EM 7.8%最高，黃金上調至5.5%</td>
+      </tr>
+
+      <tr data-cat="投資展望" data-text="群益 台灣經濟展望 台灣gdp 出口 ai供應鏈 匯率 電子業 20260324">
+        <td class="col-date">2026-03</td>
+        <td class="col-author">群益</td>
+        <td class="col-title">台灣經濟展望</td>
+        <td class="col-keys"><div class="tags"><span class="tag">台灣GDP</span><span class="tag">AI供應鏈出口</span><span class="tag">新台幣升值</span><span class="tag">電子業</span><span class="tag">國內消費</span></div></td>
+        <td>2026年台灣總體經濟展望，分析AI供應鏈拉動出口成長、新台幣升值壓力對出口商影響與內需趨勢</td>
+      </tr>
+
+      <tr data-cat="投資展望" data-text="jpm mid year outlook 2026 全球碎片化 通膨 ai roi em 46%盈利成長 202605">
+        <td class="col-date">2026-05</td>
+        <td class="col-author">JPM</td>
+        <td class="col-title">JPM Mid-Year Outlook 2026</td>
+        <td class="col-keys"><div class="tags"><span class="tag">全球碎片化</span><span class="tag">核心PCE 3.3%</span><span class="tag">AI ROI考驗年</span><span class="tag">EM盈利+46%</span><span class="tag">P/E 11.8倍</span></div></td>
+        <td>JPM 2026年中三大主題：碎片化（伊朗衝突→油價翻倍）、通膨新常態、AI ROI考驗年，EM企業盈利+46%最具吸引力</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  長期研究資料庫索引｜最後更新 2026-06-05｜路徑：~/Desktop/投資工作區/長期研究/
+  <br>如需新增關鍵字或調整分類，請告知 Claude 更新此 HTML 檔案
+</footer>
+
+<script>
+  const rows = Array.from(document.querySelectorAll('tbody tr'));
+  const sections = {
+    '總體經濟': document.getElementById('section-總體經濟'),
+    '產業研究': document.getElementById('section-產業研究'),
+    '財經書籍知識': document.getElementById('section-財經書籍知識'),
+    '投資展望': document.getElementById('section-投資展望'),
+  };
+
+  let currentCat = 'all';
+  let currentSearch = '';
+
+  function updateVisible() {
+    let count = 0;
+    rows.forEach(r => {
+      const cat = r.dataset.cat;
+      const text = r.dataset.text || '';
+      const catOk = currentCat === 'all' || cat === currentCat;
+      const searchOk = !currentSearch || text.includes(currentSearch.toLowerCase());
+      const show = catOk && searchOk;
+      r.classList.toggle('hidden', !show);
+      if (show) count++;
+    });
+    document.getElementById('visCount').textContent = count;
+
+    // hide entire section if no visible rows
+    Object.entries(sections).forEach(([key, el]) => {
+      const hasVisible = Array.from(el.querySelectorAll('tbody tr')).some(r => !r.classList.contains('hidden'));
+      el.style.display = (currentCat === 'all' || currentCat === key) && hasVisible ? '' : 'none';
+    });
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCat = btn.dataset.cat;
+      updateVisible();
+    });
+  });
+
+  document.getElementById('searchInput').addEventListener('input', e => {
+    currentSearch = e.target.value.trim();
+    updateVisible();
+  });
+</script>
+</body>
+</html>
