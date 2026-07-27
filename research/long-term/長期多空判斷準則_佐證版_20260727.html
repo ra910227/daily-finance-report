@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>長期多空判斷準則｜佐證版 2026-07-27</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --accent1: #4f8ef7;
+    --accent2: #e8a838;
+    --accent3: #52c98e;
+    --accent4: #e05c7a;
+    --red: #e05c7a;
+    --yellow: #e8a838;
+    --green: #52c98e;
+    --text: #e2e4ef;
+    --muted: #7a7e99;
+    --tag-bg: #252836;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', 'PingFang TC', system-ui, sans-serif; font-size: 14px; line-height: 1.65; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 24px 80px; }
+  header { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+  header h1 { font-size: 24px; font-weight: 700; letter-spacing: .02em; margin-bottom: 8px; }
+  header .meta { color: var(--muted); font-size: 12.5px; line-height: 1.8; }
+  header .meta b { color: var(--text); }
+
+  h2 { font-size: 18px; margin: 40px 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--accent1); display: flex; align-items: center; gap: 8px; }
+  h2 .num { color: var(--accent1); font-weight: 800; }
+  h3 { font-size: 15px; margin: 22px 0 10px; color: var(--accent2); }
+  p { margin-bottom: 10px; color: var(--text); }
+  .muted { color: var(--muted); }
+  .lede { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 13px; }
+  thead th { background: var(--card); color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-weight: 600; white-space: nowrap; }
+  tbody td { padding: 9px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:hover { background: #16182233; }
+
+  .badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+  .badge-red { background: #3a1c26; color: var(--red); }
+  .badge-yellow { background: #3a2f14; color: var(--yellow); }
+  .badge-green { background: #123a28; color: var(--green); }
+  .badge-gray { background: var(--tag-bg); color: var(--muted); }
+
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin: 12px 0; }
+  .card.red { border-left: 3px solid var(--red); }
+  .card.yellow { border-left: 3px solid var(--yellow); }
+  .card.green { border-left: 3px solid var(--green); }
+  .card.blue { border-left: 3px solid var(--accent1); }
+
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+  .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 16px 0; }
+  @media (max-width: 720px) { .grid3, .grid2 { grid-template-columns: 1fr; } }
+  .stat-tile { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .stat-tile .label { color: var(--muted); font-size: 11.5px; margin-bottom: 6px; }
+  .stat-tile .value { font-size: 20px; font-weight: 700; }
+  .stat-tile .sub { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+
+  .quote { border-left: 3px solid var(--accent1); background: #14161f; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: var(--muted); border-radius: 0 6px 6px 0; }
+  .quote b { color: var(--text); }
+
+  .verdict-box { background: linear-gradient(135deg, #1a1d27, #1f2230); border: 1px solid var(--accent1); border-radius: 12px; padding: 20px 22px; margin: 18px 0; }
+  .verdict-box .verdict-title { font-size: 13px; color: var(--accent1); font-weight: 700; margin-bottom: 8px; letter-spacing: .04em; }
+
+  code { background: var(--tag-bg); padding: 1px 6px; border-radius: 4px; font-size: 12.5px; }
+  .src { font-size: 11px; color: var(--muted); font-style: italic; }
+  footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 11.5px; }
+  ol, ul { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>長期多空頭判斷準則｜佐證版</h1>
+  <div class="meta">
+    資料截取時間：<b>2026-07-27（Asia/Taipei）</b>｜佐證數據來源：使用者Google試算表「2.訊號表」訊號值(日)/訊號值(月)/訊號總表分頁(2026/7/24收盤數據)、ra910227.github.io長期研究兩篇文章、貝瑞空頭案例、杜金龍台股波浪理論案例<br>
+    用途：每一條長期判斷準則都附上<b>目前實際數值與觸發狀態</b>，取代單純的抽象規則列表。本文件是<b>時間快照</b>，之後每次重大高低點應該另建新版本，不覆寫本檔。內部持續累積版本仍在 <code>長期多空判斷準則_20260727.md</code>。
+  </div>
+</header>
+
+<div class="verdict-box">
+  <div class="verdict-title">⚡ 本次快照的綜合結論</div>
+  <p style="margin-bottom:0">用五大高點警示訊號逐項核對，<b>③爆量下跌</b>與<b>⑤跌破上升通道/季線</b>已明確觸發，<b>②年線正乖離</b>接近但未達10%門檻；牛市逃生3訊號中<b>①噴發急漲</b>已在主升段後段出現過、<b>③高位爆量暴跌</b>傾向已觸發。搭配估值面「CAPE(40.8)已超過2021年峰值(38.3)」、台股「PB比(4.18)遠超警戒線(1.9)」、「PMI展望(63.9)觸及>60警戒」、「台指週K RSI(83.89)嚴重超買」等多項獨立訊號同時亮起——這不是單一指標誤判，是資金/心理/價量三面向同步轉弱的組合，判定為<b>「顯著減碼觀察期」</b>，且技術面的「疑似第四波」與基本面警訊互相印證，一致性偏高。</p>
+</div>
+
+<h2><span class="num">一</span>核心方法論：資金・心理・價量三面向</h2>
+<p class="lede">科斯托蘭尼雞蛋理論核心：任何一輪多空循環都是「資金鬆緊」與「心理狀態」交互作用，價格與成交量是結果、不是原因。以下每個面向附上本次快照的實際佐證。</p>
+
+<div class="grid3">
+  <div class="stat-tile">
+    <div class="label">資金面代表指標</div>
+    <div class="value" style="color:var(--accent1)">FSI −2.56</div>
+    <div class="sub">穩健買入：&lt;0且持續下滑✓ 目前符合；但備註警告「由底反轉近0要小心」，現正處於這個區間，需留意</div>
+  </div>
+  <div class="stat-tile">
+    <div class="label">心理面代表指標</div>
+    <div class="value" style="color:var(--yellow)">F&amp;G 39（恐懼）</div>
+    <div class="sub">VIX 18.49（&lt;20安穩區）、Put/Call 0.881（接近0.90偏空門檻）——恐懼但未達買入區</div>
+  </div>
+  <div class="stat-tile">
+    <div class="label">價量面代表指標</div>
+    <div class="value" style="color:var(--red)">週K RSI 83.89</div>
+    <div class="sub">嚴重超買（&gt;70警戒），MMTH 55.34%（溫和降溫，非崩塌式背離）</div>
+  </div>
+</div>
+
+<table>
+<thead><tr><th>面向</th><th>對應指標</th><th>操作口訣</th><th>本次佐證</th></tr></thead>
+<tbody>
+<tr><td><b>資金</b></td><td>FSI、美股/M2、FOMC利率、10Y-2Y利差、FINRA/台股融資餘額</td><td>FSI由底反轉近0要小心；美股/M2&gt;2.5且上升=擁擠交易</td><td>美股/M2 <b>3.16</b>（2026/07，較5月2.88持續上升）→已進入擁擠交易區；台股融資餘額7月<b>13,043億</b>，較5月12,209億持續攀升，槓桿堆積中</td></tr>
+<tr><td><b>心理</b></td><td>F&amp;G、VIX、AAII散戶多空、Put/Call、台灣景氣訊號燈</td><td>VIX&lt;20且維持多年=安穩牛市；Put/Call&gt;0.90才算真偏空</td><td>AAII散戶看多-看空 <b>−12.76%</b>（7/24，散戶淨看空），VIX 18.49尚未觸及20警戒線，但已從月初16附近回升</td></tr>
+<tr><td><b>價量</b></td><td>MMTH廣度、RSI/KD、成交量、年線乖離、52週高低</td><td>MMTH&gt;90且權值股拉抬/中小型股被賣=頭部特徵</td><td>MMTH 55.34%（7/20的59.03%溫和降至7/24），未達&gt;70/&gt;90的極端警戒，<b>但台指週K RSI已達83.89</b>，技術面超買程度遠比廣度指標更嚴重</td></tr>
+</tbody>
+</table>
+
+<h2><span class="num">二</span>高點警示訊號清單（5項）——逐項觸發狀態</h2>
+
+<table>
+<thead><tr><th style="width:36px">#</th><th>訊號定義</th><th>觸發狀態</th><th>佐證數據</th></tr></thead>
+<tbody>
+<tr><td>①</td><td>1-3個月內急漲，達前月均上漲點數的兩倍</td><td><span class="badge badge-gray">待核對</span></td><td>需要「前月均漲點數」的精確歷史序列才能計算比值，本次快照資料不足，標示待補</td></tr>
+<tr><td>②</td><td>與年線正乖離超過10%，與10年線正乖離超過30%</td><td><span class="badge badge-yellow">接近未觸發</span></td><td>S&amp;P500年線乖離 <b>+7.35%</b>（7/24），距10%門檻剩2.65個百分點；台股10年線乖離未查得精確值</td></tr>
+<tr><td>③</td><td>爆出大量（下跌段成交量放大）</td><td><span class="badge badge-red">已觸發</span></td><td>7/24加權大跌1,196點(-2.67%)失守季線，外資單日轉賣超600億元，屬於下跌段的顯著放量</td></tr>
+<tr><td>④</td><td>量價背離，KD、RSI指標背離</td><td><span class="badge badge-yellow">疑似觸發</span></td><td>台指週K RSI高達83.89（嚴重超買），配合近期價格拉回，符合「高檔鈍化後轉弱」的背離雛形，但需要更多週數確認</td></tr>
+<tr><td>⑤</td><td>大盤跌破上升通道或50日均線</td><td><span class="badge badge-red">已觸發</span></td><td>7/7跌破月線(45,479收)，7/24再跌破季線/60日均線(43,655收)，連續失守兩道均線</td></tr>
+</tbody>
+</table>
+<p class="muted" style="font-size:12.5px">5項中2項明確觸發(③⑤)、1項疑似觸發(④)、1項接近門檻(②)、1項待核——已達到使用者原始準則「多項同時出現時進入減碼觀察」的標準。</p>
+
+<h2><span class="num">三</span>牛市逃生訊號（3項）——逐項觸發狀態</h2>
+
+<div class="card yellow">
+<b>①股市突然加速上升</b> <span class="badge badge-yellow" style="margin-left:6px">近期已出現過</span><br>
+<span class="muted">定義：幾個月內完成前一年的漲幅，進入噴發急漲高潮階段，後知後覺者被騙近抵押貸款買股票（虛假繁榮）。</span><br>
+<b>佐證</b>：台股從2025/4/9低點17,306到2026/6/22高點47,741.51，14個月內大漲176%——第3波後段的漲勢本身就具備「噴發急漲」特徵，且台股融資餘額7月創新高13,043億，顯示追價槓桿確實在攀升。<br>
+<b>操作方式</b>：在興奮階段賣出70-100%持股，寧可賣早也不要沒賣。
+</div>
+
+<div class="card green">
+<b>②成分股跌破200日均線比例增加</b> <span class="badge badge-green" style="margin-left:6px">輕微，未達嚴重</span><br>
+<span class="muted">定義：大戶用權值股拉抬指數，同時偷賣中小型股，指數表面強但底層轉弱。</span><br>
+<b>佐證</b>：MMTH從7/20的59.03%降至7/24的55.34%，降幅約3.7個百分點，屬於溫和降溫，<b>沒有出現2021年那種劇烈背離</b>（當時MMTH兩週內從高位驟降近乎腰斬）。<br>
+<b>操作方式</b>：看到明顯轉弱訊號即減碼，目前尚未達到「明顯轉弱」的門檻，但需持續追蹤。
+</div>
+
+<div class="card red">
+<b>③大盤高位爆量暴跌</b> <span class="badge badge-red" style="margin-left:6px">傾向已觸發</span><br>
+<span class="muted">定義：莊家出貨才有籌碼讓大盤暴跌，長黑線配大量在牛市末端特別關鍵。</span><br>
+<b>佐證</b>：7/24加權指數單日重挫1,196點(-2.67%)，外資轉賣超600億元，屬於高位急跌配合明確賣壓（外資大額調節）的組合。<br>
+<b>操作方式</b>：一定要落跑，因為即使之後又漲了，我們仍然不會賣，只要沒有賣我們就沒有贏（獲利落袋）。
+</div>
+
+<h2><span class="num">四</span>估值與景氣面：獨立佐證交叉比對</h2>
+<p class="lede">以下這些指標跟波浪理論、高低點警示訊號各自獨立運作，但這次快照它們同步亮燈，增加了訊號的可信度。</p>
+
+<table>
+<thead><tr><th>指標</th><th>現值</th><th>警戒線</th><th>狀態</th></tr></thead>
+<tbody>
+<tr><td>S&amp;P500席勒本益比CAPE</td><td><b>40.8</b></td><td>2021年峰值38.3</td><td><span class="badge badge-red">已超過2021峰值</span></td></tr>
+<tr><td>台指股價淨值比PB</td><td><b>4.18</b></td><td>&gt;1.9注意</td><td><span class="badge badge-red">遠超警戒線</span></td></tr>
+<tr><td>台灣PMI未來六個月展望</td><td><b>63.9</b></td><td>&gt;60高點反轉注意</td><td><span class="badge badge-red">已觸及</span></td></tr>
+<tr><td>台灣景氣訊號燈</td><td><b>39分</b></td><td>&gt;29注意，陡升更注意</td><td><span class="badge badge-red">紅燈區間，遠超注意線</span></td></tr>
+<tr><td>台指週K RSI</td><td><b>83.89</b></td><td>&gt;70後注意，易高檔鈍化</td><td><span class="badge badge-red">嚴重超買</span></td></tr>
+<tr><td>台股融資維持率</td><td><b>155.71%</b></td><td>&lt;140小買，&lt;130大買（洗盤訊號）</td><td><span class="badge badge-green">遠未進入買入區，代表還沒洗過盤</span></td></tr>
+<tr><td>調整後巴菲特指標</td><td><b>183.4</b></td><td>&gt;180極度高估</td><td><span class="badge badge-red">剛越過門檻</span></td></tr>
+<tr><td>ECY超額報酬</td><td><b>1.26%</b></td><td>歷史中位數3.31%</td><td><span class="badge badge-yellow">遠低於中位數，溢價薄</span></td></tr>
+</tbody>
+</table>
+<p class="src">資料來源：使用者Google試算表「2.訊號表」訊號值(日)/訊號值(月)分頁，2026/7/24收盤數據</p>
+
+<h2><span class="num">五</span>熊市中的選股準則（5項，供未來若確認轉空使用）</h2>
+<ol>
+<li>反彈最強勁、且比指數強的股票（一般站上200MA）</li>
+<li>接近52週新高25%以內、甚至創新高——熊市中跌幅最小的個股，往往是下一輪牛市漲幅最大的</li>
+<li>市場看空氣氛下，越來越多股票技術面轉強、輪流突破</li>
+<li>買在「正確價格」而非最低價：買入後1-2週內應該要上漲，否則迅速停損</li>
+<li>若試單勝率低或虧損，但大盤指數卻大漲——代表策略失效，應退場觀望</li>
+</ol>
+<div class="quote">52週高點兩種抗跌型態：①強度足以抵抗大盤下跌，全程撐在52週高點附近 ②也曾大跌，但整理時間達52週以上，且股價已回到52週高點附近。兩者都用「52週高低點」作為篩選基準。</div>
+
+<h2><span class="num">六</span>熊市落底三訊號 ×  本次是否適用</h2>
+<div class="card blue">
+<b>底部確認＝三項條件同時滿足</b>：①爆量投降(量比≥1.3倍) ②年線負乖離極大(&lt;-25%) ③收復年線且回測守住<br><br>
+<b>目前狀態</b>：S&amp;P500年線乖離仍是<b>正值+7.35%</b>，遠未進入負乖離區間；台股才剛失守季線3天。<b>三訊號目前完全不適用</b>——現在的位置連「顯著修正期」都還沒確認進入，更遑論「底部確認」，此表僅供未來真正出現深度修正時比對使用，現階段不應套用底部訊號來判斷加碼。
+</div>
+
+<h2><span class="num">七</span>標普500歷史15輪熊市總表</h2>
+<table>
+<thead><tr><th>年份</th><th>跌幅</th><th>持續</th><th>恢復至新高</th><th>驅動因素</th></tr></thead>
+<tbody>
+<tr><td>1929-32</td><td>-86.2%</td><td>32.8月</td><td>~25.2年</td><td>銀行體系崩潰、失業率25%</td></tr>
+<tr><td>1937-38</td><td>-54.5%</td><td>12.9月</td><td>~8.8年</td><td>貨幣政策過早緊縮</td></tr>
+<tr><td>1946-49</td><td>-29.6%</td><td>36.5月</td><td>~4.1年</td><td>戰後復員、通膨飆升</td></tr>
+<tr><td>1956-57</td><td>-21.6%</td><td>14.7月</td><td>11月</td><td>週期性估值重置</td></tr>
+<tr><td>1961-62</td><td>-28.0%</td><td>6.5月</td><td>14月</td><td>—</td></tr>
+<tr><td>1966</td><td>-22.2%</td><td>8.0月</td><td>7月</td><td>大通膨首波衝擊</td></tr>
+<tr><td>1968-70</td><td>-36.1%</td><td>17.8月</td><td>21月</td><td>—</td></tr>
+<tr><td>1973-74</td><td>-48.2%</td><td>20.7月</td><td>~5.8年</td><td>石油禁運、停滯性通膨</td></tr>
+<tr><td>1980-82</td><td>-27.1%</td><td>20.4月</td><td>3月</td><td>Volcker抗通膨(利率達20%)</td></tr>
+<tr><td>1987</td><td>-33.5%</td><td>3.3月</td><td>1.7年</td><td>黑色星期一</td></tr>
+<tr><td>1990</td><td>-19.9%</td><td>2.9月</td><td>4月</td><td>波灣戰爭、儲貸危機</td></tr>
+<tr><td>2000-02</td><td>-49.1%</td><td>30.5月</td><td>~4.7年</td><td>網路泡沫破裂</td></tr>
+<tr><td>2007-09</td><td>-56.8%</td><td>17.0月</td><td>~4.1年</td><td>全球金融危機</td></tr>
+<tr><td>2020</td><td>-33.9%</td><td>1.1月</td><td>5月</td><td>新冠崩盤(峰至谷僅33天)</td></tr>
+<tr><td>2022</td><td>-25.4%</td><td>9.3月</td><td>~24.5月</td><td>Volcker以來最快升息循環</td></tr>
+</tbody>
+</table>
+<p class="muted">平均跌幅-36.7%｜中位數-33.5%｜峰至谷平均15.6個月｜11/15輪在18個月內見底｜聯準會政策轉向比估值更重要——四次最快恢復都涉及政策轉向</p>
+
+<h2><span class="num">八</span>中期(3-5年)轉折案例庫</h2>
+
+<h3>案例①　2021年頭部——廣度背離教科書範例</h3>
+<table>
+<thead><tr><th>事件</th><th>日期</th><th>數值</th></tr></thead>
+<tbody>
+<tr><td>MMTH廣度見頂</td><td><b>2021/4</b></td><td><b>96%</b></td></tr>
+<tr><td>Nasdaq見高點</td><td>2021/11/19</td><td>16,057.44</td></tr>
+<tr><td>S&amp;P500見高點</td><td>2022/1/3</td><td>4,796.56</td></tr>
+</tbody>
+</table>
+<p>廣度指標比Nasdaq早見頂<b>7個月</b>，比S&amp;P500早<b>9個月</b>——當時指數靠少數權值股撐著創新高，底層廣度早已鬆動。<b>與本次快照對照</b>：目前MMTH是溫和降溫(59.03%→55.34%)，還沒達到2021年那種劇烈背離規模，這是本次判斷「尚未到頂部確認」而非「已經崩盤」的關鍵依據之一。</p>
+
+<h3>案例②　2022年修正——估值與廣度同步探底</h3>
+<table>
+<thead><tr><th>指標</th><th>高點</th><th>低點</th><th>修正幅度</th></tr></thead>
+<tbody>
+<tr><td>S&amp;P500</td><td>4,796.56</td><td>3,491.58</td><td>-25.4%</td></tr>
+<tr><td>CAPE</td><td>38.3</td><td>27.1</td><td>約-29.2%</td></tr>
+<tr><td>MMTH廣度</td><td>90%+</td><td>10.6%</td><td>破20深度超跌</td></tr>
+</tbody>
+</table>
+<p><b>與本次快照對照</b>：本次CAPE(40.8)已經超過2021年觸發那輪修正的峰值(38.3)，如果比照2022年的修正模式(CAPE跌約29%)，理論上有可能修正到CAPE約29左右——這只是歷史類比，不是精確預測，但可作為留意估值面「還有多少空間」的參考尺標。</p>
+
+<h2><span class="num">九</span>波浪理論(Elliott Wave)交叉驗證</h2>
+<p><b>基本結構</b>：多頭5波(1-2-3-4-5)+空頭3波(A-B-C)，2、4浪不重疊，第3浪通常最長不最短，5浪末端常見頂部背離（價格創新高但動能指標未創新高）。</p>
+<div class="quote"><b>使用限制</b>：波浪計數具高度主觀性，不同分析師對同一段走勢常給出不同計數，不應作為單一判斷依據。2026年上半年多份S&amp;P500即時分析對「是否處於第五波末端」看法不一，僅作為量價背離訊號的輔助佐證，不單獨作為進出場依據。</div>
+
+<h2><span class="num">十</span>台股波浪實戰框架（杜金龍方法論整合）</h2>
+
+<h3>10.1 兩項新增台股專屬指標</h3>
+<table>
+<thead><tr><th>指標</th><th>警戒閾值</th><th>本次快照現況</th></tr></thead>
+<tbody>
+<tr><td>頭部量(成交量/M1B比重)</td><td>單日成交量突破2.5兆元為泡沫臨界點</td><td>站上4萬點時最大單日量約1.8兆，占M1B約6%，<b>這次真正頭部(6/22-23)這個指標從未觸發過</b>，屬於尾端警示而非可靠頂部時機指標</td></tr>
+<tr><td>融資餘額報酬率&gt;8%</td><td>借錢買股的人普遍賺翻＝過熱訊號</td><td>精確公式未獨立驗證，改用「融資餘額創新高」代理：6/26衝上5,909億元創歷史新高，發生在真正頭部後3天內——這次有抓到</td></tr>
+</tbody>
+</table>
+
+<h3>10.2 台股波浪實戰計數（已驗證真實高低點）</h3>
+<table>
+<thead><tr><th>波段</th><th>起訖</th><th>點位</th><th>幅度</th></tr></thead>
+<tbody>
+<tr><td>第1波(初升)</td><td>2022/10→2024/7/11</td><td>12,629→24,416</td><td>+11,787(+93.3%)</td></tr>
+<tr><td>第2波(修正)</td><td>2024/7/11→2025/4/9</td><td>24,416→17,306</td><td>-7,110，回撤第1波<b>60.3%</b>(近黃金分割0.618)</td></tr>
+<tr><td>第3波(主升)</td><td>2025/4/9→2026/6/22</td><td>17,306→47,741.51</td><td>+30,444(+176%)</td></tr>
+</tbody>
+</table>
+<div class="quote"><b>滿足點精算驗證</b>：17,306+11,787×2.618=48,167，與6/23盤中實際高點48,218.87僅差51點(誤差0.1%)。教訓：「初升段×N」滿足點算法，2倍只是保守早期警戒線，<b>2.618倍才是應優先盯的主要滿足點</b>。</div>
+
+<h3>10.3 第四波修正目標區（回撤第3波30,436點）</h3>
+<table>
+<thead><tr><th>回撤比例</th><th>大盤點位</th><th>台積電(高點2,535)</th><th>0050(高點112.3)</th></tr></thead>
+<tbody>
+<tr><td>7%淺回檔</td><td>44,400</td><td>2,357</td><td>104.4</td></tr>
+<tr><td>11%淺回檔</td><td>42,490</td><td>2,256</td><td>99.9</td></tr>
+<tr><td>0.236</td><td>~40,600-40,900</td><td>~2,154</td><td>~95.4</td></tr>
+<tr><td><b>0.382(核心目標)</b></td><td><b>~36,100-36,400</b></td><td><b>~1,918</b></td><td><b>~84.9</b></td></tr>
+<tr><td>0.5</td><td>~32,500-32,800</td><td>~1,727</td><td>~76.5</td></tr>
+<tr><td>0.618(尾端風險)</td><td>~28,900-29,100</td><td>~1,536</td><td>~68.1</td></tr>
+</tbody>
+</table>
+<p><b>本次快照(7/24收盤)位置</b>：加權43,654.84(-8.58%)、台積電2,350(-7.30%)、0050約101.70(-9.44%)——三者回檔幅度相近，屬於同步健康拉回，<b>尚未跌破任何一項的0.236第一支撐</b>，也尚未進入0.382核心目標區。若後續台積電或0050回檔幅度明顯超前或落後加權指數，代表籌碼面出現背離，須提高警覺。</p>
+<p class="muted">0050於2025/4/24進行過1拆4分割，個股/ETF在2025年4月低點的精確點位因分割與資料限制無法可靠取得，故採「加權指數回撤百分比直接套用在個股高點」的簡化法。</p>
+
+<h3>10.4「跌破季線兩三個月未收復前高＝第4波確認」規則實測</h3>
+<p>台股已於<b>2026/7/24跌破季線</b>(收43,654.84，跌1,196點，外資單日賣超600億)，「跌破」條件已觸發；「站不回前高2-3個月」的時間條件截至本文撰寫(7/27)才過3天，<b>尚未到確認門檻，判定為「疑似第四波開局中，待確認」</b>。</p>
+
+<h3>10.5 重要方法論教訓：同一分析師兩次「提早喊頂」</h3>
+<p>杜金龍在2026/5/16與2026/6/10(用46,552為基準喊「疑似第四波、目標36,000」)先後兩次判斷頭部已現，但實際頭部要到6/22-23才出現，前後被市場多走超過1,000點才真正見頂。<b>教訓</b>：波浪理論的「疑似頂部」訊號假警報率偏高，必須等結構確認才能真正採信。</p>
+
+<footer>
+本文件為時間快照(2026-07-27)，數據會隨時間失效。持續累積版請見同資料夾 <code>長期多空判斷準則_20260727.md</code>；每週五16:00另有自動訊號記錄機制，見 <code>研究報告/市場展望/市場訊號追蹤紀錄.csv</code>。
+</footer>
+
+</div>
+</body>
+</html>
