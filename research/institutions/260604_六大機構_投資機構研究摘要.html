@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>投資機構研究摘要 — 2026年06月04日</title>
+  <style>
+    :root {
+      --bg: #f7f6f3;
+      --card: #ffffff;
+      --border: #e8e4dc;
+      --accent: #1a1a2e;
+      --text: #2d2d2d;
+      --muted: #6b6b6b;
+      --tag-bg: #eef2ff;
+      --tag-color: #3730a3;
+      --highlight: #fef3c7;
+      --highlight-border: #f59e0b;
+
+      --jpm: #003087;
+      --apollo: #c41e3a;
+      --allianz: #003781;
+      --ubs: #e30613;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, "Helvetica Neue", Arial, "PingFang TC", "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--accent);
+      color: #fff;
+      padding: 36px 48px 28px;
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+    }
+    header h1 { font-size: 26px; font-weight: 700; letter-spacing: .02em; }
+    header .date { font-size: 13px; opacity: .65; margin-left: auto; white-space: nowrap; }
+
+    /* ── Layout ── */
+    .container { max-width: 960px; margin: 0 auto; padding: 36px 24px 80px; }
+
+    /* ── Summary box ── */
+    .summary-box {
+      background: var(--highlight);
+      border-left: 4px solid var(--highlight-border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      font-size: 14.5px;
+      line-height: 1.8;
+    }
+    .summary-box h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+
+    /* ── Institution section ── */
+    .institution { margin-bottom: 48px; }
+    .inst-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+    .inst-badge {
+      width: 4px;
+      height: 28px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .jpm   .inst-badge { background: var(--jpm); }
+    .apollo .inst-badge { background: var(--apollo); }
+    .allianz .inst-badge { background: var(--allianz); }
+    .ubs   .inst-badge { background: var(--ubs); }
+
+    .inst-header h2 { font-size: 20px; font-weight: 700; }
+
+    /* ── Article card ── */
+    .article {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      transition: box-shadow .15s;
+    }
+    .article:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+
+    .article-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 4px;
+      line-height: 1.45;
+    }
+    .article-title:hover { text-decoration: underline; }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 12.5px;
+    }
+    .orig-title { color: var(--muted); font-style: italic; flex: 1; min-width: 200px; }
+    .pub-date {
+      background: #f0f0f0;
+      border-radius: 4px;
+      padding: 2px 8px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-color);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 20px;
+    }
+
+    .article-summary {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 14px;
+      line-height: 1.75;
+    }
+
+    .article-points h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .article-points ul { list-style: none; }
+    .article-points li {
+      font-size: 13.5px;
+      padding: 4px 0 4px 18px;
+      position: relative;
+      color: #333;
+      line-height: 1.65;
+    }
+    .article-points li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+      font-size: 11px;
+      top: 6px;
+    }
+
+    /* ── Theme map table ── */
+    .theme-section { margin-top: 56px; }
+    .theme-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      background: var(--card);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    thead th {
+      background: var(--accent);
+      color: #fff;
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    tbody tr:nth-child(even) { background: #fafafa; }
+    tbody td {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+    tbody td:first-child { font-weight: 600; white-space: nowrap; color: var(--accent); width: 130px; }
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 24px 20px 18px; flex-direction: column; align-items: flex-start; }
+      .container { padding: 24px 16px 60px; }
+      .article { padding: 16px 18px; }
+      tbody td:first-child { white-space: normal; width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>投資機構研究摘要</h1>
+  </div>
+  <div class="date">2026年06月04日</div>
+</header>
+
+<div class="container">
+
+  <!-- 本期重點總覽 -->
+  <div class="summary-box">
+    <h2>本期重點總覽</h2>
+    四家機構本期觀點高度收斂於同一主軸：<strong>中東停火／去升溫是當前市場最大催化劑</strong>，UBS 與 JPM 均認為緊張緩解後資金將從防禦轉向風險資產，但均強調轉換過程存在非線性風險。利率方面，UBS 明確看多優質債券，認為殖利率高點已近、應提前布局；Apollo 則指出新任 Fed 主席 Warsh 將精簡 FOMC 溝通，市場降息預期的重定價可能延後。AI 創就業（Apollo）與大宗商品結構性支撐（UBS）是兩個值得關注的次要主題。
+  </div>
+
+  <!-- JPMorgan -->
+  <div class="institution jpm">
+    <div class="inst-header">
+      <div class="inst-badge"></div>
+      <h2>JPMorgan</h2>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.jpmorgan.com/insights/markets-and-economy/top-market-takeaways/tmt-if-the-shock-doesnt-stick-mapping-out-de-escalation" target="_blank">
+        若衝擊不持續：去升溫情境的市場地圖
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">If the shock doesn't stick: Mapping out de-escalation</span>
+        <span class="pub-date">2026-05-29</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#地緣政治</span><span class="tag">#資產輪動</span><span class="tag">#石油</span><span class="tag">#美股</span>
+      </div>
+      <p class="article-summary">市場目前仍定價於伊朗局勢「持續風險」情境，一旦外交進展出現，投資人持倉將面臨顯著調整壓力。低持倉、被低估的板塊與地區將成為輪動受益方，速度可能超過投資人預期。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>去升溫若發生，資金從防禦性大型科技股輪出至週期股（金融、非必需消費、REITs）及歐洲股市</li>
+          <li>AI 相關股年初至今漲幅達 40%，S&amp;P 500 其餘成分僅漲 4%，估值分歧已達臨界</li>
+          <li>航運成本先行指標開始向下修正，地緣風險溢酬存在超額定價跡象</li>
+          <li>能源敏感型產業（航空、零售）在油價正常化後具補漲空間</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.jpmorgan.com/insights/markets-and-economy/top-market-takeaways/tmt-the-us-china-relationship-a-new-equilibrium" target="_blank">
+        美中關係：走向新均衡
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">The U.S.-China relationship: A new equilibrium</span>
+        <span class="pub-date">2026-05-15</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#美中關係</span><span class="tag">#新興市場</span><span class="tag">#地緣政治</span>
+      </div>
+      <p class="article-summary">JPM 認為美中關係正進入「管理性穩定」階段，不確定性降低本身即是正面催化劑，有助於改善新興市場投資人情緒，並在中國及亞洲資產創造新機會。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>雙邊貿易額仍達 4,147 億美元，雙方均無意願全面升級</li>
+          <li>美國掌握金融體系與半導體出口管制；中國控制 90% 稀土分離，互有籌碼</li>
+          <li>「降低不確定性」對市場的意義大於「全面和解」，穩定化進展即可改善情緒</li>
+          <li>新興市場與亞洲資產為主要受益方向</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.jpmorgan.com/insights/markets-and-economy/economy/kevin-warsh-is-the-new-chair-of-the-federal-reserve" target="_blank">
+        Kevin Warsh 成為新任 Fed 主席
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">Kevin Warsh is the new chair of the Federal Reserve</span>
+        <span class="pub-date">2026-05-14</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#Fed政策</span><span class="tag">#利率</span><span class="tag">#通膨</span>
+      </div>
+      <p class="article-summary">Kevin Warsh 以 54–45 歷史性最窄票數確認，5 月 15 日正式接棒 Powell。Warsh 鷹派立場鮮明，預計更換通膨衡量指標並削減前瞻指引，市場目前定價 2026 年全年不降息。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>Warsh 稱後疫情通膨為「40–50 年來最嚴重的政策失誤」，政策立場整體偏緊</li>
+          <li>減少記者會與點陣圖，Fed 溝通將更保守，增加市場預期不確定性</li>
+          <li>4 月通膨 3.8%，高於目標，給鷹派立場提供支撐</li>
+          <li>策略師建議配置實物資產、黃金及新興市場以對抗持續性通膨</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.jpmorgan.com/insights/markets-and-economy/outlook/mid-year-outlook-key-takeaways" target="_blank">
+        2026 年中展望：石油衝擊、通膨與 AI 建設熱潮
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">Oil shocks, inflation and the AI buildout: Investing's biggest risks and opportunities midway through 2026</span>
+        <span class="pub-date">2026-05-11</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#中年展望</span><span class="tag">#通膨</span><span class="tag">#AI</span><span class="tag">#資產配置</span>
+      </div>
+      <p class="article-summary">JPM 財富管理三大中年主題：全球碎片化、持續性通膨、AI 超週期。霍爾木茲海峽佔全球石油供應 15%，台灣生產 90% 先進半導體，供應鏈脆弱性已成結構性問題，通膨維持 3% 以上。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>全球碎片化使拉丁美洲、波灣、東亞等資源地區受益；歐洲面臨能源成本壓力</li>
+          <li>傳統 60/40 組合已不足以對抗通膨，需擴展至實物資產與新興市場</li>
+          <li>AI IPO 浪潮（SpaceX、Anthropic、OpenAI）若大幅上漲，需警惕市場過熱風險</li>
+          <li>建議在波動中逢低布局長期倉位，並持有黃金作購買力保護</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Apollo -->
+  <div class="institution apollo">
+    <div class="inst-header">
+      <div class="inst-badge"></div>
+      <h2>Apollo</h2>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.apollo.com/wealth/the-daily-spark/the-number-of-words-in-the-fomc-statement-likely-going-down" target="_blank">
+        FOMC 聲明字數可能縮減
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">The Number of Words in the FOMC Statement Likely Going Down</span>
+        <span class="pub-date">2026-06-03</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#Fed政策</span><span class="tag">#市場溝通</span><span class="tag">#利率</span>
+      </div>
+      <p class="article-summary">Apollo 首席經濟學家 Torsten Slok 指出，地緣政治風險緩和加上 Fed 主席 Warsh 偏好精簡溝通，FOMC 聲明字數可能顯著縮減。歷史數據顯示，聲明長度在市場波動期間增加，暗示前方路徑較過去更為清晰。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>Warsh 風格趨於保守，前瞻指引減少將使市場對利率路徑的解讀更加困難</li>
+          <li>聲明精簡化可能增加債市波動，投資人需更依賴數據自行判斷</li>
+          <li>若停火持續，地緣不確定性降低，Fed 可維持更長時間觀望</li>
+          <li>對固定收益配置意涵：短期殖利率曲線波動率可能上升</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.apollo.com/wealth/the-daily-spark/ai-boosting-business-formation" target="_blank">
+        AI 促進商業新創激增
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">AI Boosting Business Formation</span>
+        <span class="pub-date">2026-06-02</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#AI</span><span class="tag">#就業</span><span class="tag">#商業生態</span>
+      </div>
+      <p class="article-summary">AI 與大型語言模型大幅壓低新創成本與複雜度，推動美國商業登記數量激增。Apollo 認為 AI 對就業市場帶來的是雙向效應——替代部分工作的同時，也在創造新職缺與商業機會。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>新創數量激增代表經濟中的「創造性破壞」加速，長期利好生產力</li>
+          <li>AI 相關失業目前仍無統計證據，ADP 就業數據顯示就業市場穩健</li>
+          <li>AI 實施專家聘用激增，推升科技業薪資，形成服務業通膨壓力</li>
+          <li>若 AI 創就業效應持續，Fed 降息壓力將更小，對利率敏感資產不利</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.apollo.com/wealth/the-daily-spark/ai-will-create-more-jobs-not-fewer" target="_blank">
+        AI 將創造更多工作，而非減少
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">AI Will Create More Jobs, Not Fewer</span>
+        <span class="pub-date">2026-06-01</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#AI</span><span class="tag">#就業</span><span class="tag">#生產力</span>
+      </div>
+      <p class="article-summary">援引 Jevons 悖論：醫學影像成本下降 70%，但放射師就業與薪資反而上升。Apollo 預測 AI 在金融、法律、諮詢服務業將帶來就業成長，而非失業潮，與市場主流悲觀情緒形成對比。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>技術成本下降往往刺激需求上升，最終創造更多而非更少的工作</li>
+          <li>金融、法律、諮詢業為 AI 就業成長的主要受益產業</li>
+          <li>此論點若成立，意味通膨將更具黏性，Fed 寬鬆路徑更受限</li>
+          <li>投資人應關注 AI 工具提供商與受益於生產力提升的服務業公司</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Allianz -->
+  <div class="institution allianz">
+    <div class="inst-header">
+      <div class="inst-badge"></div>
+      <h2>Allianz</h2>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.allianz.com/en/economic_research/insights/publications/specials_fmo/260603-esg-credit-risk.html" target="_blank">
+        剔除落後者：永續性作為信用篩選器
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">Weed out the laggards: Sustainability as a credit filter</span>
+        <span class="pub-date">2026-06-03</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#ESG</span><span class="tag">#信用風險</span><span class="tag">#固定收益</span>
+      </div>
+      <p class="article-summary">Allianz 分析數千家企業後發現，獲利能力、槓桿率與公司規模是信用風險的首要驅動因子，環境因素在信用評估中扮演輔助角色。永續性可作為識別信用劣化企業的早期篩選工具。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>ESG 評分低的企業往往也伴隨較差的基本面（高槓桿、低獲利），信用風險較高</li>
+          <li>永續篩選可作為固定收益組合的風險管理工具，而非純粹的道德考量</li>
+          <li>氣候轉型壓力使高碳排產業的長期信用展望惡化</li>
+          <li>建議將永續性指標納入信用分析框架，以識別潛在違約風險</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.allianz.com/en/economic_research/insights/publications/specials_fmo/260602-equity-markets.html" target="_blank">
+        俄羅斯套娃市場：股票市場的嵌套信念
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">Matryoshka market: Nested convictions in equities</span>
+        <span class="pub-date">2026-06-02</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#股市</span><span class="tag">#地緣政治</span><span class="tag">#估值</span><span class="tag">#波動率</span>
+      </div>
+      <p class="article-summary">Allianz 指出股市如同俄羅斯套娃，多層假設相互嵌套：外層是地緣政治框架協議、中層是 AI 盈利增長、內層是 Fed 政策路徑。市場目前定價 9 月前達成停火框架，任何假設落空均可能引發非線性修正。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>市場已將地緣政治解決作為「主假設」，風險不對稱——壞消息衝擊大於好消息提振</li>
+          <li>S&amp;P 500 盈利增長有 31% 集中在科技板塊（年增 66%），集中度風險被低估</li>
+          <li>ERP（股票風險溢酬）僅 2.5%，已是損益兩平而非安全緩衝</li>
+          <li>SpaceX 等巨型 IPO 創「史上最大股票供給事件」，可能對市場流動性造成壓力</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.allianz.com/en/economic_research/insights/publications/specials_fmo/260528-global-insurance-report.html" target="_blank">
+        安聯全球保險報告 2026：碎片化世界中的保險未來
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">Allianz Global Insurance Report 2026</span>
+        <span class="pub-date">2026-05-28</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#保險業</span><span class="tag">#全球碎片化</span><span class="tag">#風險</span>
+      </div>
+      <p class="article-summary">2025 年全球保險業成長 7.1%，規模達 6.9 兆歐元，壽險為最大板塊（2.861 兆歐元）。碎片化地緣政治環境正重塑全球風險模式，保險業需重新定價政治風險與氣候風險。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>全球保險業規模持續擴張，但成長率從 9.4% 放緩至 7.1%</li>
+          <li>碎片化加速再保險市場重新定價，地緣政治風險保費上升</li>
+          <li>氣候相關損失成為財產險的主要壓力，影響長期承保能力</li>
+          <li>壽險在利率高位環境下具吸引力，儲蓄型商品需求回升</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- UBS -->
+  <div class="institution ubs">
+    <div class="inst-header">
+      <div class="inst-badge"></div>
+      <h2>UBS</h2>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.ubs.com/global/en/wealthmanagement/insights/marketnews/article.3442043.html" target="_blank">
+        央行、通膨與優質債券的投資理由
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">Central banks, inflation, and the case for quality bonds</span>
+        <span class="pub-date">2026-06-03</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#固定收益</span><span class="tag">#央行政策</span><span class="tag">#通膨</span><span class="tag">#利率</span>
+      </div>
+      <p class="article-summary">UBS 認為當前高殖利率為買進優質債券創造了良好時機，隨著勞動市場走軟、通膨嵌入跡象有限，長期維持限制性政策的理由逐漸弱化。央行終將轉向，應提前布局。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>當前殖利率水準在央行政策轉向前提供具吸引力的鎖定收益機會</li>
+          <li>短至中期優質債券（Investment Grade）最具風險／報酬吸引力</li>
+          <li>勞動市場軟化 + 通膨無嵌入跡象，支持未來利率下行論點</li>
+          <li>建議在成長令人失望、通膨壓力消退前預先布局，而非等待確認訊號</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.ubs.com/global/en/wealthmanagement/insights/marketnews/article.3433883.html" target="_blank">
+        伊朗衝突如何影響大宗商品
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">How will the Iran conflict impact commodities?</span>
+        <span class="pub-date">2026-06-01</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#大宗商品</span><span class="tag">#地緣政治</span><span class="tag">#石油</span><span class="tag">#黃金</span><span class="tag">#銅</span>
+      </div>
+      <p class="article-summary">UBS 認為美伊談判雖造成短期大宗商品波動，但中長期基本面仍具支撐。油庫存偏緊、黃金受益於全球財政赤字、銅鋁面臨能源轉型帶來的供給短缺，結構性邏輯完整。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>布蘭特原油曾達 126 美元/桶四年高點，現已回落，地緣風險溢酬有超額定價之虞</li>
+          <li>黃金受全球債務累積與財政赤字結構性支撐，建議持有作通膨／地緣對沖工具</li>
+          <li>銅、鋁受電氣化與能源轉型驅動，供給缺口持續，長期看多</li>
+          <li>建議透過多元化大宗商品指數、ETF 或結構型商品取得廣泛曝險</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="article">
+      <a class="article-title" href="https://www.ubs.com/global/en/wealthmanagement/insights/chief-investment-office/potus-47/articles/quick-takes-on-the-second-trump-administration.html#alert040826" target="_blank">
+        停火後的投資部署
+      </a>
+      <div class="article-meta">
+        <span class="orig-title">CIO Alert | Ceasefire: Our investment perspectives</span>
+        <span class="pub-date">2026-04-08</span>
+      </div>
+      <div class="tags">
+        <span class="tag">#地緣政治</span><span class="tag">#股票</span><span class="tag">#債券</span><span class="tag">#大宗商品</span>
+      </div>
+      <p class="article-summary">美國、以色列與伊朗達成兩週停火協議後，UBS 建議投資人為中期股市上漲布局，同時以優質債券與大宗商品分散持有。停火為「明顯正面發展」，但持續風險仍存。</p>
+      <div class="article-points">
+        <h4>關鍵重點</h4>
+        <ul>
+          <li>停火移除短期最大尾部風險，有利風險資產中期表現</li>
+          <li>建議組合：增配股票 + 優質債券 + 大宗商品三角布局</li>
+          <li>不宜全倉押注持續和平，仍應保留對沖部位以應對談判破裂風險</li>
+          <li>能源板塊在油價回落後估值趨於合理，可考慮選擇性布局</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 跨機構主題地圖 -->
+  <div class="theme-section">
+    <h2>跨機構主題地圖</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>主題</th>
+          <th>各機構觀點摘要</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>地緣政治（中東）</td>
+          <td>JPM：市場超額定價風險，去升溫觸發輪動；UBS：停火正面，建議三角布局；Allianz：套娃假設落空風險不對稱</td>
+        </tr>
+        <tr>
+          <td>Fed / 利率</td>
+          <td>JPM：Warsh 鷹派，2026 不降息；Apollo：FOMC 溝通精簡化，波動率上升；UBS：殖利率高點已近，看多優質債</td>
+        </tr>
+        <tr>
+          <td>AI 與就業</td>
+          <td>Apollo：AI 創就業（Jevons 悖論），通膨黏性延長；JPM：AI 股估值分歧，輪動風險升高</td>
+        </tr>
+        <tr>
+          <td>大宗商品</td>
+          <td>UBS：黃金、銅、鋁中長期結構性看多；JPM：油價正常化有利航空、零售補漲</td>
+        </tr>
+        <tr>
+          <td>股市估值</td>
+          <td>Allianz：ERP 僅 2.5%，集中度風險高；JPM：AI 股漲幅遠超大盤，輪動條件成熟</td>
+        </tr>
+        <tr>
+          <td>固定收益</td>
+          <td>UBS：短中期優質債最具吸引力；Allianz：ESG 可作信用篩選工具</td>
+        </tr>
+        <tr>
+          <td>美中關係</td>
+          <td>JPM：管理性穩定，有利新興市場情緒改善</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  本報告整理自各機構官方公開頁面，僅供參考，不構成投資建議。<br>
+  資料日期：2026年06月04日
+</footer>
+
+</body>
+</html>

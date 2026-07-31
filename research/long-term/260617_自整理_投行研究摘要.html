@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投行研究摘要 — 2026年6月17日</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f7f6f3; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; color: #2d2d2d; line-height: 1.7; }
+  header { background: #1a1a2e; color: #fff; padding: 32px 24px; text-align: center; }
+  header h1 { font-size: 1.7rem; font-weight: 700; letter-spacing: 1px; }
+  header p { color: #9ab; margin-top: 6px; font-size: 0.9rem; }
+  .container { max-width: 960px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  /* 本期重點總覽 */
+  .summary-box { background: #fef3c7; border-left: 5px solid #f59e0b; border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+  .summary-box h2 { font-size: 1.1rem; color: #92400e; margin-bottom: 14px; }
+  .summary-box ul { padding-left: 18px; }
+  .summary-box ul li { margin-bottom: 8px; font-size: 0.95rem; }
+
+  /* 機構 section */
+  .institution { margin-bottom: 44px; }
+  .inst-header { font-size: 1.25rem; font-weight: 700; padding: 10px 0 10px 18px; margin-bottom: 16px; border-left: 5px solid #999; }
+  .jpm .inst-header { border-color: #003087; color: #003087; }
+  .apollo .inst-header { border-color: #c41e3a; color: #c41e3a; }
+  .allianz .inst-header { border-color: #003781; color: #003781; }
+  .ubs .inst-header { border-color: #e30613; color: #e30613; }
+  .gs .inst-header { border-color: #6c5ce7; color: #6c5ce7; }
+  .blackrock .inst-header { border-color: #000; color: #333; }
+  .pimco .inst-header { border-color: #00539b; color: #00539b; }
+
+  /* 文章卡片 */
+  .card { background: #fff; border-radius: 10px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); transition: box-shadow 0.2s; }
+  .card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.13); }
+  .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+  .card h3 a { color: #1a1a2e; text-decoration: none; }
+  .card h3 a:hover { text-decoration: underline; }
+  .card .meta { font-size: 0.82rem; color: #888; font-style: italic; margin-bottom: 10px; }
+  .date-badge { display: inline-block; background: #eee; border-radius: 10px; padding: 2px 10px; font-size: 0.78rem; margin-left: 8px; font-style: normal; color: #555; }
+  .tag { display: inline-block; background: #ede9fe; color: #5b21b6; border-radius: 12px; padding: 3px 10px; font-size: 0.78rem; margin-right: 6px; margin-bottom: 10px; }
+  .card p { font-size: 0.93rem; color: #444; margin-bottom: 12px; }
+  .card ul { padding-left: 0; list-style: none; }
+  .card ul li::before { content: "▸ "; color: #6366f1; font-weight: bold; }
+  .card ul li { font-size: 0.9rem; color: #555; margin-bottom: 5px; padding-left: 2px; }
+
+  /* 跨機構主題地圖 */
+  .theme-map { margin-bottom: 40px; }
+  .theme-map h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; color: #1a1a2e; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th { background: #1a1a2e; color: #fff; padding: 10px 14px; text-align: left; }
+  td { padding: 9px 14px; border-bottom: 1px solid #e5e5e5; }
+  tr:nth-child(even) td { background: #f9f9f7; }
+
+  /* 財經新聞 */
+  .news-section { background: #d1fae5; border-left: 5px solid #10b981; border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+  .news-section h2 { color: #065f46; margin-bottom: 18px; font-size: 1.1rem; }
+  .news-card { background: #fff; border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; }
+  .news-card h4 { font-size: 0.97rem; font-weight: 600; margin-bottom: 4px; }
+  .news-card h4 a { color: #1a1a2e; text-decoration: none; }
+  .news-card h4 a:hover { text-decoration: underline; }
+  .news-meta { font-size: 0.8rem; color: #777; margin-bottom: 6px; }
+  .source-tag { display: inline-block; background: #fed7aa; color: #9a3412; border-radius: 10px; padding: 1px 9px; font-size: 0.76rem; margin-right: 6px; }
+  .news-card p { font-size: 0.88rem; color: #555; }
+
+  /* 本期綜合總結 */
+  .conclusion { background: #dbeafe; border-left: 5px solid #2563eb; border-radius: 8px; padding: 24px 28px; margin-bottom: 36px; }
+  .conclusion h2 { color: #1e3a8a; margin-bottom: 16px; font-size: 1.1rem; }
+  .conclusion h3 { font-size: 0.95rem; font-weight: 700; color: #1e40af; margin: 14px 0 8px; }
+  .conclusion ul { padding-left: 18px; }
+  .conclusion ul li { font-size: 0.92rem; margin-bottom: 7px; }
+  .conclusion p { font-size: 0.92rem; color: #333; }
+
+  /* 封鎖通知 */
+  .blocked { background: #fff3cd; border-left: 5px solid #f97316; border-radius: 8px; padding: 18px 22px; margin-bottom: 36px; font-size: 0.9rem; color: #7c2d12; }
+  .blocked h3 { margin-bottom: 8px; }
+
+  footer { text-align: center; font-size: 0.8rem; color: #aaa; padding: 20px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📊 投行研究摘要</h1>
+  <p>2026年6月17日 ｜ JPMorgan · Apollo · Allianz · UBS</p>
+</header>
+
+<div class="container">
+
+  <!-- 本期重點總覽 -->
+  <div class="summary-box">
+    <h2>⚡ 本期重點總覽</h2>
+    <ul>
+      <li><strong>Fed 首次 Warsh 主席會議（6/16-17）</strong>：利率維持 3.50–3.75%，鷹派訊號，升息討論重回檯面，通膨預測上修至 3.8%</li>
+      <li><strong>AI 是盈利引擎，不是主題</strong>：JPM 數據顯示 AI 貢獻 2022 年底以來累計 80% EPS 成長，且是 75% 的資本支出來源</li>
+      <li><strong>軟體業雙重壓力</strong>：Apollo 警告 SaaS 面臨 AI 顛覆 ＋ 高利率的夾擊，直接融資規模已從 2015 年 $8B 暴增至 $538B</li>
+      <li><strong>中東緩和但復甦慢</strong>：Allianz 指出霍爾木茲海峽恢復通航是「多月過程，不是開關」，原油仍在 $100/桶附近</li>
+      <li><strong>IPO 浪潮歷史性但市場夠大</strong>：JPM 測算 $260B IPO 僅相當於 $65T 市值的 S&P 500 約 1-2 個交易日成交量</li>
+    </ul>
+  </div>
+
+  <!-- JPMorgan -->
+  <div class="institution jpm">
+    <div class="inst-header">🏦 JPMorgan</div>
+
+    <div class="card">
+      <h3><a href="https://www.jpmorgan.com/insights/markets-and-economy/markets/global-markets-conference" target="_blank">全球市場大會 2026：投資、風險與科技的專家觀點</a></h3>
+      <div class="meta">Global Markets Conference 2026: Expert perspectives on investment, risk and technology <span class="date-badge">2026/06/12</span></div>
+      <span class="tag">AI</span><span class="tag">美股</span><span class="tag">利率</span><span class="tag">地緣政治</span>
+      <p>JPMorgan 旗艦論壇匯集全球市場領袖，大會調查顯示 47% 受訪者看好美股為下半年最佳表現資產類別，而 AI 已從市場主題升格為企業盈利的主要驅動力。</p>
+      <ul>
+        <li>美股領先全球：消費者韌性 + 就業持續增長，47% 受訪者選美股為 H2 最強資產</li>
+        <li><strong>AI = 盈利引擎</strong>：貢獻 2022Q4 以來累計 80% EPS 成長，75% 的資本支出/研發支出</li>
+        <li>油價 Brent 預測維持年底 $100/桶，中東供應中斷影響持續，庫存緩衝提供短期保護</li>
+        <li>Fed 維持高利率姿態，78% 受訪者預期關稅年底落在 10–20%</li>
+        <li>「AI 不是主題——AI 是驅動力，不只是股市，而是更廣泛的一切。」— JPM 全球市場策略主管 Lakos-Bujas</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><a href="https://www.jpmorgan.com/insights/markets-and-economy/top-market-takeaways/tmt-the-ipo-wave-is-historic-so-is-todays-market" target="_blank">IPO 浪潮是歷史性的，但今日市場同樣歷史性</a></h3>
+      <div class="meta">The IPO wave is historic. So is today's market. <span class="date-badge">2026/06/12</span></div>
+      <span class="tag">IPO</span><span class="tag">美股</span><span class="tag">流動性</span>
+      <p>預計 2026 年 $2,600 億 IPO 規模龐大，但對比 $65 兆的 S&P 500 市值，衝擊被大幅稀釋。JPM 認為歷史上大型 IPO 浪潮後市場表現往往正面。</p>
+      <ul>
+        <li>$260B IPO 規模 vs $65T S&P 市值——今日市場比 2021 大 55%，吸收能力強</li>
+        <li>企業回購預計達 $1.5 兆，超過新股發行規模，可抵消供給壓力</li>
+        <li>即使超大型 IPO 進入指數，初始權重不足 0.2%，對被動資金衝擊極有限</li>
+        <li>歷史上 25 大 IPO 中，2/3 在後一年 S&P 500 上漲 5–20%</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><a href="https://www.jpmorgan.com/insights/markets-and-economy/economy/kevin-warsh-first-federal-reserve-meeting-as-chair-june-2026" target="_blank">Kevin Warsh 首次聯準會會議，市場期待什麼？</a></h3>
+      <div class="meta">What to expect at Kevin Warsh's first Federal Reserve meeting as chair <span class="date-badge">2026/06/08</span></div>
+      <span class="tag">Fed</span><span class="tag">利率</span><span class="tag">通膨</span>
+      <p>6月 16–17 日 FOMC 是 Warsh 就任主席後首次主持會議，市場聚焦其溝通風格是否有別於前任，以及對未來降息路徑的暗示。</p>
+      <ul>
+        <li>Fed 預計維持 3.50–3.75% 至 2026 年底，通膨 3.8% 遠超 2% 目標</li>
+        <li>Warsh 偏好葛林斯潘式模糊溝通，對前瞻指引持懷疑態度</li>
+        <li>關注三點：點陣圖呈現是否調整、記者會是否召開、聲明措辭是否轉鷹</li>
+        <li>JPM 建議：維持跨資產、跨地區分散配置，不因主席換人而大幅調倉</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Apollo -->
+  <div class="institution apollo">
+    <div class="inst-header">🔴 Apollo Daily Spark</div>
+
+    <div class="card">
+      <h3><a href="https://www.apollo.com/wealth/the-daily-spark/software-hit-by-double-whammy" target="_blank">軟體業遭雙重夾擊</a></h3>
+      <div class="meta">Software Hit by Double Whammy <span class="date-badge">2026/06/16</span></div>
+      <span class="tag">SaaS</span><span class="tag">AI顛覆</span><span class="tag">私人信貸</span><span class="tag">利率</span>
+      <p>軟體公司同時承受 AI 顛覆既有商業模式的股權價值侵蝕，以及高利率壓縮過去融資擴張的債務成本。兩股力量疊加，形成「雙重夾擊」。</p>
+      <ul>
+        <li>對 SaaS 直接借貸規模：從 2015 年 $80 億 → 2025 年 $5,380 億，10 年 67 倍</li>
+        <li>AI 侵蝕軟體股票的護城河與盈利能見度，估值溢價正在重估</li>
+        <li>高利率使龐大的 SaaS 債務成本上升，違約風險累積於私人信貸市場</li>
+        <li>投資人需區分「AI 受益者」與「AI 受害者」兩類軟體企業</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><a href="https://www.apollo.com/wealth/the-daily-spark/Commodity-Price-Outlook" target="_blank">大宗商品價格展望</a></h3>
+      <div class="meta">Commodity Price Outlook <span class="date-badge">2026/06/15</span></div>
+      <span class="tag">原物料</span><span class="tag">能源</span><span class="tag">黃金</span><span class="tag">基本金屬</span>
+      <p>大宗商品各類別因不同原因同步上漲：中東衝突影響能源與肥料，數據中心建設帶動基本金屬，通膨憂慮推高貴金屬。</p>
+      <ul>
+        <li>能源：中東局勢中斷影響能源與農業肥料供應，油價支撐在 $100/桶附近</li>
+        <li>基本金屬：數據中心 AI 基礎設施大規模建設，銅、鋁需求強勁</li>
+        <li>貴金屬：通膨憂慮 + 地緣避險需求，黃金表現相對強韌</li>
+        <li>三個驅動因素各自獨立，商品多頭行情結構支撐相對穩固</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><a href="https://www.apollo.com/wealth/the-daily-spark/When-Three-Passive-Funds-Become-the-Market" target="_blank">當三支被動基金成為市場本身</a></h3>
+      <div class="meta">When Three Passive Funds Become the Market <span class="date-badge">2026/06/14</span></div>
+      <span class="tag">被動投資</span><span class="tag">ETF</span><span class="tag">市場結構</span>
+      <p>前三大 S&P 500 被動基金合計持有超過 $2.6 兆，Vanguard VOO 本月突破 $1 兆，價格發現機制正從基本面分析轉向機械式資金流動。</p>
+      <ul>
+        <li>三大被動基金（VOO/IVV/SPY）合計 $2.6 兆，VOO 突破 $1 兆里程碑</li>
+        <li>「價格愈來愈由機械式資金流而非基本面判斷決定」</li>
+        <li>主動管理空間收窄，但極端定價失真事件出現的機率也相應提高</li>
+        <li>對三池策略的啟示：核心池持 VOO/QQQ 為市場 beta，戰術池才需選股</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Allianz -->
+  <div class="institution allianz">
+    <div class="inst-header">🔵 Allianz Research</div>
+
+    <div class="card">
+      <h3><a href="https://www.allianz.com/en/economic_research/insights/publications/specials_fmo/260616-us-iran-deal-markets-price-peace.html" target="_blank">中東：市場定價和平，經濟仍在支付戰爭代價</a></h3>
+      <div class="meta">Middle East: Markets price peace, economies still pay for war <span class="date-badge">2026/06/16</span></div>
+      <span class="tag">地緣政治</span><span class="tag">能源</span><span class="tag">中東</span>
+      <p>霍爾木茲海峽衝突終止後，金融市場迅速反彈，但 Allianz 警告實體經濟復甦遠落後於市場定價，基礎設施重新開通是「多月過程，不是按下開關」。</p>
+      <ul>
+        <li>市場已 price-in 和平紅利，但石油基礎設施恢復需數月，供給側衝擊持續</li>
+        <li>居民、企業與政府財政受衝突影響，完整修復時間軸遠長於市場反應</li>
+        <li>能源出口國財政依賴油價 $80+ 維持平衡，和平不代表油價快速下滑</li>
+        <li>建議投資人不要過度追漲「地緣緩和」，基本面恢復才是真正催化劑</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><a href="https://www.allianz.com/en/economic_research/insights/publications/specials_fmo/260608-emerging-markets.html" target="_blank">碎片化世界中的新興市場：4R 韌性框架</a></h3>
+      <div class="meta">Emerging markets in a fragmented world: From geography to resilience — the 4Rs framework <span class="date-badge">2026/06/08</span></div>
+      <span class="tag">新興市場</span><span class="tag">去全球化</span><span class="tag">韌性</span>
+      <p>伊朗衝突後，新興市場的表現打破傳統 EM vs DM 分類邏輯，個別國家的韌性差異更為關鍵。Allianz 提出 4R 框架評估 EM 投資機會。</p>
+      <ul>
+        <li>市場重新定價強調個別國家實力，而非傳統「新興 vs 已開發」二分法</li>
+        <li>4R 框架：Resources（資源）、Resilience（韌性）、Reorientation（重定向）、Reserves（儲備）</li>
+        <li>東南亞、印度、部分拉丁美洲在碎片化環境中具備結構性優勢</li>
+        <li>資源豐富國家在能源轉型與地緣重組中位置更有利</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- UBS -->
+  <div class="institution ubs">
+    <div class="inst-header">🔴 UBS CIO Insights</div>
+
+    <div class="card">
+      <h3><a href="https://www.ubs.com/global/en/wealthmanagement/insights/chief-investment-office/potus-47/articles/quick-takes-on-the-second-trump-administration.html" target="_blank">CIO Alert：停火後的投資觀點</a></h3>
+      <div class="meta">CIO Alert | Ceasefire: Our investment perspectives <span class="date-badge">2026/04/08</span></div>
+      <span class="tag">地緣政治</span><span class="tag">資產配置</span><span class="tag">黃金</span>
+      <p>美、以、伊三方同意兩週停火，伊朗開放霍爾木茲海峽，UBS CIO 稱這是「明確正面發展」，但提醒仍有未解問題，建議維持多元分散。</p>
+      <ul>
+        <li>停火是正面訊號，但未解的核問題與區域代理戰爭仍是尾部風險</li>
+        <li>UBS 建議跨資產分散：股票、債券、黃金、大宗商品四類都保留部位</li>
+        <li>黃金在地緣風險上升的環境中繼續擔任避險錨</li>
+        <li>短線波動期間，不宜大幅追漲或殺跌，維持長期框架</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 跨機構主題地圖 -->
+  <div class="theme-map">
+    <h2>🗺️ 跨機構主題地圖</h2>
+    <table>
+      <thead>
+        <tr><th>主題</th><th>JPMorgan</th><th>Apollo</th><th>Allianz</th><th>UBS</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fed 利率</strong></td>
+          <td>維持 3.50–3.75%，Warsh 鷹派姿態</td>
+          <td>高利率壓縮 SaaS 債務</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>AI</strong></td>
+          <td>80% 累計 EPS 成長來源，核心驅動</td>
+          <td>顛覆軟體護城河，被動基金強化趨勢</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>地緣政治</strong></td>
+          <td>78% 預期關稅 10–20%</td>
+          <td>中東影響能源原物料</td>
+          <td>和平已定價，實體修復慢</td>
+          <td>停火正面但尾部風險未解</td>
+        </tr>
+        <tr>
+          <td><strong>大宗商品</strong></td>
+          <td>油 $100/桶，地緣支撐</td>
+          <td>能源、基本金屬、貴金屬同步上漲</td>
+          <td>油價支撐不會快速消失</td>
+          <td>黃金作為避險錨</td>
+        </tr>
+        <tr>
+          <td><strong>新興市場</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td>4R 框架，個別國家韌性差異大</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>IPO / 市場結構</strong></td>
+          <td>$260B IPO 可消化，市場夠大</td>
+          <td>被動基金佔市場主導，機械流動</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 近期財經新聞 -->
+  <div class="news-section">
+    <h2>📰 近期相關財經新聞</h2>
+
+    <div class="news-card">
+      <h4><a href="https://www.sinotrade.com.tw/richclub/hotstock/Fed%E6%9C%83%E8%AD%B0%E4%B8%83%E9%87%8D%E9%BB%9E%E4%B8%80%E6%AC%A1%E7%9C%8B-%E8%81%AF%E6%BA%96%E6%9C%83%E6%8C%89%E5%85%B5%E4%B8%8D%E5%8B%95%E9%87%8B%E6%94%BE%E9%B7%B9%E6%B4%BE%E8%A8%8A%E8%99%9F-%E9%80%9A%E8%86%A8%E9%A0%90%E6%B8%AC%E4%B8%8A%E4%BF%AE-%E5%8D%87%E6%81%AF%E8%A8%8E%E8%AB%96%E9%87%8D%E5%9B%9E%E6%AA%AF%E9%9D%A2-%E7%BE%8E%E8%82%A1%E8%A7%80%E5%AF%9F-69bb4529435757638e64b7ca" target="_blank">Fed 6月會議七重點：按兵不動但鷹派訊號明確，升息討論重回檯面</a></h4>
+      <div class="news-meta"><span class="source-tag">豐雲學堂</span> 2026/06/17</div>
+      <p>Fed 6月 16–17 日 FOMC 結果出爐：利率維持 3.50–3.75% 不變，但 PCE 通膨中位數上修，官員點陣圖出現升息討論，市場降息預期大幅降溫。</p>
+    </div>
+
+    <div class="news-card">
+      <h4><a href="https://news.cnyes.com/news/id/6028799" target="_blank">Fed 6月聲明全文 + 最新經濟預測（鉅亨網）</a></h4>
+      <div class="news-meta"><span class="source-tag">鉅亨網</span> 2026/06/17</div>
+      <p>聯準會 6月會議完整聲明：通膨預測上修，就業市場維持強勁，新任主席 Warsh 首次主持 FOMC，整體基調偏鷹，不排除年內升息一碼可能性。</p>
+    </div>
+
+    <div class="news-card">
+      <h4><a href="https://www.sinotrade.com.tw/richclub/hotstock/2026-%E4%B8%8B%E5%8D%8A%E5%B9%B4%E9%96%8B%E5%B1%80%E9%9C%87%E7%9B%AA-%E5%8F%B0%E7%BE%8E%E8%82%A1%E6%8A%95%E8%B3%87%E4%BA%BA-6-%E5%88%B0-7-%E6%9C%88%E5%BF%85%E7%9C%8B%E7%9A%84-8-%E5%A4%A7%E7%B8%BD%E7%B6%93%E4%BA%8B%E4%BB%B6-%E8%82%A1%E5%B8%82%E8%A9%B1%E9%A1%8C-6a2a2c51ab26abbf4c8173d2" target="_blank">2026 下半年開局震盪：台美股 6–7月必看 8 大總經事件</a></h4>
+      <div class="news-meta"><span class="source-tag">豐雲學堂</span> 2026/06月</div>
+      <p>從 FOMC 點陣圖、Warsh 首次表態、到 CPI 數據與地緣風險，下半年開局充滿變數，台股費半重挫後的後續走勢成為市場焦點。</p>
+    </div>
+
+    <div class="news-card">
+      <h4><a href="https://www.schwab.com/learn/story/global-stock-market-outlook" target="_blank">Charles Schwab：全球股市中期展望 2026</a></h4>
+      <div class="news-meta"><span class="source-tag">Charles Schwab</span> 2026/06月</div>
+      <p>盈利成長速度超越去年，AI 相關資本支出週期為多頭提供支撐；但市場領導面持續收窄，少數股票貢獻不成比例的漲幅，歐洲因缺乏 AI 暴露持續落後。</p>
+    </div>
+
+    <div class="news-card">
+      <h4><a href="https://argentfinancial.com/argent-insights/market-update-june-2026/" target="_blank">Argent Financial：市場更新 2026年6月</a></h4>
+      <div class="news-meta"><span class="source-tag">Argent Financial</span> 2026/06月</div>
+      <p>新興市場領跑全球股票報酬，韓國 KOSPI 受三星、SK Hynix 帶動創歷史新高，AI 記憶體週期在亞洲演進；CME FedWatch 顯示 12 月升息一碼機率達 70%。</p>
+    </div>
+  </div>
+
+  <!-- 本期綜合總結 -->
+  <div class="conclusion">
+    <h2>📋 本期綜合總結</h2>
+
+    <h3>🔵 本期核心主題</h3>
+    <p>本期投行報告呈現三條交匯敘事：<strong>AI 已從話題升格為企業盈利的物質驅動力</strong>（佔 80% EPS 成長），<strong>中東地緣衝突雖緩和但市場提前定價過於樂觀</strong>（Allianz 明確警告），<strong>Fed 在通膨黏性下維持鷹派立場</strong>——這三者共同決定下半年資金流向。</p>
+
+    <h3>🎯 投資人關注焦點</h3>
+    <ul>
+      <li><strong>AI 基礎設施受惠股</strong>：JPM 數據確認 AI Capex 週期持續，銅、伺服器、電力設備受益（Apollo & Allianz 共鳴）</li>
+      <li><strong>軟體股分化</strong>：Apollo 警告傳統 SaaS 護城河被 AI 侵蝕，需區分「AI 賦能者」vs「AI 受害者」</li>
+      <li><strong>黃金維持配置</strong>：UBS & Apollo 皆強調貴金屬在通膨 + 地緣環境的避險價值（符合三池機會池 30% 黃金部位）</li>
+      <li><strong>美股核心持有</strong>：47% 機構投資人選美股 H2 最強，IPO 浪潮不構成結構性壓力（JPM）</li>
+      <li><strong>新興市場個別化</strong>：韓國 KOSPI（HBM/記憶體）、印度等具備 4R 韌性的市場值得追蹤（Allianz & Argent）</li>
+    </ul>
+
+    <h3>⚠️ 潛在風險提示</h3>
+    <ul>
+      <li><strong>Fed 升息風險重燃</strong>：CME 12 月升息機率升至 70%，與各投行「維持不變」基準假設存在分歧</li>
+      <li><strong>中東和平脆弱性</strong>：Allianz 與 UBS 皆指出實體復甦遠落後市場定價，油價下行空間有限</li>
+      <li><strong>SaaS 私人信貸壓力</strong>：Apollo 點出 $5,380 億直接借貸曝險，若違約潮出現，影響廣泛</li>
+    </ul>
+
+    <h3>📅 下週觀察重點</h3>
+    <ul>
+      <li><strong>FOMC 結果發酵</strong>（本週）：Warsh 記者會發言逐字稿 → 市場重新定價升降息路徑</li>
+      <li><strong>美國 CPI / PCE 數據</strong>：確認通膨是否繼續黏性，是升息討論的關鍵數據</li>
+      <li><strong>台灣/南韓出口數據</strong>：驗證 AI 硬體需求是否持續加速（顏承暉報告參考基準）</li>
+    </ul>
+  </div>
+
+  <!-- 封鎖通知 -->
+  <div class="blocked">
+    <h3>⚠️ 本期無法即時訪問的機構</h3>
+    <p><strong>Goldman Sachs、BlackRock、PIMCO</strong> — 反爬蟲保護導致 403 封鎖，本期不填入推測內容。</p>
+    <p>建議從各機構 App、Bloomberg Terminal、或付費平台補充以上機構最新觀點。</p>
+  </div>
+
+  <footer>
+    資料來源：JPMorgan Insights、Apollo Daily Spark、Allianz Research、UBS CIO、豐雲學堂、鉅亨網、Charles Schwab、Argent Financial<br>
+    生成時間：2026年6月17日 ｜ 財經小狐 Research Digest
+  </footer>
+
+</div>
+</body>
+</html>

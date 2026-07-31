@@ -58,19 +58,27 @@ def sync_files():
         dst = SITE / "stocks" / ticker_dir.name
         copied += _copy_new(ticker_dir, "*.html", dst)
 
-    # 研究摘要：投資機構研究摘要(六大機構週報) + 產業趨勢研究摘要(科技媒體週報) + 長期研究(熊市手冊/長期索引/元大投顧等)
-    copied += _copy_new(SRC / "研究報告/投資機構研究摘要", "*.html", SITE / "research/institutions")
-    copied += _copy_new(SRC / "研究報告/產業趨勢研究摘要", "產業趨勢研究摘要*.html", SITE / "research/industry-trends")
-    copied += _copy_new(SRC / "研究報告/長期研究", "*.html", SITE / "research/long-term")
+    # 研究摘要：投資機構研究摘要(六大機構週報，現存於 總體經濟/) + 產業趨勢研究摘要(現存於 產業研究/產業趨勢研究摘要/)
+    #           + 長期研究(元大投顧研究報告摘要/投行研究摘要/長期多空判斷準則/LTCMA架構報告 現存於 總體經濟/；
+    #             標普500歷次熊市/美股熊市落底判別手冊 現存於 財經書籍知識/；長期研究資料庫索引 現存於 研究報告/ 根目錄)
+    # 2026-07-31資料夾重整後，六大類已無專屬子資料夾，改用檔名關鍵字從新分類資料夾中篩選
+    copied += _copy_new(SRC / "研究報告/總體經濟", "*六大機構_投資機構研究摘要*.html", SITE / "research/institutions")
+    copied += _copy_new(SRC / "研究報告/產業研究/產業趨勢研究摘要", "*.html", SITE / "research/industry-trends")
 
-    # 今日板塊流動報告
-    copied += _copy_new(SRC / "研究報告/產業趨勢研究摘要", "今日板塊流動報告*.html", SITE / "research/sector-flow")
+    for pattern in ["*自整理_元大投顧研究報告摘要*.html", "*自整理_投行研究摘要*.html",
+                    "*自整理_長期多空判斷準則*.html", "*自整理_LTCMA2026投資架構整合報告*.html"]:
+        copied += _copy_new(SRC / "研究報告/總體經濟", pattern, SITE / "research/long-term")
+    for pattern in ["*自整理_標普500歷次熊市*.html", "*自整理_美股熊市落底判別手冊*.html"]:
+        copied += _copy_new(SRC / "研究報告/財經書籍知識", pattern, SITE / "research/long-term")
+    copied += _copy_new(SRC / "研究報告", "長期研究資料庫索引*.html", SITE / "research/long-term")
 
-    # 美股資金流雙軌週報/報告
-    copied += _copy_new(SRC / "研究報告/產業趨勢研究摘要", "美股資金流雙軌*.html", SITE / "research/capital-flow")
+    # 今日板塊流動報告 / 美股資金流雙軌週報（現存於 市場分析/，一週內在頂層，較舊的在 歷史板塊資金報告/ 子資料夾）
+    for base in [SRC / "研究報告/市場分析", SRC / "研究報告/市場分析/歷史板塊資金報告"]:
+        copied += _copy_new(base, "今日板塊流動報告*.html", SITE / "research/sector-flow")
+        copied += _copy_new(base, "美股資金流雙軌*.html", SITE / "research/capital-flow")
 
-    # 市場診斷（模式一風險診斷＋模式四三池策略合併報告）
-    copied += _copy_new(SRC / "研究報告/市場診斷", "*.html", SITE / "research/market-diagnosis")
+    # 市場診斷（模式一風險診斷＋模式四三池策略合併報告，現存於 市場分析/）
+    copied += _copy_new(SRC / "研究報告/市場分析", "*市場診斷*.html", SITE / "research/market-diagnosis")
 
     return copied
 
