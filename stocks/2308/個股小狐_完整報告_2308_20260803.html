@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>個股小狐｜台達電(2308) 完整報告（三模式）</title>
+<style>
+:root{
+  --bg:#0b0e14;--panel:#11151f;--panel2:#161b28;--border:#232a3a;
+  --text:#e6e9f0;--muted:#8b93a7;--accent:#76b9ff;--green:#3ddc84;
+  --red:#ff6b6b;--yellow:#ffc857;--purple:#b794f6;--orange:#ff9f43;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;line-height:1.6;}
+.hero{padding:40px 24px;background:linear-gradient(135deg,#1a0e2a,#0a1e3a,#0e2a18 100%);border-bottom:1px solid var(--border);}
+.hero h1{margin:0 0 4px;font-size:27px;}
+.hero .tagline{color:var(--muted);font-size:13px;margin-bottom:14px;}
+.hero .stats{display:flex;gap:22px;flex-wrap:wrap;}
+.hero .stat .label{font-size:11px;color:var(--muted);}
+.hero .stat .val{font-size:18px;font-weight:700;}
+.warning-banner{background:rgba(255,107,107,0.12);border:1px solid var(--red);border-radius:8px;padding:10px 16px;margin:12px 24px 0;max-width:1032px;font-size:13px;color:var(--red);}
+.mode-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-right:6px;}
+.mode1{background:rgba(118,185,255,0.15);color:var(--accent);}
+.mode2{background:rgba(255,200,87,0.15);color:var(--yellow);}
+.mode3{background:rgba(61,220,132,0.15);color:var(--green);}
+.toc{position:sticky;top:0;background:rgba(11,14,20,0.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:9px 24px;display:flex;gap:12px;flex-wrap:wrap;font-size:12px;z-index:10;}
+.toc a{color:var(--muted);text-decoration:none;white-space:nowrap;}
+.toc a:hover{color:var(--accent);}
+.toc .sep{color:var(--border);}
+.section{max-width:1080px;margin:0 auto;padding:30px 24px;}
+.mode-header{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.mode-header h2{margin:0;font-size:22px;}
+.section h3{font-size:17px;border-left:4px solid var(--accent);padding-left:10px;margin-bottom:12px;}
+.section h4{font-size:13px;color:var(--accent);margin-bottom:8px;}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:14px;}
+th,td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:left;}
+th{color:var(--muted);font-weight:600;background:var(--panel2);}
+tr:hover{background:var(--panel2);}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;}
+.badge.ok{background:rgba(61,220,132,0.15);color:var(--green);}
+.badge.warn{background:rgba(255,200,87,0.15);color:var(--yellow);}
+.badge.bad{background:rgba(255,107,107,0.15);color:var(--red);}
+.badge.blue{background:rgba(118,185,255,0.15);color:var(--accent);}
+.badge.orange{background:rgba(255,159,67,0.15);color:var(--orange);}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;}
+.cards2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px;}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px;}
+.card h5{margin:0 0 5px;font-size:13px;}
+.card p{margin:0;font-size:12px;color:var(--muted);}
+.scenario-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px;}
+.scenario-card.bear{border-top:3px solid var(--red);}
+.scenario-card.base{border-top:3px solid var(--accent);}
+.scenario-card.bull{border-top:3px solid var(--green);}
+.scenario-card h5{margin:0 0 7px;font-size:13px;}
+.scenario-card ul{padding-left:16px;margin:5px 0;font-size:12px;color:var(--muted);}
+.scenario-card .target{font-size:16px;font-weight:700;margin-top:7px;}
+.moat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px;}
+.moat-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:11px;text-align:center;}
+.moat-card .mname{font-size:11px;color:var(--muted);margin-bottom:3px;}
+.moat-card .stars{font-size:15px;}
+.ratio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;}
+.ratio-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px;}
+.ratio-card.ok{border-top:3px solid var(--green);}
+.ratio-card.warn{border-top:3px solid var(--yellow);}
+.ratio-card.bad{border-top:3px solid var(--red);}
+.ratio-card .rname{font-size:11px;color:var(--muted);margin-bottom:4px;}
+.ratio-card .rval{font-size:19px;font-weight:700;}
+.ratio-card .rwarn{font-size:11px;color:var(--muted);margin-top:4px;}
+.action-box{background:linear-gradient(135deg,#0e2a1d,#0e1e2e);border:1px solid var(--green);border-radius:12px;padding:18px;margin-top:10px;}
+.action-box h4{margin-top:0;color:var(--green);font-size:15px;}
+.action-box .row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--border);font-size:13px;gap:10px;}
+.action-box .row:last-child{border-bottom:none;}
+.action-box .row .lbl{color:var(--muted);white-space:nowrap;min-width:90px;}
+.caution-box{background:linear-gradient(135deg,#2a0e0e,#1e120e);border:1px solid var(--red);border-radius:12px;padding:18px;margin-top:10px;}
+.caution-box h4{margin-top:0;color:var(--red);font-size:15px;}
+.caution-box .row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--border);font-size:13px;gap:10px;}
+.caution-box .row:last-child{border-bottom:none;}
+.caution-box .row .lbl{color:var(--muted);white-space:nowrap;min-width:90px;}
+.note{background:var(--panel2);border-left:3px solid var(--purple);padding:9px 12px;border-radius:6px;font-size:12px;color:var(--muted);margin-top:8px;}
+.risk-card{background:var(--panel);border-left:4px solid var(--red);border-radius:8px;padding:10px 12px;margin-bottom:8px;}
+.risk-card h5{margin:0 0 3px;font-size:13px;color:var(--red);}
+.risk-card p{margin:0;font-size:12px;color:var(--muted);}
+.divider{border:none;border-top:2px solid var(--border);margin:10px 0 28px;}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.sum-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px;text-align:center;}
+.sum-card .sval{font-size:19px;font-weight:700;color:var(--accent);}
+.sum-card .slabel{font-size:11px;color:var(--muted);margin-top:3px;}
+footer{padding:26px 24px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);max-width:1080px;margin:0 auto;}
+@media(max-width:760px){.cards3,.moat-grid,.ratio-grid{grid-template-columns:1fr 1fr;}.summary-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div style="margin-bottom:8px;">
+    <span class="mode-badge mode1">深度研究</span>
+    <span class="mode-badge mode2">財報解析</span>
+    <span class="mode-badge mode3">財務健檢</span>
+  </div>
+  <h1>台達電子工業股份有限公司 (2308.TW) ｜個股小狐完整報告</h1>
+  <div class="tagline">分析日期：2026-08-03　｜　最新財報：2Q26（2026-07-30法說會）　｜　象限：<span style="color:var(--orange);font-weight:700;">高速成長股（傳統電源零組件廠→AI資料中心電源/液冷核心供應商）</span>　｜　Thesis：<span style="color:var(--yellow);font-weight:700;">3.5 / 5⚠️（AI電源需求真實兌現，但估值已消化樂觀預期、HVDC時程仍有變數）</span></div>
+  <div class="stats" style="margin-top:14px;">
+    <div class="stat"><div class="label">現價（2026-08-03）</div><div class="val" style="color:var(--orange);">NT$1,580（-3.66%）</div></div>
+    <div class="stat"><div class="label">市值</div><div class="val">約NT$4.1兆</div></div>
+    <div class="stat"><div class="label">TTM PE（近四季EPS 31.42）</div><div class="val" style="color:var(--red);">50.3x</div></div>
+    <div class="stat"><div class="label">KGI最新目標價（7/30）</div><div class="val" style="color:var(--green);">NT$2,505（+58.5%）</div></div>
+    <div class="stat"><div class="label">52週高/低（含近期崩跌）</div><div class="val">NT$2,585 / NT$1,425</div></div>
+    <div class="stat"><div class="label">近1年漲幅</div><div class="val" style="color:var(--green);">+169%</div></div>
+  </div>
+</div>
+<div class="warning-banner">
+  ⚠️ <strong>波動警示：</strong>2026年5月底盤中創歷史高點NT$2,585後，因市場傳出NVIDIA 800V HVDC架構可能延後至2028年後導入，加上全球AI股去槓桿式重挫，股價於7/28一度殺至跌停探至NT$1,425（波段跌幅45%），7/30法說會EPS優於預期但毛利率不如預期，凱基下修目標價13.9%至2,505元。現價NT$1,580對應TTM PE 50.3x、2026F PE約39x，仍高於歷史平均本益比，波動風險極高，本報告將完整呈現業務結構、財報細節與財務體質。
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <span style="color:var(--accent);font-weight:700;">深度研究</span>
+  <a href="#intro">基本介紹</a><a href="#engine">業務引擎</a><a href="#thesis">Thesis</a><a href="#competition">競爭</a><a href="#moat">象限/護城河</a>
+  <span class="sep">｜</span>
+  <span style="color:var(--yellow);font-weight:700;">財報解析</span>
+  <a href="#beatmiss">Beat/Miss</a><a href="#guidance">指引</a><a href="#reaction">股價反應</a><a href="#scenario">情境估值</a><a href="#eps">EPS/PE</a><a href="#comps">Comps</a><a href="#analyst">投行目標</a>
+  <span class="sep">｜</span>
+  <span style="color:var(--green);font-weight:700;">財務健檢</span>
+  <a href="#fsdata">財務數據</a><a href="#ratios">六大比率</a><a href="#debt">債務</a><a href="#capex">CapEx</a><a href="#peercomp">同業</a><a href="#diag">診斷</a>
+</div>
+
+<!-- ================================================================
+     MODE 1 深度研究
+     ================================================================ -->
+<div class="section">
+  <div class="mode-header"><span class="mode-badge mode1">MODE 1</span><h2>公司深度研究</h2></div>
+
+  <h3 id="intro">① 基本介紹</h3>
+  <div class="summary-grid">
+    <div class="sum-card"><div class="sval">NT$554.9億</div><div class="slabel">2025全年營收（+31.8% YoY）</div></div>
+    <div class="sum-card"><div class="sval">NT$183.3億</div><div class="slabel">2Q26單季營收（+47.7% YoY）</div></div>
+    <div class="sum-card"><div class="sval">80.2%</div><div class="slabel">2Q26稅後淨利YoY成長</div></div>
+    <div class="sum-card"><div class="sval">NT$9.68</div><div class="slabel">2Q26 EPS（單季史上新高）</div></div>
+    <div class="sum-card"><div class="sval">~40%</div><div class="slabel">AI相關營收佔比（2Q26）</div></div>
+    <div class="sum-card"><div class="sval">83%</div><div class="slabel">伺服器電源2025-28F營收CAGR</div></div>
+    <div class="sum-card"><div class="sval">NT$650-700億</div><div class="slabel">2026年資本支出上修後指引</div></div>
+    <div class="sum-card"><div class="sval">Net Cash</div><div class="slabel">淨負債部位（無淨負債）</div></div>
+  </div>
+  <p>台達電成立於1971年，為全球電源與能源管理解決方案龍頭，2019年收購泰達電（泰國）後於中國、台灣、泰國、印度、斯洛伐克均設有生產基地。公司原以電源供應器、被動元件、散熱模組等傳統電子零組件起家，近年憑藉在AI伺服器電源轉換、資料中心液冷與電池備援系統（BBU）的深厚積累，快速從「電子零組件廠」轉型為「AI基礎設施電力核心供應商」，2026年1月市值一度超越鴻海躍居台股第二大權值股。目前公司在AI伺服器電源解決方案市佔率約50-60%，並入列NVIDIA 800V HVDC技術18家供應鏈名單之一。</p>
+
+  <h3 id="engine">② 業務引擎分析</h3>
+  <table>
+    <tr><th>業務類別</th><th>2Q26營收佔比</th><th>2025營收成長</th><th>主要事業群/產品</th><th>護城河</th></tr>
+    <tr><td><b>電源及零組件</b></td><td>~53%</td><td><b>+69%</b></td><td>PSBG電源系統（伺服器/DT/筆電/家電電源）、CPBG零組件（被動元件-乾坤、光纖收發器）、FMBG風扇散熱</td><td>50年電源轉換技術積累、伺服器電源全球市佔50-60%、與NVIDIA/主要ODM長期設計導入關係</td></tr>
+    <tr><td><b>基礎設施</b></td><td>~34%</td><td>+13%（ICTBG段+41%）</td><td>ICTBG資料中心基礎設施（液冷系統、BBU、線上式UPS、電信電源、網通）、EISBG能源基礎設施（太陽能逆變器、風電、EV充電站、中壓驅動）</td><td>液冷+電源+UPS一站式解決方案、資料中心客戶關係深、Computex展示260kW液冷側車方案</td></tr>
+    <tr><td><b>自動化</b></td><td>~8%</td><td>+9%</td><td>IABG工業自動化（伺服馬達/變頻器/PLC/機器手臂）、BABG樓宇自動化（LED照明/監視攝影）</td><td>中度，工控領域面對日系(Yaskawa)、歐系(Siemens)競爭</td></tr>
+    <tr><td><b>交通</b></td><td>~4%</td><td><b>-16%（拖累段）</b></td><td>EVSBG電動車解決方案（車載充電器、DC-DC轉換器、感應馬達）</td><td>電動車需求疲軟，2026年展望仍無明顯回升（凱基預估）</td></tr>
+  </table>
+  <h4>近4年財務摘要（年度）</h4>
+  <table>
+    <tr><th>年度</th><th>營收</th><th>YoY</th><th>營業利益率</th><th>EPS</th><th>自由現金流</th></tr>
+    <tr><td>2022A</td><td>NT$3,844億</td><td>+22.0%</td><td>10.8%</td><td>NT$12.58</td><td>—</td></tr>
+    <tr><td>2023A</td><td>NT$4,012億</td><td>+4.4%</td><td>10.2%</td><td>NT$12.86</td><td>—</td></tr>
+    <tr><td>2024A</td><td>NT$4,211億</td><td>+5.0%</td><td>11.3%</td><td>NT$13.56</td><td>NT$226億</td></tr>
+    <tr><td>2025A</td><td>NT$5,549億</td><td>+31.8%</td><td>15.1%</td><td>NT$23.14</td><td>NT$185億</td></tr>
+  </table>
+  <div class="note">2022-2023年為傳統工業/消費性電子需求疲軟期，成長趨緩；2024年起AI資料中心電源需求開始貢獻，2025年營收成長率倍增至31.8%，營業利益率同步擴張。2025年FCF因資本支出大幅增加（NT$461億，YoY+37.9%）而較2024年略降，屬產能擴張期的正常現象。資料來源：Goodinfo、凱基投顧2026-07-30報告。</div>
+
+  <h3 id="thesis">③ 核心 Thesis 與未來性</h3>
+  <div class="cards2">
+    <div class="card"><h5><span class="badge ok">✅</span> AI資料中心電源/液冷需求是真實且已實現獲利的結構性成長</h5><p>不同於題材股僅有訂單承諾，台達電2Q26稅後淨利已年增80.2%、EPS創單季新高，AI營收占比達~40%，資料中心占營收比重預估將由2025年46%提升至2028年79%（凱基）。</p></div>
+    <div class="card"><h5><span class="badge ok">✅</span> 供應鏈卡位優勢明確</h5><p>伺服器電源全球市佔50-60%，入列NVIDIA 800V HVDC 18家供應商名單，2025-28F伺服器電源營收CAGR達83%（凱基預估）。</p></div>
+    <div class="card"><h5><span class="badge ok">✅</span> 資本支出加碼強化長期壁壘</h5><p>2026年CapEx指引由原550-600億上修至650-700億元，積極擴充泰國/美國/台灣/中國產能，並維持8%以上研發費用率強化黑區/灰區固態變壓器(SST)、燃料電池(SOFC)技術。</p></div>
+    <div class="card"><h5><span class="badge warn">⚠️</span> HVDC時程存在延後風險，已引發一次45%崩跌</h5><p>2026年7月市場傳出NVIDIA 800V HVDC架構可能延至2028年後導入，股價從5月高點2,585一度重挫至1,425（-45%），凸顯题材對單一技術路線圖時程的高度敏感性。</p></div>
+    <div class="card"><h5><span class="badge warn">⚠️</span> 零組件缺料壓縮短期毛利率</h5><p>2Q26毛利率35.6%，低於凱基預估1.2個百分點，主因功率半導體等零組件缺料（部分料號交期逾6個月）、產品組合轉差及存貨跌價損失，管理層表示正與客戶協商轉嫁成本，效益預期2H26逐步顯現。</p></div>
+    <div class="card"><h5><span class="badge bad">❌</span> 估值已大幅超前基本面，重演式波動風險高</h5><p>現價NT$1,580對應2026F PE約39x，高於過去5年平均年度收盤PE約29.4x；交通(EV)事業群持續虧損拖累（2Q26營收-16%YoY），並非全業務線皆受惠AI成長。</p></div>
+  </div>
+  <div class="risk-card"><h5>風險一：NVIDIA 800V HVDC技術路線圖延遲</h5><p>觸發條件：NVIDIA正式公告800V架構導入時程延後至2028年後；影響：市場對「戴維斯雙擊」式估值重估邏輯瓦解，2027-28F EPS預估可能同步下修，本益比向歷史均值（~29x）甚至更低修正。嚴重度：🔴 高（7月已實際發生過一次類似情境，導致45%崩跌）。</p></div>
+  <div class="risk-card"><h5>風險二：零組件缺料與成本轉嫁進度不如預期</h5><p>觸發條件：功率半導體等關鍵零組件供給持續緊張超過2H26；影響：毛利率修復不如凱基預期（39.5% 2027F），營益率成長動能減弱。嚴重度：🟡 中。</p></div>
+  <div class="risk-card"><h5>風險三：全球景氣逆風與台股系統性風險</h5><p>觸發條件：全球去槓桿賣壓延續（如7月底台股單週出現史上最大跌點與最大反彈的極端波動）、關稅政策衝擊出口；影響：即便公司基本面無虞，股價仍可能因大盤系統性風險同步下殺（如7/28台達電、國巨等權值股法說會前集體跌停即屬此類）。嚴重度：🟡 中（凱基官方風險提示：全球景氣逆風）。</p></div>
+  <div class="risk-card"><h5>風險四：交通（電動車）事業群持續虧損</h5><p>觸發條件：全球EV銷售動能未回升；影響：EVSBG營收2Q26年減16%，凱基預估2026年電動車需求仍無明顯回升，該事業群持續拖累整體毛利率結構。嚴重度：🟢 低（佔營收僅4%，影響有限）。</p></div>
+
+  <h3 id="competition">④ 競爭格局</h3>
+  <table>
+    <tr><th>戰場</th><th>競爭者</th><th>競爭者優勢</th><th>對台達電威脅度</th></tr>
+    <tr><td>AI伺服器電源/資料中心電力</td><td>Vertiv（VRT，美股）、光寶科(2301)</td><td>Vertiv專攻資料中心關鍵基礎設施快速部署；光寶科同步推出800VDC液冷電源機櫃、110kW Power Shelf搶進AI電源</td><td>🟡 中（Vertiv為美股比價指標，光寶科為台廠最直接對手）</td></tr>
+    <tr><td>資料中心液冷/電力管理整體解決方案</td><td>Schneider Electric、Eaton</td><td>Schneider模組化資料中心方案；Eaton以95億美元收購Boyd Thermal強化液冷能力，資金與品牌規模龐大</td><td>🟡 中（歐美廠商在歐美在地客戶關係更深）</td></tr>
+    <tr><td>工業自動化</td><td>Yaskawa（日）、Siemens（德）</td><td>日系伺服馬達/變頻器技術成熟；德系PLC/工控生態系完整</td><td>🟢 低（台達電自動化僅佔8%營收，非核心戰場）</td></tr>
+    <tr><td>電動車電源方案</td><td>各車用Tier 1供應商</td><td>車用認證門檻高，但EV終端需求疲軟壓縮全產業成長</td><td>🟢 低（此段本身佔比小且為拖累段，非競爭力問題）</td></tr>
+  </table>
+
+  <h3 id="moat">⑤ 成長象限與護城河</h3>
+  <table>
+    <tr><th>判斷依據</th><th>說明</th><th>評分</th></tr>
+    <tr><td>成長動能</td><td>2Q26營收YoY+47.7%、稅後淨利YoY+80.2%，2026-28F EPS成長率預估75%/63%/52%</td><td>高速成長</td></tr>
+    <tr><td>週期性</td><td>電源零組件本業具電子景氣循環屬性；AI資料中心資本支出週期亦有波動風險（如HVDC時程延遲疑慮）</td><td>複合型（成長中帶產業循環）</td></tr>
+    <tr><td>估值特性</td><td>TTM PE 50.3x、2026F PE ~39x，明顯高於5年平均年度收盤PE ~29.4x，估值已提前反映高成長預期</td><td>高預期定價，安全邊際有限</td></tr>
+  </table>
+  <p style="color:var(--orange);font-weight:600;">象限：<span style="color:var(--text);">高速成長股（AI資料中心電力核心供應商）→ 獲利已實質兌現（非僅題材），但估值波動性極大，7月單月即經歷45%崩跌與其後反彈，投資人須能承受劇烈波動並緊盯HVDC執行進度</span></p>
+  <div class="moat-grid">
+    <div class="moat-card"><div class="mname">不可替代性</div><div class="stars">⭐⭐⭐⭐</div></div>
+    <div class="moat-card"><div class="mname">網路效應</div><div class="stars">⭐⭐</div></div>
+    <div class="moat-card"><div class="mname">客戶黏著度</div><div class="stars">⭐⭐⭐⭐</div></div>
+    <div class="moat-card"><div class="mname">成本優勢</div><div class="stars">⭐⭐⭐½</div></div>
+    <div class="moat-card"><div class="mname">規模效應</div><div class="stars">⭐⭐⭐⭐</div></div>
+  </div>
+  <p style="text-align:center;color:var(--accent);font-weight:700;">護城河綜合評分：3.6 / 5 ★（電源技術與客戶關係壁壘扎實，網路效應偏弱屬硬體業本質）</p>
+</div>
+
+<hr class="divider">
+
+<!-- ================================================================
+     MODE 2 財報解析
+     ================================================================ -->
+<div class="section">
+  <div class="mode-header"><span class="mode-badge mode2">MODE 2</span><h2>最新財報解析（2Q26，2026-07-30法說會）</h2></div>
+
+  <h3 id="beatmiss">① Beat / Miss 對照表</h3>
+  <table>
+    <tr><th>項目</th><th>2Q26實際值</th><th>凱基預期</th><th>差異</th><th>YoY</th><th>判定</th></tr>
+    <tr><td>營收</td><td>NT$1,832.56億</td><td>NT$1,789.85億</td><td>+2.4%</td><td>+47.7%</td><td><span class="badge ok">✅ Beat</span></td></tr>
+    <tr><td>毛利</td><td>NT$653.08億</td><td>NT$658.67億</td><td>-0.8%</td><td>+48.3%</td><td><span class="badge warn">⚠️ 輕微Miss</span></td></tr>
+    <tr><td>營業利益</td><td>NT$305.70億</td><td>NT$320.39億</td><td>-4.6%</td><td>+63.7%</td><td><span class="badge warn">⚠️ Miss</span></td></tr>
+    <tr><td>稅後淨利</td><td>NT$251.36億</td><td>NT$234.93億</td><td>+7.0%</td><td>+80.2%</td><td><span class="badge ok">✅ Beat（業外貢獻大）</span></td></tr>
+    <tr><td>EPS</td><td>NT$9.68</td><td>NT$9.04</td><td>+7.0%</td><td>+80.3%</td><td><span class="badge ok">✅ Beat</span></td></tr>
+    <tr><td>毛利率</td><td>35.6%</td><td>36.8%</td><td>-1.2ppts</td><td>+0.1ppts</td><td><span class="badge warn">⚠️ Miss（零組件缺料所致）</span></td></tr>
+    <tr><td>營業利益率</td><td>16.7%</td><td>17.9%</td><td>-1.2ppts</td><td>+1.6ppts</td><td><span class="badge warn">⚠️ Miss</span></td></tr>
+  </table>
+  <div class="note">2Q26 EPS雖優於凱基預期7%，惟主要來自業外收益貢獻（其他營業外收入達NT$27.2億），本業毛利率與營益率均遜於預期，主因功率半導體等零組件供應吃緊（部分料號交期逾6個月）推升成本、產品組合轉差及存貨跌價損失（-1.1ppts）。伺服器電源2Q26受缺料影響，營收僅季增16%、占比30%；交通及自動化部門則呈現虧損。資料來源：凱基投顧2026-07-30報告。</div>
+
+  <h3 id="guidance">② 全年指引變化</h3>
+  <table>
+    <tr><th>指標</th><th>本次（2026-07-30後）</th><th>前次</th><th>調幅</th><th>備註</th></tr>
+    <tr><td>2026年資本支出</td><td>NT$650-700億</td><td>約NT$550-600億</td><td><b>上調逾NT$100億</b></td><td>因應2-3年後強勁AI基礎設施需求，擴充泰國/美國/台灣/中國產能</td></tr>
+    <tr><td>2026F營收</td><td>NT$7,757.94億（+39.8% YoY）</td><td>NT$7,749.29億</td><td>+0.1%</td><td>凱基上修，與市場共識(NT$7,686.62億)相近(+0.9%)</td></tr>
+    <tr><td>2026F EPS</td><td>NT$40.57</td><td>NT$41.54</td><td>-2.3%</td><td>因毛利率預估下修抵銷營收上修</td></tr>
+    <tr><td>2027F EPS</td><td>NT$66.29</td><td>NT$72.01</td><td><b>-7.9%</b></td><td>下修反映零組件成本壓力與費用率上升假設</td></tr>
+    <tr><td>2028F EPS</td><td>NT$100.71</td><td>NT$109.84</td><td><b>-8.3%</b></td><td>同上</td></tr>
+    <tr><td>研發費用率</td><td colspan="4">預期維持8%以上，2025-28年營業費用CAGR上調至37%（對比營收CAGR 43%）</td></tr>
+    <tr><td>資料中心營收占比展望</td><td colspan="4">2025年46% → 2026F 60% → 2027F 71% → 2028F 79%；伺服器電源2025-28年營收CAGR達83%</td></tr>
+  </table>
+  <div class="note">凱基雖上調2026年營收預估，但同步下修2026-28年EPS預估2%、8%、8%，主因反映零組件成本上升壓力及較高的營業費用率假設；整體屬「量增、質(利潤率)緩」的財測修正。</div>
+
+  <h3 id="reaction">③ 股價反應</h3>
+  <table>
+    <tr><th>時間點</th><th>事件</th><th>股價</th><th>說明</th></tr>
+    <tr><td>2026年初</td><td>AI電源題材發酵，市值超車鴻海躍居台股第二大權值股</td><td>快速上漲</td><td>NVIDIA 800V HVDC供應鏈名單公布，市場重新定位為AI基礎設施核心股</td></tr>
+    <tr><td>2026年5月底</td><td>股價創歷史盤中新高</td><td>NT$2,585（52週高點）</td><td>AI電源+液冷題材持續發酵，法說會前外資喊價2,600元</td></tr>
+    <tr><td>2026-07-28</td><td>市場傳NVIDIA 800V HVDC延後至2028年後導入，加上全球AI股去槓桿賣壓、台股大盤重挫逾2,000點</td><td>盤中跌停，殺至NT$1,425</td><td>波段跌幅達45%；同日國巨等權值股同步重挫，屬系統性＋題材雙重利空</td></tr>
+    <tr><td>2026-07-29</td><td>台股連日重挫（2天狂瀉3,595點），台達電再度盤中觸及跌停</td><td>探至近3個半月低點</td><td>法說會前市場情緒極度悲觀</td></tr>
+    <tr><td>2026-07-30</td><td>2Q26法說會：EPS優於預期但毛利率遜於預期，凱基下修目標價13.9%至2,505元（惟維持「增加持股」評等）</td><td>盤中一度強漲8%重返1,600元</td><td>法人認為止穩跡象出現，全年資本支出上修700億元提振信心</td></tr>
+    <tr><td>2026-08-03（分析當日）</td><td>台股延續劇烈震盪（一週內出現史上最大跌點與最大反彈）</td><td>NT$1,580（-3.66%）</td><td>近1年仍上漲169%，但季度跌幅達28.8%，波動風險極高</td></tr>
+  </table>
+
+  <h3 id="scenario">④ 三情境估值</h3>
+  <div class="cards3">
+    <div class="scenario-card bear">
+      <h5>🐻 熊市情境</h5>
+      <ul>
+        <li>NVIDIA 800V HVDC正式延後至2028年後導入，市場重新定價成長時程</li>
+        <li>伺服器電源CAGR降至~40-50%（vs基準83%），零組件缺料延續壓抑毛利率於35-37%區間</li>
+        <li>2027F EPS下修至約NT$50-55（較凱基基準低20%+）</li>
+        <li>本益比向5年歷史平均~29x或更低修正（重演7月45%崩跌情境）</li>
+      </ul>
+      <div class="target">目標價：約NT$1,450–1,600（貼近5年均值PE反推、及7月實際低點）</div>
+    </div>
+    <div class="scenario-card base">
+      <h5>⚖️ 基準情境（凱基官方預測）</h5>
+      <ul>
+        <li>±400V DC於2H26小量出貨，800V DC架構2027年逐步放量</li>
+        <li>2026-28F EPS：40.57／66.29／100.71元（YoY +75%/+63%/+52%）</li>
+        <li>資料中心營收占比60%(26F)→71%(27F)→79%(28F)</li>
+        <li>目標本益比30倍（2027-28F EPS平均83.5元），自32倍下修</li>
+      </ul>
+      <div class="target">目標價：NT$2,505（凱基官方，較現價+58.5%）</div>
+    </div>
+    <div class="scenario-card bull">
+      <h5>🚀 牛市情境</h5>
+      <ul>
+        <li>800V HVDC如期於2027年放量，無延遲，伺服器電源CAGR維持83%以上</li>
+        <li>毛利率修復優於預期（缺料緩解快於2H26），2027-28F EPS優於凱基基準10-15%</li>
+        <li>市場情緒回穩，本益比向5月高點時期水準（隱含2027F PE約39x）修復</li>
+      </ul>
+      <div class="target">目標價：約NT$2,600–2,800（重返/略超歷史高點區間）</div>
+    </div>
+  </div>
+  <div class="note">⚠️ 三情境均基於合理推算及凱基官方財測外推。敏感度：HVDC技術路線圖執行時程是最大估值驅動變數（7月已實際驗證：單一延遲傳聞可造成45%崩跌）；其次為零組件缺料緩解速度（影響毛利率修復斜率）。<b>現價NT$1,580已隱含相當程度樂觀預期（2026F PE ~39x），介於熊市與基準情境之間，波動風險遠高於一般成長股。</b></div>
+
+  <h3 id="eps">⑤ EPS 多年趨勢 ＋ 歷史本益比</h3>
+  <table>
+    <tr><th>年度</th><th>EPS</th><th>YoY成長</th><th>狀態</th><th>來源</th></tr>
+    <tr><td>2022</td><td>NT$12.58</td><td>+21.9%</td><td><span class="badge ok">A 實際</span></td><td>Goodinfo</td></tr>
+    <tr><td>2023</td><td>NT$12.86</td><td>+2.2%</td><td><span class="badge ok">A 實際</span></td><td>Goodinfo</td></tr>
+    <tr><td>2024</td><td>NT$13.56</td><td>+5.4%</td><td><span class="badge ok">A 實際</span></td><td>Goodinfo／凱基</td></tr>
+    <tr><td>2025</td><td>NT$23.14</td><td><b>+70.6%</b></td><td><span class="badge ok">A 實際</span></td><td>Goodinfo／凱基</td></tr>
+    <tr><td>2026</td><td>NT$40.57</td><td><b>+75.3%</b></td><td><span class="badge warn">E 預估（凱基）</span></td><td>凱基2026-07-30</td></tr>
+    <tr><td>2027</td><td>NT$66.29</td><td>+63.4%</td><td><span class="badge warn">E 預估（凱基）</span></td><td>凱基2026-07-30</td></tr>
+    <tr><td>2028</td><td>NT$100.71</td><td>+51.9%</td><td><span class="badge warn">E 預估（凱基）</span></td><td>凱基2026-07-30</td></tr>
+  </table>
+  <div class="note">上半年2026年（1H26）EPS已達NT$17.59（Q1 7.91 + Q2 9.68），創歷史同期新高。2026-28年EPS預估僅取得凱基投顧單一來源，未查得其他機構完整多年EPS預估以交叉比對，需留意「區間跨度」風險——市場FactSet調查歷次揭露的2026F EPS曾於35.67-39.30元間多次調整（依鉅亨網歷次「Factset最新調查」報導），顯示分析師預期本身也在快速變動中。</div>
+
+  <h4>歷史本益比（年度收盤價 ÷ 當年EPS）</h4>
+  <table>
+    <tr><th>時間點</th><th>年度收盤PE</th><th>說明</th></tr>
+    <tr><td>2018年（市場修正年）</td><td><b>18.5x</b>（收盤129.5元 ÷ EPS 7.00）</td><td>近8年年度收盤本益比最低點</td></tr>
+    <tr><td>2022年（熊市谷底）</td><td><b>22.8x</b>（收盤286.5元 ÷ EPS 12.58）</td><td>2022年全球升息熊市，台股大幅修正</td></tr>
+    <tr><td>2023年</td><td>24.4x（收盤313.5元 ÷ EPS 12.86）</td><td>—</td></tr>
+    <tr><td>2024年</td><td>31.8x（收盤430.5元 ÷ EPS 13.56）</td><td>AI題材開始反映</td></tr>
+    <tr><td>2025年</td><td>41.6x（收盤963元 ÷ EPS 23.14）</td><td>AI電源獲利實質兌現，估值大幅擴張</td></tr>
+    <tr><td>5年平均（2021-2025）</td><td><b>~29.4x</b></td><td>(26.6+22.8+24.4+31.8+41.6)/5，未經過濾極端值</td></tr>
+    <tr><td>當前（2026-08-03，TTM PE）</td><td><b>50.3x</b></td><td>現價1,580 ÷ 近四季EPS 31.42（Goodinfo）</td></tr>
+    <tr><td>當前（2026F forward PE）</td><td><b>~38.9x</b></td><td>現價1,580 ÷ 2026F EPS 40.57（凱基）</td></tr>
+  </table>
+  <h4>反推試算（必寫結論）</h4>
+  <div class="note">
+    用5年平均本益比29.4x × 2026F保守EPS 40.57元 反推 ＝ NT$1,193，<b>低於現價1,580約24%</b>；用2018年史上最低本益比18.5x × 2026F EPS反推 ＝ NT$750，<b>僅現價的47%</b>；即便用2022熊市底部PE 22.8x反推亦僅NT$925。<br><br>
+    <b>結論：現價NT$1,580主要由「本益比倍數擴張」撐起，而非單純EPS成長支撐。</b>當前2026F PE(~39x)、TTM PE(50.3x)均遠高於過去5年平均(~29.4x)及歷史修正低點(18.5-22.8x)。7月股價曾因單一技術路線圖傳聞在數日內重挫45%（PE一度壓回至約26-30x區間，貼近歷史均值），驗證此股估值對「AI敘事是否持續兌現」高度敏感——一旦成長不如預期，本益比向歷史均值甚至修正低點回歸的風險不容忽視。長期投資人應將此股視為「基本面已兌現但估值仍具題材股波動特徵」的複合型標的，非傳統安全邊際框架下的低估值標的。
+  </div>
+
+  <h3 id="comps">⑥ 可比公司（Comps）</h3>
+  <table>
+    <tr><th>公司</th><th>市值</th><th>Forward PE</th><th>2025-28F成長定位</th><th>備註</th></tr>
+    <tr><td><b>台達電（2308）</b></td><td>~NT$4.1兆</td><td>~38.9x（2026F）／~23.8x（2027F）</td><td>AI電源+液冷，2026-28F EPS CAGR約63%</td><td>本報告主體</td></tr>
+    <tr><td>光寶科（2301）</td><td>—⚠️未查得精確值</td><td>~32-37x</td><td>同步布局800VDC液冷電源機櫃，AI電源佔比提升中</td><td>台廠最直接對手，規模較小</td></tr>
+    <tr><td>Vertiv（VRT，美股）</td><td>~US$93-115B（不同來源落差大）</td><td>~35-44x（不同來源落差大）</td><td>資料中心關鍵基礎設施（電力+散熱），美股AI電力比價指標</td><td>⚠️多來源數字分歧大，反映市場對此類股估值本身波動劇烈</td></tr>
+    <tr><td>Eaton（ETN，美股）</td><td>~US$154.8B</td><td>~31.4x</td><td>電力管理，以95億美元收購Boyd Thermal強化資料中心液冷</td><td>工業產品類股平均Forward PE僅18.76x，ETN溢價67%</td></tr>
+    <tr><td>Schneider Electric（SU，法股）</td><td>~€153.4B</td><td>~26-30x（不同來源落差大）</td><td>模組化資料中心方案，AI高密度冷卻布局</td><td>部分機構評估「適度高估」</td></tr>
+  </table>
+  <div class="note">台達電2026F Forward PE(~38.9x)與美系資料中心電力龍頭(Vertiv/Eaton, ~31-44x)大致同一區間，但台達電2027F PE已降至~23.8x，反映其更陡峭的EPS成長曲線（2026-28F EPS CAGR約63% vs Eaton/Schneider個位數至十位數成長）；若2027-28年獲利兌現，台達電相對成長估值(PEG)優於多數海外同業。惟需注意：美股同業Forward PE本身在不同資料源間落差極大(Vertiv 34.5x-53.8x)，顯示整個AI電力基礎設施類股估值目前普遍處於高波動、高分歧狀態，並非台達電獨有現象。</div>
+
+  <h3 id="analyst">⑦ 投行目標價與操作建議</h3>
+  <table>
+    <tr><th>機構</th><th>評等</th><th>目標價</th><th>公式/依據</th><th>時間</th></tr>
+    <tr><td>凱基投顧</td><td>增加持股（維持）</td><td>NT$2,505（原2,910，下調13.9%）</td><td>2027-28F EPS平均83.5元 × 30倍PE（自32倍下修，對比歷史區間17-47倍）</td><td>2026-07-30</td></tr>
+    <tr><td>大和資本（Daiwa）</td><td>—</td><td>NT$2,440（原目標，上修49%）</td><td>目標本益比自40倍上修至50倍</td><td>2026年4月</td></tr>
+    <tr><td>富邦投顧</td><td>—</td><td>NT$2,200</td><td>⚠️原文未附完整計算公式</td><td>2026年4月</td></tr>
+    <tr><td>摩根士丹利</td><td>—</td><td>NT$2,440（另一報導稱1,638，時間點不同）</td><td>⚠️不同時間報導數字差異大，疑為不同月份評等</td><td>2026年1-4月間，需以最新為準</td></tr>
+  </table>
+  <div class="note">⚠️ 不同時間點、不同機構的目標價落差極大（NT$1,600~2,900區間跨度），反映此股題材敏感度極高，法人評等本身也在7月的崩跌與反彈中快速調整（如凱基單次即下修13.9%）。本報告僅以能查證到完整計算公式的凱基最新報告(2026-07-30)為主要依據，其餘數字因原文公式細節有限，僅供參考，不代表當前最新共識。</div>
+  <table>
+    <tr><th>參考目標</th><th>水位</th><th>距現價（NT$1,580）</th></tr>
+    <tr><td>凱基最新目標價（2027-28F平均EPS×30x）</td><td>NT$2,505</td><td>+58.5%</td></tr>
+    <tr><td>52週歷史高點（2026-05底）</td><td>NT$2,585</td><td>+63.6%</td></tr>
+    <tr><td>7月低點（HVDC延遲恐慌）</td><td>NT$1,425</td><td>-9.8%（現價已高於此低點）</td></tr>
+    <tr><td>5年平均PE反推（29.4x × 2026F EPS）</td><td>NT$1,193</td><td>-24.5%</td></tr>
+  </table>
+  <div class="action-box">
+    <h4>🦊 個股小狐操作建議（高波動成長股，需嚴格紀律）</h4>
+    <div class="row"><span class="lbl">核心判斷</span><span>基本面確實兌現（EPS已實質成長非僅題材），但估值波動劇烈——單月可因單一傳聞崩跌45%又反彈；現價落於「歷史均值反推價NT$1,193」與「凱基目標價NT$2,505」中段偏低，安全邊際有限但非最高風險區</span></div>
+    <div class="row"><span class="lbl">已持有者</span><span>可續抱核心持股，但因波動幅度極大（季度跌幅近29%），建議控制單一部位比重，避免因情緒追高在NT$2,000+加碼</span></div>
+    <div class="row"><span class="lbl">未持有者</span><span>若看好AI電源長期趨勢，可考慮於NT$1,400-1,600區間（貼近7月低點與歷史均值反推價之間）分批小額建倉，不宜追高整股佈局</span></div>
+    <div class="row"><span class="lbl">加碼觸發</span><span>①2H26毛利率確認回升至37%以上（缺料緩解訊號）；②NVIDIA正式確認800V HVDC時程未延遲；③股價回落至NT$1,200-1,400歷史均值反推區間</span></div>
+    <div class="row"><span class="lbl">停損/減碼警示</span><span>NVIDIA正式公告HVDC延後2028年後；伺服器電源YoY成長跌破50%；毛利率連續兩季低於35%</span></div>
+    <div class="row"><span class="lbl">每季監控</span><span>伺服器電源/ICTBG營收YoY；毛利率修復進度；資本支出執行與資料中心營收占比達成率；交通(EV)事業群虧損收斂情形</span></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ================================================================
+     MODE 3 財務健檢
+     ================================================================ -->
+<div class="section">
+  <div class="mode-header"><span class="mode-badge mode3">MODE 3</span><h2>財務風險健檢</h2></div>
+
+  <h3 id="fsdata">① 財務數據（三期對照）</h3>
+  <table>
+    <tr><th>損益表（NT$百萬）</th><th>2024A</th><th>2025A</th><th>2026F</th></tr>
+    <tr><td>營業收入</td><td>421,148 ✅</td><td>554,885 ✅</td><td>775,794（凱基預估）</td></tr>
+    <tr><td>營業毛利</td><td>136,580 ✅</td><td>190,157 ✅</td><td>285,163（預估）</td></tr>
+    <tr><td>營業利益(EBIT)</td><td>47,652 ✅</td><td>83,932 ✅</td><td>141,698（預估）</td></tr>
+    <tr><td>EBITDA</td><td>72,668 ✅</td><td>111,771 ✅</td><td>175,797（預估）</td></tr>
+    <tr><td>利息費用</td><td>1,547 ✅</td><td>2,216 ✅</td><td>2,238（預估）</td></tr>
+    <tr><td>稅後淨利</td><td>35,229 ✅</td><td>60,108 ✅</td><td>105,393（預估）</td></tr>
+  </table>
+  <table>
+    <tr><th>資產負債表（NT$百萬）</th><th>2024A</th><th>2025A</th><th>2026F</th></tr>
+    <tr><td>總資產</td><td>531,898 ✅</td><td>639,619 ✅</td><td>804,653（預估）</td></tr>
+    <tr><td>總負債</td><td>252,332 ✅</td><td>314,230 ✅</td><td>387,295（預估）</td></tr>
+    <tr><td>股東權益</td><td>279,565 ✅</td><td>325,389 ✅</td><td>417,358（預估）</td></tr>
+    <tr><td>現金及短期投資</td><td>121,793 ✅</td><td>155,113 ✅</td><td>186,062（預估）</td></tr>
+    <tr><td>短期借款</td><td>8,121 ✅</td><td>17,325 ✅</td><td>22,607（預估）</td></tr>
+    <tr><td>長期借款</td><td>56,309 ✅</td><td>56,703 ✅</td><td>48,031（預估）</td></tr>
+    <tr><td>計息負債合計</td><td>64,430</td><td>74,028</td><td>70,638</td></tr>
+    <tr><td>淨現金部位</td><td>57,363（淨現金）</td><td>81,085（淨現金）</td><td>115,424（淨現金）</td></tr>
+  </table>
+  <table>
+    <tr><th>現金流量（NT$百萬）</th><th>2024A</th><th>2025A</th><th>2026F</th></tr>
+    <tr><td>營運活動現金流(OCF)</td><td>72,895 ✅</td><td>98,474 ✅</td><td>132,695（預估）</td></tr>
+    <tr><td>資本支出(CapEx)</td><td>33,430 ✅</td><td>46,091 ✅</td><td>67,451（預估，已反映上修後650-700億指引）</td></tr>
+    <tr><td>自由現金流(FCF)</td><td>22,634 ✅</td><td>18,478 ✅</td><td>19,085（預估）</td></tr>
+  </table>
+  <div class="note">數據來源：凱基投顧2026-07-30報告完整財務預估表。台達電資產負債表計息負債規模遠低於現金部位，2024-28年各年度均維持「淨現金」（Net Cash）狀態，非依賴槓桿擴張的成長型公司。2026F FCF因資本支出大幅提高至650-700億元而暫時受壓，凱基預估自2027F起（CapEx/營收占比下降、營收規模放大）FCF將加速成長至NT$636億(27F)、1,384億(28F)。</div>
+
+  <h3 id="ratios">② 六大比率診斷</h3>
+  <div class="ratio-grid">
+    <div class="ratio-card ok">
+      <div class="rname">① 利息覆蓋率（EBIT/利息費用）</div>
+      <div class="rval" style="color:var(--green);">40.7x（2025A）</div>
+      <div>EBIT 839.32億 ÷ 利息費用22.16億（凱基官方計算，2024A為34.2x、2026F預估69.5x）</div>
+      <div class="rwarn">警戒：&lt;3x ｜ 優良：>5x</div>
+      <div style="margin-top:5px;"><span class="badge ok">✅ 極度安全</span></div>
+    </div>
+    <div class="ratio-card warn">
+      <div class="rname">② 負債比率（總負債/總資產）</div>
+      <div class="rval" style="color:var(--yellow);">49.1%（2025A）</div>
+      <div>總負債3,142.3億 ÷ 總資產6,396.19億；惟多數負債為應付帳款等營運性負債非金融負債</div>
+      <div class="rwarn">警戒：>70% ｜ 優良：&lt;40%</div>
+      <div style="margin-top:5px;"><span class="badge warn">⚠️ 中等（結構良性）</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="rname">③ 淨負債/EBITDA</div>
+      <div class="rval" style="color:var(--green);">淨現金（負值）</div>
+      <div>淨現金810.85億，優於EBITDA的1,117.71億（2025A），公司無淨負債</div>
+      <div class="rwarn">警戒：>4x ｜ 優良：&lt;2x</div>
+      <div style="margin-top:5px;"><span class="badge ok">✅ 優異（無淨負債）</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="rname">④ OCF/計息負債</div>
+      <div class="rval" style="color:var(--green);">1.33x（2025A）</div>
+      <div>OCF 984.74億 ÷ 計息負債740.28億</div>
+      <div class="rwarn">警戒：&lt;0.2x ｜ 優良：>0.5x</div>
+      <div style="margin-top:5px;"><span class="badge ok">✅ 極度充裕</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="rname">⑤ FCF覆蓋比率（FCF/利息費用）</div>
+      <div class="rval" style="color:var(--green);">8.3x（2025A）</div>
+      <div>FCF 184.78億 ÷ 利息費用22.16億（2026F預估8.5x）</div>
+      <div class="rwarn">警戒：&lt;1.2x ｜ 優良：>2x</div>
+      <div style="margin-top:5px;"><span class="badge ok">✅ 充裕</span></div>
+    </div>
+    <div class="ratio-card ok">
+      <div class="rname">⑥ 流動比率／到期牆覆蓋</div>
+      <div class="rval" style="color:var(--green);">1.9x（2025A流動比率）</div>
+      <div>流動資產3,957.81億 ÷ 流動負債2,096.65億；⚠️逐年到期細項未查得，建議查台達電年報附註</div>
+      <div class="rwarn">警戒：&lt;1.5x ｜ 優良：>3x（到期牆標準）</div>
+      <div style="margin-top:5px;"><span class="badge ok">✅ 尚可（淨現金部位下到期風險極低）</span></div>
+    </div>
+  </div>
+
+  <h3 id="debt">③ 債務到期時程</h3>
+  <table>
+    <tr><th>說明</th><th>金額</th><th>備註</th></tr>
+    <tr><td>短期借款（2025A）</td><td>NT$173.25億</td><td>—</td></tr>
+    <tr><td>長期借款（2025A）</td><td>NT$567.03億</td><td>—</td></tr>
+    <tr><td>計息負債合計（2025A）</td><td>NT$740.28億</td><td>對比現金1,551.13億，淨現金810.85億</td></tr>
+    <tr><td>逐年到期分佈細項</td><td colspan="2">⚠️ 未查得，公開資料未揭露逐年到期表，建議查台達電2025年報財務報表附註「長期借款」章節</td></tr>
+  </table>
+  <div class="note">由於台達電長年維持淨現金部位，即便無法取得逐年到期細項，違約/再融資風險評估上仍屬極低風險等級——公司帳上現金（1,551億）可完全覆蓋全部計息負債（740億），且營運活動現金流每年可再新增近千億元現金。</div>
+
+  <h3 id="capex">④ CapEx 分析</h3>
+  <table>
+    <tr><th>年度</th><th>CapEx</th><th>CapEx/營收</th><th>CapEx/OCF</th><th>說明</th></tr>
+    <tr><td>2024A</td><td>NT$334.30億</td><td>7.9%</td><td>45.9%</td><td>—</td></tr>
+    <tr><td>2025A</td><td>NT$460.91億</td><td>8.3%</td><td>46.8%</td><td>YoY+37.9%，開始加速擴產</td></tr>
+    <tr><td>2026F</td><td>NT$674.51億</td><td>8.7%</td><td>50.8%</td><td>反映上修後650-700億元指引，泰國/美國/台灣/中國四地擴產</td></tr>
+    <tr><td>2027F</td><td>NT$800.00億</td><td>7.1%</td><td>51.8%</td><td>營收成長速度超越CapEx增速，占比開始下降</td></tr>
+    <tr><td>2028F</td><td>NT$900.00億</td><td>5.5%</td><td>37.4%</td><td>規模經濟顯現，FCF加速釋放</td></tr>
+  </table>
+  <div style="margin-top:8px;">
+    <span class="badge warn">⚠️ 中度資產型（成長期加碼中）</span> 台達電CapEx/營收比重目前約8-9%，屬中度資產密集，2026-27年為擴產高峰期；惟凱基預估2028年起CapEx/營收比重將降至5.5%，隨營收規模擴大而稀釋，屆時FCF有望自2026F的190.85億大幅躍升至2028F的1,384.43億，顯示此為「先投入後收成」的典型成長型資本支出週期，而非結構性重資產商業模式。
+  </div>
+
+  <h3 id="peercomp">⑤ 同業財務對比</h3>
+  <table>
+    <tr><th>指標</th><th>台達電（2025A/26F）</th><th>Eaton（ETN，參考）</th><th>Vertiv（VRT，參考）</th></tr>
+    <tr><td>淨負債狀態</td><td>淨現金 ✅（810.85億）</td><td>⚠️未查得精確值</td><td>⚠️未查得精確值</td></tr>
+    <tr><td>營業利益率</td><td>15.1%(25A)→18.3%(26F) ✅</td><td>⚠️未查得</td><td>⚠️未查得</td></tr>
+    <tr><td>Forward PE</td><td>~38.9x（2026F）✅</td><td>~31.4x ✅</td><td>~34.5-53.8x（來源分歧大）⚠️</td></tr>
+    <tr><td>EPS成長動能</td><td>2026-28F CAGR約63% ✅（高成長）</td><td>個位數至十位數成長（一般工業股水準）</td><td>資料中心受惠股，成長性介於兩者間</td></tr>
+    <tr><td>核心成長驅動</td><td>AI伺服器電源＋液冷（結構性）</td><td>電力管理＋液冷收購(Boyd Thermal)</td><td>資料中心關鍵基礎設施（確定性高）</td></tr>
+  </table>
+  <div class="note">台達電財務體質（淨現金、利息覆蓋40x+）優於一般重資產工業股水準，且成長性顯著高於Eaton等傳統電力管理龍頭，惟因海外同業精確財務比率資料有限（多數細項標示⚠️未查得），本比較僅供方向性參考，建議進一步查閱各公司10-K/年報以取得精確可比數字。</div>
+
+  <h3 id="diag">⑥ 綜合診斷</h3>
+  <div class="action-box">
+    <h4 style="color:var(--green);">🏥 財務健康等級：優良（A）— 淨現金部位，獲利與現金流體質扎實</h4>
+    <div class="row"><span class="lbl">財務定性</span><span>台達電為典型「優良主動管理型」財務結構：淨現金部位、利息覆蓋率極高(40.7x)、OCF/計息負債達1.33x，即便2026-27年資本支出大幅加碼(650-700億)，帳上現金仍足以完全覆蓋全部計息負債</span></div>
+    <div class="row"><span class="lbl">最大財務風險</span><span>非傳統違約/槓桿風險，而是「估值風險」——若EBIT成長不如預期，利息覆蓋率仍會維持在極安全區間（EBIT需下滑超過90%以上才觸及警戒線），真正風險在於股價對AI敘事兌現時程的極端敏感度（如7月45%崩跌案例）</span></div>
+    <div class="row"><span class="lbl">核心觀察</span><span>每季追蹤：①毛利率是否如期於2H26回升至37%以上；②CapEx執行進度與資料中心營收占比達成率；③伺服器電源YoY成長是否維持50%以上動能</span></div>
+    <div class="row"><span class="lbl">操作意涵</span><span>財務體質本身無虞（非財務危機股），投資人真正需要管理的是「估值波動風險」而非「償債風險」——建倉/加碼決策應聚焦於本益比相對歷史區間的位階，而非擔憂公司資產負債表健康度</span></div>
+  </div>
+</div>
+
+<footer>
+  資料來源：✅ Goodinfo!台灣股市資訊網（歷年經營績效、即時股價）、✅ 凱基投顧《台達電》2026-07-30研究報告（財測、目標價公式、完整三表）、✅ 鉅亨網/Yahoo股市/ETtoday（法說會新聞、股價事件時間軸）、✅ 台達電法說會公開資訊、⚠️ 光寶科/Vertiv/Eaton/Schneider Electric等同業數據因多來源落差大，部分欄位標示「未查得精確值」或以區間呈現。Futu OpenD不支援台股（TW）市場報價，本報告全數改採WebSearch/WebFetch/瀏覽器工具查證。<br><br>
+  本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。<br>
+  產出時間：2026-08-03 ｜ 個股小狐 完整三模式報告
+</footer>
+</body>
+</html>
