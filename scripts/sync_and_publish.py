@@ -23,14 +23,31 @@ def date_from_name(name):
     m = re.search(r'(\d{4})(\d{2})(\d{2})', name)
     if m:
         return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    # 本機慣用短年份前綴：YYMMDD_ 或 YYMM_（西元20xx年，缺日補01）
+    m = re.match(r'(\d{2})(\d{2})(\d{2})_', name)
+    if m:
+        return f"20{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    m = re.match(r'(\d{2})(\d{2})_', name)
+    if m:
+        return f"20{m.group(1)}-{m.group(2)}-01"
     return "0000-00-00"
 
 
-def _copy_new(src_glob_dir, pattern, dst):
+def clean_report_filename(name):
+    """把本機短年份/自整理/六大機構等標籤轉成網站用的乾淨檔名：YYYYMMDD_標題.html"""
+    stem = name[:-5] if name.lower().endswith(".html") else name
+    yyyymmdd = date_from_name(name).replace("-", "")
+    title = re.sub(r'^\d{2,8}_', '', stem)
+    title = title.replace("自整理_", "").replace("六大機構_", "")
+    return f"{yyyymmdd}_{title}.html"
+
+
+def _copy_new(src_glob_dir, pattern, dst, rename=False):
     copied = []
     dst.mkdir(parents=True, exist_ok=True)
     for f in src_glob_dir.glob(pattern):
-        target = dst / f.name
+        target_name = clean_report_filename(f.name) if rename else f.name
+        target = dst / target_name
         if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
             shutil.copy2(f, target)
             copied.append(str(target))
@@ -62,14 +79,14 @@ def sync_files():
     #           + 長期研究(元大投顧研究報告摘要/投行研究摘要/長期多空判斷準則/LTCMA架構報告 現存於 總體經濟/；
     #             標普500歷次熊市/美股熊市落底判別手冊 現存於 財經書籍知識/；長期研究資料庫索引 現存於 研究報告/ 根目錄)
     # 2026-07-31資料夾重整後，六大類已無專屬子資料夾，改用檔名關鍵字從新分類資料夾中篩選
-    copied += _copy_new(SRC / "研究報告/總體經濟", "*六大機構_投資機構研究摘要*.html", SITE / "research/institutions")
+    copied += _copy_new(SRC / "研究報告/總體經濟", "*六大機構_投資機構研究摘要*.html", SITE / "research/institutions", rename=True)
     copied += _copy_new(SRC / "研究報告/產業研究/產業趨勢研究摘要", "*.html", SITE / "research/industry-trends")
 
-    for pattern in ["*自整理_元大投顧研究報告摘要*.html", "*自整理_投行研究摘要*.html",
-                    "*自整理_長期多空判斷準則*.html", "*自整理_LTCMA2026投資架構整合報告*.html"]:
-        copied += _copy_new(SRC / "研究報告/總體經濟", pattern, SITE / "research/long-term")
-    for pattern in ["*自整理_標普500歷次熊市*.html", "*自整理_美股熊市落底判別手冊*.html"]:
-        copied += _copy_new(SRC / "研究報告/財經書籍知識", pattern, SITE / "research/long-term")
+    for pattern in ["*元大投顧研究報告摘要*.html", "*投行研究摘要*.html",
+                    "*長期多空判斷準則*.html", "*LTCMA2026投資架構整合報告*.html"]:
+        copied += _copy_new(SRC / "研究報告/總體經濟", pattern, SITE / "research/long-term", rename=True)
+    for pattern in ["*標普500歷次熊市*.html", "*美股熊市落底判別手冊*.html"]:
+        copied += _copy_new(SRC / "研究報告/財經書籍知識", pattern, SITE / "research/long-term", rename=True)
     copied += _copy_new(SRC / "研究報告", "長期研究資料庫索引*.html", SITE / "research/long-term")
 
     # 今日板塊流動報告 / 美股資金流雙軌週報（現存於 市場分析/，一週內在頂層，較舊的在 歷史板塊資金報告/ 子資料夾）
@@ -161,7 +178,7 @@ def build_index():
         dated_items.append((d, link(f"research/industry-trends/{f.name}", "產業趨勢研究摘要", d)))
     for f in sorted((SITE / "research/long-term").glob("*.html")):
         d = date_from_name(f.name)
-        title = re.sub(r'_\d{8}$|_\d{4}[-年]\d{2}[-月]\d{2}日?$', '', f.stem)
+        title = re.sub(r'^\d{8}_|_\d{8}$|_\d{4}[-年]\d{2}[-月]\d{2}日?$', '', f.stem)
         href = f"research/long-term/{f.name}"
         if any(k in f.name for k in PINNED_FIRST):
             pinned.append(link(href, f"⭐ {title}", d))
