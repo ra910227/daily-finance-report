@@ -89,6 +89,10 @@ def sync_files():
         copied += _copy_new(SRC / "研究報告/財經書籍知識", pattern, SITE / "research/long-term", rename=True)
     copied += _copy_new(SRC / "研究報告", "長期研究資料庫索引*.html", SITE / "research/long-term")
 
+    # 策略回測與模擬（配置比較/加碼策略/定期投資討論等，現存於 市場分析/）
+    for pattern in ["*四配置科技成長組合回測比較*.html", "*基礎模式逢低加碼策略回測*.html", "*定期投資討論*.html"]:
+        copied += _copy_new(SRC / "研究報告/市場分析", pattern, SITE / "research/long-term", rename=True)
+
     # 今日板塊流動報告 / 美股資金流雙軌週報（現存於 市場分析/，一週內在頂層，較舊的在 歷史板塊資金報告/ 子資料夾）
     for base in [SRC / "研究報告/市場分析", SRC / "研究報告/市場分析/歷史板塊資金報告"]:
         copied += _copy_new(base, "今日板塊流動報告*.html", SITE / "research/sector-flow")

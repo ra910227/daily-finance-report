@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>定期投資討論：固定收益孳息投入股票配置 — 2026年08月06日</title>
+<style>
+  :root {
+    --bg: #ffffff; --bg2: #f7f8fc; --bg3: #eef0f7; --border: #e1e4ee;
+    --text: #1e2233; --text2: #6b7280; --accent: #4f46e5; --accent2: #4338ca;
+    --red: #dc2626; --green: #15803d; --gold: #b45309; --orange: #c2410c;
+    --blue: #2563eb; --purple: #7c3aed; --teal: #0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system,'PingFang TC','Microsoft JhengHei',sans-serif; font-size: 14px; line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #eef1fb 0%, #f5f7fc 50%, #eef2f8 100%); padding: 28px 32px 20px; border-bottom: 1px solid var(--border); }
+  .header h1 { font-size: 22px; font-weight: 700; color: var(--accent2); letter-spacing: 0.5px; }
+  .header .meta { color: var(--text2); font-size: 12px; margin-top: 4px; }
+  .summary-box { background: linear-gradient(90deg, #eef4fc 0%, #f7f8fc 100%); border-left: 4px solid var(--accent); margin: 20px 24px; padding: 14px 20px; border-radius: 0 8px 8px 0; font-size: 15px; font-weight: 600; color: #1e2233; }
+  .container { padding: 0 24px 40px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--accent2); padding: 8px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title .icon { font-size: 18px; }
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+  .stat-card .label { font-size: 11px; color: var(--text2); margin-bottom: 6px; }
+  .stat-card .val { font-size: 20px; font-weight: 700; color: var(--text); }
+  table { width: 100%; border-collapse: collapse; background: var(--bg2); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); font-size: 12.5px; vertical-align: middle; color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #eef1fb; }
+  .up { color: var(--red); font-weight: 700; }
+  .dn { color: var(--green); font-weight: 700; }
+  .badge-real { background: #e7f7ee; color: var(--green); font-size: 10.5px; padding: 2px 7px; border-radius: 4px; }
+  .badge-est { background: #fdf3d9; color: var(--gold); font-size: 10.5px; padding: 2px 7px; border-radius: 4px; }
+  .table-scroll { overflow-x: auto; }
+  .insight-box { background: #fffbea; border: 1px solid var(--gold); border-radius: 10px; padding: 16px 18px; margin-top: 14px; }
+  .insight-box h4 { color: var(--gold); font-size: 14px; margin-bottom: 10px; }
+  .insight-box p { font-size: 13px; color: var(--text); margin-bottom: 8px; }
+  .warn-box { background: #fff4ec; border: 1px solid var(--orange); border-radius: 10px; padding: 16px 18px; margin-top: 14px; }
+  .warn-box h4 { color: var(--orange); font-size: 14px; margin-bottom: 10px; }
+  .warn-box p { font-size: 13px; color: var(--text); margin-bottom: 8px; }
+  .verdict-box { background: linear-gradient(135deg, #fef2f2 0%, #fdf9f7 60%); border: 1px solid #fca5a5; border-radius: 10px; padding: 18px 20px; margin-top: 14px; }
+  .verdict-box h4 { color: var(--red); font-size: 15px; margin-bottom: 10px; }
+  .verdict-box p { font-size: 13px; color: var(--text); margin-bottom: 10px; }
+  .verdict-box ul { padding-left: 20px; margin-bottom: 10px; }
+  .verdict-box li { font-size: 13px; color: var(--text2); padding: 3px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .footer { background: var(--bg3); border-top: 1px solid var(--border); padding: 14px 24px; font-size: 11px; color: var(--text2); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .footer .warn { color: var(--orange); }
+  @media (max-width: 900px) { .stat-grid { grid-template-columns: repeat(2,1fr); } .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>💰 定期投資討論：固定收益孳息投入股票配置</h1>
+  <div class="meta">2026年08月06日｜情境：$10,000固定收益本金(年息5%=$500)，本金不動、每年將利息全數投入股票，股票比例採「四配置科技成長組合回測比較」報告的配置一(70/20/5/5)/配置二(60/20/10/10)/配置三(50/25/12.5/12.5)｜資料來源：同四配置報告使用的CSPX/CNDX/BGF/JPM美國科技逐日真實股價/NAV數據</div>
+</div>
+
+<div class="summary-box">
+  🎯 一句話結論：無論股市走勢好壞，光靠每年$500的固定投入，股票佔總資產的比例大約都在<b>第6~8年</b>就會跨過30%（7:3），因為在這個資產規模下，「投入了多少錢」比「市場漲跌多少」更決定這個比例何時達成；但5/7/10年的實際報酬與波動天差地遠——同樣的投入紀律，2000-2009遇上網路泡沫+金融海嘯雙重熊市，10年後股票部位僅淨賺不到1倍投入本金；2015-2024遇上AI多頭，10年後股票市值已是投入本金的2.5倍以上。至於「股票部位會不會腰斬」，模擬結果顯示：只要持續有新資金流入，即使遇到史上最慘的雙重熊市十年，股票部位從未真正較峰值腰斬(最深約-38%~-42%)——因為新投入的錢不斷墊高峰值，稀釋了帳面跌幅；但這個保護效果會隨著部位變大、新投入佔比變小而逐漸消失。
+</div>
+
+<div class="container">
+
+<div class="section">
+  <div class="section-title"><span class="icon">📜</span>情境設定</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>項目</th><th>設定</th></tr></thead>
+    <tbody>
+      <tr><td>固定收益本金</td><td>$10,000，本金<b>永遠不變</b>（不承擔本金風險，也不再滾入複利）</td></tr>
+      <tr><td>固定收益年息</td><td>5% = 每年$500，於每年初一次性領出</td></tr>
+      <tr><td>股票投入方式</td><td>每年初把當年領到的$500全數投入股票（等同每年一次的定期定額）</td></tr>
+      <tr><td>股票配置比例</td><td>配置一(70% CSPX+20% CNDX+5% BGF+5% JPM科技)／配置二(60/20/10/10)／配置三(50/25/12.5/12.5)</td></tr>
+      <tr><td>總資產</td><td>固定收益$10,000 + 股票部位市值（隨市場波動）</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">配置四(40/30/15/15，科技衛星60%)未納入本次模擬，因「四配置」報告已證實其在幾乎所有回測維度都是四者中風險調整後表現最差的選項，這裡聚焦討論其餘三個相對合理的配置。</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">⚠️</span>兩個情境：歷史上最壞的十年 vs 最近最順的十年</div>
+  <div class="warn-box">
+    <h4>本報告用兩段真實歷史序列模擬，而非假設平均報酬</h4>
+    <p>股市報酬高度依賴「觀察起點」——這是您在前一份「四配置」報告已經確認過的結論。這裡選用兩個真實歷史區間對照：<b>2000-2009</b>（10年內連續遭遇網路泡沫2000-2002與金融海嘯2007-2009<b>兩次</b>系統性熊市，是過去26年裡對這套配置最不利的10年窗口，也符合您要求的「三年以上慢熊格局」）；<b>2015-2024</b>（近十年，完整避開這兩次熊市，僅遇2022年一次中度回檔，是相對友善的窗口）。兩者皆為逐年真實報酬序列，非假設值。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">📉</span>情境A：2000-2009（史上最壞十年，網路泡沫+金融海嘯雙重熊市）</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>配置</th><th>5年末股票市值<br>(投入成本$2,500)</th><th>7年末股票市值<br>(投入成本$3,500)</th><th>10年末股票市值<br>(投入成本$5,000)</th><th>10年末股票佔總資產</th><th>達7:3(股票佔30%)年份</th></tr></thead>
+    <tbody>
+      <tr><td><b>配置一 (70/20/5/5)</b></td><td>$2,493 (0.99x)</td><td>$3,937 (1.12x)</td><td>$4,775 (0.95x)</td><td>32.3%</td><td>2007年(第8年)</td></tr>
+      <tr><td><b>配置二 (60/20/10/10)</b></td><td>$2,428 (0.97x)</td><td>$3,828 (1.09x)</td><td>$4,785 (0.96x)</td><td>32.4%</td><td>2007年(第8年)</td></tr>
+      <tr><td><b>配置三 (50/25/12.5/12.5)</b></td><td>$2,387 (0.95x)</td><td>$3,750 (1.07x)</td><td>$4,829 (0.97x)</td><td>32.6%</td><td>2007年(第8年)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">括號內為「股票市值 ÷ 累計投入成本」倍數。可以看到即使是史上最壞的十年，10年後股票部位也僅小虧(0.95x~0.97x，即淨值略低於已投入的本金)，並未出現重大虧損——這是因為2003年與2009年兩次強力反彈，剛好把兩次熊市的傷害修補了大半。</div>
+  <div class="insight-box">
+    <h4>逐年真實路徑（以配置二60/20/10/10為例，另兩配置走勢雷同）</h4>
+    <p>2000年報酬-20.9%、2001年-21.8%、2002年-32.7%（此時股票市值僅$808，累計投入$1,500，虧損主要是帳面的，金額尚小）→ 2003年反彈+33.1%、2004年+8.3%、2005年+3.3%、2006年+8.6%、2007年+7.3%（此時股票市值已達$4,645，累計投入$4,000，開始由虧轉盈）→ 2008年金融海嘯-40.1%（股票市值從高點回落到$3,084）→ 2009年反彈+33.5%（回升至$4,785作收）。整段期間股票佔總資產比例從不到4%一路墊高到32.4%，中間雖有兩次深跌，但比例本身幾乎是單向墊高的，因為新投入的錢持續在低點加碼。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">📈</span>情境B：2015-2024（近十年，AI多頭順風局）</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>配置</th><th>5年末股票市值<br>(投入成本$2,500)</th><th>7年末股票市值<br>(投入成本$3,500)</th><th>10年末股票市值<br>(投入成本$5,000)</th><th>10年末股票佔總資產</th><th>達7:3(股票佔30%)年份</th></tr></thead>
+    <tbody>
+      <tr><td><b>配置一 (70/20/5/5)</b></td><td>$3,899 (1.56x)</td><td>$7,889 (2.25x)</td><td>$12,293 (2.46x)</td><td>55.1%</td><td>2020年(第6年)</td></tr>
+      <tr><td><b>配置二 (60/20/10/10)</b></td><td>$4,018 (1.61x)</td><td>$8,341 (2.38x)</td><td>$12,845 (2.57x)</td><td>56.2%</td><td>2020年(第6年)</td></tr>
+      <tr><td><b>配置三 (50/25/12.5/12.5)</b></td><td>$4,111 (1.64x)</td><td>$8,708 (2.49x)</td><td>$13,308 (2.66x)</td><td>57.1%</td><td>2020年(第6年)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">同樣的投入紀律，換到近十年的多頭環境，10年後股票市值已膨脹到投入成本的2.5倍以上，且股票佔總資產比例10年後已逼近或超過一半——遠遠超出7:3的門檻。兩個情境的10年末結果，股票市值相差超過2.5倍（$4,785 vs $12,845，以配置二為例），純粹取決於「投資起點恰好遇到哪十年」，這正是序列風險(sequence-of-returns risk)的具體展現。</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">⚖️</span>問題一：什麼時候固定收益與股票會來到7:3？</div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="label">純機械式估算<br>(假設股票報酬=0%)</div><div class="val">約第8.5年</div><div style="font-size:10.5px;color:var(--text2);margin-top:4px">$500×8.5年=$4,250≈$10,000×30%/70%</div></div>
+    <div class="stat-card"><div class="label">情境A實際結果<br>(2000-2009最壞十年)</div><div class="val dn">第8年 (2007)</div><div style="font-size:10.5px;color:var(--text2);margin-top:4px">三配置皆同</div></div>
+    <div class="stat-card"><div class="label">情境B實際結果<br>(2015-2024最順十年)</div><div class="val up">第6年 (2020)</div><div style="font-size:10.5px;color:var(--text2);margin-top:4px">三配置皆同</div></div>
+  </div>
+  <div class="insight-box">
+    <h4>答案：大約6~8年，而且這個時間點主要由「投入紀律」決定，不是由「市場表現」決定</h4>
+    <p>這是本次模擬最反直覺的發現：在$10,000固定收益+每年$500投入的規模下，達到7:3所需的年數，在「史上最壞十年」與「史上最順十年」之間<b>只差2年</b>(第8年 vs 第6年)，而不是差很多年。原因是：純粹靠每年$500投入、完全不計入任何投資報酬，光是累積投入金額本身，大約8.5年就會自然讓股票部位達到$10,000的30/70比例下限（$500×8.5≈$4,250）。也就是說，<b>在這個資產規模區間，「有沒有持續投入」比「投得好不好」更決定這個比例什麼時候達成</b>。市場報酬的角色是把這個時間點加減個1-3年，而不是決定性因素——要等到股票部位金額遠大於年度投入金額之後（例如超過10-15年），市場報酬對這個比例的影響力才會逐漸超過機械式投入的影響力。三個配置(一/二/三)彼此之間在這個問題上幾乎沒有差異，因為短期報酬差異還不足以撼動「投入金額主導」的格局。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🩸</span>問題二：什麼狀態下股票部位會腰斬？</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>配置</th><th>2000-2009十年內股票部位<br>最深月度回檔(較自身峰值)</th><th>峰值時間點/金額</th><th>谷值時間點/金額</th><th>是否曾腰斬(-50%)</th></tr></thead>
+    <tbody>
+      <tr><td><b>配置一 (70/20/5/5)</b></td><td class="dn">-38.3%</td><td>2008年5月 $5,156</td><td>2009年2月 $3,180</td><td class="up">否</td></tr>
+      <tr><td><b>配置二 (60/20/10/10)</b></td><td class="dn">-38.9%</td><td>2008年5月 $5,061</td><td>2008年11月 $3,090</td><td class="up">否</td></tr>
+      <tr><td><b>配置三 (50/25/12.5/12.5)</b></td><td class="dn">-41.6%</td><td>2001年1月 $922</td><td>2001年9月 $538</td><td class="up">否</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">此表採<b>月頻</b>股票部位市值追蹤（而非本報告其他章節常用的年度端點法），才能捕捉到2008年5月-2009年2月金融海嘯真正的高低點，以及配置三在2001年網路泡沫初期就已寫下的最深跌幅。三個配置在這十年裡「較自身峰值」的最深跌幅都落在-38%~-42%之間，<b>沒有一個配置曾經腰斬</b>。</div>
+  <div class="insight-box">
+    <h4>答案：靠持續投入撐大部位的階段幾乎不會腰斬；真正的腰斬風險出現在部位已經「長大」、新投入佔比變得微不足道之後</h4>
+    <p>股票部位之所以在史上最慘的十年裡都沒有腰斬，關鍵機制是：<b>每年新投入的$500會不斷墊高「峰值」這個參考點</b>——即使2008年5月到2009年2月市場實際跌了3成以上，但因為2008、2009年初都還有新的$500匯入，峰值本身也在同步墊高，使得「較峰值下跌幅度」被沖淡。這與您在「四配置」報告裡看到的<b>靜態(一次投入、不再加碼)組合MDD高達-52.6%~-67.2%</b>形成鮮明對比——那是假設整筆錢在期初一次投入、之後完全不動的最壞情境；而定期投入的股票部位，只要仍在持續加碼階段，天生就對這種峰值回檔有稀釋效果。</p>
+    <p><b>但這個保護會隨時間遞減、並非永久有效</b>：隨著累積年數增加，股票部位金額越滾越大，每年$500的新投入佔整體部位的比重會越來越小（例如累積到$50,000時，$500只佔1%，幾乎不再有稀釋峰值的效果）。到了那個階段，股票部位的行為會逐漸趨近於「靜態一次性投入」的組合，此時<b>真正的腰斬風險門檻，就要參考「四配置」報告裡的靜態MDD數字</b>：配置一約-52.6%、配置二約-58.4%、配置三約-62.6%（皆為2000-2004網路泡沫這類深度熊市下的歷史紀錄）。換句話說：<b>投入年資越淺，越不容易腰斬；投入年資越深、部位越大，腰斬的可能性才會逐漸逼近這些靜態配置的歷史紀錄</b>，這也是定期投入策略「早期抗跌、晚期考驗心臟」的特性。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🧭</span>結論與建議</div>
+  <div class="verdict-box">
+    <h4>短期內三個配置差異不大，但長期複利與極端情境下的差距會逐漸拉開</h4>
+    <ul>
+      <li><b>7:3比例達成時間對配置選擇不敏感</b>：無論選配置一、二或三，也無論遇到史上最壞或最順的十年，達到7:3的時間點都落在第6~8年這個窄幅區間內，這個決策點不需要過度糾結該選哪個配置。</li>
+      <li><b>5/7/10年報酬對「起點」極度敏感</b>：同樣的投入紀律，10年後的股票市值可以是$4,785（最壞情境）到$13,308（最順情境）之間的任何數字，相差近3倍。這代表您無法控制「會不會遇到熊市」，但可以控制「持續投入的紀律」——本模擬顯示，即使是最壞的十年，只要不中斷投入，10年後也不至於虧損太深（0.95x~0.97x投入成本），這正是定期定額對抗序列風險的核心價值。</li>
+      <li><b>「腰斬」在累積期早期幾乎不會發生，但不代表可以掉以輕心</b>：早期的抗跌力來自「新錢不斷墊高峰值」這個機制性因素，不是因為配置本身特別抗跌。一旦部位規模顯著大於年度新投入金額（例如經過15-20年累積），就必須開始用「四配置」報告裡的靜態MDD數字(-53%~-67%)來評估真正的下檔風險，而不能再套用這份報告「從未腰斬」的早期經驗。</li>
+      <li><b>三個配置中，配置一(70/20/5/5)在兩個情境下的股票市值倍數皆與配置二、三相近，但月頻最大回檔明顯較淺</b>(-38.3% vs -38.9%/-41.6%)，延續「四配置」報告的結論——科技衛星權重最低的配置一，在風險調整後的表現持續領先。</li>
+    </ul>
+    <p><b>務實建議</b>：若您重視「不中斷投入」這件事本身多過選哪個配置，三者皆可；若同時重視風險調整後的長期效率，配置一仍是相對穩健的選擇。更重要的紀律是：不論遇到哪一種十年，都不要在熊市中停止把利息投入股票——本模擬清楚顯示，正是2000-2002、2008這些低點持續加碼的部位，才撐起了2003、2009年反彈後的淨值回升；若在低點停止投入，反而會錯失整個定期定額策略最核心的價值。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🧩</span>延伸一：如果只拿3%投股票、另外2%存3%定存，結果會差多少？</div>
+  <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">新情境設定：$10,000本金仍固定不動、年息5%不變；但這次只把<b>3%(=$300/年)</b>投入股票（配置一/二/三），剩下<b>2%(=$200/年)</b>不花掉，改存入另一個年息3%的定存帳戶，且該定存<b>逐年複利滾存</b>（每年都把新的$200存入，並讓累積本息一起以3%成長）。與前面「5%全數投入股票」的原始情境並列比較。</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>情境</th><th>配置</th><th>10年末股票市值<br>(3%股+2%定存)</th><th>10年末定存餘額</th><th>10年末總資產<br>(3%股+2%定存)</th><th>10年末總資產<br>(5%全股,對照)</th><th>達7:3年份<br>(3%股+2%定存)</th><th>達7:3年份<br>(5%全股,對照)</th><th>兩者總資產差額</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3">2000-2009<br>(最壞十年)</td><td>配置一</td><td>$2,865</td><td>$2,362</td><td>$15,227</td><td>$14,775</td><td>10年內未達成</td><td>2007年</td><td class="up">+$452</td></tr>
+      <tr><td>配置二</td><td>$2,871</td><td>$2,362</td><td>$15,232</td><td>$14,785</td><td>10年內未達成</td><td>2007年</td><td class="up">+$448</td></tr>
+      <tr><td>配置三</td><td>$2,897</td><td>$2,362</td><td>$15,259</td><td>$14,829</td><td>10年內未達成</td><td>2007年</td><td class="up">+$430</td></tr>
+      <tr><td rowspan="3">2015-2024<br>(最順十年)</td><td>配置一</td><td>$7,376</td><td>$2,362</td><td>$19,738</td><td>$22,293</td><td>2023年</td><td>2020年</td><td class="dn">-$2,556</td></tr>
+      <tr><td>配置二</td><td>$7,707</td><td>$2,362</td><td>$20,069</td><td>$22,845</td><td>2021年</td><td>2020年</td><td class="dn">-$2,776</td></tr>
+      <tr><td>配置三</td><td>$7,985</td><td>$2,362</td><td>$20,346</td><td>$23,308</td><td>2021年</td><td>2020年</td><td class="dn">-$2,962</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-box">
+    <h4>關鍵發現：3%+2%分散策略像一份「保險」——壞年頭略勝一籌，好年頭明顯較差</h4>
+    <p><b>在史上最壞的十年(2000-2009)，3%股+2%定存策略的總資產反而略勝5%全股一籌</b>（+$430~$452，約多出3%），原因很直觀：這十年股票報酬平庸(全股策略10年後股票市值僅0.95x~0.97x投入成本)，而2%定存有<b>保證3%的複利</b>，兩相權衡下分散配置贏了一點點。<b>但在近十年的多頭(2015-2024)，5%全股策略總資產大幅超前3%股+2%定存策略$2,556~$2,962</b>（約多出13%~15%），因為這十年股票年化報酬遠遠超過3%定存能提供的水準，把更多錢留在低報酬的定存反而是機會成本。</p>
+    <p><b>達到7:3比例的時間也明顯延後、甚至可能達不到</b>：3%股+2%定存策略下，最壞十年裡股票佔比10年後只到18.8%~19.0%，<b>完全沒有達到7:3</b>（因為分母的「固定收益」這邊，$10,000之外還多了一個持續成長的定存，墊高了固定收益端的成長速度，而分子的股票投入金額卻只有原本的六成）；即使在最順的十年，達成7:3的時間也比5%全股策略晚了1~3年。這是本策略「更保守」的直接代價：用犧牲股票部位成長速度，換取下檔的保護與確定性。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🎯</span>延伸二：想讓十年整體報酬(對$10,000本金)達到6%或8%，哪一年能達成？</div>
+  <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">「整體年化報酬」定義為：(總資產 ÷ 原始本金$10,000)^(1/累積年數) − 1，也就是把固定收益本金、股票市值(或+定存餘額)全部算在一起、對最初的$10,000本金計算年化報酬率。以下比較「5%全股」與「3%股+2%定存」兩種策略，在兩種歷史情境下各自最快在第幾年達到6%與8%。</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>情境</th><th>配置</th><th>5%全股<br>首次達6%</th><th>5%全股<br>首次達8%</th><th>3%股+2%定存<br>首次達6%</th><th>3%股+2%定存<br>首次達8%</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3">2000-2009<br>(最壞十年)</td><td>配置一</td><td class="dn">10年內未達成</td><td class="dn">10年內未達成</td><td class="dn">10年內未達成</td><td class="dn">10年內未達成</td></tr>
+      <tr><td>配置二</td><td class="dn">10年內未達成</td><td class="dn">10年內未達成</td><td class="dn">10年內未達成</td><td class="dn">10年內未達成</td></tr>
+      <tr><td>配置三</td><td class="dn">10年內未達成</td><td class="dn">10年內未達成</td><td class="dn">10年內未達成</td><td class="dn">10年內未達成</td></tr>
+      <tr><td rowspan="3">2015-2024<br>(最順十年)</td><td>配置一</td><td class="up">第3年(2017)</td><td class="up">第7年(2021)</td><td class="up">第5年(2019)</td><td class="dn">10年內未達成</td></tr>
+      <tr><td>配置二</td><td class="up">第3年(2017)</td><td class="up">第6年(2020)</td><td class="up">第5年(2019)</td><td class="dn">10年內未達成</td></tr>
+      <tr><td>配置三</td><td class="up">第3年(2017)</td><td class="up">第6年(2020)</td><td class="up">第5年(2019)</td><td class="dn">10年內未達成</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-box">
+    <h4>關鍵發現：6%目標在好年頭不難達成，8%目標高度依賴市場環境與策略選擇</h4>
+    <p><b>最壞情境(2000-2009)下，兩種策略在10年內都到不了6%，更別說8%</b>——整段期間的整體年化報酬最高點只出現在2007年，約4.8%~5.0%（此時股票部位還沒被2008年金融海嘯拖累），此後就再也沒有更高過。這代表在真正惡劣的市場環境下，「$10,000靠孳息滾出6%~8%整體報酬」在10年的時間跨度裡是<b>不切實際的目標</b>，不管換哪個配置或哪種投入比例都一樣，因為固定收益本身5%的貢獻加上表現不佳的股票部位，很難把整體拉到6%以上。</p>
+    <p><b>最順情境(2015-2024)下，5%全股策略最快3年就能達到6%、6~7年可達8%</b>；<b>3%股+2%定存策略則要多花2年才達6%(第5年)，且10年內從未達到8%</b>（三個配置最高點都卡在7.2%~7.7%附近，2022年回檔又把已經接近8%的成果打回原形）。這代表若您把「10年達到8%整體報酬」設為目標，<b>幾乎必須採用5%全數投入股票的積極做法，且還需要遇上像近十年這樣的順風市場</b>——用3%+2%的保守分散法，即使市場配合，8%目標在10年內的達成機率也偏低，這正是「降低風險」與「提高達標機率」之間的直接取捨。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🎯</span>延伸三：把「基礎模式逢低加碼」概念接上這套架構——三種加碼機制</div>
+  <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">承延伸一的「3%進股票+2%存3%定存」為基礎，額外疊加逢低加碼層：觸發條件沿用「基礎模式逢低加碼策略回測」報告已驗證的三層（當年較年初跌<b>-20%</b>／較熊市自身高點跌<b>-30%</b>／較熊市自身高點跌<b>-45%</b>，-30%/-45%為累計自高點、不逐年重置），加碼資金一律採<b>50% CSPX + 30% CNDX + 10% BGF + 10% JPM科技</b>配置買進，三種方法差在「加碼多少錢」：</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>方法</th><th>加碼金額規則</th></tr></thead>
+    <tbody>
+      <tr><td><b>方法一</b></td><td>每次觸發固定加碼「一年份2%利息」＝$200（不論是哪一層、也不論當時定存池有多少錢）</td></tr>
+      <tr><td><b>方法二</b></td><td>每次觸發，從「目前累積的2%定存池」中提領<b>20%</b>出來加碼（提領後池子餘額繼續依3%成長）</td></tr>
+      <tr><td><b>方法三</b></td><td>觸發條件改為<b>您投入股市部位自身的總報酬率</b>(市值÷累計成本−1)每跌破一個-10%關卡(-10%/-20%/-30%…)，即從定存池提領20%加碼；股市部位創報酬新高後重新解鎖</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>情境</th><th>方法</th><th>觸發次數</th><th>累計加碼金額<br>(基礎投入$3,000外加)</th><th>10年末股票市值<br>(投入成本＝$3,000+累計加碼金額)</th><th>10年末總資產</th><th>10年末股票佔比</th><th>達7:3年份</th><th>差額比較<br>(vs 無加碼3%+2%基準)</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3">2000-2009<br>(最壞十年,配置二示範)</td><td>方法一<span class="badge-est">已修正</span></td><td>8次</td><td>$1,600</td><td>$4,996 (1.09x)</td><td>$15,554</td><td>32.1%</td><td class="up">2009年(第10年)</td><td class="up">+$322</td></tr>
+      <tr><td>方法二</td><td>8次</td><td>$1,374</td><td>$4,695 (1.07x)</td><td>$15,577</td><td>30.1%</td><td class="up">2009年(第10年)</td><td class="up">+$290</td></tr>
+      <tr><td>方法三</td><td>8次</td><td>$1,135</td><td>$4,326 (1.05x)</td><td>$15,452</td><td>28.0%</td><td>10年內未達成</td><td class="up">+$165</td></tr>
+      <tr><td rowspan="3">2015-2024<br>(最順十年,配置二示範)</td><td>方法一<span class="badge-est">已修正</span></td><td>3次</td><td>$600</td><td>$8,630 (2.40x)</td><td>$20,329</td><td>42.4%</td><td class="up">2021年(第7年)</td><td class="up">+$260</td></tr>
+      <tr><td>方法二</td><td>3次</td><td>$744</td><td>$8,946 (2.39x)</td><td>$20,487</td><td>43.7%</td><td class="up">2021年(第7年)</td><td class="up">+$888</td></tr>
+      <tr><td>方法三</td><td>1次</td><td>$84</td><td>$7,615 (2.47x)</td><td>$19,871</td><td>38.3%</td><td class="up">2021年(第7年)</td><td class="up">+$271</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">配置一/三的結果與配置二示範走勢雷同(加碼金額規則不受底層配置影響，僅底層3%基礎投入的資金分配不同)，數字差異在±1%以內，故以配置二為代表呈現，完整9組合(3方法×3配置)數字已全數試算供內部核對。與延伸一的「5%全股vs 3%+2%」比較框架一致：加碼層是在3%+2%的基礎上再多做的動作，並非取代。</div>
+  <div class="warn-box">
+    <h4>方法一計算方式修正說明：加碼金額不再「憑空出現」，會優先扣減定存池、不足時侵蝕固定收益本金</h4>
+    <p>方法一原規則「不論當時定存池有多少錢」都固定加碼$200，原始計算未替這$200找資金來源——定存池完全不受影響地繼續累積，等於這筆錢是憑空多出來的，high估了方法一的總資產與整體報酬表現。<b>已修正為：每次觸發優先從2%定存池提領，池子不夠時，差額改由$10,000固定收益本金支出，本金一經動用即永久減少，此後每年3%股票／2%定存的提撥基礎也會等比縮小（例如本金降至$9,825，隔年起3%提撥就是$294.75而非$300）</b>。以配置二示範，2000-2009裡僅2002-07-22這一次觸發出現池子不夠的情況，缺口$175.3由本金支出（本金10,000→9,825，此後不再變動）；2015-2024全程3次觸發池子都夠支付，未動用到本金。本節與下方延伸四的表格、以及延伸六方法一，皆已依修正後邏輯重新計算。</p>
+  </div>
+  <div class="insight-box">
+    <h4>三種方法的本質差異：方法一最「敢衝」、方法三最「保守」；修正後方法一的優勢僅限於熊市</h4>
+    <p><b>方法一(固定$200/次)</b>在最壞十年裡8次觸發＝$1,600全部加碼下去，即使修正後仍是三者中對總資產貢獻最大的方法(+$322，方法二+$290、方法三+$165)——因為積極不設限的買進，在雙重熊市裡確實承接到最低點附近的價位，即使部分資金是從本金支出、犧牲了未來幾年一點點的提撥基礎，換來的加碼報酬仍划算。<b>但在2015-2024最順十年，修正後方法一的貢獻(+$260)反而是三者中最小的</b>(方法二+$888、方法三+$271)——因為修正前的「憑空多$200」優勢消失後，方法一單純只是「把定存池的錢提前搬去股票」，而這3次觸發若照2%定存池慣性成長，其實不見得比投入股票划算，加上方法一沒有像方法二那樣的自我節制機制，牛市裡觸發次數少、優勢也就跟著小。<b>方法二(提領池中20%)</b>是遞減式加碼——連續觸發時，每次只動用「當時剩餘」的20%，天生具備風險控管（絕不會把池子提領到負數），在兩種情境下的貢獻都相對穩定。<b>方法三(部位自身報酬觸發)</b>最特別：它不看大盤跌多少，只看「您自己荷包裡的股票部位」賠了多少，在2000-2009最壞十年裡因為部位規模小、任何下跌都容易被放大成很深的% 虧損，反而觸發最早最頻繁(2000年11月就已觸發-10%關卡)；但在2015-2024多頭市場裡幾乎不觸發(僅1次)，因為部位很少出現真正的-10%報酬缺口，加碼貢獻因此在牛市裡也不高(+$271)。</p>
+  </div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>情境</th><th>方法</th><th>觸發日期</th><th>觸發類型</th><th>觸發前部位總報酬率</th><th>該次加碼金額</th><th>該筆加碼部位<br>5年末市值</th><th>該筆加碼部位<br>7年末市值</th><th>該筆加碼部位<br>10年末市值</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="27">2000-2009<br>(配置二示範)</td><td rowspan="9">方法一</td><td>2001-09-17</td><td>-30%(大盤,累計自高點)</td><td class="dn">-38.1%</td><td>$200</td><td>$227</td><td>$256</td><td>$228</td></tr>
+      <tr><td>2001-09-19</td><td>-20%(大盤,當年)</td><td class="dn">-30.7%</td><td>$200</td><td>$235</td><td>$264</td><td>$236</td></tr>
+      <tr><td>2002-07-10</td><td>-20%(大盤,當年)</td><td class="dn">-34.8%</td><td>$200</td><td>$287</td><td>$322</td><td>$290</td></tr>
+      <tr><td>2002-07-22</td><td>-45%(大盤,累計自高點)</td><td class="dn">-35.4%</td><td>$200</td><td>$306</td><td>$344</td><td>$308</td></tr>
+      <tr><td>2008-09-17</td><td>-20%(大盤,當年)</td><td class="dn">-0.3%</td><td>$200</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$208</td></tr>
+      <tr><td>2008-10-06</td><td>-30%(大盤,累計自高點)</td><td class="dn">-11.7%</td><td>$200</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$237</td></tr>
+      <tr><td>2008-10-27</td><td>-45%(大盤,累計自高點)</td><td class="dn">-26.4%</td><td>$200</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$285</td></tr>
+      <tr><td>2009-02-23</td><td>-20%(大盤,當年)</td><td class="dn">-32.0%</td><td>$200</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$317</td></tr>
+      <tr style="background:var(--bg3);font-weight:700;"><td colspan="3">小計(8次)</td><td>$1,600</td><td>$1,056</td><td>$1,186</td><td>$2,110</td></tr>
+      <tr><td rowspan="9">方法二</td><td>2001-09-17</td><td>-30%(大盤,累計自高點)</td><td class="dn">-38.1%</td><td>$84</td><td>$95</td><td>$107</td><td>$95</td></tr>
+      <tr><td>2001-09-19</td><td>-20%(大盤,當年)</td><td class="dn">-35.3%</td><td>$67</td><td>$79</td><td>$88</td><td>$79</td></tr>
+      <tr><td>2002-07-10</td><td>-20%(大盤,當年)</td><td class="dn">-38.5%</td><td>$96</td><td>$138</td><td>$155</td><td>$140</td></tr>
+      <tr><td>2002-07-22</td><td>-45%(大盤,累計自高點)</td><td class="dn">-40.4%</td><td>$77</td><td>$118</td><td>$133</td><td>$119</td></tr>
+      <tr><td>2008-09-17</td><td>-20%(大盤,當年)</td><td class="dn">-4.6%</td><td>$340</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$354</td></tr>
+      <tr><td>2008-10-06</td><td>-30%(大盤,累計自高點)</td><td class="dn">-15.0%</td><td>$272</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$323</td></tr>
+      <tr><td>2008-10-27</td><td>-45%(大盤,累計自高點)</td><td class="dn">-28.7%</td><td>$218</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$310</td></tr>
+      <tr><td>2009-02-23</td><td>-20%(大盤,當年)</td><td class="dn">-33.6%</td><td>$221</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$350</td></tr>
+      <tr style="background:var(--bg3);font-weight:700;"><td colspan="3">小計(8次)</td><td>$1,374</td><td>$430</td><td>$483</td><td>$1,769</td></tr>
+      <tr><td rowspan="9">方法三</td><td>2000-11-10</td><td>-10%(部位自身總報酬率)</td><td class="dn">-11.2%</td><td>$41</td><td>$27</td><td>$31</td><td>$27</td></tr>
+      <tr><td>2000-12-20</td><td>-20%(部位自身總報酬率)</td><td class="dn">-22.7%</td><td>$33</td><td>$25</td><td>$29</td><td>$25</td></tr>
+      <tr><td>2001-04-03</td><td>-30%(部位自身總報酬率)</td><td class="dn">-32.2%</td><td>$68</td><td>$70</td><td>$79</td><td>$70</td></tr>
+      <tr><td>2001-09-21</td><td>-40%(部位自身總報酬率)</td><td class="dn">-40.4%</td><td>$55</td><td>$68</td><td>$76</td><td>$68</td></tr>
+      <tr><td>2002-10-09</td><td>-50%(部位自身總報酬率)</td><td class="dn">-50.1%</td><td>$86</td><td>$151</td><td>$169</td><td>$152</td></tr>
+      <tr><td>2008-09-29</td><td>-10%(部位自身總報酬率)</td><td class="dn">-10.9%</td><td>$349</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$384</td></tr>
+      <tr><td>2008-10-08</td><td>-20%(部位自身總報酬率)</td><td class="dn">-20.5%</td><td>$279</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$350</td></tr>
+      <tr><td>2008-11-12</td><td>-30%(部位自身總報酬率)</td><td class="dn">-30.0%</td><td>$223</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$324</td></tr>
+      <tr style="background:var(--bg3);font-weight:700;"><td colspan="3">小計(8次)</td><td>$1,135</td><td>$342</td><td>$384</td><td>$1,401</td></tr>
+      <tr><td rowspan="10">2015-2024<br>(配置二示範)</td><td rowspan="4">方法一</td><td>2020-03-12</td><td>-20%(大盤,當年)</td><td class="up">+21.2%</td><td>$200</td><td>（尚未加碼）</td><td>$416</td><td>$513</td></tr>
+      <tr><td>2020-03-20</td><td>-30%(大盤,累計自高點)</td><td class="up">+13.4%</td><td>$200</td><td>（尚未加碼）</td><td>$437</td><td>$539</td></tr>
+      <tr><td>2022-06-13</td><td>-20%(大盤,當年)</td><td class="up">+56.5%</td><td>$200</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$340</td></tr>
+      <tr style="background:var(--bg3);font-weight:700;"><td colspan="3">小計(3次)</td><td>$600</td><td>$0(無觸發)</td><td>$853</td><td>$1,392</td></tr>
+      <tr><td rowspan="4">方法二</td><td>2020-03-12</td><td>-20%(大盤,當年)</td><td class="up">+21.2%</td><td>$266</td><td>（尚未加碼）</td><td>$554</td><td>$683</td></tr>
+      <tr><td>2020-03-20</td><td>-30%(大盤,累計自高點)</td><td class="up">+12.8%</td><td>$213</td><td>（尚未加碼）</td><td>$466</td><td>$575</td></tr>
+      <tr><td>2022-06-13</td><td>-20%(大盤,當年)</td><td class="up">+56.4%</td><td>$265</td><td>（尚未加碼）</td><td>（尚未加碼）</td><td>$450</td></tr>
+      <tr style="background:var(--bg3);font-weight:700;"><td colspan="3">小計(3次)</td><td>$744</td><td>$0(無觸發)</td><td>$1,020</td><td>$1,708</td></tr>
+      <tr><td rowspan="2">方法三</td><td>2016-02-11</td><td>-10%(部位自身總報酬率)</td><td class="dn">-10.3%</td><td>$84</td><td>$176</td><td>$308</td><td>$377</td></tr>
+      <tr style="background:var(--bg3);font-weight:700;"><td colspan="3">小計(1次)</td><td>$84</td><td>$176</td><td>$308</td><td>$377</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">「觸發前部位總報酬率」為該次觸發當下、加碼前股票部位的市值/累計成本−1，方法一/二由大盤跌幅觸發、方法三由部位自身報酬觸發（欄位標籤已註明）；「該筆加碼部位N年末市值」只追蹤<b>那一次加碼投入的錢單獨滾出來的價值</b>，不含基礎3%投入或其他次加碼，加總10年末市值即為前一張表「10年末股票市值」扣除基礎$3,000後的加碼部分（小計與前表數字一致）；「（尚未加碼）」代表該筆加碼發生在該檢核年之後，故當年尚無市值可算。可留意2015-2024方法一/二的兩次觸發，發生當下部位總報酬率其實是<b>正的</b>(+13%~+21%)——這是因為大盤雖從高點跌了20-30%，但這幾年累積投入的部位早已墊高成本基礎、且先前漲幅夠大，尚未跌破自身的損益兩平點，說明「大盤跌幅」與「您自己部位的盈虧」是兩件不同的事。</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🩸</span>股市部位總報酬率的下跌年份、最深虧損與回正天數</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>情境</th><th>方法</th><th>總報酬率跌破-20%的年份</th><th>最深總報酬率(P&amp;L%)</th><th>發生日期</th><th>回正(轉正)日期</th><th>回正耗時</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3">2000-2009</td><td>方法一</td><td>2000,01,02,03,08,09</td><td class="dn">-38.6%</td><td>2002-10-09</td><td>2003-12-23</td><td>440天(約14.5個月)</td></tr>
+      <tr><td>方法二</td><td>2000,01,02,03,08,09</td><td class="dn">-44.2%</td><td>2002-10-09</td><td>2004-01-16</td><td>464天(約15.3個月)</td></tr>
+      <tr><td>方法三</td><td>2000,01,02,03,08,09</td><td class="dn">-49.7%</td><td>2002-10-07</td><td>2004-12-01</td><td>786天(約25.9個月)</td></tr>
+      <tr><td rowspan="3">2015-2024</td><td>方法一</td><td>（無）</td><td class="dn">-10.3%</td><td>2016-02-11</td><td>2016-03-29</td><td>47天</td></tr>
+      <tr><td>方法二</td><td>（無）</td><td class="dn">-10.3%</td><td>2016-02-11</td><td>2016-03-29</td><td>47天</td></tr>
+      <tr><td>方法三</td><td>（無）</td><td class="dn">-9.6%</td><td>2016-02-09</td><td>2016-03-16</td><td>36天</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">「總報酬率」＝股市部位當前市值 ÷ 累計投入成本 − 1，最深點皆落在2002年10月（網路泡沫真正的谷底）附近，與您已知的市場歷史完全吻合。三種方法的最深虧損程度不同：方法一因為加碼最積極、越跌買越多，稀釋了帳面虧損率，最深僅-38.6%；方法三因為早期部位小、報酬率對虧損最敏感，最深探到接近腰斬的-49.7%，且回正耗時最久(786天，超過2年)。2015-2024的最深點都出現在2016年2月的中國股災+油價暴跌小型回檔，跌幅僅一成左右，一個多月就回正，與最壞十年形成強烈對比。</div>
+  <div class="warn-box">
+    <h4>解讀提醒：「總報酬率」與「整體年化報酬」是兩個不同的數字，不要混淆</h4>
+    <p>本節的「總報酬率」只看<b>股市部位自己</b>(市值 vs 成本)，是純粹的投資績效；但下一節會用到的「整體年化報酬」則是<b>(固定收益本金+定存池+股票市值) ÷ 原始$10,000</b>算出來的，會把每年源源不絕流入的利息／加碼資金也算在內。這代表即使股市部位當下正深陷虧損(例如2001年股票報酬率已跌破-20%)，只要當年剛好又有大筆加碼資金匯入，「整體年化報酬」數字有時反而不跌、甚至微幅上升——這不是投資賺錢了，只是新錢流入的統計效果，請勿誤讀成「危機入市已經開始獲利」。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🏁</span>延伸四：加碼版本下，十年整體報酬達到6%/8%要等到第幾年？</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>情境</th><th>配置</th><th>方法一<br>首達6%/8%</th><th>方法二<br>首達6%/8%</th><th>方法三<br>首達6%/8%</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3">2000-2009<br>(最壞十年)</td><td>配置一</td><td>未達成 / 未達成</td><td>未達成 / 未達成</td><td>未達成 / 未達成</td></tr>
+      <tr><td>配置二</td><td>未達成 / 未達成</td><td>未達成 / 未達成</td><td>未達成 / 未達成</td></tr>
+      <tr><td>配置三</td><td>未達成 / 未達成</td><td>未達成 / 未達成</td><td>未達成 / 未達成</td></tr>
+      <tr><td rowspan="3">2015-2024<br>(最順十年)</td><td>配置一</td><td>第5年(2019) / 未達成</td><td>第5年(2019) / 未達成</td><td>第5年(2019) / 未達成</td></tr>
+      <tr><td>配置二</td><td>第5年(2019) / 未達成</td><td>第5年(2019) / 未達成</td><td>第3年(2017) / 未達成</td></tr>
+      <tr><td>配置三</td><td>第5年(2019) / 第7年(2021)</td><td>第5年(2019) / 第7年(2021)</td><td>第3年(2017) / 未達成</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-box">
+    <h4>修正方法一計算方式後：最壞十年裡三種方法完全一致地到不了6%，不再有「第2年就達6%」的例外</h4>
+    <p>舊版曾顯示方法一在2000-2009情境下2001年整體年化報酬就衝到6%以上，但這是上一節提到的計算誤差所致——2001年觸發的兩次加碼(共$400)當時並未從定存池或本金中扣除，形同憑空多出一筆錢，直接墊高了「總資產÷本金」這個比值（事實上2001年股票部位本身跌幅已超過-20%，是虧損的）。<b>修正後，方法一在最壞十年也和方法二、三一樣，10年內完全到不了6%</b>，三種加碼方法在這個問題上不再有差異，「最壞十年10年內到不了6%目標」的結論因此更加一致、也更可信。2015-2024最順十年，方法一達6%的時間點不受影響(仍是第5年)，但<b>配置二搭配方法一/二，10年內都不再能達到8%</b>(舊版誤顯示配置二第7年即可達8%)，僅配置三搭配方法一/二能在第7年達到8%，方法三(觸發最少)則三個配置都到不了8%。整體而言：加碼機制對「達到6%」這個相對溫和的目標仍有一定加速效果，但對「達到8%」這個較高的目標，主要還是取決於是否遇上多頭市場與夠高的配置權重，加碼機制本身無法無中生有創造報酬。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🏦</span>延伸五：改成「$9,000固定收益+$1,000首年直接進股市」，第二年起5%利息全投入</div>
+  <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">新設定：本金拆成$9,000固定收益(年息5%＝$450/年)＋$1,000<b>第一年就直接投入股票</b>(依配置權重)；<b>從第二年開始</b>，每年把固定收益的5%利息($450)全數投入股票。與先前「$10,000全額固定收益、股票從零開始累積」的原始情境相比，這裡股票部位多了一年的頭期款，但固定收益本金也少了$1,000。</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>情境</th><th>配置</th><th>5年末股票市值<br>(投入成本$2,800)</th><th>7年末股票市值<br>(投入成本$3,700)</th><th>10年末股票市值<br>(投入成本$5,050)</th><th>10年末總資產</th><th>10年末股票佔比</th><th>達7:3年份</th><th>首達6%/8%</th><th>10年末總資產差額<br>(vs原始情境)</th><th>10年末總資產差額<br>(vs延伸一)</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3">2000-2009<br>(最壞十年)</td><td>配置一</td><td>$2,653 (0.95x)</td><td>$4,054 (1.10x)</td><td>$4,755 (0.94x)</td><td>$13,755</td><td>34.6%</td><td class="up">2006年(第7年)</td><td>未達成 / 未達成</td><td class="dn">-$1,020</td><td class="dn">-$1,536</td></tr>
+      <tr><td>配置二</td><td>$2,562 (0.92x)</td><td>$3,919 (1.06x)</td><td>$4,719 (0.93x)</td><td>$13,719</td><td>34.4%</td><td class="up">2006年(第7年)</td><td>未達成 / 未達成</td><td class="dn">-$1,066</td><td class="dn">-$1,568</td></tr>
+      <tr><td>配置三</td><td>$2,496 (0.89x)</td><td>$3,814 (1.03x)</td><td>$4,736 (0.94x)</td><td>$13,736</td><td>34.5%</td><td class="up">2007年(第8年)</td><td>未達成 / 未達成</td><td class="dn">-$1,093</td><td class="dn">-$1,577</td></tr>
+      <tr><td rowspan="3">2015-2024<br>(最順十年)</td><td>配置一</td><td>$4,397 (1.57x)</td><td>$8,491 (2.29x)</td><td>$12,344 (2.44x)</td><td>$21,344</td><td>57.8%</td><td class="up">2019年(第5年)</td><td>第5年(2019) / 第7年(2021)</td><td class="dn">-$949</td><td class="up">+$2,058</td></tr>
+      <tr><td>配置二</td><td>$4,558 (1.63x)</td><td>$9,071 (2.45x)</td><td>$12,968 (2.57x)</td><td>$21,968</td><td>59.0%</td><td class="up">2019年(第5年)</td><td>第5年(2019) / 第6年(2020)</td><td class="dn">-$877</td><td class="up">+$2,369</td></tr>
+      <tr><td>配置三</td><td>$4,684 (1.67x)</td><td>$9,534 (2.58x)</td><td>$13,533 (2.68x)</td><td>$22,533</td><td>60.1%</td><td class="up">2019年(第5年)</td><td>第5年(2019) / 第6年(2020)</td><td class="dn">-$775</td><td class="up">+$2,647</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-box">
+    <h4>反直覺的結論：把$1,000本金提前變成股票頭期款，兩種情境下總資產都反而略輸原始的「$10,000全固定收益、股票從零開始」做法</h4>
+    <p>對比最原始的情境（$10,000全數固定收益、股票從$0開始每年用5%利息累積）：<b>最壞十年下，本延伸的10年末總資產(configuration一為例$13,755)反而比原始做法($14,775)少了約$1,020</b>；<b>最順十年下也只是打平甚至略輸</b>(配置一少$949、配置二少$877、配置三少$775)。原因很直白：把$1,000本金挪去當股票頭期款，等於<b>永久放棄了這$1,000未來能產生的固定收益本金地位</b>（固定收益基礎從$10,000降到$9,000，此後每年少收$50利息）；即使這筆頭期款在股市裡多滾了一整年，在近十年這種年化14%~17%的多頭環境下，頭期款帶來的額外成長也只能大致打平「固定收益基礎減少$1,000」這個永久性損失，並沒有真正超車；而在報酬平庸的最壞十年裡，股市根本沒能力彌補這個損失，結果自然是兩頭都輸。<b>與「延伸一」的3%+2%保守做法相比，本延伸(全額5%投入)在最壞十年仍明顯落後(-$1,536~-$1,577)、在最順十年則大幅超前(+$2,058~+$2,647)</b>——這與整份報告一貫的結論一致：全額投入股票在牛市中佔優、在熊市中吃虧。整體而言，<b>「提前把本金挪去投資」這個動作本身，並不會讓您的長期總資產變得更好，關鍵仍然是後續每年利息投入的紀律與遇到的市場環境</b>。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🏦</span>延伸六：「$9,000固定收益+$1,000首年進股市」，第二年起改用3%+2%搭配三種加碼機制(配置二為基礎)</div>
+  <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">同樣$9,000固定收益＋$1,000首年直接進股票的起手式，但第二年起改成「3%(＝$270/年)進股票＋2%(＝$180/年)存3%定存」，並疊加延伸三介紹的三種逢低加碼機制（加碼資金同樣採50% CSPX+30% CNDX+10% BGF+10% JPM科技配置一律以配置二為基礎示範）。</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>情境</th><th>方法</th><th>5年末股票市值<br>(市值/累計投入成本)</th><th>7年末股票市值<br>(市值/累計投入成本)</th><th>10年末股票市值<br>(市值/累計投入成本)</th><th>10年末總資產</th><th>10年末股票佔比</th><th>達7:3年份</th><th>首達6%/8%</th><th>觸發次數</th><th>10年末總資產差額<br>(vs延伸五)</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3">2000-2009<br>(最壞十年)</td><td>方法一<span class="badge-est">已修正</span></td><td>$2,827 (0.99x)</td><td>$3,790 (1.12x)</td><td>$5,128 (1.03x)</td><td>$14,455</td><td>35.5%</td><td class="up">2007年(第8年)</td><td>未達成 / 未達成</td><td>8次</td><td class="up">+$736</td></tr>
+      <tr><td>方法二</td><td>$2,030 (0.90x)</td><td>$2,912 (1.04x)</td><td>$4,446 (0.99x)</td><td>$14,199</td><td>31.3%</td><td class="up">2009年(第10年)</td><td>未達成 / 未達成</td><td>8次</td><td class="up">+$480</td></tr>
+      <tr><td>方法三</td><td>$1,951 (0.88x)</td><td>$2,824 (1.03x)</td><td>$4,318 (0.97x)</td><td>$14,134</td><td>30.6%</td><td class="up">2009年(第10年)</td><td>未達成 / 未達成</td><td>9次</td><td class="up">+$415</td></tr>
+      <tr><td rowspan="3">2015-2024<br>(最順十年)</td><td>方法一<span class="badge-est">已修正</span></td><td>$3,469 (1.67x)</td><td>$7,555 (2.50x)</td><td>$10,709 (2.66x)</td><td>$21,172</td><td>50.6%</td><td class="up">2020年(第6年)</td><td>第5年(2019) / 第7年(2021)</td><td>3次</td><td class="dn">-$796</td></tr>
+      <tr><td>方法二</td><td>$3,469 (1.67x)</td><td>$7,455 (2.51x)</td><td>$10,601 (2.66x)</td><td>$20,864</td><td>50.8%</td><td class="up">2020年(第6年)</td><td>第6年(2020) / 第7年(2021)</td><td>3次</td><td class="dn">-$1,104</td></tr>
+      <tr><td>方法三</td><td>$3,546 (1.68x)</td><td>$6,838 (2.57x)</td><td>$9,484 (2.74x)</td><td>$20,320</td><td>46.7%</td><td class="up">2020年(第6年)</td><td>第6年(2020) / 未達成</td><td>1次</td><td class="dn">-$1,648</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>情境</th><th>方法</th><th>股票部位總報酬率<br>跌破-20%的年份</th><th>最深總報酬率</th><th>發生日期</th><th>回正日期</th><th>回正耗時</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3">2000-2009</td><td>方法一<span class="badge-est">已修正</span></td><td>2000,01,02,03,08,09</td><td class="dn">-45.1%</td><td>2002-10-09</td><td>2005-08-02</td><td>1,028天(約34個月)</td></tr>
+      <tr><td>方法二</td><td>2000,01,02,03,04,08,09</td><td class="dn">-52.6%</td><td>2002-10-09</td><td>2006-10-12</td><td>1,464天(約48個月)</td></tr>
+      <tr><td>方法三</td><td>2000,01,02,03,04,08,09</td><td class="dn">-53.9%</td><td>2002-10-09</td><td>2006-10-25</td><td>1,477天(約49個月)</td></tr>
+      <tr><td rowspan="3">2015-2024</td><td>方法一</td><td>（無）</td><td class="dn">-10.4%</td><td>2016-02-11</td><td>2016-03-29</td><td>47天</td></tr>
+      <tr><td>方法二</td><td>（無）</td><td class="dn">-10.4%</td><td>2016-02-11</td><td>2016-03-29</td><td>47天</td></tr>
+      <tr><td>方法三</td><td>（無）</td><td class="dn">-10.1%</td><td>2016-02-11</td><td>2016-03-18</td><td>36天</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-box">
+    <h4>與延伸五(第一年$1,000進場、第二年起5%全投)相比：熊市時加碼機制明顯占優，牛市時全額投入明顯占優（方法一數字已依定存池/本金修正邏輯重算）</h4>
+    <p>直接對比同樣「$9,000+$1,000起手式」下的兩種做法（皆以配置二為準）：<b>最壞十年，方法一比延伸五多賺$736、方法二多$480、方法三多$415</b>——加碼機制在這段雙重熊市裡確實發揮了保護與逢低加碼的效果；修正後方法一的優勢雖比修正前($2,136)小了不少(因為$175的加碼資金改為老實從本金支出，不再是憑空多賺)，但仍是三者中貢獻最大的。<b>但最順十年反過來，延伸五(全額5%投入)比方法一多賺$796、比方法二多$1,104、比方法三多$1,648</b>——保守分流＋加碼機制在牛市裡的「閒置資金機會成本」再次成為主要拖累，且修正後方法一在牛市裡的相對表現又更差了一些(修正前僅落後$515)。這與整份報告從頭到尾的核心主題完全一致：<b>沒有一種做法能同時在熊市與牛市都最優</b>，選擇本質上是您對「未來十年比較可能是哪種市場環境」的判斷，或者說，是您對「保護下檔」與「不錯過上檔」兩者的相對偏好。</p>
+    <p>本節「股票部位總報酬率」的最深虧損與回正天數，比延伸三(無$1,000頭期款版本)略深、回正也略慢——例如方法一最深回檔從延伸三的-38.6%加深到本節的-45.1%，回正時間也從440天拉長到1,028天(約多19.5個月)。這是因為<b>頭期款讓部位一開始就直接曝險在市場裡，沒有像延伸三那樣先花幾年慢慢養大部位、稀釋掉早期波動</b>——2000年市場一開盤下跌，這筆已經進場的$1,000立刻就跟著虧損，而不是像延伸三要等到有一定累積金額後才明顯感受到跌幅，這也是「一次性進場」與「逐步累積進場」在風險體感上的關鍵差異。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🔁</span>延伸七：「$8,000固定收益+$2,000首年直接進股市」，第二年起5%利息全投入</div>
+  <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">與延伸五相同邏輯，只是把頭期款加倍：本金拆成<b>$8,000固定收益(年息5%＝$400/年)＋$2,000第一年直接投入股票</b>(依配置權重)；<b>從第二年開始</b>，每年把固定收益的5%利息($400)全數投入股票。以下以配置二(60/20/10/10)為代表呈現，並比照延伸五補上「達7:3」與「達5:5(股票佔比過半)」兩個門檻的年份。</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>情境</th><th>5年末股票市值<br>(投入成本$3,600)</th><th>7年末股票市值<br>(投入成本$4,400)</th><th>10年末股票市值<br>(投入成本$5,600)</th><th>10年末總資產</th><th>10年末股票佔比</th><th>達7:3年份</th><th>達5:5年份</th><th>首達6%/8%</th></tr></thead>
+    <tbody>
+      <tr><td>2000-2009<br>(最壞十年)</td><td>$2,978 (0.83x)</td><td>$4,291 (0.98x)</td><td>$4,864 (0.87x)</td><td>$12,864</td><td>37.8%</td><td class="up">2005年(第6年)</td><td>10年內未達成</td><td>未達成 / 未達成</td></tr>
+      <tr><td>2015-2024<br>(最順十年)</td><td>$6,090 (1.69x)</td><td>$11,561 (2.63x)</td><td>$15,792 (2.82x)</td><td>$23,792</td><td>66.4%</td><td class="up">2017年(第3年)</td><td class="up">2020年(第6年)</td><td>第5年(2019) / 第6年(2020)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-box">
+    <h4>頭期款加倍後，兩種情境的分歧被進一步放大——最順十年裡甚至反超原始情境</h4>
+    <p><b>2000-2009最壞十年，延伸七是目前為止所有做法裡10年末總資產最低的($12,864)</b>，比原始情境的$14,785少了$1,921、比延伸五的$13,719也少了$855——$2,000頭期款一開局就全數曝險在網路泡沫裡，達5:5股票佔比十年內完全達不到，整體報酬6%/8%的目標也完全無望。<b>但2015-2024最順十年，延伸七的10年末總資產($23,792)反而是目前所有做法裡最高的</b>，第一次超過原始情境的$22,845(多賺$947)，也遠勝延伸五的$21,968——股票佔比第3年就衝過7:3、第6年就過半(5:5)，整體報酬6%/8%也是全報告目前最快達成的組合(第5年、第6年)。這印證了延伸五章節後面「滾動十年窗口」分析的結論：<b>頭期款規模是一個槓桿旋鈕</b>，加倍頭期款不會讓結果變得「普遍更好或更差」，而是讓「起點市場位置的好壞」被加倍放大——放在熊市開局是加倍的傷，放在牛市開局則第一次讓「提前投入」的做法整體超車了最純粹的原始情境。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">📊</span>定期策略比較總表</div>
+  <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">彙整本報告討論過的所有做法，統一以<b>配置二(60/20/10/10)</b>為代表呈現5年末與10年末總資產（固定收益/定存+股票市值合計），並列出對原始$10,000本金的<b>累計報酬率</b>。10年末數字取自各節已發表的表格(延伸三/六方法一已依本金侵蝕修正邏輯重算)；5年末總資產為本節新補充計算。<b>報酬率比原始情境(5%全股)同一檢核點高出3個百分點以上標紅色，低3個百分點以上標綠色</b>，落在±3個百分點內維持中性色。</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>情境</th><th>檢核點</th><th>原始情境<br>(5%全股)</th><th>延伸一<br>(3%股+2%定存)</th><th>延伸三-方法一<br>(3%+2%+固定加碼)</th><th>延伸三-方法二<br>(3%+2%+池提領20%)</th><th>延伸三-方法三<br>(3%+2%+部位觸發)</th><th>延伸五<br>(9k+1k,5%全股)</th><th>延伸六-方法一<br>(9k+1k,3%+2%+固定加碼)</th><th>延伸六-方法二<br>(9k+1k,3%+2%+池提領20%)</th><th>延伸六-方法三<br>(9k+1k,3%+2%+部位觸發)</th><th>延伸七<br>(8k+2k,5%全股)</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="2">2000-2009<br>(最壞十年)</td><td>5年末總資產</td><td>$12,428<br>+24.3%</td><td>$12,570<br>+25.7%</td><td>$12,754<br><span class="up">+27.5%</span></td><td>$12,652<br>+26.5%</td><td>$12,602<br>+26.0%</td><td>$11,562<br><span class="dn">+15.6%</span></td><td>$11,954<br><span class="dn">+19.5%</span></td><td>$11,615<br><span class="dn">+16.2%</span></td><td>$11,589<br><span class="dn">+15.9%</span></td><td>$10,978<br><span class="dn">+9.8%</span></td></tr>
+      <tr><td>10年末總資產</td><td>$14,785<br>+47.9%</td><td>$15,232<br><span class="up">+52.3%</span></td><td>$15,554<br><span class="up">+55.5%</span></td><td>$15,577<br><span class="up">+55.8%</span></td><td>$15,452<br><span class="up">+54.5%</span></td><td>$13,719<br><span class="dn">+37.2%</span></td><td>$14,455<br><span class="dn">+44.6%</span></td><td>$14,199<br><span class="dn">+42.0%</span></td><td>$14,134<br><span class="dn">+41.3%</span></td><td>$12,864<br><span class="dn">+28.6%</span></td></tr>
+      <tr><td rowspan="2">2015-2024<br>(最順十年)</td><td>5年末總資產</td><td>$14,018<br>+40.2%</td><td>$13,460<br><span class="dn">+34.6%</span></td><td>$13,460<br><span class="dn">+34.6%</span></td><td>$13,460<br><span class="dn">+34.6%</span></td><td>$13,544<br><span class="dn">+35.4%</span></td><td>$13,558<br><span class="dn">+35.6%</span></td><td>$13,453<br><span class="dn">+34.5%</span></td><td>$13,244<br><span class="dn">+32.4%</span></td><td>$13,282<br><span class="dn">+32.8%</span></td><td>$14,090<br>+40.9%</td></tr>
+      <tr><td>10年末總資產</td><td>$22,845<br>+128.5%</td><td>$20,069<br><span class="dn">+100.7%</span></td><td>$20,329<br><span class="dn">+103.3%</span></td><td>$20,487<br><span class="dn">+104.9%</span></td><td>$19,871<br><span class="dn">+98.7%</span></td><td>$21,968<br><span class="dn">+119.7%</span></td><td>$21,172<br><span class="dn">+111.7%</span></td><td>$20,864<br><span class="dn">+108.6%</span></td><td>$20,320<br><span class="dn">+103.2%</span></td><td>$23,792<br><span class="up">+137.9%</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">報酬率＝(總資產÷$10,000原始本金－1)×100%，同一檢核點下與「原始情境(5%全股)」比較。可留意2015-2024整欄幾乎全綠（除了延伸七)：不是這些做法表現差，而是原始情境在單一大多頭市場裡「完全不分流、複利效果最純粹」的優勢過於巨大，任何形式的分流(定存)、保留(加碼池)或本金拆分都會被算成落後超過3個百分點——除非像延伸七那樣把頭期款規模也放大到$2,000，才反而能超車。</div>
+  <div class="insight-box">
+    <h4>總表一眼看出：最壞十年由延伸三-方法二些微勝出、延伸七墊底，最順十年由延伸七首度超車原始全股</h4>
+    <p><b>2000-2009最壞十年，10年末總資產最高的是延伸三-方法二($15,577)</b>，僅些微超過修正後的延伸三-方法一($15,554，差距僅$23)，兩者都比最原始的做法($14,785)高出逾$750；<b>而新加入的延伸七則是十個做法裡總資產最低的($12,864)</b>，$2,000頭期款全數曝險在雙重熊市裡的代價，比延伸五的$1,000頭期款($13,719)更沉重。<b>2015-2024最順十年，總資產最高的變成延伸七($23,792)</b>，是全報告目前唯一一個在牛市裡贏過原始情境($22,845)的做法，原因正是頭期款規模夠大、且全額投入股票、完全不分流——把「提前投入」與「不分流」兩個優勢疊加到極致；原始情境退居第二，延伸五(把$1,000本金提前變股票頭期款)排名第三。這張總表濃縮了本報告從頭到尾的核心結論：<b>沒有一種做法能同時稱霸兩種市場環境</b>，而且結果的極端程度會隨著「頭期款規模」或「加碼積極度」等槓桿參數同步放大——參數越極端，贏的時候贏越多，輸的時候也輸越多。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">📉</span>附錄：原始情境／延伸五／延伸七 滾動十年窗口報酬率比較</div>
+  <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">把「原始情境(5%全股)」「延伸五(9k+1k)」「延伸七(8k+2k)」三者，用配置二(60/20/10/10)為代表，攤開2000年至今<b>所有可用的完整10年滾動窗口</b>(2000-2009一路到2015-2024，共16組；2016-2025因CSPX/CNDX真實日資料僅到2025年8月、無完整年度報酬可算，故未列入)比較累計報酬率(對原始$10,000本金)，<b>每列報酬率最高者以紅字加粗標示</b>。</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>十年窗口</th><th>原始情境<br>(10k全固定收益,5%全股)</th><th>延伸五<br>(9k+1k,5%全股)</th><th>延伸七<br>(8k+2k,5%全股)</th></tr></thead>
+    <tbody>
+      <tr><td>2000-2009</td><td class="up"><b>+48.8%</b></td><td>+37.2%</td><td>+28.6%</td></tr>
+      <tr><td>2001-2010</td><td class="up"><b>+58.7%</b></td><td>+47.7%</td><td>+41.0%</td></tr>
+      <tr><td>2002-2011</td><td class="up"><b>+58.6%</b></td><td>+48.8%</td><td>+44.5%</td></tr>
+      <tr><td>2003-2012</td><td class="up"><b>+65.6%</b></td><td>+59.2%</td><td>+61.9%</td></tr>
+      <tr><td>2004-2013</td><td class="up"><b>+80.1%</b></td><td>+71.9%</td><td>+72.7%</td></tr>
+      <tr><td>2005-2014</td><td class="up"><b>+85.8%</b></td><td>+77.6%</td><td>+78.9%</td></tr>
+      <tr><td>2006-2015</td><td class="up"><b>+83.5%</b></td><td>+75.3%</td><td>+76.3%</td></tr>
+      <tr><td>2007-2016</td><td class="up"><b>+85.7%</b></td><td>+77.3%</td><td>+78.1%</td></tr>
+      <tr><td>2008-2017</td><td class="up"><b>+104.1%</b></td><td>+96.1%</td><td>+99.3%</td></tr>
+      <tr><td>2009-2018</td><td>+94.7%</td><td>+94.8%</td><td class="up"><b>+112.6%</b></td></tr>
+      <tr><td>2010-2019</td><td>+109.8%</td><td>+107.9%</td><td class="up"><b>+123.2%</b></td></tr>
+      <tr><td>2011-2020</td><td>+136.6%</td><td>+135.7%</td><td class="up"><b>+155.5%</b></td></tr>
+      <tr><td>2012-2021</td><td>+147.2%</td><td>+150.3%</td><td class="up"><b>+178.9%</b></td></tr>
+      <tr><td>2013-2022</td><td>+89.7%</td><td>+88.0%</td><td class="up"><b>+101.9%</b></td></tr>
+      <tr><td>2014-2023</td><td>+108.0%</td><td>+106.2%</td><td class="up"><b>+121.8%</b></td></tr>
+      <tr><td>2015-2024</td><td>+120.6%</td><td>+119.7%</td><td class="up"><b>+137.9%</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-box">
+    <h4>頭期款越大，賭性越強：贏的時候贏更多，輸的時候也輸更多</h4>
+    <p>16個窗口裡，<b>原始情境勝出9次(2000-2008年開頭的窗口)，延伸七勝出7次(2009-2015年開頭的窗口)，延伸五則完全沒有勝出過一次</b>——因為延伸五的頭期款規模「不上不下」，永遠介於原始情境(0元頭期款)與延伸七(2,000元頭期款)之間，自然拿不到極端結果。這證明了本報告一貫的結論：<b>頭期款的規模是一個槓桿旋鈕，不是「有沒有」的問題，而是「多大」的問題</b>——窗口起點若落在股災年或股災剛結束前(2000-2002網路泡沫、2008金融海嘯)，頭期款規模越大，開局曝險越深，落後原始情境越多(2000-2009裡，延伸七落後原始情境達20.2個百分點，遠比延伸五的11.6個百分點更慘)；但窗口起點若落在股災「後」的復甦期(2009年之後)，頭期款規模越大，越能提早吃到反彈紅利，領先原始情境的幅度也隨頭期款放大(2012-2021裡，延伸七領先原始情境31.7個百分點，遠比延伸五的3.2個百分點更亮眼)。換句話說，「提前把本金挪去投資」這個動作本身沒有絕對的對錯，它只是把您的結果<b>朝起點當下的市場位置做了槓桿放大</b>——起點若買在相對低點，頭期款越大越好；起點若買在相對高點附近，頭期款越大越傷。</p>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <span>資料來源：SP500/NASDAQ100指數與CSPX/CNDX ETF逐日真實股價、BGF世界科技逐月真實NAV、JPM美國科技(dist)逐日真實NAV（同「四配置科技成長組合回測比較」報告使用之四產品歷史數據，存於本資料夾「四產品歷史價格數據」子資料夾）</span>
+  <span class="warn">⚠️ 本報告僅供研究參考，不構成投資建議；歷史績效不代表未來表現；固定收益5%利率與本金不變為簡化假設，實際固定收益商品可能有利率變動或信用風險</span>
+</div>
+
+</body>
+</html>

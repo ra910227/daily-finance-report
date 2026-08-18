@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>四配置科技成長組合回測比較 — 2026年08月06日</title>
+<style>
+  :root {
+    --bg: #ffffff; --bg2: #f7f8fc; --bg3: #eef0f7; --border: #e1e4ee;
+    --text: #1e2233; --text2: #6b7280; --accent: #4f46e5; --accent2: #4338ca;
+    --red: #dc2626; --green: #15803d; --gold: #b45309; --orange: #c2410c;
+    --blue: #2563eb; --purple: #7c3aed; --teal: #0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system,'PingFang TC','Microsoft JhengHei',sans-serif; font-size: 14px; line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #eef1fb 0%, #f5f7fc 50%, #eef2f8 100%); padding: 28px 32px 20px; border-bottom: 1px solid var(--border); }
+  .header h1 { font-size: 22px; font-weight: 700; color: var(--accent2); letter-spacing: 0.5px; }
+  .header .meta { color: var(--text2); font-size: 12px; margin-top: 4px; }
+  .summary-box { background: linear-gradient(90deg, #eef4fc 0%, #f7f8fc 100%); border-left: 4px solid var(--accent); margin: 20px 24px; padding: 14px 20px; border-radius: 0 8px 8px 0; font-size: 15px; font-weight: 600; color: #1e2233; }
+  .container { padding: 0 24px 40px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--accent2); padding: 8px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title .icon { font-size: 18px; }
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+  .stat-card .label { font-size: 11px; color: var(--text2); margin-bottom: 6px; }
+  .stat-card .val { font-size: 20px; font-weight: 700; color: var(--text); }
+  table { width: 100%; border-collapse: collapse; background: var(--bg2); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); font-size: 12.5px; vertical-align: middle; color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #eef1fb; }
+  .name-cn { color: var(--text2); font-size: 10.5px; }
+  .up { color: var(--red); font-weight: 700; }
+  .dn { color: var(--green); font-weight: 700; }
+  .badge { background: #f1eafe; color: var(--purple); font-size: 10.5px; padding: 2px 7px; border-radius: 4px; display: inline-block; white-space: nowrap; }
+  .badge-real { background: #e7f7ee; color: var(--green); font-size: 10.5px; padding: 2px 7px; border-radius: 4px; }
+  .badge-est { background: #fdf3d9; color: var(--gold); font-size: 10.5px; padding: 2px 7px; border-radius: 4px; }
+  .table-scroll { overflow-x: auto; }
+  .insight-box { background: #fffbea; border: 1px solid var(--gold); border-radius: 10px; padding: 16px 18px; margin-top: 14px; }
+  .insight-box h4 { color: var(--gold); font-size: 14px; margin-bottom: 10px; }
+  .insight-box p { font-size: 13px; color: var(--text); margin-bottom: 8px; }
+  .warn-box { background: #fff4ec; border: 1px solid var(--orange); border-radius: 10px; padding: 16px 18px; margin-top: 14px; }
+  .warn-box h4 { color: var(--orange); font-size: 14px; margin-bottom: 10px; }
+  .warn-box p { font-size: 13px; color: var(--text); margin-bottom: 8px; }
+  .verdict-box { background: linear-gradient(135deg, #fef2f2 0%, #fdf9f7 60%); border: 1px solid #fca5a5; border-radius: 10px; padding: 18px 20px; margin-top: 14px; }
+  .verdict-box h4 { color: var(--red); font-size: 15px; margin-bottom: 10px; }
+  .verdict-box p { font-size: 13px; color: var(--text); margin-bottom: 10px; }
+  .verdict-box ul { padding-left: 20px; margin-bottom: 10px; }
+  .verdict-box li { font-size: 13px; color: var(--text2); padding: 3px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .footer { background: var(--bg3); border-top: 1px solid var(--border); padding: 14px 24px; font-size: 11px; color: var(--text2); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .footer .warn { color: var(--orange); }
+  @media (max-width: 900px) { .stat-grid { grid-template-columns: repeat(2,1fr); } .two-col, .three-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📊 四配置科技成長組合回測比較</h1>
+  <div class="meta">2026年08月06日｜比較標的：CSPX(S&amp;P500) + CNDX(NASDAQ100) + BGF貝萊德世界科技A2 + JPM摩根美國科技A(dist)｜回溯期間：2000-2004（網路泡沫）／2018-2022／2021-2025，並新增2000-2025連續全期間統計｜資料來源：投資產品比較表_2026.xlsx官方月報 ＋ Damodaran NYU Stern/QQQ歷史序列 ＋ BlackRock官網歷史淨值匯出檔(BGF,1995-2026逐月真實) ＋ J.P. Morgan官網歷史NAV API(JPM美國科技A(dist) LU0082616367,1997-2026逐日真實)</div>
+</div>
+
+<div class="summary-box">
+  🎯 一句話結論：JPM美國科技已全面改用官網「A股(分派)」LU0082616367逐日真實NAV數據，2003年不再是估算值。四配置在2018-2022與2021-2025呈現「科技權重越高、CAGR略高但波動與回檔同步放大」的溫和正向關係，但把時間拉回2000-2002網路泡沫，結論完全反轉——CAGR降至-7.7%~-13.0%，最大回檔逼近-53%~-67%；把24年攤開看(2000-2025連續)，科技衛星權重越低的配置一(10%)總報酬反而最高(+419.8%)、回檔最淺(-52.6%)，證明長期而言分散在CSPX/CNDX比重壓兩檔高費率主動科技基金更有效率。
+</div>
+
+<div class="container">
+
+<div class="section">
+  <div class="section-title"><span class="icon">⚠️</span>資料完整度與方法論說明（請務必先讀）</div>
+  <div class="warn-box">
+    <h4>這些報酬率是含息(總報酬)嗎？——逐標的說明</h4>
+    <p><b>CSPX/CNDX</b>：2018-2025用官方基金月報數字，兩者皆為「累積(Acc)」股份，配息已完全再投資、NAV已反映總報酬，<span class="badge-real">總報酬</span>。2000-2004(2010年前，ETF尚未成立)改用S&amp;P500/NASDAQ100<b>價格指數</b>(不含息)代理，會些微低估實際報酬(每年約1~1.5%股息落差)，<span class="badge-est">價格報酬，非總報酬</span>。</p>
+    <p><b>BGF世界科技A2</b>：累積(Acc)股份，配息已再投資於NAV內，取自BlackRock官網「歷史淨值/表現」逐月真實數據，<span class="badge-real">總報酬</span>，2000-2025全期間皆為真實數字。</p>
+    <p><b>JPM美國科技</b>：依使用者指示，<b>全面改用1997年發行的「摩根基金－美國科技基金－(美元)-A股(分派)」(JPM US Technology A (dist) - USD，ISIN LU0082616367)計算</b>，取自J.P. Morgan官網歷史NAV API(am.jpmorgan.com/FundsMarketingHandler/historicalData)，1997-12-05至今逐日真實NAV，2000-2025全期間不再需要任何估算值。此為<b>分派(dist)股份</b>，理論上NAV價格報酬需另外加回配息才是完整總報酬；但查證該股份最近一次配息僅USD 0.01/股（相對NAV約75元，殖利率約0.01%），配息金額長期以來都極小(該股份「配息頻率」設定為年配，性質上更接近法規/稅務要求的象徵性配息，而非實質收益分配)，<b>NAV價格報酬與真實總報酬的差異可忽略不計</b>，<span class="badge-real">視同總報酬</span>使用。與BGF/CSPX/CNDX等累積股份相比，這是本報告中唯一嚴格來說並非100%總報酬定義的標的，但差異對整體配置數字的影響預估在0.1個百分點以內。</p>
+  </div>
+  <div class="insight-box">
+    <h4>最大回檔(MDD)計算方式的限制</h4>
+    <p>受限於僅有「年度」報酬率資料（非月度/日度組合層級計算），本報告的組合MDD是以「年底對年底」的年度端點估算，<b>會低估真實盤中最大回檔</b>，尤其是2020年——當年NASDAQ100/S&amp;P500在2-3月COVID崩盤時一度分別重挫約-28%~-30%與-33.9%，但因為全年最終收正，年度端點法完全「看不到」這段真實回檔。因此本報告在2018-2022與2021-2025章節額外附上「真實盤中回檔參考值」，供您理解組合在崩盤當下的實際波動遠比年度數字看起來更劇烈。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🧩</span>四配置定義（2000-2025連續全期間統計）</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>配置</th><th>CSPX (S&amp;P500)</th><th>CNDX (NASDAQ100)</th><th>BGF世界科技</th><th>JPM美國科技</th><th>科技衛星合計</th><th>2000年至今總報酬率</th><th>期間最大回檔率</th></tr></thead>
+    <tbody>
+      <tr><td><b>配置一</b></td><td>70%</td><td>20%</td><td>5%</td><td>5%</td><td>10%</td><td class="up">+419.8%</td><td class="dn">-52.60%</td></tr>
+      <tr><td><b>配置二</b></td><td>60%</td><td>20%</td><td>10%</td><td>10%</td><td>20%</td><td class="up">+401.7%</td><td class="dn">-58.39%</td></tr>
+      <tr><td><b>配置三</b></td><td>50%</td><td>25%</td><td>12.5%</td><td>12.5%</td><td>25%</td><td class="up">+396.6%</td><td class="dn">-62.64%</td></tr>
+      <tr><td><b>配置四</b></td><td>40%</td><td>30%</td><td>15%</td><td>15%</td><td>30%</td><td class="up">+387.5%</td><td class="dn">-66.59%</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">「2000年至今總報酬率」與「期間最大回檔率」是把2000-2025這26年當成<b>一段連續期間</b>（不是分開的三段），逐年複利串接計算出的總成果——這與後面「三期間」各自獨立回測的數字是不同概念，請勿混淆。四配置實質上都是「以CSPX/CNDX為底、疊加10-30%高費率單一科技主動基金」的科技增強型組合，本質上並非分散配置，四檔標的高度相關（皆為美國/全球大型科技股曝險），這一點會直接放大危機期間的同步下跌風險。有趣的是：以26年完整週期來看，<b>科技衛星權重越低，總報酬反而越高、回檔也越淺</b>，與短期(5年)回測「科技權重越高CAGR越高」的印象恰恰相反——原因是配置一到四的差異被2000-2002網路泡沫這場深度回撤永久性地拉開了差距，之後20多年的複利再也無法完全填平。</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">💥</span>期間一：2000-2004 網路泡沫（BGF與JPM科技皆為真實數據）</div>
+  <div style="background:#fbfbfd;border:1px solid var(--border);border-radius:10px;padding:16px 18px 10px;margin-bottom:16px;">
+    <div style="font-size:12.5px;color:var(--text2);margin-bottom:8px;">仿J.P. Morgan《Guide to the Markets》年度報酬圖：柱狀=當年報酬率，深色方形點=當年盤中最大跌幅(intra-year decline)。CSPX/CNDX 2000-2004用S&amp;P500/NASDAQ100價格指數代理，BGF用月頻NAV估算跌幅(較日頻粗略)，JPM美國科技(dist)為逐日真實數據。</div>
+    <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" font-family="-apple-system,PingFang TC,Microsoft JhengHei,sans-serif">
+<rect x="0" y="0" width="720" height="400" fill="#ffffff"/>
+<line x1="55" y1="344.6" x2="705" y2="344.6" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="348.6" font-size="10.5" fill="#6b7280" text-anchor="end">-80%</text>
+<line x1="55" y1="301.9" x2="705" y2="301.9" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="305.9" font-size="10.5" fill="#6b7280" text-anchor="end">-60%</text>
+<line x1="55" y1="259.1" x2="705" y2="259.1" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="263.1" font-size="10.5" fill="#6b7280" text-anchor="end">-40%</text>
+<line x1="55" y1="216.4" x2="705" y2="216.4" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="220.4" font-size="10.5" fill="#6b7280" text-anchor="end">-20%</text>
+<line x1="55" y1="173.6" x2="705" y2="173.6" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="177.6" font-size="10.5" fill="#6b7280" text-anchor="end">0%</text>
+<line x1="55" y1="130.9" x2="705" y2="130.9" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="134.9" font-size="10.5" fill="#6b7280" text-anchor="end">20%</text>
+<line x1="55" y1="88.1" x2="705" y2="88.1" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="92.1" font-size="10.5" fill="#6b7280" text-anchor="end">40%</text>
+<line x1="55" y1="45.4" x2="705" y2="45.4" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="49.4" font-size="10.5" fill="#6b7280" text-anchor="end">60%</text>
+<line x1="55" y1="173.6" x2="705" y2="173.6" stroke="#9ca3af" stroke-width="1.4"/>
+<rect x="63.0" y="173.6" width="25.5" height="19.8" fill="#2563eb" rx="1.5"/>
+<text x="75.8" y="204.4" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">-9.3</text>
+<rect x="72.5" y="207.1" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="92.5" y="173.6" width="25.5" height="81.7" fill="#c2410c" rx="1.5"/>
+<text x="105.2" y="266.3" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">-38.2</text>
+<rect x="102.0" y="283.7" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="122.0" y="173.6" width="25.5" height="67.8" fill="#0d9488" rx="1.5"/>
+<text x="134.8" y="252.4" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">-31.7</text>
+<rect x="131.5" y="262.1" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="151.5" y="173.6" width="25.5" height="97.5" fill="#7c3aed" rx="1.5"/>
+<text x="164.2" y="282.1" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">-45.6</text>
+<rect x="161.0" y="312.6" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="120.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2000</text>
+<rect x="193.0" y="173.6" width="25.5" height="22.5" fill="#2563eb" rx="1.5"/>
+<text x="205.8" y="207.1" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">-10.5</text>
+<rect x="202.5" y="233.8" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="222.5" y="173.6" width="25.5" height="55.4" fill="#c2410c" rx="1.5"/>
+<text x="235.2" y="240.0" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">-25.9</text>
+<rect x="232.0" y="295.9" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="252.0" y="173.6" width="25.5" height="95.4" fill="#0d9488" rx="1.5"/>
+<text x="264.8" y="280.0" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">-44.6</text>
+<rect x="261.5" y="303.0" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="281.5" y="173.6" width="25.5" height="125.4" fill="#7c3aed" rx="1.5"/>
+<text x="294.2" y="310.0" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">-58.7</text>
+<rect x="291.0" y="339.1" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="250.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2001</text>
+<line x1="185.0" y1="24.0" x2="185.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<rect x="323.0" y="173.6" width="25.5" height="50.9" fill="#2563eb" rx="1.5"/>
+<text x="335.8" y="235.5" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">-23.8</text>
+<rect x="332.5" y="242.5" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="352.5" y="173.6" width="25.5" height="83.1" fill="#c2410c" rx="1.5"/>
+<text x="365.2" y="267.7" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">-38.9</text>
+<rect x="362.0" y="281.4" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="382.0" y="173.6" width="25.5" height="101.7" fill="#0d9488" rx="1.5"/>
+<text x="394.8" y="286.3" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">-47.6</text>
+<rect x="391.5" y="284.5" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="411.5" y="173.6" width="25.5" height="125.1" fill="#7c3aed" rx="1.5"/>
+<text x="424.2" y="309.7" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">-58.5</text>
+<rect x="421.0" y="315.7" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="380.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2002</text>
+<line x1="315.0" y1="24.0" x2="315.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<rect x="453.0" y="125.9" width="25.5" height="47.7" fill="#2563eb" rx="1.5"/>
+<text x="465.8" y="121.9" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">+22.3</text>
+<rect x="462.5" y="200.4" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="482.5" y="82.1" width="25.5" height="91.5" fill="#c2410c" rx="1.5"/>
+<text x="495.2" y="78.1" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">+42.8</text>
+<rect x="492.0" y="198.3" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="512.0" y="56.9" width="25.5" height="116.7" fill="#0d9488" rx="1.5"/>
+<text x="524.8" y="52.9" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">+54.6</text>
+<rect x="521.5" y="173.4" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="541.5" y="51.8" width="25.5" height="121.9" fill="#7c3aed" rx="1.5"/>
+<text x="554.2" y="47.8" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">+57.0</text>
+<rect x="551.0" y="203.1" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="510.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2003</text>
+<line x1="445.0" y1="24.0" x2="445.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<rect x="583.0" y="153.7" width="25.5" height="19.9" fill="#2563eb" rx="1.5"/>
+<text x="595.8" y="149.7" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">+9.3</text>
+<rect x="592.5" y="187.8" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="612.5" y="150.6" width="25.5" height="23.0" fill="#c2410c" rx="1.5"/>
+<text x="625.2" y="146.6" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">+10.8</text>
+<rect x="622.0" y="204.7" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="642.0" y="173.6" width="25.5" height="3.4" fill="#0d9488" rx="1.5"/>
+<text x="654.8" y="188.0" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">-1.6</text>
+<rect x="651.5" y="222.8" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="671.5" y="157.9" width="25.5" height="15.7" fill="#7c3aed" rx="1.5"/>
+<text x="684.2" y="153.9" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">+7.3</text>
+<rect x="681.0" y="223.3" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="640.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2004</text>
+<line x1="575.0" y1="24.0" x2="575.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<line x1="55" y1="24" x2="55" y2="366" stroke="#d1d5db" stroke-width="1"/>
+</svg>
+<div style="font-size:11px;color:#374151;margin-top:8px;display:flex;flex-wrap:wrap;"><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#2563eb;border-radius:2px;display:inline-block;"></span>S&P500(CSPX)</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#c2410c;border-radius:2px;display:inline-block;"></span>NASDAQ100(CNDX)</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#0d9488;border-radius:2px;display:inline-block;"></span>BGF世界科技</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#7c3aed;border-radius:2px;display:inline-block;"></span>JPM美國科技</span><span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;background:#1e2233;display:inline-block;"></span>該年度最大跌幅(intra-year decline)</span></div>
+  </div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>標的/配置</th><th>CAGR</th><th>年度報酬波動度</th><th>年度端點最大回檔</th><th>報酬/回檔比</th><th>5年總報酬</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>S&amp;P 500 <span class="badge-est">價格報酬</span></td><td class="dn">-2.32%</td><td>20.13%</td><td class="dn">-37.43%</td><td>-0.06</td><td class="dn">-11.1%</td><td>真實盤中高點2000/3～低點2002/10回檔約<b>-49.1%</b></td></tr>
+      <tr><td>NASDAQ 100 <span class="badge-est">價格報酬</span></td><td class="dn">-15.26%</td><td>38.43%</td><td class="dn">-73.32%</td><td>-0.21</td><td class="dn">-56.3%</td><td>真實盤中高點2000/3～低點2002/10回檔約<b>-82~83%</b></td></tr>
+      <tr><td>JPM美國科技 <span class="badge-real">全真實(dist)</span></td><td class="dn">-27.02%</td><td>44.02%</td><td class="dn">-90.02%</td><td>-0.30</td><td class="dn">-80.5%</td><td>逐年：-45.6%/-58.7%/-58.5%/+57.0%/+7.3%，2003年不再是估算值</td></tr>
+      <tr><td>BGF世界科技 <span class="badge-real">全真實</span></td><td class="dn">-21.30%</td><td>42.53%</td><td class="dn">-80.16%</td><td>-0.27</td><td class="dn">-69.8%</td><td>逐年：-31.7%/-44.6%/-47.6%/+54.6%/-1.6%</td></tr>
+      <tr style="border-top:2px solid var(--border)"><td><b>配置一 (70/20/5/5)</b></td><td class="dn">-7.69%</td><td>24.22%</td><td class="dn">-52.60%</td><td>-0.15</td><td class="dn">-33.0%</td><td rowspan="4" style="vertical-align:middle;color:var(--text2)">全數真實數據，無情境估算</td></tr>
+      <tr><td><b>配置二 (60/20/10/10)</b></td><td class="dn">-9.71%</td><td>27.00%</td><td class="dn">-58.39%</td><td>-0.17</td><td class="dn">-40.0%</td></tr>
+      <tr><td><b>配置三 (50/25/12.5/12.5)</b></td><td class="dn">-11.32%</td><td>29.28%</td><td class="dn">-62.64%</td><td>-0.19</td><td class="dn">-45.2%</td></tr>
+      <tr><td><b>配置四 (40/30/15/15)</b></td><td class="dn">-12.98%</td><td>31.57%</td><td class="dn">-66.59%</td><td>-0.20</td><td class="dn">-50.1%</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-box">
+    <h4>關鍵發現：科技權重與虧損深度成正比</h4>
+    <p>從配置一到配置四，科技衛星權重從10%一路增至30%，2000-2004五年CAGR從-7.69%惡化到-12.98%，最大回檔從-52.6%擴大到-66.6%。這與後面兩個期間「科技權重越高、報酬越高」的關係完全相反——網路泡沫證明：當「科技」本身就是泡沫核心時，加碼科技衛星不是分散風險，而是加碼系統性風險本身。純S&amp;P 500在這五年也已虧損逾一成(CAGR -2.32%，5年總報酬-11.1%)，而JPM美國科技(dist)真實數據顯示這五年累積虧損高達80.5%，是四檔標的中跌得最深的，四個配置皆是兩位數年化虧損，五年後本金仍虧損33%~50%未回本。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">📈</span>期間二：2018-2022</div>
+  <div style="background:#fbfbfd;border:1px solid var(--border);border-radius:10px;padding:16px 18px 10px;margin-bottom:16px;">
+    <div style="font-size:12.5px;color:var(--text2);margin-bottom:8px;">仿J.P. Morgan《Guide to the Markets》年度報酬圖：柱狀=當年報酬率，深色方形點=當年盤中最大跌幅。本圖CSPX/CNDX/BGF/JPM科技(dist)皆採逐日真實股價/NAV計算，2020年COVID崩盤與2022年熊市的盤中跌幅在此清楚可見（柱狀看不到的部分）。注意：此處CSPX/CNDX年度報酬取自ETF逐日收盤價自算，與其餘表格採用的官方基金月報數字可能有1-2個百分點左右的細微差異。</div>
+    <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" font-family="-apple-system,PingFang TC,Microsoft JhengHei,sans-serif">
+<rect x="0" y="0" width="720" height="400" fill="#ffffff"/>
+<line x1="55" y1="366.0" x2="705" y2="366.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="370.0" font-size="10.5" fill="#6b7280" text-anchor="end">-60%</text>
+<line x1="55" y1="323.2" x2="705" y2="323.2" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="327.2" font-size="10.5" fill="#6b7280" text-anchor="end">-40%</text>
+<line x1="55" y1="280.5" x2="705" y2="280.5" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="284.5" font-size="10.5" fill="#6b7280" text-anchor="end">-20%</text>
+<line x1="55" y1="237.8" x2="705" y2="237.8" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="241.8" font-size="10.5" fill="#6b7280" text-anchor="end">0%</text>
+<line x1="55" y1="195.0" x2="705" y2="195.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="199.0" font-size="10.5" fill="#6b7280" text-anchor="end">20%</text>
+<line x1="55" y1="152.2" x2="705" y2="152.2" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="156.2" font-size="10.5" fill="#6b7280" text-anchor="end">40%</text>
+<line x1="55" y1="109.5" x2="705" y2="109.5" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="113.5" font-size="10.5" fill="#6b7280" text-anchor="end">60%</text>
+<line x1="55" y1="66.8" x2="705" y2="66.8" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="70.8" font-size="10.5" fill="#6b7280" text-anchor="end">80%</text>
+<line x1="55" y1="24.0" x2="705" y2="24.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="28.0" font-size="10.5" fill="#6b7280" text-anchor="end">100%</text>
+<line x1="55" y1="237.8" x2="705" y2="237.8" stroke="#9ca3af" stroke-width="1.4"/>
+<rect x="63.0" y="237.8" width="25.5" height="11.1" fill="#2563eb" rx="1.5"/>
+<text x="75.8" y="259.8" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">-5.2</text>
+<rect x="72.5" y="272.7" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="92.5" y="237.8" width="25.5" height="3.4" fill="#c2410c" rx="1.5"/>
+<text x="105.2" y="252.1" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">-1.6</text>
+<rect x="102.0" y="280.7" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="122.0" y="237.8" width="25.5" height="3.0" fill="#0d9488" rx="1.5"/>
+<text x="134.8" y="251.7" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">-1.4</text>
+<rect x="131.5" y="283.3" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="151.5" y="231.6" width="25.5" height="6.2" fill="#7c3aed" rx="1.5"/>
+<text x="164.2" y="227.6" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">+2.9</text>
+<rect x="161.0" y="283.0" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="120.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2018</text>
+<rect x="193.0" y="171.9" width="25.5" height="65.8" fill="#2563eb" rx="1.5"/>
+<text x="205.8" y="167.9" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">+30.8</text>
+<rect x="202.5" y="248.1" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="222.5" y="155.7" width="25.5" height="82.0" fill="#c2410c" rx="1.5"/>
+<text x="235.2" y="151.7" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">+38.4</text>
+<rect x="232.0" y="254.8" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="252.0" y="140.1" width="25.5" height="97.6" fill="#0d9488" rx="1.5"/>
+<text x="264.8" y="136.1" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">+45.7</text>
+<rect x="261.5" y="256.5" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="281.5" y="145.9" width="25.5" height="91.9" fill="#7c3aed" rx="1.5"/>
+<text x="294.2" y="141.9" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">+43.0</text>
+<rect x="291.0" y="261.7" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="250.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2019</text>
+<line x1="185.0" y1="24.0" x2="185.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<rect x="323.0" y="201.2" width="25.5" height="36.6" fill="#2563eb" rx="1.5"/>
+<text x="335.8" y="197.2" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">+17.1</text>
+<rect x="332.5" y="307.0" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="352.5" y="138.3" width="25.5" height="99.5" fill="#c2410c" rx="1.5"/>
+<text x="365.2" y="134.3" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">+46.5</text>
+<rect x="362.0" y="295.9" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="382.0" y="61.9" width="25.5" height="175.8" fill="#0d9488" rx="1.5"/>
+<text x="394.8" y="57.9" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">+82.2</text>
+<rect x="391.5" y="298.2" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="411.5" y="59.6" width="25.5" height="178.1" fill="#7c3aed" rx="1.5"/>
+<text x="424.2" y="55.6" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">+83.3</text>
+<rect x="421.0" y="303.4" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="380.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2020</text>
+<line x1="315.0" y1="24.0" x2="315.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<rect x="453.0" y="172.8" width="25.5" height="65.0" fill="#2563eb" rx="1.5"/>
+<text x="465.8" y="168.8" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">+30.4</text>
+<rect x="462.5" y="246.7" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="482.5" y="175.2" width="25.5" height="62.6" fill="#c2410c" rx="1.5"/>
+<text x="495.2" y="171.2" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">+29.3</text>
+<rect x="492.0" y="258.9" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="512.0" y="221.8" width="25.5" height="16.0" fill="#0d9488" rx="1.5"/>
+<text x="524.8" y="217.8" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">+7.5</text>
+<rect x="521.5" y="276.2" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="541.5" y="211.9" width="25.5" height="25.8" fill="#7c3aed" rx="1.5"/>
+<text x="554.2" y="207.9" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">+12.1</text>
+<rect x="551.0" y="277.2" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="510.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2021</text>
+<line x1="445.0" y1="24.0" x2="445.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<rect x="583.0" y="237.8" width="25.5" height="40.7" fill="#2563eb" rx="1.5"/>
+<text x="595.8" y="289.4" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">-19.0</text>
+<rect x="592.5" y="286.3" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="612.5" y="237.8" width="25.5" height="70.0" fill="#c2410c" rx="1.5"/>
+<text x="625.2" y="318.8" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">-32.8</text>
+<rect x="622.0" y="306.4" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="642.0" y="237.8" width="25.5" height="90.9" fill="#0d9488" rx="1.5"/>
+<text x="654.8" y="339.6" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">-42.5</text>
+<rect x="651.5" y="330.1" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="671.5" y="237.8" width="25.5" height="94.5" fill="#7c3aed" rx="1.5"/>
+<text x="684.2" y="343.2" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">-44.2</text>
+<rect x="681.0" y="334.4" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="640.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2022</text>
+<line x1="575.0" y1="24.0" x2="575.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<line x1="55" y1="24" x2="55" y2="366" stroke="#d1d5db" stroke-width="1"/>
+</svg>
+<div style="font-size:11px;color:#374151;margin-top:8px;display:flex;flex-wrap:wrap;"><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#2563eb;border-radius:2px;display:inline-block;"></span>S&P500(CSPX)</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#c2410c;border-radius:2px;display:inline-block;"></span>NASDAQ100(CNDX)</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#0d9488;border-radius:2px;display:inline-block;"></span>BGF世界科技</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#7c3aed;border-radius:2px;display:inline-block;"></span>JPM美國科技</span><span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;background:#1e2233;display:inline-block;"></span>該年度最大跌幅(intra-year decline)</span></div>
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px;">
+    <div class="stat-card"><div class="label">逐年報酬 2018→2022</div><div style="font-size:12px;color:var(--text2)">2018:-4.7%~+2.9%<br>2019:+31~43%<br>2020:+18~85%<br>2021:+8~13%<br>2022:-18%~-44%</div></div>
+    <div class="stat-card"><div class="label">COVID真實盤中回檔(2020/2-3月)</div><div class="val dn" style="font-size:16px">S&amp;P500 -33.9%<br>NASDAQ100 -28~30%</div></div>
+    <div class="stat-card"><div class="label">2022真實盤中回檔</div><div class="val dn" style="font-size:16px">S&amp;P500 -25.4%<br>(2022/1/3~10/12)<br>NASDAQ100 -32~33%</div></div>
+    <div class="stat-card"><div class="label">全年報酬端點法侷限</div><div style="font-size:11px;color:var(--text2)">因2020全年收正，年度端點法完全看不到COVID崩盤，下表MDD係低估值</div></div>
+  </div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>標的/配置</th><th>CAGR</th><th>年度波動度</th><th>Sharpe(rf 2%)</th><th>年度端點最大回檔</th><th>報酬/回檔比</th></tr></thead>
+    <tbody>
+      <tr><td>CSPX (S&amp;P500)</td><td class="up">9.08%</td><td>21.56%</td><td>0.33</td><td class="dn">-18.35%</td><td>0.49</td></tr>
+      <tr><td>CNDX (NASDAQ100)</td><td class="up">11.84%</td><td>32.83%</td><td>0.30</td><td class="dn">-32.67%</td><td>0.36</td></tr>
+      <tr><td>BGF世界科技</td><td class="up">10.28%</td><td>48.39%</td><td>0.17</td><td class="dn">-43.06%</td><td>0.24</td></tr>
+      <tr><td>JPM美國科技(dist真實)</td><td class="up">8.83%</td><td>47.38%</td><td>0.14</td><td class="dn">-44.20%</td><td>0.20</td></tr>
+      <tr style="border-top:2px solid var(--border)"><td><b>配置一 (70/20/5/5)</b></td><td class="up">10.24%</td><td>25.17%</td><td>0.33</td><td class="dn">-23.74%</td><td>0.43</td></tr>
+      <tr><td><b>配置二 (60/20/10/10)</b></td><td class="up">10.61%</td><td>27.35%</td><td>0.31</td><td class="dn">-26.27%</td><td>0.40</td></tr>
+      <tr><td><b>配置三 (50/25/12.5/12.5)</b></td><td class="up">10.87%</td><td>29.21%</td><td>0.30</td><td class="dn">-28.25%</td><td>0.38</td></tr>
+      <tr><td><b>配置四 (40/30/15/15)</b></td><td class="up">11.09%</td><td>31.17%</td><td>0.29</td><td class="dn">-30.23%</td><td>0.37</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">此5年含2020年V型反彈（BGF+85.5%、JPM科技dist+83.3%）與2022年熊市（BGF-43.1%、JPM科技dist-44.2%），CAGR隨科技權重上升而微幅提高，但Sharpe比率反而下降（0.33→0.29），代表多承擔的波動並未換得等比例的風險調整後報酬；科技衛星最輕的配置一反而是四者中Sharpe與報酬/回檔比最高的。</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">📊</span>期間三：2021-2025</div>
+  <div style="background:#fbfbfd;border:1px solid var(--border);border-radius:10px;padding:16px 18px 10px;margin-bottom:16px;">
+    <div style="font-size:12.5px;color:var(--text2);margin-bottom:8px;">仿J.P. Morgan《Guide to the Markets》年度報酬圖：柱狀=當年報酬率，深色方形點=當年盤中最大跌幅。全部標的皆採逐日真實股價/NAV計算。</div>
+    <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" font-family="-apple-system,PingFang TC,Microsoft JhengHei,sans-serif">
+<rect x="0" y="0" width="720" height="400" fill="#ffffff"/>
+<line x1="55" y1="366.0" x2="705" y2="366.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="370.0" font-size="10.5" fill="#6b7280" text-anchor="end">-60%</text>
+<line x1="55" y1="317.1" x2="705" y2="317.1" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="321.1" font-size="10.5" fill="#6b7280" text-anchor="end">-40%</text>
+<line x1="55" y1="268.3" x2="705" y2="268.3" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="272.3" font-size="10.5" fill="#6b7280" text-anchor="end">-20%</text>
+<line x1="55" y1="219.4" x2="705" y2="219.4" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="223.4" font-size="10.5" fill="#6b7280" text-anchor="end">0%</text>
+<line x1="55" y1="170.6" x2="705" y2="170.6" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="174.6" font-size="10.5" fill="#6b7280" text-anchor="end">20%</text>
+<line x1="55" y1="121.7" x2="705" y2="121.7" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="125.7" font-size="10.5" fill="#6b7280" text-anchor="end">40%</text>
+<line x1="55" y1="72.9" x2="705" y2="72.9" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="76.9" font-size="10.5" fill="#6b7280" text-anchor="end">60%</text>
+<line x1="55" y1="24.0" x2="705" y2="24.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="47" y="28.0" font-size="10.5" fill="#6b7280" text-anchor="end">80%</text>
+<line x1="55" y1="219.4" x2="705" y2="219.4" stroke="#9ca3af" stroke-width="1.4"/>
+<rect x="63.0" y="145.2" width="25.5" height="74.3" fill="#2563eb" rx="1.5"/>
+<text x="75.8" y="141.2" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">+30.4</text>
+<rect x="72.5" y="230.2" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="92.5" y="147.9" width="25.5" height="71.5" fill="#c2410c" rx="1.5"/>
+<text x="105.2" y="143.9" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">+29.3</text>
+<rect x="102.0" y="244.1" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="122.0" y="201.1" width="25.5" height="18.3" fill="#0d9488" rx="1.5"/>
+<text x="134.8" y="197.1" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">+7.5</text>
+<rect x="131.5" y="263.8" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="151.5" y="189.9" width="25.5" height="29.5" fill="#7c3aed" rx="1.5"/>
+<text x="164.2" y="185.9" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">+12.1</text>
+<rect x="161.0" y="265.0" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="120.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2021</text>
+<rect x="193.0" y="219.4" width="25.5" height="46.5" fill="#2563eb" rx="1.5"/>
+<text x="205.8" y="276.9" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">-19.0</text>
+<rect x="202.5" y="275.4" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="222.5" y="219.4" width="25.5" height="80.0" fill="#c2410c" rx="1.5"/>
+<text x="235.2" y="310.4" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">-32.8</text>
+<rect x="232.0" y="298.3" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="252.0" y="219.4" width="25.5" height="103.9" fill="#0d9488" rx="1.5"/>
+<text x="264.8" y="334.3" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">-42.5</text>
+<rect x="261.5" y="325.5" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="281.5" y="219.4" width="25.5" height="108.0" fill="#7c3aed" rx="1.5"/>
+<text x="294.2" y="338.4" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">-44.2</text>
+<rect x="291.0" y="330.3" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="250.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2022</text>
+<line x1="185.0" y1="24.0" x2="185.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<rect x="323.0" y="152.7" width="25.5" height="66.7" fill="#2563eb" rx="1.5"/>
+<text x="335.8" y="148.7" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">+27.3</text>
+<rect x="332.5" y="239.2" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="352.5" y="80.1" width="25.5" height="139.4" fill="#c2410c" rx="1.5"/>
+<text x="365.2" y="76.1" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">+57.1</text>
+<rect x="362.0" y="242.3" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="382.0" y="100.6" width="25.5" height="118.8" fill="#0d9488" rx="1.5"/>
+<text x="394.8" y="96.6" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">+48.6</text>
+<rect x="391.5" y="249.4" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="411.5" y="63.2" width="25.5" height="156.2" fill="#7c3aed" rx="1.5"/>
+<text x="424.2" y="59.2" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">+63.9</text>
+<rect x="421.0" y="255.2" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="380.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2023</text>
+<line x1="315.0" y1="24.0" x2="315.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<rect x="453.0" y="155.0" width="25.5" height="64.4" fill="#2563eb" rx="1.5"/>
+<text x="465.8" y="151.0" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">+26.4</text>
+<rect x="462.5" y="234.9" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="482.5" y="149.1" width="25.5" height="70.3" fill="#c2410c" rx="1.5"/>
+<text x="495.2" y="145.1" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">+28.8</text>
+<rect x="492.0" y="246.3" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="512.0" y="130.4" width="25.5" height="89.0" fill="#0d9488" rx="1.5"/>
+<text x="524.8" y="126.4" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">+36.5</text>
+<rect x="521.5" y="258.2" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="541.5" y="142.5" width="25.5" height="77.0" fill="#7c3aed" rx="1.5"/>
+<text x="554.2" y="138.5" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">+31.5</text>
+<rect x="551.0" y="264.9" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="510.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2024</text>
+<line x1="445.0" y1="24.0" x2="445.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<rect x="583.0" y="200.9" width="25.5" height="18.6" fill="#2563eb" rx="1.5"/>
+<text x="595.8" y="196.9" font-size="8.3" fill="#2563eb" text-anchor="middle" font-weight="700">+7.6</text>
+<rect x="592.5" y="261.4" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="612.5" y="195.9" width="25.5" height="23.6" fill="#c2410c" rx="1.5"/>
+<text x="625.2" y="191.9" font-size="8.3" fill="#c2410c" text-anchor="middle" font-weight="700">+9.6</text>
+<rect x="622.0" y="271.0" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="642.0" y="175.9" width="25.5" height="43.5" fill="#0d9488" rx="1.5"/>
+<text x="654.8" y="171.9" font-size="8.3" fill="#0d9488" text-anchor="middle" font-weight="700">+17.8</text>
+<rect x="651.5" y="285.1" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="671.5" y="177.9" width="25.5" height="41.6" fill="#7c3aed" rx="1.5"/>
+<text x="684.2" y="173.9" font-size="8.3" fill="#7c3aed" text-anchor="middle" font-weight="700">+17.0</text>
+<rect x="681.0" y="291.3" width="6.5" height="6.5" fill="#1e2233" stroke="#ffffff" stroke-width="0.8"/>
+<text x="640.0" y="384.0" font-size="12.5" fill="#1e2233" text-anchor="middle" font-weight="700">2025</text>
+<line x1="575.0" y1="24.0" x2="575.0" y2="366.0" stroke="#f0f1f5" stroke-width="1"/>
+<line x1="55" y1="24" x2="55" y2="366" stroke="#d1d5db" stroke-width="1"/>
+</svg>
+<div style="font-size:11px;color:#374151;margin-top:8px;display:flex;flex-wrap:wrap;"><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#2563eb;border-radius:2px;display:inline-block;"></span>S&P500(CSPX)</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#c2410c;border-radius:2px;display:inline-block;"></span>NASDAQ100(CNDX)</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#0d9488;border-radius:2px;display:inline-block;"></span>BGF世界科技</span><span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px;"><span style="width:10px;height:10px;background:#7c3aed;border-radius:2px;display:inline-block;"></span>JPM美國科技</span><span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;background:#1e2233;display:inline-block;"></span>該年度最大跌幅(intra-year decline)</span></div>
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px;">
+    <div class="stat-card"><div class="label">逐年報酬 2021→2025</div><div style="font-size:12px;color:var(--text2)">2021:+8~13%<br>2022:-18%~-44%<br>2023:+26~64%<br>2024:+24~32%<br>2025:+17~21%</div></div>
+    <div class="stat-card"><div class="label">2022真實盤中回檔</div><div class="val dn" style="font-size:16px">S&amp;P500 -25.4%<br>NASDAQ100 -32~33%<br>(本期間內唯一崩盤)</div></div>
+    <div class="stat-card"><div class="label">CSPX vs CNDX</div><div style="font-size:12px;color:var(--text2)">CAGR 14.11% vs 14.80%<br>幾乎打平，CNDX波動高出12.3個百分點卻只多賺0.7個百分點年化</div></div>
+    <div class="stat-card"><div class="label">主動科技基金表現</div><div style="font-size:12px;color:var(--text2)">BGF/JPM科技(dist)CAGR僅7.6%/8.9%，明顯落後被動指數</div></div>
+  </div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>標的/配置</th><th>CAGR</th><th>年度波動度</th><th>Sharpe(rf 2%)</th><th>年度端點最大回檔</th><th>報酬/回檔比</th></tr></thead>
+    <tbody>
+      <tr><td>CSPX (S&amp;P500)</td><td class="up">14.11%</td><td>19.42%</td><td>0.62</td><td class="dn">-18.35%</td><td>0.77</td></tr>
+      <tr><td>CNDX (NASDAQ100)</td><td class="up">14.80%</td><td>31.74%</td><td>0.40</td><td class="dn">-32.67%</td><td>0.45</td></tr>
+      <tr><td>BGF世界科技</td><td class="up">7.57%</td><td>35.09%</td><td>0.16</td><td class="dn">-43.06%</td><td>0.18</td></tr>
+      <tr><td>JPM美國科技(dist真實)</td><td class="up">8.89%</td><td>39.19%</td><td>0.18</td><td class="dn">-44.20%</td><td>0.20</td></tr>
+      <tr style="border-top:2px solid var(--border)"><td><b>配置一 (70/20/5/5)</b></td><td class="up">13.98%</td><td>23.08%</td><td>0.52</td><td class="dn">-23.74%</td><td>0.59</td></tr>
+      <tr><td><b>配置二 (60/20/10/10)</b></td><td class="up">13.53%</td><td>24.72%</td><td>0.47</td><td class="dn">-26.27%</td><td>0.52</td></tr>
+      <tr><td><b>配置三 (50/25/12.5/12.5)</b></td><td class="up">13.32%</td><td>26.20%</td><td>0.43</td><td class="dn">-28.25%</td><td>0.48</td></tr>
+      <tr><td><b>配置四 (40/30/15/15)</b></td><td class="up">13.07%</td><td>27.74%</td><td>0.40</td><td class="dn">-30.23%</td><td>0.43</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-box">
+    <h4>關鍵發現：主動科技基金近5年拖累報酬與風險調整後表現</h4>
+    <p>與2018-2022不同，這裡科技權重越高、CAGR反而越低（配置一13.98% → 配置四13.07%），且Sharpe比率同步下降（0.52→0.40）。原因是BGF/JPM科技這兩檔「純科技主動基金」在AI巨頭集中反彈的2023-2025年間，跑輸持股更集中於NVDA/MSFT/GOOGL等超大型股的CSPX/CNDX——它們仍保有半導體設備、記憶體等更廣泛且波動更大的科技供應鏈曝險，2022年跌得比NASDAQ100更深(-43~44% vs -32.7%)，2023-2025年的漲幅雖也不錯(+27~64%)卻未能完全彌補，導致5年風險調整後報酬明顯遜於兩檔被動ETF。配置一(科技衛星僅10%)在這五年是四者中CAGR、Sharpe、報酬/回檔比都最高的組合。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🔍</span>三期間彙總比較</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>配置</th><th>2000-2004 CAGR</th><th>2000-2004 總報酬(5年,非年化)</th><th>2000-2004 MDD</th><th>2018-2022 CAGR</th><th>2018-2022 總報酬(5年,非年化)</th><th>2018-2022 MDD</th><th>2021-2025 CAGR</th><th>2021-2025 總報酬(5年,非年化)</th><th>2021-2025 MDD</th></tr></thead>
+    <tbody>
+      <tr><td><b>配置一 (70/20/5/5)</b></td><td class="dn">-7.69%</td><td class="dn">-33.0%</td><td class="dn">-52.60%</td><td class="up">10.24%</td><td class="up">62.8%</td><td class="dn">-23.74%</td><td class="up">13.98%</td><td class="up">92.4%</td><td class="dn">-23.74%</td></tr>
+      <tr><td><b>配置二 (60/20/10/10)</b></td><td class="dn">-9.71%</td><td class="dn">-40.0%</td><td class="dn">-58.39%</td><td class="up">10.61%</td><td class="up">65.5%</td><td class="dn">-26.27%</td><td class="up">13.53%</td><td class="up">88.6%</td><td class="dn">-26.27%</td></tr>
+      <tr><td><b>配置三 (50/25/12.5/12.5)</b></td><td class="dn">-11.32%</td><td class="dn">-45.2%</td><td class="dn">-62.64%</td><td class="up">10.87%</td><td class="up">67.5%</td><td class="dn">-28.25%</td><td class="up">13.32%</td><td class="up">86.8%</td><td class="dn">-28.25%</td></tr>
+      <tr><td><b>配置四 (40/30/15/15)</b></td><td class="dn">-12.98%</td><td class="dn">-50.1%</td><td class="dn">-66.59%</td><td class="up">11.09%</td><td class="up">69.2%</td><td class="dn">-30.23%</td><td class="up">13.07%</td><td class="up">84.8%</td><td class="dn">-30.23%</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text2);">BGF世界科技與JPM美國科技(dist)皆已全面改用官方逐日/逐月真實數據，2000-2004不再含任何情境區間或估算值。總報酬(非年化)為期間累積報酬率，由CAGR複利還原計算，例如配置一在2021-2025五年累積上漲92.4%，換算年化為13.98%；2000-2004五年配置一則是累積虧損33.0%尚未回本，是四配置中回檔最淺、報酬/回檔比最佳的一個，也是唯一在三個期間都排名第一的配置。</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">📅</span>2000-2025連續全期間統計（26年，一段連續回測）</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>標的/配置</th><th>CAGR</th><th>2000年至今總報酬率</th><th>期間最大回檔率</th></tr></thead>
+    <tbody>
+      <tr><td>S&amp;P 500 <span class="badge-est">價格報酬2000-04</span></td><td class="up">5.44%</td><td class="up">+296.0%</td><td class="dn">-38.15%</td></tr>
+      <tr><td>NASDAQ 100 <span class="badge-est">價格報酬2000-04</span></td><td class="up">6.84%</td><td class="up">+459.1%</td><td class="dn">-72.02%</td></tr>
+      <tr><td>BGF世界科技 <span class="badge-real">全真實</span></td><td class="up">4.10%</td><td class="up">+183.9%</td><td class="dn">-82.09%</td></tr>
+      <tr><td>JPM美國科技(dist) <span class="badge-real">全真實</span></td><td class="up">2.46%</td><td class="up">+88.2%</td><td class="dn">-90.67%</td></tr>
+      <tr style="border-top:2px solid var(--border)"><td><b>配置一 (70/20/5/5)</b></td><td class="up">6.54%</td><td class="up">+419.8%</td><td class="dn">-52.60%</td></tr>
+      <tr><td><b>配置二 (60/20/10/10)</b></td><td class="up">6.40%</td><td class="up">+401.7%</td><td class="dn">-58.39%</td></tr>
+      <tr><td><b>配置三 (50/25/12.5/12.5)</b></td><td class="up">6.36%</td><td class="up">+396.6%</td><td class="dn">-62.64%</td></tr>
+      <tr><td><b>配置四 (40/30/15/15)</b></td><td class="up">6.28%</td><td class="up">+387.5%</td><td class="dn">-66.59%</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-box">
+    <h4>拉長到26年看，結論與短期回測完全相反：科技衛星越輕，總報酬與回檔控制反而都越好</h4>
+    <p>個別標的裡最驚人的對比是<b>JPM美國科技(dist)26年CAGR僅2.46%、期間最大回檔達-90.67%</b>——這代表若從2000年最高點算起，這檔基金一度蒸發超過9成淨值，直到今天累計報酬也只有+88.2%，遠遠落後S&amp;P500的+296.0%與NASDAQ100的+459.1%；BGF世界科技雖然比JPM科技好一些，但26年CAGR(4.10%)與最大回檔(-82.09%)同樣明顯遜於兩檔被動指數。這正是為什麼四個配置裡，<b>科技衛星權重最低的配置一(僅10%)在26年總報酬(+419.8%)、CAGR(6.54%)、最大回檔(-52.60%)三項指標上都是四者最佳</b>——2000-2002網路泡沫造成的傷害如此之深，即便之後23年不斷用複利彌補，權重較高的配置也始終無法追平配置一的起跑點劣勢。這是本報告目前為止最有力的證據：長期而言，把資金重壓在高費率的單一科技主題主動基金上，即使偶有像2020年那樣的爆發性年度，也難以彌補系統性風險事件帶來的永久性損傷。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🔬</span>2015-2025連續全期間統計（11年，一段連續回測——排除2000-2002與2007-2009兩段超長熊市後）</div>
+  <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">使用者提問：「2015年後沒有了2000-2010年的兩段超長熊市，是否科技股迎頭趕上，才會讓大家有種長期投科技會比標普的風險報酬比更高的錯覺？」——下表就是為了驗證這個假說。（註：2015-2025共11個日曆年，非16年，已更正年份計算。）</div>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>標的/配置</th><th>CAGR</th><th>2015年至今總報酬率</th><th>期間最大回檔率</th><th>年度波動度</th><th>Sharpe(rf 2%)</th></tr></thead>
+    <tbody>
+      <tr><td>S&amp;P 500</td><td class="up">10.70%</td><td class="up">+206.0%</td><td class="dn">-19.95%</td><td>15.80%</td><td>0.55</td></tr>
+      <tr><td>NASDAQ 100</td><td class="up">16.56%</td><td class="up">+439.5%</td><td class="dn">-33.71%</td><td>24.87%</td><td>0.59</td></tr>
+      <tr><td>BGF世界科技</td><td class="up">18.38%</td><td class="up">+539.5%</td><td class="dn">-43.06%</td><td>34.33%</td><td>0.48</td></tr>
+      <tr><td>JPM美國科技(dist)</td><td class="up">19.64%</td><td class="up">+618.9%</td><td class="dn">-44.20%</td><td>34.32%</td><td>0.51</td></tr>
+      <tr style="border-top:2px solid var(--border)"><td><b>配置一 (70/20/5/5)</b></td><td class="up">14.70%</td><td class="up">+352.0%</td><td class="dn">-23.74%</td><td>18.25%</td><td class="up"><b>0.70</b></td></tr>
+      <tr><td><b>配置二 (60/20/10/10)</b></td><td class="up">15.45%</td><td class="up">+385.5%</td><td class="dn">-26.27%</td><td>19.83%</td><td>0.68</td></tr>
+      <tr><td><b>配置三 (50/25/12.5/12.5)</b></td><td class="up">16.06%</td><td class="up">+414.7%</td><td class="dn">-28.25%</td><td>21.18%</td><td>0.66</td></tr>
+      <tr><td><b>配置四 (40/30/15/15)</b></td><td class="up">16.65%</td><td class="up">+444.2%</td><td class="dn">-30.23%</td><td>22.62%</td><td>0.65</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-box">
+    <h4>答案：是的，這確實是一種「倖存者觀察窗」造成的錯覺——而且證據非常清楚</h4>
+    <p><b>個別標的的翻轉最戲劇化</b>：JPM美國科技(dist)在2000-2025完整26年裡CAGR僅2.46%、Sharpe僅0.01(幾乎等於白忙一場、承擔的風險完全沒有換到報酬)；但只要把窗口切到2015-2025，同一檔基金CAGR暴衝到19.64%、Sharpe回升到0.51——單純因為<b>拿掉了2000-2002與2007-2009這兩段對科技股傷害最深的熊市</b>，同一檔基金看起來就從「風險調整後幾乎沒有回報」變成「report可以拿去outperform大盤的明星基金」。BGF世界科技也是同樣的模式(26年Sharpe 0.06 → 近11年Sharpe 0.48)。這兩個數字上的懸殊差距，正是「觀察窗口決定敘事」的教科書級案例。</p>
+    <p><b>但即使拿掉這兩段熊市，配置層級的結論方向仍未完全翻轉</b>：近11年裡科技衛星最重的配置四CAGR(16.65%)確實反超配置一(14.70%)，<b>看CAGR的話「科技衛星越重報酬越高」這個印象在近11年是成立的</b>；但看<b>風險調整後報酬(Sharpe)，配置一(0.70)仍是四者中最高，配置四(0.65)仍是最低</b>——只是差距從26年窗口的0.22 vs 0.17(相對差距約29%)收斂到11年窗口的0.70 vs 0.65(相對差距約8%)，收斂了超過三分之二。換句話說：<b>拿掉兩段超長熊市後，「重壓科技」在CAGR上確實開始佔上風，但即使在這段對科技最友善的11年裡，用波動度校正後科技衛星較重的配置依然沒有勝過配置一</b>，只是輸的幅度小很多，容易被「近幾年科技基金CAGR比較高」的表面印象蓋過去。</p>
+    <p><b>這正好回答了您的問題</b>：多數人形成「長期投科技風險報酬比更高」的印象，時間起點幾乎都設在2010年代之後(常見的回測範例、App裡的「近5年/近10年績效」預設區間，也都自然落在牛市段)，這個時期剛好完整避開了整個2000年代的兩次系統性重創。若把觀察窗口誠實地拉回包含這兩次熊市的完整週期，科技集中配置的風險調整後報酬其實從未真正贏過分散度更高、科技衛星更輕的配置——只是這種比較需要至少20年以上的資料才看得出來，而大多數投資人(包括基金公司自己的行銷素材)不會有動機去做這麼長的回測。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="icon">🧭</span>結論與建議</div>
+  <div class="verdict-box">
+    <h4>科技衛星權重越低，無論短期或長期表現都越穩健——配置一(10%)全面勝出</h4>
+    <p>四個配置的核心差異只是「科技衛星從10%一路加碼到30%」，本質上是同一個組合的槓桿式變體，而非真正分散的四個獨立策略。回測結果呈現典型的「機制依賴」(regime-dependent)特徵，但拉長到26年連續回測後，這個依賴性其實有明確的方向：</p>
+    <ul>
+      <li><b>2000-2004網路泡沫（純科技系統性風險期）</b>：配置一(科技10%)最抗跌(-33.0%)，配置四(科技30%)虧損與回檔明顯更深(-50.1%)，証明科技衛星比重越高，在「科技本身是泡沫源頭」的情境下傷害越大。</li>
+      <li><b>2018-2022與2021-2025（牛熊交替與AI集中反彈期）</b>：配置二到四科技權重越高CAGR略高，但Sharpe比率反而遞減；配置一雖CAGR不是最高，但Sharpe與報酬/回檔比在兩個期間都是四者最高。</li>
+      <li><b>2000-2025連續26年</b>：這是最關鍵的證據——科技衛星權重越低，總報酬、CAGR、最大回檔控制<b>三項指標同步變好</b>，配置一全面勝出，因為網路泡沫造成的深度傷害在之後23年都無法被追平。</li>
+    </ul>
+    <p><b>務實建議</b>：<b>配置一(70/20/5/5，科技衛星僅10%)是目前唯一在所有回測維度(三個短期期間＋26年連續期間)都排名第一的配置</b>。配置四（科技衛星30%）在近5年與網路泡沫情境、以及26年連續回測下都是四者中最差的風險調整後表現與長期複利效率，除非您對「科技集中賭注可能大幅跑輸大盤」有明確心理準備與更長的持有期，否則不建議採用30%科技衛星權重。更根本的問題是：BGF與JPM美國科技這兩檔主動基金的1.8%高費率，在26年連續期間並未換得對應的超額報酬（CAGR分別僅4.10%與2.46%，遠遜於S&amp;P500的5.44%與NASDAQ100的6.84%），其存在的價值主要體現在2020年那種急速V型反彈的單一年度，作為長期核心配置的必要性值得重新檢視——這也是配置一把科技衛星壓到僅10%反而在所有時間維度都勝出的根本原因。</p>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <span>資料來源：投資產品比較表_2026.xlsx（各基金官方月報，數據截至2026年4月30日）；2000-2004與2000-2025連續期間指數數據取自Damodaran NYU Stern學術資料庫與^GSPC/^NDX歷史序列；BGF世界科技取自BlackRock香港官網歷史淨值/表現匯出檔(1995-2026逐月真實)；JPM美國科技取自J.P. Morgan Asset Management官網歷史NAV API(LU0082616367，1997-2026逐日真實)</span>
+  <span class="warn">⚠️ 本報告僅供研究參考，不構成投資建議；歷史績效不代表未來表現</span>
+</div>
+
+</body>
+</html>
