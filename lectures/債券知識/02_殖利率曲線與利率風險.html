@@ -555,7 +555,7 @@ footer.source-note .rule { height: 1px; background: var(--line); margin: 0 0 20p
       <p>要真正看懂下一段的英國國債危機——為什麼一個減稅消息能逼得央行出手救市——得先建立一張更完整的地圖：一個公債市場裡，錢實際上是在哪四個角色之間流動的。</p>
 
       <figure class="diagram-figure">
-        <svg viewBox="0 0 880 600" role="img" aria-label="公債市場四主體關係圖：財政部與買家透過標售互換公債與現金；買家與銀行透過次級市場交易與repo槓桿往來；銀行與央行透過公開市場操作調節準備金；央行在危機時才會反過來以最後貸放者身分支援財政部融資條件，這條路徑平常不存在">
+        <svg viewBox="0 0 960 460" role="img" aria-label="公債市場四主體關係圖，銀行／主要交易商位於中樞：財政部只透過標售把公債配售給銀行，不直接對買家或央行；買家向銀行買公債並用repo跟銀行借錢加槓桿；央行只透過公開市場操作向銀行買賣公債來調節準備金，危機時是在同一條銀行管道上加碼無上限買入，不是繞過銀行直接買財政部的債">
           <defs>
             <marker id="arrowNormal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"/>
@@ -566,65 +566,71 @@ footer.source-note .rule { height: 1px; background: var(--line); margin: 0 0 20p
           </defs>
 
           <!-- edges (drawn first, under the nodes) -->
-          <line x1="270" y1="88" x2="610" y2="88" stroke="var(--ink-soft)" stroke-width="1.5" marker-start="url(#arrowNormal)" marker-end="url(#arrowNormal)"/>
-          <line x1="720" y1="136" x2="720" y2="460" stroke="var(--ink-soft)" stroke-width="1.5" marker-start="url(#arrowNormal)" marker-end="url(#arrowNormal)"/>
-          <line x1="610" y1="508" x2="270" y2="508" stroke="var(--ink-soft)" stroke-width="1.5" marker-start="url(#arrowNormal)" marker-end="url(#arrowNormal)"/>
-          <line x1="160" y1="452" x2="160" y2="144" stroke="var(--gold)" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrowCrisis)"/>
+          <!-- 財政部(top) <-> 銀行(center): 標售 -->
+          <line x1="480" y1="128" x2="480" y2="278" stroke="var(--ink-soft)" stroke-width="1.5" marker-start="url(#arrowNormal)" marker-end="url(#arrowNormal)"/>
+          <text x="497" y="196" text-anchor="start" font-family="var(--mono)" font-size="14.5" fill="var(--ink-soft)">
+            <tspan x="497" dy="0">標售 auction</tspan>
+            <tspan x="497" dy="18">銀行義務投標承接</tspan>
+          </text>
 
-          <!-- edge labels -->
-          <text x="440" y="76" text-anchor="middle" font-family="var(--mono)" font-size="15" fill="var(--ink-soft)">標售 auction・公債↔現金</text>
-          <text x="737" y="290" text-anchor="start" font-family="var(--mono)" font-size="15" fill="var(--ink-soft)">
-            <tspan x="737" dy="0">次級市場交易</tspan>
-            <tspan x="737" dy="19">+ repo槓桿</tspan>
-          </text>
-          <text x="440" y="530" text-anchor="middle" font-family="var(--mono)" font-size="15" fill="var(--ink-soft)">OMO 買賣公債・調節準備金</text>
-          <text x="135" y="282" text-anchor="end" font-family="var(--mono)" font-size="15" fill="var(--gold)">
-            <tspan x="135" dy="0">危機時：</tspan>
-            <tspan x="135" dy="19">最後貸放者</tspan>
-            <tspan x="135" dy="19">／直接買債</tspan>
-          </text>
+          <!-- 銀行(center) <-> 買家(right): 次級市場配售 + repo -->
+          <line x1="610" y1="330" x2="740" y2="330" stroke="var(--ink-soft)" stroke-width="1.5" marker-start="url(#arrowNormal)" marker-end="url(#arrowNormal)"/>
+          <text x="675" y="312" text-anchor="middle" font-family="var(--mono)" font-size="14.5" fill="var(--ink-soft)">配售分銷</text>
+          <text x="675" y="356" text-anchor="middle" font-family="var(--mono)" font-size="14.5" fill="var(--ink-soft)">次級市場＋repo槓桿</text>
+
+          <!-- 央行(left) <-> 銀行(center): 常態OMO -->
+          <line x1="220" y1="316" x2="350" y2="316" stroke="var(--ink-soft)" stroke-width="1.5" marker-start="url(#arrowNormal)" marker-end="url(#arrowNormal)"/>
+          <text x="285" y="300" text-anchor="middle" font-family="var(--mono)" font-size="14.5" fill="var(--ink-soft)">OMO・附買回</text>
+          <!-- 央行 -> 銀行: 危機時加碼(同一條管道，非直接找財政部) -->
+          <line x1="220" y1="346" x2="350" y2="346" stroke="var(--gold)" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrowCrisis)"/>
+          <text x="285" y="368" text-anchor="middle" font-family="var(--mono)" font-size="14.5" fill="var(--gold)">危機：無上限買入</text>
 
           <!-- nodes -->
           <g>
-            <rect x="50" y="40" width="220" height="96" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
-            <text x="160" y="76" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="600" fill="var(--ink)">財政部／國庫</text>
-            <text x="160" y="100" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
-              <tspan x="160" dy="0">發行公債</tspan>
-              <tspan x="160" dy="16">籌措財政支出</tspan>
+            <rect x="370" y="32" width="220" height="96" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="480" y="68" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="600" fill="var(--ink)">財政部／國庫</text>
+            <text x="480" y="92" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
+              <tspan x="480" dy="0">發行公債</tspan>
+              <tspan x="480" dy="16">籌措財政支出</tspan>
             </text>
           </g>
 
           <g>
-            <rect x="610" y="40" width="220" height="96" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
-            <text x="720" y="76" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="600" fill="var(--ink)">買家</text>
-            <text x="720" y="100" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
-              <tspan x="720" dy="0">退休基金・他國央行</tspan>
-              <tspan x="720" dy="16">機構法人／保險公司</tspan>
+            <rect x="10" y="282" width="210" height="96" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="115" y="318" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="600" fill="var(--ink)">央行</text>
+            <text x="115" y="342" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
+              <tspan x="115" dy="0">調節銀行準備金</tspan>
+              <tspan x="115" dy="16">貼現窗口・最後貸放者</tspan>
             </text>
           </g>
 
           <g>
-            <rect x="610" y="460" width="220" height="96" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
-            <text x="720" y="496" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="600" fill="var(--ink)">銀行／主要交易商</text>
-            <text x="720" y="520" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
-              <tspan x="720" dy="0">標售義務投標・做市</tspan>
-              <tspan x="720" dy="16">repo融資對手方</tspan>
+            <rect x="350" y="278" width="260" height="104" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="480" y="316" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="700" fill="var(--ink)">銀行／主要交易商</text>
+            <text x="480" y="342" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
+              <tspan x="480" dy="0">標售的直接投標人</tspan>
+              <tspan x="480" dy="16">所有資金流的中樞</tspan>
             </text>
           </g>
 
           <g>
-            <rect x="50" y="460" width="220" height="96" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
-            <text x="160" y="496" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="600" fill="var(--ink)">央行</text>
-            <text x="160" y="520" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
-              <tspan x="160" dy="0">OMO調節準備金</tspan>
-              <tspan x="160" dy="16">貼現窗口・最後貸放者</tspan>
+            <rect x="740" y="282" width="210" height="96" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="845" y="318" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="600" fill="var(--ink)">買家</text>
+            <text x="845" y="342" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
+              <tspan x="845" dy="0">退休基金・他國央行</tspan>
+              <tspan x="845" dy="16">機構法人／保險公司</tspan>
             </text>
           </g>
         </svg>
-        <figcaption>公債市場四主體關係圖——三條實線是常態下的日常資金往來，虛線(央行→財政部)只在危機時才會出現，是本堂F段英國案例被打斷惡性循環的關鍵路徑。</figcaption>
+        <figcaption>公債市場四主體關係圖——銀行／主要交易商是唯一跟其他三個角色都有往來的節點：財政部標售只賣給銀行，買家跟央行都是再向銀行買。金色虛線是危機時同一條央行-銀行管道被加碼到無上限買入，不是央行繞過銀行直接找財政部。</figcaption>
       </figure>
 
-      <p>四個節點各自的角色：<strong>財政部</strong>是公債的源頭，靠標售把債券換成現金去支應財政支出；<strong>買家</strong>是最終出資人；<strong>銀行／主要交易商</strong>是中介——義務參與標售、在次級市場做市、也是買家（尤其是退休基金）借錢加槓桿時的repo對手方；<strong>央行</strong>正常時期完全不碰一級市場標售，只在次級市場用公開市場操作(OMO)調節銀行體系的準備金，危機時才會跳出來扮演「最後貸放者」甚至直接下場買債——圖中那條金色虛線，平常不存在，只有在本堂F段那種危機時刻才會被啟動。</p>
+      <p>把關係理清楚：<strong>財政部標售的直接對手方是銀行／主要交易商</strong>——不管是美國的一級交易商(Primary Dealers)還是英國的GEMMs，都有義務投標承接每一場標售，財政部並不直接把債券賣給退休基金或央行。<strong>買家</strong>要買公債，是在標售結束後向銀行買（配售分銷，或之後的次級市場交易），如果想加槓桿（如英國LDI退休基金），也是用repo跟銀行借錢、以公債作擔保。<strong>央行</strong>同樣不直接找財政部或買家交易，日常的公開市場操作(OMO)、附買回，對手方也是銀行；危機時央行做的，是在<strong>同一條銀行管道上</strong>把買入規模拉到無上限，藉此讓銀行有能力繼續承接買家拋售的公債、把整條鏈的壓力吸收掉，而不是繞過銀行直接把錢匯給財政部。<strong>銀行／主要交易商因此是圖中唯一跟其他三方都有直接往來的節點</strong>——理解這張圖的關鍵，就是看懂銀行是資金流真正的中樞，財政部、買家、央行彼此之間並不直接對話。</p>
+
+      <div class="callout">
+        <span class="clabel">一個精確度上的但書</span>
+        <p>美國公債標售制度裡，其實除了一級交易商，機構法人可以用「直接投標人」(direct bidder)身分參與，海外央行等買家則常以「間接投標人」(indirect bidder)身分透過交易商送單——技術上買家並非完全被排除在標售之外。但無論哪種身分，一級交易商仍是標售的義務造市者與核心承接方，上圖呈現的是這個體系裡最主要、也最具代表性的資金路徑。</p>
+      </div>
 
       <div class="callout">
         <span class="clabel">央行的兩種模式：常態下的OMO，危機下的最後貸放者</span>
@@ -695,7 +701,7 @@ footer.source-note .rule { height: 1px; background: var(--line); margin: 0 0 20p
 
       <div class="callout">
         <span class="clabel">用四主體框架，逐步拆解這條鏈</span>
-        <p><strong>①財政部</strong>的減稅計畫，被市場解讀為未來要發更多債、財政赤字擴大 → <strong>②買家</strong>(LDI退休基金)持有的長天期gilt市值重挫，而這些部位是用<strong>③銀行</strong>提供的repo槓桿撐大的，市值一跌就觸發保證金追繳 → 退休基金被迫在市場上拋售gilt換現金還錢給銀行 → 賣壓推升殖利率，觸發下一輪追繳，形成迴圈 → 最後<strong>④央行</strong>(BoE)以E段講的「最後貸放者」身份，脫離常態的OMO，直接無上限買回長天期gilt，把這條被槓桿放大的死亡螺旋硬生生打斷。</p>
+        <p><strong>①財政部</strong>的減稅計畫，被市場解讀為未來要發更多債、財政赤字擴大 → <strong>②買家</strong>(LDI退休基金)持有的長天期gilt市值重挫，而這些部位是用<strong>③銀行</strong>提供的repo槓桿撐大的，市值一跌就觸發保證金追繳 → 退休基金被迫在市場上拋售gilt換現金還錢給銀行 → 賣壓推升殖利率，觸發下一輪追繳，形成迴圈 → 最後<strong>④央行</strong>(BoE)以E段講的「最後貸放者」身份，在同一條銀行管道上把OMO買入規模拉到無上限，讓銀行有能力繼續承接退休基金的拋售、不必再把賣壓轉嫁回市場，把這條被槓桿放大的死亡螺旋硬生生打斷。</p>
       </div>
 
       <div class="callout">
