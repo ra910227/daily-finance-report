@@ -288,43 +288,23 @@ section.block {
 .cf-year { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-soft); margin-top: 6px; }
 .cf-note { font-size: 0.82rem; color: var(--ink-soft); margin-top: 14px; }
 
-.flowdiagram {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas: "tl t tr" "l . r" "bl b br";
-  gap: 10px;
-  align-items: center;
+.diagram-figure {
   margin: 26px 0;
-}
-.flow-node {
+  padding: 18px 18px 14px;
   background: var(--surface);
-  border: 1.5px solid var(--accent);
+  border: 1px solid var(--line);
   border-radius: 10px;
-  padding: 16px 14px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.92rem;
-  color: var(--ink);
 }
-.flow-role {
+.diagram-figure svg {
   display: block;
-  font-weight: 400;
-  font-size: 0.74rem;
+  width: 100%;
+  height: auto;
+}
+.diagram-figure figcaption {
+  margin-top: 12px;
+  font-size: 0.82rem;
   color: var(--ink-soft);
-  margin-top: 5px;
-  line-height: 1.5;
-}
-.flow-edge {
-  text-align: center;
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--gold);
-  line-height: 1.5;
-  padding: 4px;
-}
-.flow-edge .arrow { font-size: 0.95rem; display: block; margin: 2px 0; }
-@media (max-width: 640px) {
-  .flowdiagram { grid-template-columns: 1fr; grid-template-areas: "tl" "t" "tr" "r" "br" "b" "bl" "l"; }
+  line-height: 1.6;
 }
 
 .formula {
@@ -574,18 +554,77 @@ footer.source-note .rule { height: 1px; background: var(--line); margin: 0 0 20p
       <div class="block-source">延伸資料來源：《貨幣銀行學》Ch.12 貨幣政策工具與操作（本講義補充，非SCB原文內容）</div>
       <p>要真正看懂下一段的英國國債危機——為什麼一個減稅消息能逼得央行出手救市——得先建立一張更完整的地圖：一個公債市場裡，錢實際上是在哪四個角色之間流動的。</p>
 
-      <div class="flowdiagram">
-        <div class="flow-node" style="grid-area:tl;">財政部／國庫<span class="flow-role">發行公債籌措財政支出</span></div>
-        <div class="flow-edge" style="grid-area:t;"><span class="arrow">⇄</span>標售(auction)<br>換取現金</div>
-        <div class="flow-node" style="grid-area:tr;">買家<span class="flow-role">退休基金・他國央行・機構法人</span></div>
-        <div class="flow-edge" style="grid-area:l;"><span class="arrow">⇢</span>正常時期：手不伸進一級市場<br>危機時期：最後買家／貸放者</div>
-        <div class="flow-edge" style="grid-area:r;"><span class="arrow">⇄</span>次級市場交易<br>+ repo(附買回)借券槓桿</div>
-        <div class="flow-node" style="grid-area:bl;">央行<span class="flow-role">OMO調節準備金・貼現窗口・最後貸放者</span></div>
-        <div class="flow-edge" style="grid-area:b;"><span class="arrow">⇄</span>公開市場操作(OMO)<br>調節銀行準備金</div>
-        <div class="flow-node" style="grid-area:br;">銀行／主要交易商<span class="flow-role">標售義務投標・做市・repo融資</span></div>
-      </div>
+      <figure class="diagram-figure">
+        <svg viewBox="0 0 880 600" role="img" aria-label="公債市場四主體關係圖：財政部與買家透過標售互換公債與現金；買家與銀行透過次級市場交易與repo槓桿往來；銀行與央行透過公開市場操作調節準備金；央行在危機時才會反過來以最後貸放者身分支援財政部融資條件，這條路徑平常不存在">
+          <defs>
+            <marker id="arrowNormal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"/>
+            </marker>
+            <marker id="arrowCrisis" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="var(--gold)"/>
+            </marker>
+          </defs>
 
-      <p>四個節點各自的角色：<strong>財政部</strong>是公債的源頭，靠標售把債券換成現金去支應財政支出；<strong>買家</strong>是最終出資人；<strong>銀行／主要交易商</strong>是中介——義務參與標售、在次級市場做市、也是買家（尤其是退休基金）借錢加槓桿時的repo對手方；<strong>央行</strong>正常時期完全不碰一級市場標售，只在次級市場用公開市場操作(OMO)調節銀行體系的準備金，危機時才會跳出來扮演「最後貸放者」甚至直接下場買債。</p>
+          <!-- edges (drawn first, under the nodes) -->
+          <line x1="270" y1="88" x2="610" y2="88" stroke="var(--ink-soft)" stroke-width="1.5" marker-start="url(#arrowNormal)" marker-end="url(#arrowNormal)"/>
+          <line x1="720" y1="136" x2="720" y2="460" stroke="var(--ink-soft)" stroke-width="1.5" marker-start="url(#arrowNormal)" marker-end="url(#arrowNormal)"/>
+          <line x1="610" y1="508" x2="270" y2="508" stroke="var(--ink-soft)" stroke-width="1.5" marker-start="url(#arrowNormal)" marker-end="url(#arrowNormal)"/>
+          <line x1="160" y1="452" x2="160" y2="144" stroke="var(--gold)" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrowCrisis)"/>
+
+          <!-- edge labels -->
+          <text x="440" y="76" text-anchor="middle" font-family="var(--mono)" font-size="15" fill="var(--ink-soft)">標售 auction・公債↔現金</text>
+          <text x="737" y="290" text-anchor="start" font-family="var(--mono)" font-size="15" fill="var(--ink-soft)">
+            <tspan x="737" dy="0">次級市場交易</tspan>
+            <tspan x="737" dy="19">+ repo槓桿</tspan>
+          </text>
+          <text x="440" y="530" text-anchor="middle" font-family="var(--mono)" font-size="15" fill="var(--ink-soft)">OMO 買賣公債・調節準備金</text>
+          <text x="135" y="282" text-anchor="end" font-family="var(--mono)" font-size="15" fill="var(--gold)">
+            <tspan x="135" dy="0">危機時：</tspan>
+            <tspan x="135" dy="19">最後貸放者</tspan>
+            <tspan x="135" dy="19">／直接買債</tspan>
+          </text>
+
+          <!-- nodes -->
+          <g>
+            <rect x="50" y="40" width="220" height="96" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="160" y="76" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="600" fill="var(--ink)">財政部／國庫</text>
+            <text x="160" y="100" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
+              <tspan x="160" dy="0">發行公債</tspan>
+              <tspan x="160" dy="16">籌措財政支出</tspan>
+            </text>
+          </g>
+
+          <g>
+            <rect x="610" y="40" width="220" height="96" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="720" y="76" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="600" fill="var(--ink)">買家</text>
+            <text x="720" y="100" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
+              <tspan x="720" dy="0">退休基金・他國央行</tspan>
+              <tspan x="720" dy="16">機構法人／保險公司</tspan>
+            </text>
+          </g>
+
+          <g>
+            <rect x="610" y="460" width="220" height="96" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="720" y="496" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="600" fill="var(--ink)">銀行／主要交易商</text>
+            <text x="720" y="520" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
+              <tspan x="720" dy="0">標售義務投標・做市</tspan>
+              <tspan x="720" dy="16">repo融資對手方</tspan>
+            </text>
+          </g>
+
+          <g>
+            <rect x="50" y="460" width="220" height="96" rx="12" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="160" y="496" text-anchor="middle" font-family="var(--sans)" font-size="17" font-weight="600" fill="var(--ink)">央行</text>
+            <text x="160" y="520" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--ink-soft)">
+              <tspan x="160" dy="0">OMO調節準備金</tspan>
+              <tspan x="160" dy="16">貼現窗口・最後貸放者</tspan>
+            </text>
+          </g>
+        </svg>
+        <figcaption>公債市場四主體關係圖——三條實線是常態下的日常資金往來，虛線(央行→財政部)只在危機時才會出現，是本堂F段英國案例被打斷惡性循環的關鍵路徑。</figcaption>
+      </figure>
+
+      <p>四個節點各自的角色：<strong>財政部</strong>是公債的源頭，靠標售把債券換成現金去支應財政支出；<strong>買家</strong>是最終出資人；<strong>銀行／主要交易商</strong>是中介——義務參與標售、在次級市場做市、也是買家（尤其是退休基金）借錢加槓桿時的repo對手方；<strong>央行</strong>正常時期完全不碰一級市場標售，只在次級市場用公開市場操作(OMO)調節銀行體系的準備金，危機時才會跳出來扮演「最後貸放者」甚至直接下場買債——圖中那條金色虛線，平常不存在，只有在本堂F段那種危機時刻才會被啟動。</p>
 
       <div class="callout">
         <span class="clabel">央行的兩種模式：常態下的OMO，危機下的最後貸放者</span>
