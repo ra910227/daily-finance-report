@@ -101,6 +101,15 @@ def sync_files():
     # 市場診斷（模式一風險診斷＋模式四三池策略合併報告，現存於 市場分析/）
     copied += _copy_new(SRC / "研究報告/市場分析", "*市場診斷*.html", SITE / "research/market-diagnosis")
 
+    # 專題講義（多堂課系列，每個子資料夾是一套課程，檔名以「01_」「02_」...開頭排序，不依日期）
+    lectures_root = SRC / "研究報告/專題講義"
+    if lectures_root.is_dir():
+        for course_dir in lectures_root.iterdir():
+            if not course_dir.is_dir():
+                continue
+            dst = SITE / "lectures" / course_dir.name
+            copied += _copy_new(course_dir, "*.html", dst)
+
     return copied
 
 
@@ -193,6 +202,37 @@ def build_index():
     total_research = len(pinned) + len(dated_items)
     sections.append(("research", "📚 研究摘要", "六大機構觀點彙整、長期研究資料庫索引、熊市歷史研究、券商投顧報告",
                       research_html, total_research))
+
+    # 6. 專題講義（依課程分子區塊，堂數排序，不依日期）
+    lecture_count = 0
+    course_blocks = []
+    lectures_dir = SITE / "lectures"
+    if lectures_dir.is_dir():
+        for course_dir in sorted(lectures_dir.iterdir()):
+            if not course_dir.is_dir():
+                continue
+            course = course_dir.name
+            l_items = []
+            for f in sorted(course_dir.glob("*.html")):
+                m = re.match(r'(\d+)_(.+)\.html$', f.name)
+                if m:
+                    num, title = m.group(1), m.group(2)
+                    label = f"第{int(num)}堂　{title}"
+                else:
+                    label = f.stem
+                l_items.append((f.name, f'<li><a href="{quote(f"lectures/{course}/{f.name}")}">'
+                                         f'<span class="d">{label.split("　")[0] if "　" in label else ""}</span>'
+                                         f'<span class="t">{html.escape(label.split("　",1)[-1] if "　" in label else label)}</span>'
+                                         f'</a></li>'))
+            if not l_items:
+                continue
+            l_items.sort(key=lambda x: x[0])
+            lecture_count += len(l_items)
+            lis = "\n".join(i for _, i in l_items)
+            course_blocks.append(f'<h3>{html.escape(course)}</h3>\n<ul class="list">\n{lis}\n</ul>')
+    lectures_html = "\n".join(course_blocks) if course_blocks else '<p class="empty">尚無講義</p>'
+    sections.append(("lectures", "📜 專題講義", "系統性主題課程講義，依堂數順序閱讀，附原文出處對照",
+                      lectures_html, lecture_count))
 
     all_html_dates = re.findall(r'<span class="d">(\d{4}-\d{2}-\d{2})</span>', "".join(s[3] for s in sections))
     latest = max(all_html_dates) if all_html_dates else "—"
