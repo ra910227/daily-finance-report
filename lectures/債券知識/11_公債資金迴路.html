@@ -1,0 +1,1104 @@
+<meta charset="UTF-8">
+<div style="background:linear-gradient(180deg,#24507d 0%,#1c3f66 100%); color:#f5f7fa; padding:22px 24px; font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;">
+  <div style="max-width:880px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;">
+    <div>
+      <div style="font-family:ui-monospace,Menlo,monospace; font-size:0.74rem; letter-spacing:0.1em; text-transform:uppercase; color:#cfe0f0;">債券知識講堂 &nbsp;·&nbsp; 第 11 堂（延伸閱讀，使用者提供）</div>
+      <div style="font-size:0.86rem; color:#dbe6f0; margin-top:4px;">本篇由使用者於另一則對話整理提供，聚焦美國財政部/Fed/銀行資金機制的最新（2026年）延伸內容，非SCB×INSEAD原教材範圍，經收錄為系列第11堂。</div>
+    </div>
+    <a href="10_顧問銷售實戰NFAB與PREP模型.html" style="flex:none; font-family:ui-monospace,Menlo,monospace; font-size:0.78rem; color:#eef3f8; text-decoration:none; border:1px solid rgba(255,255,255,0.3); border-radius:999px; padding:7px 14px; white-space:nowrap;">&larr; 回到第10堂</a>
+  </div>
+</div>
+<title>公債資金迴路</title>
+<style>
+  :root {
+    --bg: #F4F5F7;
+    --surface: #FFFFFF;
+    --surface-2: #ECEEF1;
+    --ink: #16202B;
+    --ink-muted: #5B6B7A;
+    --ink-faint: #8996A3;
+    --border: #D9DEE4;
+    --accent: #A8752E;
+    --accent-strong: #8C5F22;
+    --accent-soft: #F0E2C8;
+    --good: #4C7A5E;
+    --bad: #A6473A;
+    --shadow: 0 1px 2px rgba(22,32,43,0.06), 0 6px 20px rgba(22,32,43,0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12161C;
+      --surface: #1B212A;
+      --surface-2: #222A34;
+      --ink: #E8EBEF;
+      --ink-muted: #98A5B1;
+      --ink-faint: #6C7987;
+      --border: #2D3641;
+      --accent: #D9A354;
+      --accent-strong: #E8B96C;
+      --accent-soft: #3A2F1C;
+      --good: #7FB08C;
+      --bad: #CC8478;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12161C;
+    --surface: #1B212A;
+    --surface-2: #222A34;
+    --ink: #E8EBEF;
+    --ink-muted: #98A5B1;
+    --ink-faint: #6C7987;
+    --border: #2D3641;
+    --accent: #D9A354;
+    --accent-strong: #E8B96C;
+    --accent-soft: #3A2F1C;
+    --good: #7FB08C;
+    --bad: #CC8478;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Segoe UI",-apple-system,sans-serif;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 24px 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .mono {
+    font-family: "Cascadia Code","SF Mono",Consolas,"Noto Sans Mono TC",monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero { display: flex; flex-direction: column; gap: 14px; }
+  .eyebrow {
+    font-family: "Cascadia Code","SF Mono",Consolas,monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  h1 {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .lede {
+    font-size: 16px;
+    color: var(--ink-muted);
+    margin: 0;
+    max-width: 64ch;
+  }
+
+  nav.toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  nav.toc .toc-title {
+    font-family: "Cascadia Code","SF Mono",Consolas,monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 10px;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+    gap: 6px 18px;
+  }
+  nav.toc a {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 4px 0;
+  }
+  nav.toc a .n {
+    font-family: "Cascadia Code","SF Mono",Consolas,monospace;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 12.5px;
+  }
+  nav.toc a:hover, nav.toc a:focus-visible { color: var(--accent); text-decoration: underline; }
+
+  section { display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 20px; }
+
+  h2 {
+    font-size: 21px;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    text-wrap: balance;
+  }
+  h2 .sec-n {
+    font-family: "Cascadia Code","SF Mono",Consolas,monospace;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  h2 .tag {
+    font-family: "Cascadia Code","SF Mono",Consolas,monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 2px 7px;
+    white-space: nowrap;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 8px 0 0;
+  }
+
+  p { margin: 0; font-size: 15px; color: var(--ink); }
+  p.muted { color: var(--ink-muted); font-size: 14px; }
+  .stack { display: flex; flex-direction: column; gap: 10px; }
+
+  figure {
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: var(--shadow);
+  }
+  .svg-wrap { overflow-x: auto; }
+  svg { display: block; width: 100%; height: auto; }
+  figcaption {
+    padding: 14px 16px 6px;
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.65;
+  }
+  figcaption b { color: var(--ink); font-weight: 600; }
+
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface-2);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .callout.warn { border-left-color: var(--bad); }
+  .callout .callout-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-family: "Cascadia Code","SF Mono",Consolas,monospace;
+  }
+  .callout.warn .callout-title { color: var(--bad); }
+  .callout ul { margin: 0; padding-left: 1.15em; display: flex; flex-direction: column; gap: 6px; }
+  .callout li { font-size: 14px; color: var(--ink); }
+  .callout li .k { color: var(--ink-muted); }
+
+  .answer-box {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+  .answer-box .big {
+    font-family: "Cascadia Code","SF Mono",Consolas,monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent-strong);
+  }
+  .answer-box .desc { font-size: 14px; color: var(--ink-muted); }
+
+  .glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 12px;
+  }
+  .g-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .g-card .term { font-weight: 700; font-size: 14.5px; display:flex; align-items:baseline; gap:6px; flex-wrap:wrap; }
+  .g-card .term .abbr {
+    font-family: "Cascadia Code","SF Mono",Consolas,monospace;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .g-card .def { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+
+  .versus {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 620px) { .versus { grid-template-columns: 1fr; } }
+  .v-card {
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid var(--border);
+  }
+  .v-card.a { background: var(--accent-soft); border-color: var(--accent); }
+  .v-card.b { background: var(--surface-2); }
+  .v-card .v-title { font-size: 14.5px; font-weight: 700; }
+  .v-card ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 5px; }
+  .v-card li { font-size: 13.5px; color: var(--ink); }
+
+  .ref-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .ref-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ref-list li:last-child { border-bottom: none; }
+  .ref-list a {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 14.5px;
+    text-decoration: none;
+  }
+  .ref-list a:hover, .ref-list a:focus-visible { color: var(--accent); text-decoration: underline; }
+  .ref-list .src-desc { font-size: 13px; color: var(--ink-muted); }
+  .ref-list .src-tag {
+    font-family: "Cascadia Code","SF Mono",Consolas,monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  footer {
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+  }
+
+  a:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<!-- shared arrowhead defs, referenced by every figure below -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-muted)"></path>
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"></path>
+    </marker>
+    <marker id="arrow-faint" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-faint)"></path>
+    </marker>
+    <marker id="arrow-bad" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--bad)"></path>
+    </marker>
+  </defs>
+</svg>
+
+<div class="page">
+
+  <header class="hero">
+    <p class="eyebrow">Treasury · Federal Reserve · Banks — 財政貨幣資金管線全解</p>
+    <h1>公債資金迴路</h1>
+    <p class="lede">從財政部發債、Fed資產負債表、銀行體系準備金，到2026年貝森特與沃許的一連串動作——把整場對話整理成一份可以從頭讀到尾的參考報告。</p>
+  </header>
+
+  <nav class="toc" aria-label="目錄">
+    <p class="toc-title">目錄</p>
+    <ol>
+      <li><a href="#s1"><span class="n">01</span>三個主體與循環（含外國央行）</a></li>
+      <li><a href="#s2"><span class="n">02</span>資金池：準備金／TGA／RRP／SRF／SLR</a></li>
+      <li><a href="#s3"><span class="n">03</span>財政赤字與資金調控</a></li>
+      <li><a href="#s4"><span class="n">04</span>公債／MBS／長短債結構</a></li>
+      <li><a href="#s5"><span class="n">05</span>體制演變、爭議與矛盾</a></li>
+      <li><a href="#s6"><span class="n">06</span>貝森特與沃許：動機分析</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============ SECTION 1 ============ -->
+  <section id="s1">
+    <h2><span class="sec-n">01 ／</span>經濟的三個主體與循環<span class="tag">FIG. 01</span></h2>
+    <p>整套機制裡有三個主要角色：<b>財政部</b>（發債籌錢、決定花在哪）、<b>Fed</b>（管銀行體系流動性與利率）、<b>銀行／私人市場</b>（承接大部分債務、把儲蓄轉成信貸）。公債被Fed持有的那一段，利息像繞了一圈回到財政部自己手上；賣給私人投資人的那一段，利息才是真的離開政府口袋。</p>
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 980 560" role="img" aria-label="財政部發行公債，經一級交易商轉售後分成兩條路徑：賣給Fed的部分，利息繳給Fed後又以雜項收入形式繳回財政部，形成迴路；賣給私人投資人的部分，利息真正流出，不會迴圈回財政部。">
+          <rect x="20" y="230" width="180" height="80" rx="10" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="110" y="264" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">財政部</text>
+          <text x="110" y="283" text-anchor="middle" font-size="11" fill="var(--ink-muted)">Treasury ・ TGA帳戶</text>
+
+          <rect x="260" y="230" width="180" height="80" rx="10" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="350" y="264" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">一級交易商</text>
+          <text x="350" y="283" text-anchor="middle" font-size="11" fill="var(--ink-muted)">Primary Dealers</text>
+
+          <rect x="700" y="40" width="250" height="172" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.3"></rect>
+          <text x="825" y="70" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">聯準會</text>
+          <text x="825" y="88" text-anchor="middle" font-size="11" fill="var(--ink-muted)">Federal Reserve（次級市場買入）</text>
+          <line x1="720" y1="102" x2="930" y2="102" stroke="var(--accent)" stroke-width="0.7" opacity="0.5"></line>
+          <text x="825" y="126" text-anchor="middle" font-size="11.5" fill="var(--ink-muted)">持有該公債 → 每期收利息</text>
+          <text x="825" y="146" text-anchor="middle" font-size="11.5" fill="var(--ink-muted)">扣成本、股息後</text>
+          <text x="825" y="166" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--accent-strong)">淨額強制繳回財政部</text>
+          <text x="825" y="190" text-anchor="middle" font-size="10.5" fill="var(--ink-faint)">(若Fed自身虧損則暫停，見§5)</text>
+
+          <rect x="700" y="392" width="250" height="112" rx="10" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="825" y="422" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">私人投資人</text>
+          <text x="825" y="441" text-anchor="middle" font-size="11" fill="var(--ink-muted)">退休基金・外國央行・保險公司</text>
+          <text x="825" y="459" text-anchor="middle" font-size="11" fill="var(--ink-muted)">一般投資人 等</text>
+          <text x="825" y="483" text-anchor="middle" font-size="12" font-weight="700" fill="var(--bad)">利息真正流出，不迴圈</text>
+
+          <line x1="200" y1="270" x2="256" y2="270" stroke="var(--ink-muted)" stroke-width="1.6" marker-end="url(#arrow-ink)"></line>
+          <text x="228" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">① 標售新債</text>
+
+          <path d="M440,245 Q 580,120 696,132" fill="none" stroke="var(--ink-muted)" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+          <text x="560" y="108" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">② 次級市場轉售給Fed</text>
+
+          <path d="M440,300 Q 580,395 696,415" fill="none" stroke="var(--ink-faint)" stroke-width="1.4" marker-end="url(#arrow-faint)"></path>
+          <text x="560" y="410" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink-muted)">②' 轉售給私人部門</text>
+
+          <path d="M130,228 Q 400,26 698,96" fill="none" stroke="var(--ink-muted)" stroke-width="1.4" marker-end="url(#arrow-ink)"></path>
+          <text x="400" y="20" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">③ 支付利息（Fed持有部分）</text>
+
+          <path d="M200,304 Q 470,368 696,436" fill="none" stroke="var(--ink-faint)" stroke-width="1.4" marker-end="url(#arrow-faint)"></path>
+          <text x="465" y="358" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink-muted)">③' 支付利息（私人持有部分）</text>
+
+          <path d="M818,212 C 900,470 130,470 118,314" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-dasharray="7 5" marker-end="url(#arrow-accent)"></path>
+          <text x="470" y="505" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent-strong)">④ 淨利潤強制繳回（miscellaneous receipts）——形成迴路</text>
+        </svg>
+      </div>
+      <figcaption><b>看這張圖的重點：</b>右上角進Fed的路徑（②→③→④虛線迴圈）幾乎是閉合的；右下角進私人投資人的路徑（②'→③'）是斷開的。目前Fed資產負債表持有約$6.7兆公債＋MBS，只是聯邦總債務（約$40兆）中的一小部分。</figcaption>
+    </figure>
+
+    <p>這個迴圈的財政效果，比字面上看起來更微妙。一旦公債落在Fed手上，對「財政部＋Fed」合併起來看的政府整體而言，這部分債務的<b>淨利息負擔幾乎歸零</b>——跟財政部直接印鈔花用，效果非常接近，只是多繞了次級市場這一道手續。這正是QE規模做得越大、做得越久，就越容易被質疑正在悄悄「監管套利」掉『央行不能直接借錢給政府』這條防線精神的原因：法律防火牆管得住「怎麼買」，管不住「買了以後利息去哪」。</p>
+    <p>但這不代表整體利息負擔被洗掉了。Fed持有的公債只占聯邦總債務（約$40兆）的一小部分——約<b>六分之一</b>左右；本財年迄今$1.17兆、年增15%的利息支出裡，絕大多數付給的是退休基金、外國央行、保險公司這些真正的私人債權人，只有一小塊是繞了一圈又回到財政部自己手上的。</p>
+    <p>更關鍵的是，這個迴圈<b>不是穩定機制</b>，而是隨Fed自身損益反覆的：§5會談到，2022–2023年升息循環中，Fed付給銀行的準備金利息（IORB）暴增，收到的舊債利息卻偏低，自己轉虧，不但沒有盈餘可繳回，財政部反而少了這筆過去習慣依賴的固定收入。同一套機制，在Fed賺錢的年份幫財政部省了一筆利息，在Fed賠錢的年份卻反過來變相加重財政部的負擔——這種不確定性，正是市場對QE規模抱持戒心的根本原因：一旦市場觀察到Fed持續大量買債，會開始懷疑Fed是不是在幫財政部融資（fiscal dominance），進而要求更高的通膨風險溢酬，讓殖利率不降反升。</p>
+    <div class="callout">
+      <p class="callout-title">這個迴路不是永遠成立的——三個限制條件</p>
+      <ul>
+        <li><span class="k">規模：</span>只有Fed持有的約$6.7兆債務享有這個迴圈，其餘約$33兆流向私人部門，利息是真實支出，不會迴圈。</li>
+        <li><span class="k">前提：</span>迴圈能否成立，取決於Fed自己當年是賺錢還是虧錢——升息循環中可能反轉成負擔。</li>
+        <li><span class="k">法律防火牆：</span>Fed只能在次級市場買，不能直接參與財政部標售——但一旦債券落到Fed手上，財政效果跟直接買單非常接近。</li>
+      </ul>
+    </div>
+
+    <h3>外國央行扮演的角色：第四個、會被自己國內政策拖著走的買家</h3>
+    <p>圖一右下角的「私人投資人」裡，其實藏著一群特殊玩家——外國央行與主權基金。他們買賣美債的動機，往往不是看美債本身的價值，而是被自己國內的匯率政策綁架。要知道賣壓可能從哪裡來，得先看清楚誰持有這些債、以及這個結構這十幾年是怎麼變的。</p>
+
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 940 170" role="img" aria-label="2026年約31兆美元對外流通公債（debt held by public）的持有結構：外國持有約9.2兆美元、占31%；Fed持有約4.4兆美元、占14%；國內私人部門（銀行、共同基金、退休基金、保險公司、家庭）持有約17.4兆美元、占55%。另有約8兆美元政府內部帳戶間持有（如社安基金），不計入此圖，因為那部分不在市場上交易，不會產生賣壓。">
+          <rect x="40" y="50" width="267" height="60" fill="var(--accent)" opacity="0.85"></rect>
+          <text x="173" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">外國</text>
+          <text x="173" y="94" text-anchor="middle" font-size="10.5" fill="#fff">$9.2兆・31%</text>
+
+          <rect x="307" y="50" width="120" height="60" fill="var(--ink-faint)" opacity="0.55"></rect>
+          <text x="367" y="76" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">Fed</text>
+          <text x="367" y="94" text-anchor="middle" font-size="9.5" fill="var(--ink)">$4.4兆・14%</text>
+
+          <rect x="427" y="50" width="473" height="60" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="663" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)">國內私人部門（銀行・共同基金・退休基金・保險・家庭）</text>
+          <text x="663" y="94" text-anchor="middle" font-size="10.5" fill="var(--ink-muted)">$17.4兆・55%</text>
+
+          <text x="40" y="132" font-size="11" fill="var(--ink-faint)">基準為約$31兆美元「對外流通公債」（debt held by public）；另有約$8兆美元屬政府內部帳戶間持有（如社安基金），</text>
+          <text x="40" y="150" font-size="11" fill="var(--ink-faint)">不列入此圖，因為那部分不在市場交易，不構成賣壓。（聯邦總債務約$40兆 ＝ 對外流通$31兆 ＋ 內部持有$8兆）</text>
+        </svg>
+      </div>
+      <figcaption>把總負債$40兆拆成「會不會在市場上被賣出」兩塊之後，真正的賣壓來源只在最上面這31兆美元裡——而其中私人部門吃下了過半數，是實際上的最大邊際買家／賣家。</figcaption>
+    </figure>
+
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 940 260" role="img" aria-label="外國持有占對外流通公債比例的走勢：2011年高點49%，2015年降至34%，2023年10月低點22%，2026年2月回升至24.5%。資料點之間以虛線連接，代表已知的確切錨點，中間路徑非逐年精確數字。">
+          <line x1="90" y1="30" x2="90" y2="190" stroke="var(--border)" stroke-width="1"></line>
+          <line x1="90" y1="190" x2="880" y2="190" stroke="var(--border)" stroke-width="1"></line>
+          <text x="80" y="34" text-anchor="end" font-size="10" fill="var(--ink-faint)">50%</text>
+          <line x1="90" y1="30" x2="880" y2="30" stroke="var(--border)" stroke-width="0.6" stroke-dasharray="2 3"></line>
+          <text x="80" y="98" text-anchor="end" font-size="10" fill="var(--ink-faint)">30%</text>
+          <line x1="90" y1="94" x2="880" y2="94" stroke="var(--border)" stroke-width="0.6" stroke-dasharray="2 3"></line>
+          <text x="80" y="194" text-anchor="end" font-size="10" fill="var(--ink-faint)">0%</text>
+
+          <path d="M120,33 L323,81 L728,120 L860,112" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-dasharray="5 4"></path>
+
+          <circle cx="120" cy="33" r="5" fill="var(--accent)"></circle>
+          <text x="120" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">2011：49%</text>
+          <text x="120" y="215" text-anchor="middle" font-size="10" fill="var(--ink-faint)">歷史高點</text>
+
+          <circle cx="323" cy="81" r="5" fill="var(--accent)"></circle>
+          <text x="323" y="66" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">2015：34%</text>
+
+          <circle cx="728" cy="120" r="5" fill="var(--bad)"></circle>
+          <text x="728" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="var(--bad)">2023/10：22%</text>
+          <text x="728" y="215" text-anchor="middle" font-size="10" fill="var(--ink-faint)">十餘年低點</text>
+
+          <circle cx="860" cy="112" r="5" fill="var(--accent-strong)"></circle>
+          <text x="860" y="97" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent-strong)">2026/2：24.5%</text>
+          <text x="860" y="235" text-anchor="middle" font-size="10" fill="var(--ink-faint)">回升中</text>
+        </svg>
+      </div>
+      <figcaption>外國持有占比從2011年近半的高點，一路降到2023年僅22%的低點——這十幾年被騰出來的份額，幾乎全由§2提到的國內私人部門（尤其銀行與基金）接手，也是§6銀行SLR鬆綁討論的背景之一。2026年以來雖略有回升，仍遠低於2011年水準。（此線僅標出已驗證的關鍵年份，點與點之間為概略路徑，非逐年精確數字。）</figcaption>
+    </figure>
+
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 940 480" role="img" aria-label="2026年6月前十大美債外國持有國排名（財政部TIC資料）：日本1兆1,167億美元、英國9,399億美元、中國大陸6,334億美元、比利時4,825億美元、加拿大4,596億美元、開曼群島4,531億美元、盧森堡4,342億美元、法國3,899億美元、愛爾蘭3,535億美元、台灣3,025億美元。比利時與開曼群島的數字大部分是託管或避險基金過手部位，不代表當地真正的最終持有人。">
+          <text x="0" y="20" font-size="12" font-weight="700" fill="var(--ink-muted)">前十大持有國（2026年6月，美國財政部TIC資料）</text>
+
+          <g font-size="12.5">
+            <text x="160" y="48" text-anchor="end" font-size="12" font-weight="700" fill="var(--ink)">日本</text>
+            <rect x="170" y="32" width="679" height="26" fill="var(--accent)"></rect>
+            <text x="857" y="49" font-size="11.5" font-weight="700" fill="var(--ink)" class="mono">$1.12兆</text>
+
+            <text x="160" y="88" text-anchor="end" font-size="12" font-weight="700" fill="var(--ink)">英國</text>
+            <rect x="170" y="72" width="572" height="26" fill="var(--accent)" opacity="0.75"></rect>
+            <text x="750" y="89" font-size="11.5" font-weight="700" fill="var(--ink)" class="mono">$0.94兆</text>
+
+            <text x="160" y="128" text-anchor="end" font-size="12" font-weight="700" fill="var(--ink)">中國大陸</text>
+            <rect x="170" y="112" width="385" height="26" fill="var(--bad)" opacity="0.7"></rect>
+            <text x="563" y="129" font-size="11.5" font-weight="700" fill="var(--ink)" class="mono">$0.63兆</text>
+
+            <text x="160" y="168" text-anchor="end" font-size="12" fill="var(--ink)">比利時＊</text>
+            <rect x="170" y="152" width="294" height="26" fill="var(--surface-2)" stroke="var(--border)" stroke-dasharray="3 3"></rect>
+            <text x="472" y="169" font-size="11.5" fill="var(--ink-muted)" class="mono">$0.48兆</text>
+
+            <text x="160" y="208" text-anchor="end" font-size="12" fill="var(--ink)">加拿大</text>
+            <rect x="170" y="192" width="280" height="26" fill="var(--surface-2)" stroke="var(--border)"></rect>
+            <text x="458" y="209" font-size="11.5" fill="var(--ink-muted)" class="mono">$0.46兆</text>
+
+            <text x="160" y="248" text-anchor="end" font-size="12" fill="var(--ink)">開曼群島＊</text>
+            <rect x="170" y="232" width="276" height="26" fill="var(--surface-2)" stroke="var(--border)" stroke-dasharray="3 3"></rect>
+            <text x="454" y="249" font-size="11.5" fill="var(--ink-muted)" class="mono">$0.45兆</text>
+
+            <text x="160" y="288" text-anchor="end" font-size="12" fill="var(--ink)">盧森堡</text>
+            <rect x="170" y="272" width="264" height="26" fill="var(--surface-2)" stroke="var(--border)"></rect>
+            <text x="442" y="289" font-size="11.5" fill="var(--ink-muted)" class="mono">$0.43兆</text>
+
+            <text x="160" y="328" text-anchor="end" font-size="12" fill="var(--ink)">法國</text>
+            <rect x="170" y="312" width="237" height="26" fill="var(--surface-2)" stroke="var(--border)"></rect>
+            <text x="415" y="329" font-size="11.5" fill="var(--ink-muted)" class="mono">$0.39兆</text>
+
+            <text x="160" y="368" text-anchor="end" font-size="12" fill="var(--ink)">愛爾蘭</text>
+            <rect x="170" y="352" width="215" height="26" fill="var(--surface-2)" stroke="var(--border)"></rect>
+            <text x="393" y="369" font-size="11.5" fill="var(--ink-muted)" class="mono">$0.35兆</text>
+
+            <text x="160" y="408" text-anchor="end" font-size="12" fill="var(--ink)">台灣</text>
+            <rect x="170" y="392" width="184" height="26" fill="var(--surface-2)" stroke="var(--border)"></rect>
+            <text x="362" y="409" font-size="11.5" fill="var(--ink-muted)" class="mono">$0.30兆</text>
+          </g>
+
+          <text x="0" y="440" font-size="10.5" fill="var(--ink-faint)">＊比利時（Euroclear所在地）與開曼群島（避險基金常用註冊地）的數字，大部分是託管或避險基金過手部位，</text>
+          <text x="0" y="456" font-size="10.5" fill="var(--ink-faint)">不代表當地機構真正的最終持有人——這也是為什麼美債持有國排名不能只看國籍字面意思。</text>
+        </svg>
+      </div>
+      <figcaption>資料來源：美國財政部TIC（Treasury International Capital）Table 5，2026年6月最新月度數據。前兩名日本、英國合計就占了外國持有的近四分之一；中國大陸雖仍排第三，但已被英國拉開明顯差距。</figcaption>
+    </figure>
+
+    <div class="versus">
+      <div class="v-card b">
+        <p class="v-title">中國＋香港：結構性、持續十年的賣方</p>
+        <ul>
+          <li>中國大陸單一持有量已從2025年6月的$7,314億降到2026年6月的$6,334億，十年來累計降幅逾三分之一。</li>
+          <li>賣壓來自策略性去美元化、降低對美曝險，不是單一事件觸發，是長期趨勢。</li>
+        </ul>
+      </div>
+      <div class="v-card a">
+        <p class="v-title">日本：波段震盪，近月出現明顯回落</p>
+        <ul>
+          <li>2026年2月一度衝上$1.24兆高點，之後連續回落——4月$1.21兆、5月$1.14兆、6月僅剩<b>$1.12兆</b>，4個月內減少逾$1,200億。</li>
+          <li>時間點與同年7月底美日聯手干預日圓前後接近，是否直接相關還需要更多月份數據確認，但方向與圖二的機制一致：需要美元時，美債部位就是最現成的籌碼。</li>
+        </ul>
+      </div>
+    </div>
+
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 940 340" role="img" aria-label="比較日本應對日圓走弱的兩種路徑：若獨自籌措美元，需要賣出美債部位，直接推升美債長端殖利率；若美國財政部與Fed聯手介入、改賣出歐元購入日圓，日本就能少賣一些美債，間接護住殖利率。">
+          <rect x="30" y="125" width="200" height="90" rx="10" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="130" y="153" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">日本 財務省＋央行</text>
+          <text x="130" y="171" text-anchor="middle" font-size="10.5" fill="var(--ink-muted)">持有約$1.12兆美債</text>
+          <text x="130" y="189" text-anchor="middle" font-size="10.5" fill="var(--ink-faint)">日圓走弱 → 需要美元買日圓</text>
+
+          <rect x="330" y="20" width="260" height="70" rx="9" fill="var(--surface-2)" stroke="var(--bad)" stroke-width="1.2"></rect>
+          <text x="460" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="var(--bad)">賣出美債部位</text>
+          <text x="460" y="65" text-anchor="middle" font-size="10.5" fill="var(--ink-muted)">獨自換取美元</text>
+
+          <rect x="650" y="20" width="260" height="70" rx="9" fill="var(--surface-2)" stroke="var(--bad)" stroke-width="1.2"></rect>
+          <text x="780" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="var(--bad)">推升美債長端殖利率</text>
+          <text x="780" y="65" text-anchor="middle" font-size="10.5" fill="var(--ink-muted)">增加市場賣壓</text>
+
+          <rect x="330" y="240" width="260" height="80" rx="9" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"></rect>
+          <text x="460" y="266" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">美財政部＋Fed加入干預</text>
+          <text x="460" y="284" text-anchor="middle" font-size="10.5" fill="var(--ink-muted)">賣出歐元（非美元）買日圓</text>
+          <text x="460" y="301" text-anchor="middle" font-size="9.5" fill="var(--ink-faint)">2026/7/31 近30年首次</text>
+
+          <rect x="650" y="240" width="260" height="80" rx="9" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"></rect>
+          <text x="780" y="270" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent-strong)">日本少賣一些美債</text>
+          <text x="780" y="288" text-anchor="middle" font-size="10.5" fill="var(--ink-muted)">間接護住殖利率</text>
+
+          <path d="M230,150 Q280,80 330,58" fill="none" stroke="var(--bad)" stroke-width="1.5" marker-end="url(#arrow-bad)"></path>
+          <text x="270" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="var(--bad)">① 若獨自行動</text>
+          <line x1="590" y1="55" x2="646" y2="55" stroke="var(--bad)" stroke-width="1.5" marker-end="url(#arrow-bad)"></line>
+
+          <path d="M230,190 Q280,255 330,278" fill="none" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrow-accent)"></path>
+          <text x="270" y="235" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent-strong)">② 美方聯手介入</text>
+          <line x1="590" y1="280" x2="646" y2="280" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrow-accent)"></line>
+        </svg>
+      </div>
+      <figcaption>外國央行不是被動的「私人投資人代替品」——它們自己也是政策行為者。日本為了穩住日圓被迫拋售美債的壓力，跟美國財政部想壓低長端殖利率的目標正好衝突；2026年7月底美日聯手干預日圓（美方賣的是歐元，不是美元），本質上就是在替日本分擔一部分外匯需求，換取它少賣一點美債——跟回購、發債訊號一樣，都是在保護圖一裡「私人投資人」這一側的需求。</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ SECTION 2 ============ -->
+  <section id="s2">
+    <h2><span class="sec-n">02 ／</span>三個主體的資金池關係<span class="tag">FIG. 02</span></h2>
+    <p>資產負債表總額看起來很大，但Fed的負債端不是只有準備金——流通貨幣和TGA是另外兩塊，跟寬鬆緊縮幾乎無關。銀行自己能不能接住這些資產，還要看另一條看不見的天花板：SLR。</p>
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 980 470" role="img" aria-label="Fed資產負債表示意：資產端是公債與MBS約6.7兆美元；負債端由上至下依序是銀行準備金約2.9兆美元、流通貨幣約2.4兆美元、財政部TGA帳戶約1兆美元、逆回購ON RRP接近淨空，另有常設回購工具SRF作為銀行缺現金時的後備管道，僅連接準備金一格。">
+          <text x="215" y="34" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="0.04em" fill="var(--ink-muted)">資產 ASSETS</text>
+          <text x="665" y="34" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="0.04em" fill="var(--ink-muted)">負債 LIABILITIES</text>
+
+          <rect x="60" y="70" width="310" height="341" rx="10" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="215" y="230" text-anchor="middle" font-size="16" font-weight="700" fill="var(--ink)">公債 + MBS</text>
+          <text x="215" y="254" text-anchor="middle" font-size="20" font-weight="700" fill="var(--ink)" class="mono">≈ $6.7兆</text>
+          <text x="215" y="280" text-anchor="middle" font-size="11" fill="var(--ink-muted)">佔名目GDP約21%</text>
+          <text x="215" y="298" text-anchor="middle" font-size="10.5" fill="var(--ink-faint)">（疫後高峰時曾達35%）</text>
+
+          <text x="450" y="248" text-anchor="middle" font-size="26" fill="var(--ink-faint)">=</text>
+
+          <rect x="530" y="70" width="270" height="141" rx="8" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.3"></rect>
+          <text x="550" y="98" font-size="14" font-weight="700" fill="var(--ink)">銀行準備金</text>
+          <text x="550" y="116" font-size="11" fill="var(--ink-muted)">Bank Reserves</text>
+          <text x="785" y="112" text-anchor="end" font-size="17" font-weight="700" fill="var(--accent-strong)" class="mono">$2.9兆</text>
+          <text x="550" y="188" font-size="11.5" font-weight="700" fill="var(--accent-strong)">← 「充裕」與否只看這一格</text>
+
+          <rect x="530" y="211" width="270" height="117" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="550" y="238" font-size="14" font-weight="700" fill="var(--ink)">流通貨幣</text>
+          <text x="550" y="256" font-size="11" fill="var(--ink-muted)">Currency in circulation</text>
+          <text x="785" y="252" text-anchor="end" font-size="17" font-weight="700" fill="var(--ink)" class="mono">$2.4兆</text>
+          <text x="550" y="310" font-size="11" fill="var(--ink-faint)">結構性、隨經濟成長，與寬鬆緊縮無關</text>
+
+          <rect x="530" y="328" width="270" height="49" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="550" y="349" font-size="12.5" font-weight="700" fill="var(--ink)">財政部帳戶 TGA</text>
+          <text x="785" y="360" text-anchor="end" font-size="14" font-weight="700" fill="var(--ink)" class="mono">≈ $1兆</text>
+          <text x="550" y="368" font-size="10" fill="var(--ink-faint)">隨稅收 / 支出波動</text>
+
+          <rect x="530" y="377" width="270" height="34" fill="var(--surface)" stroke="var(--border)" stroke-dasharray="3 3"></rect>
+          <text x="550" y="398" font-size="11.5" font-weight="700" fill="var(--ink-muted)">逆回購 ON RRP</text>
+          <text x="785" y="398" text-anchor="end" font-size="11.5" fill="var(--ink-faint)">接近淨空</text>
+
+          <path d="M800,140 L 846,140" fill="none" stroke="var(--ink-muted)" stroke-width="1.3" stroke-dasharray="3 3" marker-end="url(#arrow-ink)"></path>
+          <rect x="850" y="104" width="112" height="72" rx="8" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="906" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">常設回購</text>
+          <text x="906" y="143" text-anchor="middle" font-size="10" fill="var(--ink-muted)">SRF</text>
+          <text x="906" y="163" text-anchor="middle" font-size="9.5" fill="var(--ink-faint)">銀行缺現金的後備</text>
+        </svg>
+      </div>
+      <figcaption><b>看這張圖的重點：</b>只有橘色的「銀行準備金」一格是「充裕準備金框架」實際監測的對象；流通貨幣、TGA是另外兩塊「結構性」負債。金額為2025年底至2026年初概數，長條高度為示意比例，非精算刻度。</figcaption>
+    </figure>
+
+    <h3>銀行自己的天花板：SLR（補充槓桿比率）</h3>
+    <p>準備金、TGA、ON RRP都是Fed資產負債表裡的名詞，但真正決定銀行「能不能、願不願意」多接一些公債的，是銀行自己資產負債表的容量限制——尤其是SLR。SLR不像一般風險資本比率那樣替資產「加權」：公債、準備金信用風險是零，但在SLR的分母裡，跟一筆高風險企業貸款<b>占用一樣多的額度</b>。這代表QE灌準備金進銀行體系、財政部狂發公債的同時，銀行的SLR空間會被同步壓縮——即便新增的資產是全世界最安全的公債。2020年疫情期間Fed曾暫時把公債和準備金排除在SLR計算外，之後到期恢復，這正是§6會談到、貝森特現在想重啟的那場監理鬆綁討論的背景。</p>
+
+    <div class="glossary-grid">
+      <div class="g-card">
+        <p class="term">準備金 <span class="abbr">Reserves</span></p>
+        <p class="def">銀行存放在Fed的錢，銀行體系最終的支付工具與流動性緩衝。</p>
+      </div>
+      <div class="g-card">
+        <p class="term">財政部帳戶 <span class="abbr">TGA</span></p>
+        <p class="def">財政部在Fed的活期帳戶，稅收、發債收入流入，政府支出流出。</p>
+      </div>
+      <div class="g-card">
+        <p class="term">隔夜逆回購 <span class="abbr">ON RRP</span></p>
+        <p class="def">貨幣市場基金等非銀機構把多餘現金停在Fed賺利息的「停車場」，是準備金以外的第二層流動性緩衝。</p>
+      </div>
+      <div class="g-card">
+        <p class="term">常設回購工具 <span class="abbr">SRF</span></p>
+        <p class="def">銀行／交易商缺現金時，隨時可拿公債抵押跟Fed借錢的後備水龍頭，2021年成立，2025年底取消單日額度上限。</p>
+      </div>
+      <div class="g-card">
+        <p class="term">補充槓桿比率 <span class="abbr">SLR</span></p>
+        <p class="def">銀行資本對「總曝險」（不分風險高低）的比率下限；公債、準備金即便零信用風險，照樣占用這個額度。</p>
+      </div>
+      <div class="g-card">
+        <p class="term">充裕準備金框架 <span class="abbr">Ample Reserves</span></p>
+        <p class="def">Fed用IORB／ON RRP這類「利率工具」而非每天微調供給量來控制利率的操作模式，2008年QE後取代舊的稀缺準備金框架。</p>
+      </div>
+      <div class="g-card">
+        <p class="term">準備金管理性購債 <span class="abbr">RMP</span></p>
+        <p class="def">準備金逼近充裕下限時，Fed用來補水位的技術性購債，刻意只挑短天期國庫券，跟QE的「刺激／壓殖利率」目的區隔開。</p>
+      </div>
+      <div class="g-card">
+        <p class="term">聯邦基金有效利率 <span class="abbr">EFFR</span></p>
+        <p class="def">銀行間隔夜無擔保拆借準備金的實際市場成交利率，就是一般講的「聯邦基金利率」。</p>
+      </div>
+      <div class="g-card">
+        <p class="term">準備金利率 <span class="abbr">IORB</span></p>
+        <p class="def">Fed直接付給銀行、放在Fed的準備金利息，是EFFR事實上的下錨——沒有銀行會用更低利率借錢給別人。</p>
+      </div>
+      <div class="g-card">
+        <p class="term">附買回市場利率 <span class="abbr">SOFR</span></p>
+        <p class="def">以公債為抵押、隔夜拆借現金的市場成交利率，交易量遠大於聯邦基金市場，是判斷準備金鬆緊最敏感的即時指標。</p>
+      </div>
+    </div>
+
+    <h3>IORB／ON RRP形成的「利率走廊」</h3>
+    <p>Fed不再每天精算供給量去命中目標利率，而是設定IORB當上錨、ON RRP當下錨，讓EFFR和SOFR這兩個市場利率被夾在中間波動——這就是「充裕準備金框架」實際運作的樣子。</p>
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 940 300" role="img" aria-label="利率走廊示意圖：IORB作為上錨、ON RRP利率作為下錨，形成一個帶狀區間；EFFR聯邦基金有效利率通常緊貼IORB下方波動；SOFR附買回市場利率波動幅度較大；2019年9月準備金稀缺時，SOFR一度飆破10%，遠遠衝出走廊上緣。">
+          <rect x="80" y="90" width="780" height="120" fill="var(--accent-soft)" opacity="0.45"></rect>
+          <line x1="80" y1="90" x2="860" y2="90" stroke="var(--ink)" stroke-width="1.6"></line>
+          <text x="870" y="86" font-size="12" font-weight="700" fill="var(--ink)">IORB</text>
+          <text x="870" y="100" font-size="10" fill="var(--ink-muted)">準備金利率・上錨</text>
+
+          <line x1="80" y1="210" x2="860" y2="210" stroke="var(--ink-muted)" stroke-width="1.4" stroke-dasharray="5 4"></line>
+          <text x="870" y="207" font-size="12" font-weight="700" fill="var(--ink-muted)">ON RRP</text>
+          <text x="870" y="221" font-size="10" fill="var(--ink-faint)">非銀機構地板</text>
+
+          <text x="95" y="115" font-size="11" font-weight="700" fill="var(--ink)">EFFR（聯邦基金有效利率）</text>
+          <circle cx="150" cy="130" r="3.5" fill="var(--ink)"></circle>
+          <circle cx="250" cy="128" r="3.5" fill="var(--ink)"></circle>
+          <circle cx="350" cy="132" r="3.5" fill="var(--ink)"></circle>
+          <circle cx="450" cy="129" r="3.5" fill="var(--ink)"></circle>
+          <circle cx="550" cy="131" r="3.5" fill="var(--ink)"></circle>
+          <circle cx="650" cy="129" r="3.5" fill="var(--ink)"></circle>
+          <circle cx="750" cy="130" r="3.5" fill="var(--ink)"></circle>
+
+          <text x="95" y="168" font-size="11" font-weight="700" fill="var(--accent-strong)">SOFR（附買回市場利率，波動較大）</text>
+          <circle cx="150" cy="150" r="3.5" fill="var(--accent-strong)"></circle>
+          <circle cx="250" cy="160" r="3.5" fill="var(--accent-strong)"></circle>
+          <circle cx="350" cy="145" r="3.5" fill="var(--accent-strong)"></circle>
+          <circle cx="450" cy="165" r="3.5" fill="var(--accent-strong)"></circle>
+          <circle cx="550" cy="148" r="3.5" fill="var(--accent-strong)"></circle>
+          <circle cx="750" cy="155" r="3.5" fill="var(--accent-strong)"></circle>
+
+          <line x1="650" y1="145" x2="650" y2="45" stroke="var(--bad)" stroke-width="1.3" stroke-dasharray="3 3"></line>
+          <circle cx="650" cy="40" r="5" fill="var(--bad)"></circle>
+          <text x="650" y="24" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--bad)">2019/9：SOFR一度飆破10%</text>
+        </svg>
+      </div>
+      <figcaption>EFFR幾乎貼著IORB下方波動，因為沒有銀行會用低於IORB的利率借錢給別人；SOFR波動較大，是因為附買回市場交易量遠大於聯邦基金市場，也最先反映準備金供需的緊張——2019年9月那次飆升，就是走廊機制第一次被真正壓力測試。</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ SECTION 3 ============ -->
+  <section id="s3">
+    <h2><span class="sec-n">03 ／</span>財政赤字與三主體的資金調控<span class="tag">FIG. 03</span></h2>
+    <p>財政赤字是整個系統的驅動力：政府花得比收得多，就得靠發債補缺口。這個過程會讓TGA跟銀行準備金像蹺蹺板一樣此消彼長，而Fed的工作，是在這個蹺蹺板晃得太劇烈時充當緩衝。</p>
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 940 420" role="img" aria-label="TGA與銀行準備金的循環：財政部發債或收稅時資金流入TGA、準備金下降；政府支出時資金從TGA流向經濟與銀行體系、準備金回升；赤字持續代表財政部還要再發債，循環繼續。Fed透過準備金管理性購債，在準備金逼近充裕下限時補水位。">
+          <rect x="60" y="50" width="240" height="80" rx="10" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="180" y="83" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--ink)">① 財政部發債／收稅</text>
+          <text x="180" y="101" text-anchor="middle" font-size="10.5" fill="var(--ink-muted)">資金從市場流入TGA</text>
+
+          <rect x="640" y="50" width="240" height="80" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"></rect>
+          <text x="760" y="83" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--ink)">② TGA水位上升</text>
+          <text x="760" y="101" text-anchor="middle" font-size="10.5" fill="var(--accent-strong)">→ 銀行準備金↓</text>
+
+          <rect x="640" y="290" width="240" height="80" rx="10" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="760" y="323" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--ink)">③ 政府支出</text>
+          <text x="760" y="341" text-anchor="middle" font-size="10.5" fill="var(--ink-muted)">社福・採購・發薪・退稅</text>
+
+          <rect x="60" y="290" width="240" height="80" rx="10" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="180" y="323" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--ink)">④ 銀行體系準備金回流</text>
+          <text x="180" y="341" text-anchor="middle" font-size="10.5" fill="var(--good)">→ 準備金↑</text>
+
+          <rect x="385" y="165" width="170" height="90" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.3" stroke-dasharray="4 3"></rect>
+          <text x="470" y="197" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent-strong)">Fed準備金</text>
+          <text x="470" y="213" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent-strong)">管理性購債</text>
+          <text x="470" y="232" text-anchor="middle" font-size="9.5" fill="var(--ink-faint)">逼近下限就買債補水位</text>
+
+          <path d="M300,90 L 636,90" fill="none" stroke="var(--ink-muted)" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+          <path d="M760,134 L 760,286" fill="none" stroke="var(--ink-muted)" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+          <text x="800" y="212" font-size="10.5" fill="var(--ink-faint)">動用（含債務上限</text>
+          <text x="800" y="226" font-size="10.5" fill="var(--ink-faint)">重建期尤其劇烈）</text>
+          <path d="M636,330 L 304,330" fill="none" stroke="var(--ink-muted)" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+          <path d="M180,286 L 180,134" fill="none" stroke="var(--ink-faint)" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#arrow-faint)"></path>
+          <text x="120" y="212" font-size="10.5" fill="var(--ink-faint)">赤字持續</text>
+          <text x="120" y="226" font-size="10.5" fill="var(--ink-faint)">→ 需再發債</text>
+
+          <path d="M470,161 Q 560,110 636,88" fill="none" stroke="var(--accent)" stroke-width="1.3" stroke-dasharray="3 3" marker-end="url(#arrow-accent)"></path>
+          <path d="M418,259 Q 320,320 304,325" fill="none" stroke="var(--accent)" stroke-width="1.3" stroke-dasharray="3 3" marker-end="url(#arrow-accent)"></path>
+        </svg>
+      </div>
+      <figcaption>順時針是資金流向：發債／收稅把錢吸進TGA（準備金↓）→ 支出把錢送回經濟與銀行體系（準備金↑）→ 赤字仍在，財政部還得再發債。中間虛線框的Fed，扮演的是「不管蹺蹺板往哪邊晃，都設法把準備金托在充裕水位之上」的緩衝角色。</figcaption>
+    </figure>
+
+    <div class="callout">
+      <p class="callout-title">財政部什麼時候動TGA、Fed什麼時候動準備金</p>
+      <ul>
+        <li><span class="k">TGA上升：</span>正常發債籌資、四月報稅季稅收湧入、債務上限僵局解除後的「快速重建」期——這段常常在短時間內抽走大量準備金，2023年那次債務上限落幕後就是代表案例。</li>
+        <li><span class="k">TGA下降：</span>債務上限卡關期間財政部不能淨發新債、只能動用「非常規措施」把TGA燒下去撐開支；退稅季（約2至4月）與例行支出高峰。</li>
+        <li><span class="k">Fed增加準備金：</span>SOFR相對IORB走高、SRF被頻繁動用、ON RRP接近淨空——這些訊號亮起，Fed就啟動準備金管理性購債；若能預期到TGA即將快速重建（例如債務上限即將解除），Fed也會提前布局購債來緩衝衝擊。</li>
+        <li><span class="k">Fed減少準備金：</span>QT期間讓到期債券不再展延，主動、緩步地把準備金往下壓，直到逼近充裕下限前停手。</li>
+      </ul>
+    </div>
+    <p class="muted">這裡藏著一個結構性摩擦：TGA的漲跌很大程度是<b>政治／法定觸發</b>（債務上限、報稅季），不是Fed自己選的時間點；Fed常常是被動地替財政部的資金調度收拾流動性後果，這正是§5「財政主導」爭議的起點。</p>
+  </section>
+
+  <!-- ============ SECTION 4 ============ -->
+  <section id="s4">
+    <h2><span class="sec-n">04 ／</span>公債／MBS的關係，長短債的關係<span class="tag">FIG. 04</span></h2>
+    <p>Fed資產負債表裡除了公債，還有一塊MBS（不動產抵押貸款證券）——這是危機時期留下的資產，正在被慢慢換成公債。而財政部處理「太多長債」的方式，也不是單純減少新發行，而是主動回購。</p>
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 940 380" role="img" aria-label="左半部：2026年3月Fed持有部位中公債約占68.3%、MBS約占31.7%，長期目標是幾乎全數轉為公債，MBS隨自然到期不再投再購。右半部：財政部回購機制，先多發短天期國庫券籌資，再用這筆現金買回流動性較差的舊長債並使其從市場消失，直接減少存量，而非只影響未來發行流量。">
+          <line x1="470" y1="20" x2="470" y2="360" stroke="var(--border)" stroke-width="1"></line>
+
+          <text x="215" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink-muted)">Fed持債組成正在轉向公債</text>
+
+          <text x="130" y="60" text-anchor="middle" font-size="11" fill="var(--ink-muted)">現在（2026/3）</text>
+          <rect x="90" y="70" width="90" height="82" fill="var(--ink-faint)" opacity="0.45"></rect>
+          <text x="135" y="115" text-anchor="middle" font-size="10.5" fill="var(--ink)" font-weight="700">MBS</text>
+          <text x="135" y="129" text-anchor="middle" font-size="9" fill="var(--ink)">$1.99兆・31.7%</text>
+          <rect x="90" y="152" width="90" height="178" fill="var(--accent)" opacity="0.85"></rect>
+          <text x="135" y="235" text-anchor="middle" font-size="10.5" fill="#fff" font-weight="700">公債</text>
+          <text x="135" y="249" text-anchor="middle" font-size="9" fill="#fff">$4.28兆・68.3%</text>
+
+          <path d="M190,190 L 250,190" fill="none" stroke="var(--ink-muted)" stroke-width="1.4" marker-end="url(#arrow-ink)"></path>
+          <text x="220" y="176" text-anchor="middle" font-size="9.5" fill="var(--ink-muted)">MBS到期</text>
+          <text x="220" y="330" text-anchor="middle" font-size="9.5" fill="var(--ink-muted)">不再投再購，</text>
+          <text x="220" y="343" text-anchor="middle" font-size="9.5" fill="var(--ink-muted)">改買國庫券</text>
+
+          <text x="330" y="60" text-anchor="middle" font-size="11" fill="var(--ink-muted)">長期目標</text>
+          <rect x="290" y="70" width="90" height="14" fill="var(--ink-faint)" opacity="0.45"></rect>
+          <text x="395" y="80" font-size="9" fill="var(--ink-faint)">MBS→0</text>
+          <rect x="290" y="84" width="90" height="246" fill="var(--accent)" opacity="0.85"></rect>
+          <text x="335" y="200" text-anchor="middle" font-size="10.5" fill="#fff" font-weight="700">幾乎全為公債</text>
+          <text x="335" y="215" text-anchor="middle" font-size="9" fill="#fff">短天期占比↑</text>
+
+          <text x="705" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink-muted)">回購機制怎麼運作</text>
+
+          <rect x="560" y="45" width="300" height="58" rx="8" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="710" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">財政部</text>
+
+          <path d="M710,103 L 710,143" fill="none" stroke="var(--ink-muted)" stroke-width="1.4" marker-end="url(#arrow-ink)"></path>
+          <text x="710" y="122" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--ink)">① 多發短天期國庫券籌資</text>
+
+          <rect x="560" y="146" width="300" height="50" rx="8" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="710" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">籌得現金</text>
+
+          <path d="M710,196 L 710,236" fill="none" stroke="var(--ink-muted)" stroke-width="1.4" marker-end="url(#arrow-ink)"></path>
+          <text x="710" y="215" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--ink)">② 買回舊長債（off-the-run）</text>
+
+          <rect x="560" y="239" width="300" height="80" rx="8" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"></rect>
+          <text x="710" y="268" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)">流動性差的舊長債</text>
+          <text x="710" y="286" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--accent-strong)">直接從市場消失</text>
+          <text x="710" y="304" text-anchor="middle" font-size="9.5" fill="var(--ink-faint)">存量立即減少，不用等到期</text>
+        </svg>
+      </div>
+      <figcaption>左半部比例為2026年3月SOMA持倉概數，示意用途非精確刻度。右半部說明回購資金的真正來源：不是憑空印出來，是靠多發短債籌資置換出來的。</figcaption>
+    </figure>
+
+    <div class="versus">
+      <div class="v-card a">
+        <p class="v-title">為什麼要把MBS換成公債</p>
+        <ul>
+          <li>MBS有提前還款風險，存續期不確定，公債沒有這個問題。</li>
+          <li>長期持有MBS等於央行在替房市這個特定產業做信用分配，模糊了「貨幣政策」跟「產業政策」的界線。</li>
+          <li>MBS原本就是2008年、2020年危機應急工具，不是打算長期持有的部位。</li>
+        </ul>
+      </div>
+      <div class="v-card b">
+        <p class="v-title">為什麼回購長債，而不是只減少新發行</p>
+        <ul>
+          <li>存量 vs 流量：既有的30年債可能還要20幾年才到期，減少新發行只影響<b>未來增量</b>，回購才能立刻減少市場<b>現在</b>要消化的存量。</li>
+          <li>舊長債交易稀疏、買賣價差大（off-the-run），回購順便清掉這些流動性最差的部位。</li>
+          <li>資金來源是多發短債——這會直接拉短政府整體債務的平均存續期，也是§5要談的ATI爭議核心。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 5 ============ -->
+  <section id="s5">
+    <h2><span class="sec-n">05 ／</span>現有體制的演變、爭議與矛盾</h2>
+    <p>整套機制不是憑空設計出來的，每一塊拼圖背後幾乎都有一次危機或一次爭論。</p>
+
+    <h3>債券義勇軍（bond vigilantes）</h3>
+    <p>指投資人主動拋售公債、把殖利率推高，用市場力量去「教訓」被認為財政不負責任的政府——這個詞源自1994年市場對柯林頓政府赤字的反應。它是一種市場自發的紀律機制：政治程序管不住的赤字，交易員用賣壓管。這也是§2提到的「央行信譽」約束在市場端的具體展現：財政部越是被認為在操縱殖利率曲線，越容易召喚出義勇軍加碼賣壓，殖利率不降反升。</p>
+
+    <h3>2019年回購市場流動性危機<span class="tag">FIG. 05</span></h3>
+    <p>這件事之所以關鍵，是因為它直接催生了現在整套「充裕準備金框架」的操作方式，包括§2提到的常設回購工具（SRF）跟準備金管理性購債這兩個詞彙的來源。</p>
+    <p><b>背景：</b>2017到2019年，Fed在做第一輪QT，回應2008年QE留下的龐大資產負債表，準備金從高峰逐步下滑。但當時「充裕準備金框架」的市場監測指標體系還不成熟，Fed和市場其實都不確定準確的充裕下限在哪裡——等於是蒙著眼睛往下探。</p>
+    <p><b>引爆點：</b>2019年9月16至17日，兩件事剛好撞在一起。一是企業季度繳稅截止日，大量資金從銀行體系、貨幣市場基金轉去繳稅給財政部（TGA上升，準備金瞬間被大量抽走）；二是同一天剛好又是一批大規模新發公債的結算日，交易商需要準備大筆現金支付新債款項。兩股資金需求同時暴增，但銀行體系準備金早已被QT削到偏低水位，而且<b>分佈不均</b>——少數大銀行手上握著大部分準備金，卻受限於自身流動性覆蓋率（LCR）等監管要求，不願意把手上的準備金借出去救急，即便帳面上整個系統不算真的缺錢。</p>
+    <p><b>結果：</b>隔夜附買回利率當天盤中一度飆到10%，聯邦基金有效利率也一度被推出FOMC設定的目標區間之外——這是一次貨幣政策傳導機制的<b>技術性失靈</b>，不是經濟基本面出問題，純粹是短期資金管線塞車。</p>
+    <p><b>Fed的應對與後續制度改革：</b>9月17日當天緊急注入大量隔夜及定期回購資金滅火；10月起宣布重新每月購買約600億美元國庫券，並特別聲明「這不是QE」；2021年進一步成立常設回購工具（SRF），讓銀行和交易商缺現金時隨時能用固定利率跟Fed借錢，不用再靠市場自己撮合——徹底杜絕2019年那種「系統不缺錢、但銀行不願意借」導致利率失控飆升的情況。這個購債計畫只撐了約五個月，就被2020年3月疫情引發的大規模QE吸收掉了。</p>
+    <p class="muted">這正是現在Fed對準備金充裕與否高度敏感、動輒用準備金管理性購債做小額微調的原因：2019年的教訓是，等危機真正爆發才處理已經太晚，必須在指標剛開始惡化時就搶先出手——這也是為什麼2025年底準備金一下滑，Fed幾乎立刻啟動購債補水位，不敢像2019年那樣一路縮表縮到出事才反應。</p>
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 980 250" role="img" aria-label="時間軸：2017至2019年QT持續縮表；2019年9月16至17日回購利率飆破10%；2019年10月Fed宣布每月購買600億美元國庫券並聲明這不是QE；2020年3月疫情爆發後併入大規模QE，非QE購債計畫約維持五個月；2021年成立常設回購工具SRF；2025年12月QT正式結束；2026年準備金管理性購債持續進行中。">
+          <line x1="60" y1="140" x2="920" y2="140" stroke="var(--border)" stroke-width="2"></line>
+
+          <circle cx="100" cy="140" r="5" fill="var(--ink-faint)"></circle>
+          <text x="100" y="118" text-anchor="middle" font-size="11" fill="var(--ink-muted)">2017–19</text>
+          <text x="100" y="102" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">QT持續縮表</text>
+
+          <circle cx="280" cy="140" r="6" fill="var(--bad)"></circle>
+          <text x="280" y="118" text-anchor="middle" font-size="11" fill="var(--ink-muted)">2019/9/16–17</text>
+          <text x="280" y="102" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--bad)">回購利率飆破10%</text>
+
+          <circle cx="460" cy="140" r="6" fill="var(--accent)"></circle>
+          <text x="460" y="162" text-anchor="middle" font-size="11" fill="var(--ink-muted)">2019/10</text>
+          <text x="460" y="178" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">每月$600億購T-bill</text>
+          <text x="460" y="192" text-anchor="middle" font-size="10.5" fill="var(--ink-faint)">聲明「這不是QE」</text>
+
+          <path d="M460,205 L460,213 L640,213 L640,205" fill="none" stroke="var(--accent)" stroke-width="1.3"></path>
+          <text x="550" y="230" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--accent-strong)">≈ 5個月後被併入QE</text>
+
+          <circle cx="640" cy="140" r="6" fill="var(--accent-strong)"></circle>
+          <text x="640" y="118" text-anchor="middle" font-size="11" fill="var(--ink-muted)">2020/3</text>
+          <text x="640" y="102" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">疫情爆發，併入大規模QE</text>
+
+          <circle cx="760" cy="140" r="5" fill="var(--ink-faint)"></circle>
+          <text x="760" y="162" text-anchor="middle" font-size="11" fill="var(--ink-muted)">2021</text>
+          <text x="760" y="178" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">SRF常設回購成立</text>
+
+          <circle cx="850" cy="140" r="5" fill="var(--ink-faint)"></circle>
+          <text x="850" y="118" text-anchor="middle" font-size="11" fill="var(--ink-muted)">2025/12</text>
+          <text x="850" y="102" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">QT正式結束</text>
+
+          <circle cx="920" cy="140" r="6" fill="var(--accent)"></circle>
+          <circle cx="920" cy="140" r="10" fill="none" stroke="var(--accent)" stroke-width="1.2" opacity="0.5"></circle>
+          <text x="920" y="162" text-anchor="middle" font-size="11" fill="var(--ink-muted)">2026</text>
+          <text x="920" y="178" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">準備金管理性購債</text>
+          <text x="920" y="192" text-anchor="middle" font-size="10.5" fill="var(--ink-faint)">持續進行中</text>
+        </svg>
+      </div>
+      <figcaption>2019年那次購債，官方定調為「準備金管理性購買」而非QE——跟2025–26年這輪用的是同一套說法，但2019年是被外部衝擊（疫情）打斷，不是自然執行完畢。</figcaption>
+    </figure>
+
+    <h3>Miran與Roubini 2024年聯署論文：「激進財政部發行操作」（ATI）</h3>
+    <p>論文批評的做法，正是財政部在高赤字期間刻意多發短債、少發長債，人為壓低表面借貸成本、順便刺激短期經濟——本質上是一種「後門財政刺激」。論文警告：一旦某黨開始用ATI在選舉季拉抬經濟，之後每一屆政府都會被迫跟進，形成棘輪效應，侵蝕財政紀律的長期規範。諷刺的是，貝森特當年是耶倫用這招時最直言不諱的批評者之一，如今卻是這套工具用得最猛的財長——§4回購搭配多發短債的資金來源，就是這篇論文點名的操作。</p>
+
+    <h3>2022–2023年資產負債表的財務風險</h3>
+    <p>升息循環中，Fed持有的舊債（QE時代買的，多半殖利率不到2%）利息收入沒變，但要付給銀行的準備金利率（IORB）被推到5%以上，Fed一度轉虧，暫停向財政部繳回盈餘、改記為「遞延資產」的欠條。這件事在政治上被鷹派拿來當武器：Fed資產負債表養得太肥，升息時自己先承擔不必要的利率風險，還牽連財政部收入——這正是§6沃許「貨幣槓鈴」策略的部分理據來源。</p>
+
+    <h3>「變相債務貨幣化」：Fed是不是在幫財政部融資？</h3>
+    <p>這其實是一個光譜，不是是非題。一端是教科書式的獨立央行——買賣債券只考慮物價穩定，完全不管財政部的融資成本；另一端是「財政主導（fiscal dominance）」——央行的動作事實上被政府融資需求綁架，必要時甚至犧牲物價穩定。現實中的爭議在於：貝森特那頭的財政工具越來越積極，Fed這頭「準備金管理性購債」名義上只是技術性维护，但規模與時機是否也開始隱隱配合財政部的融資節奏——這條界線，正是市場緊盯Fed每一次購債聲明的原因。</p>
+
+    <h3>未來升息循環：利息負擔的連鎖效應<span class="tag">FIG. 06</span></h3>
+    <p>本財年迄今利息支出已達<b>$1.17兆</b>，年增<b>15%</b>——這個數字不需要新增一分錢赤字支出就會自己往上滾，純粹是舊債用2%以下利率發的，現在得用4.7%～5.3%的利率展期。</p>
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 700 460" role="img" aria-label="利息與赤字的自我強化循環：舊債到期後按現在更高的利率展期，導致利息支出增加，即使支出不變也會使赤字擴大，赤字擴大代表財政部需要發行更多新債，而更多新債的供給壓力可能進一步推升殖利率，讓下一輪展期的利率更高，循環繼續。">
+          <rect x="240" y="20" width="220" height="70" rx="9" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="350" y="48" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)">① 舊債到期</text>
+          <text x="350" y="65" text-anchor="middle" font-size="10.5" fill="var(--ink-muted)">按現在更高利率展期</text>
+
+          <rect x="470" y="195" width="220" height="70" rx="9" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="580" y="223" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)">② 利息支出增加</text>
+          <text x="580" y="240" text-anchor="middle" font-size="10.5" fill="var(--bad)">年增15%・$1.17兆</text>
+
+          <rect x="240" y="370" width="220" height="70" rx="9" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="350" y="398" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)">③ 赤字擴大</text>
+          <text x="350" y="415" text-anchor="middle" font-size="10.5" fill="var(--ink-muted)">即使支出不變</text>
+
+          <rect x="10" y="195" width="220" height="70" rx="9" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="120" y="223" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)">④ 需再發更多新債</text>
+          <text x="120" y="240" text-anchor="middle" font-size="10.5" fill="var(--ink-muted)">供給壓力可能推升殖利率</text>
+
+          <circle cx="350" cy="230" r="55" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.3"></circle>
+          <text x="350" y="222" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--accent-strong)">利息—赤字</text>
+          <text x="350" y="238" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--accent-strong)">螺旋</text>
+
+          <path d="M460,88 Q560,120 578,193" fill="none" stroke="var(--ink-muted)" stroke-width="1.5" marker-end="url(#arrow-ink)"></path>
+          <path d="M580,267 Q560,340 462,378" fill="none" stroke="var(--ink-muted)" stroke-width="1.5" marker-end="url(#arrow-ink)"></path>
+          <path d="M238,388 Q140,340 122,267" fill="none" stroke="var(--ink-muted)" stroke-width="1.5" marker-end="url(#arrow-ink)"></path>
+          <path d="M122,193 Q140,120 238,90" fill="none" stroke="var(--ink-muted)" stroke-width="1.5" marker-end="url(#arrow-ink)"></path>
+        </svg>
+      </div>
+      <figcaption>這是一個自我強化的迴圈：打斷它需要經濟成長跑贏利率，或政治上真正削減赤字——目前財政部用的回購、干預工具，都還沒有真正動到這兩個變數，只是延後市場對它做出反應的時間。</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ SECTION 6 ============ -->
+  <section id="s6">
+    <h2><span class="sec-n">06 ／</span>貝森特與沃許：動機分析<span class="tag">FIG. 07</span></h2>
+    <p>把前五節的機制對照起來看，貝森特跟沃許上任後的一連串動作，其實是財政工具與貨幣工具在同一個問題上互相拉扯——都在回答「誰該為壓不下去的長端殖利率讓步」。</p>
+
+    <h3>SLR鬆綁：直接對應§2的銀行資產負債表容量</h3>
+    <p>§2提過，SLR不分風險高低，公債和準備金占用的額度跟高風險貸款一樣多——這代表QE時代灌進銀行體系的準備金、加上財政部狂發的公債，會同步擠壓銀行的SLR空間，即便銀行想多接一些公債做市，也可能被SLR卡住。貝森特和Fed副主席鮑曼力推的「強化版SLR（eSLR）」調整規則已經在2025年底拍板、2026年4月1日正式生效——即使沒有把公債完全排除在分母外，也大幅放寬了大型銀行（GSIB）的強化緩衝要求，方向與貝森特原本主張一致：讓SLR不再是銀行的主要束縛。</p>
+    <p>這跟§4的回購、§1的干預，其實是同一個目標的三支箭：<b>回購</b>減少市場現在要消化的長債<b>存量</b>；<b>發債訊號</b>與<b>SLR鬆綁</b>則是分別從發行端與買方容量端，降低單位公債推升殖利率的力道。批評者的顧慮也很直接：SLR是2008年後刻意設計的「不看風險、一刀切」的槓桿上限，用意就是防止銀行再用「這資產很安全」當理由無限擴表——現在為了消化政府自己的巨量發債而鬆綁這條線，等於重新打開那道曾被刻意焊死的閥門。</p>
+
+    <div class="versus">
+      <div class="v-card a">
+        <p class="v-title">財政部（貝森特）的工具箱</p>
+        <ul>
+          <li>擴大回購長債，直接減少市場要消化的存量</li>
+          <li>暗示削減長債發行，改變未來供給預期</li>
+          <li>聯合日本干預日圓，保住海外最大買家的需求</li>
+          <li>推動SLR鬆綁，擴大銀行接單容量</li>
+        </ul>
+      </div>
+      <div class="v-card b">
+        <p class="v-title">Fed（沃許）的姿態</p>
+        <ul>
+          <li>取消前瞻指引，不再對市場預先承諾路徑</li>
+          <li>提出「貨幣槓鈴」，目標更激進地縮表</li>
+          <li>成立task force重新檢視資產負債表的政策角色</li>
+          <li>堅持充裕框架的「被動維護」定位，避免被解讀成配合財政</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>「貨幣槓鈴（Monetary Barbell）」策略</h3>
+    <p>沃許主張的槓鈴式操作，一端是務實、保持彈性的短率管理（IORB／FFR這個常規工具），另一端是刻意<b>更激進的縮表</b>——用意是把「短期利率」跟「資產負債表規模」這兩個原本被視為同一件事的工具重新拆開，讓縮表本身也變成一個獨立、主動的緊縮手段，而不只是被動的準備金管理。動機包括：縮小資產負債表能減少市場扭曲、降低Fed自己的利率風險曝險（避免重演§5的2022–23虧損）、以及在貝森特一連串積極動作之下，用「更小、更瘦」的Fed重新劃清貨幣與財政的界線。但這裡有個沃許自己也要面對的矛盾：儘管他方向上想更激進縮表，資產負債表實際上卻從2025年12月的6.5兆回升到2026年8月的6.75兆——因為「充裕準備金框架」本身的技術邏輯（避免重演2019年回購危機）逼著他還是得買債補水位。槓鈴策略的鷹派企圖，正撞上這套操作框架自身的維護需求。</p>
+
+    <h3>到底是聯邦基金利率還是資產負債表活動在真正驅動貨幣政策？</h3>
+    <p>2008年後的主流共識，是把資產負債表當成純粹的「水電維修」——真正決定貨幣政策鬆緊的只有IORB這個利率，QE／QT只在利率已經降到零、沒有更多空間時才會拿出來用，不是常態化的獨立工具。沃許讓task force重新檢視「到底是FFR還是資產負債表規模在驅動政策」，等於在挑戰這個共識——如果資產負債表規模本身被重新定義成一個獨立、主動的緊縮/寬鬆手段，那麼即便利率不變，Fed也可能透過主動調控資產負債表規模來收緊或放鬆金融條件。這個問題目前還沒有答案，但利害關係很大：一旦資產負債表被提升為主動政策工具，未來每一次「準備金管理性購債」都可能被沃許自己的框架解讀成一次貨幣寬鬆決策，而不只是技術性的水位維護——這會讓Fed在配合財政部訴求上變得更加謹慎、更不願意讓步，讓§1到§5描述的這場拉扯進一步升溫。</p>
+
+    <figure>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 960 420" role="img" aria-label="拔河示意圖：財政部（貝森特）用回購、縮短發債、外匯干預、SLR鬆綁把長端殖利率拉向寬鬆；Fed（沃許）用取消前瞻指引、貨幣槓鈴、激進縮表目標、重新定義資產負債表角色把長端殖利率拉向緊縮與獨立性；截至2026年，30年期殖利率仍在19年高點附近，勝負未分。">
+          <rect x="380" y="100" width="200" height="64" rx="9" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="480" y="126" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">長端殖利率／市場信心</text>
+          <text x="480" y="144" text-anchor="middle" font-size="10" fill="var(--ink-faint)">2026：30年期仍在19年高點附近</text>
+
+          <line x1="480" y1="164" x2="480" y2="198" stroke="var(--ink-muted)" stroke-width="1.4"></line>
+          <circle cx="480" cy="210" r="11" fill="var(--accent)"></circle>
+
+          <line x1="150" y1="210" x2="474" y2="210" stroke="var(--accent)" stroke-width="3" marker-end="url(#arrow-accent)"></line>
+          <text x="310" y="196" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent-strong)">壓低殖利率的拉力</text>
+
+          <line x1="486" y1="210" x2="810" y2="210" stroke="var(--bad)" stroke-width="3" marker-end="url(#arrow-bad)"></line>
+          <text x="650" y="196" text-anchor="middle" font-size="11" font-weight="700" fill="var(--bad)">維持獨立信譽的拉力</text>
+
+          <rect x="40" y="250" width="300" height="150" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"></rect>
+          <text x="190" y="278" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--ink)">財政部（貝森特）</text>
+          <text x="190" y="296" text-anchor="middle" font-size="10.5" fill="var(--accent-strong)">拉向寬鬆</text>
+          <text x="60" y="320" font-size="11" fill="var(--ink)">・回購長債</text>
+          <text x="60" y="338" font-size="11" fill="var(--ink)">・縮短長債發行</text>
+          <text x="60" y="356" font-size="11" fill="var(--ink)">・聯合日圓干預</text>
+          <text x="60" y="374" font-size="11" fill="var(--ink)">・推動SLR鬆綁</text>
+
+          <rect x="620" y="250" width="300" height="150" rx="10" fill="var(--surface-2)" stroke="var(--border)"></rect>
+          <text x="770" y="278" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--ink)">Fed（沃許）</text>
+          <text x="770" y="296" text-anchor="middle" font-size="10.5" fill="var(--bad)">拉向緊縮／獨立性</text>
+          <text x="640" y="320" font-size="11" fill="var(--ink)">・取消前瞻指引</text>
+          <text x="640" y="338" font-size="11" fill="var(--ink)">・貨幣槓鈴／激進QT目標</text>
+          <text x="640" y="356" font-size="11" fill="var(--ink)">・task force重議平衡表角色</text>
+          <text x="640" y="374" font-size="11" fill="var(--ink)">・堅持準備金框架被動性</text>
+        </svg>
+      </div>
+      <figcaption>兩邊都在使力，但方向相反：財政部的每一項工具都在替市場多爭取一點需求或少一點供給；Fed的每一項工具都在刻意保持距離、不讓自己看起來像在配合財政部。目前的結果——30年期殖利率仍徘徊在19年高點附近——說明這場拔河還沒有分出勝負。</figcaption>
+    </figure>
+  </section>
+
+  <section class="resources">
+    <h2>延伸資源</h2>
+    <ul class="ref-list">
+      <li>
+        <span class="src-tag">NY Fed</span>
+        <a href="https://www.newyorkfed.org/markets/treasury-reinvestments-purchases-faq-200312" target="_blank" rel="noopener">Treasury Reserve Management and Reinvestment Purchases FAQ</a>
+        <span class="src-desc">紐約Fed對「準備金管理性購債」機制最直接的官方問答，說明它跟QE的差異。</span>
+      </li>
+      <li>
+        <span class="src-tag">St. Louis Fed</span>
+        <a href="https://www.stlouisfed.org/publications/page-one-economics/2026/feb/fed-balance-sheet-and-ample-reserves" target="_blank" rel="noopener">The Fed's Balance Sheet and Ample Reserves</a>
+        <span class="src-desc">用淺白方式解釋資產負債表結構與「充裕準備金框架」的判斷邏輯。</span>
+      </li>
+      <li>
+        <span class="src-tag">Federal Reserve</span>
+        <a href="https://www.federalreserve.gov/econres/notes/feds-notes/a-brief-illustrated-history-of-the-federal-reserves-balance-sheet-20260213.html" target="_blank" rel="noopener">A Brief Illustrated History of the Federal Reserve's Balance Sheet</a>
+        <span class="src-desc">Fed官方圖解資產負債表從2008年至今的規模與組成演變。</span>
+      </li>
+      <li>
+        <span class="src-tag">Dallas Fed</span>
+        <a href="https://www.dallasfed.org/news/speeches/logan/2026/lkl260402" target="_blank" rel="noopener">The Banking System and the Demand for Reserves</a>
+        <span class="src-desc">2026年談銀行體系準備金需求與「充裕」下限如何被實際估計。</span>
+      </li>
+      <li>
+        <span class="src-tag">FRED</span>
+        <a href="https://fred.stlouisfed.org/series/WALCL" target="_blank" rel="noopener">Fed總資產（WALCL）</a>
+        <span class="src-desc">聖路易Fed資料庫，可查即時資產負債表總額；同系列還有 RRPONTSYD（ON RRP）、WTREGEN（TGA）、WRESBAL（準備金）等對應數據。</span>
+      </li>
+      <li>
+        <span class="src-tag">American Banker</span>
+        <a href="https://www.americanbanker.com/news/slr-proposal-gives-gsibs-a-capital-break-keeps-treasuries" target="_blank" rel="noopener">SLR proposal gives GSIBs a capital break, keeps Treasuries</a>
+        <span class="src-desc">eSLR規則調整的內容與2026年4月生效時程。</span>
+      </li>
+      <li>
+        <span class="src-tag">Congress.gov / CRS</span>
+        <a href="https://www.congress.gov/crs-product/RS22331" target="_blank" rel="noopener">Foreign Holdings of Federal Debt</a>
+        <span class="src-desc">國會研究處按季更新的美債持有結構報告，含外國持有占比與主要國家明細。</span>
+      </li>
+      <li>
+        <span class="src-tag">Wolf Street</span>
+        <a href="https://wolfstreet.com/2026/04/15/the-largest-foreign-holders-of-us-treasury-securities-and-the-basis-trade-april-2026-update/" target="_blank" rel="noopener">Largest Foreign Holders of US Treasury Securities: April 2026 Update</a>
+        <span class="src-desc">外國持有占比自2011年以來的走勢，以及中國、日本個別持有量的長期變化。</span>
+      </li>
+      <li>
+        <span class="src-tag">PGPF</span>
+        <a href="https://www.pgpf.org/article/the-federal-government-has-borrowed-trillions-but-who-owns-all-that-debt/" target="_blank" rel="noopener">Who Owns All that Debt?</a>
+        <span class="src-desc">聯邦總債務與「對外流通公債」的區分，以及各類持有人的分類說明。</span>
+      </li>
+      <li>
+        <span class="src-tag">U.S. Treasury / TIC</span>
+        <a href="https://ticdata.treasury.gov/resource-center/data-chart-center/tic/Documents/slt_table5.html" target="_blank" rel="noopener">Major Foreign Holders of Treasury Securities（Table 5）</a>
+        <span class="src-desc">財政部官方按月更新的各國持有明細，本報告前十大持有國排名的原始資料來源。</span>
+      </li>
+    </ul>
+  </section>
+
+  <footer>整理自對話中討論的機制與公開資料，金額多為2025年底至2026年初概數，圖中比例為示意，非精算刻度。</footer>
+
+</div>
+
+<div style="max-width:880px; margin:32px auto 64px; padding:0 24px;">
+  <div style="border-top:1px solid #D9DEE4; padding-top:18px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;">
+    <a href="10_顧問銷售實戰NFAB與PREP模型.html" style="font-size:0.86rem; color:#5B6B7A; text-decoration:none;">&larr; 上一堂：第10堂　顧問銷售實戰：NFAB與PREP模型</a>
+    <span style="font-size:0.78rem; color:#8996A3;">債券知識講堂・第11堂（延伸閱讀）</span>
+  </div>
+</div>
