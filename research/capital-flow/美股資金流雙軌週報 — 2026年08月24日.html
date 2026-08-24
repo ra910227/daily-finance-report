@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美股資金流雙軌週報 — 2026年08月24日</title>
+<style>
+  :root {
+    --bg: #ffffff; --bg2: #f7f8fc; --bg3: #eef0f7; --border: #e1e4ee;
+    --text: #1e2233; --text2: #6b7280; --accent: #4f46e5; --accent2: #4338ca;
+    --red: #dc2626; --green: #15803d; --gold: #b45309; --orange: #c2410c;
+    --blue: #2563eb; --purple: #7c3aed; --teal: #0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system,'PingFang TC','Microsoft JhengHei',sans-serif; font-size: 14px; line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #eef2ff 0%, #f7f8fc 50%, #ffffff 100%); padding: 28px 32px 20px; border-bottom: 1px solid var(--accent); }
+  .header h1 { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing:0.3px;}
+  .header .meta { color: var(--text2); font-size: 12px; margin-top: 6px; }
+  .nav { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+  .nav a { font-size:11px; color: var(--accent2); background:#eef2ff; border:1px solid var(--border); padding:4px 10px; border-radius:6px; text-decoration:none; }
+  .summary-box { background: linear-gradient(90deg, #eef2ff 0%, #f7f8fc 100%); border-left: 4px solid var(--accent); margin: 20px 24px; padding: 16px 20px; border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 600; color: var(--text); }
+  .container { padding: 0 24px 40px; }
+  .section { margin-bottom: 32px; scroll-margin-top: 16px; }
+  .section-title { font-size: 16px; font-weight: 700; color: var(--accent2); padding: 10px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; display:flex; align-items:center; gap:8px;}
+  .section-num { background: var(--accent); color:#fff; width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0;}
+  table { width: 100%; border-collapse: collapse; background: var(--bg2); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 10px;}
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  td { padding: 8px 10px; border-bottom: 1px solid var(--border); font-size: 12.5px; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #eef2ff; }
+  .code { font-family: monospace; font-weight: 700; color: var(--blue); font-size: 13px; }
+  .up { color: var(--red); font-weight:700; }
+  .dn { color: var(--green); font-weight:700; }
+  .gap { color: var(--text2); font-style: italic; }
+  .badge { font-size: 10.5px; padding: 2px 7px; border-radius: 4px; display: inline-block; white-space:nowrap;}
+  .b-warn { background: #fef2f2; color: var(--red); }
+  .b-ok { background: #f0fdf4; color: var(--green); }
+  .b-mix { background: #fffbeb; color: var(--gold); }
+  .b-gap { background: #f7f8fc; color: var(--text2); border:1px dashed var(--border); }
+  .b-new { background:#eef2ff; color: var(--accent2); border:1px solid var(--accent2);}
+  .alert-box { background: #fff4ec; border: 1px solid #f0c199; border-radius: 10px; padding: 14px 16px; margin-top: 10px; }
+  .alert-box h4 { color: var(--orange); font-size: 13px; margin-bottom: 8px; }
+  .ok-box { background: #f0fdf4; border: 1px solid #bfe8cc; border-radius: 10px; padding: 14px 16px; margin-top: 10px; }
+  .ok-box h4 { color: var(--green); font-size: 13px; margin-bottom: 8px; }
+  .gap-box { background: #f7f8fc; border: 1px dashed var(--border); border-radius: 10px; padding: 14px 16px; margin-top: 10px;}
+  .gap-box h4 { color: var(--text2); font-size: 13px; margin-bottom: 8px; }
+  .gap-box ul, .ok-box ul, .alert-box ul { padding-left: 18px; font-size: 12.5px; }
+  .gap-box li { color: var(--text2); padding: 3px 0; }
+  .interp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .interp-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .interp-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--accent2); }
+  .interp-card p { font-size: 12.5px; color: var(--text2); }
+  .verdict-box { background: linear-gradient(90deg,#f5f0ff,#ffffff); border:1px solid var(--purple); border-radius:10px; padding:16px 20px; margin-top:14px;}
+  .verdict-box h4 { color: var(--purple); font-size:14px; margin-bottom:10px;}
+  .verdict-box p { font-size:13px; color:var(--text); line-height:1.8;}
+  .src { font-size: 10.5px; color: var(--text2); margin-top: 4px; }
+  .footer { background: var(--bg3); border-top: 1px solid var(--border); padding: 14px 24px; font-size: 11px; color: var(--text2); }
+  .footer .warn { color: var(--orange); }
+  @media (max-width: 768px) { .interp-grid { grid-template-columns: 1fr; } .container { padding: 0 12px 40px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>美股資金流雙軌週報 <span class="badge b-new">第14期</span></h1>
+  <div class="meta">2026年08月24日｜每週固定報告（週一、週四）｜資料擷取：08/24台北時間，各表已標示原始統計日期</div>
+  <div class="nav">
+    <a href="#s1">①總體資金流</a><a href="#s2">②ETF資金流</a><a href="#s3">③CFTC COT</a><a href="#s4">④台灣外資</a><a href="#s5">⑤七大巨頭</a><a href="#s6">⑥綜合研判</a><a href="#s7">⑦方法論</a>
+  </div>
+</div>
+
+<div class="summary-box">
+  本期最需留意：①FINRA融資餘額來源分歧本期獲得解決：FINRA官方頁面確認7月官方值為$1.417兆，較6月$1.502兆下滑-5.65%，為近期首見的官方MoM下滑，先前媒體引用的$1.53兆創新高說法未獲證實 ②ETF資金流08/17-08/21延續上期轉弱格局但內部分化加劇：SPY(-1.37%)/QQQ(-2.41%)持續收黑，半導體SOXX(-5.52%)、SMH(-4.66%)續居跌幅前列，惟關鍵金屬COPX逆勢暴衝+10.37%，為本系列開報以來單週最大漲幅 ③CFTC COT新一週(08/18)資料出爐：S&amp;P500與Nasdaq同步下跌，惟槓桿基金反應分歧——S&amp;P500 Lev Funds續小幅加空(打破下跌週回補慣例)，Nasdaq Lev Funds同步大幅回補(符合慣例) ④台灣外資08/20-08/21連續2日買超但力道溫和，3日累計由-81.78億回升至-60.16億，尚未脫離負值，未再觸發任何閾值 ⑤七大巨頭Put/Call量比全數重新查詢，MSFT由上期異常值0.20回升至0.57，驗證上期「08/21月度到期日雜訊」假說 ⑥中國CPI驟降至0.5%(前值1.0%)，帶動PBOC實質利率擴大至約+2.50%(前值+2.00%)，四大央行中唯一擴大的正實質利率。
+</div>
+
+<div class="container">
+
+  <div class="section" id="s1">
+    <div class="section-title"><span class="section-num">1</span>美股整體資金流</div>
+    <table>
+      <tr><th>週結束日</th><th>總淨流量</th><th>股票型</th><th>債券型</th><th>ETF淨發行</th><th>備註</th></tr>
+      <tr><td>07/29</td><td class="up">+220.3億</td><td class="up">+172.0億</td><td class="up">+63.3億</td><td class="up">+465.0億</td><td>股票型由連續2週流出轉為大幅流入，轉折確認</td></tr>
+      <tr><td>08/05</td><td class="up">+272.8億</td><td class="up">+85.2億</td><td class="up">+196.8億</td><td class="up">+437.0億</td><td>股票型連續第2週流入，惟規模較07/29明顯收斂；債券型流入居近5週次高</td></tr>
+      <tr><td>08/12</td><td class="up">+173.9億</td><td class="dn">-44.1億</td><td class="up">+196.5億</td><td class="up">+342.1億</td><td>股票型由連續2週流入轉為單週流出，為07/22以來首次流出轉折；債券型與ETF淨發行仍維持強勁，總淨流量靠債券與ETF撐住轉正</td></tr>
+      <tr><td class="gap">08/19</td><td class="gap">—</td><td class="gap">—</td><td class="gap">—</td><td class="gap">—</td><td class="gap">尚未公布，ICI每週三公布，本期查詢時仍為08/12當週最新，預計08/26公布08/19當週資料</td></tr>
+    </table>
+    <table>
+      <tr><th>指標</th><th>最新數值</th><th>統計期間</th></tr>
+      <tr><td>FINRA融資餘額(Margin Debt)</td><td class="dn">$1.417兆美元（本期改採FINRA官方頁面直接查詢確認，較6月$1.502兆下滑-5.65%，解決上期GuruFocus($1.417兆) vs 媒體引用($1.53兆)的來源分歧，確認官方數字為$1.417兆而非後者）</td><td>2026年7月（FINRA官方公告，約於參考月份後第3週發布）</td></tr>
+      <tr><td>美國M2貨幣供給</td><td>$23.29兆美元（沿用上期07/06週值；FRED M2SL月頻值下次公布為08/25，屆時將更新7月官方值）</td><td>2026年07月06日當週</td></tr>
+      <tr><td>融資餘額／美國M2</td><td class="dn">6.08%（較上期6.45%回落，反映FINRA官方數字下修，惟分母M2尚未更新）</td><td>比率由歷史高位小幅降溫，槓桿相對貨幣基礎的壓力略減</td></tr>
+      <tr><td>美股總市值(Wilshire5000)</td><td>$76.97兆美元（沿用08/18查詢值，本期查無更新數字；惟大盤08/21續小幅走弱，實際市值可能已進一步略降）</td><td>2026/08/18（沿用）</td></tr>
+      <tr><td>四大央行(Fed/ECB/BOJ/PBOC)M2合計</td><td>約$98.6兆美元（估算，沿用上期，各國口徑不一+匯率波動，僅供參考）</td><td>2026年上半年</td></tr>
+      <tr><td>美股市值／四大央行M2</td><td>約78.07%（與上期78.08%基本持平，兩項分子分母皆未更新）</td><td>全球流動性角度的另一種「巴菲特指標」</td></tr>
+    </table>
+    <table>
+      <tr><th>央行</th><th>政策利率</th><th>CPI年增率</th><th>實質利率</th><th>解讀</th></tr>
+      <tr><td>Fed(美國)</td><td>3.50–3.75%（07/29例會維持不變，沿用上期，下次例會9月16日）</td><td>3.4%(7月，與上期持平)</td><td>約+0.23%</td><td>與上期持平，維持觀察</td></tr>
+      <tr><td>ECB(歐元區)</td><td>2.25%（06/17起維持不變，沿用上期，下次例會9月）</td><td class="up">2.9%(7月，較6月2.8%略升)</td><td class="dn">約-0.65%</td><td>負實質利率較上期(-0.55%)略為加深</td></tr>
+      <tr><td>BOJ(日本)</td><td>1.00%（08月例會8:1票數維持不變，1席主張升息至1.25%）</td><td>1.6%(東京核心CPI，與上期持平)</td><td class="dn">約-0.60%</td><td>BOJ會後強調下半財年(9月起)核心通膨可能「明顯超過2%」，9月升息預期未消退</td></tr>
+      <tr><td>PBOC(中國)</td><td>1年期LPR 3.00%（連續第16個月不變，沿用上期）</td><td class="dn">0.5%(7月，較6月1.0%明顯回落)</td><td class="up">約+2.50%</td><td>四大央行中唯一擴大的正實質利率，CPI降溫為主要驅動</td></tr>
+    </table>
+    <div class="src">本期實質更新項目：FINRA融資餘額(改採官方頁面查證，$1.417兆，解決上期來源分歧)、ECB CPI(2.8%→2.9%)、PBOC CPI(1.0%→0.5%，帶動實質利率擴大至+2.50%)、BOJ政策會議結果(8:1票數維持不變)。ICI新一週(08/19)、美國M2(7月官方值)、Wilshire5000本期查無更新，沿用上期。</div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-title"><span class="section-num">2</span>ETF資金流（近期交易日，08/17–08/21）</div>
+    <table>
+      <tr><th>ETF</th><th>類別</th><th>08/17收盤</th><th>08/21收盤</th><th>期間累計%</th><th>成交額合計(08/17-08/21，5個交易日)</th><th>備註</th></tr>
+      <tr><td class="code">SPY</td><td>大盤</td><td>776.34</td><td>765.72</td><td class="dn">-1.37%</td><td>1457.34億</td><td>連續第2期收黑，惟跌幅較上期(-0.94%)略擴大</td></tr>
+      <tr><td class="code">QQQ</td><td>大盤/科技</td><td>731.07</td><td>713.44</td><td class="dn">-2.41%</td><td>1214.96億</td><td>連續第2期收黑，跌幅較上期(-2.05%)持續擴大</td></tr>
+      <tr><td class="code">IWM</td><td>大盤(小型股)</td><td>305.09</td><td>299.96</td><td class="dn">-1.68%</td><td>253.39億</td><td></td></tr>
+      <tr><td class="code">SMH</td><td>半導體</td><td>587.82</td><td>560.42</td><td class="dn">-4.66%</td><td>245.91億</td><td>連續第2期領跌族群之一，惟跌幅較上期(-4.58%)大致持平</td></tr>
+      <tr><td class="code">SOXX</td><td>半導體</td><td>550.42</td><td>520.05</td><td class="dn">-5.52%</td><td>185.28億</td><td>連續第2期十檔中跌幅最深</td></tr>
+      <tr><td class="code">XLK</td><td>科技</td><td>190.01</td><td>183.31</td><td class="dn">-3.53%</td><td>58.15億</td><td>跌幅與上期(-3.35%)相近</td></tr>
+      <tr><td class="code">XLF</td><td>金融</td><td>58.16</td><td>57.48</td><td class="dn">-1.17%</td><td>93.60億</td><td>與上期跌幅完全持平</td></tr>
+      <tr><td class="code">XLE</td><td>能源</td><td>61.91</td><td>63.64</td><td class="up">+2.80%</td><td>80.14億</td><td>連續第4期收紅，漲幅與上期(+2.70%)大致持平</td></tr>
+      <tr><td class="code">COPX</td><td>關鍵金屬(銅礦)</td><td>85.70</td><td>94.59</td><td class="up">+10.37%</td><td>14.38億</td><td>本系列開報以來單週最大漲幅，由上期溫和收紅(+3.01%)大幅加速</td></tr>
+      <tr><td class="code">REMX</td><td>關鍵金屬(稀土)</td><td>78.55</td><td>80.75</td><td class="up">+2.80%</td><td>2.93億</td><td>由上期收黑(-3.26%)轉為收紅，與COPX同步走強</td></tr>
+    </table>
+    <div class="src">期間累計%以收盤價計算(08/17收盤至08/21收盤)；成交額合計涵蓋08/17-08/21共5個交易日(每日板塊流動報告CSV數據，08/21資料由每日排程08/24因故障以08/21收盤價補記，經核對數字一致)；此為「成交額×漲跌方向」代理指標，粗略反映交易熱度與資金傾向，並非真實申贖流量。</div>
+    <div class="alert-box">
+      <h4>⚠ 大盤與科技股連續2期收黑且跌幅擴大，惟關鍵金屬類別逆勢暴衝，內部分化為本期最大特徵</h4>
+      本期(08/17→08/21)延續上期(08/17-08/20)的全面轉弱格局：SPY(-1.37%)、QQQ(-2.41%)跌幅較上期(-0.94%/-2.05%)進一步擴大，顯示大盤修正尚未止穩；半導體SOXX(-5.52%)、SMH(-4.66%)連續第2期居跌幅前列，惟本期跌幅較上期大致持平而非加速惡化，顯示半導體賣壓可能已開始鈍化。真正的異常訊號來自關鍵金屬類別：COPX本期暴衝+10.37%，為本系列報告開報以來單週最大單一漲幅，較上期溫和的+3.01%明顯加速；REMX亦由上期收黑(-3.26%)轉為收紅(+2.80%)，兩檔同步走強顯示資金對銅礦與稀土等關鍵金屬的追捧並非單一個股事件，而是類別性的資金流向。能源XLE延續穩定上漲格局(+2.80%，與上期+2.70%持平)。整體觀察，大盤/科技持續承壓、半導體跌勢鈍化、關鍵金屬加速走強三者並存，顯示本期資金並非單純的風險趨避，而更像是從高估值科技股/半導體向具備供需題材(銅礦/稀土戰略金屬需求)的實物資產類別輪動，此輪動是否延續需觀察下期COPX/REMX是否維持動能，或僅為單週噴出後隨即拉回。
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-title"><span class="section-num">3</span>CFTC COT期貨部位 × 指數關係</div>
+    <table>
+      <tr><th>統計日</th><th>SPY收盤</th><th>SPY週漲跌</th><th>S&amp;P500 Lev Funds淨部位</th><th>週變化</th></tr>
+      <tr><td>08/04</td><td>757.67</td><td class="up">+2.51%</td><td class="dn">-329,999</td><td class="dn">轉為加空 -32,523</td></tr>
+      <tr><td>08/11</td><td>773.03</td><td class="up">+2.03%</td><td class="dn">-280,446</td><td class="up">逆勢大幅回補 +49,553</td></tr>
+      <tr><td>08/18</td><td>767.45</td><td class="dn">-0.72%</td><td class="dn">-281,402</td><td class="dn">小幅加空 -956</td></tr>
+    </table>
+    <table>
+      <tr><th>統計日</th><th>QQQ收盤</th><th>QQQ週漲跌</th><th>Nasdaq Lev Funds淨部位</th><th>週變化</th></tr>
+      <tr><td>08/04</td><td>700.07</td><td class="up">+2.63%</td><td class="dn">-78,333</td><td class="dn">加空 -20,035</td></tr>
+      <tr><td>08/11</td><td>720.87</td><td class="up">+2.97%</td><td class="dn">-89,125</td><td class="dn">續加空 -10,792</td></tr>
+      <tr><td>08/18</td><td>717.51</td><td class="dn">-0.47%</td><td class="dn">-61,771</td><td class="up">大幅回補 +27,354</td></tr>
+    </table>
+    <div class="alert-box">
+      <h4>⚠ 08/18當週：S&amp;P500與Nasdaq同步下跌，惟槓桿基金反應方向分歧</h4>
+      08/18當週資料顯示，S&amp;P500與Nasdaq現貨雙雙轉跌(SPY -0.72%、QQQ -0.47%)，結束連續2週(08/04、08/11)的上漲格局。依照本系列建立的結構性對沖判讀原則，「下跌週回補、上漲週加空」為Leveraged Funds(CTA/避險基金代理)的常態行為，本期兩個合約的實際反應卻出現分歧：Nasdaq Lev Funds淨部位由-89,125大幅回補至-61,771(+27,354)，符合下跌週回補的常態；S&amp;P500 Lev Funds淨部位卻由-280,446續小幅加空至-281,402(-956)，打破下跌週應回補的慣例。惟需留意S&amp;P500本期的加空幅度極小(僅956口，相對總空頭部位447,693口不到0.3%)，較可能反映部位大致持平而非真實方向性轉空；相對地Nasdaq的回補幅度(27,354口)遠大於現貨-0.47%的溫和跌幅，回補力道略顯不成比例。兩個合約OI變動皆屬正常波動(S&amp;P500 -2.22%、Nasdaq +5.40%)，非季度展倉月，數據可信度無虞。整體而言，本期COT分歧程度小於08/11當週(S&amp;P500逆勢大幅回補+49,553 vs Nasdaq續加空-10,792的鮮明分歧)，較接近「大致持平、方向微幅分歧」而非「明確反向操作」，建議下期(08/25公布)資料出爐後觀察分歧是否收斂或擴大。
+    </div>
+    <div class="src">來源：CFTC官方Socrata API逐週查詢。下一週(08/25當週)資料預計08/29(週五)公布。SPY/QQQ收盤價為對應CFTC報告日(週二)當日收盤價。</div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-title"><span class="section-num">4</span>台灣外資買賣超週紀錄</div>
+    <table>
+      <tr><th>日期</th><th>外資買賣超</th><th>3日累計</th><th>閾值標註</th><th>備註</th></tr>
+      <tr><td>08/17</td><td class="up">+454.47億</td><td class="up">+1664.93億</td><td><span class="badge b-warn">趨勢改變(3日累計觸發)</span></td><td>單日買超延續前期動能，3日累計連續第2次突破1100億</td></tr>
+      <tr><td>08/18</td><td class="dn">-119.86億</td><td class="dn">+788.12億</td><td></td><td>由買轉賣，未觸及閾值</td></tr>
+      <tr><td>08/19</td><td class="dn">-416.39億</td><td class="dn">-81.78億</td><td></td><td>連續第2個交易日淨賣超，3日累計由正轉負</td></tr>
+      <tr><td>08/20</td><td class="up">+73.18億</td><td class="dn">-463.07億</td><td></td><td>連續2日賣超後轉為小幅買超，未觸及閾值，3日累計(08/18-08/20)仍為負值，賣超動能尚未完全消化</td></tr>
+      <tr><td>08/21</td><td class="up">+283.05億</td><td class="dn">-60.16億</td><td></td><td>連續第2個交易日淨買超，力道較08/20增強，3日累計(08/19-08/21)回升至-60.16億，接近轉正但尚未脫離08/18-08/19賣超影響</td></tr>
+    </table>
+    <div class="ok-box">
+      <h4>✓ 連續2日買超收斂負值缺口，惟尚未確認反轉為正，未再觸發任何閾值</h4>
+      延續上期(08/18-08/19)連續2日賣超(合計-536.25億)導致3日累計由正轉負的格局，本期08/20、08/21轉為連續2個交易日淨買超(+73.18億、+283.05億)，力道逐步增強，帶動3日累計由08/19的-81.78億、經08/20的-463.07億(此為08/18-08/20三日窗口，仍受08/18-08/19兩日大額賣超拖累)，回升至08/21的-60.16億(08/19-08/21窗口，已排除08/18最大單日賣超)。整體觀察，買超力道尚屬溫和(單日最高283.05億，遠低於700億注意閾值)，3日累計雖收斂但仍為負值，顯示08/18-08/19的賣超影響尚未完全消化，距離確認买超動能重新轉為主導仍需下週資料驗證。本期未觸發700億/1100億任何閾值，波動度較08/13-08/19一週明顯降溫。
+    </div>
+    <div class="src">來源：TWSE官方 BFI82U逐日查詢。08/24(當週交易日)查詢時尚未公布資料，留待下期補齊。</div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-title"><span class="section-num">5</span>七大巨頭資金流代理指標（08/24查詢更新）</div>
+    <table>
+      <tr><th>個股</th><th>Put/Call量比</th><th>Put/Call未平倉比</th><th>籌碼解讀</th><th>13F機構動向</th></tr>
+      <tr><td class="code">NVDA</td><td class="up">0.55</td><td class="up">0.82</td><td><span class="badge b-ok">量比與上期(0.55)完全持平，維持偏多</span></td><td class="gap">沿用上期(來源分歧，建議以官方SEC 13F公告為準)</td></tr>
+      <tr><td class="code">AAPL</td><td class="up">0.51</td><td class="up">0.71</td><td><span class="badge b-ok">量比由上期0.43升至0.51，仍在偏多區間但偏多程度略降</span></td><td>Q2'26(截至06/30)機構總持股93.64億股，沿用上期查詢</td></tr>
+      <tr><td class="code">MSFT</td><td class="up">0.57</td><td class="up">0.51</td><td><span class="badge b-ok">量比由上期異常值0.20回升至0.57，驗證上期「08/21月度到期日雜訊」假說，籌碼解讀回歸偏多常態</span></td><td class="gap">數字未核實不採信</td></tr>
+      <tr><td class="code">GOOGL</td><td class="up">0.54</td><td class="up">0.69</td><td><span class="badge b-ok">量比由上期0.39升至0.54，仍維持偏多但程度略降</span></td><td class="gap">未查到</td></tr>
+      <tr><td class="code">AMZN</td><td class="up">0.46</td><td class="up">0.71</td><td><span class="badge b-ok">量比由上期異常值0.29回升至0.46，同樣印證到期日雜訊假說</span></td><td class="gap">未查到</td></tr>
+      <tr><td class="code">META</td><td class="up">0.50</td><td class="up">0.45</td><td><span class="badge b-ok">量比由上期0.41升至0.50，仍維持偏多</span></td><td class="gap">未查到</td></tr>
+      <tr><td class="code">TSLA</td><td class="up">0.58</td><td class="up">0.76</td><td><span class="badge b-ok">量比與上期(0.57)基本持平</span></td><td class="gap">未查到</td></tr>
+    </table>
+    <div class="src">Put/Call為08/24盤中查詢數據，會隨盤中變動；AAPL 13F沿用上期Q2'26(截至06/30)申報，13F為季度頻率本期不重查。</div>
+    <div class="ok-box">
+      <h4>✓ 上期MSFT/AMZN異常值獲得驗證性回歸，七檔全數維持量比&lt;0.7偏多格局且回歸常態波動範圍</h4>
+      本期查詢結果證實了上期報告的假說：MSFT量比由上期驟降的異常值0.20回升至0.57(接近08/17當期的0.76)，AMZN同樣由異常低點0.29回升至0.46，兩者的回升方向與幅度均與「08/21月度選擇權到期日鄰近造成短線扭曲、到期日過後應回歸常態」的解釋高度吻合，顯示上期的背離確屬到期日雜訊而非真實籌碼轉向訊號。本期七檔量比全數落在0.46-0.58之間，較上期(0.20-0.57，含異常值)的離散程度明顯收斂，且量比與②現貨市場同期下跌(QQQ -2.41%)的方向已無矛盾——多數個股量比較上期溫和上升(AAPL/GOOGL/MSFT/AMZN/META)，反映選擇權市場對現貨走弱有一定程度的同步反應，僅NVDA、TSLA大致持平。整體判讀：七大巨頭選擇權市場情緒仍維持偏多格局，但已從上期的「表面極端偏多、與現貨矛盾」修正為「溫和偏多、與現貨方向一致」，籌碼面訊號可信度較上期提升。
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-title"><span class="section-num">6</span>綜合研判</div>
+    <div class="interp-grid">
+      <div class="interp-card">
+        <h4>總體資金面</h4>
+        <p>ICI本期查無新一週資料，仍為08/12當週(股票型-44.06億)，08/19當週資料預計08/26公布。本期重點更新為FINRA融資餘額：改採官方頁面直接查證，確認7月值為$1.417兆，較6月下滑-5.65%，解決上期GuruFocus與媒體引用數字互相矛盾的問題，槓桿/M2比率隨之降至6.08%(上期6.45%)，槓桿相對貨幣基礎的壓力略為降溫。Wilshire5000本期查無更新，沿用$76.97兆。</p>
+      </div>
+      <div class="interp-card">
+        <h4>期貨部位面</h4>
+        <p>CFTC新一週(08/18)資料顯示S&amp;P500與Nasdaq同步下跌，槓桿基金反應方向分歧：Nasdaq依常態回補(+27,354)，S&amp;P500則逆勢小幅加空(-956，惟幅度極小)。分歧程度小於08/11當週的鮮明反向，較接近方向微幅不一致而非明確對作。下一週(08/25當週)資料08/29公布後，可觀察此分歧是否收斂或擴大為趨勢性訊號。</p>
+      </div>
+      <div class="interp-card">
+        <h4>全球流動性面</h4>
+        <p>本期焦點更新為中國CPI驟降至0.5%(前值1.0%)，帶動PBOC實質利率由+2.00%擴大至+2.50%，為四大央行中唯一擴大的正實質利率；ECB CPI小升至2.9%，負實質利率略加深至-0.65%。Fed、BOJ政策利率與CPI均維持不變，BOJ會後重申下半財年通膨恐「明顯超過2%」，9月升息預期仍為政策面最大變數。</p>
+      </div>
+      <div class="interp-card">
+        <h4>台灣外資面</h4>
+        <p>延續上期08/18-08/19連續賣超後，本期08/20、08/21轉為連續2日淨買超，力道溫和但持續增強，3日累計負值缺口逐步收斂(-81.78億→-60.16億)，惟尚未轉正，未觸發任何閾值。買超動能能否延續至下週，將是確認短線修正是否結束的關鍵。</p>
+      </div>
+    </div>
+    <div class="verdict-box">
+      <h4>🦊 財經小狐總結</h4>
+      <p>本期資料呈現「大盤持續承壓、但多項雜訊訊號獲得澄清、部分類別出現逆勢強勢」的混合格局。延續轉弱的部分：②ETF資金流SPY(-1.37%)、QQQ(-2.41%)連續第2期收黑且跌幅較上期擴大，半導體SOXX(-5.52%)、SMH(-4.66%)持續居跌幅前列（惟跌幅未再加速，賣壓可能鈍化）。獲得澄清的雜訊：①FINRA融資餘額來源分歧本期解決，官方確認7月$1.417兆的下滑數字為真，排除了媒體引用的創新高說法；⑤上期MSFT/AMZN Put/Call異常值本期回升至常態範圍，證實為08/21到期日雜訊而非真實籌碼轉空。逆勢走強的訊號：②COPX本系列開報以來單週最大漲幅(+10.37%)，REMX同步轉紅，顯示資金正從高估值科技/半導體向具實物供需題材的關鍵金屬輪動；④台灣外資連續2日買超收斂賣超缺口，雖未轉正但方向已見改善；③CFTC本期S&amp;P500與Nasdaq部位分歧程度也較上期收斂。綜合而言，本期沒有出現足以支持進一步下修倉位的新增空方證據（融資餘額、選擇權雜訊皆屬於「假訊號被排除」而非「新增利空」），同時也沒有出現足以支持上修的一致性多方訊號（大盤與半導體仍在下跌，COT分歧依然存在，僅程度收斂）。倉位建議維持上期的「中性」判斷不變，重點觀察下期：(1)COPX/REMX的關鍵金屬輪動是否延續，或僅為單週噴出；(2)08/25當週COT資料公布後S&amp;P500/Nasdaq分歧是否收斂或轉為明確方向；(3)台灣外資買超動能能否延續轉正；(4)08/26 ICI新一週資料是否顯示股票型基金流出加劇或止穩。</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-title"><span class="section-num">7</span>方法論與追蹤檔案</div>
+    <table>
+      <tr><th>追蹤檔案</th><th>用途</th><th>更新頻率</th><th>本期新增</th></tr>
+      <tr><td>ETF週序列追蹤.csv</td><td>SPY/IWM/QQQ/SOXX/SMH/XLK/XLF/XLE/COPX/REMX每日%與成交額</td><td>每日（隨每日板塊流動報告）</td><td class="gap">0筆（本週報僅讀取，由每日排程維護）</td></tr>
+      <tr><td>台灣外資買賣超週紀錄.csv</td><td>外資買賣超逐日紀錄+閾值標註(700億注意/1100億趨勢改變)</td><td>每週報告時累積</td><td>2筆(08/20、08/21)</td></tr>
+      <tr><td>ICI週報歷史.csv</td><td>ICI週度淨流量歷史，供連續週方向性判斷</td><td>每週（ICI週三公布）</td><td class="gap">0筆（本期查無新一週資料，仍為08/12當週）</td></tr>
+      <tr><td>CFTC_COT歷史.csv</td><td>E-mini S&amp;P500/Nasdaq Mini週度部位歷史，供多空轉折判斷</td><td>每週（CFTC週五公布）</td><td>2筆(08/18當週，兩合約)</td></tr>
+    </table>
+    <div class="gap-box">
+      <h4>本期特殊狀況</h4>
+      <ul>
+        <li>台灣外資本期新增2筆(08/20、08/21)：連續2日淨買超收斂前期賣超缺口，3日累計由-81.78億回升至-60.16億，惟尚未轉正，08/24(今日)查詢時尚無資料公布，留待下期補齊。</li>
+        <li>CFTC COT本期新增08/18當週2筆(S&amp;P500、Nasdaq)：兩合約同步下跌但槓桿基金反應分歧，S&amp;P500小幅加空、Nasdaq大幅回補，分歧程度較08/11當週收斂。下一週(08/25當週)資料預計08/29公布。</li>
+        <li>ICI本期查詢無新一週資料，仍為08/12當週，08/19當週資料預計08/26公布，留待下期補齊。</li>
+        <li>ETF資金流本期比較基準採08/17→08/21(5個交易日)，08/24每日排程因Chrome不可用全數以stockanalysis.com補抓且反映08/21收盤價(與08/21同一交易日數據)，不影響本期期間內部比較，惟08/24當日尚無獨立新交易日數據可用。</li>
+        <li>FINRA融資餘額本期改採官方頁面(finra.org)直接查證，確認7月值為$1.417兆(較6月$1.502兆下滑-5.65%)，解決上期GuruFocus與媒體引用數字互相矛盾的問題，往後查詢優先以FINRA官方頁面為準。</li>
+        <li>四大央行CPI本期更新：ECB(2.8%→2.9%)、PBOC(1.0%→0.5%，中國CPI明顯降溫)，帶動ECB實質利率略加深、PBOC實質利率明顯擴大；Fed、BOJ政策利率與CPI維持不變。</li>
+        <li>七大巨頭Put/Call本期全數重新查詢，上期MSFT(0.76→0.20)、AMZN(0.53→0.29)的異常降幅本期回升至0.57、0.46，驗證上期關於08/21月度選擇權到期日雜訊的假說。</li>
+        <li>已依你指示移除EPFR全球資金流、IIF新興市場資金流兩項（訂閱制/半年報頻率，不適合週報）。</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<div class="footer">
+  <span>本報告為每週固定報告第14期 · 財經小狐產出</span>
+  <span class="warn">⚠ 請勿作為單一決策依據，部分數據源自搜尋引擎片段，精確度已標註</span>
+</div>
+</body>
+</html>

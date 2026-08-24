@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日板塊流動報告 — 2026年08月24日</title>
+<style>
+  :root {
+    --bg: #f5f6fa;
+    --bg2: #ffffff;
+    --bg3: #eef1f7;
+    --border: #dde3ee;
+    --text: #1e2433;
+    --text2: #667085;
+    --accent: #4f46e5;
+    --accent2: #4338ca;
+    --red: #dc2626;
+    --green: #16a34a;
+    --gold: #b45309;
+    --orange: #c2410c;
+    --blue: #2563eb;
+    --purple: #7c3aed;
+    --teal: #0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system,'PingFang TC','Microsoft JhengHei',sans-serif; font-size: 14px; line-height: 1.6; }
+
+  .header { background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 55%, #eef1f7 100%); padding: 28px 32px 20px; border-bottom: 1px solid var(--accent); }
+  .header h1 { font-size: 22px; font-weight: 700; color: #1e1b4b; letter-spacing: 0.5px; }
+  .header .meta { color: var(--text2); font-size: 12px; margin-top: 4px; }
+  .header .indices { display: flex; gap: 24px; margin-top: 16px; flex-wrap: wrap; }
+  .idx { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 16px; box-shadow: 0 1px 2px rgba(16,24,40,0.04); }
+  .idx .name { font-size: 11px; color: var(--text2); }
+  .idx .val { font-size: 16px; font-weight: 700; color: var(--text); }
+  .idx .chg { font-size: 12px; }
+
+  .summary-box { background: linear-gradient(90deg, #eef2ff 0%, #f8fafc 100%); border-left: 4px solid var(--accent); margin: 20px 24px; padding: 14px 20px; border-radius: 0 8px 8px 0; font-size: 15px; font-weight: 600; color: #312e81; }
+
+  .warn-box { background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid var(--red); margin: 0 24px 20px; padding: 16px 20px; border-radius: 0 8px 8px 0; font-size: 13px; color: #7f1d1d; }
+  .warn-box strong { color: var(--red); }
+  .warn-box ul { margin: 8px 0 0 18px; }
+  .warn-box li { margin-bottom: 4px; }
+
+  .container { padding: 0 24px 40px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--accent2); padding: 8px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title .icon { font-size: 18px; }
+
+  table { width: 100%; border-collapse: collapse; background: var(--bg2); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(16,24,40,0.05); }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  td { padding: 8px 10px; border-bottom: 1px solid #eef1f7; font-size: 13px; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f8fafc; }
+  .code { font-family: monospace; font-weight: 700; color: var(--blue); font-size: 13px; }
+  .name-cn { color: var(--text2); font-size: 11px; }
+  .up { color: var(--red); }
+  .dn { color: var(--green); }
+
+  .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .news-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(16,24,40,0.05); }
+  .news-box h4 { font-size: 13px; color: var(--text2); margin-bottom: 8px; }
+  .news-box ol { padding-left: 18px; }
+  .news-box li { font-size: 12px; color: var(--text); padding: 4px 0; }
+
+  .missing-box { background: #f8fafc; border: 1px dashed var(--border); border-radius: 10px; padding: 14px 16px; font-size: 12px; color: var(--text2); }
+  .missing-box strong { color: var(--text); }
+
+  .footer { background: var(--bg3); border-top: 1px solid var(--border); padding: 14px 24px; font-size: 11px; color: var(--text2); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .footer .warn { color: var(--orange); }
+
+  @media (max-width: 768px) {
+    .news-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 12px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>📊 今日板塊流動報告</h1>
+  <div class="meta">2026年08月24日（一）｜⚠️本期為「精簡版」，原因見下方警示框｜指數/ETF數據反映08-21（週五）美股收盤，經stockanalysis.com取得</div>
+  <div class="indices">
+    <div class="idx"><div class="name">標普500(SPY代理)</div><div class="val">$765.72</div><div class="chg up">+0.41%</div></div>
+    <div class="idx"><div class="name">那斯達克(QQQ代理)</div><div class="val">$713.44</div><div class="chg up">+0.35%</div></div>
+    <div class="idx"><div class="name">道瓊(DIA代理)</div><div class="val">$532.22</div><div class="chg up">+0.89%</div></div>
+  </div>
+</div>
+
+<!-- ONE-SENTENCE SUMMARY -->
+<div class="summary-box">
+  🎯 三大指數代理ETF週五(08-21)全數收紅（DIA代理+0.89%、SPY+0.41%、QQQ+0.35%），惟本期富途行情頁（熱力圖／成交額榜／熱議榜／概念板塊／潛力雷達所需資料源）因下方所述技術限制全數無法抓取；僅能確認關鍵金屬類ETF今日領漲全場：REMX +6.69%、COPX +5.18%，半導體雙ETF SOXX(-0.44%)/SMH(-0.40%)同步小幅收黑，科技/金融/能源類ETF則漲跌互見，整體板塊輪動細節須待下次連線正常後回補。
+</div>
+
+<div class="warn-box">
+  <strong>⚠️ 本期資料缺口說明（務必先讀）：</strong>本次排程執行時偵測到 <strong>2 個已連線的 Chrome 擴充（Browser 1／Browser 2）</strong>，且兩者的作業系統與本機執行環境不一致，安全機制要求在對任一瀏覽器下指令前，必須先由使用者確認要用哪一個 —— 但本次為排程自動執行、現場無人可回答，為避免誤用他人／錯誤的瀏覽器工作階段，本次<strong>未執行任何 Chrome 瀏覽器操作</strong>。富途行情頁（熱力圖、成交額榜、熱議榜、概念板塊、潛力雷達）皆仰賴 Chrome MCP 抓取虛擬列表資料，因此以下各層本期<strong>全數跳過</strong>：
+  <ul>
+    <li>第1層 行業熱力圖（流入/流出前三）</li>
+    <li>第2層 成交額榜前10（含5/20/60日趨勢）</li>
+    <li>第3層 熱議榜前20 + 槓桿ETF警示 + 類別數量排名</li>
+    <li>第4層 概念板塊</li>
+    <li>搜索熱度 vs 資訊熱度交叉表</li>
+    <li>💎 潛力雷達（含歷史勝率追蹤，今日未寫入潛力雷達追蹤.csv，避免資料斷點誤判）</li>
+  </ul>
+  下次執行若 Chrome 僅剩單一連線、或使用者已於工作階段中手動選定瀏覽器，即可恢復完整9段式報告。若使用者想解決此問題，可在互動對話中執行本排程並於提示時選擇要使用的瀏覽器。
+</div>
+
+<div class="container">
+
+<!-- SECTION 2.5: INDICATOR ETFS -->
+<div class="section">
+  <div class="section-title"><span class="icon">📌</span>指標ETF表（10檔全數以WebFetch/stockanalysis.com補抓，不依賴Chrome，資料反映08-21週五收盤）</div>
+  <table>
+    <thead>
+      <tr><th>代碼</th><th>名稱</th><th>類別</th><th>當日</th><th>成交額</th><th>備註</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="code">SPY</span></td><td class="name-cn">標普500ETF-SPDR</td><td>大盤</td><td class="up">+0.41%</td><td>300.06億</td><td style="font-size:11px;color:var(--text2);">stockanalysis.com補抓</td></tr>
+      <tr><td><span class="code">QQQ</span></td><td class="name-cn">那斯達克100ETF-Invesco</td><td>大盤/科技</td><td class="up">+0.35%</td><td>238.29億</td><td style="font-size:11px;color:var(--text2);">stockanalysis.com補抓</td></tr>
+      <tr><td><span class="code">IWM</span></td><td class="name-cn">羅素2000小型股ETF-iShares</td><td>大盤</td><td class="up">+0.77%</td><td>68.81億</td><td style="font-size:11px;color:var(--text2);">stockanalysis.com補抓</td></tr>
+      <tr style="background:#fef2f2;"><td><span class="code">SOXX</span></td><td class="name-cn">半導體ETF-iShares</td><td>半導體</td><td class="dn">-0.44%</td><td>32.53億</td><td style="font-size:11px;color:var(--text2);">stockanalysis.com補抓</td></tr>
+      <tr style="background:#fef2f2;"><td><span class="code">SMH</span></td><td class="name-cn">半導體指數ETF-VanEck</td><td>半導體</td><td class="dn">-0.40%</td><td>53.91億</td><td style="font-size:11px;color:var(--text2);">stockanalysis.com補抓</td></tr>
+      <tr><td><span class="code">XLK</span></td><td class="name-cn">科技類股SPDR</td><td>科技</td><td class="up">+0.11%</td><td>10.66億</td><td style="font-size:11px;color:var(--text2);">stockanalysis.com補抓</td></tr>
+      <tr><td><span class="code">XLF</span></td><td class="name-cn">金融類股SPDR</td><td>金融</td><td class="up">+0.93%</td><td>15.68億</td><td style="font-size:11px;color:var(--text2);">stockanalysis.com補抓</td></tr>
+      <tr><td><span class="code">XLE</span></td><td class="name-cn">能源類股SPDR</td><td>能源</td><td class="dn">-0.17%</td><td>17.69億</td><td style="font-size:11px;color:var(--text2);">stockanalysis.com補抓</td></tr>
+      <tr style="background:#ecfdf5;"><td><span class="code">COPX</span></td><td class="name-cn">銅礦業ETF-Global X</td><td>關鍵金屬</td><td class="up">+5.18%</td><td>5.26億</td><td style="font-size:11px;color:var(--text2);">stockanalysis.com補抓</td></tr>
+      <tr style="background:#ecfdf5;"><td><span class="code">REMX</span></td><td class="name-cn">稀土及戰略金屬ETF-VanEck</td><td>關鍵金屬</td><td class="up">+6.69%</td><td>1.14億</td><td style="font-size:11px;color:var(--text2);">stockanalysis.com補抓</td></tr>
+    </tbody>
+  </table>
+  <div style="margin-top:8px;font-size:12px;color:var(--text2);">10檔指標ETF全數抓齊，無失敗項目。關鍵金屬類（REMX +6.69%、COPX +5.18%）是今日ETF表現最強的一組，兩者同步大漲，暗示週五貴金屬/稀土供應鏈類股資金明顯流入；金融(XLF +0.93%)、大盤(IWM +0.77%／SPY +0.41%／QQQ +0.35%)同步收紅；半導體雙ETF(SOXX -0.44%／SMH -0.40%)是今日唯二收黑的類別，能源(XLE -0.17%)小幅收黑，科技(XLK +0.11%)接近持平。惟因熱力圖/成交額榜/熱議榜今日皆無法抓取，此處僅能呈現ETF層級的粗略板塊方向，無法交叉驗證是否有具體個股驅動，也無法判斷是否為趨勢延續或單日反彈，解讀應保守看待。</div>
+</div>
+
+<!-- SECTION: NEWS -->
+<div class="section">
+  <div class="section-title"><span class="icon">📰</span>熱門新聞（WebFetch抓取，不依賴Chrome）</div>
+  <div class="news-grid">
+    <div class="news-box">
+      <h4>Investing.com 熱門新聞（宏觀情緒）</h4>
+      <ol>
+        <li>特朗普突然大調倉！一個月1051筆交易，他到底買了什麼？</li>
+        <li>繫好安全帶！美股迎「超級考驗周」 英偉達財報、傑克遜霍爾重磅來襲</li>
+        <li>花旗預計英偉達財報後股價將走高</li>
+        <li>沃什傑克遜霍爾「首秀」倒計時：美聯儲指引模糊，長期美債面臨進一步拋售風險</li>
+        <li>比特幣強勢反攻！貨幣貶值交易復甦助力衝向8萬美元，多頭押注牛市飛輪再啓動</li>
+        <li>特朗普財務披露顯示6月份證券交易逾1,000筆</li>
+        <li>美銀調查釋放危險信號：股票配置創近5年新高，現金3.5%逼近紀錄低位</li>
+        <li>CFTC：截止8月18日當週COMEX黃金期貨和期權持倉報告</li>
+        <li>聯儲局卡什卡利：國債收益率上升不構成威脅</li>
+        <li>阿里巴巴-W(09988)擬於香港配售新股份，配售總對價爲800億港元</li>
+      </ol>
+    </div>
+    <div class="news-box">
+      <h4>富途頭條（個股/產業）</h4>
+      <ol>
+        <li>富途早報｜美擬於美東時間週一盤中公布對伊經濟戰具體措施；英偉達夜盤漲近1%，服務器被曝漲價15%；阿里完成800億港元新股配售定價，擬全部投入AI建設</li>
+        <li>阿里巴巴擬在香港配售新股，配售總額為800億港元，資金全部投入AI建設</li>
+        <li>沃什傑克遜霍爾「首秀」倒計時：美聯儲指引模糊，長期美債面臨進一步拋售風險</li>
+        <li>一週前瞻｜沃什將首次亮相傑克遜霍爾；英偉達、美團財報陸續放榜；PCE、非農年度修訂重磅公布</li>
+        <li>「經濟諾曼底登陸」將至，美國財長稱要切斷伊朗的全部經濟命脈</li>
+        <li>比特幣強勢反攻！貨幣貶值交易復甦助力衝向8萬美元，多頭押注牛市飛輪再啓動</li>
+        <li>瑞·達里歐最新宏觀分析全文：多買黃金，再買點比特幣</li>
+        <li>伊朗議會推進霍爾木茲收費，最高安全官員：經濟戰若繼續，一滴石油都別想出口</li>
+        <li>全球AI「軍備競賽」升級，阿里巴巴宣布800億港元港股配售</li>
+        <li>英偉達財報「萬眾矚目」：Rubin週期、循環融資與遠期市場份額</li>
+      </ol>
+    </div>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:var(--text2);"><strong style="color:var(--accent2);">新聞×ETF交叉解讀：</strong>本週焦點明確落在08/26(週二)英偉達財報與傑克遜霍爾央行年會(沃什首秀)兩大事件，市場資金似有提前避險跡象——美銀調查顯示股票配置創5年新高、現金部位逼近紀錄低位，與今日REMX/COPX(關鍵金屬)逆勢大漲、SOXX/SMH(半導體)收黑的走向部分呼應，可能反映部分資金在AI晶片核心持股(NVDA週二財報前)提前獲利了結、轉往抗通膨/稀有金屬題材避險；比特幣衝向8萬美元與達里歐「多買黃金再買比特幣」的論述同步發酵，惟本期無法交叉比對熱議榜/潛力雷達確認加密貨幣概念股(如COIN/MSTR/CRCL)今日實際表現，僅供方向參考。阿里巴巴800億港元港股配售用於AI建設，為中概/AI雲端的中期資金面消息，建議下次報告連線正常後追蹤是否反映在中概相關個股熱度。</div>
+</div>
+
+<!-- MISSING SECTIONS NOTICE -->
+<div class="section">
+  <div class="section-title"><span class="icon">🚧</span>本期跳過的分析層（待下次連線正常回補）</div>
+  <div class="missing-box">
+    <strong>行業熱力圖、成交額榜前10、熱議榜前20+槓桿ETF警示+類別排名、概念板塊、搜索/資訊熱度交叉表、💎潛力雷達（含歷史勝率）</strong> 皆因本次排程無法安全選定 Chrome 連線而跳過，未寫入任何 CSV 追蹤檔（僅指標ETF層已正常寫入 ETF週序列追蹤.csv，潛力雷達追蹤.csv 今日未新增資料，避免造成連續天數計算斷點誤判）。建議：(1) 若使用者在互動工作階段執行本排程，屆時系統會詢問要使用哪個 Chrome 連線，選定後即可恢復完整報告；(2) 若僅有單一 Chrome 連線在線，下次排程應可自動通過。
+  </div>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>資料來源：stockanalysis.com（ETF層）、Investing.com／富途頭條（新聞層，WebFetch抓取）。富途行情頁（熱力圖/成交額/熱議/概念/潛力雷達）本期因Chrome連線選定限制未抓取。</div>
+  <div class="warn">⚠️ 非投資建議，盤中/收盤快照僅供參考，本期為精簡版報告</div>
+</div>
+
+</body>
+</html>
