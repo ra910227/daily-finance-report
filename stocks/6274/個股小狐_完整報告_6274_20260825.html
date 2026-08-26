@@ -1,0 +1,644 @@
+<title>個股小狐｜台燿科技 6274</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#ffffff; --text:#1a1f2b; --text-dim:#5b6472; --text-faint:#8a93a3;
+  --border:#e3e6eb; --accent:#1a56db; --accent-dim:#e8eefc;
+  --green:#0f9d58; --green-bg:#e6f4ea; --amber:#b7791f; --amber-bg:#fdf3e0;
+  --red:#d93025; --red-bg:#fce8e6; --purple:#7c3aed; --purple-bg:#f1e9fe;
+  --gray-bg:#eef0f3;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ } }
+:root[data-theme="dark"]{ }
+*{box-sizing:border-box;}
+body{background:var(--bg); color:var(--text); margin:0; line-height:1.65; font-size:15px;}
+.wrap{max-width:1180px; margin:0 auto; padding:0 20px 80px;}
+h1,h2,h3,h4{font-weight:700; letter-spacing:.01em;}
+a{color:var(--accent);}
+.hero{background:linear-gradient(135deg,#1a56db 0%,#1e3a8a 100%); color:#fff; padding:36px 28px; border-radius:0 0 20px 20px; margin-bottom:28px;}
+.hero-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;}
+.hero-title{font-size:28px; margin:0 0 4px;}
+.hero-sub{opacity:.85; font-size:14px; margin:0;}
+.hero-stats{display:flex; gap:28px; flex-wrap:wrap; margin-top:22px;}
+.hero-stat .label{font-size:12px; opacity:.75;}
+.hero-stat .value{font-size:22px; font-weight:700; margin-top:2px;}
+.hero-badges{display:flex; gap:8px; flex-wrap:wrap; margin-top:16px;}
+.pill{background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); border-radius:999px; padding:4px 12px; font-size:12.5px;}
+.toc{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:18px 22px; margin-bottom:30px; position:sticky; top:10px; z-index:5;}
+.toc h4{margin:0 0 10px; font-size:13px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.06em;}
+.toc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:6px 20px;}
+.toc a{display:block; padding:4px 0; font-size:13.5px; color:var(--text); text-decoration:none; border-bottom:1px dashed transparent;}
+.toc a:hover{color:var(--accent); border-color:var(--accent);}
+section{margin-bottom:44px;}
+.part-header{display:flex; align-items:center; gap:12px; margin:56px 0 18px; padding-bottom:10px; border-bottom:3px solid var(--accent);}
+.part-header .num{background:var(--accent); color:#fff; font-weight:700; border-radius:8px; padding:6px 12px; font-size:14px;}
+.part-header h2{margin:0; font-size:22px;}
+h3.sub{font-size:17px; margin:30px 0 12px; padding-left:10px; border-left:4px solid var(--accent-dim); color:var(--text);}
+h3.sub span.tag{font-size:11px; background:var(--accent-dim); color:var(--accent); padding:2px 8px; border-radius:6px; margin-left:8px; vertical-align:middle;}
+.card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px 22px; margin-bottom:16px;}
+table{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0 6px;}
+th,td{border:1px solid var(--border); padding:7px 10px; text-align:center;}
+th{background:var(--gray-bg); font-weight:700; white-space:nowrap;}
+td.left, th.left{text-align:left;}
+.tblwrap{overflow-x:auto;}
+.badge{display:inline-block; padding:2px 9px; border-radius:6px; font-size:12px; font-weight:700;}
+.badge.ok{background:var(--green-bg); color:var(--green);}
+.badge.warn{background:var(--amber-bg); color:var(--amber);}
+.badge.bad{background:var(--red-bg); color:var(--red);}
+.badge.info{background:var(--accent-dim); color:var(--accent);}
+.note{font-size:12.5px; color:var(--text-faint); margin-top:6px;}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr;} .toc-grid{grid-template-columns:1fr 1fr;}}
+.scenario-card{border-radius:14px; padding:18px 20px; border:1.5px solid var(--border);}
+.scenario-card.bear{border-color:#f3b3ac; background:#fff8f7;}
+.scenario-card.base{border-color:#a9c2f5; background:#f6f9ff;}
+.scenario-card.bull{border-color:#9fd8b4; background:#f4fbf6;}
+.scenario-card h4{margin:0 0 4px; font-size:16px;}
+.scenario-card .tp{font-size:20px; font-weight:800; margin:6px 0 10px;}
+.scenario-card ul{margin:6px 0; padding-left:18px; font-size:13px;}
+.risk-card{border-left:4px solid var(--red); background:var(--red-bg); border-radius:8px; padding:12px 16px; margin:10px 0; font-size:13.5px;}
+.risk-card.amber{border-color:var(--amber); background:var(--amber-bg);}
+.action-box{background:linear-gradient(135deg,#eef4ff,#f7f5ff); border:1.5px solid var(--accent-dim); border-radius:14px; padding:20px 22px;}
+.action-box h4{margin-top:0; color:var(--accent);}
+.stars{color:#e0a800; letter-spacing:2px;}
+.moat-row{display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border); font-size:13.5px;}
+.summary-cards{display:grid; grid-template-columns:repeat(5,1fr); gap:14px;}
+@media(max-width:1000px){.summary-cards{grid-template-columns:repeat(2,1fr);}}
+.sumcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; text-align:center;}
+.sumcard .lab{font-size:12px; color:var(--text-dim); margin-bottom:6px;}
+.sumcard .val{font-size:20px; font-weight:800; color:var(--accent);}
+footer{margin-top:60px; padding-top:24px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-faint);}
+.src{font-size:11.5px; color:var(--text-faint);}
+code{background:var(--gray-bg); padding:1px 5px; border-radius:4px; font-size:12px;}
+.conflict-box{background:var(--purple-bg); border-left:4px solid var(--purple); border-radius:8px; padding:12px 16px; margin:10px 0; font-size:13px;}
+</style>
+
+<div class="hero">
+  <div class="wrap" style="padding:0;">
+    <div class="hero-top">
+      <div>
+        <p class="hero-sub">個股小狐｜三模式合一報告（深度研究＋財報解析＋財務健檢）</p>
+        <h1 class="hero-title">台燿科技 6274 <span style="font-weight:400; opacity:.8; font-size:18px;">(6274.TWO 上櫃)</span></h1>
+        <p class="hero-sub">分析日期：2026-08-25　｜　資料時間戳：2026-08-25 12:35（股價）／2026Q2財報（2026-07-30公告）</p>
+      </div>
+      <div class="hero-badges">
+        <span class="pill">CCL／高階銅箔基板</span>
+        <span class="pill">AI伺服器材料題材股</span>
+        <span class="pill">上櫃OTC</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="label">股價</div><div class="value">NT$1,465.10</div></div>
+      <div class="hero-stat"><div class="label">市值（估算）</div><div class="value">≈NT$4,384億</div></div>
+      <div class="hero-stat"><div class="label">TTM本益比</div><div class="value">≈73.9倍</div></div>
+      <div class="hero-stat"><div class="label">Thesis成立度</div><div class="value">4/5</div></div>
+      <div class="hero-stat"><div class="label">護城河</div><div class="value">★★★☆☆</div></div>
+      <div class="hero-stat"><div class="label">成長象限</div><div class="value">高速成長股（週期性產業）</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="toc">
+  <h4>報告導覽</h4>
+  <div class="toc-grid">
+    <a href="#dd">【模式一】深度研究：基本介紹</a>
+    <a href="#dd2">【模式一】業務引擎分析</a>
+    <a href="#dd3">【模式一】核心Thesis</a>
+    <a href="#dd4">【模式一】競爭格局</a>
+    <a href="#dd5">【模式一】成長象限＋護城河</a>
+    <a href="#er1">【模式二】Beat/Miss</a>
+    <a href="#er2">【模式二】指引變化</a>
+    <a href="#er3">【模式二】股價反應</a>
+    <a href="#er4">【模式二】三情境估值</a>
+    <a href="#er5">【模式二】股價位階</a>
+    <a href="#er6">【模式二】Comps分析</a>
+    <a href="#er7">【模式二】額外優勢/風險</a>
+    <a href="#er8">【模式二】目標價與建議</a>
+    <a href="#er9">【模式二】估值歷史錨點★</a>
+    <a href="#rk1">【模式三】財務數據</a>
+    <a href="#rk2">【模式三】六大比率</a>
+    <a href="#rk3">【模式三】債務到期</a>
+    <a href="#rk4">【模式三】CapEx分析</a>
+    <a href="#rk5">【模式三】同業對比</a>
+    <a href="#rk6">【模式三】綜合診斷</a>
+    <a href="#final">綜合總結與操作建議</a>
+  </div>
+</div>
+
+<div class="card conflict-box">
+<b>📌 資料衝突解決摘要（先讀）：</b> 本報告取得台燿科技兩份完整券商研究報告原文（凱基證券 2026/7/30、國票投顧 2026/6/29，皆已存於本機資料夾），連同即時網路資料交叉比對後，解決了使用者初始提供的所有數據衝突。詳見各節內文標註，總表見文末「資料衝突解決總表」。
+</div>
+
+<!-- ================= PART A 深度研究 ================= -->
+<div class="part-header"><span class="num">模式一</span><h2>公司深度研究</h2></div>
+
+<h3 class="sub" id="dd">1. 基本介紹</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">項目</th><th>數值</th><th class="left">狀態／說明</th></tr>
+<tr><td class="left">股價（2026-08-25 12:35）</td><td>NT$1,465.10（+0.69%）</td><td class="left"><span class="badge ok">✅已驗證</span> Yahoo奇摩股市／Goodinfo同步報價</td></tr>
+<tr><td class="left">流通在外股數</td><td>299.3百萬股</td><td class="left"><span class="badge ok">✅已驗證</span> 凱基證券2026/7/30報告</td></tr>
+<tr><td class="left">市值</td><td><b>≈NT$4,384億元</b></td><td class="left"><span class="badge warn">⚠️估算</span> 299.3百萬股×NT$1,465.10（見下方衝突說明）</td></tr>
+<tr><td class="left">TTM營收（近四季，Q3'25–Q2'26）</td><td>≈NT$591.3億元</td><td class="left"><span class="badge warn">⚠️估算</span> 由季營收加總：92.5+100.5+143.01+143.0≈（詳見財報解析B節）</td></tr>
+<tr><td class="left">2026H1營收YoY</td><td>+85.17%</td><td class="left"><span class="badge ok">✅已驗證</span> 公司2026Q2財報公告（cmoney轉載）</td></tr>
+<tr><td class="left">2026Q2毛利率</td><td>29.72%（KGI報告示29.7%）</td><td class="left"><span class="badge ok">✅已驗證</span> 公司財報公告＋凱基報告一致</td></tr>
+<tr><td class="left">FCF（2025A）</td><td>約NT$-20.35億元</td><td class="left"><span class="badge warn">⚠️估算</span> 凱基模型OCF596M−CapEx1,949M等調整項後</td></tr>
+<tr><td class="left">所屬產業</td><td>印刷電路板上游材料（銅箔基板CCL／黏合片Prepreg）</td><td class="left"><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">台股同業排名</td><td>台灣四大CCL廠之一（次於台光電，與聯茂、南亞並列）</td><td class="left"><span class="badge ok">✅已驗證</span> 工商時報／凱基公司概況</td></tr>
+<tr><td class="left">全球排名（高速材料）</td><td>台光電、南亞、聯茂、台燿合計市佔34.4%（2025）；台燿個別市佔未見獨立揭露</td><td class="left"><span class="badge warn">⚠️估算</span> 產業合計數據，個股市占查無精確數字，標「—」</td></tr>
+</table></div>
+
+<div class="conflict-box">
+<b>市值衝突解決：</b>使用者原始資料出現「4,317.18億元」vs「5.18千億元」兩個版本。以股本28.88億元（面額10元）反推約2.888億股，乘以當時股價1,495元＝約NT$4,317.6億元，與「4,317.18億」高度吻合，判定其為正確算法。惟凱基證券2026/7/30報告揭露的實際流通在外股數為<b>299.3百萬股</b>（較單純股本/面額反推的288.8百萬股多出約10.5百萬股，可能反映可轉債轉換或員工認股權已稀釋），以此股數×現價1,465.10元，得出市值約<b>NT$4,384億元</b>，為本報告採用之最終數字。「5.18千億元」經股數反推核對後數量級不符，予以捨棄，判定為錯誤或誤植數據。
+</div>
+<div class="note">來源：<a href="https://tw.stock.yahoo.com/quote/6274.TWO" target="_blank">Yahoo奇摩股市</a>、<a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6274" target="_blank">Goodinfo</a>、凱基證券《台燿：擴產規劃延伸至2029》2026/7/30、國票投顧《6274.TT台燿：如此耀眼》2026/6/29</div>
+</div>
+
+<h3 class="sub" id="dd2">2. 業務引擎分析</h3>
+<div class="card">
+<p>台燿科技成立於1974年5月，2003年12月上市（上櫃），總部位於新竹縣竹北市，為台灣四大銅箔基板（CCL）供應商之一。主力產品為CCL／Prepreg（黏合片），聚焦Low-Loss／Ultra-Low-Loss（低損耗／超低損耗）高速傳輸材料，應用於AI伺服器、800G/1.6T交換器、資料中心等領域。目前銅箔基板產能約230萬張／月，膠片產能4.5萬捲，壓合代工每月155萬平方英呎。<span class="badge ok">✅已驗證</span></p>
+
+<h4 style="margin-top:20px;">產品線結構（依損耗等級分類，2026Q1）</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">產品線</th><th>2026Q1營收占比</th><th class="left">護城河來源</th></tr>
+<tr><td class="left">ELL &amp; SLL（超低損耗／極低損耗，M7/M8等級）</td><td>38%</td><td class="left">最高技術門檻，直接對應AI ASIC/GPU伺服器與800G以上交換器需求，客戶認證週期長（通常12–18個月），轉單成本高</td></tr>
+<tr><td class="left">VLL &amp; LL（極低/低損耗，M4-M6等級）</td><td>32%</td><td class="left">中階應用主力，技術成熟但仍具一定認證門檻，為公司現金流基本盤</td></tr>
+<tr><td class="left">HDI &amp; N-LL（高密度互連／一般損耗）</td><td>18%</td><td class="left">技術含量較低，價格競爭較激烈，護城河相對薄弱</td></tr>
+<tr><td class="left">高壓材料（厚銅電源板）／其他特殊應用</td><td>12–14%</td><td class="left">利基型應用（含衛星地面接收器等），需求強勁且漲價幅度最高，2026Q2占比續增至14%</td></tr>
+</table></div>
+<div class="note"><span class="badge ok">✅已驗證</span> 國票投顧2026/6/29報告圖1；凱基2026/7/30報告內文</div>
+
+<h4 style="margin-top:20px;">產品結構長期趨勢（凱基模型，2020–2027F）</h4>
+<div class="tblwrap"><table>
+<tr><th>年度</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025F</th><th>2026F</th><th>2027F</th></tr>
+<tr><td class="left">Low Loss HSD占比</td><td>38%</td><td>35%</td><td>45%</td><td>54%</td><td>63%</td><td>69%</td><td>78%</td><td>84%</td></tr>
+</table></div>
+<p style="font-size:13px; color:var(--text-dim);">低損耗高速材料占比從2020年38%持續攀升至2027年預估84%，是公司毛利率結構性改善的核心驅動力，也是「優勢產品表」中護城河最深的區塊。<span class="badge ok">✅已驗證</span>（凱基模型圖5）</p>
+
+<h4 style="margin-top:20px;">近4期歷史財務摘要（單位：NT$百萬，除EPS/BVPS外）</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">期間</th><th>營收</th><th>YoY</th><th>EBITDA Margin</th><th>EPS(元)</th><th>FCF</th></tr>
+<tr><td class="left">FY2023A</td><td>16,003</td><td>-13.4%</td><td>11.8%</td><td>3.05</td><td>481</td></tr>
+<tr><td class="left">FY2024A</td><td>23,070</td><td>+44.2%</td><td>16.4%</td><td>9.56</td><td>-320</td></tr>
+<tr><td class="left">FY2025A</td><td>30,340</td><td>+31.5%</td><td>15.8%</td><td>11.81（模型）／12.13（官方）</td><td>-2,035</td></tr>
+<tr><td class="left">2026H1（累計）</td><td>24,355</td><td>+85.17%</td><td>≈25%（Q2單季）</td><td>12.40</td><td>負值（Q2單季OCF -716）</td></tr>
+</table></div>
+<div class="note"><span class="badge ok">✅已驗證</span> 凱基證券模型；cmoney公司財報公告轉載。FY2025A EPS兩來源差異詳見文末「資料衝突解決總表」。</div>
+
+<h4 style="margin-top:20px;">客戶結構</h4>
+<p style="font-size:13.5px;">台燿為台灣首批取得Amazon、Google、Meta（Facebook）、IBM等國際級CSP（雲端服務供應商）客戶認證的高頻高速CCL供應商之一。目前成長動能主要來自CSP客戶的AI基礎建設投資與NVIDIA以外各大CSP自研ASIC需求，帶動M7/M8高階材料放量。<span class="badge ok">✅已驗證</span>（stockfeel股感；國票2026/6/29報告）。<b>客戶集中度（前五大客戶占營收比例）：</b><span class="badge bad">❌無法取得</span>——公開資料未揭露精確集中度百分比，建議查公司年報「主要客戶」章節，標「—」。</p>
+</div>
+
+<h3 class="sub" id="dd3">3. 核心Thesis與未來性</h3>
+<div class="card">
+<h4>投資論點支柱</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">論點</th><th>狀態</th><th class="left">證據</th></tr>
+<tr><td class="left">① AI伺服器/資料中心帶動高階CCL結構性需求成長</td><td><span class="badge ok">✅成立</span></td><td class="left">2026Q2營收YoY+110.9%創新高；M7/M8占比由2021年10%提升至2025年36%，2026Q1已達38%（ELL&SLL）</td></tr>
+<tr><td class="left">② 產品組合優化＋漲價帶動毛利率結構性上升</td><td><span class="badge ok">✅成立</span></td><td class="left">毛利率由2023年19.7%（KGI口徑）→2025年22.7%→2026Q2單季29.7%；CCL二度漲價（大和資本報告）</td></tr>
+<tr><td class="left">③ 產能擴張支撐中長期市占率提升</td><td><span class="badge warn">⚠️部分成立</span></td><td class="left">已規劃泰國廠、中山廠擴產至2029年（月產能260萬→575萬張），惟需百億可轉債等外部融資支應，執行風險與稀釋風險並存</td></tr>
+<tr><td class="left">④ 獲利能力（ROE）大幅提升驗證規模效應</td><td><span class="badge ok">✅成立</span></td><td class="left">ROE由2023年7.0%→2025年20.7%→2026F預估42.1%（凱基模型）</td></tr>
+<tr><td class="left">⑤ 自由現金流轉正、財務體質同步改善</td><td><span class="badge bad">❌未兌現</span></td><td class="left">FCF連續3年為負（2024:-320M、2025:-2,035M），2026F/2027F預估進一步惡化至-9,862M／-13,964M，需仰賴大規模舉債與可轉債融資</td></tr>
+</table></div>
+<p style="font-size:13px; color:var(--text-dim);">5根支柱中4根成立（含1根部分成立），1根未兌現（現金流體質），故Thesis成立度評為 <b>4/5</b>。</p>
+
+<h4 style="margin-top:20px;">核心成長驅動力</h4>
+<ul>
+<li><b>CSP自研ASIC與GPU伺服器板材規格同步提升至M8：</b>各大CSP廠自研ASIC需求強勁，CPU板材規格亦大幅提升，非僅NVIDIA GPU單一動能</li>
+<li><b>800GbE/1.6T光模塊PCB認證放量：</b>採用M8材料，M9材料已於網通1.6T交換器測試中，預期2027年放大貢獻</li>
+<li><b>衛星地面接收器／數據中心新應用：</b>泰國廠2H26起支援地面衛星接收器產品，新一代V3衛星認證中，2028-29年衛星數據中心計畫預計全採M8以上材料</li>
+</ul>
+
+<h4 style="margin-top:20px;">需監控風險（含觸發條件）</h4>
+<div class="risk-card"><b>風險①　估值過熱／題材股泡沫化：</b> 觸發條件——若單季營收YoY降至50%以下，或毛利率連續兩季低於26%，代表AI伺服器資本支出循環降溫，届時本益比恐由現行73.9倍快速向歷史區間（7–18倍）回歸，股價下修風險遠高於一般價值股。影響程度：<span class="badge bad">高</span></div>
+<div class="risk-card amber"><b>風險②　資本支出循環與現金流壓力：</b> 觸發條件——OCF/FCF若在2028年後（產能高峰期過後）仍未如期轉正，或百億可轉債／新增借款募資不順，兩年內到期牆覆蓋倍數（現金/短期借款）預估將由2025年4.95倍探底至2027F的0.76倍，恐面臨再融資壓力。影響程度：<span class="badge bad">高</span></div>
+<div class="risk-card amber"><b>風險③　客戶集中度與競爭對手進度超前：</b> 觸發條件——若M7/M8材料客戶認證轉單至台光電（現全球高速材料市佔38.6%龍頭）或南亞，公司高階材料占比成長恐停滯。影響程度：<span class="badge warn">中</span>（凱基報告亦列為官方投資風險之一）</div>
+</div>
+
+<h3 class="sub" id="dd4">4. 競爭格局</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">公司</th><th>市場定位</th><th class="left">優勢</th><th>對台燿威脅度</th></tr>
+<tr><td class="left">台光電（2383）</td><td>全球CCL龍頭，2025年全球市佔16.2%（超越生益科技13.2%、建滔12.4%）；高速材料市佔38.6%全球第一，M7以上占比逾60%，首家M9小量出貨</td><td class="left">技術與規模雙重領先，與國際大客戶深度綁定</td><td><span class="badge bad">🔴 高</span></td></tr>
+<tr><td class="left">聯茂（6213）</td><td>「中長線趨勢受惠＋估值重估題材」補漲型定位，介於台光電與台燿之間</td><td class="left">財務體質穩健（淨負債比低），成長性溫和</td><td><span class="badge warn">🟡 中</span></td></tr>
+<tr><td class="left">南亞（南亞塑膠集團旗下CCL事業）</td><td>台系四大材料廠之一，M8搶單積極</td><td class="left">集團資源與原物料垂直整合</td><td><span class="badge warn">🟡 中</span></td></tr>
+<tr><td class="left">生益科技（600183.CH）</td><td>中國大陸最大CCL廠，全球市占次於台光電</td><td class="left">中國內需市場規模、成本優勢</td><td><span class="badge ok">🟢 低-中</span></td></tr>
+<tr><td class="left">建滔積層板（1888.HK）</td><td>港股上市，大中華區CCL大廠</td><td class="left">垂直整合原物料（銅箔、玻纖布）成本優勢</td><td><span class="badge ok">🟢 低-中</span></td></tr>
+<tr><td class="left">Isola／Rogers／Doosan／Panasonic（國際廠）</td><td>歐美日系高頻材料廠，深耕電信/國防/衛星利基市場</td><td class="left">特定利基應用（如毫米波、雷達）技術積累深</td><td><span class="badge ok">🟢 低</span></td></tr>
+</table></div>
+<p style="font-size:12.5px; color:var(--text-faint);">台系四大材料廠（台光電、南亞、聯茂、台燿）2025年合計全球市佔34.4%。台燿個別全球市占率<span class="badge bad">❌無法取得</span>公開精確數字，標「—」。</p>
+</div>
+
+<h3 class="sub" id="dd5">5. 成長象限判斷與護城河評估</h3>
+<div class="grid2">
+<div class="card">
+<h4>Peter Lynch 成長象限判斷</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">判斷依據</th><th class="left">數據</th></tr>
+<tr><td class="left">近四季營收YoY</td><td class="left">Q2'26單季+110.9%，H1累計+85.2%</td></tr>
+<tr><td class="left">EPS YoY</td><td class="left">Q2'26單季+239.8%（或官方口徑+259.3%淨利YoY）</td></tr>
+<tr><td class="left">產業本質</td><td class="left">CCL屬電子材料上游，歷史上具景氣循環特性（2022年10月本益比曾探底7.17倍）</td></tr>
+<tr><td class="left">短期分類</td><td class="left"><b>高速成長股（Fast Grower）</b>——營收/EPS增速遠超20%門檻</td></tr>
+<tr><td class="left">中長期本質</td><td class="left">仍具<b>景氣循環股</b>屬性，非永續高成長，需留意資本支出循環與PCB產業庫存週期</td></tr>
+</table></div>
+<p style="font-size:13px; color:var(--text-dim);">綜合判斷：<b>現階段為高速成長股，但產業本質為景氣循環股</b>——此雙重屬性是本檔股票估值波動劇烈（PE可由7倍到120倍以上）的根本原因。</p>
+</div>
+<div class="card">
+<h4>護城河五維度評分</h4>
+<div class="moat-row"><span>不可替代性（技術門檻）</span><span class="stars">★★★★☆</span></div>
+<div class="moat-row"><span>網路效應</span><span class="stars">★☆☆☆☆</span></div>
+<div class="moat-row"><span>客戶黏著度（認證轉換成本）</span><span class="stars">★★★★☆</span></div>
+<div class="moat-row"><span>成本優勢</span><span class="stars">★★★☆☆</span></div>
+<div class="moat-row"><span>規模效應</span><span class="stars">★★★☆☆</span></div>
+<p style="margin-top:14px; font-weight:700;">綜合評分：★★★☆☆（3.0／5）</p>
+<p style="font-size:13px; color:var(--text-dim);">護城河集中在技術認證門檻與客戶轉換成本，而非規模或網路效應；規模效應正在建立中（產能2026-29年擴大逾2倍）但尚未追上龍頭台光電。</p>
+</div>
+</div>
+
+<div class="action-box" style="margin-top:16px;">
+<h4>建議動作</h4>
+<p><b>當前建議：</b>若已持有，因目前本益比（73.9倍）已遠超歷史區間（7–18倍）與近5年PE河流圖上緣（50倍），屬於「持有但需嚴設停利/停損」階段，非新資金加碼時點；若未持有，不建議在估值倍數已逼近歷史頂緣之上追高建倉。</p>
+<p><b>加碼觸發（具體門檻）：</b>股價拉回至NT$1,050–1,150元附近（對應2027F EPS 32–35倍區間，⚠️估算基準）且基本面未惡化；或連續兩季EPS年增率維持100%以上、毛利率維持29%以上，視為題材延續確認訊號。</p>
+<p><b>賣出觸發（具體門檻）：</b>①單季營收YoY降至50%以下；②毛利率連續兩季低於26%；③兩年內到期牆覆蓋倍數（現金/短期借款）低於1倍且無明確再融資計畫；④M7/M8材料占比成長停滯或轉單至台光電/南亞。</p>
+<p><b>每季監控指標：</b>月營收YoY、M7/M8高階材料營收占比、泰國廠稼動率與損益兩平進度、百億可轉債發行進度與稀釋效果、OCF/FCF轉正時點。</p>
+</div>
+
+<!-- ================= PART B 財報解析 ================= -->
+<div class="part-header"><span class="num">模式二</span><h2>最新財報解析（2026Q2，2026/7/30公告）</h2></div>
+
+<h3 class="sub" id="er1">1. Beat/Miss 表</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">指標</th><th>2026Q2實際</th><th>凱基預估</th><th>差異</th><th>市場共識</th><th>差異</th><th>YoY</th><th>判定</th></tr>
+<tr><td class="left">營收（NT$百萬）</td><td>14,301</td><td>14,206</td><td>+0.7%</td><td>14,320</td><td>-0.1%</td><td>+110.9%</td><td><span class="badge ok">✅Beat</span></td></tr>
+<tr><td class="left">毛利（NT$百萬）</td><td>4,250</td><td>3,898</td><td>+9.0%</td><td>4,004</td><td>+6.1%</td><td>—</td><td><span class="badge ok">✅Beat</span></td></tr>
+<tr><td class="left">營業利益（NT$百萬）</td><td>3,358</td><td>3,026</td><td>+11.0%</td><td>3,130</td><td>+7.3%</td><td>+293.9%</td><td><span class="badge ok">✅Beat</span></td></tr>
+<tr><td class="left">稅後淨利（NT$百萬）</td><td>2,342</td><td>2,358</td><td>-0.7%</td><td>2,412</td><td>-2.9%</td><td>+259.3%</td><td><span class="badge warn">⚠️輕微Miss</span></td></tr>
+<tr><td class="left">EPS（元）</td><td>7.82（KGI口徑）／8.02（公司公告口徑）</td><td>8.16</td><td>-4.2%</td><td>8.35</td><td>-6.3%</td><td>+239.8%</td><td><span class="badge warn">⚠️輕微Miss</span></td></tr>
+<tr><td class="left">毛利率</td><td>29.7%</td><td>27.4%</td><td>+2.3ppts</td><td>28.0%</td><td>+1.8ppts</td><td>—</td><td><span class="badge ok">✅Beat</span></td></tr>
+<tr><td class="left">營業利益率</td><td>23.5%</td><td>21.3%</td><td>+2.2ppts</td><td>21.9%</td><td>+1.6ppts</td><td>—</td><td><span class="badge ok">✅Beat</span></td></tr>
+<tr><td class="left">淨利率</td><td>16.4%</td><td>16.6%</td><td>-0.2ppts</td><td>16.8%</td><td>-0.5ppts</td><td>—</td><td><span class="badge warn">⚠️輕微Miss</span></td></tr>
+</table></div>
+<p style="font-size:13px;"><b>結論：</b>營運面（營收/毛利/營業利益/毛利率/營益率）全面Beat市場共識，惟受泰國廠虧損拖累、整體稅率高達31.7%，稅後淨利與EPS小幅Miss共識2.9%/6.3%。整體判定為「營運面全面優於預期，但獲利端受一次性稅負因素小幅低於共識」。</p>
+<div class="note"><span class="badge warn">⚠️估算</span> EPS存在7.82元（凱基模型口徑，以流通股數299.3百萬股計）與8.02元（公司公告／cmoney轉載口徑）之差異，推測為加權平均股數計算基準不同所致，兩者淨利數字（2,342百萬元）本身高度一致。詳見文末總表。</div>
+<div class="note">來源：凱基證券《台燿：擴產規劃延伸至2029》2026/7/30 圖1</div>
+</div>
+
+<h3 class="sub" id="er2">2. 全年指引變化</h3>
+<div class="card">
+<p style="font-size:13px; color:var(--text-dim);">台燿未發布正式財測guidance（台灣中小型股常態），本節以法人預估修正幅度作為替代指標。</p>
+<div class="tblwrap"><table>
+<tr><th class="left">項目</th><th>財報前（修正前）</th><th>財報後（修正後）</th><th>調幅</th></tr>
+<tr><td class="left">凱基 FY2026F 稅後淨利</td><td>NT$8,926M</td><td>NT$9,582M</td><td>▲+7.4%</td></tr>
+<tr><td class="left">凱基 FY2027F 稅後淨利</td><td>NT$14,830M</td><td>NT$17,778M</td><td>▲+19.9%</td></tr>
+<tr><td class="left">凱基 12個月目標價</td><td>NT$1,650</td><td>NT$1,900</td><td>▲+15.2%</td></tr>
+<tr><td class="left">凱基評等</td><td>增加持股</td><td>增加持股（維持）</td><td>—</td></tr>
+<tr><td class="left">國票評等（Q1後）</td><td>區間操作</td><td>買進（上調）</td><td>▲</td></tr>
+<tr><td class="left">國票目標價</td><td>NT$1,500</td><td>NT$2,000</td><td>▲+33.3%</td></tr>
+<tr><td class="left">大和資本目標價</td><td>NT$1,680</td><td>NT$2,122</td><td>▲+26.3%</td></tr>
+<tr><td class="left">產能擴產計畫（月產能）</td><td>2026F 260萬張／2027F 380萬張</td><td>追加2028F 530萬張／2029F 575萬張（新增百億台幣擴產至泰國+中山廠）</td><td>擴產時程延伸至2029年</td></tr>
+</table></div>
+<div class="note"><span class="badge ok">✅已驗證</span> 凱基證券、國票投顧報告內部比較</div>
+</div>
+
+<h3 class="sub" id="er3">3. 股價反應</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">時間點</th><th>股價</th><th class="left">說明</th></tr>
+<tr><td class="left">2026/6/15（財報前，題材搶進期）</td><td>1,570元（漲停）</td><td class="left">市場提前反映AI伺服器材料題材與擴產/籌資預期，攻上鎖漲停</td></tr>
+<tr><td class="left">2026/7/29（財報公告前一日）</td><td>1,010元</td><td class="left">較6月高點回落約35.7%，反映短線獲利了結與財報公布前觀望氣氛</td></tr>
+<tr><td class="left">2026/7/30（財報公告日）</td><td>收盤1,010元（同日公告）</td><td class="left">Q2財報公告：營運面全面Beat，惟稅負因素使EPS小幅Miss共識；公司同日宣布擬發行百億可轉債擴產至2029年</td></tr>
+<tr><td class="left">2026/8月中旬（分析當日前，⚠️估算）</td><td>約1,580–1,600元區間</td><td class="left"><span class="badge warn">⚠️估算</span>：以現價1,465.10元回推「連2跌7.62%」之前水準，推算財報公布後股價強勁反彈，一度逼近或超越6月高點，主因基本面數據佐證＋大和資本同期上調目標價至2,122元</td></tr>
+<tr><td class="left">2026/8/25（分析當日）</td><td>1,465.10元</td><td class="left">近2日連跌合計7.62%，符合評價過熱後獲利了結的正常拉回</td></tr>
+</table></div>
+<div class="note">來源：凱基證券報告股價圖、國票投顧「歷史投資建議走勢」圖、Goodinfo即時報價</div>
+</div>
+
+<h3 class="sub" id="er4">4. 三情境估值（DCF／目標價敏感度）</h3>
+<div class="card">
+<p style="font-size:13px; color:var(--text-dim);"><span class="badge warn">⚠️估算</span> 由於公司目前處於重資產擴產週期，2026F/2027F自由現金流預估皆為顯著負值（-98.6億／-139.6億元），傳統多年期顯性FCF折現模型失真，故本節採「近期顯性負FCF ＋ 產能高峰後（假設2028年起）常態化FCF」之混合估值架構，並輔以法人目標價的隱含PE倍數交叉驗證。以下所有假設參數均為推算估計值，非任何單一券商正式模型。</p>
+<div class="grid3">
+<div class="scenario-card bear">
+<h4>熊市 Bear</h4>
+<div class="tp">NT$900–1,100元</div>
+<ul>
+<li>營收假設：FY26-30 CAGR降至約35%（較一致預期腰斬，反映AI資本支出循環提前降溫或M7/M8市占遭台光電/南亞侵蝕）</li>
+<li>EBITDA margin：回落至20%</li>
+<li>FCF conversion：低檔30%（資本支出持續拖累）</li>
+<li>WACC：10.5%</li>
+<li>Terminal growth：2.0%</li>
+</ul>
+</div>
+<div class="scenario-card base">
+<h4>基準 Base</h4>
+<div class="tp">NT$1,750–1,950元</div>
+<ul>
+<li>營收假設：採凱基/國票一致預期路徑，FY26 YoY+88–91%、FY27 YoY+56–78%，其後放緩至20–30%</li>
+<li>EBITDA margin：逐步提升至28–29%（2027F）</li>
+<li>FCF conversion：2028年資本支出高峰後回升至50–60%</li>
+<li>WACC：9.0%</li>
+<li>Terminal growth：2.5%</li>
+</ul>
+<p style="font-size:12px; color:var(--text-faint);">中樞NT$1,900元＝凱基官方目標價（公式：2027F EPS 59.39元 × 32倍PE）</p>
+</div>
+<div class="scenario-card bull">
+<h4>牛市 Bull</h4>
+<div class="tp">NT$2,100–2,500元</div>
+<ul>
+<li>營收假設：採野村/花旗上修路徑，2026年營收成長率上看98%，M7以上材料加速滲透、M9放量</li>
+<li>EBITDA margin：突破30%，看齊台光電目前水準</li>
+<li>FCF conversion：65%以上（規模效應顯現）</li>
+<li>WACC：8.0%</li>
+<li>Terminal growth：3.0%</li>
+</ul>
+<p style="font-size:12px; color:var(--text-faint);">對應大和2,122元、野村2,115元目標價區間</p>
+</div>
+</div>
+<p style="font-size:13px; margin-top:14px;"><b>敏感度說明：</b>對估值影響最大的變數為「EBITDA margin假設」與「終端成長率」的組合。由於FCF目前為負且資本支出強度持續攀升（CapEx/營收由FY23的3.96%攀升至FY27F預估的12.07%），估值高度仰賴「2028年資本支出高峰過後FCF能否順利轉正並維持高轉換率」。WACC每變動1個百分點，目標價估值變動幅度約8–12%，遠高於一般成熟企業的DCF敏感度，反映其目前近似「早期高成長重資產股」的估值特徵。</p>
+</div>
+
+<h3 class="sub" id="er5">5. 股價位階評估</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">絕對估值指標</th><th>數值</th><th class="left">判讀</th></tr>
+<tr><td class="left">TTM PE（以TTM EPS≈19.81元計）</td><td>≈73.9倍</td><td class="left">遠高於同業平均47.0倍（goodinfo）與歷史區間，估值明顯偏貴</td></tr>
+<tr><td class="left">Forward PE（2026F EPS 32.01元，凱基）</td><td>≈45.8倍（以現價計）</td><td class="left">仍顯著高於凱基模型當時基準價（1,010元）算出的31.6倍，反映股價已先行反映更樂觀情境</td></tr>
+<tr><td class="left">PB（BVPS 80.69元，2026Q2）</td><td>≈18.2倍</td><td class="left">遠高於一般電子零組件股常見1–5倍區間，屬題材股極端估值</td></tr>
+<tr><td class="left">PEG（PE 73.9倍 ÷ 2026E EPS YoY估約164%）</td><td>≈0.45</td><td class="left"><span class="badge warn">⚠️估算</span> PEG<1傳統上代表相對成長性而言估值尚可，惟需留意EPS高成長是否具備延續性（見估值歷史錨點分析）</td></tr>
+</table></div>
+<h4 style="margin-top:18px;">EPS成長趨勢（近4期YoY）</h4>
+<div class="tblwrap"><table>
+<tr><th>期間</th><th>2025Q3</th><th>2025Q4</th><th>2026Q1</th><th>2026Q2</th></tr>
+<tr><td class="left">EPS（元）</td><td>3.58</td><td>3.85</td><td>4.36</td><td>7.82–8.02</td></tr>
+<tr><td class="left">YoY</td><td>+47.7%（估）</td><td>+80.4%（估）</td><td>+79.4%</td><td>+239.8%</td></tr>
+</table></div>
+<p style="font-size:13px;"><b>判讀：</b>EPS YoY自2026Q1起加速度明顯攀升，Q2單季YoY突破200%，本益比同期亦由年初約44倍擴張至現行73.9倍，屬於典型的「戴維斯雙擊」（EPS成長×估值倍數同步擴張）加速期，惟此種雙重動能同時存在時，一旦任一端反轉（EPS成長放緩或估值回歸），股價修正幅度將被放大。</p>
+</div>
+
+<h3 class="sub" id="er6">6. Comps分析（同業比較）</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">公司</th><th>市值(US$M)</th><th>股價</th><th>2025 EPS</th><th>2026F EPS</th><th>2025 PE</th><th>2026F PE</th><th>2025 PB</th><th>2025 ROE</th><th>2025殖利率</th><th>成長類型</th></tr>
+<tr><td class="left"><b>台燿 6274</b></td><td>8,983（＠NT$1,010）</td><td>NT$1,010→現價1,465</td><td>11.81</td><td>32.01</td><td>85.5x</td><td>31.6x（現價下≈45.8x）</td><td>15.7x</td><td>20.7%</td><td>0.7%</td><td>高速成長股（週期性）</td></tr>
+<tr><td class="left">台光電 2383</td><td>47,621</td><td>NT$4,315</td><td>41.67</td><td>108.84</td><td>103.6x</td><td>39.6x</td><td>30.6x</td><td>34.2%</td><td>0.6%</td><td>技術/市佔龍頭型成長股</td></tr>
+<tr><td class="left">聯茂 6213</td><td>2,682</td><td>NT$239.50</td><td>4.16</td><td>9.79</td><td>57.6x</td><td>24.5x</td><td>4.1x</td><td>7.2%</td><td>1.3%</td><td>估值重估型補漲股</td></tr>
+<tr><td class="left">騰輝 6672</td><td>455</td><td>NT$181.00</td><td>4.85</td><td>10.59</td><td>37.3x</td><td>17.1x</td><td>3.5x</td><td>11.2%</td><td>11.2%（原文如此）</td><td>轉機型成長股</td></tr>
+<tr><td class="left">建滔積層板 1888.HK</td><td>11,707</td><td>HK$29.14</td><td>0.78</td><td>2.04</td><td>37.3x</td><td>14.3x</td><td>5.6x</td><td>15.4%</td><td>15.4%（原文如此）</td><td>垂直整合成本優勢型</td></tr>
+<tr><td class="left">生益科技 600183.CH</td><td>35,987</td><td>RMB100.08</td><td>1.39</td><td>2.46</td><td>72.0x</td><td>40.7x</td><td>13.6x</td><td>23.4%</td><td>23.4%（原文如此）</td><td>中國內需龍頭型</td></tr>
+</table></div>
+<p style="font-size:13px;"><b>溢價/折價合理性：</b>台燿以現價計算的2026F PE（≈45.8倍）已高於台光電（39.6倍）與聯茂（24.5倍），但台燿ROE（20.7%→2026F 42.1%）成長曲線最陡、PB卻仍低於台光電（15.7x vs 30.6x），顯示市場尚未將台燿完全等同於台光電估值，仍存在「成長性溢價尚未完全反映」與「規模/龍頭地位折價」並存的矛盾定位。</p>
+<div class="note">⚠️部分殖利率數字（騰輝11.2%、建滔15.4%、生益23.4%）原始來源（凱基報告表格排版）與其他欄位順序疑似錯位，惟為保持忠於原文，本表按原文呈現並加註提醒，使用時建議交叉查證。來源：凱基證券報告圖3（2026/7/30，台燿基準價NT$1,010）。</div>
+</div>
+
+<h3 class="sub" id="er7">7. 額外優勢／風險</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">項目</th><th class="left">內容</th><th>狀態</th></tr>
+<tr><td class="left">股票回購（庫藏股）</td><td class="left">查無現行庫藏股買回計畫公告</td><td><span class="badge bad">❌無法取得</span></td></tr>
+<tr><td class="left">機構持股</td><td class="left">外資持股率30.43%（2026/6/29）；投信持股率17.75%；董監持股率4.16%（董事長辛忠衡個人持股3.75%）</td><td><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">近期法人動態</td><td class="left">近20日：外資-706張、投信+8,179張（大幅買超）、自營-2,852張；融資-741張。近5個交易日（至8/5）外資連續賣超</td><td><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">股利政策</td><td class="left">已連續25年配息；FY23A每股現金股利4.01元、FY24A 6.50元、FY25A 7.51元（呈遞增趨勢，惟殖利率因股價飆升而降至0.7%）</td><td><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">十大股東（前3名）</td><td class="left">新制勞退基金6.59%、辛忠衡（董事長）3.75%、安聯台灣科技證券3.28%</td><td><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">內部人交易</td><td class="left">董監事持股集中於辛氏家族（辛忠衡3.75%、辛燿宏0.35%、辛燿吉0.06%），三席獨立董事均無持股。未見近期大額內部人申報轉讓</td><td><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">ESG評等</td><td class="left">CMoney ESG綜合評等6分（電子零組件產業平均），公司治理評鑑等級A（2025年，前5-20%）</td><td><span class="badge ok">✅已驗證</span></td></tr>
+</table></div>
+<div class="note">來源：國票投顧2026/6/29報告（十大股東、董監持股、ESG頁）</div>
+</div>
+
+<h3 class="sub" id="er8">8. 投行目標價與操作建議</h3>
+<div class="card">
+<h4>投行評等目標價表</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">機構</th><th>日期</th><th>評等</th><th>目標價</th><th class="left">計算公式（如有揭露）</th></tr>
+<tr><td class="left">凱基證券</td><td>2026-07-30</td><td>增加持股（維持）</td><td>NT$1,900</td><td class="left">2027F EPS 59.39元 × 32倍PE ＝ NT$1,900.5（前次1,650元，上調15.2%）</td></tr>
+<tr><td class="left">國票投顧</td><td>2026-06-29</td><td>買進（由區間操作上調）</td><td>NT$2,000</td><td class="left">參考PE區間上緣30X，「2027F PE 29X」= 2027F EPS 70.61元 × 29倍 ≈ NT$2,048（原文標示目標價2,000元，略有取整）</td></tr>
+<tr><td class="left">大和資本（Daiwa）</td><td>2026-06月</td><td>買進（維持，上調）</td><td>NT$2,122</td><td class="left">由1,680元上調；具體EPS×PE公式未見於轉述原文，標「—」</td></tr>
+<tr><td class="left">野村證券（Nomura）</td><td>2026-06月（轉述）</td><td>Buy</td><td>NT$2,115</td><td class="left">2026E EPS 35.16元、2027E EPS 68.73元；目標價計算公式未見於轉述原文，標「—」</td></tr>
+<tr><td class="left">花旗環球（Citi）</td><td>2026-06月（轉述）</td><td>Buy</td><td>NT$1,950</td><td class="left">2026E EPS 35.23元、2027E EPS 77.51元；計算公式未見於轉述原文，標「—」</td></tr>
+</table></div>
+
+<h4 style="margin-top:20px;">主要分歧點</h4>
+<div class="grid2">
+<div class="card" style="background:var(--green-bg); border:none;">
+<b>樂觀派論點</b>
+<ul style="font-size:13px;">
+<li>M7/M8高階材料占比持續攀升，2027年低損耗材料占比預估上看84%</li>
+<li>CSP客戶ASIC需求為結構性趨勢，非單一景氣循環</li>
+<li>產能擴張至2029年鎖定未來3年營收成長路徑</li>
+</ul>
+</div>
+<div class="card" style="background:var(--amber-bg); border:none;">
+<b>謹慎派論點</b>
+<ul style="font-size:13px;">
+<li>現行PE（73.9倍）已遠超歷史區間（7–18倍）與河流圖50倍上緣</li>
+<li>FCF連續3年為負，且2026-27F預估進一步惡化，財務體質對照獲利成長呈現背離</li>
+<li>CCL產業本質具景氣循環性，2022年曾出現本益比探底7.17倍的先例</li>
+</ul>
+</div>
+</div>
+
+<h4 style="margin-top:20px;">上行空間彙總表（基準現價NT$1,465.10）</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">參考點</th><th>對應價格</th><th>距現價空間</th></tr>
+<tr><td class="left">凱基目標價</td><td>NT$1,900</td><td>+29.7%</td></tr>
+<tr><td class="left">國票目標價</td><td>NT$2,000</td><td>+36.5%</td></tr>
+<tr><td class="left">花旗目標價</td><td>NT$1,950</td><td>+33.1%</td></tr>
+<tr><td class="left">野村目標價</td><td>NT$2,115</td><td>+44.4%</td></tr>
+<tr><td class="left">大和目標價</td><td>NT$2,122</td><td>+44.8%</td></tr>
+<tr><td class="left">本報告熊市情境</td><td>NT$900–1,100</td><td>-38.6%~-24.9%</td></tr>
+<tr><td class="left">歷史低點PE反推價（見下節）</td><td>約NT$178–229</td><td>-88.0%~-84.4%</td></tr>
+</table></div>
+
+<div class="action-box" style="margin-top:16px;">
+<h4>最終操作建議</h4>
+<p><b>已持有者：</b>建議設定分批停利區間（如接近NT$1,800–1,900元附近可分批獲利了結一部分部位），並嚴設停損（跌破NT$1,050元或單季營收YoY降至50%以下應重新評估部位）。</p>
+<p><b>未持有者：</b>不建議現價追高建倉；若欲參與此題材，建議等待回檔至NT$1,050-1,150元附近（對應相對合理的32-35倍2027F PE區間）分批布局，並嚴格控制部位大小（題材股波動風險極高）。</p>
+<p><b>加碼觸發：</b>股價拉回且Q3/Q4財報持續驗證M7/M8占比與毛利率不墜。</p>
+<p><b>停損警示：</b>兩年內到期牆覆蓋倍數低於1倍、或OCF連續兩季未見改善跡象。</p>
+</div>
+</div>
+
+<h3 class="sub" id="er9">9. 估值歷史錨點 <span class="tag">使用者硬性要求★必附</span></h3>
+<div class="card">
+<h4>多年期EPS實際值vs預估值表</h4>
+<div class="tblwrap"><table>
+<tr><th>年度</th><th>2021A</th><th>2022A</th><th>2023A</th><th>2024A</th><th>2025A</th><th>2026E</th><th>2027E</th><th>2028E</th></tr>
+<tr><td class="left">EPS（凱基）</td><td>—</td><td>—</td><td>3.05</td><td>9.56</td><td>11.81</td><td>32.01</td><td>59.39</td><td>—</td></tr>
+<tr><td class="left">EPS（國票）</td><td>—</td><td>—</td><td>—</td><td>—</td><td>12.13</td><td>31.88</td><td>70.61</td><td>—</td></tr>
+<tr><td class="left">EPS（野村，轉述）</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>35.16</td><td>68.73</td><td>—</td></tr>
+<tr><td class="left">EPS（花旗，轉述）</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>35.23</td><td>77.51</td><td>—</td></tr>
+<tr><td class="left">EPS（公開資料庫加總，⚠️估算）</td><td>7.01</td><td>4.69</td><td>3.05</td><td>9.56/9.57</td><td>12.13</td><td>—</td><td>—</td><td>—</td></tr>
+</table></div>
+<div class="conflict-box">
+<b>分歧提示：</b>2026E EPS各機構預估落在31.88–35.23元（分歧幅度約10%，相對集中）；但2027E EPS分歧極大，落在59.39–77.51元之間（最高值花旗77.51元較最低值凱基59.39元高出約30.6%），屬於<b>「分歧大」</b>案例，反映各家對「M7/M8占比加速滲透幅度」與「毛利率能否維持30%以上」假設差異顯著。2028E各機構均未提供，標「—」。</div>
+<div class="note">2021A、2022A EPS為<span class="badge warn">⚠️估算</span>，由公開資料庫（wantgoo）各季EPS加總所得，非官方年報直接揭露數字：2022年＝1.53+1.08+1.00+1.08=4.69元；2021年官方年度數字7.01元則為wantgoo網站直接列示。2024A兩來源（9.56/9.57）差異為四捨五入。2025A EPS存在11.81元（凱基模型口徑）與12.13元（官方公告/多方轉載口徑）之差異，本報告後續反推試算採用官方口徑12.13元為準。</div>
+
+<h4 style="margin-top:22px;">歷史本益比錨點表</h4>
+<div class="tblwrap"><table>
+<tr><th>年度</th><th>2018</th><th>2021</th><th>2022</th><th>2023-2025</th><th>2026（現行）</th></tr>
+<tr><td class="left">本益比範圍</td><td><span class="badge bad">❌無法取得</span></td><td>約14.28-18.40倍</td><td><b>最低7.17倍（2022年10月）</b></td><td>河流圖區間6X/17X/28X/39X/50X（國票模型5年河流圖帶狀）</td><td>73.9倍（現價，遠超歷史河流圖50倍上緣）</td></tr>
+</table></div>
+<div class="note"><span class="badge bad">❌無法取得</span> 2018年度本益比：多次查詢公開網路資料庫（histock、goodinfo等）均未能取得該年度數字，非因虧損無法計算（無證據顯示2018年虧損），純屬資料庫查詢限制，建議查goodinfo付費完整歷史資料庫或公司年報核實，本報告不臆測填入任何精確數字。<br/><span class="badge ok">✅已驗證</span> 2022年10月最低本益比7.17倍：histock網站歷史本益比資料頁面。</div>
+
+<h4 style="margin-top:22px;">反推試算</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">反推情境</th><th>採用PE</th><th>採用EPS</th><th>反推股價</th><th>vs現價1,465.10元</th></tr>
+<tr><td class="left">歷史最低點（2022/10）</td><td>7.17倍</td><td>2026E保守值31.88元（國票）</td><td>≈NT$228.6元</td><td>僅為現價15.6%</td></tr>
+<tr><td class="left">歷史最低點×H1年化簡易法</td><td>7.17倍</td><td>2026H1×2＝24.80元</td><td>≈NT$177.8元</td><td>僅為現價12.1%</td></tr>
+<tr><td class="left">近5年平均本益比（⚠️估算取中值）</td><td>約16倍</td><td>31.88元</td><td>≈NT$510.1元</td><td>約為現價34.8%</td></tr>
+<tr><td class="left">國票河流圖頂緣</td><td>50倍</td><td>31.88元</td><td>≈NT$1,594元</td><td>約為現價108.8%（現價已接近此頂緣線）</td></tr>
+</table></div>
+
+<div class="conflict-box">
+<b>反推試算結論（必寫）：</b>不論採用2022年產業修正低點（7.17倍）或近5年平均本益比（約16倍）反推，現價1,465.10元均遠高於反推股價（分別高出現價的5.7倍與2.9倍），代表<b>目前股價已無法用歷史正常本益比區間、搭配保守EPS估算來合理化</b>。進一步拆解2026年初至今的漲幅：股價由1月的NT$463.01元（TTM PE 44.31倍）漲至現行NT$1,465.10元（TTM PE 73.9倍），漲幅約+216%，可拆解為「TTM EPS成長約+90%（10.45元→19.81元）」與「本益比倍數再擴張約+67%（44.31倍→73.9倍）」兩部分相乘所致。這代表<b>目前股價同時受惠於EPS高速成長與本益比倍數擴張的雙重推升（戴維斯雙擊），本益比擴張的貢獻度不亞於基本面成長本身</b>。現價甚至已逼近國票投顧自建5年PE河流圖的50倍歷史頂緣，屬於典型高波動題材股的估值結構——一旦AI伺服器資本支出循環降溫或M7/M8材料市占不如預期，本益比向下修正對股價的殺傷力，將顯著大於EPS下修本身。</div>
+<div class="note">TTM PE 44.31倍、股價463.01元數字來源：2026年1月網路財經資訊平台快照（⚠️估算基準日期，非精確交易日對照）。</div>
+</div>
+
+<!-- ================= PART C 財務風險健檢 ================= -->
+<div class="part-header"><span class="num">模式三</span><h2>財務風險健檢</h2></div>
+
+<h3 class="sub" id="rk1">1. 財務數據填表（單位：NT$百萬，凱基模型，近3年+2年預估）</h3>
+<div class="card">
+<h4>損益表</h4>
+<div class="tblwrap"><table>
+<tr><th>項目</th><th>FY2023A</th><th>FY2024A</th><th>FY2025A</th><th>FY2026F</th><th>FY2027F</th></tr>
+<tr><td class="left">EBIT（營業利益）</td><td>1,424</td><td>3,332</td><td>4,344</td><td>13,184</td><td>23,500</td></tr>
+<tr><td class="left">利息支出</td><td>27</td><td>52</td><td>89</td><td>182</td><td>180</td></tr>
+<tr><td class="left">EBITDA</td><td>1,885</td><td>3,784</td><td>4,803</td><td>14,184</td><td>24,901</td></tr>
+<tr><td class="left">D&amp;A（折舊攤提）</td><td>461</td><td>452</td><td>459/472</td><td>1,000</td><td>1,401</td></tr>
+</table></div>
+<h4 style="margin-top:16px;">資產負債表</h4>
+<div class="tblwrap"><table>
+<tr><th>項目</th><th>FY2023A</th><th>FY2024A</th><th>FY2025A</th><th>FY2026F</th><th>FY2027F</th></tr>
+<tr><td class="left">總資產</td><td>19,420</td><td>25,878</td><td>39,741</td><td>64,525</td><td>94,468</td></tr>
+<tr><td class="left">總負債</td><td>7,840</td><td>11,541</td><td>21,127</td><td>37,565</td><td>55,808</td></tr>
+<tr><td class="left">計息債務（短期+長期借款）</td><td>2,709</td><td>4,411</td><td>8,445</td><td>17,945</td><td>27,445</td></tr>
+<tr><td class="left">現金及約當現金</td><td>5,657</td><td>7,037</td><td>10,602</td><td>14,099</td><td>13,789</td></tr>
+<tr><td class="left">短期到期債務（短期借款）</td><td>603</td><td>962</td><td>2,141</td><td>10,919</td><td>18,160</td></tr>
+</table></div>
+<h4 style="margin-top:16px;">現金流量表</h4>
+<div class="tblwrap"><table>
+<tr><th>項目</th><th>FY2023A</th><th>FY2024A</th><th>FY2025A</th><th>FY2026F</th><th>FY2027F</th></tr>
+<tr><td class="left">OCF（營運現金流）</td><td>1,120</td><td>653</td><td>596</td><td>-4,871</td><td>-3,185</td></tr>
+<tr><td class="left">CapEx（資本支出）</td><td>-634</td><td>-1,172</td><td>-1,949</td><td>-4,885</td><td>-10,747</td></tr>
+<tr><td class="left">FCF（自由現金流）</td><td>481</td><td>-320</td><td>-2,035</td><td>-9,862</td><td>-13,964</td></tr>
+</table></div>
+<div class="note"><span class="badge ok">✅已驗證</span> 凱基證券2026/7/30報告完整財務模型（Dec-23A至Dec-27F）。</div>
+</div>
+
+<h3 class="sub" id="rk2">2. 六大比率診斷</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">比率</th><th>公式</th><th>FY2025A</th><th>FY2026F</th><th>FY2027F</th><th>警戒標準</th><th>狀態</th></tr>
+<tr><td class="left">利息覆蓋率</td><td class="left">EBIT/利息支出</td><td>48.8x（EBIT4344/利息89）</td><td>72.4x</td><td>130.6x</td><td>&lt;3x為警戒</td><td><span class="badge ok">✅健康</span></td></tr>
+<tr><td class="left">負債比率（毛）</td><td class="left">總負債/總資產</td><td>45.4%（凱基口徑）／53.16%（國票口徑，FY25）</td><td>66.6%（凱基）/46.6%（國票，定義差異）</td><td>71.0%</td><td>&gt;60%需留意</td><td><span class="badge warn">⚠️上升中</span></td></tr>
+<tr><td class="left">淨負債/EBITDA</td><td class="left">淨負債/EBITDA</td><td>0.68x（淨負債3,280/EBITDA4,803）</td><td>0.65x</td><td>0.77x</td><td>&gt;3x為警戒</td><td><span class="badge ok">✅健康</span></td></tr>
+<tr><td class="left">OCF/總債務</td><td class="left">OCF/計息債務</td><td>7.1%（596/8,445，較FY23的41.3%大幅弱化）</td><td>-27.1%（OCF轉負）</td><td>-11.6%</td><td>&lt;10%需留意，負值為警戒</td><td><span class="badge bad">❌警戒</span></td></tr>
+<tr><td class="left">現金流量覆蓋比率</td><td class="left">OCF/流動負債</td><td>4.1%（596/14,621）</td><td>-17.7%</td><td>-6.9%</td><td>&lt;20%需留意</td><td><span class="badge bad">❌警戒</span></td></tr>
+<tr><td class="left">兩年內到期牆覆蓋倍數</td><td class="left">現金/短期借款</td><td>4.95x（10,602/2,141）</td><td>1.29x（14,099/10,919）</td><td>0.76x（13,789/18,160）</td><td>&lt;1x為警戒</td><td><span class="badge bad">❌FY27F警戒</span></td></tr>
+</table></div>
+<p style="font-size:13px; color:var(--text-dim);">凱基與國票模型對「負債比率」定義口徑不同（凱基以毛負債/總資產計算，國票另有槓桿比率等指標），本報告以凱基口徑為主線呈現趨勢，兩家模型方向一致：負債比率呈上升趨勢。</p>
+</div>
+
+<h3 class="sub" id="rk3">3. 債務到期時程</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">年度</th><th>短期借款（1年內到期）</th><th>長期借款</th><th class="left">說明</th></tr>
+<tr><td class="left">FY2025A</td><td>NT$2,141M</td><td>NT$6,304M</td><td class="left">現金10,602M可覆蓋短期借款達4.95倍，無虞</td></tr>
+<tr><td class="left">FY2026F</td><td>NT$10,919M</td><td>NT$7,026M</td><td class="left">短期借款躍增逾5倍（因擴產融資需求），現金覆蓋倍數降至1.29倍</td></tr>
+<tr><td class="left">FY2027F</td><td>NT$18,160M</td><td>NT$9,285M</td><td class="left">現金已不足覆蓋短期借款（覆蓋倍數0.76倍），需仰賴OCF或再融資（含百億可轉債發行）支應</td></tr>
+</table></div>
+<div class="note"><span class="badge warn">⚠️估算，建議查10-K/財報附註原文</span> 上表為凱基模型預估值，非公司財報附註揭露之逐年到期時程細項；長期借款之具體到期年度分布未見於公開資料，標「—」，建議查公司年報「長期借款」附註原文確認精確到期結構。</div>
+</div>
+
+<h3 class="sub" id="rk4">4. CapEx分析</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th>項目</th><th>FY2023A</th><th>FY2024A</th><th>FY2025A</th><th>FY2026F</th><th>FY2027F</th></tr>
+<tr><td class="left">CapEx/營收</td><td>3.96%</td><td>5.08%</td><td>6.43%</td><td>8.58%</td><td>12.07%</td></tr>
+<tr><td class="left">CapEx/OCF</td><td>56.6%</td><td>179.5%</td><td>327.0%</td><td>OCF已轉負，無法計算比率</td><td>OCF已轉負，無法計算比率</td></tr>
+</table></div>
+<p style="font-size:13px;"><b>趨勢與業務模式判讀：</b>CapEx強度（CapEx/營收）逐年攀升，由FY2023年3.96%一路上升至FY2027F預估的12.07%，且CapEx/OCF比率自FY2024年起即超過100%（代表資本支出已超出當年營運現金流所能支應），FY2026-27F更因OCF轉負而完全無法自行覆蓋資本支出，需仰賴外部融資（借款＋規劃中的百億可轉債）。此為典型<b>重資產製造業</b>（CCL屬資本密集之化學材料加工產業）在產能擴張週期中的財務特徵，與「成長股」敘事下投資人常忽略的現金流壓力形成對照，是本報告財務健檢部分最需留意的訊號。</p>
+</div>
+
+<h3 class="sub" id="rk5">5. 同業對比</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">比率</th><th>台燿(6274) FY25A</th><th>台光電(2383)</th><th>聯茂(6213)</th></tr>
+<tr><td class="left">PB（股價淨值比）</td><td>15.7x（凱基模型，＠1,010元基準）／現價下18.2x</td><td>30.6x</td><td>4.1x</td></tr>
+<tr><td class="left">ROE</td><td>20.7%</td><td>34.2%</td><td>7.2%</td></tr>
+<tr><td class="left">殖利率</td><td>0.7%</td><td>0.6%</td><td>1.3%</td></tr>
+<tr><td class="left">淨負債狀態</td><td>淨負債3,280M（由淨現金轉為淨負債，2024→2025年翻轉）</td><td><span class="badge bad">❌無法取得</span></td><td><span class="badge bad">❌無法取得</span></td></tr>
+<tr><td class="left">利息保障倍數</td><td>≈48.8x（凱基口徑）／58.24x（統計狗網路查詢口徑）</td><td><span class="badge bad">❌無法取得</span></td><td><span class="badge bad">❌無法取得</span></td></tr>
+</table></div>
+<p style="font-size:13px; color:var(--text-dim);">台光電、聯茂之詳細六大比率（利息覆蓋率、負債比率等）公開資料未提供精確數字，僅取得PB/ROE/殖利率等估值面比較指標，其餘欄位標「—」。整體觀察：台燿PB與ROE均低於龍頭台光電，但淨負債結構已由淨現金轉為淨負債，財務體質正在承壓中，值得留意其擴產期的財務彈性是否不如台光電（規模更大、現金部位更厚）。</p>
+</div>
+
+<h3 class="sub" id="rk6">6. 綜合診斷</h3>
+<div class="card">
+<p><b>定性分類：</b><span class="badge warn">⚠️ 高成長擴產型／槓桿快速攀升警戒型</span>——公司獲利能力（ROE、EBITDA margin）快速改善，但財務結構正從「淨現金」快速轉向「淨負債攀升」，且OCF已轉負，屬於典型「高成長但現金流體質尚未跟上」的擴產期公司，非傳統意義上財務體質優良的成熟企業，亦非陷入財務危機的公司，而是處於「成長投資期的槓桿快速攀升」階段。</p>
+
+<div class="risk-card">
+<b>最大風險點：</b>兩年內到期牆覆蓋倍數（現金/短期借款）預估將由FY2025年的4.95倍，於FY2027F急墜至0.76倍——即現金已不足覆蓋短期借款，必須仰賴營運現金流轉正或百億可轉債等再融資計畫順利執行。觸發數字：若FY2026-27年百億可轉債發行不順或延遲、或OCF未能如預期於2028年後轉正，短期流動性壓力將浮現。
+</div>
+
+<h4 style="margin-top:18px;">安全邊際計算</h4>
+<p style="font-size:13.5px;">以FY2025A為基準：EBIT為NT$4,344M，利息支出NT$89M，利息覆蓋率48.8倍，安全邊際極大——EBIT需下滑約<b>97.9%</b>（即降至約NT$91M）才會使利息覆蓋率跌破警戒值3倍。惟此指標僅反映「利息支付能力」，不代表整體財務彈性；真正的風險集中在<b>短期流動性（到期牆覆蓋倍數）</b>而非長期償債能力——以FY2027F預估數字計算，若現金部位不變（NT$13,789M），短期借款需下降至NT$13,789M以下（即較預估的NT$18,160M再減少約24.1%）或現金部位需再增加NT$4,371M，才能使到期牆覆蓋倍數回升至1倍以上的安全水準。</p>
+</div>
+
+<!-- ================= 綜合總結 ================= -->
+<div class="part-header" id="final"><span class="num">總結</span><h2>綜合總結與最終操作建議</h2></div>
+
+<div class="summary-cards">
+<div class="sumcard"><div class="lab">Thesis成立度</div><div class="val">4/5</div></div>
+<div class="sumcard"><div class="lab">護城河強度</div><div class="val">★★★☆☆</div></div>
+<div class="sumcard"><div class="lab">成長象限</div><div class="val" style="font-size:15px;">高速成長股<br/>（週期性產業）</div></div>
+<div class="sumcard"><div class="lab">財務健康度</div><div class="val" style="font-size:14px;">槓桿快速攀升<br/>警戒型</div></div>
+<div class="sumcard"><div class="lab">估值位階</div><div class="val" style="font-size:14px;">遠超歷史區間<br/>（73.9x vs 7-18x）</div></div>
+</div>
+
+<div class="action-box" style="margin-top:24px;">
+<h4>最終操作建議</h4>
+<p><b>已持有／未持有：</b>若已持有，屬「持有並嚴設停利停損」階段，非加碼時點；若未持有，不建議現價（NT$1,465.10）追高建倉，估值已遠超歷史區間與法人自建河流圖上緣。</p>
+<p><b>長期3-5年觀點：</b>核心業務引擎（AI伺服器/CSP自研ASIC帶動高階CCL需求）之結構性成長邏輯目前證據充分（✅成立），但財務體質（現金流轉負、槓桿攀升）與估值位階（本益比倍數擴張貢獻度接近甚至超過EPS成長本身）均顯示當前股價隱含極高的市場預期，長期投資人應以「產業龍頭候選＋景氣循環股」雙重視角看待，避免將短期爆發性成長線性外推至5年。</p>
+<p><b>核心催化劑（正向）：</b>M7/M8材料占比持續攀升、泰國廠/中山廠擴產如期於2028-29年貢獻產能、百億可轉債順利發行且未過度稀釋每股獲利。</p>
+<p><b>核心催化劑（負向）：</b>AI伺服器資本支出循環降溫、兩年內到期牆覆蓋倍數跌破1倍且無明確再融資進度、單季營收YoY降至50%以下。</p>
+<p><b>加碼與停損具體數值：</b>加碼參考區間NT$1,050–1,150元（⚠️估算，對應2027F EPS 32–35倍相對合理區間）；停損／重新評估參考點：跌破NT$1,050元，或單季毛利率連續兩季低於26%，或到期牆覆蓋倍數低於1倍。</p>
+</div>
+
+<h3 style="margin-top:40px;">資料衝突解決總表</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">項目</th><th class="left">原始衝突</th><th class="left">最終採用</th><th class="left">解決理由</th></tr>
+<tr><td class="left">市值</td><td class="left">4,317.18億元 vs 5.18千億元</td><td class="left">≈NT$4,384億元</td><td class="left">以凱基揭露之實際流通股數299.3百萬股×現價1,465.10元反推，5.18千億經股數反推核對後數量級不符，判定為誤植</td></tr>
+<tr><td class="left">本益比</td><td class="left">75.87倍 vs 123.4倍</td><td class="left">≈73.9倍（TTM）；123.4倍為2025A EPS基期舊算法</td><td class="left">123.4倍實為「用2025A EPS 11.81元計算」之PE（1465.10/11.81≈124.1倍，高度吻合），Q2財報後TTM EPS更新為19.81元，PE隨之壓縮至73.9倍，屬正常的財報後基期更新，非數據錯誤</td></tr>
+<tr><td class="left">每股淨值</td><td class="left">62.54元 vs 80.69元</td><td class="left">80.69元（2026Q2最新）</td><td class="left">62.54元為2026Q1數字，已被2026Q2公告之80.69元取代；期間另出現17.96元疑似AI搜尋快照誤讀（與凱基模型FY25A的64.47元/FY26F的93.38元趨勢不符），予以排除</td></tr>
+<tr><td class="left">EPS（2026Q2單季）</td><td class="left">7.82元（凱基模型） vs 8.02元（公司公告/媒體轉載）</td><td class="left">主採8.02元（官方口徑），並列7.82元</td><td class="left">兩者對應淨利金額一致（NT$2,342M），差異推測源於加權平均股數計算基準不同（299.3M vs ≈292M）</td></tr>
+<tr><td class="left">2026F/2027F EPS預估</td><td class="left">各券商31.88-35.23元(2026E)、59.39-77.51元(2027E)</td><td class="left">並列呈現，不取單一數字</td><td class="left">屬於分歧大的典型案例，已於估值歷史錨點章節逐一列出各機構數字與名稱</td></tr>
+</table></div>
+</div>
+
+<h3 style="margin-top:32px;">本報告❌無法取得／⚠️估算重要項目清單</h3>
+<div class="card">
+<ul style="font-size:13.5px;">
+<li><span class="badge bad">❌</span> 2018年度歷史本益比（多次查詢無果，非虧損因素，建議查goodinfo付費完整資料庫）</li>
+<li><span class="badge bad">❌</span> 台燿個別全球CCL/高速材料市占率精確數字（僅有台系四大廠合計34.4%）</li>
+<li><span class="badge bad">❌</span> 客戶集中度（前五大客戶占營收比例）精確數字</li>
+<li><span class="badge bad">❌</span> 現行庫藏股買回計畫</li>
+<li><span class="badge bad">❌</span> 台光電、聯茂之利息覆蓋率、負債比率等六大比率精確數字（僅取得PB/ROE/殖利率）</li>
+<li><span class="badge warn">⚠️</span> 三情境DCF估值之WACC、terminal growth、EBITDA margin假設均為推算估計值，非任何單一券商正式模型直接揭露</li>
+<li><span class="badge warn">⚠️</span> 債務到期時程逐年細項（僅有短期/長期借款總額，無精確到期年度分布，建議查財報附註原文）</li>
+<li><span class="badge warn">⚠️</span> 2021、2022年度EPS由公開資料庫季度數字加總推算，非官方年報直接數字</li>
+<li><span class="badge warn">⚠️</span> 2026/8月中旬股價高點（回推估算，非精確歷史交易日對照）</li>
+</ul>
+</div>
+
+<footer>
+<p><b>資料來源：</b>Goodinfo!台灣股市資訊網、Yahoo奇摩股市、鉅亨網、財報狗(statementdog)、Fugle富果、公開資訊觀測站(MOPS)、histock嗨投資、wantgoo玩股網、nStock、cmoney股市爆料同學會、凱基證券《台燿：擴產規劃延伸至2029》(2026/7/30)、國票投顧《6274.TT台燿：如此耀眼》(2026/6/29)。</p>
+<p>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</footer>
+
+</div>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜兆聯實業(6944) 財務風險健檢</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1a2233; --sub:#5b6472; --line:#e4e7ec;
+    --accent:#1d6fd6; --accent-soft:#e8f1fd;
+    --green:#1a9c5f; --green-soft:#e7f8ef;
+    --amber:#b5760a; --amber-soft:#fdf3e0;
+    --red:#c8352f; --red-soft:#fdeceb;
+    --grey:#6b7280; --grey-soft:#f0f1f3;
+    --shadow:0 1px 3px rgba(20,30,50,.06), 0 8px 24px rgba(20,30,50,.05);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.65;font-size:15px;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px 80px;}
+
+  /* Hero */
+  .hero{background:linear-gradient(135deg,#0f2f5c 0%,#1d6fd6 55%,#2f8fe0 100%);color:#fff;padding:40px 32px 34px;border-radius:0 0 28px 28px;margin-bottom:28px;}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;}
+  .hero-tag{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:4px 12px;border-radius:999px;font-size:12.5px;letter-spacing:.5px;margin-bottom:12px;}
+  .hero-title{font-size:30px;font-weight:800;margin:0 0 6px;}
+  .hero-sub{font-size:14.5px;opacity:.9;margin:0;}
+  .hero-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:22px;}
+  .hero-meta .item{min-width:110px;}
+  .hero-meta .label{font-size:11.5px;opacity:.75;letter-spacing:.5px;}
+  .hero-meta .value{font-size:20px;font-weight:700;margin-top:2px;}
+  .hero-meta .value.small{font-size:15px;font-weight:600;}
+  .hero-price-box{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:16px 22px;text-align:right;}
+  .hero-price-box .p{font-size:34px;font-weight:800;}
+  .hero-price-box .chg{font-size:14px;color:#ffd7d2;}
+  .hero-price-box .note{font-size:11.5px;opacity:.75;margin-top:6px;}
+
+  /* TOC */
+  .toc{display:flex;flex-wrap:wrap;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:28px;box-shadow:var(--shadow);position:sticky;top:10px;z-index:10;}
+  .toc a{font-size:13px;color:var(--accent);text-decoration:none;background:var(--accent-soft);padding:6px 12px;border-radius:999px;font-weight:600;white-space:nowrap;}
+  .toc a:hover{background:var(--accent);color:#fff;}
+
+  section{margin-bottom:38px;}
+  .sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;}
+  .sec-num{font-size:13px;font-weight:800;color:#fff;background:var(--accent);width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .sec-title{font-size:20px;font-weight:800;margin:0;}
+  .sec-desc{color:var(--sub);font-size:13.5px;margin:2px 0 0;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:16px;}
+  .card h4{margin:0 0 10px;font-size:15px;font-weight:700;}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;}
+  th:first-child,td:first-child{text-align:left;}
+  thead th{background:var(--grey-soft);font-weight:700;color:var(--ink);font-size:12.5px;}
+  tbody tr:hover{background:#fafbfd;}
+  .tbl-wrap{overflow-x:auto;}
+  .row-highlight td{font-weight:700;background:#fbfcfe;}
+
+  .badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap;}
+  .badge.ok{background:var(--green-soft);color:var(--green);}
+  .badge.warn{background:var(--amber-soft);color:var(--amber);}
+  .badge.bad{background:var(--red-soft);color:var(--red);}
+  .badge.na{background:var(--grey-soft);color:var(--grey);}
+
+  .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-left:6px;}
+  .tag.verified{background:var(--green-soft);color:var(--green);}
+  .tag.est{background:var(--amber-soft);color:var(--amber);}
+  .tag.na{background:var(--grey-soft);color:var(--grey);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .ratio-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);}
+  .ratio-card .top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+  .ratio-card .name{font-weight:700;font-size:14.5px;}
+  .ratio-card .formula{font-size:12px;color:var(--sub);margin-bottom:10px;}
+  .ratio-card .num{font-size:26px;font-weight:800;color:var(--ink);margin:6px 0 4px;}
+  .ratio-card .thresh{font-size:12px;color:var(--sub);}
+
+  .risk-card{border-left:4px solid var(--red);background:var(--red-soft);border-radius:12px;padding:16px 20px;margin-bottom:14px;}
+  .risk-card.med{border-left-color:var(--amber);background:var(--amber-soft);}
+  .risk-card h5{margin:0 0 6px;font-size:15px;font-weight:800;color:var(--ink);}
+  .risk-card p{margin:0;font-size:13.5px;color:#3a3f4a;}
+  .risk-card .num-tag{display:inline-block;background:#fff;border-radius:8px;padding:2px 8px;font-weight:700;font-size:12.5px;margin-left:6px;}
+
+  .note-box{background:var(--accent-soft);border:1px solid #cfe2fb;border-radius:12px;padding:14px 18px;font-size:13px;color:#134c8c;margin-top:10px;}
+  .gap-box{background:var(--grey-soft);border:1px dashed #c7ccd4;border-radius:12px;padding:16px 20px;font-size:13.5px;color:var(--sub);}
+
+  .src{font-size:11.5px;color:var(--sub);margin-top:8px;}
+  .divider{height:1px;background:var(--line);margin:10px 0 18px;}
+
+  footer{margin-top:50px;padding:22px 0;border-top:1px solid var(--line);color:var(--sub);font-size:12px;text-align:center;}
+  footer .disc{font-weight:700;color:#3a3f4a;margin-bottom:4px;}
+
+  .kicker{font-size:11.5px;color:var(--accent);font-weight:800;letter-spacing:.6px;text-transform:uppercase;}
+  ul.compact{margin:8px 0 0;padding-left:18px;}
+  ul.compact li{margin-bottom:6px;font-size:13.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <span class="hero-tag">個股小狐 ｜ 財務風險健檢</span>
+        <h1 class="hero-title">兆聯實業 6944.TW</h1>
+        <p class="hero-sub">高科技廠房水務系統工程服務商（設計・施工・維運一條龍） ｜ 分析日期 2026-08-25</p>
+      </div>
+      <div class="hero-price-box">
+        <div class="p">NT$ 704~706</div>
+        <div class="chg">盤中，5日連跌 -7.24% ｜ 前收 705</div>
+        <div class="note">2026/08/25 12:20-12:48 資料 ｜ Yahoo奇摩股市／鉅亨網</div>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div class="item"><div class="label">市值</div><div class="value">539.1 億元</div></div>
+      <div class="item"><div class="label">本益比 (TTM)</div><div class="value">22.7 倍</div></div>
+      <div class="item"><div class="label">股價淨值比</div><div class="value">6.4 倍</div></div>
+      <div class="item"><div class="label">52週高／低</div><div class="value small">1,115 / 513</div></div>
+      <div class="item"><div class="label">近4季EPS</div><div class="value">31.0 元</div></div>
+      <div class="item"><div class="label">產業別</div><div class="value small">綠能環保／半導體水處理</div></div>
+    </div>
+  </div>
+
+  <div class="toc">
+    <a href="#s1">① 財務數據填表</a>
+    <a href="#s2">② 六大比率診斷</a>
+    <a href="#s3">③ 債務到期時程</a>
+    <a href="#s4">④ CapEx分析</a>
+    <a href="#s5">⑤ 同業對比</a>
+    <a href="#s6">⑥ 綜合診斷</a>
+  </div>
+
+  <!-- ============ 1. 財務數據填表 ============ -->
+  <section id="s1">
+    <div class="sec-head"><span class="sec-num">1</span><div><h2 class="sec-title">財務數據填表（近3期對照）</h2><p class="sec-desc">單位：新台幣仟元，除特別註明外。標註 <span class="tag verified">✅已驗證</span> <span class="tag est">⚠️估算</span> <span class="tag na">❌無法取得</span></p></div></div>
+
+    <div class="card">
+      <h4>損益表 <span class="tag verified">✅ Yahoo奇摩股市（年度）／與華南投顧2026/07/30報告億元數字交叉核對一致</span></h4>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>項目</th><th>FY2024</th><th>FY2025</th><th>TTM（2025Q3–2026Q2）</th></tr></thead>
+        <tbody>
+          <tr><td>營業收入</td><td>10,300,194</td><td>16,912,921</td><td>19,928,698</td></tr>
+          <tr><td>營業毛利（毛利率）</td><td>2,348,517（22.8%）</td><td>3,823,391（22.6%）</td><td>5,093,653（25.6%）</td></tr>
+          <tr><td>營業費用</td><td>422,437</td><td>708,264</td><td>902,954</td></tr>
+          <tr class="row-highlight"><td>營業利益（EBIT代理值）</td><td>1,926,080（18.7%）</td><td>3,115,127（18.4%）</td><td>4,190,699（21.0%）</td></tr>
+          <tr><td>稅後淨利</td><td>1,512,088</td><td>2,371,525</td><td>3,086,853</td></tr>
+          <tr><td>利息支出</td><td colspan="3" style="text-align:center">❌ 無法取得（未於免費管道揭露科目明細，需查合併財報附註「財務成本」）</td></tr>
+          <tr><td>折舊攤銷 D&amp;A</td><td colspan="3" style="text-align:center">❌ 無法取得（現金流量表附註未公開揭露，需查年報現金流量表補充資訊）</td></tr>
+          <tr><td>EBITDA</td><td colspan="3" style="text-align:center">❌ 無法取得（因D&amp;A缺失無法計算，以下比率分析改用EBIT保守估）</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note-box">⚠️ 說明：由於「業外收支率」長期僅佔營收 0.1%～0.4%（華南投顧報告202402–202601季度資料），推估財務成本（利息支出）金額占比極小；但採用營業利益（EBIT）作為分析基礎，已較保守。EBIT不含業外損益，與含業外之稅前息前利益略有差異，但差異幅度應在1%以內。</p>
+    </div>
+
+    <div class="card">
+      <h4>資產負債表 <span class="tag verified">✅ Yahoo奇摩股市（季度快照）／負債比率與華南投顧報告逐季數字完全一致交叉驗證</span></h4>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>項目</th><th>FY2024末（2024Q4）</th><th>FY2025末（2025Q4）</th><th>最新（2026Q2）</th></tr></thead>
+        <tbody>
+          <tr><td>總資產</td><td>9,753,802</td><td>15,484,590</td><td>18,226,346</td></tr>
+          <tr class="row-highlight"><td>總負債（負債比率）</td><td>5,283,646（54.2%）</td><td>7,458,190（48.2%）</td><td>9,762,543（53.6%）</td></tr>
+          <tr><td>股東權益</td><td>4,470,156</td><td>8,026,400</td><td>8,463,803</td></tr>
+          <tr><td>流動資產</td><td>7,874,033</td><td>13,109,963</td><td>15,156,066</td></tr>
+          <tr><td>流動負債</td><td>4,746,623</td><td>7,022,182</td><td>9,279,652</td></tr>
+          <tr><td>計息負債（短期借款＋長期借款＋一年內到期）</td><td colspan="3" style="text-align:center">❌ 無法取得逐項拆分（Goodinfo／MOPS查詢頁需登入或表單提交，本次未能取得）</td></tr>
+          <tr><td>現金及約當現金</td><td colspan="3" style="text-align:center">❌ 無法取得精確數字（僅能由現金流量表「淨現金流」推算變動量，非期末餘額）</td></tr>
+          <tr><td>應收帳款餘額</td><td colspan="3" style="text-align:center">⚠️估算：約 27.6 億元（=TTM營收÷365×應收帳款週轉天數54.2天，週轉天數取自華南投顧2026Q1資料）</td></tr>
+          <tr><td>存貨餘額（含工程用料）</td><td colspan="3" style="text-align:center">⚠️估算：約 9.0 億元（=TTM銷貨成本÷365×存貨週轉天數23.1天，同上資料來源）</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note-box">✅ 交叉驗證：本表2026Q1負債比率（8,758,959÷17,618,791＝49.7%）與華南投顧報告「202601」季度負債比率49.7%完全一致，確認Yahoo奇摩股市資料可信度。</p>
+    </div>
+
+    <div class="card">
+      <h4>現金流量表 <span class="tag verified">✅ Yahoo奇摩股市（年度）</span></h4>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>項目</th><th>FY2024</th><th>FY2025</th><th>TTM（2025Q3–2026Q2）</th></tr></thead>
+        <tbody>
+          <tr><td>營業活動現金流（OCF）</td><td>1,721,539</td><td>2,944,745</td><td>4,956,817</td></tr>
+          <tr><td>投資活動現金流</td><td>+233,000</td><td>-1,092,560</td><td>-1,857,946（估算,近四季合計）</td></tr>
+          <tr><td>融資活動現金流</td><td>-571,094</td><td>+1,740,503</td><td>—</td></tr>
+          <tr><td>資本支出（CapEx，精確值）</td><td colspan="3" style="text-align:center">❌ 無法取得逐項「購置不動產廠房設備」數字，以下以投資活動現金流量作為⚠️上限估算代理指標</td></tr>
+          <tr class="row-highlight"><td>自由現金流（OCF＋投資CF，Yahoo定義）</td><td>1,954,539</td><td>1,852,185</td><td>—</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note-box">⚠️ 注意：此處「自由現金流」為Yahoo奇摩股市網站定義（OCF＋投資活動現金流），與傳統「OCF－CapEx」定義不同，因無法取得精確CapEx數字，兩者無法完全等價換算，僅供參考趨勢。</p>
+    </div>
+  </section>
+
+  <!-- ============ 2. 六大比率診斷 ============ -->
+  <section id="s2">
+    <div class="sec-head"><span class="sec-num">2</span><div><h2 class="sec-title">六大比率診斷</h2><p class="sec-desc">因計息負債／利息費用／EBITDA數據缺失，部分比率以保守代理指標呈現，並清楚標註限制</p></div></div>
+
+    <div class="grid3">
+      <div class="ratio-card">
+        <div class="top"><span class="name">① 利息覆蓋率</span><span class="badge na">❌ 無法精確計算</span></div>
+        <div class="formula">公式：EBIT ÷ 利息支出</div>
+        <div class="num">—</div>
+        <div class="thresh">警戒標準：&lt;3倍需留意。利息支出未揭露，無法計算精確值。⚠️定性推估：業外收支率長期僅0.1~0.4%營收，歷史財務成本應極低，覆蓋率理論上遠高於安全水位；惟2026/8/6首次發行約25億元5年期無擔保轉換公司債後，利息費用將明顯增加，此比率需待2026Q3財報後重新計算。</div>
+      </div>
+
+      <div class="ratio-card">
+        <div class="top"><span class="name">② 負債比率</span><span class="badge warn">⚠️ 中度</span></div>
+        <div class="formula">公式：總負債 ÷ 總資產</div>
+        <div class="num">53.6%</div>
+        <div class="thresh">警戒標準：一般&gt;60%需留意。FY24 54.2%→FY25 48.2%→最新2026Q2 53.6%，呈現隨營收擴張略回升的趨勢。⚠️ 因無法拆分計息負債與營運性負債（應付帳款／合約負債／預收工程款），此比率可能高估真實財務槓桿，工程服務業常態如此。</div>
+      </div>
+
+      <div class="ratio-card">
+        <div class="top"><span class="name">③ 淨負債／EBITDA</span><span class="badge na">❌ 無法取得</span></div>
+        <div class="formula">公式：（計息負債－現金）÷ EBITDA</div>
+        <div class="num">—</div>
+        <div class="thresh">計息負債、現金餘額、D&amp;A（EBITDA所需項目）三者均未能於本次免費資料源取得，禁止臆測填入，標示為「—」。建議查閱MOPS合併財務報表附註。</div>
+      </div>
+
+      <div class="ratio-card">
+        <div class="top"><span class="name">④ OCF／總負債</span><span class="badge ok">✅ 良好</span></div>
+        <div class="formula">公式：營業活動現金流 ÷ 總負債（因無計息負債細項，以總負債為保守分母）</div>
+        <div class="num">50.8%</div>
+        <div class="thresh">警戒標準：&lt;20%需留意，&gt;40%屬優良。FY24 32.6%→FY25 39.5%→TTM（截至2026Q2）50.8%，現金流對總負債之覆蓋能力持續改善。</div>
+      </div>
+
+      <div class="ratio-card">
+        <div class="top"><span class="name">⑤ 現金流覆蓋比率</span><span class="badge ok">✅ 健康</span></div>
+        <div class="formula">公式：OCF ÷ 流動負債（缺利息支出，改用流動負債作分母之流動性替代指標）</div>
+        <div class="num">53.4%</div>
+        <div class="thresh">警戒標準：&lt;30%需留意。FY24 36.3%→FY25 41.9%→TTM 53.4%，逐年改善，短期償債現金來源穩健。</div>
+      </div>
+
+      <div class="ratio-card">
+        <div class="top"><span class="name">⑥ 兩年內到期牆覆蓋倍數</span><span class="badge na">❌ 無法取得</span></div>
+        <div class="formula">公式：（現金＋預估2年OCF）÷ 未來2年內到期計息負債</div>
+        <div class="num">—</div>
+        <div class="thresh">未能取得計息負債到期時程明細。已知重大新增負債（約25億元5年期CB，⚠️待MOPS核實金額）到期日約在2031年，不落入未來2年到期窗內，短期到期壓力初步判斷有限，但短期銀行借款展期情況未知，建議查閱最新合併財報附註「借款」科目之到期日分析表確認。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. 債務到期時程 ============ -->
+  <section id="s3">
+    <div class="sec-head"><span class="sec-num">3</span><div><h2 class="sec-title">債務到期時程</h2><p class="sec-desc">免費公開管道未能取得逐年到期金額明細；以下為已知、經官方公告證實之重大新增計息負債／資本承諾事件</p></div></div>
+
+    <div class="card">
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>公告日期</th><th>事項</th><th>金額</th><th>備註</th><th>資料狀態</th></tr></thead>
+        <tbody>
+          <tr><td>2026/08/06</td><td>國內第一次＋第二次無擔保轉換公司債（董事會決議）</td><td>合計約 NT$25億元（一：13億／二：12億）</td><td>5年期，預計到期約2031年；主辦券商富邦證券</td><td><span class="tag est">⚠️估算</span>事件經statementdog個股公告與新聞彙整證實，惟精確金額未直接核對MOPS原文，建議以MOPS重大訊息公告再次確認</td></tr>
+          <tr><td>2026/08/06</td><td>增資美國子公司MUAQUA ENGINEERING INC.（普通股）</td><td>美金5,000萬元</td><td>100%持股子公司，用於美國廠區營運資金</td><td><span class="tag verified">✅已驗證</span>MOPS重大訊息／Yahoo個股公告原文</td></tr>
+          <tr><td>2026/03/12</td><td>美國子公司自地委建廠房預算</td><td>NT$19.5億元</td><td>物料倉庫、廠房擴充及辦公室，與華南投顧報告數字一致</td><td><span class="tag verified">✅已驗證</span></td></tr>
+          <tr><td>2026/07/03</td><td>屏東科技產業園區設立分公司（租地委建）</td><td>上限NT$5億元</td><td>契約總金額上限，相對人待定</td><td><span class="tag verified">✅已驗證</span></td></tr>
+          <tr><td>2026/07/03、2026/03/12</td><td>彰化縣鹿港鎮工業區土地廠房兩筆購置</td><td>❌未揭露交易金額</td><td>合計土地約3,100坪</td><td><span class="tag na">❌未取得</span></td></tr>
+          <tr><td>逐年到期金額明細（含銀行借款）</td><td colspan="3" style="text-align:center">❌ 無法取得，建議查閱兆聯實業2026年半年報／年報「借款明細」章節及合併財務報表附註</td><td><span class="tag na">❌無法取得</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note-box">📌 觀察重點：以上已知資本承諾規模合計已超過NT$40億元，遠高於單一年度OCF水準（FY2025僅NT$29.4億），是公司「首次」引入外部無擔保轉換公司債融資的關鍵背景——過去主要依賴內生現金流與股本，如今轉為內生現金流＋外部融資混合支應多廠區（美國、屏東、彰化）同步擴建。</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. CapEx分析 ============ -->
+  <section id="s4">
+    <div class="sec-head"><span class="sec-num">4</span><div><h2 class="sec-title">CapEx分析與資本結構特性判讀</h2><p class="sec-desc">兆聯屬工程服務業（設計・施工・維運），資產負債表結構與傳統重資產製造業不同，需特別判讀應收帳款／合約資產佔比</p></div></div>
+
+    <div class="grid2">
+      <div class="card">
+        <h4>傳統CapEx視角（以投資活動現金流量⚠️代理估算）</h4>
+        <table>
+          <tbody>
+            <tr><td>FY2024 投資活動現金流</td><td>+2.33億元（淨流入）</td></tr>
+            <tr><td>FY2025 投資活動現金流</td><td>-10.93億元（淨流出）</td></tr>
+            <tr><td>CapEx／營收（以FY25投資CF估算上限）</td><td>⚠️約 6.5%</td></tr>
+            <tr><td>CapEx／OCF（以FY25投資CF估算上限）</td><td>⚠️約 37.1%</td></tr>
+          </tbody>
+        </table>
+        <p class="src">⚠️ 此「CapEx」為投資活動現金流量之代理估算，可能包含子公司增資、定存進出等非資本支出項目，非精確購置不動產廠房設備數字。FY2024投資CF為淨流入，顯示當年到期投資/處分金額大於新增投資，實質資本支出可能偏低。</p>
+      </div>
+
+      <div class="card">
+        <h4>工程服務業真實資金壓力來源：應收帳款與合約資產</h4>
+        <table>
+          <tbody>
+            <tr><td>淨營運資金（流動資產－流動負債），2024Q4</td><td>31.3億元</td></tr>
+            <tr><td>淨營運資金，2026Q2（最新）</td><td>58.8億元</td></tr>
+            <tr><td>6季成長幅度</td><td>+87.7%</td></tr>
+            <tr><td>應收帳款週轉天數（2026Q1，華南投顧）</td><td>54.2天</td></tr>
+            <tr><td>存貨週轉天數（2026Q1，華南投顧）</td><td>23.1天</td></tr>
+          </tbody>
+        </table>
+        <p class="src">✅ 淨營運資金數字取自Yahoo奇摩股市資產負債表；週轉天數取自華南投顧2026/07/30報告。淨營運資金6季成長87.7%，遠高於同期投資性CapEx規模（約11億元），顯示應收帳款／合約資產的累積才是主要資金消耗來源，而非廠房設備投資。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>業務模式判讀：輕資產（服務／工程）＋成長性營運資金缺口</h4>
+      <p>兆聯的核心資產並非自有生產產能，而是應收帳款、合約資產（在建工程／預收工程款）與專業工程團隊（企劃設計90人＋專案工程300餘人）。因此傳統製造業常用的「CapEx／營收」「CapEx／OCF」比率對兆聯的財務壓力揭示能力有限，須改用應收帳款、合約資產成長速度與淨營運資金變化作為觀察重點：</p>
+      <ul class="compact">
+        <li>營收持續高速成長（近四季YoY介於23%～100%區間，含月營收波動），將直接推升應收帳款絕對金額，即便週轉天數不變，餘額仍隨營收等比例放大。</li>
+        <li>工程業普遍存在「標案與成本認列時間差」（華南投顧法說會紀要提及），若客戶延遲驗收付款或發生爭議款，將直接壓縮營運現金流，此為工程服務業特有的「增長性現金流風險」，與製造業的資本支出風險性質不同。</li>
+        <li>公司近期同時啟動美國（亞利桑那）、屏東、彰化多廠區擴建與子公司增資，資本需求與應收帳款成長同步發生，是本次首度引入外部無擔保轉換公司債融資的直接原因。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 5. 同業對比 ============ -->
+  <section id="s5">
+    <div class="sec-head"><span class="sec-num">5</span><div><h2 class="sec-title">同業對比</h2><p class="sec-desc">同業選取：中鼎工程（9933，泛用型大型EPC）、亞翔工程（6139，半導體無塵室廠務工程，業務性質與兆聯最接近）。資料來源：Yahoo奇摩股市財務報表(FY2025年度)</p></div></div>
+
+    <div class="card">
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>指標（FY2025年度）</th><th>兆聯實業 6944</th><th>中鼎工程 9933</th><th>亞翔工程 6139</th></tr></thead>
+        <tbody>
+          <tr><td>營業收入</td><td>169.1億元</td><td>918.5億元</td><td>774.8億元</td></tr>
+          <tr><td>營業利益率</td><td>18.4%</td><td>4.4%</td><td>13.0%</td></tr>
+          <tr><td>稅後淨利率</td><td>14.0%</td><td>3.0%</td><td>11.9%</td></tr>
+          <tr class="row-highlight"><td>負債比率（FY25末）</td><td>48.2%</td><td>81.8%</td><td>68.0%</td></tr>
+          <tr><td>流動比率（FY25末）</td><td>186.7%</td><td>103.4%</td><td>138.1%</td></tr>
+          <tr class="row-highlight"><td>OCF／總負債（FY25）</td><td>39.5%</td><td>8.5%</td><td>40.8%</td></tr>
+          <tr><td>本益比（最新）</td><td>22.7倍</td><td>7.7倍</td><td>15.3倍</td></tr>
+          <tr><td>淨負債／EBITDA</td><td colspan="3" style="text-align:center">❌ 三家皆無法取得（計息負債與EBITDA數據缺失）</td></tr>
+          <tr><td>兩年內到期牆覆蓋倍數</td><td colspan="3" style="text-align:center">❌ 三家皆無法取得（到期時程明細未公開）</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note-box">
+        📌 解讀：中鼎作為泛用型大型EPC集團，負債比率高達81.8%但OCF／總負債僅8.5%——反映其龐大在建工程（法說會揭露達4,718億元歷史新高）帶來的營運資金波動大、現金流對負債覆蓋能力相對薄弱。亞翔工程作為半導體無塵室廠務工程專業廠商，體質與兆聯較接近：負債比率68.0%但OCF／總負債達40.8%，同樣展現「高負債比率、高現金流自償能力」的工程服務業特徵。兆聯在負債比率（48.2%）、流動比率（186.7%）與本益比（22.7倍，估值溢價最高）三項指標上均優於／高於兩家同業，顯示市場給予其更高的成長溢價，但也代表安全邊際相對較薄。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 6. 綜合診斷 ============ -->
+  <section id="s6">
+    <div class="sec-head"><span class="sec-num">6</span><div><h2 class="sec-title">綜合診斷</h2><p class="sec-desc">定性分類、最大風險點、安全邊際計算</p></div></div>
+
+    <div class="card">
+      <h4>定性分類：<span class="badge warn" style="font-size:14px;padding:5px 14px;">成長擴張型 － 體質尚可，惟客戶集中度與新增槓桿轉折需密切觀察</span></h4>
+      <p>兆聯過去長期依賴內生現金流自籌成長資本（OCF／總負債與現金流覆蓋比率逐年改善、負債比率48~54%屬中度），財務體質整體健康，不屬於「槓桿警戒型」；但因（1）單一客戶集中度極高、（2）2026/08首度引入外部無擔保轉換公司債融資、（3）多廠區同步擴建推升應收帳款與資本需求、（4）statementdog第三方地雷股篩選僅通過33%，尚不足以歸類為「優良主動管理型」。故本報告將其定性為「成長擴張型」的財務體質觀察名單，關鍵在於接下來1~2季計息負債與利息費用揭露後的槓桿走向。</p>
+    </div>
+
+    <h4 style="margin:22px 0 12px;">最大風險點</h4>
+
+    <div class="risk-card">
+      <h5>① 客戶集中度風險（最高權重）<span class="num-tag">單一客戶＞80%營收</span></h5>
+      <p>⚠️第三方投資分析網站（uanalyze.com.tw）指出兆聯最大客戶（推測為台積電）貢獻營收比重超過80%，此數字非官方財報直接揭露，建議查閱年報「主要客戶」附註核實精確比例。惟官方公告可交叉佐證集中度風險：2026/07/20公司代美國子公司公告承攬「單一美國高科技產業客戶」廢水處理系統工程，依內部重大訊息門檻「絕對金額達新臺幣50億元以上」規定公告（✅來源：MOPS重大訊息／Yahoo個股公告），單一合約規模即逼近公司FY2025全年營收（169.1億元）的三成。若該核心客戶資本支出計畫轉向或延後，對兆聯營收與在手訂單的衝擊將遠大於一般分散型客戶結構的同業。</p>
+    </div>
+
+    <div class="risk-card">
+      <h5>② 應收帳款／合約資產周轉風險<span class="num-tag">淨營運資金6季+87.7%</span></h5>
+      <p>淨營運資金（流動資產－流動負債）由2024Q4的31.3億元成長至2026Q2的58.8億元，成長幅度87.7%，遠超過同期投資性CapEx規模（約11億元）。⚠️估算應收帳款餘額約27.6億元（以TTM營收與週轉天數54.2天推算）。工程收入認列與客戶付款存在時間差，若營收成長趨緩或客戶延遲驗收付款，將直接壓縮營運現金流——這是工程服務業特有的「增長性現金流風險」，與製造業CapEx風險性質不同。</p>
+    </div>
+
+    <div class="risk-card med">
+      <h5>③ 財務槓桿轉折點<span class="num-tag">首次發行約25億元CB</span></h5>
+      <p>2026/08/06董事會決議發行國內第一次＋第二次無擔保轉換公司債（⚠️金額約25億元，5年期，待MOPS原文核實），為公司上市以來首度採用之直接融資工具，加上同期美國子公司增資5,000萬美元。此舉顯示資本支出需求（美國、屏東、彰化多廠區同步擴建，已知承諾規模合計逾40億元）已超出單靠內生現金流可支應的規模。未來利息費用將首次成為財報中具意義的項目，且轉換公司債若觸發轉換，將帶來股權稀釋，需留意轉換價格與稀釋比例。</p>
+    </div>
+
+    <div class="risk-card med">
+      <h5>④ 估值已反映高成長預期<span class="num-tag">本益比22.7倍／股價淨值比6.4倍</span></h5>
+      <p>股價自52週高點1,115元回落至700元附近（近5日連跌7.24%），本益比22.7倍、股價淨值比6.4倍，相對同業中鼎（7.7倍）、亞翔（15.3倍）明顯偏高，顯示市場已給予兆聯顯著的成長溢價。安全邊際計算（見下）顯示，目前估值對獲利下修的容忍度有限。</p>
+    </div>
+
+    <div class="risk-card med">
+      <h5>⑤ 第三方體質篩選警訊<span class="num-tag">地雷股健診2/6通過</span></h5>
+      <p>財報狗（statementdog.com）「排除地雷股健診」工具顯示兆聯僅通過33%（2/6項）檢查條件，判定為「財務體質風險高」。⚠️逐項細目內容需付費解鎖，本次未能取得明細，但作為公開篩選工具之結果仍具參考價值，建議投資人自行登入查核細項再做判斷（該工具同時標示「投資風險：財務數據無明顯風險」，兩項指標結論略有出入，僅供交叉參考）。</p>
+    </div>
+
+    <h4 style="margin:26px 0 12px;">安全邊際計算</h4>
+    <div class="card">
+      <p><b>方法一：營業利益率回落安全邊際</b><br>
+      FY2025營業利益率18.4%，TTM（截至2026Q2）營業利益率21.0%。以公司歷史最低營益率（2022年6.2%，華南投顧報告，惟2022年為上市初期規模與結構皆與現況差異甚大，僅供參考下限）為警戒基準：<br>
+      EBIT需衰退幅度 ＝ (18.4% － 6.2%) ÷ 18.4% ≈ <b>66.3%</b>，即營業利益必須重挫超過三分之二，營益率才會打回2022年水準——以近期21%的TTM營益率動能而言，短期內發生的機率偏低，反映公司目前獲利韌性尚屬穩健。</p>
+      <div class="divider"></div>
+      <p><b>方法二：利息覆蓋率安全邊際</b><br>
+      <span class="tag na">❌ 無法精確計算</span> 因利息支出未揭露，無法計算EBIT需下滑多少百分比才會使利息覆蓋率跌破警戒值（一般為3倍）。待2026Q3／Q4合併財報公布新發轉換公司債之實際利息費用後，應立即重新計算此項安全邊際，這是本報告最關鍵的待補資料缺口。</p>
+    </div>
+
+    <div class="gap-box" style="margin-top:20px;">
+      <b>📋 資料缺口總覽（本報告中標示為「—」或「❌無法取得」的項目）：</b>
+      <ul class="compact">
+        <li>利息支出（財務成本）— 各期皆無法取得精確數字</li>
+        <li>折舊攤銷D&amp;A — 各期皆無法取得，導致EBITDA、淨負債/EBITDA無法計算</li>
+        <li>計息負債細項（短期借款／長期借款／一年內到期長期負債）— 三期皆無法取得，Goodinfo資產負債表細項頁與MOPS財報查詢系統因表單/登入限制未能於本次取得</li>
+        <li>現金及約當現金期末餘額（精確值）— 僅能由現金流量表淨變動量推算，非資產負債表期末餘額</li>
+        <li>逐年計息負債到期金額明細 — 年報「借款明細」章節未能取得，僅掌握2026/08新發轉換公司債（約25億元，⚠️估算）及到期日約2031年</li>
+        <li>精確CapEx（購置不動產廠房設備）數字 — 以投資活動現金流量作為⚠️估算上限代理指標</li>
+        <li>同業（中鼎、亞翔）之淨負債/EBITDA、兩年內到期牆覆蓋倍數 — 同樣因計息負債與D&amp;A數據缺失無法取得</li>
+        <li>轉換公司債精確發行金額（13億+12億=25億） — 來自WebSearch彙整結果，未直接核對MOPS重大訊息原文，標示⚠️估算，建議使用者自行至公開資訊觀測站確認</li>
+        <li>客戶集中度精確比例（單一客戶逾80%營收） — 來自第三方投資分析網站，非官方財報直接揭露數字，建議查閱年報「主要客戶」附註核實</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="disc">本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</div>
+    <div>資料來源：Yahoo奇摩股市（tw.stock.yahoo.com）、鉅亨網（cnyes.com）、財報狗（statementdog.com）、華南投顧個股訪談報告（2026/07/30）、MoneyDJ理財網、公開資訊觀測站重大訊息公告、uanalyze.com.tw、blog.bei-sin.com 部落格分析（部分數字為第三方推估，已於文中標註）</div>
+    <div style="margin-top:6px;">個股小狐｜財務風險健檢 v1.0 ｜ 產出日期 2026-08-25</div>
+  </footer>
+
+</div>
+</body>
+</html>

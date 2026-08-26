@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜兆聯實業(6944) 公司深度研究</title>
+<style>
+:root{
+  --bg:#f7f8fa; --bg-card:#ffffff; --bg-soft:#eef2f6;
+  --text:#1c2530; --text-soft:#5b6675; --text-faint:#8994a3;
+  --border:#e2e6ec; --accent:#0f6e5c; --accent-soft:#e4f3ee;
+  --blue:#1c5fa8; --blue-soft:#e8f1fb;
+  --amber:#a3690a; --amber-soft:#fdf1de;
+  --red:#b3382c; --red-soft:#fbeae8;
+  --green:#1f8a4c; --green-soft:#e7f6ec;
+  --gray:#6b7280; --gray-soft:#eef0f3;
+  --shadow:0 1px 3px rgba(20,30,45,.06), 0 1px 2px rgba(20,30,45,.04);
+  --radius:14px;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,sans-serif;
+  line-height:1.7; font-size:15.5px;
+}
+.wrap{max-width:1080px; margin:0 auto; padding:0 20px 80px;}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#0f6e5c 0%,#0a4d3f 100%);
+  color:#fff; padding:40px 20px 34px; margin-bottom:0;
+}
+.hero-inner{max-width:1080px; margin:0 auto;}
+.hero-tag{display:inline-block; font-size:12.5px; letter-spacing:.06em; background:rgba(255,255,255,.16); padding:4px 12px; border-radius:20px; margin-bottom:14px;}
+.hero-title{font-size:30px; font-weight:800; margin:0 0 6px;}
+.hero-sub{font-size:14.5px; color:rgba(255,255,255,.82); margin-bottom:22px;}
+.hero-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:12px;}
+.hero-stat{background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:12px 14px;}
+.hero-stat .label{font-size:12px; color:rgba(255,255,255,.72); margin-bottom:4px;}
+.hero-stat .value{font-size:19px; font-weight:700;}
+.hero-stat .note{font-size:11px; color:rgba(255,255,255,.6); margin-top:2px;}
+@media(max-width:900px){.hero-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* TOC */
+.toc{
+  background:var(--bg-card); border-bottom:1px solid var(--border);
+  position:sticky; top:0; z-index:10; box-shadow:var(--shadow);
+}
+.toc-inner{max-width:1080px; margin:0 auto; padding:10px 20px; display:flex; gap:6px; flex-wrap:wrap; overflow-x:auto;}
+.toc a{
+  font-size:13px; color:var(--text-soft); text-decoration:none; padding:7px 13px;
+  border-radius:20px; white-space:nowrap; transition:.15s;
+}
+.toc a:hover{background:var(--accent-soft); color:var(--accent);}
+
+section{padding-top:42px;}
+h2.sec-title{
+  font-size:21px; font-weight:800; margin:0 0 4px; display:flex; align-items:center; gap:10px;
+}
+h2.sec-title .num{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:8px; background:var(--accent); color:#fff; font-size:14px;
+}
+.sec-desc{color:var(--text-soft); font-size:13.5px; margin:0 0 20px;}
+
+.card{background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px 22px; margin-bottom:16px;}
+.card h3{font-size:16px; margin:0 0 10px; font-weight:700;}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+.grid5{display:grid; grid-template-columns:repeat(5,1fr); gap:12px;}
+@media(max-width:900px){.grid2,.grid3,.grid5{grid-template-columns:1fr;}}
+
+table{width:100%; border-collapse:collapse; font-size:13.6px;}
+th,td{padding:9px 10px; border-bottom:1px solid var(--border); text-align:left;}
+th{background:var(--bg-soft); font-weight:700; color:var(--text-soft); font-size:12.5px;}
+tr:last-child td{border-bottom:none;}
+.tbl-wrap{overflow-x:auto;}
+td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+
+.badge{display:inline-block; font-size:12px; font-weight:700; padding:3px 10px; border-radius:20px;}
+.badge-green{background:var(--green-soft); color:var(--green);}
+.badge-amber{background:var(--amber-soft); color:var(--amber);}
+.badge-red{background:var(--red-soft); color:var(--red);}
+.badge-gray{background:var(--gray-soft); color:var(--gray);}
+.badge-blue{background:var(--blue-soft); color:var(--blue);}
+
+.tag-verified{color:var(--green); font-weight:700;}
+.tag-est{color:var(--amber); font-weight:700;}
+.tag-na{color:var(--gray); font-weight:700;}
+
+.risk-card{
+  border-left:4px solid var(--red); background:var(--red-soft);
+  border-radius:10px; padding:14px 16px; margin-bottom:12px;
+}
+.risk-card.mid{border-left-color:var(--amber); background:var(--amber-soft);}
+.risk-card h4{margin:0 0 6px; font-size:14.5px; display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap;}
+.risk-card p{margin:4px 0; font-size:13.5px; color:var(--text-soft);}
+.risk-card .trigger{background:rgba(255,255,255,.55); border-radius:8px; padding:8px 10px; margin-top:8px; font-size:13px;}
+
+.thesis-item{border:1px solid var(--border); border-radius:12px; padding:14px 16px; margin-bottom:12px; display:flex; gap:14px; align-items:flex-start;}
+.thesis-item .status{font-size:20px; flex-shrink:0; margin-top:2px;}
+.thesis-item h4{margin:0 0 4px; font-size:15px;}
+.thesis-item p{margin:0; font-size:13.5px; color:var(--text-soft);}
+
+.stars{color:#d59a1c; letter-spacing:1px; font-size:15px;}
+.stars .off{color:#dfe3e8;}
+
+.action-box{
+  background:linear-gradient(135deg,#0f6e5c,#0a4d3f); color:#fff; border-radius:var(--radius);
+  padding:22px 24px; margin-top:16px;
+}
+.action-box h3{margin:0 0 14px; font-size:16.5px; color:#fff;}
+.action-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.action-grid .item{background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); border-radius:10px; padding:12px 14px;}
+.action-grid .item .k{font-size:12px; color:rgba(255,255,255,.72); margin-bottom:4px; font-weight:700;}
+.action-grid .item .v{font-size:13.8px; line-height:1.6;}
+@media(max-width:900px){.action-grid{grid-template-columns:1fr;}}
+
+.pill-row{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0;}
+.pill{background:var(--bg-soft); border-radius:8px; padding:8px 12px; font-size:13px; flex:1; min-width:140px;}
+.pill b{display:block; font-size:16px; margin-top:2px;}
+
+.summary-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:20px;}
+.summary-card{background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; text-align:center;}
+.summary-card .label{font-size:12.5px; color:var(--text-soft); margin-bottom:8px;}
+.summary-card .big{font-size:26px; font-weight:800; color:var(--accent);}
+@media(max-width:900px){.summary-cards{grid-template-columns:1fr;}}
+
+.source-note{font-size:12px; color:var(--text-faint); margin-top:6px;}
+footer{margin-top:50px; padding:26px 20px; border-top:1px solid var(--border); color:var(--text-faint); font-size:12.5px;}
+footer .disclaimer{background:var(--bg-soft); border-radius:10px; padding:14px 16px; margin-bottom:14px; color:var(--text-soft);}
+.divider{height:1px; background:var(--border); margin:36px 0 0;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">個股小狐｜公司深度研究</span>
+    <h1 class="hero-title">兆聯實業 (6944.TW)</h1>
+    <div class="hero-sub">分析日期 2026-08-25　｜　台灣證交所上市（2025/05/28上市）　｜　產業分類：綠能環保 / 半導體廠務水處理工程</div>
+    <div class="hero-grid">
+      <div class="hero-stat"><div class="label">股價（盤中）</div><div class="value">約 699–706 元</div><div class="note">昨收705元・2026/08/25</div></div>
+      <div class="hero-stat"><div class="label">市值</div><div class="value">約 696.9 億元</div><div class="note">wantgoo 2026/08/25</div></div>
+      <div class="hero-stat"><div class="label">本益比(TTM)</div><div class="value">約 17.5 倍</div><div class="note">多來源交叉：17.52倍</div></div>
+      <div class="hero-stat"><div class="label">股價淨值比</div><div class="value">約 6.3–6.4 倍</div><div class="note">每股淨值110.37元</div></div>
+      <div class="hero-stat"><div class="label">Thesis成立度</div><div class="value">3.5 / 5</div><div class="note">詳見綜合總結</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#s1">① 基本介紹</a>
+    <a href="#s2">② 業務引擎分析</a>
+    <a href="#s3">③ 核心Thesis與未來性</a>
+    <a href="#s4">④ 競爭格局</a>
+    <a href="#s5">⑤ 成長象限與護城河</a>
+    <a href="#s6">綜合總結</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ============ SECTION 1 基本介紹 ============ -->
+<section id="s1">
+  <h2 class="sec-title"><span class="num">1</span>基本介紹</h2>
+  <p class="sec-desc">兆聯實業成立於2004年，核心團隊承襲外商水處理背景（前美商Ionics台灣分公司暨其後被奇異(GE)水處理部門併購之技術團隊），累積近三十年水務系統經驗，已建造超過30座（華南投顧7/30報告載為40餘座）大型先進科技廠房純廢水回收系統，主要客戶為半導體晶圓代工龍頭（含台積電、聯電等）。</p>
+
+  <div class="card">
+    <h3>核心財務快照</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>指標</th><th>數值</th><th>狀態</th><th>來源／計算依據</th></tr>
+      <tr><td>股價</td><td>約699–706元（區間），昨收705元</td><td class="tag-verified">✅已驗證</td><td>PChome股市／wantgoo／Yahoo奇摩股市，2026-08-25盤中</td></tr>
+      <tr><td>市值</td><td>約696.9億元</td><td class="tag-verified">✅已驗證</td><td>wantgoo 2026-08-25；與華南投顧7/30報告684.9億元(股價687元)依股價比例換算後(約697.9億)一致</td></tr>
+      <tr><td>TTM營收</td><td>約199.4億元</td><td class="tag-est">⚠️估算</td><td>近四季加總：25Q3 47.9億+25Q4 53.6億+26Q1 47.1億+26Q2 50.8億（華南投顧2026/07/30報告＋公司月營收公告）</td></tr>
+      <tr><td>營收YoY（上半年）</td><td>+44.54%（H1 2026營收97.87億元）</td><td class="tag-verified">✅已驗證</td><td>富聯網／CMoney 法說會後報導，2026年8月</td></tr>
+      <tr><td>毛利率（TTM加權）</td><td>約24.4%</td><td class="tag-est">⚠️估算</td><td>以近四季營收加權平均自行計算（基期數據取自華南投顧報告）；26Q1單季毛利率27.2%為單季新高（✅已驗證）</td></tr>
+      <tr><td>FCF（自由現金流）</td><td>近四季營業現金流約49億元；資本支出未逐季揭露，FCF精確值無法取得</td><td class="tag-na">❌無法取得精確值</td><td>營業現金流依華南投顧「每股營業現金流量」季度數據加總估算；資本支出（含美國新廠）未拆分揭露</td></tr>
+      <tr><td>每股淨值</td><td>110.37元</td><td class="tag-verified">✅已驗證</td><td>鉅亨網 2026-08-25</td></tr>
+      <tr><td>現金殖利率</td><td>2.41%（2025年度現金股利17元）</td><td class="tag-verified">✅已驗證</td><td>鉅亨網；2026/07/23除息</td></tr>
+      <tr><td>52週最高／最低</td><td>—</td><td class="tag-na">❌無法取得</td><td>各查詢管道未能取得精確52週高低價數字，僅知近一年股價自約400元區間上漲至千元附近後回落至現價，禁止臆測精確價位</td></tr>
+      <tr><td>在手訂單</td><td>264.7億元（歷史新高），海外占比逾100億元</td><td class="tag-verified">✅已驗證</td><td>華南投顧2026/07/30訪談報告</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>產業與市場地位</h3>
+      <p style="font-size:13.6px; color:var(--text-soft);">兆聯為台灣少數專注「高科技廠房純水／廢水回收系統工程」之上市公司，提供設計、施工、維運一條龍整合服務。經濟部智慧財產局2024年9月報告指出，全球前20大半導體製程廢水處理專利申請人中兆聯排名第14，台灣僅次於工研院，顯示其技術門檻與專業地位。<br><br>
+      2025年營收結構：工程收入占比約68%、其他營業收入（耗材／化學品／維運／樹脂再生）占32%；銷售地區：台灣約88%、大陸3%、美國5%、新加坡4%（華南投顧報告）。</p>
+    </div>
+    <div class="card">
+      <h3>估值交叉核對備註</h3>
+      <p style="font-size:13.6px; color:var(--text-soft);">本益比在不同資料源間存在落差：wantgoo／Yahoo奇摩股市顯示17.52倍，鉅亨網顯示22.69倍，主因可能為2026/07/23股票股利（每股3元，約當30%）除權後，各平台股本／股數更新時點不一致所致。本報告採多數來源交叉一致之17.5倍區間為主要參考，並在此註明差異來源以符合「不臆測精確數字」原則。</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 2 業務引擎分析 ============ -->
+<section id="s2">
+  <h2 class="sec-title"><span class="num">2</span>業務引擎分析</h2>
+  <p class="sec-desc">兆聯的業務可拆解為四條主要產品線，彼此構成「建置→維運→耗材」的閉環商業模式，其中工程包收入貢獻主要營收規模，而耗材／維運收入則提供較穩定的重複性現金流。</p>
+
+  <div class="card">
+    <h3>核心業務線拆解</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>業務線</th><th>內容</th><th>客戶結構</th><th>護城河來源</th></tr>
+      <tr>
+        <td><b>① 超純水系統工程</b></td>
+        <td>半導體晶圓廠超純水（UPW）系統之規劃、設計、統包建造</td>
+        <td>半導體晶圓代工龍頭（台積電、聯電等）為主，客戶集中度高</td>
+        <td>製程用水純度／穩定度要求極高，屬一級供應商資格門檻；40餘座大型廠房實績</td>
+      </tr>
+      <tr>
+        <td><b>② 廢水處理與回收系統工程</b></td>
+        <td>酸鹼廢水、有機廢水、金屬離子廢水（含鈷製程廢水）、氟離子廢水回收系統</td>
+        <td>同上，並隨先進封裝濕製程需求擴大而增加</td>
+        <td>客製化處理技術（如鈷廢水回收因應先進製程開發）；全球廢水處理專利申請人排名第14</td>
+      </tr>
+      <tr>
+        <td><b>③ 系統代操作(O&amp;M)＋耗材／化學品／樹脂再生</b></td>
+        <td>系統委外維運、RO膜清洗、樹脂再生、特用化學品銷售</td>
+        <td>既有建置客戶轉換而來，具高度續約與交叉銷售關係</td>
+        <td>客戶轉換成本高、在地化服務網絡；貢獻2025年約32%「其他營業收入」，屬相對穩定的重複性收入</td>
+      </tr>
+      <tr>
+        <td><b>④ 再生水／海水淡化系統規劃工程</b></td>
+        <td>再生水廠、海水淡化系統之規劃設計工程</td>
+        <td>企業客戶＋政府機關（水資源政策驅動）</td>
+        <td>技術團隊承襲海水淡化外商背景（Ionics）；受惠政策方向但目前占比與具體標案金額未充分揭露，需持續追蹤</td>
+      </tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>優勢產品／服務表</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>產品線分類</th><th>對應服務範疇</th><th>護城河說明</th></tr>
+      <tr><td>超純水及廢水處理回收系統統包工程</td><td>企劃、設計、工程施工、驗收（一條龍）</td><td>企劃設計團隊約90人、專案工程人員逾300人，單日最大動員施工人力達2,000餘人，材料元件與耗材備品庫存充足，施工能量具規模話語權</td></tr>
+      <tr><td>水系統耗材與化學品銷售</td><td>元件耗材更換、特用化學品應用銷售</td><td>與既有設備基礎綁定，具備供應鏈黏著度</td></tr>
+      <tr><td>膜類與離子交換樹脂再生循環</td><td>RO膜清洗、樹脂再生服務</td><td>延伸自建置客戶的售後服務，重複性收入來源</td></tr>
+      <tr><td>水系統維運服務</td><td>系統代操作、日常運維</td><td>長約性質、客戶轉換成本高</td></tr>
+    </table>
+    </div>
+    <p class="source-note">資料來源：華南投顧「兆聯實業(6944)0727訪談報告」(2026-07-30)，經整理重述，非原文抄錄。</p>
+  </div>
+
+  <div class="card">
+    <h3>近四期歷史財務摘要（年度）</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>年度</th><th class="num">營收(億元)</th><th class="num">YoY</th><th class="num">營益率</th><th class="num">稅後EPS(元)</th><th class="num">EPS YoY</th><th>FCF</th></tr>
+      <tr><td>2022</td><td class="num">100.1</td><td class="num">—</td><td class="num">6.2%</td><td class="num">7.44</td><td class="num">—</td><td class="tag-na">—</td></tr>
+      <tr><td>2023</td><td class="num">90.1</td><td class="num">-10.0%</td><td class="num">15.8%</td><td class="num">15.97</td><td class="num">+114.6%</td><td class="tag-na">—</td></tr>
+      <tr><td>2024</td><td class="num">103.0</td><td class="num">+14.3%</td><td class="num">18.7%</td><td class="num">22.33</td><td class="num">+39.8%</td><td class="tag-na">—</td></tr>
+      <tr><td>2025</td><td class="num">169.1</td><td class="num">+64.2%</td><td class="num">18.4%</td><td class="num">32.29</td><td class="num">+44.6%</td><td class="tag-na">—</td></tr>
+      <tr><td>2026(F)</td><td class="num">241.9</td><td class="num">+43.1%</td><td class="num">20.2%</td><td class="num">43.02</td><td class="num">+33.2%</td><td class="tag-na">—</td></tr>
+    </table>
+    </div>
+    <p class="source-note">來源：華南投顧2026/07/30報告年度EPS預估表（2026年為華南投顧預估值，非公司財測）。因公司未拆分揭露折舊攤銷(D&amp;A)，本表以「營益率」替代嚴格定義之EBITDA margin，並如實標示「—」而非臆測數字；FCF因資本支出未逐年揭露，同樣標示為「—」。2022年為上市前資料，YoY基期不完整，故標示「—」。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 3 核心Thesis與未來性 ============ -->
+<section id="s3">
+  <h2 class="sec-title"><span class="num">3</span>核心Thesis與未來性</h2>
+  <p class="sec-desc">投資論點支柱逐項檢視成立狀態，並區分成長驅動力與需監控風險。</p>
+
+  <div class="card">
+    <h3>投資論點支柱檢視</h3>
+
+    <div class="thesis-item">
+      <div class="status">✅</div>
+      <div>
+        <h4>支柱一：半導體資本支出上行帶動純水／廢水系統需求 —— 成立</h4>
+        <p>2026年上半年營收97.87億元，YoY+44.5%創歷史同期新高；在手訂單264.7億元創新高，海外占比逾100億元，接單動能持續往上（華南投顧2026/07/30報告）。</p>
+      </div>
+    </div>
+
+    <div class="thesis-item">
+      <div class="status">✅</div>
+      <div>
+        <h4>支柱二：核心客戶全球擴廠帶來地理擴張與客戶黏著 —— 成立</h4>
+        <p>兆聯美國子公司已規劃於亞利桑那投資約19.5–23億元建設集中型新廠，提供建廠、維護、化學品、資源循環全面性服務，預計2028年完工，員工規模將倍增達百人；新加坡則受惠記憶體大廠擴產（華南投顧報告、法說會揭露）。</p>
+      </div>
+    </div>
+
+    <div class="thesis-item">
+      <div class="status">✅</div>
+      <div>
+        <h4>支柱三：技術護城河與專利佈局支撐高毛利率 —— 成立</h4>
+        <p>毛利率自2022年9.7%擴張至2026Q1的27.2%（單季新高），全球半導體製程廢水處理專利申請人排名第14（台灣僅次工研院），支撐其在客製化廢水處理（如鈷製程廢水）的技術溢價。</p>
+      </div>
+    </div>
+
+    <div class="thesis-item">
+      <div class="status">⚠️</div>
+      <div>
+        <h4>支柱四：政策驅動的再生水／海水淡化長期商機 —— 部分成立</h4>
+        <p>台灣工業用水回收政策方向明確（目標朝向更高工業用水回收率推進），公司亦具備海水淡化技術背景，但兆聯此業務線目前占營收比重及具體標案金額未於公開資訊中充分揭露，中長期潛力仍待更多實際訂單驗證。</p>
+      </div>
+    </div>
+
+    <div class="thesis-item">
+      <div class="status">❌</div>
+      <div>
+        <h4>支柱五：獲利成長可完全轉化為股東可分配價值 —— 未完全兌現</h4>
+        <p>市場分析指出公司提撥約19%稅後淨利作為員工分紅，加上盈餘轉增資及可能的員工認股權持續使股本膨脹（2025年股票股利3元，約當30%），對每股獲利成長形成稀釋，獲利品質需留意（來源：法說會後分析報導，2026年）。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>核心成長驅動力</h3>
+      <ul style="padding-left:18px; font-size:13.6px; color:var(--text-soft); margin:0;">
+        <li style="margin-bottom:10px;"><b>台灣／全球半導體資本支出擴張：</b>SEMI預估2026年全球晶片前段製程設備(WFE)支出年增約8%，主要動能來自AI/HPC先進製程、封裝、HBM相關設備需求延續（華南投顧報告引用SEMI數據）。</li>
+        <li style="margin-bottom:10px;"><b>核心客戶多地擴廠同步帶動：</b>台積電等客戶於美國、台灣、新加坡等地持續擴產，兆聯同步在美國就近設立配套服務據點，強化長期客戶黏著與海外營收占比。</li>
+        <li><b>水資源短缺與再生水／海淡政策趨勢：</b>先進製程與封裝製程用水需求提升，帶動工業再生水廠建設需求；記憶體大廠在台灣及新加坡擴產亦挹注相關商機。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>需監控風險摘要</h3>
+      <p style="font-size:13px; color:var(--text-faint);">詳細觸發條件見下方風險卡片。</p>
+      <div class="pill-row">
+        <div class="pill">客戶集中度<b style="color:var(--red);">高</b></div>
+        <div class="pill">美國建廠執行<b style="color:var(--amber);">中高</b></div>
+        <div class="pill">估值／質押<b style="color:var(--amber);">中</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="risk-card">
+    <h4>風險一：客戶集中度過高（最大客戶占比逾80%） <span class="badge badge-red">影響：高</span></h4>
+    <p>最大客戶為台積電，其營收貢獻占比逾80%（WebSearch多來源交叉：法人研究整理）。公司營運高度綁定單一客戶資本支出週期。</p>
+    <div class="trigger"><b>觸發條件：</b>若台積電資本支出年增率轉為負成長，或既定擴廠計畫出現延遲／縮減，兆聯營收及在手訂單成長動能將明顯受挫。</div>
+  </div>
+
+  <div class="risk-card mid">
+    <h4>風險二：美國建廠資金與執行風險 <span class="badge badge-amber">影響：中高</span></h4>
+    <p>亞利桑那新廠總投資規模約19.5–23億元，市場分析指出「等於一整年獲利all-in到海外建廠」；美國人力與物料成本遠高於台灣，折舊壓力可能侵蝕獲利（來源：法說會後分析報導，2026年）。</p>
+    <div class="trigger"><b>觸發條件：</b>若2028年完工時程延遲，或美國營運成本超出預期導致該子公司連續虧損／侵蝕合併毛利率2個百分點以上，應重新檢視海外擴張效益。</div>
+  </div>
+
+  <div class="risk-card mid">
+    <h4>風險三：估值已反映高成長預期，波動風險上升 <span class="badge badge-amber">影響：中</span></h4>
+    <p>目前本益比約17.5倍（多來源交叉），法人（華南投顧）目標價800元對應隱含漲幅約16.45%（以7/30收盤687元計算）；另有市場分析指出保守目標價880元已達標，估值上緣已具一定程度反映。內部人質押比例偏高（經理人質押持股占比約15.92%，部分主管質押逾50%）亦增加籌碼面波動風險。</p>
+    <div class="trigger"><b>觸發條件：</b>若單季營收YoY降至20%以下，或毛利率連續兩季回落至20%以下，股價可能面臨本益比快速收斂的壓力；技術面重挫亦可能觸發質押斷頭賣壓。</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 4 競爭格局 ============ -->
+<section id="s4">
+  <h2 class="sec-title"><span class="num">4</span>競爭格局</h2>
+  <p class="sec-desc">兆聯所處的「半導體廠務水處理」領域並非獨立掛牌賽道，實務上與台灣「半導體廠務工程」大型統包廠存在部分業務重疊（廠務系統含無塵室、機電、氣化學品供應及水系統），同時也面對區域性水處理專業分包廠的競爭。以下依主要戰場分別列示，市占率因未見具公信力之公開統計，如實標示「—」，避免臆測。</p>
+
+  <div class="card">
+    <h3>戰場一：半導體廠務統包工程（部分業務重疊）</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>公司</th><th>市占</th><th>優勢</th><th>對兆聯威脅度</th></tr>
+      <tr><td>漢唐(2404)</td><td>—</td><td>無塵室統包龍頭，深度綁定台積電（含美國亞利桑那廠），在手訂單規模達千億元級</td><td><span class="badge badge-amber">🟡 中</span></td></tr>
+      <tr><td>帆宣(6196)</td><td>—</td><td>設備代工與廠務並重，業務涵蓋氣化學品供應系統，同樣受惠台積電美國／德國擴廠</td><td><span class="badge badge-amber">🟡 中</span></td></tr>
+      <tr><td>亞翔(6139)</td><td>—</td><td>機電與無塵室統包大廠，手握聯電、記憶體廠海外大案</td><td><span class="badge badge-amber">🟡 中</span></td></tr>
+      <tr><td>聖暉(5536)</td><td>—</td><td>廠務工程供應商之一，同步受惠半導體擴廠週期</td><td><span class="badge badge-green">🟢 低</span></td></tr>
+    </table>
+    </div>
+    <p class="source-note">上述廠務工程四雄業務範疇涵蓋無塵室、機電、氣化學品等綜合廠務系統，水處理僅為其部分承攬範疇，非其核心專精領域；兆聯則以純水／廢水處理回收「專業縱深」取勝，兩者在客戶重疊度上存在但非直接同質競爭，威脅度綜合評為中等。市占率數字因無公信力來源，標示「—」。</p>
+  </div>
+
+  <div class="card">
+    <h3>戰場二：純水／廢水處理專業分包與耗材服務</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>競爭型態</th><th>市占</th><th>優勢</th><th>對兆聯威脅度</th></tr>
+      <tr><td>區域性中小型水處理工程／耗材供應商（未具名，資料不足）</td><td>—</td><td>價格彈性，服務在地中小型廠房客戶</td><td><span class="badge badge-green">🟢 低</span></td></tr>
+    </table>
+    </div>
+    <p class="source-note">此戰場缺乏具名且具公信力之上市櫃可比公司資料，禁止臆測列入未經查證之公司名稱。兆聯在半導體龍頭客戶認證門檻、專利佈局（全球第14）與施工規模（單日動員逾2,000人）上具備明顯規模與技術優勢，判斷此戰場對兆聯威脅度低。</p>
+  </div>
+
+  <div class="card">
+    <h3>戰場三：政府再生水／海水淡化標案</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>公司</th><th>市占</th><th>優勢</th><th>對兆聯威脅度</th></tr>
+      <tr><td>崑鼎(6803，中鼎集團)</td><td>—</td><td>廢棄物管理與再生能源經驗豐富，母集團中鼎工程資源雄厚，積極布局水處理相關業務</td><td><span class="badge badge-amber">🟡 中</span></td></tr>
+    </table>
+    </div>
+    <p class="source-note">此戰場兆聯目前實際標案佔比與具體案例未於公開資訊充分揭露，判斷依據有限，建議列為持續追蹤項目而非既定優勢。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 5 成長象限與護城河評估 ============ -->
+<section id="s5">
+  <h2 class="sec-title"><span class="num">5</span>成長象限判斷與護城河評估</h2>
+
+  <div class="card">
+    <h3>Peter Lynch 成長象限判斷</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>判斷依據</th><th>數據</th><th>結論方向</th></tr>
+      <tr><td>營收CAGR（2023–2025）</td><td>約+37.0%</td><td>符合高速成長股特徵（一般門檻20%以上）</td></tr>
+      <tr><td>EPS CAGR（2023–2025）</td><td>約+42.2%</td><td>符合高速成長股特徵</td></tr>
+      <tr><td>市值規模</td><td>約697億元，屬中小型股</td><td>高速成長股常見於中小型股階段</td></tr>
+      <tr><td>上市歷史</td><td>2025/05/28上市，交易歷史僅約1年3個月</td><td>樣本期間短，成長延續性尚待更多季度驗證</td></tr>
+      <tr><td>營收驅動來源</td><td>單一產業（半導體）＋高客戶集中度（最大客戶逾80%）</td><td>成長動能集中，波動性可能高於分散型成長股</td></tr>
+    </table>
+    </div>
+    <p style="margin-top:10px;"><b>判斷結論：</b><span class="badge badge-green">高速成長股</span>（Fast Grower），但因上市歷史短、客戶集中度高，其成長屬性帶有較高的週期敏感性，需持續觀察是否能跨過半導體資本支出週期波動而維持成長慣性。</p>
+  </div>
+
+  <div class="card">
+    <h3>護城河五維度評分</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>維度</th><th>評分</th><th>說明</th></tr>
+      <tr><td>不可替代性</td><td><span class="stars">★★★★<span class="off">★</span></span> 4/5</td><td>半導體超純水系統為晶圓廠一級供應商資格門檻，全球廢水處理專利申請人排名第14</td></tr>
+      <tr><td>網路效應</td><td><span class="stars">★<span class="off">★★★★</span></span> 1/5</td><td>工程服務業本質不具備典型網路效應</td></tr>
+      <tr><td>客戶黏著度</td><td><span class="stars">★★★★<span class="off">★</span></span> 4/5</td><td>O&amp;M代操作＋耗材／樹脂再生形成長約黏著關係，客戶轉換成本高</td></tr>
+      <tr><td>成本優勢</td><td><span class="stars">★★★<span class="off">★★</span></span> 3/5</td><td>單日動員逾2,000人的施工規模帶來一定議價力，但屬工程服務業，毛利率仍受接案條件影響波動大</td></tr>
+      <tr><td>規模效應</td><td><span class="stars">★★★<span class="off">★★</span></span> 3/5</td><td>台灣市場具規模領先地位，惟美國、新加坡等海外據點仍處早期投入階段，規模效應尚未完全發揮</td></tr>
+    </table>
+    </div>
+    <p style="margin-top:10px;"><b>護城河強度平均：</b><span class="stars">★★★<span class="off">★★</span></span> 約3.0／5（中高等強度，集中於不可替代性與客戶黏著度）</p>
+  </div>
+
+  <div class="action-box">
+    <h3>建議動作 Box</h3>
+    <div class="action-grid">
+      <div class="item"><div class="k">當前建議</div><div class="v">觀察／分批布局（依個人持倉與風險承受度）。目前本益比約17.5倍、已具一定漲幅，法人目標價（華南投顧800元）隱含空間已隨股價上行而收斂，不建議追高一次重倉。</div></div>
+      <div class="item"><div class="k">加碼觸發（具體門檻）</div><div class="v">股價回落至約600–650元區間（對應以2026年預估EPS 43.02元計算之約14–15倍本益比），且單季營收YoY維持30%以上、在手訂單續創新高，可視為較佳分批加碼時點。</div></div>
+      <div class="item"><div class="k">賣出觸發（具體門檻）</div><div class="v">若單季營收YoY降至20%以下、毛利率連續兩季低於20%，或台積電／主要客戶資本支出出現明確下修訊號，應重新檢視持股部位。</div></div>
+      <div class="item"><div class="k">每季監控指標</div><div class="v">單月營收YoY、在手訂單金額變化（是否續創新高）、單季毛利率／營益率、美國亞利桑那廠興建進度與資本支出揭露、員工分紅比例對EPS稀釋程度、股本膨脹速度。</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 6 綜合總結 ============ -->
+<section id="s6">
+  <h2 class="sec-title"><span class="num">✓</span>綜合總結</h2>
+
+  <div class="summary-cards">
+    <div class="summary-card">
+      <div class="label">Thesis成立度</div>
+      <div class="big">3.5 / 5</div>
+      <div class="source-note">5支柱中3項✅成立、1項⚠️部分成立、1項❌未完全兌現</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">護城河強度</div>
+      <div class="big"><span class="stars">★★★<span class="off">★★</span></span></div>
+      <div class="source-note">約3.0／5，集中於不可替代性與客戶黏著度</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">成長象限</div>
+      <div class="big" style="font-size:19px;">高速成長股</div>
+      <div class="source-note">EPS CAGR約42%，惟上市歷史短需持續驗證</div>
+    </div>
+  </div>
+
+  <div class="action-box">
+    <h3>最終操作建議</h3>
+    <div class="action-grid">
+      <div class="item"><div class="k">若未持有</div><div class="v">不建議在目前估值（PE約17.5倍、股價高檔區）一次性重倉建立部位，建議等待回檔至加碼觸發區間（約600–650元）分批布局，並持續驗證在手訂單與美國建廠進度。</div></div>
+      <div class="item"><div class="k">若已持有</div><div class="v">可續抱核心部位，惟建議關注獲利品質（員工分紅比例、股本膨脹）與客戶集中度風險，設定明確的賣出觸發條件並定期檢視。</div></div>
+      <div class="item"><div class="k">長期3–5年觀點</div><div class="v">在半導體先進製程／封裝資本支出上行周期、以及台灣工業用水回收政策長期趨勢下，兆聯具備結構性成長基礎；惟需通過美國海外擴張執行、客戶集中度分散化兩大考驗，方能將短期高成長轉化為長期可持續的護城河型企業。</div></div>
+      <div class="item"><div class="k">核心催化劑</div><div class="v">①半導體（尤其台積電）資本支出周期與擴廠時程；②亞利桑那新廠2028年完工進度與獲利貢獻；③再生水／海水淡化政策標案是否轉化為具體訂單；④毛利率能否維持在24%以上高檔水準。</div></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap" style="padding:0;">
+    <div class="disclaimer">本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</div>
+    <p><b>資料來源：</b>華南投顧「兆聯實業(6944)0727訪談報告」(2026-07-30，訪談報告，經整理重述並標明出處，非原文轉載)；財報狗(statementdog.com)；Goodinfo!台灣股市資訊網；鉅亨網(cnyes.com)；Yahoo奇摩股市；wantgoo萬股網；PChome股市；公開資訊觀測站(MOPS)；台灣證券交易所市場觀點；經濟日報／富聯網等公開新聞報導；WebSearch多來源交叉比對，查詢日期2026-08-25。</p>
+    <p>本報告依「資料來源狀態標示規則」標註：✅已驗證＝本次查詢成功取得並附來源；⚠️估算/近似值＝基於合理推算並標示計算依據；❌無法取得＝標示「—」，禁止填入未經查證之精確數字。</p>
+  </div>
+</footer>
+
+</body>
+</html>

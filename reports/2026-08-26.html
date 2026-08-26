@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>財經小狐｜全面財經日報 2026/08/26</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#ffffff; --text:#1a1d23; --sub:#5b6270; --border:#e2e5ea;
+  --accent:#1a56db; --tag-risk-bg:#fde8e8; --tag-risk-text:#9b1c1c;
+  --tag-ind-bg:#e1effe; --tag-ind-text:#1e429f; --tag-cat-bg:#edebfe; --tag-cat-text:#5521b5;
+  --badge-global:#1a56db; --badge-us:#0e9f6e; --badge-asia:#c27803; --badge-eu:#7e3af2;
+  --src:#8b93a1; --up:#c0392b; --down:#1a7a3c; --table-head:#eef1f6;
+}
+:root[data-theme="dark"]{ --bg:#14161a; --card:#1e2128; --text:#e5e7eb; --sub:#9aa1ad; --border:#2d313a;
+  --accent:#5b9dff; --tag-risk-bg:#4a1515; --tag-risk-text:#ffb4b4;
+  --tag-ind-bg:#123056; --tag-ind-text:#9ec5fe; --tag-cat-bg:#2e2456; --tag-cat-text:#c9b8ff; --src:#7b8291; --up:#ff6b6b; --down:#4fd17f; --table-head:#262a33;}
+:root[data-theme="light"]{ --bg:#f5f6f8; --card:#ffffff; --text:#1a1d23; --sub:#5b6270; --border:#e2e5ea;
+  --accent:#1a56db; --tag-risk-bg:#fde8e8; --tag-risk-text:#9b1c1c;
+  --tag-ind-bg:#e1effe; --tag-ind-text:#1e429f; --tag-cat-bg:#edebfe; --tag-cat-text:#5521b5; --src:#8b93a1; --up:#c0392b; --down:#1a7a3c; --table-head:#eef1f6;}
+*{box-sizing:border-box;}
+body{background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif; margin:0; padding:24px 16px; line-height:1.65;}
+.wrap{max-width:960px; margin:0 auto;}
+header{margin-bottom:20px;}
+h1{font-size:1.5rem; margin:0 0 4px;}
+.meta{color:var(--sub); font-size:0.9rem;}
+h2{font-size:1.15rem; margin:36px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--accent); color:var(--accent);}
+h3{font-size:1rem; margin:24px 0 10px; color:var(--text);}
+.recap{background:var(--card); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:8px; padding:14px 18px; font-size:0.95rem; margin-top:16px;}
+.card{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px;}
+.idx{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:var(--accent); color:#fff; font-size:0.8rem; font-weight:700; margin-right:8px; flex-shrink:0;}
+.card-head{display:flex; align-items:flex-start; gap:6px; margin-bottom:6px;}
+.title{font-weight:700; font-size:1.02rem;}
+.rowmeta{color:var(--sub); font-size:0.82rem; margin:4px 0 8px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;}
+.badge{display:inline-block; padding:1px 8px; border-radius:10px; font-size:0.72rem; font-weight:600; color:#fff;}
+.b-global{background:var(--badge-global);} .b-us{background:var(--badge-us);} .b-asia{background:var(--badge-asia);} .b-eu{background:var(--badge-eu);}
+.tags{margin:8px 0;}
+.tag{display:inline-block; padding:2px 9px; border-radius:12px; font-size:0.75rem; margin:2px 4px 2px 0;}
+.tag-risk{background:var(--tag-risk-bg); color:var(--tag-risk-text);}
+.tag-ind{background:var(--tag-ind-bg); color:var(--tag-ind-text);}
+.tag-cat{background:var(--tag-cat-bg); color:var(--tag-cat-text);}
+.tier{display:inline-block; padding:2px 10px; border-radius:12px; font-size:0.78rem; font-weight:700; margin-right:6px;}
+.tier-must{background:var(--tag-risk-bg); color:var(--tag-risk-text);}
+.tier-monthly{background:var(--tag-cat-bg); color:var(--tag-cat-text);}
+.tier-risk{background:#fff3cd; color:#7a5b00;}
+:root[data-theme="dark"] .tier-risk{background:#4a3c00; color:#ffd873;}
+@media (prefers-color-scheme: dark){ .tier-risk{background:#4a3c00; color:#ffd873;} }
+.summary{font-size:0.92rem; margin-top:8px;}
+.src{font-size:0.8rem; color:var(--src); margin-top:10px;}
+.src a{color:var(--accent); text-decoration:none;}
+.src a:hover{text-decoration:underline;}
+.site{display:inline-block; padding:1px 9px; border-radius:10px; font-size:0.72rem; font-weight:600; background:var(--tag-cat-bg); color:var(--tag-cat-text);}
+.cat{display:inline-block; padding:1px 9px; border-radius:10px; font-size:0.72rem; font-weight:600; border:1px solid var(--accent); color:var(--accent);}
+.site-block{margin:28px 0 8px;}
+.footer-note{color:var(--sub); font-size:0.82rem; margin-top:40px; padding-top:16px; border-top:1px solid var(--border);}
+.toc{display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 0;}
+.toc a{font-size:0.82rem; color:var(--accent); text-decoration:none; border:1px solid var(--border); padding:4px 10px; border-radius:14px;}
+table{width:100%; border-collapse:collapse; font-size:0.88rem; margin:10px 0;}
+th,td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--border);}
+th{background:var(--table-head); font-weight:700; color:var(--sub); font-size:0.78rem; text-transform:uppercase;}
+.up{color:var(--up); font-weight:600;}
+.down{color:var(--down); font-weight:600;}
+.sent-grid{display:grid; grid-template-columns:1fr; gap:14px;}
+@media(min-width:700px){ .sent-grid{grid-template-columns:1fr 1fr;} }
+.sent-card{border-radius:10px; padding:14px 16px; border:1px solid var(--border);}
+.sent-bull{background:var(--tag-ind-bg);}
+.sent-bear{background:var(--tag-risk-bg);}
+.sent-focus{background:var(--tag-cat-bg); grid-column:1/-1;}
+.sent-verdict{background:var(--card); border:2px solid var(--accent); border-radius:10px; padding:14px 16px; margin-top:14px; font-weight:600;}
+.lwp-card{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 18px; margin-bottom:12px;}
+.lwp-head{font-weight:700; margin-bottom:6px;}
+.quote-line{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:0.85rem; margin:2px 0;}
+.strategy{font-size:0.88rem; margin-top:8px; padding-top:8px; border-top:1px dashed var(--border);}
+.interpret-box{font-size:0.88rem; margin-top:10px; padding:10px 12px; border-left:3px solid var(--accent); background:var(--tag-ind-bg); border-radius:0 8px 8px 0;}
+.interpret-box b{color:var(--accent);}
+.interpret-box ul{margin:6px 0 0; padding-left:20px;}
+.interpret-box li{margin-bottom:4px;}
+.cal-item{display:flex; gap:12px; padding:10px 0; border-bottom:1px solid var(--border);}
+.cal-date{flex-shrink:0; width:92px; font-weight:700; color:var(--accent); font-size:0.85rem;}
+.cal-body{font-size:0.9rem;}
+.cal-body b{display:block; margin-bottom:2px;}
+.kw-section{margin-bottom:18px;}
+.kw-list{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>財經小狐｜全面財經日報</h1>
+<div class="meta">2026/08/26（週三）　擷取時間 09:00（Asia/Taipei，市場數據為美股08/25收盤）｜來源：Bloomberg／Reuters／CNBC（交叉驗證）／華爾街見聞／investing.com中文版／富途牛牛／中央社／鉅亨網／今日板塊流動報告／美股資金流雙軌週報／投資機構研究摘要／LWP研究報告</div>
+<div class="recap">
+<b>📋 前情提要（8/24–8/26）：</b>半導體週一(08/24)遭博通信用成本飆升、「AI幽靈槓桿」疑慮拖累全面重挫，NVDA七連跌；週二(08/25)在輝達財報前反彈收復失土、NVDA終結連跌。伊朗與阿曼重啟荷姆茲海峽談判緩解油價，黃金五連漲、比特幣站上8萬美元的「去美元化貶值交易」延續。今日焦點轉向美股週三盤後輝達財報＋7月PCE數據，以及週四起登場的Jackson Hole央行年會、新主席華許首秀演說。</div>
+<div class="toc">
+<a href="#s1">一、國際財經重點</a>
+<a href="#s2">二、補充國際新聞</a>
+<a href="#s3">三、台灣新聞</a>
+<a href="#s4">四、產業報告</a>
+<a href="#s5">五、今日焦點解讀</a>
+<a href="#s6">六、市場情緒</a>
+<a href="#s7">七、全球指數&總經</a>
+<a href="#s8">八、S&P500板塊排行</a>
+<a href="#s9">九、LWP組合觀察</a>
+<a href="#s10">十、市場日曆</a>
+<a href="#kw">關鍵字分類</a>
+</div>
+</header>
+
+<h2 id="s1">一｜國際財經重點</h2>
+
+<div class="card">
+<div class="card-head"><span class="idx">1</span><span class="title">伊朗與阿曼重啟荷姆茲海峽談判，油價應聲下跌逾2%，川普稱海峽水雷已清除</span></div>
+<div class="rowmeta"><span class="tier tier-must">🔴必追 地緣政治/油價</span><span class="badge b-global">國際</span><span>2026/08/25-26</span></div>
+<div class="tags"><span class="tag tag-risk">地緣政治</span><span class="tag tag-ind">油價</span><span class="tag tag-cat">荷姆茲海峽</span></div>
+<div class="summary">Reuters以「Iran and Oman discuss temporary Hormuz corridor as impasse with US drags on」報導，伊朗表示已與鄰國阿曼重啟談判，商討設立臨時安全通道管理荷姆茲海峽通航；同篇並引述川普週二表示，國際水域內所有水雷均已被引爆或移除，並警告伊朗若再佈雷，任何船隻都將被摧毀。Bloomberg「Oil Extends Declines as Iran, Oman Push Talks to Reopen Hormuz」、華爾街見聞「美伊停火談判傳重大進展，就霍爾木茲自由通航達成共識，布油一度跌6%」、富途「俄媒報導美伊將重啟談判，WTI原油跌近2%」、investing.com「傳美伊就停火達成共識 三大指數收涨」、鉅亨網「荷姆茲海峽危機現轉機！伊朗阿曼擬建臨時航道聯手清雷」六方交叉印證，是本期跨來源出現率最高的單一新聞。受此影響，Brent原油跌至86.77美元(-2.04%，Reuters)，WTI亦跌至約82.5-84.9美元區間(各源快照略有差異)，週二單日跌幅約2-3%，為近期油價地緣風險溢價最明顯的一次消退。</div>
+<div class="src">來源：Reuters／Bloomberg／華爾街見聞／富途牛牛／investing.com／鉅亨網　<a href="https://www.reuters.com/world/" target="_blank">Reuters</a>・<a href="https://www.bloomberg.com/markets" target="_blank">Bloomberg</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">2</span><span class="title">輝達今日(美股週三)盤後公布財報，PCE物價指數同日登場；股價昨日終結七連跌</span></div>
+<div class="rowmeta"><span class="tier tier-must">🔴必追 AI晶片供應鏈/Fed政策</span><span class="badge b-us">美國</span><span>2026/08/26</span></div>
+<div class="tags"><span class="tag tag-ind">AI晶片</span><span class="tag tag-risk">財報風險</span></div>
+<div class="summary">CNBC「Stock futures are little changed as traders await key inflation report, Nvidia earnings」、「Nvidia's dependence on hyperscalers faces big test in earnings report」、Reuters「Nvidia faces growth test as Rubin debut meets AI financing scrutiny」報導，輝達將於美股週三(台北時間週四凌晨)盤後公布本季財報，市場預期營收約922億美元(年增近97%)，公司自身財測(910億美元±2%)略低於市場共識，關鍵在於第三季展望是否站穩1,000億美元以上；華爾街見聞「英伟达終結七連跌漲超2%」、富途「英偉達盤後放榜」、鉅亨網「輝達成AI熱潮『最重要股票』克雷默點名5大財報觀察焦點」同步聚焦。CNBC並引述分析師觀點指出，輝達過去四次財報即便獲利優於預期，股價仍在公布後下跌，顯示市場「預期溢價」已成常態；同日美國7月PCE物價指數公布，是聯準會9月決策前最後一份關鍵通膨數據，兩大事件同日登場使今日成為本週波動風險最高的交易日。</div>
+<div class="src">來源：CNBC／Reuters／華爾街見聞／富途牛牛／鉅亨網　<a href="https://www.cnbc.com/investing/" target="_blank">CNBC</a>・<a href="https://www.reuters.com/business/" target="_blank">Reuters</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">3</span><span class="title">「去美元化貶值交易」延續：黃金五連漲、比特幣站上8萬美元，機構三週買進黃金期貨創紀錄</span></div>
+<div class="rowmeta"><span class="tier tier-must">🔴必追 去美元化/財政主導</span><span class="badge b-global">國際</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-risk">去美元化</span><span class="tag tag-ind">黃金</span><span class="tag tag-ind">比特幣</span></div>
+<div class="summary">Bloomberg「Gold Holds Five-Day Gain as Oil Drop Eases Inflation Concerns」報導黃金已連五日上漲；CNBC「'Debasement trade' returns after Bessent bond maneuver. Crypto and gold are back」、「A massive trade just happened in gold. The options market is buzzing」、「Buy gold on the Treasury bond market intervention, says Deutsche Bank」三篇同步聚焦；華爾街見聞「黃金、美元、比特幣齊漲」、「投資機構過去三週買入黃金期貨規模創紀錄」、investing.com「美銀投資啟示錄：股票資產可能失血，黃金領衔的大宗商品接管配置主線」、富途「MSTR浮盈破40億，84萬枚持倉成機構風向標」、「比特幣突破8萬美元，幣圈超過10萬人爆倉」交叉印證。此為本節第1則新聞後續發展——上週貝森特回購利多退潮、達里歐公開籲拋債券增持黃金比特幣的敘事，本期已從機構研究論述進一步擴散為選擇權市場的大規模具體交易行為，是「去美元化貶值交易」本系列報告以來最具體的資金面證據。</div>
+<div class="src">來源：Bloomberg／CNBC／華爾街見聞／investing.com／富途牛牛　<a href="https://www.bloomberg.com/economics" target="_blank">Bloomberg</a>・<a href="https://www.cnbc.com/investing/" target="_blank">CNBC</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">4</span><span class="title">Jackson Hole央行年會週四登場，美銀警告：華許若不釋放鴿派訊號，30年期殖利率恐衝上5.5%</span></div>
+<div class="rowmeta"><span class="tier tier-must">🔴必追 Fed政策</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-risk">聯準會決策機制不確定性</span><span class="tag tag-ind">公債殖利率</span></div>
+<div class="summary">華爾街見聞「杰克逊霍尔成美债关键一战，美銀警告沃什若不釋放加息信號，30年期收益率或衝上5.5%」、富途「傑克遜霍爾溝通危機：華爾街要的不是『答案』而是解釋」、「民主黨議員敦促沃什維持每年8次FOMC會議，擔憂削弱政策響應能力」、「聯儲局明年票委警告：美國債務膨脹或令投資者拋售美債」四篇同步聚焦本週四(08/27，台北時間)登場的Jackson Hole年會；Bloomberg「Fed's Barkin Says Rising US Debt Will Lead to Eventual Reckoning」、Balance of Power「Faulkender: Warsh Should Reaffirm 2% Target, Not Hike Rates」同步呼應。Reuters「Four Fed bank boards wanted rate hike」報導，7月會議前四家聯邦準備銀行董事會投票主張調升重貼現率，是本期最新的鷹派雜訊訊號。新任主席華許本週稍晚的首次公開演說，能否穩住近期再度承壓的長天期殖利率，是本週僅次於輝達財報的第二大市場焦點。</div>
+<div class="src">來源：華爾街見聞／富途牛牛／Bloomberg／Reuters　<a href="https://www.bloomberg.com/economics" target="_blank">Bloomberg</a>・<a href="https://www.reuters.com/business/" target="_blank">Reuters</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">5</span><span class="title">加拿大對美「等額」反制關稅正式生效，美方考慮加碼貿易措施回應</span></div>
+<div class="rowmeta"><span class="tier tier-must">🔴必追 關稅政策/貿易戰</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-risk">貿易戰</span><span class="tag tag-cat">關稅政策</span></div>
+<div class="summary">Reuters「Canada slaps retaliatory tariffs on US goods as trade war intensifies」報導，加拿大已對約200億美元的美國年進口商品課徵反制關稅，並同步推出企業與勞工紓困措施，與美方最新一輪關稅「等額對等」；同篇「US Weighs More Trade Measures Against Canada After Retaliation」報導美方正考慮對加拿大加碼貿易措施回應。此為上期(08/24)報告記錄「加拿大宣布9月8日起等額反制」的具體落實，顯示美加貿易戰並未如08/18一度出現的緩和跡象降溫，反而依Bloomberg先前形容「可能延續至期中選舉之後」的軌跡持續升級，鋼鋁、乳製品、農業設備等產業首當其衝。</div>
+<div class="src">來源：Reuters　<a href="https://www.reuters.com/business/" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">6</span><span class="title">倫銅、紐約銅雙雙創歷史新高，摩根士丹利視回調為買點，帶動礦業股領漲全週板塊</span></div>
+<div class="rowmeta"><span class="tier tier-monthly">📌月度關鍵字 關鍵金屬/供應鏈重組</span><span class="badge b-global">國際</span><span>2026/08/25-26</span></div>
+<div class="tags"><span class="tag tag-ind">銅</span><span class="tag tag-cat">關鍵金屬</span></div>
+<div class="summary">富途「倫銅紐銅齊創歷史新高」報導，倫敦金屬交易所(LME)與紐約商品交易所(COMEX)銅價同步刷新歷史紀錄；investing.com中文版「摩根士丹利看好銅價機會」報導大摩將銅價回調視為買入機會。此為上期資金流雙軌週報記錄「COPX單週暴衝10.37%、系列開報以來最大單週漲幅」的直接延續，本期LWP觀察COPX單日再收+1.89%(詳見九、LWP組合觀察③)，S&amp;P500板塊排行中Basic Materials本週以+8.96%大幅領漲，成分股中金礦/銀礦類股(AU、EGO、KGC、WPM等)漲幅同樣驚人，顯示資金正明確從降息預期敘事延伸至「實物資產+去美元化」的雙重買盤動能，銅礦與貴金屬礦業股同步走強而非單一族群行情。</div>
+<div class="src">來源：富途牛牛／investing.com中文版　<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a>・<a href="https://cn.investing.com/news/headlines" target="_blank">investing.com</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">7</span><span class="title">日本央行擬加速緊縮步調，9月可能升息至1.25%；歐洲央行同樣傳出9月升息可能</span></div>
+<div class="rowmeta"><span class="tier tier-risk">⚡風險關鍵字 央行政策分歧</span><span class="badge b-eu">歐/日</span><span>2026/08/25-26</span></div>
+<div class="tags"><span class="tag tag-risk">日圓/日債壓力</span><span class="tag tag-cat">央行政策</span></div>
+<div class="summary">Reuters「BOJ to speed up its tightening campaign, raise key rate to 1.25% in September」與「Japan's corporate services inflation accelerates in July」報導，日本央行醞釀加快緊縮步調，市場預期9月可能升息至1.25%，企業服務通膨7月同步加速；同日Reuters另以「ECB set for September rate hike with no appetite to signal more, sources say」報導歐洲央行消息人士透露9月同樣可能升息，惟官員無意釋出後續進一步升息訊號。兩大央行同步偏鷹的政策訊號，與美國聯準會受制於財政壓力、暫難大幅升息的處境形成對比，呼應LTCMA長期風險關鍵字「日圓/日債壓力」，也為本週稍晚Jackson Hole年會的全球央行政策路徑討論增添變數。</div>
+<div class="src">來源：Reuters　<a href="https://www.reuters.com/markets/" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">8</span><span class="title">小摩喊「減碼」美股，警告9月風險升高；頂級晶片分析師警告半導體股恐再跌10%</span></div>
+<div class="rowmeta"><span class="tier tier-risk">⚡風險關鍵字 機構觀點轉謹慎</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-risk">機構觀點</span><span class="tag tag-ind">半導體</span></div>
+<div class="summary">鉅亨網「小摩喊『減碼』！警告美股9月風險升高」報導摩根大通調降美股評等；CNBC「Top chip analyst says the group could fall another 10%. Here's why」同步示警半導體類股恐再下修一成。兩則觀點分屬不同機構，惟方向一致指向9月「輝達財報+Jackson Hole+FOMC」三重事件密集期的下檔風險升溫，與本節第2、4則新聞所述的財報/央行政策雙重不確定性相互呼應，是本期機構觀點由樂觀轉趨謹慎的具體訊號，值得留意是否僅為財報前的例行避險言論，或反映更深層的估值疑慮。</div>
+<div class="src">來源：鉅亨網／CNBC　<a href="https://news.cnyes.com/news/cat/headline" target="_blank">鉅亨網</a>・<a href="https://www.cnbc.com/investing/" target="_blank">CNBC</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">9</span><span class="title">阿里巴巴股價因800億港元AI增發案重挫10%，市場消化史上最大港股配售衝擊</span></div>
+<div class="rowmeta"><span class="tier tier-monthly">📌月度關鍵字 AI資本支出/股權融資</span><span class="badge b-asia">中國</span><span>2026/08/24-25</span></div>
+<div class="tags"><span class="tag tag-ind">AI資本支出</span><span class="tag tag-risk">股權稀釋</span></div>
+<div class="summary">CNBC「Alibaba shares plunge 10% after $10.2 billion share placement to fund AI push」報導，阿里巴巴股價在完成港股史上最大規模主板後續增發後重挫一成。此為上期(08/24)報告記錄「配售獲市場超額認購」樂觀敘事的重要修正——增發本身雖獲機構踴躍認購，惟現有股東面臨的稀釋衝擊仍在配售完成後具體反映到股價上，顯示市場對「AI資本支出擴大至股權融資管道」這一趨勢，開始出現「認購熱烈≠股價無壓」的更細緻定價，是本期AI資本支出融資熱潮中最具體的股權稀釋案例。</div>
+<div class="src">來源：CNBC　<a href="https://www.cnbc.com/technology/" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">10</span><span class="title">Anthropic加速籌備IPO，據稱擬向投資人披露AI市場潛力上看30兆美元、估值目標約2兆美元</span></div>
+<div class="rowmeta"><span class="tier tier-monthly">📌月度關鍵字 AI獨角獸/IPO熱潮</span><span class="badge b-us">美國</span><span>2026/08/26</span></div>
+<div class="tags"><span class="tag tag-ind">AI</span><span class="tag tag-cat">IPO熱潮</span></div>
+<div class="summary">富途「Anthropic加速IPO：提拔新總法律顧問，前任轉任國際特別大使，加速上市籌備」、「Anthropic IPO估值：擬向投資者披露超30萬億美元市場潛力，IPO估值目標約2萬億美元」報導，Anthropic正加速IPO籌備並調整高階法務人事，據稱將向潛在投資人展示規模達30兆美元的市場潛力敘事，估值目標上看2兆美元。此為上期(08/21)報告記錄「Anthropic年化營收運行率突破650億美元」動能的最新延伸，惟2兆美元估值目標與30兆美元市場潛力的說法尚未見Bloomberg/Reuters/CNBC等英語媒體交叉證實，本則消息暫以富途單一來源列示，數字規模之大值得後續持續查證。</div>
+<div class="src">來源：富途牛牛　<a href="https://news.futunn.com/hk/main" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">11</span><span class="title">蘋果執行長交接進入倒數，CNBC剖析庫克接班人面臨三大挑戰，秋季發表會在即</span></div>
+<div class="rowmeta"><span class="tier tier-monthly">📌月度關鍵字 科技巨頭治理</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-cat">企業治理</span><span class="tag tag-ind">蘋果</span></div>
+<div class="summary">CNBC「Apple's next chapter: 3 pressing challenges facing Tim Cook's successor as CEO」深度剖析蘋果執行長交接後新任者將面臨的三大挑戰；富途「蘋果秋季發佈會：2nm芯片上車、摺疊iPhone或首秀」同步報導即將登場的秋季新品發表會重點。CNBC另有「Jim Cramer says this could be the key to sending Apple shares higher」與「Apple announces new Mac Mini and Mac Studio models with AI upgrades」等系列報導，顯示蘋果在執行長交接的敏感時期，仍同步推進硬體更新與AI功能升級雙軌敘事，是本期科技巨頭治理動態中關注度最高的個案。</div>
+<div class="src">來源：CNBC／富途牛牛　<a href="https://www.cnbc.com/technology/" target="_blank">CNBC</a>・<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">12</span><span class="title">美國消費者信心降至七個月低點，7月新屋銷售同步下滑，就業與經濟前景轉趨悲觀</span></div>
+<div class="rowmeta"><span class="tier tier-risk">⚡風險關鍵字 消費信心走弱</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-risk">消費信心</span><span class="tag tag-cat">總體經濟</span></div>
+<div class="summary">Reuters「New US single-family home sales slide in July, confidence dips in August」報導，7月美國新屋銷售因高房貸利率下滑，消費者信心同步降至七個月低點，反映民眾對就業市場與通膨前景日趨悲觀；富途「美國消費者信心下降至七個月低點，對就業和經濟前景趨於悲觀」同步跟進。此則數據與本節第4則Fed官員對財政與債務的警示形成呼應，在今日PCE物價指數公布前，為聯準會9月決策增添「消費疲軟 vs 通膨仍具黏性」的雙重矛盾訊號，是本期總經數據中最直接指向消費端轉弱的證據。</div>
+<div class="src">來源：Reuters／富途牛牛　<a href="https://www.reuters.com/business/" target="_blank">Reuters</a>・<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">13</span><span class="title">台積電ADR領漲逾1.7%，台股本週聚焦輝達財報，外資調節台積電轉戰金控與ETF</span></div>
+<div class="rowmeta"><span class="tier tier-monthly">📌月度關鍵字 台股/AI供應鏈</span><span class="badge b-asia">台灣</span><span>2026/08/25-26</span></div>
+<div class="tags"><span class="tag tag-cat">台股</span><span class="tag tag-ind">AI晶片供應鏈</span></div>
+<div class="summary">中央社「美股齊揚台積電ADR漲1.78%　投顧：關注輝達財報」報導，台積電ADR隨美股科技股反彈同步走高，投顧提醒市場關注稍晚登場的輝達財報；同篇「外資加碼金控調節力積電和ETF　台指期淨空單增至8.5萬口」顯示外資操作出現調節台積電轉戰金控股與ETF的跡象，台指期淨空單同步增加至8.5萬口，籌碼面轉趨保守。台股08/25收盤45,169.46點，三大法人合計以投信買超為主、外資賣超約405億元，週二美股早盤一度重挫逾500點、午盤後在台積電回神與金融股助攻下急拉收復失土，顯示台股與美股科技股連動仍高，今晚輝達財報結果將是週四台股開盤的最直接變數。</div>
+<div class="src">來源：中央社　<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">連結</a></div>
+</div>
+
+<h2 id="s2">二｜補充國際新聞（每站3篇，不重複於上方要聞）</h2>
+
+<div class="site-block"><h3><span class="site">Bloomberg</span></h3></div>
+<div class="card">
+<div class="card-head"><span class="title">OpenAI聲稱新款自研晶片「Jalapeno」測試表現優於輝達處理器</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-ind">AI晶片</span></div>
+<div class="summary">Bloomberg報導OpenAI聲稱其新款自研「Jalapeno」晶片在測試中表現優於輝達處理器，是AI晶片自研浪潮持續升溫的最新案例，惟細節與獨立驗證尚待後續觀察。</div>
+<div class="src">來源：Bloomberg　<a href="https://www.bloomberg.com/markets" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">SpaceX計劃在路易斯安那州興建千億美元規模發射場</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-cat">太空產業</span></div>
+<div class="summary">Bloomberg報導SpaceX計劃在路易斯安那州興建規模達1,000億美元的發射場，是該公司IPO後持續加碼實體基礎建設投資的最新指標性案例。</div>
+<div class="src">來源：Bloomberg　<a href="https://www.bloomberg.com/markets" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">中國AI模型雙雄面臨激烈競爭，遭遇創紀錄放空部位</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-asia">中國</span><span>2026/08/26</span></div>
+<div class="tags"><span class="tag tag-ind">AI</span><span class="tag tag-risk">放空部位</span></div>
+<div class="summary">Bloomberg「Record Short Bets Hit China's AI Model Duo on Fierce Competition」報導，中國兩大AI模型廠商面臨激烈競爭，放空部位創下紀錄新高，反映市場對中國AI產業競爭格局的疑慮升溫。</div>
+<div class="src">來源：Bloomberg　<a href="https://www.bloomberg.com/markets" target="_blank">連結</a></div>
+</div>
+
+<div class="site-block"><h3><span class="site">Reuters</span></h3></div>
+<div class="card">
+<div class="card-head"><span class="title">Instagram執行長於兒少成癮訴訟中作證，坦言少數青少年知悉安全功能</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-risk">法律風險</span></div>
+<div class="summary">Reuters報導Instagram負責人Mosseri在Meta兒少成癮訴訟中作證，表示公司並未指示團隊「隱藏」任何資訊，惟證詞顯示知悉安全功能的青少年比例極低，延續本系列追蹤的Meta法律風險關鍵字。</div>
+<div class="src">來源：Reuters　<a href="https://www.reuters.com/business/" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">IMF總裁：全球經濟挺過伊朗戰爭能源衝擊，惟財政疑慮升溫</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-global">國際</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-risk">財政風險</span></div>
+<div class="summary">Reuters報導IMF總裁喬治艾娃表示全球經濟挺過伊朗戰爭引發的能源衝擊優於預期，惟對部分國家財政狀況惡化表達關切，指出公債殖利率走升與去通膨進程停滯是主要觀察指標。</div>
+<div class="src">來源：Reuters　<a href="https://www.reuters.com/business/" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">Zoom第三季獲利展望遜於預期，視訊會議競爭壓力未歇</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-cat">財報</span></div>
+<div class="summary">Reuters報導Zoom Communications第三季獲利財測遜於華爾街預期，儘管公司持續擴大AI功能，仍難抵禦視訊會議市場的激烈競爭壓力。</div>
+<div class="src">來源：Reuters　<a href="https://www.reuters.com/business/" target="_blank">連結</a></div>
+</div>
+
+<div class="site-block"><h3><span class="site">CNBC</span>（交叉驗證來源）</h3></div>
+<div class="card">
+<div class="card-head"><span class="title">Dick's Sporting Goods單日重挫30%，創該股史上最慘單日表現</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-risk">零售疲軟</span></div>
+<div class="summary">CNBC「Dick's Sporting Goods stock falls 30% as retailer misses expectations」報導，運動用品零售商Dick's財報表現不如市場預期，股價單日重挫達三成，創下該股史上最差單日表現。</div>
+<div class="src">來源：CNBC　<a href="https://www.cnbc.com/business/" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">「大空頭」丹尼摩西：10年期殖利率與輝達是當前最重要的兩項資產</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-ind">公債殖利率</span></div>
+<div class="summary">CNBC報導以電影《大賣空》聞名的基金經理人丹尼摩西表示，10年期公債殖利率與輝達股價是當前市場最重要的兩項觀察指標，呼應本期殖利率與AI財報雙主線的市場敘事。</div>
+<div class="src">來源：CNBC　<a href="https://www.cnbc.com/investing/" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">邁威爾科技可望成為AI題材的「腎上腺素」，Joe Terranova看好後市</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-us">美國</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-ind">AI晶片</span></div>
+<div class="summary">CNBC報導市場策略師Joe Terranova看好邁威爾科技(Marvell)可望成為AI題材的「一劑腎上腺素」，與上期報告記錄該股財報週前遭遇獲利了結賣壓的格局形成對比，顯示市場對其後市看法仍存分歧。</div>
+<div class="src">來源：CNBC　<a href="https://www.cnbc.com/investing/" target="_blank">連結</a></div>
+</div>
+
+<div class="site-block"><h3><span class="site">華爾街見聞</span></h3></div>
+<div class="card">
+<div class="card-head"><span class="title">貝森特擬動用萬億美元國庫賬戶進行債券回購</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-us">美國</span><span>08/25</span></div>
+<div class="tags"><span class="tag tag-risk">財政主導</span></div>
+<div class="summary">華爾街見聞報導財長貝森特考慮動用規模達萬億美元的國庫賬戶(TGA)資金進行債券回購，是本節第4則新聞「美銀警告若不釋放鴿派訊號30年期恐衝上5.5%」背景下，財政部持續尋求穩定長債殖利率的最新政策工具選項。</div>
+<div class="src">來源：華爾街見聞　<a href="https://wallstreetcn.com/news/most-read" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">輝達首測Vera Rubin平台，DeepSeek推理吞吐量暴漲30倍</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-us">美國</span><span>08/25</span></div>
+<div class="tags"><span class="tag tag-ind">AI晶片</span></div>
+<div class="summary">華爾街見聞報導輝達新一代Vera Rubin平台首次測試結果顯示，DeepSeek模型推理吞吐量暴漲30倍，是輝達新平台上市前釋出的技術性能指標，可能成為今晚財報法說會的討論焦點之一。</div>
+<div class="src">來源：華爾街見聞　<a href="https://wallstreetcn.com/news/most-read" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">韓國DRAM記憶體晶片8月出口價格年增暴漲401%</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-asia">南韓</span><span>08/26</span></div>
+<div class="tags"><span class="tag tag-ind">記憶體</span></div>
+<div class="summary">富途早報引述數據顯示，韓國DRAM記憶體晶片8月出口價格較去年同期暴漲401%，是記憶體超級週期漲價力道最新、最具體的官方出口數據佐證，與本系列持續追蹤的記憶體漲價關鍵字直接呼應。</div>
+<div class="src">來源：富途牛牛　<a href="https://news.futunn.com/hk/main" target="_blank">連結</a></div>
+</div>
+
+<div class="site-block"><h3><span class="site">investing.com中文版</span></h3></div>
+<div class="card">
+<div class="card-head"><span class="title">摩根士丹利看好銅價回調後的買入機會</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-global">國際</span><span>2026/08/26</span></div>
+<div class="tags"><span class="tag tag-ind">銅</span></div>
+<div class="summary">investing.com中文版報導摩根士丹利將近期銅價回調視為買入機會，與本節第6則「倫銅紐銅齊創歷史新高」形成呼應，機構觀點傾向認為本輪銅價多頭格局尚未結束。</div>
+<div class="src">來源：investing.com中文版　<a href="https://cn.investing.com/news/headlines" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">巴菲特的可口可樂持股成為AI股動盪期間最大避風港</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-us">美國</span><span>2026/08/24</span></div>
+<div class="tags"><span class="tag tag-cat">防禦性資產</span></div>
+<div class="summary">investing.com中文版報導股神巴菲特「永遠持有」的可口可樂持股，在近期AI類股劇烈震盪期間成為波克夏投資組合中表現最穩健的避風港部位，呼應機構研究摘要「消費者體驗」類股被低估的觀察。</div>
+<div class="src">來源：investing.com中文版　<a href="https://cn.investing.com/news/headlines" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">達美樂披薩因資產減值轉為全年虧損，股價重挫近一成</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-global">國際</span><span>2026/08/26</span></div>
+<div class="tags"><span class="tag tag-cat">財報</span></div>
+<div class="summary">investing.com中文版報導達美樂披薩因資產減值因素轉為全年虧損，儘管核心營業利潤仍成長4%，股價仍重挫近一成，是本期消費/餐飲類股財報表現分化的一例。</div>
+<div class="src">來源：investing.com中文版　<a href="https://cn.investing.com/news/headlines" target="_blank">連結</a></div>
+</div>
+
+<div class="site-block"><h3><span class="site">富途牛牛</span></h3></div>
+<div class="card">
+<div class="card-head"><span class="title">英偉達推出Jetson Orin Nano 2機器人計算機，瞄準入門級物理AI市場</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-us">美國</span><span>03:05</span></div>
+<div class="tags"><span class="tag tag-ind">機器人</span></div>
+<div class="summary">富途牛牛報導輝達推出新款Jetson Orin Nano 2機器人計算機，推理性能翻倍、功耗降四成，瞄準入門級物理AI市場，是輝達今日財報前釋出的又一項產品線布局動作。</div>
+<div class="src">來源：富途牛牛　<a href="https://news.futunn.com/hk/main" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">財捷(Intuit)第四季財報營收年增14%，惟全年財測不如市場預期</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-us">美國</span><span>04:07</span></div>
+<div class="tags"><span class="tag tag-cat">財報</span></div>
+<div class="summary">富途牛牛報導財捷(Intuit) 2026財年第四季營收44億美元、年增14%，調整後EPS達4.03美元，惟Reuters同步指出其年度財測遜於市場預期，反映公司優先追求客戶成長而非短期獲利。</div>
+<div class="src">來源：富途牛牛　<a href="https://news.futunn.com/hk/main" target="_blank">連結</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">Waymo宣布2027年底於慕尼黑推出無人駕駛叫車服務</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-eu">歐洲</span><span>03:21</span></div>
+<div class="tags"><span class="tag tag-cat">自駕車</span></div>
+<div class="summary">富途牛牛報導Google旗下Waymo計劃2027年底於德國慕尼黑推出無人駕駛叫車服務，是該公司繼美國本土市場後首度跨足歐洲的具體時間表，Reuters同步證實此為其美國以外的第三個市場。</div>
+<div class="src">來源：富途牛牛　<a href="https://news.futunn.com/hk/main" target="_blank">連結</a></div>
+</div>
+
+<h2 id="s3">三｜台灣新聞</h2>
+
+<div class="card">
+<div class="card-head"><span class="idx">1</span><span class="title">台股08/25收盤45,169.46點，美股早盤重挫逾500點後在台積電、金融股帶動下急拉收復失土</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-asia">台灣</span><span>2026/08/25</span></div>
+<div class="tags"><span class="tag tag-cat">台股</span></div>
+<div class="summary">中央社報導台股08/25受美股週一重挫拖累早盤走弱，一度下殺逾500點，午盤後在台積電回神與金融股助攻下急拉，成功站回季線與45,000點關卡，終場收45,169.46點，波動幅度為近期最大。</div>
+<div class="src">來源：中央社　<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">2</span><span class="title">美股齊揚台積電ADR漲1.78%，投顧提醒關注今晚輝達財報</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-asia">台灣</span><span>2026/08/26 08:24</span></div>
+<div class="tags"><span class="tag tag-ind">AI晶片供應鏈</span></div>
+<div class="summary">中央社報導台積電ADR隨美股科技股反彈同步走高，漲幅達1.78%，投顧提醒市場緊盯稍晚公布的輝達財報，其結果將直接牽動台股週四開盤的台積電、AI供應鏈權值股表現。</div>
+<div class="src">來源：中央社　<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">3</span><span class="title">外資調節台積電轉戰金控與ETF，台指期淨空單增至8.5萬口</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-asia">台灣</span><span>2026/08/25 17:39</span></div>
+<div class="tags"><span class="tag tag-cat">資金流向</span></div>
+<div class="summary">中央社報導外資近期調節部分台積電部位，轉而加碼金控股與ETF，台指期淨空單同步增加至8.5萬口，籌碼面轉趨保守，與美股財報週前避險情緒升溫的格局一致。</div>
+<div class="src">來源：中央社　<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">4</span><span class="title">AI商機熱，上市櫃公司上半年營收獲利創10年同期新高</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-asia">台灣</span><span>2026/08/25 20:14</span></div>
+<div class="tags"><span class="tag tag-cat">總體經濟</span></div>
+<div class="summary">中央社報導台灣上市櫃公司今年上半年營收與獲利雙雙創下近10年同期新高，AI相關供應鏈需求是主要驅動力，與稍早主計總處預測2027年台灣人均GDP估逼近5萬美元的樂觀展望一致。</div>
+<div class="src">來源：中央社　<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">5</span><span class="title">7月工業生產指數續創高，AI需求推升製造業表現優於預期</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-asia">台灣</span><span>2026/08/25 18:04</span></div>
+<div class="tags"><span class="tag tag-ind">AI供應鏈</span></div>
+<div class="summary">中央社報導台灣7月工業生產指數續創歷史新高，AI相關需求持續推升製造業表現優於市場預期，與同日公布的7月批發業營業額創新高數據相互印證，顯示AI供應鏈對台灣實體經濟的貢獻持續放大。</div>
+<div class="src">來源：中央社　<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">6</span><span class="title">大立光砸逾30億元台中購地，加速布局CPO先進封裝擴產</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-asia">台灣</span><span>2026/08/25 18:35</span></div>
+<div class="tags"><span class="tag tag-ind">先進封裝</span></div>
+<div class="summary">中央社報導光學元件大廠大立光砸下逾30億元於台中購地，加速布局共同封裝光學(CPO)相關產能擴充，是台灣供應鏈廠商搶進AI資料中心光通訊題材的最新指標性投資案。</div>
+<div class="src">來源：中央社　<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">7</span><span class="title">金管會開放券商複委託可做外幣融資，最快明年第2季上路</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-asia">台灣</span><span>2026/08/25 19:36</span></div>
+<div class="tags"><span class="tag tag-cat">金融政策</span></div>
+<div class="summary">中央社報導金管會宣布開放證券商複委託業務可辦理外幣融資，最快明年第二季上路，有利擴大投資人跨境投資的槓桿與選擇彈性，是台灣資本市場對外開放的最新政策動向。</div>
+<div class="src">來源：中央社　<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">8</span><span class="title">外幣保單上半年新契約保費2,865億元，創5年同期新高</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-asia">台灣</span><span>2026/08/25 21:15</span></div>
+<div class="tags"><span class="tag tag-cat">金融體系</span></div>
+<div class="summary">中央社報導台灣外幣保單今年上半年新契約保費達2,865億元，創下5年來同期新高，反映在新台幣匯率波動與海外投資熱潮下，民眾透過外幣保單進行跨境資產配置的需求持續增溫。</div>
+<div class="src">來源：中央社　<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">9</span><span class="title">彰銀首度公開談論併購可行性評估，強調規模非唯一考量</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-asia">台灣</span><span>2026/08/25 20:32</span></div>
+<div class="tags"><span class="tag tag-cat">金融併購</span></div>
+<div class="summary">中央社報導彰化銀行董事會首度公開探討併購可行性評估，強調評估時規模並非唯一考量，是台灣銀行業近期併購整合話題升溫下，官股行庫首度正面回應的公開表態。</div>
+<div class="src">來源：中央社　<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">連結</a></div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="idx">10</span><span class="title">漢測擬9月下旬上櫃，攻熱管理、CoWoS與矽光子測試市場</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-asia">台灣</span><span>2026/08/25 16:08</span></div>
+<div class="tags"><span class="tag tag-ind">先進封裝測試</span></div>
+<div class="summary">中央社報導檢測廠漢測規劃於9月下旬掛牌上櫃，主攻熱管理、CoWoS先進封裝與矽光子測試等利基市場，是台灣半導體測試供應鏈搭上AI資料中心熱潮掛牌上市的最新一例。</div>
+<div class="src">來源：中央社　<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">連結</a></div>
+</div>
+
+<h2 id="s4">📊 四｜產業報告</h2>
+
+<h3>🏢 七大巨頭（Mag7）動態</h3>
+<div class="card">
+<div class="summary">輝達本篇報告製作期間即將公布本季財報(美股週三盤後)，是Mag7本期最大焦點——CNBC分析輝達過去四季即便獲利優於預期，股價公布後仍屢屢下跌，顯示「預期溢價」已成常態，市場關注焦點已由「是否擊敗預期」轉向「第三季展望能否站穩1,000億美元以上」；輝達同日釋出Vera Rubin平台首測數據(DeepSeek推理吞吐量暴漲30倍)與Jetson Orin Nano 2機器人計算機新品，顯示公司在財報前積極以技術與產品線布局穩定市場信心。蘋果方面，CNBC剖析執行長交接後新任者面臨的三大挑戰，同步推進Mac Mini、Mac Studio硬體更新與AI功能升級，秋季發表會傳出2nm晶片上車、摺疊iPhone可能首秀，交接與新品雙軌並進。Meta兒少安全訴訟持續延燒，Instagram負責人Mosseri出庭作證坦言僅少數青少年知悉安全功能，法律風險未見降溫。Alphabet(Google)旗下Waymo宣布2027年底進軍慕尼黑，是首度跨足歐洲市場的具體時間表。微軟、亞馬遜、特斯拉本期無獨立重大新聞。</div>
+</div>
+
+<h3>🎯 焦點個股</h3>
+<div class="card">
+<div class="summary">阿里巴巴是本期個股層級最具反差意義的案例——800億港元AI增發案雖獲市場超額認購，完成配售後股價卻重挫10%，顯示「認購熱烈」與「股價無壓」是兩回事，稀釋衝擊仍具體反映到股價，是AI資本支出擴大至股權融資管道趨勢下最新的市場定價教訓。零售股同步出現財報分化：Dick's Sporting Goods因財報不如預期單日重挫30%、創史上最慘單日紀錄，達美樂披薩則因資產減值轉虧、股價重挫近一成，反映利率高檔環境下消費類股對財報瑕疵的容忍度明顯降低。記憶體/半導體供應鏈持續受到關注：韓國DRAM晶片8月出口價格年增暴漲401%，是記憶體超級週期漲價力道最具體的官方數據佐證；邁威爾科技獲CNBC策略師看好為AI題材「腎上腺素」，與上期財報週前獲利了結賣壓的格局形成對照，顯示市場對其後市看法仍存分歧。金礦/銀礦類股(AU、EGO、KGC、WPM等)本週漲幅驚人，直接受惠黃金五連漲與「去美元化貶值交易」升溫。</div>
+</div>
+
+<h3>🔄 重要領域變革</h3>
+<div class="card">
+<div class="summary">AI晶片自研浪潮持續升溫——OpenAI聲稱新款自研「Jalapeno」晶片測試表現優於輝達處理器，儘管細節與獨立驗證尚待觀察，惟此類自研晶片挑戰輝達地位的敘事本身，已成為財報前市場情緒的潛在雜訊來源之一。銅礦與貴金屬礦業類股同步走強是本期資金面最具結構性意義的變革——倫敦與紐約銅價雙雙創歷史新高，摩根士丹利視回調為買點，S&amp;P500板塊排行Basic Materials本週以+8.96%大幅領漲，顯示「AI基礎建設用銅需求」與「去美元化貶值交易帶動貴金屬礦業股」兩條主線正同步發酵，形成板塊性而非單一個股的資金行為。央行政策分歧同步擴大：日本央行醞釀9月加速升息至1.25%、歐洲央行同樣傳出9月升息可能，與美國聯準會受制於財政壓力難以大幅寬鬆的處境形成對比，全球央行政策路徑的不同步，恰在Jackson Hole年會前夕成為市場需要重新消化的變數。</div>
+</div>
+
+<h2 id="s5">🎯 五｜今日焦點解讀</h2>
+
+<div class="card">
+<div class="card-head"><span class="title">資金面</span></div>
+<div class="summary">「去美元化貶值交易」本期由機構研究論述進一步擴散為選擇權市場的具體大規模交易行為——CNBC「A massive trade just happened in gold. The options market is buzzing」與「'Debasement trade' returns after Bessent bond maneuver」互相印證，華爾街見聞同步報導「投資機構過去三週買入黃金期貨規模創紀錄」，三者共同描繪出資金面從「言論示警」轉向「真金白銀進場」的具體轉折；比特幣站上8萬美元但週末已有逾10萬人爆倉，顯示這波貶值交易的槓桿成分不低，波動風險同步升高。與此同時，倫銅紐銅雙雙創歷史新高、COPX單日再收+1.89%，資金面呈現「黃金比特幣去美元化」與「銅礦AI基建供需」雙主線並進的格局，COPX/GLD同步走強而SPY/QQQ/RSP呈現內部分化(RSP單日轉為小跌，詳見九、LWP組合觀察①)，顯示資金並非單純的「棄股入實物資產」，而更接近「科技股內部從防禦性等權重轉向財報前的集中押注」與「另一路資金持續加碼黃金/銅礦」兩條並行的資金軌跡。</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="title">心理面</span></div>
+<div class="summary">VIX約15.5，續處2026年相對低檔區間，CNN Fear &amp; Greed指數約52-55(中性偏貪婪)，情緒指標表面持穩，惟本期最重要的心理面訊號來自機構觀點的分歧擴大——小摩對美股喊出「減碼」評等、警告9月風險升高，CNBC頂級晶片分析師同步示警半導體股恐再跌一成，兩者方向一致指向「輝達財報+Jackson Hole+FOMC」三重密集事件期的下檔風險；但另一方面，「大空頭」丹尼摩西公開表示10年期殖利率與輝達是當前最重要的兩項資產，顯示市場並非全面轉空，而是高度聚焦在今晚財報與稍晚央行年會這兩個「二元事件」上，方向未明前，表層情緒指標的平靜可能只是暴風雨前的觀望，而非真正的樂觀共識。</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="title">籌碼面</span></div>
+<div class="summary">最新一期(第14期，08/24)資金流雙軌週報顯示，台灣外資08/20、08/21已連續2日買超，3日累計負值缺口由-81.78億收斂至-60.16億，惟尚未轉正；中央社08/25新聞進一步顯示，外資近期調節台積電轉戰金控股與ETF，台指期淨空單增加至8.5萬口，籌碼面在財報前轉趨保守，與週報記錄的「買超力道溫和、尚未確認反轉」判讀方向一致。CFTC COT最新一週(08/18)資料顯示S&amp;P500與Nasdaq Lev Funds反應分歧程度已較08/11當週收斂，較接近方向微幅不一致而非明確對作訊號；FINRA融資餘額7月官方值確認為1.417兆美元(較6月下滑5.65%)，排除市場先前創新高的誤傳，槓桿/M2比率降至6.08%。整體籌碼面呈現「台灣外資溫和轉買、美股期貨部位分歧收斂、融資餘額降溫」三項訊號疊加，尚不足以支持方向性判斷，需待輝達財報後的實際資金反應驗證。</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="title">產業面</span></div>
+<div class="summary">半導體/AI硬體供應鏈本期呈現「短期波動加劇、長期敘事延續」的格局：週一(08/24)博通信用成本飆升、「AI幽靈槓桿」疑慮觸發全面重挫(NVDA -2.91%、MU -5.83%、SNDK -6.45%)，週二(08/25)在輝達財報前迅速反彈(NVDA終結七連跌)，波動之劇烈直接反映市場對財報結果的高度不確定性；韓國DRAM出口價格8月年增暴漲401%的官方數據，為記憶體超級週期的漲價力道提供最具體佐證，與輝達通知客戶明年AI伺服器估漲逾15%的說法相互印證。台灣供應鏈方面，大立光加碼CPO先進封裝、漢測衝刺熱管理/CoWoS/矽光子測試上櫃，顯示台廠持續卡位AI資料中心光通訊與先進封裝利基市場；惟外資近期調節台積電轉戰金控與ETF，顯示即便長期供應鏈敘事不變，短期籌碼仍在財報前尋求分散風險，台股45,169.46點的收盤水位，很大程度仍將取決於今晚輝達財報結果對台北時間週四開盤的直接傳導。</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="title">💡 對投資產品的具體影響</span></div>
+<div class="summary">
+<b>黃金（GLD $428.07　+0.32%，連五日上漲）：</b>「去美元化貶值交易」本期由言論示警具體轉為選擇權市場大規模交易行為，機構三週買進黃金期貨規模創紀錄，Deutsche Bank公開建議「趁財政部公債市場干預時買進黃金」，是本系列報告以來對黃金配置最直接的機構買盤證據，惟需留意此類槓桿交易同步推升波動風險（比特幣週末逾10萬人爆倉即為一例）。<br><br>
+<b>銅礦（COPX $96.32　+1.89%）：</b>倫銅、紐約銅雙雙創歷史新高，摩根士丹利視回調為買點，延續上期COPX單週暴衝10.37%的類別性資金行為，S&amp;P500 Basic Materials板塊本週以+8.96%大幅領漲，建議維持既定配置，惟持續留意本輪銅價多頭是否已進入偏擁擠交易階段。<br><br>
+<b>大盤/科技（SPY/QQQ/RSP）：</b>週二反彈中出現罕見的「RSP轉跌、SPY/QQQ收紅」內部分化(詳見九、LWP組合觀察①)，顯示財報前資金短暫回流大型科技/半導體龍頭，是否僅為單日財報前部位調整、抑或宣告等權重廣度行情階段性中止，需待輝達財報後的市場反應驗證，暫不建議因單日數據調整既定配置。<br><br>
+<b>公司債信用利差：</b>大盤IG/HY OAS本期維持歷史極緊縮區間，惟博通AI相關債務融資的信用成本飆升事件仍值得個案監控，詳見九、LWP組合觀察④解讀欄。
+</div>
+</div>
+
+<h2 id="s6">💭 六｜市場情緒</h2>
+<div class="sent-grid">
+<div class="sent-card sent-bull">
+<b>🐂 多頭訊號</b>
+<ul>
+<li>VIX約15.5，續處2026年相對低檔區間</li>
+<li>伊朗與阿曼重啟荷姆茲海峽談判，油價地緣風險溢價明顯消退</li>
+<li>輝達股價週二終結七連跌，AI硬體股財報前迅速收復失土</li>
+<li>台股在台積電與金融股帶動下急拉，成功站回季線與45,000點</li>
+<li>「大空頭」丹尼摩西看好10年期殖利率與輝達為最重要觀察資產，未全面轉空</li>
+<li>摩根士丹利視銅價回調為買入機會</li>
+</ul>
+</div>
+<div class="sent-card sent-bear">
+<b>🐻 空頭訊號</b>
+<ul>
+<li>小摩喊「減碼」美股，警告9月風險升高；頂級晶片分析師警告半導體恐再跌10%</li>
+<li>美銀警告Jackson Hole若華許不釋放鴿派訊號，30年期殖利率恐衝上5.5%</li>
+<li>加拿大對美等額反制關稅正式生效，美方考慮加碼措施回應，貿易戰未見降溫</li>
+<li>美國消費者信心降至七個月低點，7月新屋銷售同步下滑</li>
+<li>阿里巴巴800億港元AI增發完成後股價重挫10%，AI股權融資稀釋疑慮浮現</li>
+<li>Dick's Sporting Goods單日重挫30%創史上最慘表現，零售財報容忍度降低</li>
+<li>日本、歐洲央行同步傳出9月升息可能，全球央行政策路徑分歧擴大</li>
+</ul>
+</div>
+<div class="sent-card sent-focus">
+<b>🔍 今日焦點監控</b>
+今晚(美股週三盤後)輝達財報＋7月PCE物價指數同日登場，是本篇報告製作後最大的單一波動風險來源，市場預期輝達營收約922億美元(年增97%)，關鍵在第三季展望能否站穩1,000億美元以上；本週四起Jackson Hole央行年會登場，新任聯準會主席華許首次以主席身分演說，能否穩住近期承壓的長天期殖利率，是繼輝達財報後第二大焦點；台灣外資對台積電的調節動作(轉戰金控/ETF)能否延續，或僅為財報前的短線避險，須待下期資金流雙軌週報驗證；「去美元化貶值交易」由機構買盤具體化後，能否延續發酵、抑或伴隨槓桿去化(如比特幣爆倉)出現階段性拉回，同樣值得持續追蹤。
+</div>
+</div>
+<div class="sent-verdict">今日氛圍總評：VIX與Fear&amp;Greed等表層情緒指標維持平靜，惟這更接近「二元事件前的觀望」而非真正的樂觀共識——小摩減碼美股、晶片分析師警告半導體再跌一成的謹慎訊號，與丹尼摩西看好殖利率/輝達雙主線的相對正面觀點並存；黃金/銅礦的實物資產多頭與科技股財報前的內部分化同時發生，顯示資金正在為今晚輝達財報與本週稍晚Jackson Hole兩大事件預留雙向空間，建議暫維持觀望，待輝達財報結果與華許演說內容明朗後，再重新評估波動方向與加減碼時機。</div>
+
+<h2 id="s7">📈 七｜全球指數＆總體數據</h2>
+<table>
+<tr><th>項目</th><th>數值</th><th>漲跌</th></tr>
+<tr><td>S&amp;P 500（08/25收盤）</td><td>7,677.28</td><td class="up">+0.32%</td></tr>
+<tr><td>Nasdaq（08/25收盤）</td><td>26,151.30</td><td class="up">+0.66%</td></tr>
+<tr><td>道瓊工業指數（08/25收盤）</td><td>53,577.40</td><td class="up">+0.30%</td></tr>
+<tr><td>費城半導體指數(SOX，08/25收盤)</td><td>11,588.04</td><td class="up">+1.44%</td></tr>
+<tr><td>日經225（08/26盤中，Reuters快照）</td><td>65,655.44</td><td class="down">-0.31%</td></tr>
+<tr><td>FTSE 100</td><td>10,886.16</td><td class="up">+0.29%</td></tr>
+<tr><td>Euro STOXX 50</td><td>6,455.63</td><td class="up">+0.12%</td></tr>
+<tr><td>美國10年期公債殖利率（08/25收盤）</td><td>4.66%</td><td>較08/21(4.736%)　約-7.6bp</td></tr>
+<tr><td>美國2年期公債殖利率（08/25收盤）</td><td>4.217%</td><td>較08/21(4.221%)　大致持平</td></tr>
+<tr><td>德國10年期公債殖利率（Reuters快照）</td><td>3.18%</td><td class="down">-2.4bp</td></tr>
+<tr><td>英國10年期公債殖利率（Reuters快照）</td><td>4.98%</td><td class="down">-1.2bp</td></tr>
+<tr><td>日本10年期公債殖利率（Reuters快照）</td><td>2.896%</td><td class="up">+0.4bp</td></tr>
+<tr><td>Brent原油</td><td>US$86.77</td><td class="down">-2.04%</td></tr>
+<tr><td>WTI原油</td><td>US$82.5-84.9（各源快照差異，週二單日跌約2-3%）</td><td class="down">約-2~3%</td></tr>
+<tr><td>黃金現貨</td><td>US$4,638-4,702（Reuters/Bloomberg快照差異）／GLD ETF $428.07 +0.32%</td><td>連五日上漲</td></tr>
+<tr><td>VIX</td><td>約15.5</td><td>續處2026年相對低檔區間</td></tr>
+<tr><td>CNN Fear &amp; Greed指數</td><td>約52-55</td><td>中性偏貪婪</td></tr>
+<tr><td>美元指數(DXY)</td><td>約98.96-99.0</td><td>近三個月低點附近</td></tr>
+<tr><td>新台幣兌美元</td><td>約31.85-31.89</td><td>持續貶值</td></tr>
+</table>
+
+<h2 id="s8">📊 八｜S&amp;P 500板塊排行</h2>
+<h3>▲ 單週漲幅前三</h3>
+<table>
+<tr><th>排名</th><th>板塊</th><th>單週漲跌</th><th>主要貢獻股</th></tr>
+<tr><td>1</td><td>Basic Materials（原物料）</td><td class="up">+8.96%</td><td>AU +25.97%、EGO +24.36%、KGC +23.45%、WPM +23.38%（金礦/銀礦龍頭，直接受惠黃金五連漲與去美元化交易）</td></tr>
+<tr><td>2</td><td>Healthcare（醫療保健）</td><td class="up">+3.29%</td><td>MRNA +152.27%（⚠️漲幅異常龐大，疑為財報/技術性利多疊加所致，建議以正式交易終端數據覆核）、TEM +39.24%、BNTX +22.96%</td></tr>
+<tr><td>3</td><td>Communication Services（通訊服務）</td><td class="up">+2.15%</td><td>SNAP +15.85%、TIGO +9.22%、MTCH +9.02%（❌ 未查得SNAP/TIGO具體消息面驅動因子，供參考）</td></tr>
+</table>
+<h3>▼ 單週跌幅前三</h3>
+<table>
+<tr><th>排名</th><th>板塊</th><th>單週漲跌</th><th>主要拖累股</th></tr>
+<tr><td>1</td><td>Industrials（工業）</td><td class="down">-3.28%</td><td>INIO -15.54%、RKLB -15.47%、IESC -15.20%、DY -15.17%（❌ 未查得明確個股消息面歸因，或與加拿大反制關稅、工業出口前景承壓有關）</td></tr>
+<tr><td>2</td><td>Energy（能源）</td><td class="down">-1.85%</td><td>DTM -6.61%、KMI -5.87%、OKE -5.53%、CVE -5.41%（管線/中游能源股，與伊朗荷姆茲海峽談判緩解、油價回落方向一致）</td></tr>
+<tr><td>3</td><td>Technology（科技）</td><td class="down">-1.37%</td><td>CRBS -16.41%、CRWD -12.93%、SITM -12.64%（❌ CRWD/SITM未查得具體財報或消息面歸因，惟與週一(08/24)半導體全面拋售格局一致）</td></tr>
+</table>
+<div class="card">
+<div class="summary"><b>資金流向解讀：</b>Basic Materials(+8.96%)登冠由金礦/銀礦龍頭(AU、EGO、KGC、WPM)全面領軍，與本節一之3「去美元化貶值交易」、黃金連五日上漲、機構三週買進黃金期貨創紀錄直接印證，是本期資金面最鮮明的板塊性行情；Healthcare(+3.29%)延續Moderna相關題材的爆發力(MRNA單週漲幅高達152.27%，惟數字異常龐大值得覆核)。Communication Services(+2.15%)由SNAP、TIGO、MTCH等中小型通訊/社群個股帶動，惟查無明確驅動消息，較可能是財報季前的類股輪動而非單一主題性利多。跌幅方面，Industrials(-3.28%)墊底且缺乏明確個股新聞佐證，值得留意是否與加拿大對美等額反制關稅正式生效、工業設備出口前景承壓有關，惟此推論尚待更多資料驗證；Energy(-1.85%)則與伊朗荷姆茲海峽談判緩解地緣風險溢價、油價回落方向完全一致，管線/中游能源股(DTM、KMI、OKE、CVE)跌幅最深；Technology(-1.37%)延續週一(08/24)半導體全面拋售的格局，CRWD、SITM等個股跌幅明顯，惟本節之外的CRBS/CRWD等具體財報驅動因子尚待查證，暫以❌標註存疑。</div>
+</div>
+
+<h2 id="s9">💼 九｜LWP組合觀察</h2>
+
+<div class="lwp-card">
+<div class="lwp-head">① 大盤／科技（SPY／QQQ／RSP）</div>
+<div class="quote-line">SPY $765.91　+0.32%（08/25收盤）</div>
+<div class="quote-line">QQQ $710.72　+0.62%</div>
+<div class="quote-line">RSP $221.77　-0.07%（等權重，罕見單日轉跌）</div>
+<div class="strategy">週二反彈中出現本系列報告以來少見的「RSP轉跌、SPY/QQQ收紅」內部分化——與過去數期RSP穩定同時跑贏SPY/QQQ的格局相反，較可能反映財報前資金短線回流大型科技/半導體龍頭(尤其輝達終結七連跌+2%的帶動)，而非等權重廣度行情的結構性逆轉；上期CNBC獨家報導RSP規模突破千億美元、年內跑贏市值加權指數約3個百分點的里程碑仍然成立。建議暫不因單日數據調整既定EWSP/RSP配置，待輝達財報後的市場反應明朗後再行評估廣度行情是否延續。QQQ既定停利/再平衡機制（漲超15%則減碼至5%）持續追蹤中，本期QQQ表現雖優於RSP，惟距觸發門檻仍有相當距離。</div>
+</div>
+
+<div class="lwp-card">
+<div class="lwp-head">② 黃金（GLD）</div>
+<div class="quote-line">GLD $428.07　+0.32%（08/25收盤，連五日上漲）</div>
+<div class="strategy">黃金本期驅動力已從機構研究論述具體轉為選擇權市場大規模交易行為——CNBC「A massive trade just happened in gold」與Deutsche Bank公開建議「趁財政部公債市場干預時買進黃金」，加上機構三週買進黃金期貨規模創紀錄，是本系列報告以來對「去美元化貶值交易」最具體的機構買盤證據。建議維持10%配置不變，惟需留意此類槓桿性交易同步推升波動風險(比特幣週末逾10萬人爆倉即為警訊)，若後續機構觀點進一步上修黃金配置建議區間，屆時可能需要重新評估LWP黃金配置上限。</div>
+</div>
+
+<div class="lwp-card">
+<div class="lwp-head">③ 關鍵金屬／礦業（COPX／REMX）</div>
+<div class="quote-line">COPX $96.32　08/25收盤+1.89%</div>
+<div class="strategy">倫敦金屬交易所與紐約商品交易所銅價雙雙創歷史新高，摩根士丹利公開視回調為買入機會，延續上期資金流雙軌週報記錄COPX單週暴衝10.37%(系列開報以來最大單週漲幅)的類別性資金行為，S&amp;P500 Basic Materials板塊本週以+8.96%大幅領漲亦與此直接呼應，與LTCMA「關鍵金屬受惠供應鏈重組/AI資料中心用銅需求」長期論述持續吻合。建議維持3.6%關鍵金屬ETF配置不變，惟摩根士丹利「回調即買點」的樂觀論述本身也提醒，本輪銅價多頭若持續加速，需留意是否已進入偏擁擠交易階段。</div>
+</div>
+
+<div class="lwp-card">
+<div class="lwp-head">④ 公司債信用利差（IG／HY OAS）</div>
+<div class="quote-line">IG OAS　約81bps（與08/24的80bps大致持平，續處「極緊縮&lt;80bps」門檻邊緣）</div>
+<div class="quote-line">HY OAS　約275-281bps（與08/24的275bps大致持平，續處極緊縮區間）</div>
+<div class="strategy">信用利差本期維持在歷史最緊繃檔位，與美10年期殖利率本期反而小幅回落(-7.6bp)的格局並不矛盾——顯示市場尚未將任何系統性信用風險定價進利差，總經雜訊(貿易戰、消費信心走弱)仍主要反映在公債殖利率端而非信用市場。LTCMA報告建議之TIPS大幅加碼(1.1%→4-6%)邏輯在此環境下依然成立，通膨對沖需求與信用風險對沖需求本質不同，不應混為一談。</div>
+<div class="interpret-box">
+<b>🔍 解讀與訊號轉折點</b><br>
+<b>判讀結論：</b>本期IG OAS(約81bps)與HY OAS(約275-281bps)相較08/24報告大致持平，維持在歷史極緊縮區間，未見獨立走闊跡象；同期美10年期殖利率較08/21回落約7.6bp，2年期大致持平，長端回落幅度略大於短端，屬溫和的「牛平」型態(而非近期常見的熊陡)，主因週二油價回落緩解通膨疑慮、加上市場情緒回穩，帶動長端殖利率小幅下修。由於信用利差本身並未隨殖利率波動而走闊，顯示本期市場波動仍屬「利率/情緒驅動」而非「信用驅動」，信用市場對總經雜訊的反應持續遲鈍於公債市場。
+<ul>
+<li>HY利差是否獨立於利率走闊：目前HY OAS(約275-281bps)仍處於極緊縮/歷史低檔區間，較08/24(275bps)僅微幅波動，尚在噪音範圍內，並無獨立走闊跡象。</li>
+<li>10Y-2Y利差是否收斂翻負或翻正後走揚：目前利差約+44.3bps(10Y 4.66% - 2Y 4.217%)，較08/21的+51.5bps略為收斂，屬「牛平」型態下的溫和收斂(長端回落幅度大於短端)，而非典型衰退前兆式的牛平收斂，需留意此收斂是否僅為財報/事件前的短暫情緒回穩，抑或伴隨今晚PCE數據與Jackson Hole演說延續。</li>
+<li>IG／HY OAS是否觸及歷史檔位門檻：IG OAS約81bps，持續逼近「極緊縮&lt;80bps」門檻邊緣；HY OAS約275-281bps同處極緊縮區間，距350bps正常區下緣尚有約70-75bps緩衝，兩者皆顯示信用利差本身尚未反映任何壓力訊號。</li>
+</ul>
+<b>板塊性利差異常事件監控：</b>上期(08/24)今日板塊流動報告記錄「博通信用成本飆升，華爾街警惕AI產業『幽靈槓桿』」一事，源於博通近期規模上看700億美元的AI晶片相關債務融資案；此與投資機構研究摘要中Apollo「軟體授信集中在AI衝擊最深的領域」(應用軟體貸款餘額1,460億美元、多數評等B-以下)同屬AI相關私募信用曝險的風險定價階段觀察。惟就本期查得的大盤IG/HY OAS數據而言，尚未見廣泛市場層級的利差走闊，顯示博通事件目前仍屬「個別發行人層級的信用成本重新定價」，尚未擴散為板塊性或系統性的信用利差走闊，建議列入風險關鍵字持續追蹤，暫不判定為系統性警訊。</div>
+</div>
+
+<div class="lwp-card">
+<div class="lwp-head">⑤ 10年期－2年期公債期限利差</div>
+<div class="quote-line">10Y 4.66%　／　2Y 4.217%　／　利差 +44.3bps（正值，未倒掛，較08/21收斂約7.2bp）</div>
+<div class="strategy">期限利差本期由前期的「熊陡」轉為溫和的「牛平」型態——長短端殖利率同步小幅回落，但長端降幅(-7.6bp)略大於短端(近乎持平)，主因週二油價回落緩解通膨疑慮、加上市場情緒在輝達財報前回穩，長端殖利率暫時脫離財政供給壓力主導的上行軌道。惟此一收斂能否延續，關鍵仍在本週稍晚Jackson Hole年會華許首次演說能否提供市場信服的鴿派訊號，若無法穩住長端，美銀已示警30年期殖利率恐衝上5.5%，屆時「熊陡」格局可能捲土重來。</div>
+<div class="interpret-box">
+<b>🔍 解讀與訊號轉折點</b><br>
+<b>判讀結論：</b>本期殖利率曲線呈現溫和「牛平」格局：短端(2Y 4.217%，較08/21大致持平)相對穩定，反映市場對Fed政策路徑的定價尚未出現重大變化；長端(10Y 4.66%，較08/21-7.6bp)則小幅回落，驅動因子主要來自週二油價因伊朗荷姆茲海峽談判緩解而下跌，降低短期通膨疑慮，並非典型衰退前兆式的牛平(通常伴隨成長疑慮明顯升溫)，而更接近「風險情緒階段性回穩」下的技術性收斂。與本節④信用利差同步持平的格局並列觀察，顯示本期公債市場的波動收斂屬於「短期情緒/事件驅動」性質，尚未反映任何結構性轉折，財政赤字、AI建設發行、期限溢價上升三大結構性驅動力(JPM上調10年期term premium至120bps，GFC以來最高)並未消退。
+<ul>
+<li>HY利差是否獨立於利率走闊：見④卡，本期HY OAS未見獨立走闊跡象，殖利率小幅回落亦未見信用面同步改善或惡化的對應訊號。</li>
+<li>10Y-2Y利差是否收斂翻負或翻正後走揚：利差目前+44.3bps，較08/21的+51.5bps收斂約7.2bp，仍維持正值(未倒掛)，屬牛平格局下的溫和收斂；能否延續取決於今晚PCE數據與本週稍晚華許演說是否提供市場信服的政策指引。</li>
+<li>IG／HY OAS是否觸及歷史檔位門檻：見④卡，IG OAS(約81bps)持續逼近極緊縮門檻邊緣，HY OAS(約275-281bps)距正常區下緣尚有約70-75bps緩衝，信用面尚未反映殖利率端波動的對應變化。</li>
+</ul>
+</div>
+</div>
+
+<h2 id="s10">📅 十｜市場日曆</h2>
+<div class="cal-item">
+<div class="cal-date">08/26（三）</div>
+<div class="cal-body"><b>輝達Q2財報（美股盤後公布）＋美國7月PCE物價指數（8:30 ET）同日登場</b>市場預期輝達營收約922億美元(年增97%)，關鍵在第三季展望是否站穩1,000億美元以上；PCE是聯準會9月決策前最後一份關鍵通膨數據，波動風險為本週最高。</div>
+</div>
+<div class="cal-item">
+<div class="cal-date">08/27-29</div>
+<div class="cal-body"><b>Jackson Hole全球央行年會</b>新任聯準會主席凱文·華許將於年會期間首次以主席身分發表主題演說，市場高度關注其政策路徑訊號能否穩住近期承壓的長天期殖利率；美銀已示警若訊號不明確，30年期殖利率恐衝上5.5%。</div>
+</div>
+<div class="cal-item">
+<div class="cal-date">09/08</div>
+<div class="cal-body"><b>加拿大對美「等額」反制關稅（已生效）</b>本期確認已正式對約200億美元美國年進口商品課徵反制關稅，美方考慮加碼措施回應，貿易戰持續升溫。</div>
+</div>
+<div class="cal-item">
+<div class="cal-date">09/11</div>
+<div class="cal-body"><b>美國8月CPI報告公布（8:30 ET）</b>是繼今日PCE後，Jackson Hole年會後市場評估聯準會9月決策路徑的下一份關鍵通膨數據。</div>
+</div>
+<div class="cal-item">
+<div class="cal-date">09月上旬</div>
+<div class="cal-body"><b>日本央行、歐洲央行可能同步升息</b>日銀傳出9月可能升息至1.25%，歐洲央行消息人士同樣透露9月升息可能性，全球央行政策路徑分歧值得持續追蹤。</div>
+</div>
+<div class="cal-item">
+<div class="cal-date">09/15-16</div>
+<div class="cal-body"><b>FOMC會議，09/16公布利率決策＋經濟預測摘要（SEP）</b>Jackson Hole演說與PCE/CPI數據齊備後，市場對本次決策路徑的定價將更加明朗，是華許主席任內首次利率決策。</div>
+</div>
+<div class="cal-item">
+<div class="cal-date">近期已知</div>
+<div class="cal-body"><b>Anthropic籌備IPO(估值目標傳約2兆美元)、蘋果秋季發表會(2nm晶片、摺疊iPhone傳聞)</b>本期AI獨角獸上市進程與蘋果新品發表雙雙進入關鍵期，惟Anthropic估值數字尚待多方交叉證實。</div>
+</div>
+
+<h2 id="kw">🔑 關鍵字分類</h2>
+
+<div class="kw-section">
+<b>📌 月度關鍵字（本月持續發酵主題）</b>
+<div class="kw-list">
+<span class="tag tag-cat">AI獨角獸/IPO增發熱潮</span>
+<span class="tag tag-cat">半導體內部分化</span>
+<span class="tag tag-cat">AI晶片供應鏈</span>
+<span class="tag tag-cat">記憶體漲價</span>
+<span class="tag tag-cat">關稅政策/貿易戰</span>
+<span class="tag tag-cat">關鍵金屬/銅礦創新高</span>
+<span class="tag tag-cat">科技巨頭治理(蘋果交接)</span>
+</div>
+</div>
+
+<div class="kw-section">
+<b>🔴 必追（長期影響市場主線）</b>
+<div class="kw-list">
+<span class="tag tag-risk">財政主導/聯邦債務</span>
+<span class="tag tag-risk">Fed政策/新主席華許/Jackson Hole</span>
+<span class="tag tag-risk">地緣政治(荷姆茲海峽/伊朗)</span>
+<span class="tag tag-risk">去美元化/貶值交易</span>
+<span class="tag tag-risk">AI財報風險(輝達)</span>
+</div>
+</div>
+
+<div class="kw-section">
+<b>⚡ 風險關鍵字（LTCMA長期風險 + 投資機構近期觀點）</b>
+<div class="kw-list">
+<span class="tag tag-risk">期限溢價上升</span>
+<span class="tag tag-risk">股債相關性上升</span>
+<span class="tag tag-risk">AI ROI不達標</span>
+<span class="tag tag-risk">M7集中度風險</span>
+<span class="tag tag-risk">60/40組合失靈</span>
+<span class="tag tag-risk">AI基建債發行擴大/幽靈槓桿</span>
+<span class="tag tag-risk">軟體授信曝險1,460億美元(Apollo)</span>
+<span class="tag tag-risk">中國衝擊2.0(Apollo)</span>
+<span class="tag tag-risk">日圓/日債壓力/央行政策分歧</span>
+<span class="tag tag-risk">法律風險(Meta兒少訴訟)</span>
+<span class="tag tag-risk">消費信心走弱</span>
+<span class="tag tag-risk">機構觀點轉謹慎(小摩減碼)</span>
+</div>
+</div>
+
+<div class="footer-note">
+⚠ 本報告僅供參考，非投資建議；本篇報告製作時點在美股週三(08/26)交易日開盤前，市場數據原則上反映08/25收盤，輝達財報與PCE物價指數尚未公布，相關前瞻分析均以「事前預期」角度撰寫，請留意後續實際結果可能與本文論述方向不同。S&amp;P500板塊排行中Healthcare(MRNA +152.27%週漲幅)數字異常龐大，已標註建議以正式交易終端數據覆核；Anthropic IPO估值2兆美元/市場潛力30兆美元之說法僅見富途單一來源，尚待Bloomberg/Reuters/CNBC等多方交叉證實。部分市場數據(黃金精確值、WTI油價、CNN Fear&amp;Greed指數)因公開來源快照時間差略有不一致，已於文中並列標註來源，請以正式交易終端數據為準。財經小狐產出，資料擷取時間2026/08/26 09:00 Asia/Taipei。
+</div>
+
+</div>
+</body>
+</html>
