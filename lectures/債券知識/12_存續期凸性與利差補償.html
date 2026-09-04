@@ -1,0 +1,622 @@
+<meta charset="UTF-8">
+<title>存續期、凸性與利差補償</title>
+<style>
+:root {
+  --paper: #faf8f4;
+  --surface: #ffffff;
+  --ink: #1c2430;
+  --ink-soft: #5b6472;
+  --line: #e6e1d6;
+  --accent: #24507d;
+  --accent-soft: #eaf0f6;
+  --gold: #a97a2f;
+  --gold-soft: #f7efdf;
+  --serif: 'Source Serif 4', 'Noto Serif TC', serif;
+  --sans: 'Public Sans', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14181f;
+    --surface: #1b212b;
+    --ink: #eef1f5;
+    --ink-soft: #a7b0bd;
+    --line: #2a3240;
+    --accent: #7badde;
+    --accent-soft: #1f2c3d;
+    --gold: #d9a752;
+    --gold-soft: #2b2314;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14181f;
+  --surface: #1b212b;
+  --ink: #eef1f5;
+  --ink-soft: #a7b0bd;
+  --line: #2a3240;
+  --accent: #7badde;
+  --accent-soft: #1f2c3d;
+  --gold: #d9a752;
+  --gold-soft: #2b2314;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--gold-soft); }
+
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 24px 96px; }
+
+header.course {
+  background: linear-gradient(180deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 82%, black) 100%);
+  color: #f5f7fa;
+  padding: 56px 24px 40px;
+}
+header.course .inner { max-width: 860px; margin: 0 auto; }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #cfe0f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.eyebrow .dot { width: 5px; height: 5px; border-radius: 50%; background: #cfe0f0; opacity: .6; }
+h1.title {
+  font-family: var(--serif);
+  font-weight: 650;
+  font-size: clamp(2rem, 4.4vw, 2.9rem);
+  margin: 14px 0 10px;
+  text-wrap: balance;
+  letter-spacing: 0.01em;
+}
+.subtitle {
+  font-size: 1.05rem;
+  color: #dbe6f0;
+  max-width: 58ch;
+}
+.meta-row {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.meta-chip {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #eef3f8;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.rail {
+  max-width: 860px;
+  margin: -22px auto 0;
+  padding: 0 24px;
+}
+.rail-track {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 10px 30px -18px rgba(20,20,20,0.35);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  overflow-x: auto;
+}
+.rail-steps { display: flex; gap: 6px; }
+.rail-step {
+  display: block;
+  width: 20px; height: 6px; border-radius: 3px;
+  background: var(--line);
+  flex: none;
+}
+.rail-step.active { background: var(--accent); }
+.rail-step.done { background: var(--gold); }
+
+main { padding-top: 44px; }
+
+.lead {
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  max-width: 62ch;
+  margin-bottom: 8px;
+}
+
+.objectives {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin: 28px 0 44px;
+}
+.objectives h2 {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+.objectives ul { margin: 0; padding-left: 1.2em; color: var(--ink); }
+.objectives li { margin-bottom: 6px; }
+
+section.block {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 0 20px;
+  margin: 64px 0;
+}
+.tab {
+  font-family: var(--serif);
+  font-weight: 650;
+  font-size: 1.6rem;
+  color: var(--gold);
+  line-height: 1;
+  padding-top: 2px;
+}
+.block-body h2 {
+  font-family: var(--serif);
+  font-weight: 650;
+  font-size: 1.55rem;
+  margin: 0 0 6px;
+  text-wrap: balance;
+}
+.block-source {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.03em;
+  margin-bottom: 18px;
+}
+.block-body p { margin: 0 0 16px; max-width: 66ch; }
+.block-body strong { color: var(--ink); }
+.block-body ul.plain { margin: 0 0 16px; padding-left: 1.2em; max-width: 66ch; }
+.block-body ul.plain li { margin-bottom: 6px; }
+
+.deftable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0 24px;
+  font-size: 0.95rem;
+}
+.deftable th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+  padding: 8px 12px 8px 0;
+}
+.deftable td {
+  padding: 11px 12px 11px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.deftable tr:last-child td { border-bottom: none; }
+.deftable td.term {
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--ink);
+}
+.deftable td.term .zh { display:block; font-weight:400; font-size:0.82rem; color: var(--ink-soft); }
+.table-scroll { overflow-x: auto; }
+
+.callout {
+  background: var(--gold-soft);
+  border: 1px solid color-mix(in srgb, var(--gold) 35%, var(--line));
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin: 22px 0;
+}
+.callout .clabel {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: block;
+}
+.callout p { margin: 0 0 8px; max-width: 60ch; }
+.callout p:last-child { margin-bottom: 0; }
+.callout.alt {
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+}
+.callout.alt .clabel { color: var(--accent); }
+
+.formula {
+  font-family: var(--mono);
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 18px 0;
+  font-size: 0.92rem;
+  color: var(--ink);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.quiz {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 4px 22px 20px;
+  margin: 20px 0;
+}
+.quiz-item { border-bottom: 1px solid var(--line); padding: 18px 0; }
+.quiz-item:last-child { border-bottom: none; }
+.quiz-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quiz-item summary::-webkit-details-marker { display: none; }
+.quiz-item summary::before {
+  content: "＋";
+  font-family: var(--mono);
+  color: var(--gold);
+  font-size: 0.85rem;
+  transition: transform .15s ease;
+  flex: none;
+}
+.quiz-item[open] summary::before { content: "－"; }
+.quiz-answer {
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: var(--gold-soft);
+  border-radius: 6px;
+  font-size: 0.92rem;
+}
+.quiz-answer .ans-line { font-family: var(--mono); color: var(--gold); margin-bottom: 4px; display:block; }
+
+.recap {
+  background: var(--accent);
+  color: #f2f6fa;
+  border-radius: 14px;
+  padding: 32px 28px;
+  margin: 60px 0 40px;
+}
+.recap h2 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  margin: 0 0 14px;
+  font-weight: 650;
+}
+.recap ul { margin: 0; padding-left: 1.2em; }
+.recap li { margin-bottom: 8px; }
+.recap .next {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.25);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: #d7e5f2;
+}
+
+.prevnext {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 40px;
+  flex-wrap: wrap;
+}
+.prevnext a {
+  flex: 1;
+  min-width: 200px;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 0.88rem;
+}
+.prevnext a .pn-label { display:block; font-family: var(--mono); font-size: 0.7rem; color: var(--ink-soft); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px;}
+.prevnext a .pn-title { font-weight: 600; }
+.prevnext a.next { text-align: right; }
+
+footer.source-note {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+footer.source-note .rule { height: 1px; background: var(--line); margin: 0 0 20px; }
+
+@media (max-width: 560px) {
+  section.block { grid-template-columns: 1fr; }
+  .tab { display: none; }
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<header class="course">
+  <div class="inner">
+    <div class="eyebrow">債券知識講堂<span class="dot"></span>第 12 堂（延伸閱讀）<span class="dot"></span>源自個人投資組合實戰分析，非SCB×INSEAD原教材範圍</div>
+    <h1 class="title">存續期、凸性與利差補償</h1>
+    <p class="subtitle">從一筆真實持倉——27.5年期、票息5.375%的Gaci First債券——出發，示範存續期、凸性、久期免疫、信用利差補償這一整套風險量化工具的實戰算法，並解答一個常被誤用的問題：利差夠寬，就代表這檔債券划算嗎？</p>
+    <div class="meta-row">
+      <span class="meta-chip">案例來源　個人投資追蹤表06分頁</span>
+      <span class="meta-chip">性質　延伸應用，非教材原文</span>
+      <span class="meta-chip">閱讀時間　約 30 分鐘</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+<main>
+
+  <p class="lead">前十一堂建立的是概念框架——存續期是什麼、信用評等怎麼分級、CoCo債券的減記機制。這一堂反過來：從一筆真實的持倉出發，把這些概念全部帶入實際數字，示範一個像樣的風險判斷應該怎麼算，而不是憑「存續期13、evaluate評等A、利差看起來還行」這種方向性直覺下結論。</p>
+
+  <div class="objectives">
+    <h2>本堂學完你會</h2>
+    <ul>
+      <li>用Macaulay Duration / Modified Duration公式，從一筆真實持倉的現金流表逐項算出精確的存續期數字</li>
+      <li>理解「線性估算」在多大的殖利率變動下會明顯失真，並用凸性(Convexity)公式把誤差修正到0.1個百分點以內</li>
+      <li>精確拆解「同樣50bp的利率變動，跌得少、漲得多」這個不對稱現象——不是憑感覺，是把公式拆成兩項算給你看</li>
+      <li>理解「久期免疫」：為什麼持有期限夠長的投資人，不必然要怕帳面市值隨升息下跌</li>
+      <li>用歷史違約率反推信用利差的理論下限，並理解「credit spread puzzle」——為什麼市場實際利差總是遠高於這個下限，而這件事不代表債券都很便宜</li>
+      <li>學會分辨「利差偏薄的真警訊」跟「利差看起來窄但其實正常」的差別</li>
+    </ul>
+  </div>
+
+  <section class="block">
+    <div class="tab">A</div>
+    <div class="block-body">
+      <h2>存續期的兩種定義：從一筆現金流表算起</h2>
+      <div class="block-source">案例：Gaci First 5.375%，面值$300,000，2054/1/29到期（沙烏地阿拉伯主權基金PIF擔保之融資工具Gaci First International Sukuk），統計基準日2026/7/31，YTM 6.61%</div>
+      <p>存續期間（Duration）有兩個常用定義，容易被混用，先分清楚。</p>
+
+      <p><strong>Macaulay Duration</strong>：把每一筆未來現金流（半年票息＋到期時的最後一期票息加還本）依「距今年數」加權平均，反映「平均要多久才能回本」：</p>
+
+      <div class="formula">D_Mac = Σᵢ [ tᵢ × PV(CFᵢ) ] / Σᵢ PV(CFᵢ)
+
+  tᵢ  = 第 i 筆現金流距今的年數
+  CFᵢ = 第 i 筆現金流金額（半年票息，到期當期另加面值）
+  PV(CFᵢ) = CFᵢ / (1 + y/2)^(2×tᵢ)　　y = YTM(年化)，除以2是半年複利
+  分母 Σ PV(CFᵢ) 理論上應等於目前市價</div>
+
+      <p><strong>Modified Duration</strong>：把Macaulay Duration再除以(1+y/2)，這個數字才是「殖利率變動1個百分點，價格大約變動幾%」的直接敏感度指標：</p>
+
+      <div class="formula">D_Mod = D_Mac / (1 + y/2)</div>
+
+      <p>把Gaci First的完整現金流表（未來還有44期半年票息，最後一期加還本$300,000）代入公式，實際折現算出：</p>
+
+      <div class="table-scroll">
+      <table class="deftable">
+        <tr><th>指標</th><th>算出來的數字</th><th>白話意思</th></tr>
+        <tr><td class="term">Macaulay Duration</td><td>13.55年</td><td>加權平均回本時間</td></tr>
+        <tr><td class="term">Modified Duration</td><td>13.11</td><td>YTM變動1%，價格約變動13.11%（線性估算，見下段）</td></tr>
+      </table>
+      </div>
+
+      <div class="callout">
+        <span class="clabel">為什麼13.55跟27.5年（到期年數）差這麼多</span>
+        <p>因為Macaulay Duration是「加權平均」，不是到期年數本身。這檔債票息5.375%不算低，每半年都會拿回一筆現金，這些提前拿到的現金會把「加權平均回本時間」往前拉；如果是零息債（沒有票息，只有到期一次性還本），Macaulay Duration會等於到期年數本身（27.5年）。票息愈高、Duration愈短，這是判斷「這檔債對利率有多敏感」時一個常被忽略的細節——不能只看到期年數。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="tab">B</div>
+    <div class="block-body">
+      <h2>線性估算為什麼失真：凸性登場</h2>
+      <div class="block-source">把Modified Duration當公式直接乘，跟真的重新折現算一次價格，差多少？</div>
+      <p>Modified Duration量的是價格對殖利率關係曲線在「現在這一點」的斜率（一階導數）：</p>
+
+      <div class="formula">ΔP/P ≈ − D_Mod × Δy</div>
+
+      <p>這個公式只有在Δy趨近於零時才精確。Δy一旦變大到50bp、100bp這種實際會發生的幅度，這條曲線本身的彎曲程度——<strong>凸性（Convexity）</strong>——就會讓線性公式明顯失準。把價格對殖利率的關係做泰勒展開到第二項：</p>
+
+      <div class="formula">ΔP/P ≈ − D_Mod × Δy + (1/2) × C × (Δy)²
+
+  C（凸性）是二階導數，用同一套現金流折現公式數值微分算出</div>
+
+      <p>把Gaci First的完整現金流代入，算出<strong>凸性 C ≈ 264.0</strong>。用這個數字重新比較「只用Duration的線性估算」跟「真的重新折現的精確價格」：</p>
+
+      <div class="table-scroll">
+      <table class="deftable">
+        <tr><th>殖利率變動</th><th>新YTM</th><th>精確重新定價</th><th>精確跌幅</th><th>只用Duration(一階)</th><th>Duration+凸性(二階)</th></tr>
+        <tr><td class="term">現況</td><td>6.61%</td><td>84.449</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td class="term">+50bp</td><td>7.11%</td><td>79.19</td><td>−6.240%</td><td>−6.557%</td><td>−6.227%</td></tr>
+        <tr><td class="term">+70bp</td><td>7.31%</td><td>77.22</td><td>−8.567%</td><td>−9.180%</td><td>−8.533%</td></tr>
+        <tr><td class="term">+100bp</td><td>7.61%</td><td>74.41</td><td>−11.892%</td><td>−13.114%</td><td>−11.794%</td></tr>
+        <tr><td class="term">−50bp（回落）</td><td>6.11%</td><td>90.28</td><td>+6.901%</td><td>+6.557%</td><td>+6.887%</td></tr>
+      </table>
+      </div>
+
+      <p>只用Modified Duration，+100bp情境的誤差高達1.32個百分點（線性估算−13.11% vs 真實−11.89%）；只要多加凸性這一項，誤差立刻縮小到0.1個百分點以內。這證明「Duration算跌幅時明顯失真」這件事，幾乎完全是凸性造成的，不是模型算法本身有其他問題。</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="tab">C</div>
+    <div class="block-body">
+      <h2>精確拆解不對稱效應：同樣50bp，跌得少、漲得多</h2>
+      <p>注意上面表格最後一行：同樣是50bp的變動，跌是−6.24%，漲卻是+6.90%——這不是誤差或巧合，是正凸性的必然結果，可以把±50bp代進二階公式精確拆開來看：</p>
+
+      <div class="formula">一階（Duration）項：−13.11 × (±0.5%) = ∓6.56%　　← 對稱，漲跌幅理論上一樣大
+
+二階（凸性）項：(1/2) × 264.0 × (0.5%)² = +0.33%　　← 不管漲跌都是正的
+
+跌的情境：−6.56% + 0.33% = −6.23%（精確值−6.24%，幾乎完全吻合）
+漲的情境：+6.56% + 0.33% = +6.89%（精確值+6.90%，幾乎完全吻合）</div>
+
+      <p>一階項對稱地把價格往上下兩邊各拉6.56%；二階項因為是(Δy)²，不管漲跌方向永遠是正的，於是各補了+0.33個百分點——跌的時候少跌0.33個百分點，漲的時候多漲0.33個百分點。這就是「正凸性對投資人永遠有利」這句話的精確數學來源，不是比喻。</p>
+
+      <div class="callout alt">
+        <span class="clabel">凸性大小跟什麼有關</span>
+        <p>凸性大致與「存續期的平方」成正比。這檔債Modified Duration有13.11（偏長），凸性自然大（264.0）。如果換算一檔存續期只有5的短債，凸性大概只會是這檔的(5/13.11)²≈0.145倍，約38左右——同樣±50bp的凸性補償只剩約0.05個百分點。這代表短天期債券不只利率敏感度本身小，連凸性帶來的「額外保護」效應也小得多；長天期債券的正凸性紅利，是短債結構上享受不到的。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="tab">D</div>
+    <div class="block-body">
+      <h2>久期免疫：持有期限夠長，升息不必然是壞事</h2>
+      <p>先看配息這個緩衝墊：現在市價84.449買，票息5.375%換算「經常性殖利率」＝5.375/84.449≈6.36%。也就是說，即使殖利率真的+50bp、價格跌6.24%，當年度光是收到的配息就幾乎打平掉價格跌幅，總報酬（含息）接近持平；只有+100bp這種更劇烈的情境（價跌11.89% vs 配息6.36%），當年度總報酬才會是實質虧損（約−5.5%）。</p>
+
+      <p>再看更長遠的一點：<strong>Macaulay Duration = 13.55年這個數字，理論上代表——如果持有期限剛好接近13.5年，一次性的利率平移對長期總報酬的影響會被兩股力量大致抵銷：「價格立即受傷」跟「配息之後可以用更高的利率再投資」。</strong>這是債券投資裡的Duration Matching／免疫理論(Immunization Theory)：</p>
+
+      <div class="table-scroll">
+      <table class="deftable">
+        <tr><th>持有情境</th><th>升息對你的影響</th></tr>
+        <tr><td class="term">打算長抱，甚至接近到期</td><td>殖利率上升，痛的是「帳面市值」；但長期總報酬不一定變差，因為配息可以用更高的利率滾入再投資，某種程度上抵銷了價格損失</td></tr>
+        <tr><td class="term">需要在1-3年內變現</td><td>市值波動（表格裡−6%~−12%的情境）是實打實的風險，免疫效果來不及發揮</td></tr>
+      </table>
+      </div>
+
+      <div class="callout">
+        <span class="clabel">免疫理論不是「長抱就不會賠」</span>
+        <p>免疫理論成立的前提是「一次性、平行的利率位移」，而且只在Macaulay Duration那個特定持有期限上近似成立——它不是說「隨便抱多久都能免疫」，也不保證抵銷得分毫不差。它更像是一個方向性的結論：持有期限愈接近Macaulay Duration，一次性升息對你長期總報酬的傷害愈小；持有期限遠短於Duration，帳面波動就是實打實的風險，沒有時間讓再投資效果發揮。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="tab">E</div>
+    <div class="block-body">
+      <h2>存續期沒告訴你的事：信用利差風險</h2>
+      <p>前面整段分析，只算了「無風險利率上升」這一層，假設信用利差(spread)本身不變。這檔是PIF（沙烏地阿拉伯主權基金）擔保的Gaci First，評等Aa3/A+。如果設想的升息循環伴隨著全球緊縮、油價走弱這類總體經濟環境，沙烏地主權連結的信用利差有可能同步走闊——真實跌幅可能比上面表格算出來的更深。這是這檔債（相對於純美國公債）多背的一層風險，Duration/凸性本身完全量不到，必須另外評估。</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="tab">F</div>
+    <div class="block-body">
+      <h2>要不要換券？用Duration做決策比較</h2>
+      <p>如果考慮把這檔債賣掉、換成10年期公債，先算10年期公債本身的Duration：以票息＝殖利率4.5%概算平價發行，算出<strong>Macaulay Duration≈8.16年、Modified≈7.98</strong>——大約只有Gaci First這檔債的61%。</p>
+
+      <div class="table-scroll">
+      <table class="deftable">
+        <tr><th>指標</th><th>Gaci First(現況)</th><th>10年期公債</th></tr>
+        <tr><td class="term">Modified Duration</td><td>13.11</td><td>~7.98</td></tr>
+        <tr><td class="term">YTM</td><td>6.61%</td><td>~4.5%（視當下實際報價）</td></tr>
+        <tr><td class="term">+50bp價格影響</td><td>−6.24%</td><td>−3.90%</td></tr>
+        <tr><td class="term">+100bp價格影響</td><td>−11.89%</td><td>−7.61%</td></tr>
+      </table>
+      </div>
+
+      <p>換過去等於把利率敏感度砍到約六成，波動確實會小很多；但代價是三個實實在在的取捨：</p>
+      <ul class="plain">
+        <li><strong>放棄約200bp的殖利率差</strong>——這是被支付來承擔沙烏地信用風險的補償，換公債等於不要這筆補償了</li>
+        <li><strong>現在賣＝認賠了結一部分成本</strong>——如果買入價高於現價，賣掉會實現一筆資本利損，而不是繼續持有、等配息＋到期還本去攤還這個差距</li>
+        <li><strong>拿掉PIF/沙烏地的信用曝險，換成美國主權風險</strong>——更乾淨，但也是更低報酬</li>
+      </ul>
+
+      <div class="callout">
+        <span class="clabel">決策框架：這其實是兩個獨立的問題</span>
+        <p>「利率走勢很篤定」跟「要不要換券」是兩個不同的決定，中間還缺一塊：<strong>打算抱多久</strong>。持有期限夠長（接近或超過Macaulay Duration）的投資人，長抱、忍受帳面波動、持續收息，長期總報酬未必比較差，甚至因為久期免疫效果加上換得更高的再投資利率，可能更好；如果在意的其實是1-3年內的帳面波動，或是想主動去槓桿利率風險，換成短天期公債確實能大幅降低敏感度，但要清楚知道代價是放棄利差＋認列已發生的資本利損；如果真正擔心的其實是發行人的信用風險（而非單純利率），那換券是對的方向，但這跟「升息循環」是兩個不同的擔憂，值得分開判斷，不要混為一談。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="tab">G</div>
+    <div class="block-body">
+      <h2>Credit Spread Puzzle：利差裡到底補償了什麼？</h2>
+      <div class="block-source">延伸主題：市場觀察到的信用利差，遠比「純違約損失」該有的補償寬得多——這件事本身有個學術上的名字</div>
+
+      <p>第4堂教過怎麼用歷史違約率反推「這檔債至少該有多少利差」（預期損失框架：PD × LGD）。用這套方法把這份持倉裡所有2030年後到期的債券都算過一遍，得到一個很一致的結果：</p>
+
+      <div class="callout">
+        <span class="clabel">實際算出的數字</span>
+        <p>用歷史違約率(AAA/AA/A/BBB各評等的1年/5年/10年累計違約率)、LGD=60%(優先無擔保債的常見歷史區間)反推出來的「應有利差下限」，全部落在<strong>0.01%~0.22%</strong>之間；但這批債券的市場實際利差普遍是<strong>0.4%~1.8%</strong>，Gaci First本身是1.34% vs 下限僅0.11%——實際利差是理論下限的<strong>3到12倍</strong>。這不是個別案例，是幾乎所有投資級債券的常態。</p>
+      </div>
+
+      <p>這個「市場利差遠大於歷史違約損失能解釋的部分」的現象，在學術文獻裡有個明確的名字——<strong>Credit Spread Puzzle（信用利差之謎）</strong>。最具代表性的研究是Elton、Gruber、Agrawal與Mann於2001年發表在《Journal of Finance》的論文〈Explaining the Rate Spread on Corporate Bonds〉：他們發現，用歷史違約機率乘以違約後的損失率算出的「預期損失」，只能解釋投資級公司債利差的一小部分，依評等與年期不同，能解釋的比例通常不到利差總額的四分之一到一半，其餘一半以上的利差找不到違約風險可以歸因——這個「解釋不了的剩餘部分」就是這個謎題的核心。</p>
+
+      <h2 style="margin-top:36px; font-size:1.25rem;">利差裡真正裝了什麼</h2>
+      <p>後續研究陸續把「解釋不了的部分」拆解成幾個可辨識的成分，公司債利差本質上是好幾層補償疊加起來的，不是只補償「真的會違約」這一件事：</p>
+
+      <div class="table-scroll">
+      <table class="deftable">
+        <tr><th>成分</th><th>白話意思</th></tr>
+        <tr><td class="term">期望違約損失<span class="zh">Expected Loss</span></td><td>第4堂教過的PD×LGD——這是唯一能被歷史違約率直接量化的部分，也是這篇講義用來當「下限」的那個數字</td></tr>
+        <tr><td class="term">流動性溢酬<span class="zh">Liquidity Premium</span></td><td>公司債二級市場天生比公債淺，買賣價差大、成交量小，投資人要求額外補償「萬一急需變現，可能賣不到理論價」的風險</td></tr>
+        <tr><td class="term">利差本身的波動風險<span class="zh">Spread/Systematic Risk</span></td><td>即使不違約，信用利差本身會隨景氣循環大幅擴大或收窄（2008、2020都是典型案例），這種「利差波動」本身就是一種系統性風險，要求風險溢酬補償，跟「這家公司會不會倒」是兩回事</td></tr>
+        <tr><td class="term">評等遷移風險<span class="zh">Downgrade/Migration Risk</span></td><td>公司從A被調降到BBB，即使沒有違約，價格也會因為利差走闊而立刻下跌——這個風險獨立於「最終有沒有真的違約」</td></tr>
+        <tr><td class="term">稅賦與法規因素</td><td>公司債利息課稅方式與部分免稅債券不同；保險公司、退休基金等機構買家受資本適足/風險權重規定限制，只能持有特定評等以上的債券，供需結構本身會推高利差</td></tr>
+        <tr><td class="term">通路加價</td><td>私人銀行/財富管理通路的產品成本、承銷利潤等，也會反映在客戶實際拿到的利差裡</td></tr>
+      </table>
+      </div>
+
+      <div class="callout alt">
+        <span class="clabel">這對判斷「這檔債貴不貴」的實際含義</span>
+        <p>第4堂教的「利差 vs 預期損失」框架，給出的是一個<strong>下限（floor）</strong>，不是公允定價。市場利差普遍是下限的好幾倍，這件事本身不代表這些債券都「賺很大」或「錯殺」——用這個框架的正確方式，不是拿它去說哪些債券便宜，而是反過來抓「利差薄到連違約風險的下限都補不到」的異常案例：如果一檔債的市場利差竟然低於這個理論下限，代表市場定價連最起碼的違約補償都沒給夠，這才是真正值得警惕的訊號，而不是利差看起來「不夠寬」就急著下結論。</p>
+      </div>
+
+      <h2 style="margin-top:36px; font-size:1.25rem;">實例：利差偏薄的異常案例長什麼樣子</h2>
+      <p>在這批58檔分析過的債券裡，只有一檔真正落在「利差連違約下限都補不到」的區間：一檔A評等、YTM 4.43%的公司債，跟當時同天期無風險利率相比，市場利差是<strong>負的（−0.17%）</strong>——連理論下限（+0.07%）都夠不上，缺口−0.24個百分點。這是整批債券裡唯一一個「乾淨」的異常案例：沒有已知的資料缺口可以解釋，也不是次順位結構造成的，純粹就是這檔債的市場定價目前比同評等、同天期的其他債券緊得多。可能的解釋包括市場對這個特定發行人給了稀缺性溢價，也不能排除是資料本身有誤差——但這正是「利差vs理論下限」這個框架真正該派上用場的時候：不是拿它去挑便宜貨，而是拿它去抓「這裡可能有問題，該進一步查證」的訊號。</p>
+    </div>
+  </section>
+
+  <div class="quiz">
+    <details class="quiz-item">
+      <summary>Modified Duration = 13.11，代表YTM上升1%時，價格一定跌13.11%嗎？</summary>
+      <div class="quiz-answer"><span class="ans-line">答</span>不完全對。13.11是「線性估算」，只在殖利率變動很小時才精確。實際變動幅度愈大（例如100bp），凸性效應愈明顯，真實跌幅會比線性估算的13.11%小——這檔債+100bp的精確跌幅其實是11.89%，比線性估算少了1.22個百分點。</div>
+    </details>
+    <details class="quiz-item">
+      <summary>為什麼債券的正凸性對投資人「不管漲跌都有利」？</summary>
+      <div class="quiz-answer"><span class="ans-line">答</span>因為二階泰勒展開式裡凸性項是C×(Δy)²，平方項不管Δy是正是負結果都是正的。所以殖利率上升時，凸性項會讓實際跌幅比線性估算小；殖利率下跌時，凸性項會讓實際漲幅比線性估算大。兩個方向凸性都在幫你，這是option-free（無嵌入選擇權）債券的結構性特徵。</div>
+    </details>
+    <details class="quiz-item">
+      <summary>存續期13.55年跟到期年數27.5年差這麼多，代表什麼？</summary>
+      <div class="quiz-answer"><span class="ans-line">答</span>代表這檔債有實質的票息現金流會提前拿到手，把「加權平均回本時間」往前拉。票息愈高，Macaulay Duration愈短，跟到期年數的落差愈大；如果是零息債（沒有中途配息），Macaulay Duration會直接等於到期年數。</div>
+    </details>
+    <details class="quiz-item">
+      <summary>市場利差普遍是「歷史違約率反推下限」的3~10倍，代表這些債券都很便宜、可以放心買嗎？</summary>
+      <div class="quiz-answer"><span class="ans-line">答</span>不代表。這是投資級債券的市場常態（Credit Spread Puzzle），利差裡除了違約損失補償，還包含流動性溢酬、利差波動風險、評等遷移風險、稅賦與供需因素等好幾層補償。這個框架真正該用來抓的，是「利差竟然低於理論下限」的異常案例——那才是市場定價可能有問題的警訊，而不是拿「利差比下限寬很多」去論證便宜與否。</div>
+    </details>
+    <details class="quiz-item">
+      <summary>持有期限剛好等於Macaulay Duration，代表一定不會被升息傷到嗎？</summary>
+      <div class="quiz-answer"><span class="ans-line">答</span>不是「一定不會」，是免疫理論下「近似抵銷」——一次性、平行的利率上升，價格立即受損的部分，理論上會被之後配息用更高利率再投資的效果大致抵銷，但這只是近似值，且僅適用於一次性平行位移的情境，不是任何利率變動下都精確成立的保證。</div>
+    </details>
+  </div>
+
+  <div class="recap">
+    <h2>這堂課帶走的三件事</h2>
+    <ul>
+      <li>Modified Duration是「一階」線性估算，Δy愈大愈失真；凸性是「二階」修正項，長天期債券的凸性紅利遠大於短債，且不管漲跌都對投資人有利。</li>
+      <li>久期免疫理論告訴你：持有期限夠長的投資人，不必然要怕帳面市值隨升息下跌——痛的是市值，長期總報酬未必變差。但這不是保證，只在持有期限接近Macaulay Duration、且是一次性平行利率位移時近似成立。</li>
+      <li>信用利差普遍遠大於歷史違約率能解釋的下限（Credit Spread Puzzle），這代表利差裡有其他補償（流動性、利差波動、評等遷移、供需），不是這些債券都被錯殺；這套「利差vs下限」框架真正的用途，是抓利差反常偏薄的警訊，不是拿來論證便宜與否。</li>
+    </ul>
+  </div>
+
+  <div class="prevnext"><a class="prev" href="11_公債資金迴路.html"><span class="pn-label">← 上一堂</span><span class="pn-title">第11堂　公債資金迴路</span></a></div>
+
+</main>
+</div>
+
+<footer class="source-note">
+  <div class="rule"></div>
+  本篇為系列延伸內容，非Standard Chartered × INSEAD Wealth Academy原教材範圍。內容整理自個人投資追蹤表06分頁「單債到期管理」的一筆真實持倉分析（Gaci First 5.375% 2054，及2030年後到期58檔債券的信用利差批次比對），第1-2堂建立的存續期近似公式與第4堂的預期損失框架在此延伸為完整的凸性計算與Credit Spread Puzzle說明。凸性數值、精確重新定價、各情境跌漲幅均以完整現金流折現法實際計算得出，非概算。Credit Spread Puzzle之學術定義參考Elton, Gruber, Agrawal & Mann (2001)〈Explaining the Rate Spread on Corporate Bonds〉，Journal of Finance；本文為既有文獻結論的整理引用，非對原始論文之重製。僅供個人研究參考，不構成投資建議。
+</footer>
