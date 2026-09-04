@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>廣達電腦(2382) 最新財報解析｜個股小狐</title>
+<style>
+:root{
+  --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee;
+  --text:#1e2233; --text2:#6b7280; --accent:#4f46e5; --accent2:#4338ca;
+  --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+  --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.6;font-size:15px;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 60px;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);color:#fff;padding:36px 20px 28px;margin-bottom:0;}
+.hero-inner{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;}
+.hero-title{font-size:26px;font-weight:800;margin:0 0 4px;}
+.hero-sub{font-size:13px;opacity:.85;margin:0;}
+.hero-stats{display:flex;gap:22px;flex-wrap:wrap;}
+.hstat{text-align:right;}
+.hstat .label{font-size:11px;opacity:.8;}
+.hstat .value{font-size:20px;font-weight:800;}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:700;}
+.badge-red{background:#fee2e2;color:var(--red);}
+.badge-green{background:#dcfce7;color:var(--green);}
+.badge-gold{background:#fef3c7;color:var(--gold);}
+.badge-gray{background:var(--bg3);color:var(--text2);}
+.badge-blue{background:#dbeafe;color:var(--blue);}
+
+/* TOC */
+.toc{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 20px;position:sticky;top:0;z-index:10;}
+.toc-inner{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;}
+.toc a{color:var(--accent2);text-decoration:none;font-weight:600;white-space:nowrap;}
+.toc a:hover{text-decoration:underline;}
+
+section{margin-top:38px;}
+h2{font-size:19px;font-weight:800;border-left:5px solid var(--accent);padding-left:10px;margin:0 0 14px;}
+h3{font-size:15.5px;font-weight:700;color:var(--accent2);margin:22px 0 8px;}
+p{color:var(--text);}
+.muted{color:var(--text2);font-size:13px;}
+.note{font-size:12.5px;color:var(--text2);background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-top:8px;}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0;background:var(--bg);}
+th,td{border:1px solid var(--border);padding:7px 10px;text-align:left;}
+th{background:var(--bg3);font-weight:700;font-size:12.5px;}
+td.num{text-align:right;font-variant-numeric:tabular-nums;}
+tr:nth-child(even) td{background:var(--bg2);}
+.tablewrap{overflow-x:auto;}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0;}
+.card{border:1px solid var(--border);border-radius:12px;padding:16px;background:var(--bg2);}
+.card h4{margin:0 0 8px;font-size:14.5px;}
+.card ul{margin:6px 0 0;padding-left:18px;font-size:13px;}
+.card li{margin-bottom:4px;}
+
+.scenario-card{border-radius:12px;padding:16px;border:2px solid var(--border);}
+.scenario-bear{border-color:#fecaca;background:#fff5f5;}
+.scenario-base{border-color:#c7d2fe;background:#f5f6ff;}
+.scenario-bull{border-color:#bbf7d0;background:#f1fdf5;}
+.scenario-card h4{margin:0 0 6px;font-size:15px;}
+.scenario-card .tp{font-size:22px;font-weight:800;margin:6px 0;}
+.scenario-card table{background:transparent;}
+.scenario-card td,.scenario-card th{border-color:rgba(0,0,0,.08);font-size:12.5px;padding:5px 7px;}
+
+.action-box{border:2px solid var(--accent);border-radius:12px;padding:18px 20px;background:linear-gradient(135deg,#f5f6ff,#ffffff);margin-top:16px;}
+.action-box h4{margin:0 0 10px;color:var(--accent2);font-size:16px;}
+.action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px;}
+.action-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+.action-item .tag{font-size:11.5px;font-weight:700;color:var(--text2);text-transform:uppercase;}
+.action-item .val{font-size:14px;font-weight:700;margin-top:2px;}
+
+.src{font-size:11.5px;color:var(--text2);}
+.src a{color:var(--accent2);}
+
+footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--border);font-size:12px;color:var(--text2);}
+.disclaimer{background:var(--bg3);border-radius:10px;padding:14px 16px;margin-top:14px;font-size:12.5px;}
+
+.pos{color:var(--red);font-weight:700;}
+.neg{color:var(--green);font-weight:700;}
+.flag-verified::before{content:"✅ ";}
+.flag-est::before{content:"⚠️ ";}
+.flag-na::before{content:"❌ ";}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-sub">個股小狐｜最新財報解析　分析日期 2026-09-03</p>
+      <p class="hero-title">廣達電腦 Quanta Computer Inc.（2382.TW）</p>
+      <p class="hero-sub">TWSE：2382　電腦及週邊設備業　AI伺服器 ODM 龍頭之一</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="label">股價（2026/09/03）</div><div class="value">NT$335.0</div></div>
+      <div class="hstat"><div class="label">TTM本益比</div><div class="value">約14.7倍</div></div>
+      <div class="hstat"><div class="label">市值（估）</div><div class="value">約NT$1.38兆</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#beatmiss">① Beat/Miss表</a>
+    <a href="#guidance">② 全年指引變化</a>
+    <a href="#pricereaction">③ 股價反應</a>
+    <a href="#dcf">④ 三情境DCF</a>
+    <a href="#valuation">⑤ 股價位階</a>
+    <a href="#comps">⑥ 可比公司</a>
+    <a href="#risks">⑦ 優勢/風險</a>
+    <a href="#targets">⑧ 目標價與建議</a>
+    <a href="#anchor">⑨ 估值歷史錨點</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section id="beatmiss">
+<h2>① Beat/Miss表：2026年第2季財報</h2>
+<p class="muted">廣達2026Q2法說會於8/13召開。台股上市公司多未提供正式財測，故「市場預期」欄採FactSet券商調查在財報公布「前」最後一次的季度共識（若查無明確單季共識，以YoY/QoQ變動判讀，不臆測共識數字）。</p>
+
+<div class="tablewrap">
+<table>
+<tr><th>項目</th><th>2026Q2實際</th><th>QoQ</th><th>YoY</th><th>市場預期</th><th>判定</th></tr>
+<tr><td>合併營收</td><td class="num">NT$10,365.93億</td><td class="num pos">+28.1%</td><td class="num pos">+105.6%</td><td class="num">—（無單季共識可查）</td><td><span class="badge badge-red">✅ 續創新高</span></td></tr>
+<tr><td>歸屬母公司淨利</td><td class="num">NT$286.51億</td><td class="num pos">+35.2%</td><td class="num pos">+69.9%</td><td class="num">—</td><td><span class="badge badge-red">✅ 創同期新高</span></td></tr>
+<tr><td>EPS</td><td class="num">NT$7.43</td><td class="num pos">+35.0%</td><td class="num pos">+70.0%</td><td class="num">—</td><td><span class="badge badge-red">✅ 單季歷史新高</span></td></tr>
+<tr><td>毛利率</td><td class="num">5.02%</td><td class="num pos">+0.24ppt</td><td class="num">—（無法取得去年同期精確值）</td><td class="num">—</td><td><span class="badge badge-gray">— 僅QoQ略回升</span></td></tr>
+<tr><td>營業利益率</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="badge badge-gray">❌ 無法取得</span></td></tr>
+<tr><td>伺服器業務中AI伺服器佔比</td><td class="num">75–80%</td><td class="num">—</td><td class="num">—</td><td class="num">全年目標80%</td><td><span class="badge badge-blue">符合全年目標軌道</span></td></tr>
+</table>
+</div>
+<p class="note flag-est">說明：本次查詢未能取得公開、具體的「單季」券商EPS/營收共識預估值（台股中小型與大型權值股常見僅有全年度共識，無單季拆分公開數據），故Beat/Miss判定以官方公布之QoQ/YoY變動幅度與歷史新高與否為主要依據，不臆測未經證實的共識數字。就結果而言，本季營收、獲利、EPS三項皆創歷史/同期新高，屬強勁成長趨勢；惟毛利率5.02%仍處相對低檔（詳見下方全年指引段落，財務長已示警Q3毛利率恐降至9季新低）。</p>
+<p class="src">來源：<a href="https://www.sinotrade.com.tw/richclub/calendar/%E5%BB%A3%E9%81%94%E6%B3%95%E8%AA%AA-2Q26%E5%96%AE%E5%AD%A3EPS%E8%A1%9D%E4%B8%8A7-43%E5%85%83%E5%89%B5%E6%96%B0%E9%AB%98" target="_blank">豐雲學堂-廣達法說2Q26</a>、<a href="https://cmnews.com.tw/article/cmoney-8ec12605-9719-11f1-aef8-d8207deb8c86" target="_blank">CMoney-廣達2026Q2財報法說</a>、<a href="https://finance.biggo.com/news/TW_2382.TW_2026-08-13" target="_blank">BigGo Finance Q2 Earnings Call</a></p>
+</section>
+
+<section id="guidance">
+<h2>② 全年指引變化：新舊指引對照</h2>
+<div class="tablewrap">
+<table>
+<tr><th>指引項目</th><th>Q1法說（2026/05/14）舊指引</th><th>Q2法說（2026/08/13）新指引</th><th>方向</th></tr>
+<tr><td>AI伺服器全年營收目標</td><td>年增倍增（約100%+）</td><td>倍增目標維持不變</td><td><span class="badge badge-gray">維持</span></td></tr>
+<tr><td>一般型伺服器全年展望</td><td>上修至雙位數成長</td><td>維持雙位數成長</td><td><span class="badge badge-gray">維持</span></td></tr>
+<tr><td>AI伺服器佔伺服器營收比重</td><td>目標80%</td><td>目標80%維持不變</td><td><span class="badge badge-gray">維持</span></td></tr>
+<tr><td>2026全年資本支出</td><td>約NT$300億</td><td>上修至NT$400億</td><td><span class="badge badge-red">▲ 上修</span></td></tr>
+<tr><td>台灣AI伺服器產能規模</td><td>持續擴產中</td><td>目標年底前較2025年底倍增，收購友達華亞廠區（NT$197億）擴充在地產能</td><td><span class="badge badge-red">▲ 上修（新增併購）</span></td></tr>
+<tr><td>訂單能見度</td><td>看至數季後</td><td>明確延伸看至2028年</td><td><span class="badge badge-red">▲ 上修（拉長）</span></td></tr>
+<tr><td>Q3單季毛利率展望</td><td>（Q1法說未特別提示）</td><td>財務長示警：恐降至9季新低，不排除Q4續降</td><td><span class="badge badge-green">▼ 下修（警訊）</span></td></tr>
+<tr><td>Q3筆電出貨展望</td><td>（未提示）</td><td>預期QoQ下滑逾20%</td><td><span class="badge badge-green">▼ 下修</span></td></tr>
+<tr><td>股利政策</td><td>2025年度已配發現金股利15.6元（配發率約80%，2026/07/16發放）</td><td>H1 2026獲利暫不加發股利，資金留供資本支出與海外子公司增資</td><td><span class="badge badge-gray">維持保守配息、資金轉投資</span></td></tr>
+</table>
+</div>
+<p class="note">重點解讀：全年AI伺服器倍增與80%佔比的「量」的目標完全沒有下修，且訂單能見度罕見地被拉長到2028年，顯示公司對AI伺服器需求的長期信心不變、甚至更強；但同一場法說會中财務長主動示警Q3毛利率恐創9季新低、Q4可能續降，反映「量增不等於質優」——高單價機種放量出貨反而稀釋毛利率，這是本次法說會最關鍵的多空並陳訊息。</p>
+<p class="src">來源：<a href="https://blog.fugle.tw/post/earnings-call-2382-2026-08-13" target="_blank">富果直送-廣達法說會備忘錄20260813</a>、<a href="https://blog.fugle.tw/post/earnings-call-2382-2026-05-14" target="_blank">富果直送-廣達法說會備忘錄20260514</a>、<a href="https://finance.biggo.com/news/TW_2382.TW_2026-08-13" target="_blank">BigGo Finance</a></p>
+</section>
+
+<section id="pricereaction">
+<h2>③ 股價反應：財報公布前後</h2>
+<div class="tablewrap">
+<table>
+<tr><th>時間點</th><th>股價</th><th>說明</th></tr>
+<tr><td>法說會前（2026/08/12收盤）</td><td class="num">—</td><td class="flag-na">本次查詢無法取得精確收盤價數字，禁止臆測</td></tr>
+<tr><td>法說會當日（2026/08/13）</td><td class="num">—</td><td class="flag-est">當日大盤上漲503點站上46,000點、台積電上漲20元至2,435元，大盤氛圍偏多；廣達個股當日收盤精確價格無法查得</td></tr>
+<tr><td>法說會隔日（2026/08/14）</td><td class="num">—</td><td class="flag-est">財務長楊俊烈於法說會中表示，雖然高單價機種出貨增加，但第3季毛利率恐落入9季以來新低，甚至不排除Q4續降，市場消化此利空後，8/14廣達股價表現轉為疲軟（精確跌幅無法查得）</td></tr>
+<tr><td>分析當日（2026/09/03）</td><td class="num">NT$335.0</td><td class="flag-verified">Yahoo股市即時報價，14:30，當日開盤339.5／最高342.5／最低332.5</td></tr>
+</table>
+</div>
+<p class="note flag-est">解讀：法說會呈現「上（營收/獲利創高、資本支出上修、訂單能見度看至2028）下（Q3毛利率9季新低警訊）」交錯的訊息組合，屬於典型「利多出盡+隱憂浮現」的法說會後股價震盪格局。由於未能取得逐日精確收盤價，此處僅能以定性描述呈現，數值一律標示「—」，避免臆測。建議使用者自行至Goodinfo或券商看盤軟體查詢8/12–8/14逐日K線以還原精確股價反應路徑。</p>
+<p class="src">來源：<a href="https://tw.stock.yahoo.com/news/%E6%B8%85%E5%80%89%E5%A4%A7%E6%8B%8D%E8%B3%A3-%E5%85%A9%E5%AE%B6-%E6%B3%95%E8%AA%AA%E5%A0%B1%E5%96%9C%E4%BB%8D%E8%B3%A3%E8%B6%85-%E9%81%AD%E5%A4%A7%E5%92%96%E6%8A%95%E9%A1%A7%E4%B8%8B%E4%BF%AE%E7%9B%AE%E6%A8%99%E5%83%B9-033557563.html" target="_blank">Yahoo股市新聞</a>、<a href="https://tw.stock.yahoo.com/quote/2382.TW" target="_blank">Yahoo股市-廣達即時行情</a></p>
+</section>
+
+<section id="dcf">
+<h2>④ 三情境DCF估值</h2>
+<p class="muted">以下為個股小狐依公開法說會指引（AI伺服器倍增、資本支出上修至400億、H1 2026營收年增逾90%等）自行建構之情境模型，屬<strong>分析框架估算</strong>，非公司或券商官方DCF模型，所有假設數字皆標示為模型輸入，請勿視為精確預測。</p>
+
+<div class="cards">
+<div class="scenario-card scenario-bear">
+<h4>🐻 熊市情境</h4>
+<div class="tp">目標價 NT$260–290</div>
+<table>
+<tr><td>2026E營收</td><td class="num">約NT$3.4兆</td></tr>
+<tr><td>2027E營收成長</td><td class="num">+10%（AI伺服器需求降溫）</td></tr>
+<tr><td>EBITDA margin</td><td class="num">約5.0–5.5%</td></tr>
+<tr><td>FCF conversion</td><td class="num">約35–40%（資本支出居高不下）</td></tr>
+<tr><td>WACC</td><td class="num">9.5%</td></tr>
+<tr><td>Terminal growth</td><td class="num">2.0%</td></tr>
+</table>
+<p style="font-size:12.5px;">核心假設：Q3/Q4毛利率如財務長警示持續探底、AI伺服器價格競爭加劇、資本支出（400億+）侵蝕自由現金流，一般型伺服器與筆電需求同步走弱。</p>
+</div>
+
+<div class="scenario-card scenario-base">
+<h4>⚖️ 基準情境</h4>
+<div class="tp">目標價 NT$350–390</div>
+<table>
+<tr><td>2026E營收</td><td class="num">約NT$3.7–3.8兆</td></tr>
+<tr><td>2027E營收成長</td><td class="num">+18–22%</td></tr>
+<tr><td>EBITDA margin</td><td class="num">約6.0–6.5%</td></tr>
+<tr><td>FCF conversion</td><td class="num">約45–50%</td></tr>
+<tr><td>WACC</td><td class="num">9.0%</td></tr>
+<tr><td>Terminal growth</td><td class="num">2.5%</td></tr>
+</table>
+<p style="font-size:12.5px;">核心假設：全年AI伺服器倍增、佔比達80%目標如期達成，毛利率短期承壓但2027年隨產品組合優化回穩，資本支出轉化為2027–2028年產能與營收，大致對應目前FactSet分析師目標價中位數區間（370–412.5元）。</p>
+</div>
+
+<div class="scenario-card scenario-bull">
+<h4>🐂 牛市情境</h4>
+<div class="tp">目標價 NT$450–490</div>
+<table>
+<tr><td>2026E營收</td><td class="num">約NT$4.0兆以上</td></tr>
+<tr><td>2027E營收成長</td><td class="num">+30%以上</td></tr>
+<tr><td>EBITDA margin</td><td class="num">約7.0–7.5%</td></tr>
+<tr><td>FCF conversion</td><td class="num">約55%</td></tr>
+<tr><td>WACC</td><td class="num">8.5%</td></tr>
+<tr><td>Terminal growth</td><td class="num">3.0%</td></tr>
+</table>
+<p style="font-size:12.5px;">核心假設：訂單能見度延伸至2028年兌現為超預期出貨，L11整機組裝與液冷方案帶動單價與毛利率同步向上，友達華亞廠區及美國加州產能提前貢獻營收，AI伺服器供需缺口持續擴大。</p>
+</div>
+</div>
+
+<div class="note flag-est">
+<strong>敏感度分析（模型估算）：</strong> 對本案估值影響最大的單一變數是「AI伺服器毛利率」，而非出貨量本身——這正是8/13法說會財務長主動示警的焦點（Q3毛利率恐降至9季新低）。在營收假設不變的前提下，EBITDA margin每變動±1個百分點，對應目標價變動幅度可達±15–20%，遠大於營收成長率假設變動的影響。次要敏感變數為資本支出規模（400億元及後續是否再上修）對FCF conversion的侵蝕程度。建議使用者密切追蹤Q3（預計11月中）法說會毛利率是否如財務長示警般續降，此為驗證熊市情境是否成立的關鍵觀察點。
+</div>
+</section>
+
+<section id="valuation">
+<h2>⑤ 股價位階評估</h2>
+<h3>絕對估值表</h3>
+<div class="tablewrap">
+<table>
+<tr><th>指標</th><th>數值</th><th>判讀</th></tr>
+<tr><td>TTM本益比（近四季EPS 25.44元）</td><td class="num">約13.2–14.7倍（不同來源略有差異，14.01–14.68倍區間）</td><td><span class="badge badge-gray">明顯低於同業平均本益比26.01倍</span></td></tr>
+<tr><td>Forward PE（以FactSet最新2026E EPS 25.41–26.52元計）</td><td class="num">約12.6–13.2倍</td><td><span class="badge badge-gray">較TTM PE略低，反映EPS仍在成長軌道</span></td></tr>
+<tr><td>股價淨值比 PB</td><td class="num">約5.09–5.18倍</td><td><span class="badge badge-gold">相對偏高，反映市場對ROE維持高檔的預期</span></td></tr>
+<tr><td>PEG（以2026E EPS年增約27–36%估算，PE÷成長率）</td><td class="num">約0.4–0.5</td><td><span class="badge badge-red">PEG遠低於1，靜態評價顯示相對成長性尚屬合理甚至偏低</span></td></tr>
+</table>
+</div>
+<p class="note flag-est">判讀：TTM PE（約14–15倍）明顯低於NB代工/AI伺服器同業平均（同業平均本益比高達26倍），加上PEG遠低於1，單看本益比類指標，廣達目前評價並不算貴；但PB達5倍上下，顯著高於傳統代工廠的1–2倍區間，顯示市場已將其重新定位為「高ROE的AI基礎建設供應商」而非單純代工股，估值結構已與傳統NB代工股脫鉤。</p>
+
+<h3>EPS成長趨勢表（近4季YoY）</h3>
+<div class="tablewrap">
+<table>
+<tr><th>季度</th><th>單季EPS(元)</th><th>YoY</th><th>QoQ</th></tr>
+<tr><td>2025Q3</td><td class="num">4.26</td><td class="num neg">-1.39%</td><td class="num">—</td></tr>
+<tr><td>2025Q4</td><td class="num">5.75</td><td class="num pos">+39.56%</td><td class="num pos">—</td></tr>
+<tr><td>2026Q1</td><td class="num">5.50</td><td class="num pos">+8.70%</td><td class="num neg">-4.29%</td></tr>
+<tr><td>2026Q2</td><td class="num">7.43</td><td class="num pos">+70.02%</td><td class="num pos">+35.0%</td></tr>
+</table>
+</div>
+<p class="note">判讀：近4季YoY成長率呈現「小幅正成長(2025Q3微負)→顯著加速(Q4 +40%)→短暫降溫(Q1 +8.7%)→再度大幅加速(Q2 +70%)」的鋸齒狀但整體向上的軌跡。Q2單季YoY大幅跳升至+70%，若Q3、Q4能維持雙位數以上YoY成長（而非如財務長示警般因毛利率下滑導致獲利成長不如營收），則符合Peter Lynch「盈餘加速成長」定義的初期跡象；但由於法說會已示警Q3毛利率將進一步探底，EPS成長是否能延續加速態勢，關鍵在於「營收成長是否能消化毛利率下滑」，目前尚無法斷定已進入穩定的戴維斯雙擊（估值與獲利同步擴張）階段，較貼切的描述是「獲利加速成長，但估值倍數尚未明顯跟漲」——本益比仍處同業偏低位階（詳上表），屬於「獲利成長領先、估值尚未追趕」的格局。</p>
+<p class="src">來源：<a href="https://www.nstock.tw/stock_info?stock_id=2382&status=6" target="_blank">nStock-廣達EPS</a>、<a href="https://statementdog.com/analysis/2382/eps" target="_blank">財報狗-廣達EPS</a>、<a href="https://statementdog.com/analysis/2382/pb" target="_blank">財報狗-廣達PB</a></p>
+</section>
+
+<section id="comps">
+<h2>⑥ 可比公司(Comps)分析</h2>
+<div class="tablewrap">
+<table>
+<tr><th>公司</th><th>市值(約)</th><th>TTM本益比</th><th>2026E EPS共識</th><th>成長類型</th><th>AI伺服器營收佔比</th></tr>
+<tr><td><strong>廣達 2382</strong></td><td class="num">約NT$1.38兆</td><td class="num">14.0–14.7倍</td><td class="num">25.4–26.5元（上修中）</td><td>高速成長（AI伺服器主導）</td><td class="num">75–80%</td></tr>
+<tr><td>仁寶 2324</td><td class="num">約NT$1.38兆</td><td class="num">21.2–22.7倍</td><td class="num">—（無法查得單一共識）</td><td>轉型中（NB為主，AI伺服器佔比較低）</td><td class="num">—（顯著低於廣達）</td></tr>
+<tr><td>緯創 3231</td><td class="num">—</td><td class="num">約11–18倍（來源差異大，詳見備註）</td><td class="num">12.3–14.6元</td><td>高速成長（AI伺服器佔比約70%）</td><td class="num">約70%</td></tr>
+<tr><td>英業達 2356</td><td class="num">約NT$2,353億</td><td class="num">17.1–21.5倍</td><td class="num">—</td><td>穩健成長（伺服器營收年增約3成）</td><td class="num">—（低於廣達/緯創）</td></tr>
+<tr><td>緯穎 6669</td><td class="num">約NT$6,848億（2026/02資料，已過時需更新）</td><td class="num">約11–12倍</td><td class="num">326–357元（每股金額高因股本小）</td><td>高速成長（純AI伺服器ODM，無NB業務）</td><td class="num">近100%（純伺服器）</td></tr>
+</table>
+</div>
+<p class="note flag-est">溢價/折價合理性說明：廣達TTM本益比（14–15倍）明顯低於仁寶（21–23倍）、英業達（17–22倍），也低於緯創部分估算區間，是本次比較中评价最「便宜」的一檔；但緯穎作為純AI伺服器ODM（無筆電包袱），本益比同樣壓在11–12倍的歷史低檔，顯示整個NB代工轉型AI伺服器族群目前皆評價偏低，並非廣達獨有的折價現象，較可能反映市場對「AI伺服器毛利率能否維持」的產業性疑慮（即廣達本次法說會揭露的隱憂），而非廣達個股基本面弱於同業。EV/Revenue與FCF Yield因本次查詢未能取得可靠、可比的精確數字，故一律標示「—」，未來更新建議另行查閱各券商財報下載之現金流量表自行計算。</p>
+<p class="src">來源：<a href="https://statementdog.com/analysis/2324/pe" target="_blank">財報狗-仁寶</a>、<a href="https://statementdog.com/analysis/3231/pe" target="_blank">財報狗-緯創</a>、<a href="https://statementdog.com/analysis/2356/pe" target="_blank">財報狗-英業達</a>、<a href="https://statementdog.com/analysis/6669/eps" target="_blank">財報狗-緯穎</a></p>
+</section>
+
+<section id="risks">
+<h2>⑦ 額外優勢/風險</h2>
+<div class="cards">
+<div class="card">
+<h4>💰 股息政策</h4>
+<ul>
+<li class="flag-verified">2025年度盈餘配發現金股利15.6元，配發率約80%，2026/07/16發放，殖利率約4.09%（以除息前股價估算）</li>
+<li class="flag-verified">近5年平均現金股利10.04元，平均殖利率約5.26%；連續配息已達32年</li>
+<li class="flag-est">H1 2026獲利暫不加發股利，資金優先用於資本支出（400億元）與美、德海外子公司增資，屬「成長優先於配息」的資金配置策略，短期對存股型投資人的現金流不利，但若能轉化為2027–2028年產能與獲利，長期股東權益可望提升</li>
+</ul>
+</div>
+<div class="card">
+<h4>🏦 庫藏股與內部人動態</h4>
+<ul>
+<li class="flag-na">本次查詢無法取得2026年最新庫藏股買回公告的具體數字（金額/股數/期間），故不予臆測，欄位標示「—」</li>
+<li class="flag-na">內部人（董監事、大股東）持股增減之具體交易明細本次查詢未能取得，建議至公開資訊觀測站「內部人持股轉讓」專區查詢</li>
+</ul>
+</div>
+<div class="card">
+<h4>🌐 法人籌碼</h4>
+<ul>
+<li class="flag-na">本次查詢無法取得8月最新外資/投信買賣超明細數字，僅能確認FactSet調查中21位分析師裡17位樂觀、3位中立、1位保守，機構評等結構整體偏多</li>
+<li class="flag-est">美系外資曾給予「加碼」評等，目標價330元（時間點較早，已低於後續上修後的共識中位數385–412.5元，屬相對保守的一份報告）</li>
+</ul>
+</div>
+<div class="card">
+<h4>⚠️ 主要風險</h4>
+<ul>
+<li>Q3/Q4毛利率下滑風險：財務長已主動示警，若毛利率續探底且未能被營收成長抵銷，將直接侵蝕EPS成長動能</li>
+<li>資本支出加碼（400億元）若ROI不如預期，將壓抑自由現金流與未來配息能力</li>
+<li>AI伺服器產業竸爭：緯穎、鴻海、英業達等同業同步擴產，2027年後供給是否過剩需持續觀察</li>
+<li>筆電本業持續萎縮（Q3出貨預期QoQ下滑逾20%），非AI業務對營收貢獻度快速稀釋，公司體質日益集中於單一成長引擎</li>
+<li>PB已達5倍上下，若AI伺服器需求或毛利率不如預期，評價修正風險不對稱地偏向下行</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="targets">
+<h2>⑧ 投行目標價與操作建議</h2>
+<h3>投行/券商評等目標價表</h3>
+<div class="tablewrap">
+<table>
+<tr><th>調查/機構</th><th>時間（約）</th><th>2026E EPS預估</th><th>目標價</th><th>方向</th></tr>
+<tr><td>FactSet共識調查（21位分析師）</td><td>2026年4月</td><td class="num">22.49元（中位數，最高25.75／最低19.28）</td><td class="num">370元</td><td><span class="badge badge-gray">基準</span></td></tr>
+<tr><td>FactSet共識調查</td><td>2026年5月中</td><td class="num">23.21元</td><td class="num">370元</td><td><span class="badge badge-gray">持平</span></td></tr>
+<tr><td>FactSet共識調查</td><td>2026年5月15日</td><td class="num">—</td><td class="num">385元（自370元上修+4.05%，最高425／最低250；17樂觀/3中立/1保守）</td><td><span class="badge badge-red">▲ 上修</span></td></tr>
+<tr><td>FactSet共識調查</td><td>2026年6月中</td><td class="num">23.82元</td><td class="num">394元</td><td><span class="badge badge-red">▲ 上修</span></td></tr>
+<tr><td>FactSet共識調查（Q2財報後）</td><td>2026年8月中（約）</td><td class="num">25.41元</td><td class="num">412.5元</td><td><span class="badge badge-red">▲ 上修</span></td></tr>
+<tr><td>FactSet共識調查（最新一次可查得）</td><td>2026年8月下旬（約3週前）</td><td class="num">26.52元</td><td class="num">425元</td><td><span class="badge badge-red">▲ 上修</span></td></tr>
+<tr><td>美系外資（單一家，時間點較早）</td><td>—（早於上述FactSet最新調查）</td><td class="num">—</td><td class="num">330元，評等「加碼」</td><td><span class="badge badge-gray">相對保守，已落後共識</span></td></tr>
+</table>
+</div>
+<p class="note flag-est">FactSet共識調查自2026年4月的370元一路上修至8月的425元，累計漲幅約15%，且EPS共識同步自22.49元上修至26.52元，顯示Q1、Q2連續兩季獲利超乎預期後，法人普遍上修全年獲利與目標價，方向一致；惟目標價區間本身（最高425元／最低250元）仍相當分歧，反映法人對Q3毛利率下滑疑慮的解讀差異極大。</p>
+
+<h3>主要分歧點</h3>
+<div class="tablewrap">
+<table>
+<tr><th>面向</th><th>樂觀派論點</th><th>謹慎派論點</th></tr>
+<tr><td>AI伺服器需求</td><td>訂單能見度罕見地延伸至2028年，需求結構性成長未見放緩跡象</td><td>需求能見度長≠毛利率有保障，高單價機種放量出貨反而稀釋毛利率</td></tr>
+<tr><td>毛利率</td><td>Q2毛利率已季增至5.02%，較Q1回升，顯示改善中</td><td>財務長主動示警Q3恐降至9季新低、Q4可能續降，屬管理層罕見的保守發言，市場應予重視</td></tr>
+<tr><td>估值</td><td>TTM PE僅14–15倍，遠低於同業平均26倍及緯創/仁寶等同業，PEG遠低於1，估值仍具吸引力</td><td>股價已自低點大幅反彈站上三年新高，PB達5倍上下，「老AI族群」需同步走強才能支撐，單一個股難以獨強</td></tr>
+<tr><td>資本支出</td><td>400億元資本支出(較原300億再上修)反映公司對長期AI基礎建設投資信心，收購友達華亞廠區具體擴大在地產能</td><td>資本支出持續上修將壓抑短期自由現金流與配息能力，且ROI需待2027–2028年才能驗證</td></tr>
+</table>
+</div>
+
+<h3>上行空間彙總表（以現價NT$335.0為基準）</h3>
+<div class="tablewrap">
+<table>
+<tr><th>參考點</th><th>對應股價</th><th>距現價空間</th></tr>
+<tr><td>FactSet共識目標價下緣</td><td class="num">250元</td><td class="num neg">-25.4%</td></tr>
+<tr><td>DCF熊市情境目標價下緣</td><td class="num">260元</td><td class="num neg">-22.4%</td></tr>
+<tr><td>DCF熊市情境目標價上緣</td><td class="num">290元</td><td class="num neg">-13.4%</td></tr>
+<tr><td>FactSet最早共識中位數（4月）</td><td class="num">370元</td><td class="num pos">+10.4%</td></tr>
+<tr><td>DCF基準情境目標價下緣</td><td class="num">350元</td><td class="num pos">+4.5%</td></tr>
+<tr><td>DCF基準情境目標價上緣</td><td class="num">390元</td><td class="num pos">+16.4%</td></tr>
+<tr><td>FactSet最新共識目標價（8月）</td><td class="num">412.5–425元</td><td class="num pos">+23.1–26.9%</td></tr>
+<tr><td>FactSet共識目標價上緣</td><td class="num">425元</td><td class="num pos">+26.9%</td></tr>
+<tr><td>DCF牛市情境目標價上緣</td><td class="num">490元</td><td class="num pos">+46.3%</td></tr>
+</table>
+</div>
+
+<div class="action-box">
+<h4>🦊 個股小狐操作建議</h4>
+<div class="action-grid">
+<div class="action-item"><div class="tag">若已持有</div><div class="val">可續抱，但建議設定Q3法說（約2026年11月中旬）為關鍵驗證點——密切追蹤毛利率是否確如財務長示警續降至9季新低以下</div></div>
+<div class="action-item"><div class="tag">考慮建倉</div><div class="val">現價335元對應TTM PE約14–15倍、PEG遠低於1，估值面尚可接受；建議分批布局，首批可設於330元附近（近5日低點區）</div></div>
+<div class="action-item"><div class="tag">加碼觸發</div><div class="val">股價拉回至NT$300元以下（對應DCF熊市情境上緣，PE約12倍），且Q3法說未進一步惡化毛利率展望，可視為加碼時機</div></div>
+<div class="action-item"><div class="tag">停損警示</div><div class="val">若股價跌破NT$280元（對應DCF熊市情境下緣，逼近歷史PE低檔區9.8–10倍所反推股價的合理下緣，詳見下節），且Q3/Q4毛利率確認未如市場預期回穩，應重新檢視持股邏輯</div></div>
+</div>
+</div>
+</section>
+
+<section id="anchor">
+<h2>⑨ 估值歷史錨點（必附）</h2>
+
+<h3>多年期EPS實際值 vs 預估值表</h3>
+<div class="tablewrap">
+<table>
+<tr><th>年度</th><th>EPS</th><th>性質</th><th>YoY</th><th>來源/機構</th></tr>
+<tr><td>2021</td><td class="num">9.88元</td><td>實際</td><td class="num pos">+38.3%</td><td>nStock</td></tr>
+<tr><td>2022</td><td class="num">8.94元</td><td>實際</td><td class="num neg">-9.5%</td><td>nStock</td></tr>
+<tr><td>2023</td><td class="num">10.82元</td><td>實際</td><td class="num pos">+21.0%</td><td>nStock</td></tr>
+<tr><td>2024</td><td class="num">16.31元　<span class="muted">／另有來源15.49元</span></td><td>實際</td><td class="num pos">+50.8%（以16.31元計）</td><td>nStock（16.31元）vs. 鉅亨網/經濟日報轉述（15.49元）</td></tr>
+<tr><td>2025</td><td class="num">19.45元　<span class="muted">／另有來源19.64元</span></td><td>實際</td><td class="num pos">約+19.2–20.4%</td><td>鉅亨網/經濟日報（董事會公告配息新聞，19.45元，較具官方性質）vs. nStock（19.64元，近四季加總估算）</td></tr>
+<tr><td>2026</td><td class="num">上半年實際12.93元；全年共識已上修至25.41–26.52元</td><td>H1實際+全年預估</td><td class="num">—</td><td>公司法說會（H1實際）；FactSet 2026/08共識（全年預估）</td></tr>
+<tr><td>2027</td><td class="num">—</td><td>預估</td><td class="num">—</td><td class="flag-na">本次查詢未能取得公開、具名機構的2027年EPS預估數字，禁止臆測，欄位標示「—」</td></tr>
+<tr><td>2028</td><td class="num">—</td><td>預估</td><td class="num">—</td><td class="flag-na">同上，無法取得</td></tr>
+</table>
+</div>
+<p class="note flag-est">⚠️ 區間跨度提示：2024、2025全年EPS實際值在不同資料來源間出現落差（2024年16.31元 vs 15.49元；2025年19.45元 vs 19.64元），差異幅度約5%，可能源於財報狗/nStock等數據聚合平台之季度加總估算與公司正式年報/董事會配息公告的認列基準或計算時點不同。本報告以公司配息公告新聞（19.45元）作為2025年較具官方性質的參考數字，但同時保留另一來源數字供交叉核對，符合「不同來源數字有落差時逐一列出」的原則。2027、2028年度目前查無公開具名機構預估，故不予填入，待後續法說會或券商報告更新後再補充。</p>
+
+<h3>歷史本益比錨點表（近5–8年，年度區間）</h3>
+<div class="tablewrap">
+<table>
+<tr><th>年度</th><th>本益比區間（最低–最高）</th><th>備註</th></tr>
+<tr><td>2021</td><td class="num">9.49–14.98倍</td><td class="flag-est">來源：HiStock（AI摘要提取，未逐筆核對原始河流圖數字，建議需精確數字時另行查證Goodinfo）</td></tr>
+<tr><td>2022</td><td class="num">8.98–10.85倍</td><td class="flag-est"><strong>歷史本益比低檔年份之一</strong>，同上備註</td></tr>
+<tr><td>2023</td><td class="num">9.84–32.06倍（一說27.10倍上緣）</td><td class="flag-verified"><strong>歷史最低本益比：2023年1月9.84倍</strong>（對應股價約74.7元），兩資料來源皆一致確認此低點，全年區間振幅極大反映AI伺服器題材帶動股價與評價同步跳升</td></tr>
+<tr><td>2024</td><td class="num">20.25–28.52倍</td><td class="flag-est">兩資料來源一致，評價維持高檔</td></tr>
+<tr><td>2025</td><td class="num">14.49–20.73倍（一說14.49–19.20倍）</td><td class="flag-est">評價區間較2024年明顯收斂/回檔</td></tr>
+<tr><td>2026（截至9月）</td><td class="num">14.01–18.50倍</td><td class="flag-est">目前14.68倍落在本年度區間下緣，亦低於2024年全年區間下緣（20.25倍）</td></tr>
+</table>
+</div>
+<p class="note flag-est">本表數字係透過AI網頁摘要工具（非直接讀取Goodinfo原始數據表格）整理而成，2021–2022年數字僅有單一來源、未經第二來源交叉驗證，故整體標示為⚠️估算/近似值，若用於精確交易決策，建議另行至Goodinfo「本益比河流圖(年)」頁面人工核對。</p>
+
+<h3>反推試算：歷史低本益比 × 保守EPS，是否撐得起現價？</h3>
+<div class="tablewrap">
+<table>
+<tr><th>情境</th><th>本益比</th><th>×</th><th>EPS</th><th>=</th><th>反推股價</th><th>vs. 現價335元</th></tr>
+<tr><td>歷史最低本益比（2023年1月）× 2026年H1年化保守EPS</td><td class="num">9.84倍</td><td>×</td><td class="num">12.93元×2＝25.86元（H1年化，非官方全年預估，僅供反推試算）</td><td>=</td><td class="num">約254.5元</td><td class="num neg">-24.0%</td></tr>
+<tr><td>歷史近5年平均本益比（約估13–14倍，取區間中位）× 全年共識EPS下緣</td><td class="num">約13.5倍</td><td>×</td><td class="num">22.49元（FactSet最早共識，2026/04）</td><td>=</td><td class="num">約303.6元</td><td class="num neg">-9.4%</td></tr>
+<tr><td>目前TTM本益比 × FactSet最新全年EPS共識</td><td class="num">14.68倍</td><td>×</td><td class="num">25.41元</td><td>=</td><td class="num">約373.0元</td><td class="num pos">+11.3%</td></tr>
+</table>
+</div>
+<div class="note" style="background:#fff7ed;border-color:#fed7aa;">
+<strong>結論：目前股價主要仍是靠EPS成長撐起，而非靠本益比倍數擴張撐起。</strong>
+以「歷史最低本益比(9.84倍) × H1年化保守EPS」反推的股價僅約254.5元，較現價335元低約24%；即使用「歷史平均本益比」×「相對保守的全年EPS共識(22.49元)」反推，仍僅約303.6元，較現價低約9.4%——顯示若本益比回落至歷史平均甚至僅是回到2025年區間下緣（14.49倍），現價已缺乏足夠的評價安全邊際，需要EPS持續兌現甚至優於共識，股價才有支撐。反過來看，用「目前本益比 × 最新上修後的EPS共識(25.41元)」反推可得約373元，略高於現價，顯示現階段股價定位大致反映「EPS已加速成長、但評價倍數本身並未明顯擴張、甚至仍低於2024年高峰區間（20–28倍）」的格局。換言之，廣達目前的漲勢主要由獲利成長驅動而非評價泡沫化，但這也代表：一旦Q3/Q4毛利率如財務長警示般走弱、拖累EPS成長不如預期，股價將失去「獲利成長」這個唯一的支撐支柱，且本益比本身已無太多向下緩衝空間（現值14.68倍已低於近3年區間中樞）。
+</div>
+<p class="src">來源：<a href="https://www.wantgoo.com/stock/2382/enterprise-value/price-to-earning-ratio" target="_blank">玩股網-廣達本益比</a>、<a href="https://histock.tw/stock/2382/%E6%9C%AC%E7%9B%8A%E6%AF%94" target="_blank">HiStock-廣達本益比</a>、<a href="https://www.nstock.tw/stock_info?stock_id=2382&status=6" target="_blank">nStock-廣達EPS</a></p>
+</section>
+
+<footer>
+<p><strong>資料來源：</strong>公開資訊觀測站(mops.twse.com.tw)、廣達電腦法說會資料（富果直送備忘錄、CMoney、BigGo Finance轉述）、Yahoo奇摩股市、財報狗(statementdog.com)、nStock、玩股網(wantgoo.com)、HiStock、鉅亨網(cnyes.com)、經濟日報、聯合新聞網、豐雲學堂(sinotrade.com.tw)、FactSet券商調查（經前述媒體轉述）。本報告因本次工作階段未使用Futu OpenD即時行情，部分逐日股價、EV/Revenue、FCF Yield、庫藏股與內部人交易明細數字無法取得，已一律標示「—」，未臆測任何精確數字。</p>
+<div class="disclaimer">本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</div>
+</footer>
+
+</div>
+</body>
+</html>

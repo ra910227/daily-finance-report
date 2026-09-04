@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>廣達電腦(2382) 財務風險健檢｜個股小狐</title>
+<style>
+:root{
+  --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee;
+  --text:#1e2233; --text2:#6b7280; --accent:#4f46e5; --accent2:#4338ca;
+  --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+  --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.6;font-size:15px;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px 60px;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);color:#fff;padding:36px 20px 28px;margin-bottom:0;}
+.hero-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;}
+.hero-title{font-size:26px;font-weight:800;margin:0 0 4px;}
+.hero-sub{font-size:13px;opacity:.85;margin:0;}
+.hero-stats{display:flex;gap:22px;flex-wrap:wrap;}
+.hstat{text-align:right;}
+.hstat .label{font-size:11px;opacity:.8;}
+.hstat .value{font-size:20px;font-weight:800;}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:700;}
+.badge-red{background:#fee2e2;color:var(--red);}
+.badge-green{background:#dcfce7;color:var(--green);}
+.badge-gold{background:#fef3c7;color:var(--gold);}
+.badge-gray{background:var(--bg3);color:var(--text2);}
+.badge-blue{background:#dbeafe;color:var(--blue);}
+.badge-orange{background:#ffedd5;color:var(--orange);}
+.badge-purple{background:#ede9fe;color:var(--purple);}
+
+/* TOC */
+.toc{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 20px;position:sticky;top:0;z-index:10;}
+.toc-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;}
+.toc a{color:var(--accent2);text-decoration:none;font-weight:600;white-space:nowrap;}
+.toc a:hover{text-decoration:underline;}
+
+section{margin-top:38px;}
+h2{font-size:19px;font-weight:800;border-left:5px solid var(--accent);padding-left:10px;margin:0 0 14px;}
+h3{font-size:15.5px;font-weight:700;color:var(--accent2);margin:22px 0 8px;}
+p{color:var(--text);}
+.muted{color:var(--text2);font-size:13px;}
+.note{font-size:12.5px;color:var(--text2);background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-top:8px;}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0;background:var(--bg);}
+th,td{border:1px solid var(--border);padding:7px 10px;text-align:left;}
+th{background:var(--bg3);font-weight:700;font-size:12.5px;}
+td.num{text-align:right;font-variant-numeric:tabular-nums;}
+tr:nth-child(even) td{background:var(--bg2);}
+.tablewrap{overflow-x:auto;}
+tr.total td{font-weight:800;background:#eef0f7;}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0;}
+.card{border:1px solid var(--border);border-radius:12px;padding:16px;background:var(--bg2);}
+.card h4{margin:0 0 8px;font-size:14.5px;}
+.card ul{margin:6px 0 0;padding-left:18px;font-size:13px;}
+.card li{margin-bottom:4px;}
+
+.ratio-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:14px 0;}
+.risk-card{border-radius:12px;padding:16px 18px;border:2px solid var(--border);background:var(--bg2);}
+.risk-card.ok{border-color:#bbf7d0;background:#f1fdf5;}
+.risk-card.warn{border-color:#fde68a;background:#fffbeb;}
+.risk-card.danger{border-color:#fecaca;background:#fff5f5;}
+.risk-card h4{margin:0 0 4px;font-size:15px;display:flex;justify-content:space-between;align-items:center;}
+.risk-card .formula{font-size:12px;color:var(--text2);margin:2px 0 8px;}
+.risk-card .figures{font-size:13px;margin:2px 0;}
+.risk-card .threshold{font-size:11.5px;color:var(--text2);margin-top:8px;border-top:1px dashed var(--border);padding-top:6px;}
+
+.action-box{border:2px solid var(--accent);border-radius:12px;padding:18px 20px;background:linear-gradient(135deg,#f5f6ff,#ffffff);margin-top:16px;}
+.action-box h4{margin:0 0 10px;color:var(--accent2);font-size:16px;}
+.action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px;}
+.action-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+.action-item .tag{font-size:11.5px;font-weight:700;color:var(--text2);text-transform:uppercase;}
+.action-item .val{font-size:14px;font-weight:700;margin-top:2px;}
+
+.src{font-size:11.5px;color:var(--text2);}
+.src a{color:var(--accent2);}
+
+footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--border);font-size:12px;color:var(--text2);}
+.disclaimer{background:var(--bg3);border-radius:10px;padding:14px 16px;margin-top:14px;font-size:12.5px;}
+
+.pos{color:var(--red);font-weight:700;}
+.neg{color:var(--green);font-weight:700;}
+.flag-verified::before{content:"✅ ";}
+.flag-est::before{content:"⚠️ ";}
+.flag-na::before{content:"❌ ";}
+
+.verdict-box{border-radius:14px;padding:20px 22px;background:linear-gradient(135deg,#fffbeb,#fff);border:2px solid var(--gold);margin:16px 0;}
+.verdict-box h3{color:var(--gold);margin-top:0;font-size:17px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-sub">個股小狐｜財務風險健檢　分析日期 2026-09-03</p>
+      <p class="hero-title">廣達電腦 Quanta Computer Inc.（2382.TW）</p>
+      <p class="hero-sub">TWSE：2382　電腦及週邊設備業　NB／AI伺服器 ODM 大廠</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="label">股價（2026/09/03）</div><div class="value">NT$335.0</div></div>
+      <div class="hstat"><div class="label">TTM本益比</div><div class="value">約14.6倍</div></div>
+      <div class="hstat"><div class="label">市值（估）</div><div class="value">約NT$1.29兆</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#data">① 財務數據填表</a>
+    <a href="#ratios">② 六大比率診斷</a>
+    <a href="#maturity">③ 債務到期時程</a>
+    <a href="#capex">④ CapEx分析</a>
+    <a href="#peers">⑤ 同業對比</a>
+    <a href="#verdict">⑥ 綜合診斷</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section id="data">
+<h2>① 財務數據填表（近3期年報，單位：新台幣百萬元）</h2>
+<p class="muted">廣達會計年度採曆年制，2025年報為最新已完整揭露之全年度合併財報（已於2026年3月公告並經會計師查核）；2026年上半年僅有累計營收/EPS等零星數據可查，尚無完整三大報表可供計算全部比率，故本次六大比率診斷主要以FY2023-FY2025年度數據為基礎，並於文末補充2026H1最新動能作為方向性參考。</p>
+
+<h3>損益表</h3>
+<div class="tablewrap">
+<table>
+<tr><th>項目</th><th>FY2025</th><th>FY2024</th><th>FY2023</th><th>狀態</th></tr>
+<tr><td>營業收入淨額</td><td class="num">2,123,689</td><td class="num">1,410,756</td><td class="num">1,085,611</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>營業毛利</td><td class="num">148,332</td><td class="num">110,760</td><td class="num">84,883</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>營業利益（核心EBIT）</td><td class="num">87,396</td><td class="num">61,622</td><td class="num">43,550</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>財務成本／利息支出（含租賃）</td><td class="num">8,827</td><td class="num">7,288</td><td class="num">8,915</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>稅前淨利</td><td class="num">95,273</td><td class="num">73,167</td><td class="num">51,731</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>稅前息前淨利（EBIT，用於利息覆蓋率計算）</td><td class="num">104,100</td><td class="num">80,455</td><td class="num">60,646</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>D&amp;A（折舊+攤提，取自現金流量表）</td><td class="num">12,442</td><td class="num">11,678</td><td class="num">11,437</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>EBITDA（稅前息前折舊前淨利）</td><td class="num">116,541</td><td class="num">92,134</td><td class="num">72,083</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>稅後淨利（合併總損益）</td><td class="num">75,786</td><td class="num">60,283</td><td class="num">40,489</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>EPS（元）</td><td class="num">19.45</td><td class="num">15.49</td><td class="num">10.29</td><td><span class="badge badge-green">✅</span></td></tr>
+</table>
+</div>
+<p class="note flag-verified">交叉驗證：稅前淨利95,273＋利息支出8,827＝104,100＝稅前息前淨利，數字內部一致；另以EPS反推流通股數（75,786百萬÷19.45元≈3,896百萬股）與廣達實際股本38,626百萬元（面額10元＝3,862.6百萬股）相符，確認單位為「百萬元」而非原始頁面標示之千元。</p>
+
+<h3>資產負債表</h3>
+<div class="tablewrap">
+<table>
+<tr><th>項目</th><th>FY2025</th><th>FY2024</th><th>FY2023</th><th>狀態</th></tr>
+<tr><td>總資產</td><td class="num">1,343,112</td><td class="num">932,446</td><td class="num">690,120</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>總負債</td><td class="num">1,087,367</td><td class="num">702,141</td><td class="num">496,228</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>股東權益總額</td><td class="num">255,745</td><td class="num">230,306</td><td class="num">193,892</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>現金及約當現金</td><td class="num">178,310</td><td class="num">163,992</td><td class="num">177,234</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>應收帳款及票據</td><td class="num">494,969</td><td class="num">371,246</td><td class="num">259,907</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>存貨</td><td class="num">512,946</td><td class="num">261,886</td><td class="num">123,764</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>短期借款</td><td class="num">241,724</td><td class="num">157,067</td><td class="num">156,978</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>一年內到期長期負債</td><td class="num">16,603</td><td class="num">22,473</td><td class="num">1,818</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>應付公司債－非流動</td><td class="num">56,579</td><td class="num">28,784</td><td class="num">0</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>銀行借款－非流動</td><td class="num">0</td><td class="num">22,199</td><td class="num">5,931</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr class="total"><td>計息負債合計（不含租賃負債）</td><td class="num">314,906</td><td class="num">230,523</td><td class="num">164,727</td><td><span class="badge badge-blue">計算</span></td></tr>
+<tr><td>應付帳款及票據</td><td class="num">535,232</td><td class="num">282,782</td><td class="num">168,322</td><td><span class="badge badge-green">✅</span></td></tr>
+</table>
+</div>
+<p class="note flag-est">說明：「計息負債合計」＝短期借款＋一年內到期長期負債＋應付公司債（非流動）＋銀行借款（非流動），不含IFRS16租賃負債（2025年租賃負債流動+非流動合計約7,590百萬，佔比極小，暫不列入槓桿分析主體）。首次以WebFetch摘要工具讀取本頁時，曾誤將「應付帳款及票據」535,232與「合約負債－流動」107,125錯置為「長期借款」與「一年內到期長期負債」，本報告已改用原始HTML逐欄核對（合計數與官方揭露之流動/非流動負債總額完全吻合），予以更正。</p>
+
+<h3>現金流量表</h3>
+<div class="tablewrap">
+<table>
+<tr><th>項目</th><th>FY2025</th><th>FY2024</th><th>FY2023</th><th>狀態</th></tr>
+<tr><td>營業活動之淨現金流量（OCF）</td><td class="num neg">-10,365</td><td class="num neg">-39,516</td><td class="num pos">125,003</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>資本支出（購置不動產廠房設備，CapEx）</td><td class="num">-14,757</td><td class="num">-13,132</td><td class="num">-8,832</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>自由現金流量（FCF＝OCF－CapEx）</td><td class="num neg">-25,122</td><td class="num neg">-52,648</td><td class="num pos">116,171</td><td><span class="badge badge-blue">計算</span></td></tr>
+<tr><td>投資活動之現金流量</td><td class="num">-8,338</td><td class="num">-12,290</td><td class="num">-37,612</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>籌資活動之現金流量</td><td class="num">38,764</td><td class="num">28,917</td><td class="num">-112,854</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>　其中：短期借款增加（減少）</td><td class="num">84,166</td><td class="num">-3,117</td><td class="num">-46,171</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>　其中：發行公司債</td><td class="num">30,105</td><td class="num">31,909</td><td class="num">0</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>　其中：支付現金股利</td><td class="num">-50,214</td><td class="num">-34,764</td><td class="num">-23,765</td><td><span class="badge badge-green">✅</span></td></tr>
+<tr><td>期末現金及約當現金</td><td class="num">178,310</td><td class="num">163,992</td><td class="num">177,234</td><td><span class="badge badge-green">✅</span></td></tr>
+</table>
+</div>
+<p class="note flag-verified">此表期末現金數字與資產負債表現金及約當現金完全吻合，三表勾稽一致。<b>核心觀察：OCF已連續兩年（FY2024、FY2025）由正轉負</b>，同期間EBIT／EBITDA仍持續成長，顯示現金流惡化並非獲利衰退所致，而是應收帳款與存貨大幅擴張（詳見④）吃掉營運現金，資金缺口靠短期借款、發行公司債與新增長期借款填補，同時仍持續擴大現金股利發放。</p>
+<p class="src">來源：<a href="https://fubon-ebrokerdj.fbs.com.tw/z/zc/zcq/zcqa/zcqa_2382.djhtm" target="_blank">富邦證券-廣達綜合損益表年表</a>、<a href="https://fubon-ebrokerdj.fbs.com.tw/z/zc/zcp/zcpb/zcpb_2382.djhtm" target="_blank">富邦證券-廣達資產負債表年表</a>、<a href="https://fubon-ebrokerdj.fbs.com.tw/z/zc/zc3/zc3a_2382.djhtm" target="_blank">富邦證券-廣達現金流量表年表</a>（原始資料源自MoneyDJ理財網／公開資訊觀測站），建議交叉查核 <a href="https://mops.twse.com.tw" target="_blank">mops.twse.com.tw</a> 2025年報原文。</p>
+</section>
+
+<section id="ratios">
+<h2>② 六大比率診斷</h2>
+<p class="muted">以下每項比率均列出FY2023→FY2025三期走勢，狀態燈號綜合「絕對水準」與「趨勢方向」判定。</p>
+
+<div class="ratio-cards">
+
+<div class="risk-card ok">
+<h4>① 利息覆蓋率<span class="badge badge-green">✅ 安全</span></h4>
+<p class="formula">公式：EBIT（稅前息前淨利）÷ 利息支出</p>
+<p class="figures">FY2025：104,100÷8,827＝<b>11.79倍</b></p>
+<p class="figures">FY2024：80,455÷7,288＝<b>11.04倍</b></p>
+<p class="figures">FY2023：60,646÷8,915＝<b>6.80倍</b></p>
+<p class="threshold">警戒標準：&gt;5倍安全／3–5倍留意／&lt;3倍高風險。三年皆高於安全線，且近兩年隨獲利成長而走揚（2023年為三年低點，仍屬安全區間）。與官網「財務比率表」揭露之利息保障倍數完全吻合。</p>
+</div>
+
+<div class="risk-card warn">
+<h4>② 負債比率<span class="badge badge-gold">⚠️ 留意</span></h4>
+<p class="formula">公式：總負債 ÷ 總資產</p>
+<p class="figures">FY2025：1,087,367÷1,343,112＝<b>80.96%</b></p>
+<p class="figures">FY2024：702,141÷932,446＝<b>75.30%</b></p>
+<p class="figures">FY2023：496,228÷690,120＝<b>71.90%</b></p>
+<p class="threshold">警戒標準：&lt;60%安全／60–75%留意／&gt;75%偏高。廣達身為ODM代工廠，總負債中約半數為應付帳款（535,232百萬，佔總負債49%），屬營運性槓桿而非全然財務槓桿，但三年間比率持續攀升且FY2025已突破80%，速度值得留意。</p>
+</div>
+
+<div class="risk-card ok">
+<h4>③ 淨負債／EBITDA<span class="badge badge-green">✅ 安全（但方向轉差）</span></h4>
+<p class="formula">公式：（計息負債－現金）÷ EBITDA</p>
+<p class="figures">FY2025：（314,906－178,310）÷116,541＝<b>1.17倍</b></p>
+<p class="figures">FY2024：（230,523－163,992）÷92,134＝<b>0.72倍</b></p>
+<p class="figures">FY2023：（164,727－177,234）÷72,083＝<b>-0.17倍（淨現金）</b></p>
+<p class="threshold">警戒標準：&lt;2倍安全／2–3.5倍留意／&gt;3.5倍高風險。三年皆在安全區間內，惟FY2023為淨現金部位，FY2025已轉為淨負債且倍數快速上升，若此速度延續，2-3年內可能進逼留意區。</p>
+</div>
+
+<div class="risk-card danger">
+<h4>④ OCF／總債務<span class="badge badge-red">❌ 危險</span></h4>
+<p class="formula">公式：營業活動現金流量 ÷ 計息負債合計</p>
+<p class="figures">FY2025：-10,365÷314,906＝<b>-3.29%</b></p>
+<p class="figures">FY2024：-39,516÷230,523＝<b>-17.14%</b></p>
+<p class="figures">FY2023：125,003÷164,727＝<b>75.89%</b></p>
+<p class="threshold">警戒標準：&gt;20%安全／10–20%留意／&lt;10%高風險。連續兩年為負值，代表公司目前無法用本業現金流償還計息負債本金，須仰賴新增借款與發行公司債周轉，是六項比率中訊號最差者。</p>
+</div>
+
+<div class="risk-card danger">
+<h4>⑤ 現金流量覆蓋比率<span class="badge badge-red">❌ 危險</span></h4>
+<p class="formula">公式：營業活動現金流量 ÷ 流動負債（即官方「現金流量比率」）</p>
+<p class="figures">FY2025：-10,365÷1,014,155＝<b>-1.02%</b></p>
+<p class="figures">FY2024：-39,516÷638,699＝<b>-6.19%</b></p>
+<p class="figures">FY2023：125,003÷483,013＝<b>25.88%</b></p>
+<p class="threshold">警戒標準：&gt;100%理想／40–100%尚可／&lt;40%偏弱／負值為危險訊號。FY2024、FY2025連續兩年為負，且與流動比率（121.5%、131.6%）、速動比率（68.95%、89.87%）同步走弱，顯示短期流動性正在收緊。</p>
+</div>
+
+<div class="risk-card warn">
+<h4>⑥ 兩年內到期牆覆蓋倍數<span class="badge badge-gold">⚠️ 估算，留意</span></h4>
+<p class="formula">公式：現金及約當現金 ÷ 一年內到期計息負債（無完整2年期分年到期表，暫以1年期到期部位為分母估算，詳見③）</p>
+<p class="figures">FY2025：178,310÷258,327＝<b>0.69倍</b></p>
+<p class="figures">FY2024：163,992÷179,540＝<b>0.91倍</b></p>
+<p class="figures">FY2023：177,234÷158,796＝<b>1.12倍</b></p>
+<p class="threshold">警戒標準：&gt;1.5倍安全／1–1.5倍留意／&lt;1倍高風險。現金部位已連兩年低於當年度到期之短債總額，覆蓋倍數逐年下滑，惟廣達為台股權值AI伺服器指標股、銀行授信關係良好，短期借款展延（roll-over）能力通常優於一般中小型企業，此為評估此項風險時應納入的質化因素。</p>
+</div>
+
+</div>
+
+<p class="note flag-est">整體訊號矛盾之處：以「損益表」為基礎的比率（①利息覆蓋率、③淨負債/EBITDA）仍在安全區間，反映廣達本業獲利能力持續增強；但以「現金流量表」為基礎的比率（④、⑤、⑥）已明確亮紅燈，反映的是應收帳款／存貨急速膨脹的營運資金壓力，兩者背離正是本次健檢最關鍵的風險訊號（詳見⑥綜合診斷）。</p>
+</section>
+
+<section id="maturity">
+<h2>③ 債務到期時程</h2>
+<div class="tablewrap">
+<table>
+<tr><th>到期區間</th><th>FY2025金額</th><th>資料狀態</th><th>備註</th></tr>
+<tr><td>1年內到期（短期借款＋一年內到期長期負債）</td><td class="num">258,327</td><td><span class="badge badge-green">✅ 已驗證</span></td><td>短期借款241,724＋一年內到期長期負債16,603，取自2025年報資產負債表流動負債科目</td></tr>
+<tr><td>應付公司債－非流動（到期日不明）</td><td class="num">56,579</td><td><span class="badge badge-gold">⚠️ 估算</span></td><td>財報僅揭露「非流動」總額，未附具體到期年度，需查MOPS 2025年報附註「應付公司債」細項；一般公司債期限3–5年，粗估其中約3–4成（約17,000–22,000百萬）將於未來24個月內到期</td></tr>
+<tr><td>銀行借款－非流動</td><td class="num">0</td><td><span class="badge badge-green">✅ 已驗證</span></td><td>2025年底非流動銀行借款科目已降為0（2024年底為22,199），代表原有中長期銀行借款已於當年度到期或轉列流動項下</td></tr>
+<tr class="total"><td>粗估2年內到期合計（1年內＋公司債估算部分）</td><td class="num">約275,000–280,000</td><td><span class="badge badge-gold">⚠️ 估算，建議查財報附註</span></td><td>—</td></tr>
+</table>
+</div>
+<p class="figures">現金／2年到期牆估算覆蓋倍數：178,310÷約277,000 ≈ <b>0.64倍</b>（⚠️估算值，與①中1年期0.69倍方向一致，同樣低於1倍）。</p>
+<p class="note flag-est">本次資料來源（MoneyDJ/富邦證券財報年表）僅提供資產負債表科目層級數字，未附逐年到期金額明細表。若需精確之公司債／銀行團貸款到期年度與利率，應直接查閱公開資訊觀測站2025年報附註「六、重大交易事項之揭露」或「借款」章節原文，本報告不對未揭露之精確到期年度進行臆測。</p>
+</section>
+
+<section id="capex">
+<h2>④ CapEx分析</h2>
+<div class="tablewrap">
+<table>
+<tr><th>項目</th><th>FY2025</th><th>FY2024</th><th>FY2023</th></tr>
+<tr><td>CapEx（購置不動產廠房設備）</td><td class="num">14,757</td><td class="num">13,132</td><td class="num">8,832</td></tr>
+<tr><td>CapEx／營收</td><td class="num">0.69%</td><td class="num">0.93%</td><td class="num">0.81%</td></tr>
+<tr><td>CapEx／EBITDA</td><td class="num">12.66%</td><td class="num">14.25%</td><td class="num">12.25%</td></tr>
+<tr><td>CapEx／OCF</td><td class="num" colspan="1">不適用（OCF為負）</td><td class="num">不適用（OCF為負）</td><td class="num">7.06%</td></tr>
+<tr><td>不動產廠房及設備（PP&amp;E）帳面淨額</td><td class="num">72,970</td><td class="num">67,061</td><td class="num">60,820</td></tr>
+</table>
+</div>
+<p><b>業務模式判讀：</b>CapEx／營收比率三年間穩定維持在0.7%–0.9%的極低水準，PP&amp;E帳面淨額也僅溫和成長（60,820→67,061→72,970百萬），並未出現機櫃/廠房大舉擴建導致的資本支出跳升。這代表<b>廣達的AI伺服器業務仍維持典型ODM代工「輕資產」模式</b>：AI伺服器機櫃組裝的資本財投入主要由委外機構代工夥伴或雲端客戶（hyperscaler）自身承擔資本支出，廣達本身並未因AI伺服器放量而大幅重資產化。換言之，本次健檢中FCF由正轉負的主因<b>並非CapEx擴張</b>，而是應收帳款（259,907→371,246→494,969百萬）與存貨（123,764→261,886→512,946百萬）的營運資金堆積——兩者合計三年成長逾3倍，是解讀廣達現金流惡化的關鍵，須與CapEx趨勢明確區分。</p>
+<p class="note flag-est">⚠️前瞻參考（非本次健檢期間數據）：據2026Q2法說會（8/13）公司財測，2026全年資本支出目標已由年初約NT$300億上修至NT$400億，較FY2025實際14,757百萬（約NT$148億）大幅跳升逾1.7倍，顯示2026年起CapEx強度可能轉向偏高，建議下次健檢時重新評估CapEx／營收比率是否轉為重資產化訊號。</p>
+</section>
+
+<section id="peers">
+<h2>⑤ 同業對比（NB代工／伺服器ODM同業，FY2023–FY2025，單位：新台幣百萬元）</h2>
+<p class="muted">仁寶2324、緯創3231、英業達2356同為NB/伺服器代工廠，資本結構與現金流模式（低毛利、高存貨應收週轉、常見負債比率60–80%）具高度可比性；緯創近年伺服器/AI伺服器業務占比大幅提升，與廣達營運模式最為接近。</p>
+
+<div class="tablewrap">
+<table>
+<tr><th>比率／公司</th><th>期別</th><th>廣達2382</th><th>仁寶2324</th><th>緯創3231</th><th>英業達2356</th></tr>
+<tr><td rowspan="3">①利息覆蓋率（倍）</td><td>FY2025</td><td class="num">11.79</td><td class="num">5.07</td><td class="num">5.82</td><td class="num">2.96</td></tr>
+<tr><td>FY2024</td><td class="num">11.04</td><td class="num">4.80</td><td class="num">5.99</td><td class="num">2.53</td></tr>
+<tr><td>FY2023</td><td class="num">6.80</td><td class="num">3.35</td><td class="num">3.78</td><td class="num">2.58</td></tr>
+<tr><td rowspan="3">②負債比率（%）</td><td>FY2025</td><td class="num">80.96</td><td class="num">66.35</td><td class="num">76.93</td><td class="num">76.95</td></tr>
+<tr><td>FY2024</td><td class="num">75.30</td><td class="num">66.25</td><td class="num">68.33</td><td class="num">79.02</td></tr>
+<tr><td>FY2023</td><td class="num">71.90</td><td class="num">69.60</td><td class="num">71.54</td><td class="num">74.86</td></tr>
+<tr><td rowspan="3">③淨負債／EBITDA（倍）</td><td>FY2025</td><td class="num">1.17</td><td class="num">-0.02</td><td class="num">1.82</td><td class="num">1.35</td></tr>
+<tr><td>FY2024</td><td class="num">0.72</td><td class="num">0.20</td><td class="num">0.84</td><td class="num">2.24</td></tr>
+<tr><td>FY2023</td><td class="num">-0.17</td><td class="num">0.53</td><td class="num">1.14</td><td class="num">1.44</td></tr>
+<tr><td rowspan="3">④OCF／總債務（%）</td><td>FY2025</td><td class="num">-3.29</td><td class="num">35.92</td><td class="num">-31.5</td><td class="num">16.47</td></tr>
+<tr><td>FY2024</td><td class="num">-17.14</td><td class="num">29.9</td><td class="num">4.44</td><td class="num">-9.68</td></tr>
+<tr><td>FY2023</td><td class="num">75.89</td><td class="num">34.66</td><td class="num">37.98</td><td class="num">22.60</td></tr>
+<tr><td rowspan="3">⑤現金流量比率（%）</td><td>FY2025</td><td class="num">-1.02</td><td class="num">11.08</td><td class="num">-14.45</td><td class="num">5.92</td></tr>
+<tr><td>FY2024</td><td class="num">-6.19</td><td class="num">8.92</td><td class="num">1.64</td><td class="num">-2.90</td></tr>
+<tr><td>FY2023</td><td class="num">25.88</td><td class="num">10.70</td><td class="num">16.73</td><td class="num">6.71</td></tr>
+<tr><td rowspan="3">⑥現金／1年到期債覆蓋（倍）</td><td>FY2025</td><td class="num">0.69</td><td class="num">1.17</td><td class="num">0.60</td><td class="num">0.71</td></tr>
+<tr><td>FY2024</td><td class="num">0.91</td><td class="num">1.09</td><td class="num">0.92</td><td class="num">0.47</td></tr>
+<tr><td>FY2023</td><td class="num">1.12</td><td class="num">1.03</td><td class="num">0.75</td><td class="num">0.60</td></tr>
+</table>
+</div>
+
+<div class="cards">
+<div class="card">
+<h4>仁寶2324－相對最保守</h4>
+<ul>
+<li>唯一OCF連3年維持正值且穩定成長，FY2025淨負債/EBITDA轉負（淨現金）</li>
+<li>營收規模不隨AI題材大幅波動，屬傳統NB代工為主，現金流最穩健</li>
+<li>利息覆蓋率(3.35–5.07倍)雖低於廣達，但方向穩定向上</li>
+</ul>
+</div>
+<div class="card">
+<h4>緯創3231－與廣達模式最相近，風險程度更高</h4>
+<ul>
+<li>FY2025營收年增108%（AI伺服器放量），但OCF同步崩落至-105,810百萬，降幅較廣達更劇烈</li>
+<li>CapEx／營收達1.81%，高於廣達的0.69%，顯示緯創資本支出強度更高</li>
+<li>負債比率76.93%、淨負債/EBITDA達1.82倍，六項比率中多數劣於廣達，可視為「同病更重」的對照組</li>
+</ul>
+</div>
+<div class="card">
+<h4>英業達2356－體質相對最弱</h4>
+<ul>
+<li>利息覆蓋率三年均低於3倍警戒線（2.53–2.96倍），六大比率中訊號最弱</li>
+<li>負債比率常年逾75%，總負債/總淨值近330–380%，槓桿為四家最高</li>
+<li>FY2024 OCF亦轉負（-7,165百萬），現金／到期債覆蓋倍數多數年度低於0.7倍</li>
+</ul>
+</div>
+</div>
+<p class="note flag-est">結論：OCF由正轉負、現金流覆蓋比率轉負並非廣達獨有現象，緯創同樣出現且降幅更大，顯示這是2024–2025年AI伺服器供應鏈「先囤料墊款、後收款」的產業共通現象，非廣達單一管理問題；但廣達目前的利息覆蓋率與淨負債/EBITDA仍優於三家同業，屬四家中「損益表體質最佳、但現金流壓力同樣顯著」的一家。</p>
+<p class="src">來源：富邦證券/MoneyDJ理財網 仁寶2324、緯創3231、英業達2356 綜合損益表、資產負債表、財務比率表、現金流量表年表（各公司同一資料源，方法一致）。</p>
+</section>
+
+<section id="verdict">
+<h2>⑥ 綜合診斷</h2>
+
+<div class="verdict-box">
+<h3>定性分類：成長性槓桿擴張型（獲利安全、現金流吃緊）</h3>
+<p>廣達不屬於典型的「優良主動管理型」（現金流與獲利同步健康）亦非「槓桿警戒型」（獲利與現金流同步惡化）。其特徵是：<b>損益表持續改善（營收+50.5%、EBIT+41.8%、EBITDA+26.5%，FY2025年增率）</b>，但<b>資產負債表與現金流量表同步惡化</b>——負債比率兩年內由71.9%攀升至80.96%，OCF連兩年為負，短期借款一年內大增84,166百萬並發行30,105百萬公司債以填補應收帳款/存貨堆積的資金缺口，同時仍維持並擴大現金股利發放（50,214百萬）。這是一種「用資產負債表換取營收規模擴張」的策略性槓桿，而非獲利衰退導致的被動槓桿惡化，兩者風險意涵不同，但仍需密切觀察。</p>
+</div>
+
+<h3>最大風險點（附觸發數字）</h3>
+<div class="cards">
+<div class="card">
+<h4>1. 應收帳款／存貨集中度風險</h4>
+<ul>
+<li>應收帳款494,969百萬＋存貨512,946百萬＝1,007,915百萬，合計已達總資產的75%（1,343,112百萬）</li>
+<li>若主要AI伺服器客戶（hyperscaler集中度高）延遲驗收、砍單或存貨跌價，資產減損將直接侵蝕股東權益（255,745百萬）——存貨跌價僅需影響約25%即可能吃掉全年稅後淨利（75,786百萬）</li>
+</ul>
+</div>
+<div class="card">
+<h4>2. 短期借款展延（roll-over）依賴度上升</h4>
+<ul>
+<li>短期借款241,724百萬＋一年內到期長期負債16,603百萬＝258,327百萬，現金僅178,310百萬，覆蓋倍數0.69倍</li>
+<li>FY2025單年短期借款淨增84,166百萬，代表對銀行/貨幣市場短期資金的依賴度快速上升，一旦利率環境轉緊或授信條件收緊，再融資成本與可得性將直接衝擊流動性</li>
+</ul>
+</div>
+</div>
+
+<h3>安全邊際計算（以利息覆蓋率為基準）</h3>
+<div class="tablewrap">
+<table>
+<tr><th>情境</th><th>EBIT需下滑至</th><th>對應下滑幅度（自104,100基期）</th></tr>
+<tr><td>觸及3倍利息覆蓋率（警戒線）</td><td class="num">3×8,827＝26,481</td><td class="num pos">-74.6%</td></tr>
+<tr><td>觸及1倍利息覆蓋率（無法覆蓋利息）</td><td class="num">1×8,827＝8,827</td><td class="num pos">-91.5%</td></tr>
+</table>
+</div>
+<p><b>解讀：</b>就損益表面的安全邊際而言，廣達EBIT須衰退逾7成才會觸及3倍警戒線，緩衝空間非常寬裕，這也是本次健檢中六項比率唯二維持「✅安全」等級的兩項（①利息覆蓋率、③淨負債/EBITDA）之所在。<b>但真正的風險並不在損益表，而在現金流量表</b>：現金流量比率、OCF/總債務、到期牆覆蓋倍數三項已「無須任何進一步惡化」即已處於警戒/危險區間——換言之，流動性壓力可能遠早於獲利能力壓力浮現，是波段投資人在追蹤此檔時應優先監控OCF轉正時點與存貨/應收帳款週轉天數變化（FY2025平均售貨天數已由54.14天回升至71.59天），而非僅關注EPS成長是否延續。</p>
+
+<div class="action-box">
+<h4>後續追蹤重點</h4>
+<div class="action-grid">
+<div class="action-item"><div class="tag">監控指標1</div><div class="val">單季OCF是否轉正（2026Q1/Q2尚無完整現金流數據可查）</div></div>
+<div class="action-item"><div class="tag">監控指標2</div><div class="val">存貨/應收帳款週轉天數是否持續攀升</div></div>
+<div class="action-item"><div class="tag">監控指標3</div><div class="val">短期借款餘額與銀行授信額度使用率</div></div>
+<div class="action-item"><div class="tag">監控指標4</div><div class="val">2026全年CapEx是否確實由148億上修至400億（重資產化訊號）</div></div>
+</div>
+</div>
+</section>
+
+</div>
+
+<footer>
+<div class="wrap" style="padding:0;">
+<p class="src"><b>資料來源：</b>富邦證券/MoneyDJ理財網（廣達2382及仁寶2324、緯創3231、英業達2356之綜合損益表、資產負債表、現金流量表、財務比率表年表）、公開資訊觀測站 mops.twse.com.tw（建議交叉核對年報原文）、Yahoo股市、鉅亨網twstock（股價/市值參考）。本次工作階段無Futu OpenD連線，全數採WebSearch/WebFetch/直接HTML解析方式取得，並以三表勾稽（現金餘額、負債加總）與EPS反推股數等方式交叉驗證，過程中發現並修正一次網頁摘要工具的欄位錯置。</p>
+<div class="disclaimer">
+本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。
+</div>
+</div>
+</footer>
+
+</body>
+</html>

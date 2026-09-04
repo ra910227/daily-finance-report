@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜雙鴻(3324) 完整報告 2026/09/03</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1c2230; --sub:#5a6472; --line:#e4e7ec;
+    --brand:#c9622a; --brand-soft:#fdeee1;
+    --green:#1a8754; --green-soft:#e8f7ef;
+    --amber:#b8860b; --amber-soft:#fff6e0;
+    --red:#c23b3b; --red-soft:#fdebeb;
+    --blue:#2563a8; --blue-soft:#e9f1fb;
+    --gray-soft:#eef0f3;
+    --shadow: 0 1px 3px rgba(20,20,30,.06), 0 1px 2px rgba(20,20,30,.04);
+  }
+  *{box-sizing:border-box;}
+  body{background:var(--bg); color:var(--ink); font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,sans-serif; line-height:1.7; margin:0;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px 60px;}
+  a{color:var(--blue);}
+
+  .hero{background:linear-gradient(135deg,#fff 0%,var(--brand-soft) 100%); border-bottom:1px solid var(--line); padding:36px 20px 28px;}
+  .hero-inner{max-width:1080px; margin:0 auto;}
+  .hero-tag{display:inline-block; background:var(--brand); color:#fff; font-size:12px; font-weight:700; letter-spacing:.05em; padding:4px 10px; border-radius:20px; margin-bottom:14px;}
+  .hero h1{font-size:30px; margin:0 0 6px; font-weight:800;}
+  .hero .sub{color:var(--sub); font-size:14px; margin-bottom:20px;}
+  .hero-stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:14px; margin-top:10px;}
+  .hstat{background:#fff; border:1px solid var(--line); border-radius:10px; padding:12px 14px; box-shadow:var(--shadow);}
+  .hstat .l{font-size:12px; color:var(--sub); margin-bottom:4px;}
+  .hstat .v{font-size:19px; font-weight:800;}
+  .hstat .v.down{color:var(--red);} .hstat .v.up{color:var(--green);}
+
+  .toc{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 22px; margin:26px 0; box-shadow:var(--shadow);}
+  .toc h2{font-size:14px; margin:0 0 10px; color:var(--sub); letter-spacing:.05em;}
+  .toc ol{margin:0; padding-left:0; list-style:none; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:6px 18px;}
+  .toc a{text-decoration:none; font-size:14px; font-weight:600; color:var(--ink);}
+  .toc a span{color:var(--brand); margin-right:6px;}
+  .toc a:hover{color:var(--brand);}
+
+  section{margin:40px 0;}
+  .part-badge{display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:#fff; font-size:13px; font-weight:700; padding:6px 14px; border-radius:8px; margin-bottom:14px;}
+  h2.sec-title{font-size:22px; font-weight:800; margin:0 0 4px; border-left:5px solid var(--brand); padding-left:12px;}
+  h3{font-size:17px; font-weight:800; margin:28px 0 10px;}
+  h4{font-size:15px; font-weight:800; margin:18px 0 8px; color:var(--brand);}
+  p{color:var(--ink);}
+  .lead{color:var(--sub); font-size:14px; margin:6px 0 20px 17px;}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 22px; margin:14px 0; box-shadow:var(--shadow);}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .grid5{display:grid; grid-template-columns:repeat(5,1fr); gap:10px;}
+  @media (max-width:760px){ .grid2,.grid3,.grid5{grid-template-columns:1fr;} }
+
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0;}
+  th,td{border:1px solid var(--line); padding:8px 10px; text-align:left;}
+  th{background:var(--gray-soft); font-weight:700; white-space:nowrap;}
+  td.num{text-align:right; font-variant-numeric:tabular-nums;}
+  .tbl-wrap{overflow-x:auto;}
+
+  .badge{display:inline-block; font-size:12px; font-weight:700; padding:2px 9px; border-radius:20px;}
+  .b-green{background:var(--green-soft); color:var(--green);}
+  .b-amber{background:var(--amber-soft); color:var(--amber);}
+  .b-red{background:var(--red-soft); color:var(--red);}
+  .b-blue{background:var(--blue-soft); color:var(--blue);}
+  .b-gray{background:var(--gray-soft); color:var(--sub);}
+
+  .risk-card{border-left:4px solid var(--red); background:var(--red-soft); border-radius:8px; padding:14px 16px; margin:10px 0;}
+  .risk-card h5{margin:0 0 6px; color:var(--red); font-size:14px;}
+  .growth-card{border-left:4px solid var(--green); background:var(--green-soft); border-radius:8px; padding:14px 16px; margin:10px 0;}
+  .growth-card h5{margin:0 0 6px; color:var(--green); font-size:14px;}
+
+  .action-box{background:#fff; border:2px solid var(--brand); border-radius:12px; padding:18px 22px; margin:16px 0;}
+  .action-box h4{margin-top:0; color:var(--brand);}
+  .action-box .row{display:flex; gap:10px; margin:6px 0; font-size:14px;}
+  .action-box .row .k{min-width:90px; font-weight:700; color:var(--sub);}
+
+  .moat-star{color:#e0a72c; letter-spacing:1px;}
+  .source-note{font-size:12px; color:var(--sub); margin-top:4px;}
+  .quote{border-left:3px solid var(--brand); padding:10px 16px; background:var(--brand-soft); border-radius:6px; font-style:italic; margin:14px 0; color:#5a4a3a;}
+
+  .divider{height:1px; background:var(--line); margin:36px 0;}
+  footer{margin-top:50px; padding-top:20px; border-top:1px solid var(--line); font-size:12.5px; color:var(--sub);}
+  .disclaimer{background:var(--gray-soft); border-radius:10px; padding:14px 18px; margin-top:16px;}
+  .src-list{columns:2; font-size:12px; color:var(--sub);}
+  @media (max-width:760px){.src-list{columns:1;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">個股小狐 · 三合一完整報告</span>
+    <h1>雙鴻科技 (3324.TWO) — AURAS Technology</h1>
+    <div class="sub">分析日期：2026年9月3日｜資料截至收盤：2026/09/03｜涵蓋：公司深度研究＋最新財報解析＋財務風險健檢</div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="l">收盤價</div><div class="v down">1,350.0元 (-5.92%)</div></div>
+      <div class="hstat"><div class="l">52週高/低</div><div class="v">1,465 / 641元</div></div>
+      <div class="hstat"><div class="l">市值</div><div class="v">1,256.5億元</div></div>
+      <div class="hstat"><div class="l">本益比(TTM)</div><div class="v">30.85倍</div></div>
+      <div class="hstat"><div class="l">近四季EPS</div><div class="v">43.75元</div></div>
+      <div class="hstat"><div class="l">毛利率(最新季)</div><div class="v up">29.66%</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toc">
+    <h2>報告導覽</h2>
+    <ol>
+      <li><a href="#p1"><span>Ⅰ</span>公司深度研究</a></li>
+      <li><a href="#p1-1"><span>·</span>基本介紹</a></li>
+      <li><a href="#p1-2"><span>·</span>業務引擎分析</a></li>
+      <li><a href="#p1-3"><span>·</span>核心Thesis與未來性</a></li>
+      <li><a href="#p1-4"><span>·</span>競爭格局</a></li>
+      <li><a href="#p1-5"><span>·</span>成長象限與護城河</a></li>
+      <li><a href="#p2"><span>Ⅱ</span>最新財報解析</a></li>
+      <li><a href="#p2-1"><span>·</span>Beat/Miss對照</a></li>
+      <li><a href="#p2-2"><span>·</span>EPS多年期與估值反推</a></li>
+      <li><a href="#p2-3"><span>·</span>三情境估值與股價位階</a></li>
+      <li><a href="#p2-4"><span>·</span>Comps分析與投行目標價</a></li>
+      <li><a href="#p3"><span>Ⅲ</span>財務風險健檢</a></li>
+      <li><a href="#p3-1"><span>·</span>六大比率診斷</a></li>
+      <li><a href="#p3-2"><span>·</span>債務到期與CapEx</a></li>
+      <li><a href="#p3-3"><span>·</span>同業對比與綜合診斷</a></li>
+      <li><a href="#summary"><span>★</span>綜合總結與操作建議</a></li>
+    </ol>
+  </div>
+
+  <!-- ============ PART 1: 深度研究 ============ -->
+  <section id="p1">
+    <span class="part-badge">Ⅰ 公司深度研究</span>
+    <h2 class="sec-title" id="p1-1">基本介紹</h2>
+    <p class="lead">市值、獲利概況與產業定位</p>
+
+    <div class="card">
+      <div class="grid5">
+        <div><div class="source-note">市值</div><b>1,256.5億元</b></div>
+        <div><div class="source-note">TTM營收(2025年)</div><b>232.76億元</b></div>
+        <div><div class="source-note">2026H1營收YoY</div><b class="badge b-green">+93.6%(Q1)</b></div>
+        <div><div class="source-note">毛利率(2026Q1)</div><b>29.66%</b></div>
+        <div><div class="source-note">近四季FCF</div><b>—</b></div>
+      </div>
+      <p style="margin-top:14px;">雙鴻科技（AURAS Technology）為台灣散熱解決方案廠商，2005年上櫃，早期以NB/PC散熱模組起家，2010年取得Apple MacBook Air散熱模組認證後建立起「近乎偏執的良率紀律」的核心製造能力。近年隨AI伺服器液冷需求爆發，公司從單一零組件供應商轉型為涵蓋水冷板(Cold Plate)、分歧管(Manifold)、快接頭(QDC)、冷卻液分配單元(CDU)的系統級方案商，為NVIDIA GB200/GB300平台認證供應商之一，深度切入北美四大CSP（Meta、AWS、Microsoft、Google）供應鏈。目前為台股散熱雙雄之一（另一家為市值約十倍的奇鋐3017）。 <span class="badge b-amber">⚠️ 產業排名/精確市佔數字未見官方揭露，以下市佔皆為法人估算</span></p>
+    </div>
+
+    <h2 class="sec-title" id="p1-2">業務引擎分析</h2>
+    <p class="lead">核心業務線拆解與歷史財務摘要</p>
+
+    <h4>優勢產品表</h4>
+    <div class="tbl-wrap"><table>
+      <tr><th>產品線</th><th>2026年營收佔比(法說會目標)</th><th>護城河來源</th></tr>
+      <tr><td>直晶液冷(D2C)冷板 Cold Plate</td><td class="num">主力，AI伺服器占比目標72%</td><td>銅件微通道加工精度、壓降/熱阻控制能力、蘋果級良率紀律</td></tr>
+      <tr><td>分歧管 Manifold / 快接頭 QDC</td><td class="num">Vera Rubin世代資源轉往重點</td><td>系統整合能力、與CSP客戶共同開發</td></tr>
+      <tr><td>冷卻液分配單元 CDU</td><td class="num">2026年數百台小量出貨</td><td>系統級整合，尚在爬坡階段，非成熟護城河</td></tr>
+      <tr><td>PC/NB/顯卡散熱模組</td><td class="num">非成長主力，維持既有客戶</td><td>11年以上Apple供應鏈關係</td></tr>
+    </table></div>
+    <p class="source-note">來源：<a href="https://blog.fugle.tw/post/earnings-call-3324-1" target="_blank">富果法說會重點備忘錄(2026/03/12)</a>、<a href="https://www.wiseup.cc/p/auras" target="_blank">WiseUp深度分析</a></p>
+
+    <h4>近4期歷史財務摘要</h4>
+    <div class="tbl-wrap"><table>
+      <tr><th>期別</th><th>營收(億元)</th><th>營收YoY</th><th>毛利率</th><th>單季EPS(元)</th><th>EPS YoY</th></tr>
+      <tr><td>2025 Q1</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">5.66</td><td class="num">—</td></tr>
+      <tr><td>2025 Q2</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">1.75</td><td class="num">—</td></tr>
+      <tr><td>2025 Q3</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">10.66</td><td class="num">—</td></tr>
+      <tr><td>2025 Q4</td><td class="num">—</td><td class="num">—</td><td class="num">26.4%</td><td class="num">10.21</td><td class="num">—</td></tr>
+      <tr><td>2026 Q1</td><td class="num">85.51</td><td class="num badge b-green">+93.6%</td><td class="num">29.66%</td><td class="num">12.61</td><td class="num badge b-green">+122.8%</td></tr>
+      <tr><td>2026 Q2</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">10.41</td><td class="num badge b-green">+494%</td></tr>
+    </table></div>
+    <p class="source-note">⚠️ 部分單季營收與毛利率欄位網路公開資料未揭露完整數字，標「—」。來源：<a href="https://tw.stock.yahoo.com/quote/3324.TWO/eps" target="_blank">Yahoo股市EPS表</a>、<a href="https://money.udn.com/money/story/5612/9486687" target="_blank">經濟日報(2026Q1法說)</a>、財報狗</p>
+
+    <h2 class="sec-title" id="p1-3">核心Thesis與未來性</h2>
+    <p class="lead">投資論點支柱逐項檢驗</p>
+
+    <div class="card">
+      <table>
+        <tr><th style="width:36%">論點</th><th style="width:14%">狀態</th><th>證據</th></tr>
+        <tr><td>AI伺服器液冷從氣冷標配轉換趨勢受惠者</td><td><span class="badge b-green">✅ 成立</span></td><td>2026年Q3 AI伺服器營收占比達60%，Q4法人估上看70%；水冷占比法說會目標由34%(2025)上修至55%(2026)</td></tr>
+        <tr><td>良率紀律轉化為認證速度優勢，能持續卡位新平台</td><td><span class="badge b-amber">⚠️ 部分成立</span></td><td>GB300已取得認證並於9月量產，估市占20-25%；但GB200世代份額明顯落後奇鋐(估1-3成 vs 4-5成)</td></tr>
+        <tr><td>由零件供應商升級為系統方案商(CDU一條龍)</td><td><span class="badge b-amber">⚠️ 部分成立</span></td><td>CDU 2026年僅數百台小量出貨，2027年目標約2000台，距系統商規模化仍有距離</td></tr>
+        <tr><td>毛利率隨產品組合優化持續上升</td><td><span class="badge b-green">✅ 成立</span></td><td>毛利率23%(2023)→25.5%(2024)→27.4%(2025)→29.7%(2026Q1)連續4年上升</td></tr>
+        <tr><td>Vera Rubin世代維持關鍵供應商地位</td><td><span class="badge b-red">❌ 未兌現／需高度關注</span></td><td>NVIDIA Vera Rubin官方公布四家冷板認證供應商(Cooler Master/奇鋐/健策/台達電)<b>不含雙鴻</b>，公司資源已轉向分歧管、NVLink散熱、CDU尋求新賽道</td></tr>
+      </table>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <h4>核心成長驅動力</h4>
+        <div class="growth-card"><h5>驅動① AI伺服器液冷滲透率提升</h5>液冷散熱法人預期2026年成為AI伺服器標配，雙鴻水冷占比目標由34%衝向55%以上</div>
+        <div class="growth-card"><h5>驅動② GB300量產放量+CDU系統化</h5>9月切入GB300水冷板量產，法人估AI伺服器營收占比Q4上看70%；CDU若能如期擴量至2027年2000台，將提升系統整合價值</div>
+      </div>
+      <div>
+        <h4>需監控風險（觸發條件）</h4>
+        <div class="risk-card"><h5>風險① Vera Rubin世代邊緣化</h5>觸發條件：若下一代平台雙鴻持續未進入官方核心冷板供應商名單，AI伺服器營收成長動能可能顯著趨緩</div>
+        <div class="risk-card"><h5>風險② 毛利率被砍價壓縮</h5>觸發條件：若非冷板零件(分歧管/CDU)未能補上出貨缺口，或既有冷板遭客戶壓價，近30%毛利率有回落至20%出頭的風險</div>
+      </div>
+    </div>
+
+    <h2 class="sec-title" id="p1-4">競爭格局</h2>
+    <p class="lead">散熱五強競爭態勢（依主要戰場：AI伺服器液冷）</p>
+    <div class="tbl-wrap"><table>
+      <tr><th>公司</th><th>代號</th><th>市值</th><th>優勢</th><th>對雙鴻威脅度</th></tr>
+      <tr><td>奇鋐</td><td>3017</td><td class="num">約1.30兆元</td><td>散熱龍頭，風扇/快接頭/冷板一條龍整合能力，GB200/300份額估4-5成，Vera Rubin官方四家認證供應商之一</td><td><span class="badge b-red">🔴 高</span></td></tr>
+      <tr><td>健策</td><td>3653</td><td class="num">—</td><td>後進但快速追趕，同為Vera Rubin官方四家認證供應商，本益比市場給予高估值(近95倍預估)</td><td><span class="badge b-amber">🟡 中高</span></td></tr>
+      <tr><td>台達電</td><td>2308</td><td class="num">—</td><td>電源+散熱+資料中心基建全方位布局，資源規模最大，同為Vera Rubin官方認證供應商</td><td><span class="badge b-amber">🟡 中</span></td></tr>
+      <tr><td>建準</td><td>2421</td><td class="num">約483.5億元</td><td>風扇/馬達本業為主，液冷布局幅度較小，本益比相對低(約20倍)</td><td><span class="badge b-green">🟢 低</span></td></tr>
+      <tr><td>高力</td><td>8996</td><td class="num">約134.9億元</td><td>精密結構件+水冷零組件，規模小、成長性市場預期分歧大</td><td><span class="badge b-green">🟢 低</span></td></tr>
+    </table></div>
+    <p class="source-note">⚠️ 需特別注意：NVIDIA Vera Rubin平台官方公布的冷板認證供應商為 Cooler Master、奇鋐、健策、台達電四家，<b>不含雙鴻</b>，此為雙鴻在該世代的重大競爭劣勢。來源：<a href="https://www.wiseup.cc/p/auras" target="_blank">WiseUp深度分析</a>、<a href="https://www.pocket.tw/school/report/perspective/7300/" target="_blank">口袋學堂散熱雙雄比較</a></p>
+
+    <h2 class="sec-title" id="p1-5">成長象限判斷與護城河評估</h2>
+
+    <h4>Peter Lynch成長象限判斷</h4>
+    <div class="card">
+      <table>
+        <tr><th>判斷依據</th><th>數值/事實</th></tr>
+        <tr><td>EPS成長率(2024A→2025A→2026E)</td><td>21.42元 → 28.28元(YoY+32%) → 約57.3元(FactSet中位，YoY+103%)</td></tr>
+        <tr><td>產業階段</td><td>AI資料中心液冷滲透率快速提升的早期階段，非成熟產業</td></tr>
+        <tr><td>營運槓桿</td><td>毛利率連續4年上升，顯示規模經濟與產品組合優化同步發生</td></tr>
+      </table>
+      <p><b>判斷：高速成長股(Fast Grower)</b>，但象限穩定性存疑——若液冷全面標配化後成長趨緩、且Vera Rubin世代供應商地位未能挽回，公司可能從「高速成長股」滑落為「題材退燒的景氣循環股」，需持續以GB300出貨與2027年CDU放量驗證。</p>
+    </div>
+
+    <h4>護城河五維度評分</h4>
+    <div class="tbl-wrap"><table>
+      <tr><th>維度</th><th>評分</th><th>說明</th></tr>
+      <tr><td>不可替代性</td><td class="moat-star">★★☆☆☆ (2.5/5)</td><td>Vera Rubin冷板未列入官方四家供應商名單，證明現階段地位可被取代</td></tr>
+      <tr><td>網路效應</td><td class="moat-star">★☆☆☆☆ (1/5)</td><td>B2B精密製造業，不具網路效應</td></tr>
+      <tr><td>客戶黏著度</td><td class="moat-star">★★★★☆ (3.5/5)</td><td>與CSP客戶認證週期長、Apple供應鏈11年以上關係建立信任基礎，但客戶仍可分散訂單</td></tr>
+      <tr><td>成本優勢</td><td class="moat-star">★★★☆☆ (3/5)</td><td>良率紀律降低不良品成本、泰國廠分散關稅/地緣風險，但規模不及奇鋐難達採購優勢</td></tr>
+      <tr><td>規模效應</td><td class="moat-star">★★☆☆☆ (2/5)</td><td>市值僅約奇鋐十分之一，議價力與垂直整合能力相對受限</td></tr>
+    </table></div>
+    <p class="source-note">⚠️ 上述評分為研究框架下的主觀推論，非官方評等，僅供投資參考。</p>
+
+    <div class="action-box">
+      <h4>建議動作</h4>
+      <div class="row"><div class="k">當前建議</div><div>觀察／小量參與，不宜重倉。核心論點(液冷滲透率提升)成立，但關鍵風險(Vera Rubin地位)未解，波動風險高</div></div>
+      <div class="row"><div class="k">加碼觸發</div><div>①GB300出貨市占率法人估算上修至30%以上，或②2027年CDU出貨明確超越2000台指引，或③股價回落至近1年低點(641元)附近且基本面未惡化</div></div>
+      <div class="row"><div class="k">賣出觸發</div><div>①毛利率單季跌破25%，或②Vera Rubin後續平台仍未進入官方認證名單且AI伺服器營收占比連續2季下滑，或③50億元CB到期前股價持續低於轉換價導致稀釋壓力顯著上升</div></div>
+      <div class="row"><div class="k">每季監控</div><div>AI伺服器營收占比、水冷占比、毛利率、GB300/Rubin平台認證進度、CDU出貨量</div></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ PART 2: 財報解析 ============ -->
+  <section id="p2">
+    <span class="part-badge">Ⅱ 最新財報解析</span>
+    <h2 class="sec-title" id="p2-1">Beat/Miss對照</h2>
+    <p class="lead">2026年Q1、Q2實際 vs 市場預期</p>
+    <div class="tbl-wrap"><table>
+      <tr><th>期別</th><th>實際EPS</th><th>QoQ</th><th>YoY</th><th>備註</th></tr>
+      <tr><td>2026 Q1</td><td class="num">12.61元</td><td class="num badge b-green">+25.3%</td><td class="num badge b-green">+122.8%</td><td>淡季飆高，優於一般淡季表現</td></tr>
+      <tr><td>2026 Q2</td><td class="num">10.41元</td><td class="num badge b-red">-18%</td><td class="num badge b-green">+494%</td><td>QoQ季減主因Q1基期偏高，YoY仍大幅成長</td></tr>
+      <tr><td>2026 H1累計</td><td class="num">23.01~23.02元</td><td colspan="2" class="num badge b-green">YoY +211%</td><td>2025年全年EPS為28.26元，H1已達其81%</td></tr>
+    </table></div>
+    <p class="source-note">⚠️ 市場單季共識預估(Consensus)未見完整公開資料，故僅呈現實際值年增/季增率，無法完整比對Beat/Miss差異幅度。來源：財報狗、經濟日報</p>
+
+    <h2 class="sec-title" id="p2-2">EPS多年期表與歷史PE反推試算</h2>
+
+    <h4>★ EPS多年期表</h4>
+    <div class="tbl-wrap"><table>
+      <tr><th>年度</th><th>2024A</th><th>2025A</th><th>2026E</th><th>2027E</th><th>2028E</th></tr>
+      <tr><td>EPS(元)</td><td class="num">21.42</td><td class="num">28.28</td><td class="num">57.34<br><span class="source-note">(中位數，區間50.3~62.6)</span></td><td class="num">71.65<br><span class="source-note">(中位數，區間56.41~91.42)</span></td><td class="num">86.45<br><span class="source-note">(單一估值，覆蓋分析師較少)</span></td></tr>
+      <tr><td>YoY</td><td class="num">—</td><td class="num badge b-green">+32.0%</td><td class="num badge b-green">+102.7%</td><td class="num badge b-green">+25.0%</td><td class="num badge b-green">+20.7%</td></tr>
+    </table></div>
+    <p class="source-note">2024A/2025A由財報狗單季EPS加總計算（2024: 4.51+7.24+4.43+5.24=21.42；2025: 5.66+1.75+10.66+10.21=28.28，與另一來源揭露之28.26元接近，差異為四捨五入）。2026E/2027E/2028E為FactSet最新調查中位數（15位分析師，2026/09前後），來源：<a href="https://news.cnyes.com/news/id/6446408" target="_blank">鉅亨網Factset速報</a>。</p>
+
+    <h4>★ 歷史本益比參考</h4>
+    <div class="tbl-wrap"><table>
+      <tr><th>指標</th><th>數值</th><th>說明</th></tr>
+      <tr><td>目前本益比(TTM)</td><td class="num">30.85倍</td><td>2026/09/03收盤1,350元 ÷ 近四季EPS 43.75元</td></tr>
+      <tr><td>近期參考低點</td><td class="num">23.3倍</td><td>2026/08/14收盤1,010元時，位於2013年以來自身本益比分佈第58百分位</td></tr>
+      <tr><td>5年平均本益比(TTM)</td><td class="num">❌ 無法取得</td><td>玩股網本益比河流圖需付費會員登入才能查看完整歷史，公開頁面僅顯示2021年10月至今片段</td></tr>
+      <tr><td>2022年最低本益比</td><td class="num">❌ 無法取得</td><td>公開搜尋與免費頁面均未揭露，非因虧損無法計算——單純資料存取限制，不可臆測填入</td></tr>
+      <tr><td>2018年最低本益比</td><td class="num">❌ 無法取得</td><td>同上，公開免費管道無法取得，需登入Goodinfo/玩股網會員查詢</td></tr>
+    </table></div>
+
+    <h4>★ 反推試算（替代方案，因歷史低點PE資料缺口已明確揭露）</h4>
+    <div class="card">
+      <p>由於2018年與2022年歷史最低本益比無法從公開免費管道取得，以下改用<b>「近1年可查證的相對低點本益比(23.3倍)」</b>與<b>「目前本益比(30.85倍)」</b>兩組情境，交叉2026年保守情境EPS(FactSet區間下緣50.3元)進行反推，作為替代性安全邊際參考：</p>
+      <table>
+        <tr><th>情境</th><th>本益比</th><th>× 保守EPS(50.3元)</th><th>= 反推股價</th><th>vs 目前股價(1,350元)</th></tr>
+        <tr><td>近期相對低點PE</td><td class="num">23.3倍</td><td class="num">50.3元</td><td class="num">≈1,172元</td><td class="num badge b-amber">低於現價約13%</td></tr>
+        <tr><td>目前PE</td><td class="num">30.85倍</td><td class="num">50.3元</td><td class="num">≈1,552元</td><td class="num badge b-green">高於現價約15%</td></tr>
+      </table>
+      <p><b>結論：</b>目前股價(1,350元)介於「近期相對低點PE×保守EPS」與「現行PE×保守EPS」之間，顯示<b>目前股價已同時反映EPS高速成長(YoY翻倍)與本益比維持相對高檔(30倍上下)的雙重支撐</b>——並非純靠獲利成長撐起，也有一定程度的本益比倍數維持在偏樂觀水準。若2026年EPS成長不如預期(跌至區間下緣或以下)，或本益比向近期低點(23倍)修正，股價存在約13%的下行空間；反之若成長優於預期且評價維持樂觀，仍有上行空間。<b>因缺乏2018/2022真正熊市谷底的本益比數據，此反推試算的安全邊際評估效力有限，僅供參考，不應視為完整的谷底估值支撐。</b></p>
+    </div>
+
+    <h2 class="sec-title" id="p2-3">三情境估值與股價位階</h2>
+    <div class="tbl-wrap"><table>
+      <tr><th>情境</th><th>假設</th><th>2027E EPS</th><th>適用PE</th><th>目標股價</th></tr>
+      <tr><td><span class="badge b-red">悲觀</span></td><td>Vera Rubin持續邊緣化，AI伺服器成長趨緩，評價向近期低點修正</td><td class="num">56.4元(區間下緣)</td><td class="num">20~23倍</td><td class="num">1,128~1,297元</td></tr>
+      <tr><td><span class="badge b-amber">中性</span></td><td>維持GB300既有市占，CDU穩健爬坡，評價持平現行水準</td><td class="num">71.65元(中位數)</td><td class="num">28~31倍</td><td class="num">2,006~2,221元</td></tr>
+      <tr><td><span class="badge b-green">樂觀</span></td><td>Vera Rubin後續世代重新納入認證，CDU超越指引，評價擴張</td><td class="num">91.4元(區間上緣)</td><td class="num">33~36倍</td><td class="num">3,016~3,290元</td></tr>
+    </table></div>
+    <p class="source-note">⚠️ 本情境為研究框架下依可得共識EPS區間與歷史PE區間交叉推算，非官方預測，樂觀情境隱含較大評價擴張假設，實際須觀察後續法說會與訂單能見度。</p>
+
+    <div class="card">
+      <h4>股價位階</h4>
+      <p>現價1,350元位於52週區間(641~1,465元)的<b>約60%分位</b>，距52週高點約7.8%，距52週低點約111%。近期股價自1,465元高點回落，2026/09/03單日下跌5.92%，波動度偏高，符合高成長高波動題材股特性。</p>
+    </div>
+
+    <h2 class="sec-title" id="p2-4">Comps分析與投行目標價</h2>
+    <div class="tbl-wrap"><table>
+      <tr><th>公司</th><th>代號</th><th>股價</th><th>市值</th><th>本益比</th><th>2025A/2026E EPS</th></tr>
+      <tr><td><b>雙鴻</b></td><td>3324</td><td class="num">1,350元</td><td class="num">1,256.5億</td><td class="num">30.85倍(TTM)</td><td class="num">28.26 / ~57.3元</td></tr>
+      <tr><td>奇鋐</td><td>3017</td><td class="num">3,310元</td><td class="num">約1.30兆</td><td class="num">44.08倍(TTM)</td><td class="num">— / —(近四季EPS 75.08)</td></tr>
+      <tr><td>建準</td><td>2421</td><td class="num">179.5元</td><td class="num">483.5億</td><td class="num">20.45倍(TTM)</td><td class="num">— / 約10.8元(估，來源分歧)</td></tr>
+      <tr><td>高力</td><td>8996</td><td class="num">1,175元</td><td class="num">134.9億</td><td class="num">81.7倍(預估)</td><td class="num">— / 14.3~17.8元(⚠️不同來源估值分歧大)</td></tr>
+      <tr><td>健策</td><td>3653</td><td class="num">5,780元</td><td class="num">—</td><td class="num">94.6倍(預估)</td><td class="num">— / 約38.3元(估)</td></tr>
+    </table></div>
+    <p class="source-note">⚠️ 高力(8996) 2026年EPS估值在不同來源出現14.3元與17.8元兩種數字，差異可能來自估算時點或年度定義不同，區間跨度大，需留意。雙鴻目前TTM本益比(30.85倍)在同業中屬中段，明顯低於健策(94.6倍)、高力(81.7倍)、奇鋐(44.08倍)，但高於建準(20.45倍)——反映市場對雙鴻成長性認可但仍低於「二線散熱題材股」的評價溢價，也可能反映Vera Rubin風險已部分計入評價折價。</p>
+
+    <h4>法人目標價（逐一列出，不取單一共識數字）</h4>
+    <div class="tbl-wrap"><table>
+      <tr><th>機構/來源</th><th>目標價</th><th>備註</th></tr>
+      <tr><td>FactSet調查中位數(16位分析師)</td><td class="num">1,425元</td><td>較前次1,380元上修3.26%；區間最高1,740元、最低1,050元</td></tr>
+      <tr><td>兆豐證券</td><td class="num">1,580元</td><td>看多評等，預估2026年營收374.22億元、EPS 58.03元</td></tr>
+      <tr><td>元大投顧</td><td class="num">約1,505元</td><td>預估2026年獲利年增118%</td></tr>
+    </table></div>
+    <p><b>分析師評等分佈：</b>積極樂觀12位、中立5位、保守悲觀0位（FactSet調查，共約16-17位分析師）。</p>
+    <p class="source-note">來源：<a href="https://news.cnyes.com/news/id/6446599" target="_blank">鉅亨網Factset速報(目標價)</a>、<a href="https://news.cnyes.com/news/id/6446408" target="_blank">鉅亨網Factset速報(EPS)</a>、<a href="https://tw.stock.yahoo.com/news/%E9%9B%99%E9%B4%BB%E6%B0%B4%E5%86%B7%E9%9C%80%E6%B1%82%E5%A4%A7%E7%88%86%E7%99%BC-%E9%A0%90%E4%BC%B0%E7%8D%B2%E5%88%A9%E5%B9%B4%E5%A2%9E118-%E7%9B%AE%E6%A8%99%E5%83%B9%E7%9B%B4%E9%80%BC1505%E5%85%83-083550509.html" target="_blank">Yahoo股市(元大投顧)</a></p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ PART 3: 財務風險健檢 ============ -->
+  <section id="p3">
+    <span class="part-badge">Ⅲ 財務風險健檢</span>
+    <h2 class="sec-title" id="p3-1">六大比率診斷</h2>
+    <div class="tbl-wrap"><table>
+      <tr><th>比率</th><th>最新數值</th><th>診斷</th></tr>
+      <tr><td>毛利率</td><td class="num">29.66%(2026Q1)</td><td><span class="badge b-green">健康</span>連續4年上升(23%→29.66%)，反映產品組合優化</td></tr>
+      <tr><td>營益率</td><td class="num">17.77%</td><td><span class="badge b-green">健康</span></td></tr>
+      <tr><td>淨利率</td><td class="num">14.80%</td><td><span class="badge b-green">健康</span></td></tr>
+      <tr><td>股價淨值比(PB)</td><td class="num">約9.3~9.5倍</td><td><span class="badge b-amber">偏高</span>每股淨值144.21元(2026Q1)，反映高ROE預期已充分反映在股價，安全邊際較薄</td></tr>
+      <tr><td>流動比率／速動比率</td><td class="num">❌ 無法取得</td><td>公開免費管道未揭露精確數字，不可臆測</td></tr>
+      <tr><td>負債比率</td><td class="num">❌ 無法取得</td><td>公開免費管道未揭露精確數字；已知2025年12月新增發行50億元無擔保可轉債(第6、7次)，需留意此筆負債對比率的影響</td></tr>
+    </table></div>
+    <p class="source-note">⚠️ 股價淨值比在不同來源出現9.5倍、6.51倍、39.32倍等多種數字，差異疑似來自資料擷取時點或每股淨值基期不同。本報告採用「目前股價1,350元 ÷ 2026Q1每股淨值144.21元 ≈ 9.36倍」自行換算為主要參考值，其餘來源數字列為交叉參考，不可視為單一定論。</p>
+
+    <h2 class="sec-title" id="p3-2">債務到期時程與CapEx分析</h2>
+    <div class="card">
+      <h4>新增債務追蹤</h4>
+      <table>
+        <tr><th>項目</th><th>金額</th><th>時間</th><th>備註</th></tr>
+        <tr><td>第6次無擔保可轉換公司債</td><td class="num" rowspan="2">合計50億元</td><td rowspan="2">2025年12月董事會通過</td><td rowspan="2">用途研判為支應泰國二期廠擴建與資本支出上修需求；未查得具體轉換價、到期日等發行條件細節，需追蹤公開資訊觀測站公告</td></tr>
+        <tr><td>第7次無擔保可轉換公司債</td></tr>
+      </table>
+      <p class="source-note">⚠️ 轉換價、到期日、票面利率等具體發行條件未能從公開新聞搜尋取得，建議查詢公開資訊觀測站(MOPS)重大訊息公告以取得完整條件，避免臆測稀釋幅度。</p>
+
+      <h4>資本支出(CapEx)計畫</h4>
+      <table>
+        <tr><th>期間</th><th>金額</th><th>用途</th></tr>
+        <tr><td>原規劃(未來2-3年，每年)</td><td class="num">約20~25億元</td><td>泰國廠一期/既有產能擴充</td></tr>
+        <tr><td>2026年上修後</td><td class="num">約25~30億元</td><td>台北總部工程遞延款、泰國二期建廠、三期廠土地評估</td></tr>
+      </table>
+      <p>資本支出約占2025年營收(232.76億)之11-13%，屬穩健擴產範圍，尚未見過度激進跡象。泰國二期廠預計2026年下半年確定細部配置，滿載後水冷板月產能可提升至20萬組以上，惟實際進度將視客戶拉貨節奏彈性調整。</p>
+      <p class="source-note">來源：<a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=e5af4762-2929-4e58-bb9f-834164ee8d74" target="_blank">MoneyDJ(泰國廠資本支出)</a>、<a href="https://blog.fugle.tw/post/earnings-call-3324-1" target="_blank">富果法說會備忘錄</a></p>
+    </div>
+
+    <h3>現有產能規劃一覽</h3>
+    <div class="tbl-wrap"><table>
+      <tr><th>產品</th><th>產能</th><th>狀態</th></tr>
+      <tr><td>DIMM Cold Plate</td><td class="num">月產3萬片</td><td>—</td></tr>
+      <tr><td>Rack Manifold</td><td class="num">台灣月產2,000組 + 泰國1,000組</td><td>均滿載</td></tr>
+      <tr><td>In-Row CDU</td><td class="num">月產100~150台</td><td>—</td></tr>
+    </table></div>
+
+    <h2 class="sec-title" id="p3-3">同業對比與綜合診斷</h2>
+    <div class="tbl-wrap"><table>
+      <tr><th>公司</th><th>毛利率</th><th>本益比(TTM/預估)</th><th>財務體質相對評估</th></tr>
+      <tr><td>雙鴻(3324)</td><td class="num">29.66%</td><td class="num">30.85倍</td><td>獲利能力強、成長快，但新增50億CB提高財務槓桿，需追蹤稀釋與到期贖回壓力</td></tr>
+      <tr><td>奇鋐(3017)</td><td class="num">—</td><td class="num">44.08倍</td><td>規模最大、多元產品線分散風險，財務體質相對更穩健(市值約十倍於雙鴻)</td></tr>
+      <tr><td>建準(2421)</td><td class="num">—</td><td class="num">20.45倍</td><td>估值相對保守，液冷布局幅度小，成長彈性較低但風險亦較低</td></tr>
+    </table></div>
+
+    <div class="card">
+      <h4>綜合財務診斷</h4>
+      <p><span class="badge b-green">獲利面：健康</span> 毛利率、營益率、淨利率均呈上升趨勢，成長動能強勁。<br>
+      <span class="badge b-amber">評價面：偏熱</span> PB約9.3倍、TTM PE 30.85倍，安全邊際相對薄弱，任何成長不如預期的訊號都可能引發評價修正。<br>
+      <span class="badge b-amber">槓桿面：需觀察</span> 2025年12月新增50億元可轉債融資，加上資本支出上修至25-30億/年，財務槓桿與稀釋壓力較過去提升，惟具體負債比率/流動比率因資料限制無法完整驗證，建議查詢雙鴻最新季報(MOPS)以取得精確數字。</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ 綜合總結 ============ -->
+  <section id="summary">
+    <h2 class="sec-title">综合總結與操作建議</h2>
+    <div class="grid3">
+      <div class="card" style="text-align:center;">
+        <div class="source-note">Thesis成立度</div>
+        <div style="font-size:26px; font-weight:800; color:var(--brand);">3/5</div>
+        <div class="source-note">5項論點中3項成立、1項部分成立、1項未兌現(Vera Rubin)</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="source-note">護城河強度</div>
+        <div class="moat-star" style="font-size:22px;">★★☆☆☆</div>
+        <div class="source-note">平均2.4/5，屬「認證+良率優勢」而非結構性壟斷</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="source-note">成長象限</div>
+        <div style="font-size:18px; font-weight:800;">高速成長股</div>
+        <div class="source-note">穩定性存疑，需持續驗證GB300/CDU放量</div>
+      </div>
+    </div>
+
+    <div class="action-box">
+      <h4>最終操作建議</h4>
+      <div class="row"><div class="k">已持有者</div><div>可續抱核心部位，但建議設定明確停損/停利點（參考上方賣出觸發條件），並將部位控制在可承受高波動的比重內</div></div>
+      <div class="row"><div class="k">未持有者</div><div>不建議在現階段(本益比30倍、PB約9倍)追高重倉。可等待①股價回落至反推試算下緣(約1,150~1,300元區間)或②GB300出貨/CDU放量數據明確優於指引後分批布局</div></div>
+      <div class="row"><div class="k">時間框架</div><div>中長期3-5年波段：核心命題(液冷取代氣冷)方向正確，但雙鴻能否維持在液冷供應鏈中的關鍵地位（尤其Vera Rubin及後續世代）是決定長期報酬率高低的最大變數</div></div>
+      <div class="row"><div class="k">核心催化劑</div><div>①GB300出貨市占率上修 ②CDU 2027年出貨達標 ③下一代平台重新納入官方認證名單 ④50億CB發行條件明朗化</div></div>
+    </div>
+
+    <div class="quote">"別人給的機會可能被收回去，但我練出來的真本事，誰也收不走"——雙鴻的核心投資命題，在Vera Rubin冷板認證失利後正面臨最直接的檢驗。2026-2027年的財報數據，將決定這是先見之明，還是被動退讓的開始。</div>
+  </section>
+
+  <footer>
+    <div class="disclaimer">
+      <b>免責聲明：</b>本報告僅供個人研究參考，不構成投資建議。所有數據來自公開網路搜尋，部分欄位因資料來源限制標示為「—」或「❌無法取得」，請勿臆測填補。投資有風險，請自行查證最新財報與公開資訊觀測站(MOPS)公告後審慎判斷。
+    </div>
+    <p style="margin-top:14px;"><b>主要資料來源：</b></p>
+    <div class="src-list">
+      <a href="https://www.wiseup.cc/p/auras" target="_blank">WiseUp深度分析</a><br>
+      <a href="https://blog.fugle.tw/post/earnings-call-3324-1" target="_blank">富果法說會備忘錄</a><br>
+      <a href="https://news.cnyes.com/news/id/6446599" target="_blank">鉅亨網Factset目標價速報</a><br>
+      <a href="https://news.cnyes.com/news/id/6446408" target="_blank">鉅亨網Factset EPS速報</a><br>
+      <a href="https://www.pocket.tw/school/report/perspective/7300/" target="_blank">口袋學堂散熱雙雄比較</a><br>
+      <a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=e5af4762-2929-4e58-bb9f-834164ee8d74" target="_blank">MoneyDJ泰國廠資本支出</a><br>
+      <a href="https://money.udn.com/money/story/5612/9486687" target="_blank">經濟日報Q1法說</a><br>
+      <a href="https://money.udn.com/money/story/11074/9541541" target="_blank">經濟日報2026營收展望</a><br>
+      <a href="https://tw.stock.yahoo.com/quote/3324.TWO/eps" target="_blank">Yahoo股市EPS表</a><br>
+      <a href="https://statementdog.com/analysis/3324" target="_blank">財報狗</a><br>
+      <a href="https://www.cnyes.com/twstock/3324" target="_blank">鉅亨網個股總覽</a>
+    </div>
+    <p style="margin-top:14px;">個股小狐｜三合一完整報告 · 產生時間 2026-09-03</p>
+  </footer>
+
+</div>
+</body>
+</html>

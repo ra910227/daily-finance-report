@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜廣達電腦(2382) 公司深度研究</title>
+<style>
+:root{
+  --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee;
+  --text:#1e2233; --text2:#6b7280; --accent:#4f46e5; --accent2:#4338ca;
+  --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+  --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang TC","Microsoft JhengHei",sans-serif;
+  line-height:1.65; font-size:15px;
+}
+.wrap{max-width:1080px; margin:0 auto; padding:0 20px 60px;}
+a{color:var(--accent);}
+h1,h2,h3,h4{color:var(--text); font-weight:700;}
+h2{font-size:22px; margin:0 0 6px; padding-top:6px; border-left:5px solid var(--accent); padding-left:12px;}
+h3{font-size:17px; color:var(--accent2); margin:26px 0 10px;}
+.section{margin-top:56px; scroll-margin-top:20px;}
+.subtitle{color:var(--text2); font-size:13px; margin:0 0 20px 17px;}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  color:#fff; padding:36px 32px; border-radius:16px; margin-top:24px;
+  box-shadow:0 8px 24px rgba(79,70,229,0.18);
+}
+.hero-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;}
+.hero-code{font-size:13px; opacity:0.85; letter-spacing:1px;}
+.hero-name{font-size:30px; font-weight:800; margin:4px 0 2px;}
+.hero-en{font-size:13px; opacity:0.8;}
+.hero-date{font-size:12px; opacity:0.75; text-align:right;}
+.hero-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:14px; margin-top:26px;}
+.hero-card{background:rgba(255,255,255,0.13); border-radius:10px; padding:12px 14px; backdrop-filter:blur(4px);}
+.hero-card .lbl{font-size:11px; opacity:0.8; margin-bottom:4px;}
+.hero-card .val{font-size:19px; font-weight:700;}
+.hero-card .sub{font-size:11px; opacity:0.75; margin-top:2px;}
+
+/* TOC */
+.toc{
+  display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 0; padding:14px 16px;
+  background:var(--bg2); border:1px solid var(--border); border-radius:12px;
+}
+.toc a{
+  font-size:13px; text-decoration:none; color:var(--accent2); background:#fff;
+  border:1px solid var(--border); padding:6px 12px; border-radius:20px; font-weight:600;
+}
+.toc a:hover{background:var(--bg3);}
+
+/* BADGES */
+.badge{display:inline-block; padding:2px 9px; border-radius:20px; font-size:12px; font-weight:700;}
+.badge-green{background:#dcfce7; color:var(--green);}
+.badge-red{background:#fee2e2; color:var(--red);}
+.badge-gold{background:#fef3c7; color:var(--gold);}
+.badge-blue{background:#dbeafe; color:var(--blue);}
+.badge-purple{background:#ede9fe; color:var(--purple);}
+.badge-grey{background:var(--bg3); color:var(--text2);}
+.status-verified{color:var(--green); font-weight:700;}
+.status-est{color:var(--gold); font-weight:700;}
+.status-na{color:var(--text2); font-weight:700;}
+
+/* CARDS */
+.card{background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+.grid5{display:grid; grid-template-columns:repeat(5,1fr); gap:12px;}
+@media(max-width:800px){.grid2,.grid3,.grid5{grid-template-columns:1fr;}}
+
+/* TABLE */
+table{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0 18px;}
+th,td{padding:9px 10px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top;}
+th{background:var(--bg3); color:var(--text); font-weight:700; font-size:12.5px;}
+tr:hover td{background:#fafbff;}
+.tbl-wrap{overflow-x:auto;}
+.num{text-align:right; font-variant-numeric:tabular-nums;}
+.pos{color:var(--red); font-weight:700;} /* 台股慣例:紅漲 */
+.neg{color:var(--green); font-weight:700;} /* 綠跌 */
+
+/* RISK CARD */
+.risk-card{
+  border:1px solid var(--border); border-left:5px solid var(--orange); border-radius:10px;
+  padding:14px 16px; margin-bottom:12px; background:#fff8f2;
+}
+.risk-card h4{margin:0 0 6px; color:var(--orange); font-size:15px;}
+.risk-meta{font-size:12.5px; color:var(--text2); margin-top:6px;}
+.risk-meta b{color:var(--text);}
+
+/* ACTION BOX */
+.action-box{
+  border:2px solid var(--accent); border-radius:14px; padding:20px 22px; background:#f5f4ff; margin-top:16px;
+}
+.action-box h4{color:var(--accent2); margin:0 0 10px; font-size:16px;}
+.action-row{display:flex; gap:10px; padding:8px 0; border-bottom:1px dashed var(--border);}
+.action-row:last-child{border-bottom:none;}
+.action-label{min-width:110px; font-weight:700; color:var(--accent2); font-size:13px; flex-shrink:0;}
+.action-val{font-size:13.5px; color:var(--text);}
+
+/* STARS */
+.stars{color:var(--gold); letter-spacing:2px; font-size:16px;}
+.stars-empty{color:#e5c9a0;}
+
+/* SUMMARY CARDS */
+.sum-card{
+  border-radius:14px; padding:20px; text-align:center; background:var(--bg2); border:1px solid var(--border);
+}
+.sum-card .big{font-size:28px; font-weight:800; color:var(--accent2); margin:8px 0 4px;}
+.sum-card .lbl{font-size:12.5px; color:var(--text2); font-weight:600;}
+
+/* THREAT DOTS */
+.threat{font-size:15px;}
+
+footer{
+  margin-top:70px; padding-top:24px; border-top:1px solid var(--border);
+  font-size:12px; color:var(--text2); line-height:1.9;
+}
+.disclaimer{
+  margin-top:14px; padding:14px 16px; background:var(--bg3); border-radius:10px; font-size:12.5px; color:var(--text2);
+}
+.source-tag{font-size:11px; color:var(--text2); margin-top:2px;}
+ul.compact{margin:6px 0; padding-left:20px;}
+ul.compact li{margin-bottom:5px;}
+.quote-note{font-size:12px; color:var(--text2); font-style:italic;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="hero-code">TWSE 2382 ｜ Quanta Computer Inc.</div>
+        <div class="hero-name">廣達電腦</div>
+        <div class="hero-en">個股小狐｜公司深度研究報告</div>
+      </div>
+      <div class="hero-date">
+        分析日期：2026-09-03<br>
+        資料期別：2026Q2法說會(08/13) + 2026/07累計月營收
+      </div>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-card"><div class="lbl">股價 (2026/09/03)</div><div class="val">NT$335</div><div class="sub">✅ 台股收盤</div></div>
+      <div class="hero-card"><div class="lbl">市值</div><div class="val">約NT$1.29兆</div><div class="sub">✅ 已驗證</div></div>
+      <div class="hero-card"><div class="lbl">本益比 (TTM)</div><div class="val">約14.6倍</div><div class="sub">近四季EPS 22.95元</div></div>
+      <div class="hero-card"><div class="lbl">殖利率</div><div class="val">約4.6~4.8%</div><div class="sub">2025年現金股利15.6元</div></div>
+      <div class="hero-card"><div class="lbl">Thesis成立度</div><div class="val">3.5 / 5</div><div class="sub">2項✅成立、3項⚠️部分成立</div></div>
+      <div class="hero-card"><div class="lbl">護城河強度</div><div class="val">★★★☆☆</div><div class="sub">平均3.0 / 5（15/25分）</div></div>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <a href="#basic">① 基本介紹</a>
+    <a href="#business">② 業務引擎分析</a>
+    <a href="#thesis">③ 核心Thesis與未來性</a>
+    <a href="#competition">④ 競爭格局</a>
+    <a href="#moat">⑤ 成長象限與護城河</a>
+    <a href="#summary">綜合總結</a>
+  </div>
+
+  <!-- 1. 基本介紹 -->
+  <div class="section" id="basic">
+    <h2>① 基本介紹</h2>
+    <p class="subtitle">產業定位：NB代工(ODM)龍頭 + AI伺服器ODM雙軌業務廠商</p>
+
+    <div class="grid3">
+      <div class="card">
+        <div class="lbl" style="color:var(--text2);font-size:12px;">市值 / 股價</div>
+        <div style="font-size:20px;font-weight:800;margin-top:4px;">NT$1.29兆 / NT$335</div>
+        <div class="source-tag">✅ 2026/09/03，來源：Yahoo奇摩股市、鉅亨網</div>
+      </div>
+      <div class="card">
+        <div class="lbl" style="color:var(--text2);font-size:12px;">TTM營收（估算）</div>
+        <div style="font-size:20px;font-weight:800;margin-top:4px;">約NT$2.98兆</div>
+        <div class="source-tag">⚠️ 估算：2025Q3+Q4+2026Q1+Q2四季合計（495.3+638.6+809.2+1,040億）</div>
+      </div>
+      <div class="card">
+        <div class="lbl" style="color:var(--text2);font-size:12px;">累計營收YoY</div>
+        <div style="font-size:20px;font-weight:800;margin-top:4px;">+92.7%</div>
+        <div class="source-tag">✅ 2026年1-7月累計營收NT$2.21兆，年增92.67%（自結月營收）</div>
+      </div>
+    </div>
+    <div class="grid3">
+      <div class="card">
+        <div class="lbl" style="color:var(--text2);font-size:12px;">毛利率（最新季）</div>
+        <div style="font-size:20px;font-weight:800;margin-top:4px;">5.02%<span style="font-size:13px;color:var(--text2);"> (2026Q2)</span></div>
+        <div class="source-tag">✅ 較去年同期7.05%下滑，因AI伺服器高單價零件墊高營收基期</div>
+      </div>
+      <div class="card">
+        <div class="lbl" style="color:var(--text2);font-size:12px;">FCF（自由現金流）</div>
+        <div style="font-size:20px;font-weight:800;margin-top:4px;color:var(--green);">2025年 -NT$251億</div>
+        <div class="source-tag">✅ 較2024年-NT$485億改善；2026Q1單季再轉負NT$1,201億（產能擴建期資本支出大增）</div>
+      </div>
+      <div class="card">
+        <div class="lbl" style="color:var(--text2);font-size:12px;">所屬產業 / 全球排名</div>
+        <div style="font-size:15px;font-weight:700;margin-top:4px;line-height:1.6;">NB代工：全球第1（市佔約32%）<br>AI伺服器機櫃：三大機櫃供應商之一（鴻海、廣達、緯創）</div>
+        <div class="source-tag">✅ 富果直送、DIGITIMES</div>
+      </div>
+    </div>
+
+    <div class="card" style="background:#fff8f2;border-color:#f3d9bd;">
+      <b style="color:var(--orange);">業務轉型現況：</b>廣達傳統為全球最大NB代工廠（2382），近5年已成功切入AI伺服器ODM賽道，目前AI伺服器已佔整體伺服器營收<b>75~80%</b>（2026上半年），公司全年目標維持「AI伺服器佔比8成、營收三位數成長」不變。此一結構轉變同時帶來營收爆發與毛利率稀釋的雙面刃效應（詳見第②③節）。
+      <div class="source-tag">✅ 來源：廣達2026Q2法說會（鉅亨網、富果直送，2026/08/13）</div>
+    </div>
+  </div>
+
+  <!-- 2. 業務引擎分析 -->
+  <div class="section" id="business">
+    <h2>② 業務引擎分析</h2>
+    <p class="subtitle">四大業務線拆解與客戶結構</p>
+
+    <h3>2.1 業務線佔比與說明</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>業務線</th><th>營收佔比（估算）</th><th>核心客戶</th><th>護城河來源</th></tr>
+      <tr>
+        <td><b>AI伺服器（GB200/GB300機櫃、HGX架構）</b></td>
+        <td class="num">⚠️ 約60~65%<br><span style="font-size:11px;color:var(--text2);">(整體伺服器營收75~80% × 伺服器佔總營收約8成推估)</span></td>
+        <td>NVIDIA（晶片供應商）、雲端CSP：Google（HGX新平台）、Meta（部分訂單）、Microsoft/Oracle（新增小量訂單）</td>
+        <td>與NVIDIA自2010年起共同開發伺服器架構的長期工程協作關係；機櫃液冷整合技術門檻高，全球僅鴻海/廣達/緯創三家具量產能力</td>
+      </tr>
+      <tr>
+        <td><b>傳統NB代工</b></td>
+        <td class="num">⚠️ 約20~25%<br><span style="font-size:11px;color:var(--text2);">(全年營收占比隨AI伺服器稀釋逐年下降，2026Q1法說提及NB需求偏弱)</span></td>
+        <td>品牌大廠（HP、Dell、Lenovo等，個別客戶名未逐一揭露）</td>
+        <td>全球NB ODM龍頭規模（市佔約32%），供應鏈垂直整合與量產效率</td>
+      </tr>
+      <tr>
+        <td><b>資料中心／網通設備、雲端基礎建設</b></td>
+        <td class="num">❌ —<br><span style="font-size:11px;color:var(--text2);">(未單獨揭露，公司多將其歸入伺服器/雲端業務群組)</span></td>
+        <td>雲端服務供應商（CSP）</td>
+        <td>與AI伺服器業務共用機櫃整合、散熱與電源管理技術平台</td>
+      </tr>
+      <tr>
+        <td><b>其他（穿戴裝置、車用電子、智慧製造等）</b></td>
+        <td class="num">❌ —<br><span style="font-size:11px;color:var(--text2);">(占比極小，未單獨揭露)</span></td>
+        <td>多元品牌客戶</td>
+        <td>技術延伸應用；德國子公司增資支援車用業務發展</td>
+      </tr>
+    </table>
+    </div>
+    <p class="quote-note">說明：廣達財報並未逐季公布NB代工／AI伺服器/其他業務的精確營收拆分比例，上表「AI伺服器」與「NB代工」佔比為依據法說會揭露的「AI伺服器占伺服器營收75~80%」與產業慣例中伺服器占廣達總營收約7~8成之交叉推估，屬⚠️估算值，非公司官方逐項揭露數字。</p>
+
+    <h3>2.2 優勢產品表</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>產品</th><th>佔營收（估）</th><th>護城河說明</th></tr>
+      <tr><td>NVIDIA GB200/GB300 NVL72 AI伺服器機櫃</td><td class="num">⚠️ 最大單一成長引擎</td><td>機櫃級液冷系統整合能力，客戶訂單能見度已延伸至2028年，2026年下半起導入「客供料」模式優化毛利率認列</td></tr>
+      <tr><td>HGX架構AI伺服器（Google新平台）</td><td class="num">❌ —</td><td>受惠雲端業者自研晶片與新一代GPU平台需求，分散對單一CSP的依賴</td></tr>
+      <tr><td>NB代工（各品牌機種）</td><td class="num">⚠️ 約2成上下</td><td>全球最大NB ODM廠規模優勢，供應鏈與良率管控成熟</td></tr>
+      <tr><td>伺服器主機板/機構件</td><td class="num">❌ —</td><td>與AI伺服器機櫃整合互為綜效</td></tr>
+    </table>
+    </div>
+
+    <h3>2.3 近4期財務摘要（單季）</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>期別</th><th class="num">營收</th><th class="num">營收YoY</th><th class="num">毛利率</th><th class="num">EPS</th><th class="num">FCF/現金流備註</th></tr>
+      <tr>
+        <td>2025 Q3</td>
+        <td class="num">NT$495.3億</td>
+        <td class="num pos">+16.7%</td>
+        <td class="num">6.80%</td>
+        <td class="num">4.27元</td>
+        <td class="num">GB200轉GB300平台過渡期</td>
+      </tr>
+      <tr>
+        <td>2025 Q4</td>
+        <td class="num">NT$638.6億</td>
+        <td class="num">✅（未查得精確值）</td>
+        <td class="num">6.33%</td>
+        <td class="num">5.77元</td>
+        <td class="num">FY2025全年FCF約-NT$251億</td>
+      </tr>
+      <tr>
+        <td>2026 Q1</td>
+        <td class="num pos">NT$809.2億</td>
+        <td class="num pos">+66.6%</td>
+        <td class="num neg">4.78%</td>
+        <td class="num">5.50元</td>
+        <td class="num neg">單季FCF約-NT$1,201億（資本支出擴張期）</td>
+      </tr>
+      <tr>
+        <td>2026 Q2</td>
+        <td class="num pos">NT$1.04兆</td>
+        <td class="num pos">+105.6%</td>
+        <td class="num neg">5.02%</td>
+        <td class="num pos">7.43元</td>
+        <td class="num">2026全年資本支出上修至NT$400億</td>
+      </tr>
+    </table>
+    </div>
+    <p class="quote-note">✅ 資料來源：鉅亨網、富果直送法說會備忘錄、經濟日報、非凡新聞（2025Q3~2026Q2各季財報新聞）。EBITDA margin公司未單獨揭露，故以毛利率/營業利益率替代呈現，未強行估算EBITDA數字。</p>
+  </div>
+
+  <!-- 3. 核心Thesis與未來性 -->
+  <div class="section" id="thesis">
+    <h2>③ 核心Thesis與未來性</h2>
+    <p class="subtitle">投資論點支柱逐項檢驗（Thesis成立度 3.5 / 5）</p>
+
+    <div class="card">
+      <h4 style="margin-top:0;"><span class="badge badge-green">✅ 成立</span> 支柱1：AI伺服器GB200/GB300機櫃放量為核心成長引擎</h4>
+      <p style="margin:8px 0 0;">AI伺服器占整體伺服器營收比重已達75~80%（2026上半年），2026Q2營收年增105.6%、EPS年增70%創同期新高；管理層維持全年三位數成長目標不變，且客戶訂單能見度已延伸至2028年，並以NT$197億收購桃園華亞廠擴充台灣後段組裝產能（2028年產能較現況倍增）。</p>
+      <div class="risk-meta">來源：2026Q2法說會（鉅亨網2026/08/13）、DIGITIMES、經濟日報</div>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top:0;"><span class="badge badge-green">✅ 成立</span> 支柱2：雲端資本支出循環延續，客戶結構逐步多元化</h4>
+      <p style="margin:8px 0 0;">除既有GB200/GB300出貨放量外，廣達新增取得Google新一代HGX架構平台需求，並取得Oracle、Microsoft小量新增訂單，顯示客戶結構不再單押單一CSP；惟需注意目前主要機櫃訂單仍由鴻海（約40%市佔）取得多數Meta/Microsoft/Oracle主力供應商地位。</p>
+      <div class="risk-meta">來源：聯合新聞網、經濟日報（GB300供應鏈報導，2026）</div>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top:0;"><span class="badge badge-gold">⚠️ 部分成立</span> 支柱3：NB代工基本盤提供穩定現金流</h4>
+      <p style="margin:8px 0 0;">廣達仍為全球NB ODM龍頭（市佔約32%），電子五哥合計市佔約8成，具規模優勢；惟2026Q1法說會明確提及「NB代工需求相對疲弱」，NB業務對整體營收與獲利成長的貢獻度已被AI伺服器業務大幅稀釋，「現金流穩定器」角色論點尚未完全兌現於財務數字（近兩年FCF持續為負）。</p>
+      <div class="risk-meta">來源：富果直送法說會備忘錄（2026/05/14）</div>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top:0;"><span class="badge badge-gold">⚠️ 部分成立</span> 支柱4：毛利率「轉骨」——買斷制轉客供料模式可緩解稀釋</h4>
+      <p style="margin:8px 0 0;">管理層於2026Q2法說會宣布，第三季起將針對部分AI伺服器高單價零件交易，由傳統買賣模式調整為客戶供料的「委託代工」模式，預期可緩解毛利率被墊高營收稀釋的壓力。惟此措施剛於2026Q3啟動，尚未有實際季度財報數字驗證成效，屬前瞻性論點，暫列部分成立。</p>
+      <div class="risk-meta">來源：蕃新聞〈AI伺服器占比升高不等於毛利更高〉（2026/08/14）</div>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top:0;"><span class="badge badge-gold">⚠️ 部分成立</span> 支柱5：垂直整合能力與規模帶來長期競爭優勢</h4>
+      <p style="margin:8px 0 0;">廣達具備自2010年起與NVIDIA共同開發伺服器架構的先行者優勢，且透過美國加州、台灣華亞廠、德國子公司多地擴產強化垂直整合；惟AI伺服器機櫃市佔仍落後鴻海（約40% vs 廣達＋緯創合計市場尾隨），且毛利率仍為同業間相對承壓的區間，規模優勢尚未完全轉化為獲利品質優勢。</p>
+      <div class="risk-meta">來源：DIGITIMES、蕃新聞、E大成長股投資筆記（2026 AI伺服器指南）</div>
+    </div>
+
+    <h3>核心成長驅動力</h3>
+    <ul class="compact">
+      <li><b>GB200→GB300→下一代Rubin平台機櫃放量：</b>單機櫃價值量持續墊高，訂單能見度看至2027~2028年。</li>
+      <li><b>雲端業者(CSP)資本支出持續擴大：</b>Google新平台需求、Oracle/Microsoft新增訂單，分散客戶集中度。</li>
+      <li><b>台美歐多地擴產：</b>華亞廠（2028量產）、加州子公司增資、德國子公司支援車用業務，支撐中長期出貨成長動能。</li>
+    </ul>
+
+    <h3>需監控風險</h3>
+    <div class="risk-card">
+      <h4>風險1：客戶集中度與訂單流向鴻海的競爭風險</h4>
+      <p>廣達AI伺服器業務高度依賴少數CSP客戶；目前鴻海為Microsoft、Oracle主要供應商並取得Meta第二供應商地位，廣達僅取得部分小量訂單。NVIDIA財報揭露前兩大直接客戶合計貢獻近4成營收，市場臆測與台灣ODM廠有關，惟未經證實(❌無法取得具體對應公司)。</p>
+      <div class="risk-meta"><b>觸發條件：</b>單季AI伺服器營收年增率降至50%以下，或有明確新聞證實既有CSP客戶訂單大幅轉單。<b>影響程度：</b>高（AI伺服器已占整體伺服器營收75~80%）</div>
+    </div>
+    <div class="risk-card">
+      <h4>風險2：AI伺服器毛利率稀釋風險尚未證實可解</h4>
+      <p>2026Q2毛利率5.02%，較去年同期7.05%下滑逾2個百分點，主因高單價零件墊高營收但未同比例貢獻獲利；「客供料模式」轉換剛於Q3啟動，成效待驗證。</p>
+      <div class="risk-meta"><b>觸發條件：</b>連續兩季毛利率年減幅度超過1個百分點，且客供料模式占比未見提升。<b>影響程度：</b>中高（直接影響EPS品質與本益比評價）</div>
+    </div>
+    <div class="risk-card">
+      <h4>風險3：資本支出擴張導致自由現金流持續為負</h4>
+      <p>2026全年資本支出上修至NT$400億，加計NT$197億收購華亞廠，2026Q1單季FCF即為-NT$1,201億。若AI伺服器需求不如預期或客戶延後拉貨，恐面臨產能過剩與財務槓桿上升風險；此外美中科技管制/關稅政策變動亦可能影響美國、墨西哥、中國產能佈局與客戶採購決策（⚠️地緣政治風險影響程度尚無具體量化數據，暫列為觀察項目）。</p>
+      <div class="risk-meta"><b>觸發條件：</b>客戶訂單能見度縮短至12個月以下，或法說會下修全年AI伺服器成長目標。<b>影響程度：</b>中</div>
+    </div>
+  </div>
+
+  <!-- 4. 競爭格局 -->
+  <div class="section" id="competition">
+    <h2>④ 競爭格局</h2>
+    <p class="subtitle">依兩大主戰場分別列示</p>
+
+    <h3>4.1 NB代工戰場</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>公司</th><th>市佔（估）</th><th>優勢</th><th>對廣達威脅度</th></tr>
+      <tr><td><b>廣達 (2382，自身)</b></td><td class="num">約32%（全球第1）</td><td>規模龍頭、AI伺服器綜效延伸</td><td class="threat">— (自身)</td></tr>
+      <tr><td>緯創 (3231)</td><td class="num">約11%（全球第3）</td><td>同步布局AI伺服器機櫃，訂單能見度佳</td><td class="threat">🟡 中度（雙線競爭重疊）</td></tr>
+      <tr><td>仁寶 (2324)</td><td class="num">❌ —</td><td>NB/桌機/穿戴裝置為主力，6月營收YoY+58.4%</td><td class="threat">🟢 低（AI伺服器業務重疊度較低）</td></tr>
+      <tr><td>英業達 (2356)</td><td class="num">❌ —</td><td>NB代工+伺服器業務同步成長，6月營收YoY+61.6%</td><td class="threat">🟡 中度（伺服器業務逐步擴大）</td></tr>
+      <tr><td>和碩</td><td class="num">❌ —</td><td>電子五哥之一，NB/組裝代工規模</td><td class="threat">🟢 低</td></tr>
+    </table>
+    </div>
+    <p class="quote-note">✅ 電子五哥（廣達/仁寶/英業達/緯創/和碩）合計PC代工市佔約8成。來源：富果直送、104職場力。</p>
+
+    <h3>4.2 AI伺服器戰場</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>公司</th><th>市佔（估）</th><th>優勢</th><th>對廣達威脅度</th></tr>
+      <tr><td><b>鴻海 (2317)</b></td><td class="num">約40%（2026Q1，市場龍頭）</td><td>Microsoft/Oracle主要供應商、Meta第二供應商、營收規模與獲利能力領先</td><td class="threat">🔴 高（直接競爭且市佔最大）</td></tr>
+      <tr><td><b>廣達 (2382，自身)</b></td><td class="num">⚠️ 次於鴻海（未有精確數字）</td><td>GB200/GB300三大機櫃供應商之一，Google HGX新平台受惠，AI伺服器毛利率據報優於部分同業</td><td class="threat">— (自身)</td></tr>
+      <tr><td>緯創 (3231)</td><td class="num">❌ —</td><td>GB200 NVL72三大機櫃供應商之一，訂單能見度延伸至2027年</td><td class="threat">🔴 高（同為機櫃直接競爭者）</td></tr>
+      <tr><td>緯穎 (6669)</td><td class="num">❌ —</td><td>純度最高AI伺服器ODM Direct模式，聚焦北美CSP、ASIC AI伺服器最大受惠者之一</td><td class="threat">🟡 中度（客戶與產品定位略有區隔，但共同競逐CSP資本支出）</td></tr>
+    </table>
+    </div>
+    <p class="quote-note">✅ 來源：今周刊、聯合新聞網、經濟日報、104職場力（2026年GB200/GB300供應鏈報導）。GB200+GB300全產業機櫃出貨量：2025年約3萬櫃、2026年預估超過6萬櫃。</p>
+  </div>
+
+  <!-- 5. 成長象限與護城河 -->
+  <div class="section" id="moat">
+    <h2>⑤ 成長象限判斷與護城河評估</h2>
+
+    <h3>5.1 Peter Lynch成長象限判斷</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>判斷依據</th><th>數據</th><th>對應象限特徵</th></tr>
+      <tr><td>近兩期EPS年增率</td><td class="num pos">H1'26 EPS年增+37.1%（12.93元 vs H1'25 9.43元）</td><td>符合高速成長股（Fast Grower）門檻（EPS成長&gt;20~25%）</td></tr>
+      <tr><td>營收年增率</td><td class="num pos">2026Q2營收YoY +105.6%</td><td>爆發性成長，惟基期效應與AI伺服器單價墊高需留意含金量</td></tr>
+      <tr><td>業務循環性</td><td>NB代工需求疲弱、資本支出/庫存周期敏感</td><td>同時具備景氣循環股（Cyclical）特徵</td></tr>
+      <tr><td>毛利率趨勢</td><td class="num neg">2026Q2毛利率5.02%（YoY下滑2.03pp）</td><td>成長「含金量」尚待驗證，非典型高毛利成長股</td></tr>
+      <tr><td>資本支出/FCF</td><td class="num neg">FCF連續為負，2026全年資本支出上修至NT$400億</td><td>資本密集型擴產階段，非資產隱藏股或穩定成長股特徵</td></tr>
+    </table>
+    </div>
+    <div class="card" style="background:#f5f4ff;border-color:#d6d3f8;">
+      <b style="color:var(--accent2);">綜合判斷：高速成長股（Fast Grower），兼具景氣循環股特徵</b><br>
+      <span style="font-size:13.5px;">廣達的獲利成長速度與營收動能符合高速成長股定義，但成長動能高度集中於AI伺服器單一題材、且NB代工本業具備傳統硬體循環性，加上毛利率含金量尚在驗證期，建議以「高速成長股，但需持續確認獲利品質」的角度追蹤，而非視為穩定配息型持股。</span>
+    </div>
+
+    <h3>5.2 護城河五維度評分</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>維度</th><th>評分</th><th>理由</th></tr>
+      <tr>
+        <td>不可替代性</td>
+        <td><span class="stars">★★★★</span><span class="stars stars-empty">★</span> (4/5)</td>
+        <td>NVL72機櫃液冷整合技術門檻高，全球僅鴻海/廣達/緯創三家具備量產能力，但非唯一供應商（非獨佔）</td>
+      </tr>
+      <tr>
+        <td>網路效應</td>
+        <td><span class="stars">★</span><span class="stars stars-empty">★★★★</span> (1/5)</td>
+        <td>硬體代工本質不具備使用者網路效應，客戶增加不會自動強化其他客戶的採用誘因</td>
+      </tr>
+      <tr>
+        <td>客戶黏著度</td>
+        <td><span class="stars">★★★★</span><span class="stars stars-empty">★</span> (4/5)</td>
+        <td>與NVIDIA自2010年起長期共同開發架構，客戶訂單能見度延伸至2028年，工程協作轉換成本高</td>
+      </tr>
+      <tr>
+        <td>成本優勢</td>
+        <td><span class="stars">★★</span><span class="stars stars-empty">★★★</span> (2/5)</td>
+        <td>毛利率長期處於5~7%低檔且持續受零件墊高稀釋，顯示對上游(NVIDIA)與下游(CSP)議價力皆有限</td>
+      </tr>
+      <tr>
+        <td>規模效應</td>
+        <td><span class="stars">★★★★</span><span class="stars stars-empty">★</span> (4/5)</td>
+        <td>全球NB ODM龍頭(32%市佔)+AI伺服器機櫃前三大供應商，並持續加碼台美歐產能擴建強化規模</td>
+      </tr>
+    </table>
+    </div>
+    <p style="text-align:center;font-size:14px;"><b>總分：15 / 25　平均：<span class="stars">★★★</span><span class="stars stars-empty">★★</span> 3.0 / 5（中度護城河）</b></p>
+
+    <div class="action-box">
+      <h4>📌 建議動作</h4>
+      <div class="action-row"><div class="action-label">當前建議</div><div class="action-val">中立偏多／逢回布局思維。目前PE約14.6倍，已部分反映AI伺服器高成長預期，但毛利率轉骨（客供料模式）成效尚待2026Q3財報驗證，建議暫不追高，等待數據確認。</div></div>
+      <div class="action-row"><div class="action-label">加碼觸發</div><div class="action-val">① 股價回檔至月線/季線支撐（參考區間NT$300以下）且AI伺服器訂單能見度未縮短；② 2026Q3/Q4財報證實客供料模式已使毛利率年增轉正或跌幅收斂。</div></div>
+      <div class="action-row"><div class="action-label">賣出觸發</div><div class="action-val">① 單季AI伺服器營收年增率跌破50%；② 有具體新聞證實既有CSP大客戶訂單大幅轉向鴻海/緯創；③ 毛利率連兩季年減幅度超過1.5個百分點且無改善跡象。</div></div>
+      <div class="action-row"><div class="action-label">每季監控指標</div><div class="action-val">AI伺服器營收占比與YoY成長率、毛利率變化(留意客供料模式轉換效果)、資本支出與FCF方向、法說會客戶集中度說明、NB代工營收動能、Huaya廠擴產進度。</div></div>
+    </div>
+  </div>
+
+  <!-- 綜合總結 -->
+  <div class="section" id="summary">
+    <h2>綜合總結</h2>
+    <div class="grid5">
+      <div class="sum-card"><div class="lbl">Thesis成立度</div><div class="big">3.5/5</div><div class="lbl">2項✅+3項⚠️</div></div>
+      <div class="sum-card"><div class="lbl">護城河強度</div><div class="big" style="color:var(--gold);">★★★☆☆</div><div class="lbl">15/25分</div></div>
+      <div class="sum-card"><div class="lbl">成長象限</div><div class="big" style="font-size:18px;">高速成長股<br><span style="font-size:13px;font-weight:600;color:var(--text2);">(兼景氣循環)</span></div></div>
+      <div class="sum-card"><div class="lbl">近四季本益比</div><div class="big">14.6x</div><div class="lbl">EPS 22.95元</div></div>
+      <div class="sum-card"><div class="lbl">AI伺服器占比</div><div class="big" style="color:var(--red);">75~80%</div><div class="lbl">占整體伺服器營收</div></div>
+    </div>
+
+    <div class="action-box" style="margin-top:24px;">
+      <h4>🎯 最終操作建議</h4>
+      <div class="action-row"><div class="action-label">持有狀態</div><div class="action-val">若已持有：可續抱，惟建議設定毛利率與客戶集中度監控點，作為加減碼依據；若未持有：建議等待回檔或Q3財報驗證毛利率轉骨成效後再評估進場時點。</div></div>
+      <div class="action-row"><div class="action-label">投資期間</div><div class="action-val">中長期3~5年波段：AI伺服器機櫃訂單能見度已延伸至2027~2028年，具備中期成長能見度，但需留意單一題材集中度風險。</div></div>
+      <div class="action-row"><div class="action-label">核心催化劑</div><div class="action-val">① 2026Q3客供料模式毛利率驗證；② 華亞廠2028年產能倍增落地進度；③ 下一代NVIDIA平台（Rubin等）機櫃訂單分配結果；④ Google/Microsoft/Oracle客戶訂單占比持續提升與否。</div></div>
+    </div>
+  </div>
+
+  <footer>
+    <div><b>資料來源：</b>公開資訊觀測站(mops.twse.com.tw)、廣達電腦法說會（2026/05/14、2026/08/13）、鉅亨網twstock、富果直送、財報狗statementdog.com、Yahoo奇摩股市、Goodinfo!台灣股市資訊網、DIGITIMES、經濟日報、工商時報、聯合新聞網、蕃新聞、今周刊、104職場力。本報告未使用Futu OpenD（本次session環境不可用），所有數據均以⚠️/✅/❌狀態標示查證程度。</div>
+    <div class="disclaimer">本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</div>
+  </footer>
+</div>
+</body>
+</html>
