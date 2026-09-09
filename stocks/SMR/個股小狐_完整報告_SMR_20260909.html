@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜SMR NuScale Power 2026-09-09</title>
+<style>
+  :root {
+    --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6;
+    --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca;
+    --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+    --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 32px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-change { font-size: 16px; color: var(--green); margin-top: 4px; }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+
+  /* Nav */
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .toc-inner a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+
+  /* Layout */
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); padding: 0 0 4px 0; }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+
+  /* Cards */
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(79,70,229,0.03); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+
+  /* Indicators */
+  .ok { color: var(--green); }
+  .warn { color: var(--gold); }
+  .bad { color: var(--red); }
+  .muted { color: var(--text2); }
+  .est { color: var(--gold); font-size: 11px; }
+
+  /* Thesis grid */
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+
+  /* DCF scenarios */
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); }
+  .scenario.base { border-top: 3px solid var(--blue); }
+  .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); }
+  .scenario.base h4 { color: var(--blue); }
+  .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .scenario .row:last-child { border-bottom: none; }
+
+  /* Moat radar */
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+
+  /* Action / Caution / Warning boxes */
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .risk-card { background: #fef2f2; border: 1px solid rgba(220,38,38,0.20); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .risk-card h4 { color: var(--red); font-size: 13px; margin-bottom: 4px; }
+
+  /* Rating orb */
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+
+  /* Comp table row highlight */
+  .comp-now { background: rgba(79,70,229,0.05); }
+  .comp-now td { font-weight: 700; }
+
+  /* Ratio bar */
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); }
+  .bar-yellow { background: var(--gold); }
+  .bar-red { background: var(--red); }
+
+  /* Footer */
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+
+  @media (max-width: 720px) {
+    .scenario-row { grid-template-columns: 1fr; }
+    .moat-grid { grid-template-columns: repeat(2,1fr); }
+    .hero-price-block { text-align:left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">SMR</div>
+      <div class="hero-name">NuScale Power Corporation（小型模組化反應爐 SMR 技術公司）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-09-09　⚠️ 高波動題材股，Beta 2.31</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$11.18</div>
+      <div class="hero-change">▲ 2026-09-08 收盤，單日 +15.3%</div>
+      <div class="hero-mktcap">市值 ~$4.80B　股數 429.72M（TTM，波動極大）</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-purple">SMR 小型模組化反應爐</span>
+    <span class="badge badge-blue">唯一 NRC 標準設計核准廠商</span>
+    <span class="badge badge-red">近乎零營收 ⚠️</span>
+    <span class="badge badge-orange">現金 $1.9B 但持續增資稀釋</span>
+    <span class="badge badge-yellow">Lynch：轉機股（早期）</span>
+    <span class="badge badge-red">52週跌幅 -80%（自高點 $57.42）</span>
+    <span class="badge badge-green">零有息負債 ✅</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$11.18</div><div class="sub">✅ 2026-09-08，52週 $7.21–$57.42</div></div>
+    <div class="meta-item"><label>TTM 營收</label><div class="val">$10.69M</div><div class="sub">YoY -81.0% ✅</div></div>
+    <div class="meta-item"><label>TTM 淨損</label><div class="val">-$415.7M</div><div class="sub">EPS -$1.54 ✅</div></div>
+    <div class="meta-item"><label>PE / Forward PE</label><div class="val">無法計算</div><div class="sub">持續虧損中 ✅</div></div>
+    <div class="meta-item"><label>Thesis 成立度</label><div class="val">2.0 / 5</div><div class="sub">早期轉機股，商轉未兌現</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐½☆☆</div><div class="sub">法規先發優勢，但可複製性高</div></div>
+  </div>
+</div>
+
+<!-- ── TOC ── -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#mode1">模式一 深度研究</a>
+    <span class="toc-sep">·</span>
+    <a href="#biz">業務引擎</a>
+    <a href="#thesis">核心Thesis</a>
+    <a href="#competition">競爭格局</a>
+    <a href="#moat">成長象限</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode2">模式二 財報解析</a>
+    <span class="toc-sep">·</span>
+    <a href="#earnings">Q2 2026財報</a>
+    <a href="#eps">EPS與估值錨點</a>
+    <a href="#dcf">DCF情境</a>
+    <a href="#targets">投行目標</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode3">模式三 財務健檢</a>
+    <span class="toc-sep">·</span>
+    <a href="#ratios">六大比率</a>
+    <a href="#capex">CapEx分析</a>
+    <a href="#comps">同業對比</a>
+    <a href="#health">綜合診斷</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════
+     模式一：深度研究
+══════════════════════════════════════ -->
+<div id="mode1" class="mode-divider">
+  <h2>◈ 模式一：公司深度研究</h2>
+  <p>業務引擎 · 核心Thesis · 競爭格局 · Peter Lynch成長象限 · 護城河五維評分</p>
+</div>
+
+<!-- 1. 公司基本介紹 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">公司基本介紹</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">NuScale Power（NYSE: SMR）成立於 2007 年，總部美國奧勒岡州 Portland，2022 年 5 月透過 SPAC（Spring Valley Acquisition）合併上市。核心產品為 <strong>VOYGR 小型模組化反應爐（SMR）平台</strong>，單一模組發電量 77MWe（原設計 50MWe，2025年5月獲NRC升級核准），一座電廠最多可容納 6 個模組（合計 462MWe）。公司本身<strong>不建造電廠、不擁有電廠</strong>，商業模式為技術授權 + 工程設計服務 + 設備銷售，目前處於「法規已核准、商轉尚未開始」的關鍵早期階段。</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$10.69M</div><div class="big-label">TTM 營收（大幅萎縮）</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--red)">-81.0%</div><div class="big-label">YoY（Fluor FEED收入到期）</div></div>
+        <div><div class="big-num" style="font-size:22px;">毛利率 —</div><div class="big-label">❌ 營收過小無法有效計算</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--red)">FCF 深負</div><div class="big-label">現金燒錢期 ⚠️</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent)">
+    <h3 style="color:var(--accent)">🏭 所屬產業與全球排名</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">所屬產業：<strong>先進核能／小型模組化反應爐（SMR）</strong>，屬於美國「核能復興」+「AI 資料中心用電荒」雙題材受惠股之一。全球排名方面，NuScale 是<strong>唯一取得美國 NRC（核能管制委員會）標準設計核准（Standard Design Approval）的商用 SMR 廠商</strong>（2023年首發50MWe設計、2025年5月加碼77MWe升級版），在「法規進度」單一維度上暫居全球領先。但在「資金規模」與「大廠背書」維度，已落後於 Oklo（Sam Altman背書）、X-energy（Amazon $700M+投資）、TerraPower（Bill Gates/Microsoft背書，已取得NRC建照並動工）等競爭者。</p>
+  </div>
+
+  <!-- 近4-5期歷史財務摘要 -->
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財務摘要</th>
+          <th class="num">FY2022</th>
+          <th class="num">FY2023</th>
+          <th class="num">FY2024</th>
+          <th class="num">FY2025 A</th>
+          <th class="num">H1 FY2026</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$11.80M ✅</td><td class="num">$22.81M ✅</td><td class="num">$37.05M ✅</td><td class="num">$31.48M ✅</td><td class="num bad">$0.64M ✅（Q1+Q2合計）</td></tr>
+        <tr><td>YoY 成長</td><td class="num ok">+312% ✅</td><td class="num ok">+93% ✅</td><td class="num ok">+62% ✅</td><td class="num bad">-15.0% ✅</td><td class="num bad">-95%+ ✅</td></tr>
+        <tr><td>EBITDA margin</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td></tr>
+        <tr><td>EPS（GAAP）</td><td class="num bad">-$0.51 ✅</td><td class="num bad">-$0.80 ✅</td><td class="num bad">-$1.47 ✅</td><td class="num bad">-$2.17 ✅</td><td class="num bad">-$0.27 ✅（Q1-$0.14+Q2-$0.13）</td></tr>
+        <tr><td>淨損</td><td class="num bad">-$25.91M ✅</td><td class="num bad">-$58.36M ✅</td><td class="num bad">-$136.62M ✅</td><td class="num bad">-$355.79M ✅</td><td class="num bad">~-$94-97M ✅（Q1+Q2）</td></tr>
+        <tr><td>FCF</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">深度負值 ⚠️</td></tr>
+        <tr><td>期末現金+投資</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">$1.3B ✅</td><td class="num ok">$1.9B ✅（Q2末，含2月$1B增資）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅ 已驗證（來源：NuScale IR/SEC EDGAR、stockanalysis.com）｜❌ 無法取得或不適用（因營收規模過小、毛利率/EBITDA margin無實質意義）｜⚠️ 估算。營收/淨損為NuScale基本面「如實呈現」的關鍵警訊：公司仍為技術授權前期階段，尚未進入量產營收。</p>
+</div>
+
+<!-- 2. 業務引擎分析 -->
+<div id="biz" class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">業務引擎分析</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>⚛️ VOYGR SMR 技術授權與 EPC 支援</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">核心商業模式：向電廠開發商／公用事業出售 NPM（NuScale Power Module）技術授權、工程設計（FEED）服務與長期支援。2025年最大一筆已認列收入來自 Fluor 為 RoPower 專案執行的 FEED Phase 2 工程，於2025年底完成後，2026年營收出現斷崖式下滑（Q2營收僅$75K，年減98.8%），凸顯<strong>「一案吃三年」的營收結構性缺陷</strong>——尚無穩定重複性收入來源。</p>
+    </div>
+    <div class="card">
+      <h3>🇷🇴 RoPower Romania（歐洲最進階SMR案）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">與Nuclearelectrica/Nova Power & Gas合資的RoPower Nuclear，於2026年2月12日經股東會核准FID（最終投資決策），將在前燃煤電廠Doicești場址建置<strong>6座77MWe NPM模組</strong>，總投資額估US$6-7B。但採<strong>分階段策略</strong>：先建1座測試，再決定是否擴建其餘5座——意味著全案商轉可見度仍低，且非一次性全額確定訂單。</p>
+    </div>
+    <div class="card">
+      <h3>🇺🇸 TVA／ENTRA1 六座電廠合作案（美國最大潛在訂單）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">2025年9月，田納西河谷管理局（TVA）與ENTRA1 Energy簽署合作協議，規劃在TVA七州轄區部署<strong>最高6GW（約72個NPM模組）</strong>核能新增裝置容量，CEO稱為「美國史上最大核能建設計畫」，潛在規模可達6-8GW。<strong>關鍵限制：此為非約束性協議（non-binding），ENTRA1負責融資、興建、擁有電廠並售電予TVA，尚未簽署具法律約束力的PPA（電力購售協議）</strong>，首座電廠預計2030年前後商轉。</p>
+    </div>
+    <div class="card">
+      <h3>🏭 供應鏈夥伴與國際拓展</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">已建立<strong>60家以上專業供應鏈夥伴、逾30項已簽署協議</strong>，包含Paragon（HIPS保護系統設計）、Curio與Framatome（封閉式燃料循環MOU）、Nucor（鋼鐵廠用電MOU）。此為建立製造生態系的必要布局，但多數仍停留在MOU（合作備忘錄）或設計合約階段，尚未轉化為具約束力的設備銷售訂單。</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>核心業務線</th><th>目前狀態</th><th>護城河來源</th><th>2026-2027關鍵催化劑</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>VOYGR 技術授權/FEED服務</strong></td><td class="num">已認列收入但斷崖下滑</td><td>NRC核准設計唯一供應商</td><td>新技術授權合約簽訂</td></tr>
+        <tr><td><strong>RoPower Romania（6模組）</strong></td><td class="num">FID已核准，分階段執行</td><td>歐洲首個實際動工SMR案</td><td>2026下半年EPC/環評進度</td></tr>
+        <tr><td><strong>TVA/ENTRA1（最高6-8GW）</strong></td><td class="num">非約束性協議階段</td><td>美國最大潛在SMR訂單量</td><td>是否轉化為具約束力PPA</td></tr>
+        <tr><td><strong>供應鏈/製造生態系</strong></td><td class="num">60+夥伴，30+協議</td><td>先發布局製造能力</td><td>首批NPM量產下線時程</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 3. 核心Thesis -->
+<div id="thesis" class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">核心 Thesis 與未來成長驅動</div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 1｜唯一NRC標準設計核准的SMR供應商</div>
+      <div class="content">NuScale是全美（也是全球）第一家取得NRC標準設計核准的SMR公司——2023年50MWe設計核准，2025年5月77MWe升級版核准，成為NRC史上第七款核准反應爐設計。此為<strong>可驗證的法規先發優勢</strong>，任何新案要走NuScale以外的設計，仍須重新經歷NRC冗長審查流程（過去NuScale本身即耗時多年）。✅ 明確成立。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 2｜$1.9B現金提供充裕的短中期跑道</div>
+      <div class="content">截至2026年Q2末，公司持有現金、約當現金及短長期投資共$1.9B，且<strong>零有息負債</strong>。以近兩季平均單季淨損約$47M估算，理論現金跑道逾9年（不含未來製造產能投資的資本支出激增）。這使公司短期內無立即破產風險。✅ 成立，但需持續監控未來製造階段資本支出對跑道的侵蝕。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--red)">❌ 未兌現</div>
+      <div class="label">Thesis 3｜營收與訂單能見度轉化為商業動能</div>
+      <div class="content">2026年迄今兩季營收合計僅約$640K（Q1 $565K + Q2 $75K），較2025年同期暴跌逾95%。TVA/ENTRA1協議<strong>非具約束力</strong>，RoPower僅先建1座測試模組。截至目前<strong>沒有任何具約束力的NPM設備銷售訂單</strong>，公司「營收即將起飛」的敘事尚未被財報數字驗證。❌ 明確未兌現，是最大的Thesis風險。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 4｜AI資料中心用電荒帶動核能需求結構性提升</div>
+      <div class="content">AI資料中心用電需求确實在2025-2026年帶動核能股整體重新評價（NuScale、Oklo、TerraPower股價均曾大漲），Trump政府核能政策路線圖也提供政策順風。但<strong>需求熱度≠NuScale訂單</strong>——多數大型科技公司（Microsoft、Google、Amazon）優先與TerraPower、Oklo、X-energy簽署PPA/投資協議，尚未有主要AI巨頭直接向NuScale下單。⚠️ 部分成立，題材確實存在但尚未精準轉化為NuScale訂單。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--red)">❌ 未兌現（且有前科）</div>
+      <div class="label">Thesis 5｜首座商轉電廠如期如質完成</div>
+      <div class="content">NuScale原旗艦專案Carbon Free Power Project（UAMPS/猶他州）已於2023年因成本超支、訂閱不足而<strong>取消</strong>，是SMR經濟性尚未在商業規模驗證的鮮明前例。目前RoPower與TVA案均未進入實際建造階段，首座商轉電廠最快落在2029-2030年後，執行風險（成本超支、工期延宕、供應鏈瓶頸）在核能建設史上屬常態而非例外。❌ 尚未兌現，且歷史紀錄不利。</div>
+    </div>
+  </div>
+
+  <!-- 核心成長驅動 & 監控風險 -->
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🚀 核心成長驅動力</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>TVA/ENTRA1協議轉化為具約束力PPA</strong>：若2026-2027年簽署definitive agreement，將是股價最大單一催化劑</li>
+        <li><strong>RoPower Module 1動工/里程碑達成</strong>：歐洲首座實際建造中的SMR案，具指標意義</li>
+        <li><strong>美國聯邦政策/DOE資金加碼</strong>：DOE已宣布擬投入$800M支持SMR，NuScale可能受惠於Advanced Nuclear相關補助/貸款擔保</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 核心監控風險</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>持續增資稀釋</strong>：過去12個月股數已增加50.8%，2026年8月再登記$750M ATM增資計畫（約占目前流通股18%）——觸發條件：股價每逢反彈即可能面臨新一輪增資賣壓</li>
+        <li><strong>訂單無法轉化為具約束力合約</strong>：若TVA/ENTRA1在2027年底前仍未簽署definitive PPA，題材恐降溫——觸發條件：連續兩次財報會議未提及PPA簽署進度</li>
+        <li><strong>現金燒錢速度隨製造階段加速惡化</strong>：目前現金跑道估算基於「開發期」燒錢速度，一旦進入實際製造/建廠期，資本支出可能倍增，觸發條件：單季淨損／現金流出超過$100M</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 競爭格局 -->
+<div id="competition" class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">競爭格局：SMR／先進核能新創對照表</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th>技術路線／進度</th><th>優勢</th><th>對NuScale威脅度</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>NuScale Power（本案）</strong></td><td>輕水式NPM，77MWe，NRC標準設計已核准（2023/2025）</td><td>法規先發、唯一已核准設計、上市公司資金管道</td><td>—</td></tr>
+        <tr><td><strong>Oklo（OKLO）</strong></td><td>Aurora Powerhouse，15-75MWe液態金屬快中子爐，走NRC合併執照（COL）路徑而非標準設計核准，目標2027-2028首堆</td><td>Sam Altman任董事長，資金/話題度高，Microsoft間接生態圈PPA(1.2GW)</td><td>🔴 高｜市值已超越NuScale近$3B，資本市場關注度更高，稀釋NuScale增資溢價空間</td></tr>
+        <tr><td><strong>X-energy</strong></td><td>Xe-100鵝卵石床高溫氣冷爐320MWe，Dow Seadrift廠址FOAK案進行中</td><td>Amazon領投$700M+輪、DOE ARDP資助，宣稱可視性達11.5GW/144座反應爐</td><td>🟡 中｜不同技術路線但直接競爭同一批資料中心/工業客戶資本</td></tr>
+        <tr><td><strong>TerraPower</strong></td><td>Natrium鈉冷快中子爐345MWe，2026年3月已取得NRC建照（40年來首張非輕水式建照），2026年4月已動工</td><td>Bill Gates創辦，Microsoft承購8座電廠合計2.8GW，實際建造進度領先所有同業</td><td>🔴 高｜是目前唯一「已動工」的先進反應爐案，執行力證明對NuScale形成直接對比壓力</td></tr>
+        <tr><td><strong>Kairos Power</strong></td><td>KP-FHR氟化鹽冷卻鵝卵石床爐，Hermes示範堆於田納西州興建中</td><td>Google簽署Master Plant Development Agreement，目標2035年前部署500MW機隊</td><td>🟡 中｜示範堆階段，商轉時程晚於NuScale，但Google背書增添資金與訂單能見度</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box" style="margin-top:16px;">
+    <h3>⚠️ 競爭關鍵監控：NuScale的法規先發優勢正被「資金與大廠背書」抵銷</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">NuScale在「NRC設計核准」單一維度確實領先，但2025-2026年市場焦點已明顯轉向「誰能實際動工、誰有大型科技公司PPA背書」。TerraPower已動工、Oklo與X-energy分別綁定Microsoft/Amazon生態系，NuScale至今<strong>沒有任何一家超大規模科技公司（hyperscaler）直接簽約</strong>，僅有公用事業（TVA）與海外國營電力公司（Romania Nuclearelectrica）合作，訂單含金量與話題延展性均遜於同業。每季監控：是否有任一家Big Tech公司宣布與NuScale簽署PPA或投資協議。</p>
+  </div>
+</div>
+
+<!-- 5. 成長象限 & 護城河評分 -->
+<div id="moat" class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Peter Lynch 成長象限 & 護城河評分</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border:2px solid var(--purple);">
+      <h3 style="color:var(--purple)">📊 Lynch 象限判斷</h3>
+      <div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">轉機股（Turnaround），早期投機性質高</div>
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <thead><tr><th>判斷標準</th><th>NuScale 現況</th><th>判定</th></tr></thead>
+          <tbody>
+            <tr><td>目前基本面是否慘淡</td><td>營收萎縮95%+、持續虧損擴大</td><td class="ok">✅ 符合轉機股定義</td></tr>
+            <tr><td>是否有明確轉機催化劑</td><td>NRC核准+TVA/RoPower兩大潛在訂單</td><td class="ok">✅ 有具體催化劑</td></tr>
+            <tr><td>轉機是否已被驗證</td><td>皆為非約束性協議/分階段案，尚未驗證</td><td class="bad">❌ 尚未驗證</td></tr>
+            <tr><td>資產負債表能否撐到轉機</td><td>現金$1.9B、零負債，惟持續增資稀釋</td><td class="warn">⚠️ 能撐但股東持續被稀釋</td></tr>
+            <tr><td>股價是否已反映轉機成功</td><td>現價$11.18遠低於2025年高點$57.42，但仍高於2024年常態區間</td><td class="warn">⚠️ 部分反映，波動極大</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 判斷依據：NuScale不具備「景氣循環股」的規律性、也非「高速成長股」（營收實際上是萎縮的）、更遠非「穩定成長股」或「資產隱藏股」。其股價完全建立在「未來訂單能否兌現」的敘事之上，符合Lynch定義中風險最高的「轉機股」象限，且目前仍處於「轉機尚未驗證」的最早期階段。</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item">
+      <div class="moat-label">不可替代性</div>
+      <div class="moat-stars">★★★½☆</div>
+      <div class="moat-score">3.5 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">NRC核准為稀缺資產，但非永久排他</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">客戶黏著度</div>
+      <div class="moat-stars">★★☆☆☆</div>
+      <div class="moat-score">2.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">尚無長期綁定客戶，訂單多為MOU</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">網路效應</div>
+      <div class="moat-stars">★☆☆☆☆</div>
+      <div class="moat-score">1.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">反應爐技術不具網路效應</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">成本優勢</div>
+      <div class="moat-stars">★★☆☆☆</div>
+      <div class="moat-score">2.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">SMR經濟性尚未大規模驗證，CFPP案前例顯示成本超支風險高</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">規模效應</div>
+      <div class="moat-stars">★★☆☆☆</div>
+      <div class="moat-score">2.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">工廠模組化製造理論上具規模效應，惟尚未量產驗證</div>
+    </div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：2.1 / 5 ⭐⭐☆☆☆（法規先發優勢明確，但商業護城河尚未建立）</div>
+
+  <div class="caution-box" style="margin-top:24px;">
+    <h3>⚠️ 建議動作（深度研究視角）</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+      <div>
+        <strong>當前建議：</strong>屬於<span class="bad">高風險投機性倉位</span>，不符合使用者「重視護城河/現金流/安全邊際」的核心投資原則。若已持有，建議控制在<strong>機會池極小倉位（&lt;1-2%總資產）</strong>，不建議作為核心或戰術池部位；未持有者不建議現階段建倉，應等待具約束力訂單出現後再評估。<br><br>
+        <strong>加碼觸發（需同時滿足多項）：</strong>
+        <ul style="padding-left:16px;">
+          <li>TVA/ENTRA1轉化為具法律約束力的definitive PPA</li>
+          <li>任一家Big Tech（Microsoft/Google/Amazon/Meta）直接簽約或投資</li>
+          <li>單季營收重新轉為正成長且達雙位數百萬美元規模</li>
+        </ul>
+      </div>
+      <div>
+        <strong>賣出/迴避觸發：</strong>
+        <ul style="padding-left:16px;">
+          <li>TVA協議在2027年底前仍未轉化為約束性合約</li>
+          <li>現金跑道因製造期資本支出急遽下降至&lt;2年</li>
+          <li>RoPower Module 1建造出現重大延宕或成本超支（重演CFPP前例）</li>
+          <li>股數因ATM增資在12個月內再增加&gt;30%</li>
+        </ul>
+        <br>
+        <strong>每季監控指標：</strong>具約束力訂單金額、現金消耗速度、股數變化率、TVA/RoPower里程碑達成狀況
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式二：財報解析
+══════════════════════════════════════ -->
+<div id="mode2" class="mode-divider">
+  <h2>◈ 模式二：最新財報解析</h2>
+  <p>Q2 FY2026 財報 · EPS多年期估值錨點 · DCF三情境 · 投行目標價 · 操作建議</p>
+</div>
+
+<!-- 6. Q2 2026 財報 Beat/Miss -->
+<div id="earnings" class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">Q2 FY2026 財報（2026-08-18發布）</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--red); margin-bottom:20px;">
+    <h3 style="color:var(--red)">❌ 營收懸崖式暴跌，EPS雖打平預期但基本面訊號極差</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Q2 2026營收僅$75,000，較市場預期$8.91M大幅落差（-99.2%），主因是2025年底完成的Fluor RoPower FEED Phase 2工程收入認列到期、且無新合約遞補。EPS -$0.13與市場預期一致（非「打敗」預期，而是預期本身已極度保守）。財報發布後股價於盤後下跌3.73%，隔日隨大盤與AI核能族群情緒回穩後才反彈。<strong>唯一亮點是現金部位增至$1.9B</strong>，主要來自2026年2月完成的$1B增發（每股$13.18）與8月新登記的$750M ATM增資額度。</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>指標</th><th class="num">實際值 ✅</th><th class="num">市場預期 ⚠️</th><th class="num">YoY 變化</th><th>判定</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>營收</td><td class="num bad">$75千</td><td class="num">$8.91M</td><td class="num bad">-98.8%</td><td><span class="badge badge-red">重大 Miss ❌</span></td></tr>
+        <tr><td>EPS（GAAP）</td><td class="num">-$0.13</td><td class="num">-$0.13</td><td class="num">虧損擴大⚠️</td><td><span class="badge badge-yellow">符合預期 ≈</span></td></tr>
+        <tr><td>淨損</td><td class="num bad">$50.1M</td><td class="num">— ❌</td><td class="num bad">較去年同期擴大⚠️</td><td><span class="badge badge-red">虧損擴大 ❌</span></td></tr>
+        <tr><td>R&D費用</td><td class="num">年增約$6.6M</td><td class="num">— ❌</td><td class="num">組件開發加碼</td><td><span class="badge badge-yellow">投入增加 ≈</span></td></tr>
+        <tr><td>G&A費用</td><td class="num">年增約$4.4M</td><td class="num">— ❌</td><td class="num">組織/人員成本上升</td><td><span class="badge badge-yellow">投入增加 ≈</span></td></tr>
+        <tr><td>期末現金+投資</td><td class="num ok">$1.9B</td><td class="num">— ❌</td><td class="num ok">季增$900M（主要來自增資）</td><td><span class="badge badge-green">流動性強化 ✅</span></td></tr>
+        <tr><td>毛利率／營業利益率</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td><span class="badge badge-red">營收過小無法計算</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 全年指引變化 -->
+  <div class="card" style="margin-top:16px; border-left:3px solid var(--gold);">
+    <h3 style="color:var(--gold)">全年指引變化對照</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">NuScale管理層<strong>未在Q2 2026財報中提供具體全年營收/EPS財務指引</strong>（❌），僅重申「2026年主軸為商轉準備，確保首批NPM製造就緒」的方向性敘述。相較於Q1 2026財報同樣未提供量化指引，全年展望維持模糊狀態——這與同業BWXT、CEG等已進入穩定財測週期的公司形成鮮明對比，反映NuScale仍處於「前營收」階段，公司自身對收入時程的能見度也有限。</p>
+  </div>
+
+  <!-- 股價反應 -->
+  <div class="card" style="margin-top:16px;">
+    <h3>股價反應（財報前後）</h3>
+    <div style="font-size:13px; line-height:1.9; color:var(--text)">
+      <strong>財報前收盤（2026-08-18盤前）</strong>：約$9.37（受8月11日新登記$750M ATM增資消息壓抑，股價已提前走弱）<br>
+      <strong>財報後盤後</strong>：下跌3.73%至約$9.03，反映營收慘跌與持續稀釋雙重利空<br>
+      <strong>近日走勢（截至9/8）</strong>：股價自9/6的$9.70反彈至$11.18（單日+15.3%），主因<strong>選擇權市場出現異常看多買權成交量、及AI基礎設施加速話題再度發酵</strong>——⚠️需留意此類單日暴力反彈在缺乏基本面支撐下，波動風險（Beta 2.31）極高，不宜視為趨勢反轉訊號。
+    </div>
+  </div>
+</div>
+
+<!-- 7. EPS多年期表 & 歷史本益比 -->
+<div id="eps" class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">估值歷史錨點：多年期EPS ＋ 歷史本益比（★必附）</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財年</th>
+          <th class="num">EPS 實際值/預估值</th>
+          <th class="num">來源／機構</th>
+          <th class="num">股價（年末參考⚠️）</th>
+          <th class="num">本益比 PE</th>
+          <th>狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>FY2024 A</strong></td>
+          <td class="num bad">-$1.47 ✅</td>
+          <td class="num">stockanalysis.com</td>
+          <td class="num">— ⚠️分割前股價區間波動大</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td><span class="badge badge-red">虧損中</span></td>
+        </tr>
+        <tr style="background:rgba(220,38,38,0.03)">
+          <td><strong>FY2025 A</strong></td>
+          <td class="num bad">-$2.17 ✅</td>
+          <td class="num">stockanalysis.com</td>
+          <td class="num">~$18-20 ⚠️（估）</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td><span class="badge badge-red">虧損中</span></td>
+        </tr>
+        <tr style="background:rgba(180,83,9,0.04)">
+          <td><strong>FY2026 E（來源A）</strong></td>
+          <td class="num bad">-$0.48 ✅共識</td>
+          <td class="num">stockanalysis.com（7家分析師）</td>
+          <td class="num">$11.18（現價）</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td><span class="badge badge-yellow">虧損收斂但仍虧</span></td>
+        </tr>
+        <tr style="background:rgba(180,83,9,0.06)">
+          <td><strong>FY2026 E（來源B）</strong></td>
+          <td class="num bad">-$0.45 ✅共識</td>
+          <td class="num">Zacks Investment Research</td>
+          <td class="num">$11.18（現價）</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td><span class="badge badge-yellow">與來源A接近</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2027 E</strong></td>
+          <td class="num bad">-$0.79 ✅共識</td>
+          <td class="num">Zacks Investment Research</td>
+          <td class="num">—</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td><span class="badge badge-red">虧損反而擴大⚠️</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2028 E</strong></td>
+          <td class="num">— ❌</td>
+          <td class="num">未查得可靠免費來源</td>
+          <td class="num">—</td>
+          <td class="num">— ❌</td>
+          <td><span class="badge badge-red">資料缺口</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 分歧提示：FY2026E營收預估同樣存在跨機構落差——stockanalysis.com估$24.77M（較2025年再衰退21.3%），Zacks估$39.69M；FY2027E Zacks估營收$169.79M（隱含大幅回升但仍虧損擴大至-$0.79）。此區間跨度反映分析師對「訂單何時轉化為營收」高度不確定，不可只取單一數字視為共識。</p>
+
+  <!-- 歷史PE錨點 -->
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr><th colspan="4" style="color:var(--accent); font-size:13px;">★ 歷史本益比錨點表（2022年SPAC上市迄今）</th></tr>
+        <tr><th>年度</th><th class="num">本益比</th><th>狀態</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>FY2022</td><td class="num bad">無法計算</td><td><span class="badge badge-red">❌</span></td><td>SPAC上市首年即虧損（EPS -$0.51）</td></tr>
+        <tr><td>FY2023</td><td class="num bad">無法計算</td><td><span class="badge badge-red">❌</span></td><td>EPS -$0.80，虧損持續擴大</td></tr>
+        <tr><td>FY2024</td><td class="num bad">無法計算</td><td><span class="badge badge-red">❌</span></td><td>EPS -$1.47</td></tr>
+        <tr><td>FY2025</td><td class="num bad">無法計算</td><td><span class="badge badge-red">❌</span></td><td>EPS -$2.17，公司史上最大單年虧損</td></tr>
+        <tr><td>FY2026E</td><td class="num bad">無法計算</td><td><span class="badge badge-red">❌</span></td><td>共識預估EPS仍為負（-$0.45~-$0.48）</td></tr>
+        <tr style="background:rgba(220,38,38,0.04)"><td><strong>歷史最低本益比年份</strong></td><td class="num bad" colspan="3">不存在——NuScale自2022年上市以來從未有任何一個財年轉虧為盈，本益比在公司整段上市史上皆「無法計算」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="risk-card" style="margin-top:12px;">
+    <h4>📌 反推試算結論：股價完全由「本益比倍數擴張」與敘事驅動，與獲利成長完全脫鉤</h4>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">由於NuScale自2022年上市以來<strong>每一個財年、每一季度EPS均為負值</strong>，傳統「歷史最低本益比 × 保守情境EPS」反推試算法在此個股<strong>完全不適用</strong>——分母（EPS）從未為正，無法建立任何本益比錨點。這意味著：NuScale股價的所有波動（從2022年約$5、到2025年高點$57.42、再回落至現價$11.18），<strong>100%由市場對「未來獲利能力」的敘事預期與倍數重估所驅動，與過去或現在的實際獲利完全無關</strong>。這是判斷NuScale是否為「題材泡沫化」的關鍵證據——正確的估值框架應以「未來現金流貼現（DCF）情境」取代本益比錨定法，詳見下節。</p>
+  </div>
+</div>
+
+<!-- 8. DCF 三情境 -->
+<div id="dcf" class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">DCF 三情境估值（情境式現金流貼現，非傳統FCF折現）</div>
+  </div>
+
+  <div class="caution-box">
+    <h3>⚠️ NuScale DCF估值方法論特別說明</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">NuScale目前FCF為深度負值且無穩定營收基礎，<strong>傳統以現有現金流為起點的DCF模型不適用</strong>。以下三情境改採「假設商轉時點 + 假設訂單轉化規模」的<strong>情境式估值法</strong>，核心假設為：①TVA/ENTRA1與RoPower訂單何時轉化為具約束力合約與實際設備銷售；②首批NPM模組商轉／量產時點；③届時的營收規模與利潤率假設。<strong>所有假設均為⚠️高度不確定的情境推演，非精確財務模型，僅供參考。</strong></p>
+  </div>
+
+  <div class="scenario-row">
+    <div class="scenario bear">
+      <h4>🐻 熊市情境（35% 機率）</h4>
+      <div class="scenario-price" style="color:var(--red)">$5-7</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $11.18　下跌 -37% ~ -55%</div>
+      <div class="row"><span>假設首次商轉時點</span><span>2031年後或延宕</span></div>
+      <div class="row"><span>TVA/RoPower轉化率</span><span>&lt;30%（多數仍卡在MOU階段）</span></div>
+      <div class="row"><span>稀釋股數（未來3年）</span><span>+40-60%（持續ATM增資）</span></div>
+      <div class="row"><span>對應方法</span><span>參考Citi Sell評等 $6.50-7.00</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：CFPP式取消重演、TVA協議破局、現金跑道加速消耗被迫大幅增資</div>
+    </div>
+    <div class="scenario base">
+      <h4>📊 基本情境（45% 機率）</h4>
+      <div class="scenario-price" style="color:var(--blue)">$11-16</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $11.18　-2% ~ +43%</div>
+      <div class="row"><span>假設首次商轉時點</span><span>RoPower Module 1約2029-2030年</span></div>
+      <div class="row"><span>TVA/RoPower轉化率</span><span>部分轉化為具約束力合約（2027-2028年）</span></div>
+      <div class="row"><span>稀釋股數（未來3年）</span><span>+20-30%（持續但趨緩的增資）</span></div>
+      <div class="row"><span>對應方法</span><span>大致貼近分析師共識均值 $12.6-15.4</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：RoPower如期動工、TVA簽署部分definitive PPA、無重大工程延宕</div>
+    </div>
+    <div class="scenario bull">
+      <h4>🐂 牛市情境（20% 機率）</h4>
+      <div class="scenario-price" style="color:var(--green)">$20-25</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $11.18　+79% ~ +124%</div>
+      <div class="row"><span>假設首次商轉時點</span><span>提前至2028-2029年，多案並行</span></div>
+      <div class="row"><span>TVA/RoPower轉化率</span><span>TVA全案6-8GW定案+新增Big Tech直接簽約</span></div>
+      <div class="row"><span>稀釋股數（未來3年）</span><span>+10-15%（訂單能見度足夠支撐低稀釋融資）</span></div>
+      <div class="row"><span>對應方法</span><span>貼近分析師最高目標 $20-25</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：Microsoft/Google/Amazon任一家直接簽約、DOE大型貸款擔保核准、RoPower全6模組提前定案</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent);">
+    <h3>敏感度分析：哪個變數對估值影響最大？</h3>
+    <p style="font-size:13px; color:var(--text); line-height:1.7">三情境間價差（$5-7至$20-25，約3.5倍）主要由<strong>「訂單能否轉化為具約束力合約的時點與規模」</strong>單一變數主導，其重要性遠高於折現率或終值假設——這與成熟現金流公司的DCF模型（利率/成長率敏感度主導）截然不同。次要敏感變數為<strong>股數稀釋速度</strong>：若公司被迫以更高頻率、更折價的方式增資，即使營運面兌現利多，每股價值仍可能被稀釋侵蝕。<strong>加權估算公允價值約 $10-14（⚠️情境加權平均，非精確模型）</strong>，與現價$11.18大致重疊，顯示市場目前定價已大致反映「基本情境」的機率分布，上下行皆需明確催化劑才能突破區間。</p>
+  </div>
+</div>
+
+<!-- 9. 股價位階評估 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">股價位階評估</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>估值指標</th><th class="num">數值</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>TTM PE</td><td class="num bad">無法計算 ❌</td><td>TTM EPS為-$1.54，持續虧損</td></tr>
+        <tr><td>Forward PE</td><td class="num bad">無法計算 ❌</td><td>FY2026E EPS共識仍為負值（-$0.45~-$0.48）</td></tr>
+        <tr><td>PB（股價淨值比）</td><td class="num warn">~4.3x ⚠️估</td><td>估算依據：Q2 2026資產負債表股東權益約$1,116M ÷ 429.72M股 ≈ 每股淨值$2.60，現價$11.18 ÷ $2.60</td></tr>
+        <tr><td>PEG</td><td class="num bad">無法計算 ❌</td><td>需正值EPS成長率為分母，不適用</td></tr>
+        <tr><td>EV/Revenue（TTM）</td><td class="num bad">~448x ⚠️估（參考用，無實質意義）</td><td>市值$4.80B（估略高於EV，因無有息負債）÷ TTM營收$10.69M，數字極端反映公司仍為前營收階段，非可比估值指標</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box">
+    <h3>⚠️ EPS成長趨勢判讀：非「戴維斯雙擊」，而是「虧損擴大＋倍數敘事」組合</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">近4期EPS趨勢：FY2023 -$0.80 → FY2024 -$1.47 → FY2025 -$2.17 → FY2026E約-$0.45~-$0.48（虧損收斂，主因股數大增稀釋掉部分每股虧損，而非獲利實質改善）→ FY2027E Zacks預估反而擴大至-$0.79（隱含營收放量但成本/資本支出同步大增）。這並非典型「獲利加速+本益比同步擴張」的戴維斯雙擊格局，而是<strong>「每股虧損因股數稀釋而數字收斂，實質獲利能力尚未出現拐點」</strong>的假性訊號，投資人須小心區分。</p>
+  </div>
+</div>
+
+<!-- 10. Comps分析 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">可比公司（Comps）分析</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th class="num">市值</th><th class="num">TTM營收</th><th class="num">PE（Trailing/Fwd）</th><th class="num">FCF Yield</th><th>成長類型</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now">
+          <td><strong>NuScale Power (SMR) ★</strong></td>
+          <td class="num">$4.80B ✅</td>
+          <td class="num bad">$10.69M ✅</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td class="num bad">深度負值 ⚠️</td>
+          <td><span class="badge badge-red">轉機股（前營收）</span></td>
+        </tr>
+        <tr>
+          <td>Oklo (OKLO)</td>
+          <td class="num">$7.67B ✅</td>
+          <td class="num bad">~$0 ✅</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td class="num bad">深度負值 ⚠️</td>
+          <td><span class="badge badge-red">轉機股（前營收，更早期）</span></td>
+        </tr>
+        <tr>
+          <td>BWX Technologies (BWXT)</td>
+          <td class="num">~$14.0B ✅</td>
+          <td class="num ok">$3.37B ✅</td>
+          <td class="num">47.9x / 37.7x ✅</td>
+          <td class="num">正值⚠️估</td>
+          <td><span class="badge badge-green">穩定成長股（既有核能供應鏈）</span></td>
+        </tr>
+        <tr>
+          <td>Constellation Energy (CEG)</td>
+          <td class="num">~$98-110B ✅</td>
+          <td class="num">大型核能電力營運商⚠️</td>
+          <td class="num">~22-29x ✅</td>
+          <td class="num">正值⚠️估</td>
+          <td><span class="badge badge-teal">穩定成長股（既有核電運營商）</span></td>
+        </tr>
+        <tr>
+          <td>Cameco (CCJ)</td>
+          <td class="num">~$32-44B ⚠️（來源分歧）</td>
+          <td class="num">鈾燃料供應商⚠️</td>
+          <td class="num">88-114x ✅</td>
+          <td class="num">低正值⚠️估</td>
+          <td><span class="badge badge-blue">景氣循環股（鈾價連動）</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ CCJ市值因查詢時間點不同而有$32B與$44B兩組數字，差異可能反映近期股價劇烈波動，請以最新報價為準。</p>
+
+  <div class="card" style="margin-top:12px;">
+    <h3>🏆 同業對比結論</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">NuScale與Oklo同屬「前營收SMR新創」族群，估值完全建立在未來題材而非當期財務指標，兩者均<strong>無法用傳統PE/FCF Yield比較</strong>；相對地，BWXT、CEG屬於<strong>已有穩定現金流的核能供應鏈成熟公司</strong>，可作為「若SMR題材兌現後長期應有的估值型態」參照，但目前階段兩者不具直接可比性。Cameco作為鈾燃料上游，其高本益比反映市場對核能復興的樂觀溢價，但屬於原物料循環股邏輯，與NuScale的技術授權商業模式本質不同。整體而言，NuScale相對Oklo市值折價約37%（$4.80B vs $7.67B），反映市場認為Oklo在「大廠背書」與「話題延展性」上略勝一籌，儘管NuScale在法規進度上領先。</p>
+  </div>
+</div>
+
+<!-- 11. 額外優勢/風險 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">額外優勢/風險</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3 style="color:var(--red)">⚠️ 增資稀釋（核心風險）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">2025年底流通股337.89M股 → 2026年2月增發75.87M股（每股$13.18，募得$1B，對新投資人立即稀釋$8.17/股）→ 2026年8月再登記$750M ATM增資額度（以$9.59估算約可再發行78M股，約占目前流通股429.72M的18%）。過去12個月股數已成長50.8%。<strong>這是NuScale最確定發生、且持續發生的財務事實</strong>，任何獲利模型都須將未來股數稀釋納入每股價值計算。</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3 style="color:var(--green)">✅ 機構持股與資金流向</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">機構持股約45.4%，內部人持股約11.25%，散戶持股約43.4%（⚠️估，來源WallStreetZen）。過去12個月機構買入289家（流入$594M）vs賣出84家（流出$285M），淨流入為正，顯示機構資金並未全面撤出，但同期內部人交易呈現「持續小額賣出、無買入」的格局（過去90天賣出68,651股，約$633,470），需留意管理層信心訊號偏弱。</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <h3 style="color:var(--blue)">✅ Fluor退出＝去槓桿化事件，非利空</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">前大股東暨EPC夥伴Fluor已於2026年4月23日出清剩餘4,000萬股（實現$473M，全案累計獲利326%，初始投資$570M回收$2.43B），從控股股東轉為純商業合作夥伴。此舉<strong>移除了長期潛在賣壓來源</strong>，但也代表NuScale失去了原本的「策略性大股東信心背書」，Fluor持續維持EPC承包商角色，非完全退出合作關係。</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--gold)">
+      <h3 style="color:var(--gold)">⚠️ 無股息、無回購（不適用於此階段公司）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">公司持續虧損燒錢，無股息政策，也無股票回購計畫（❌不適用）。政府補助/融資方面，DOE於2025年底宣布擬投入約$800M支持SMR相關計畫，NuScale過去曾申請Title XVII貸款擔保（$12.5B額度池的一部分），但截至最新財報未見具體核准金額入帳，需持續追蹤。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 12. 投行目標價與操作建議 -->
+<div id="targets" class="section">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">投行目標價與操作建議</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>機構</th><th>評等</th><th class="num">目標價</th><th class="num">vs 現價 $11.18</th><th>異動時間／理由</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Citigroup</strong></td><td><span class="badge badge-red">Sell（賣出）</span></td><td class="num bad">$6.50-7.00</td><td class="num bad">-37% ~ -42%</td><td>2026-08-06下修至$6.50（原$7.50）；9月初再提及$7目標，警示逾46%下行空間</td></tr>
+        <tr><td><strong>Barclays</strong></td><td><span class="badge badge-yellow">Equal Weight（中立）</span></td><td class="num">$11.00</td><td class="num bad">-1.6%</td><td>2026-07-22下修至$11（原$15），反映增資稀釋擔憂</td></tr>
+        <tr><td><strong>Northland Securities</strong></td><td><span class="badge badge-green">Outperform（優於大盤）</span></td><td class="num ok">$19.00</td><td class="num ok">+70%</td><td>2026年內多次下修（自$40→$30區間、後續$21→$19），但持續維持樂觀評等，理由為TVA/RoPower長期題材</td></tr>
+        <tr><td>市場共識均值（來源A，18家）</td><td><span class="badge badge-yellow">Hold（持有）</span></td><td class="num">$12.63</td><td class="num ok">+13.0%</td><td>stockanalysis.com；Strong Buy 5／Buy 1／Hold 10／Sell 1／Strong Sell 1</td></tr>
+        <tr><td>市場共識均值（來源B，14家）</td><td><span class="badge badge-yellow">Neutral（中性）</span></td><td class="num">$15.36</td><td class="num ok">+37.4%</td><td>另一資料源；高$25／低$7</td></tr>
+        <tr><td>S&P Global共識（18家）</td><td><span class="badge badge-yellow">Hold（持有）</span></td><td class="num">$12.90</td><td class="num ok">+15.4%</td><td>與來源A高度一致</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 分歧提示：不同資料源統計的分析師家數（14 vs 18）與均值（$12.63 vs $15.36）存在明顯落差，反映NuScale分析師覆蓋度本身不高、且各家評等更新頻率不一致，共識數字的穩定性遠低於大型成熟股。</p>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>主要分歧點：樂觀派 vs 謹慎派</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; margin-top:10px;">
+      <div>
+        <strong style="color:var(--green)">樂觀派論點（Northland等）</strong>
+        <ul style="padding-left:16px; line-height:1.8;">
+          <li>唯一NRC核准設計，法規護城河具排他性</li>
+          <li>TVA潛在6-8GW訂單規模為業界最大單一潛在案</li>
+          <li>$1.9B現金提供充裕轉機驗證時間</li>
+          <li>AI用電荒為核能整體提供長期政策/需求順風</li>
+        </ul>
+      </div>
+      <div>
+        <strong style="color:var(--red)">謹慎派論點（Citi等）</strong>
+        <ul style="padding-left:16px; line-height:1.8;">
+          <li>營收接近歸零，「概念股」估值與基本面完全脫鉤</li>
+          <li>TVA/RoPower均為非約束性或分階段協議，兌現時間表不確定</li>
+          <li>持續大規模增資稀釋，每股價值被系統性侵蝕</li>
+          <li>CFPP旗艦案取消前例，SMR經濟性尚未商業驗證</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px; border-left:3px solid var(--accent);">
+    <h3>上行空間彙總表</h3>
+    <div class="tbl-wrap" style="margin-top:8px; margin-bottom:0;">
+      <table>
+        <thead><tr><th>參考點</th><th class="num">對應價格</th><th class="num">距現價空間</th></tr></thead>
+        <tbody>
+          <tr><td>Citi悲觀情境（Sell）</td><td class="num bad">$6.50-7.00</td><td class="num bad">-37% ~ -42%</td></tr>
+          <tr><td>DCF熊市情境</td><td class="num bad">$5-7</td><td class="num bad">-37% ~ -55%</td></tr>
+          <tr><td>Barclays中性目標</td><td class="num">$11.00</td><td class="num bad">-1.6%</td></tr>
+          <tr><td>DCF基本情境</td><td class="num">$11-16</td><td class="num">-2% ~ +43%</td></tr>
+          <tr><td>市場共識均值（多來源區間）</td><td class="num ok">$12.6-15.4</td><td class="num ok">+13% ~ +37%</td></tr>
+          <tr><td>Northland樂觀目標</td><td class="num ok">$19.00</td><td class="num ok">+70%</td></tr>
+          <tr><td>DCF牛市情境</td><td class="num ok">$20-25</td><td class="num ok">+79% ~ +124%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="risk-card" style="margin-top:16px; background:#fffbea; border-color:rgba(180,83,9,0.3);">
+    <h3 style="color:var(--gold)">⚠️ 財報解析操作建議：投機性題材股，不符合中長期價值投資核心原則</h3>
+    <div style="font-size:13px; line-height:1.8; color:var(--text)">
+      <strong>核心邏輯</strong>：NuScale目前股價完全由敘事與倍數重估驅動，無實質獲利、無正向FCF、無具約束力訂單支撐，分析師評等本身也高度分歧（從Sell $6.50到Outperform $19），反映機構對其基本面缺乏信心錨點。這與使用者「護城河/現金流/安全邊際」的核心投資理念<strong>明顯不符</strong>。
+      <br><br>
+      <strong>操作建議（若考慮參與，僅限機會池極小倉位）</strong>：
+      <ul style="padding-left:16px; margin-top:6px;">
+        <li>未持有者：不建議現階段建倉；若堅持參與，建議倉位控制在總資產1%以下，且僅以「選擇權般」的高風險認知配置</li>
+        <li>已持有者：建議逢反彈（如近期$11+反彈）分批減碼，將部位控制在可承受歸零的規模內</li>
+        <li>關鍵觀察點：2026年Q3/Q4財報是否出現任何具約束力訂單簽署公告，此為唯一能實質改變Thesis判斷的事件</li>
+        <li>停損/止觀參考：若股價因ATM增資持續下探至$7以下（Citi悲觀情境），且無新訂單消息，應重新評估是否退出</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式三：財務健檢
+══════════════════════════════════════ -->
+<div id="mode3" class="mode-divider">
+  <h2>◈ 模式三：財務風險健檢</h2>
+  <p>財務三表 · 六大比率 · 現金燒錢速度與跑道 · CapEx分析 · 同業對比 · 綜合診斷</p>
+</div>
+
+<!-- 13. 財務三表 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">財務三表數據（近3期）</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>損益表 / 現金流</th>
+          <th class="num">FY2024 ✅</th>
+          <th class="num">FY2025 ✅</th>
+          <th class="num">H1 FY2026 ✅</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$37.05M</td><td class="num">$31.48M</td><td class="num bad">$0.64M</td></tr>
+        <tr><td>EBIT（估）</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">深度負值 ⚠️</td></tr>
+        <tr><td>利息支出</td><td class="num ok">~$0（無有息負債）✅</td><td class="num ok">~$0 ✅</td><td class="num ok">~$0 ✅</td></tr>
+        <tr><td>投資收益（現金部位孳息）</td><td class="num">— ❌</td><td class="num ok">$25.3M ✅</td><td class="num ok">合計約$14.1M（Q1 $5.6M+Q2 $8.5M）✅</td></tr>
+        <tr><td>淨損</td><td class="num bad">-$136.62M ✅</td><td class="num bad">-$355.79M ✅</td><td class="num bad">約-$94-97M ✅</td></tr>
+        <tr><td>OCF</td><td class="num">— ❌</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">深度負值 ⚠️</td></tr>
+        <tr><td>CapEx</td><td class="num">— ❌（估極低，開發期尚未大規模建廠）</td><td class="num">— ❌</td><td class="num">— ❌</td></tr>
+        <tr><td>FCF</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">深度負值 ⚠️</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr>
+          <th>資產負債表</th>
+          <th class="num">FY2025末 ✅</th>
+          <th class="num">Q2 FY2026末 ✅</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>現金+短長期投資</td><td class="num ok">$1.3B</td><td class="num ok">$1.9B</td></tr>
+        <tr><td>總資產</td><td class="num">— ❌</td><td class="num">~$1,412.5M ⚠️</td></tr>
+        <tr><td>總負債</td><td class="num">— ❌</td><td class="num">~$296.1M ⚠️</td></tr>
+        <tr><td>計息債務（有息負債）</td><td class="num ok">$0 ✅</td><td class="num ok">$0 ✅ ⭐</td></tr>
+        <tr><td>股東權益（估算）</td><td class="num">— ❌</td><td class="num">~$1,116.4M ⚠️（資產-負債反推）</td></tr>
+        <tr><td>淨現金部位</td><td class="num ok">$1.3B（全數淨現金，零負債）✅</td><td class="num ok">$1.9B（全數淨現金，零負債）✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3); margin-top:4px;">⭐ NuScale目前<strong>零有息負債</strong>，這是其財務結構中唯一與成熟優質公司相似的特徵——但代價是持續透過股權增資（而非債務）為營運燒錢融資，稀釋股東權益取代了利息負擔。</p>
+</div>
+
+<!-- 14. 六大比率診斷 -->
+<div id="ratios" class="section">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">六大財務健康比率診斷</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>比率</th><th class="num">公式</th><th class="num">SMR現況（Q2 FY2026）</th><th>警戒標準</th><th>狀態</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. 利息覆蓋率</strong></td>
+          <td class="num">EBIT / 利息支出</td>
+          <td class="num">不適用（無有息負債，分母為零）</td>
+          <td>&lt;3x 警戒</td>
+          <td><span class="badge badge-blue">N/A（零負債）</span></td>
+        </tr>
+        <tr>
+          <td><strong>2. 負債比率</strong></td>
+          <td class="num">總負債 / 總資產</td>
+          <td class="num ok">~21% ⚠️（$296.1M/$1,412.5M）</td>
+          <td>&gt;70% 警戒</td>
+          <td><span class="badge badge-green">✅ 健康（低槓桿）</span></td>
+        </tr>
+        <tr>
+          <td><strong>3. 淨負債 / EBITDA</strong></td>
+          <td class="num">淨負債 / EBITDA</td>
+          <td class="num ok">淨現金狀態，且EBITDA本身為負，比率意義有限</td>
+          <td>&gt;3x 警戒</td>
+          <td><span class="badge badge-blue">N/A（淨現金但EBITDA為負）</span></td>
+        </tr>
+        <tr>
+          <td><strong>4. OCF / 計息債務</strong></td>
+          <td class="num">OCF / 計息債務</td>
+          <td class="num">不適用（計息債務=$0）</td>
+          <td>&lt;0.5x 警戒</td>
+          <td><span class="badge badge-blue">N/A（零負債）</span></td>
+        </tr>
+        <tr>
+          <td><strong>5. 現金流覆蓋比率</strong></td>
+          <td class="num">FCF / 利息支出</td>
+          <td class="num">不適用（無利息支出可比）</td>
+          <td>&lt;2x 警戒</td>
+          <td><span class="badge badge-blue">N/A（零負債）</span></td>
+        </tr>
+        <tr>
+          <td><strong>6. 兩年內到期牆覆蓋倍數</strong></td>
+          <td class="num">現金 / 2年內到期債務</td>
+          <td class="num ok">無到期債務（$0）</td>
+          <td>&lt;1x 警戒</td>
+          <td><span class="badge badge-green">✅ 無到期壓力</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="risk-card" style="margin-top:16px;">
+    <h4 style="color:var(--red)">⭐ 對NuScale而言，比六大傳統比率更關鍵的兩項指標：現金燒錢速度與現金跑道</h4>
+    <div class="tbl-wrap" style="margin-top:10px; margin-bottom:0;">
+      <table>
+        <thead><tr><th>指標</th><th class="num">計算</th><th class="num">結果</th><th>狀態</th></tr></thead>
+        <tbody>
+          <tr><td>單季平均淨損（現金燒錢速度近似值）</td><td class="num">(Q1淨損$44-46.7M + Q2淨損$50.1M)/2</td><td class="num bad">~$47-48M/季 ⚠️</td><td><span class="badge badge-yellow">開發期正常，惟趨勢向上</span></td></tr>
+          <tr><td>年化燒錢速度</td><td class="num">單季平均 × 4</td><td class="num bad">~$188-192M/年 ⚠️</td><td><span class="badge badge-yellow">需持續增資支應</span></td></tr>
+          <tr><td>現金跑道（以現行燒錢速度）</td><td class="num">$1.9B現金 ÷ 年化燒錢速度</td><td class="num ok">~9.9-10.1年 ⚠️</td><td><span class="badge badge-green">✅ 短中期無虞</span></td></tr>
+          <tr><td>現金跑道（若進入製造期，⚠️假設CapEx倍增）</td><td class="num">情境測試：燒錢速度x2</td><td class="num warn">~5年 ⚠️估</td><td><span class="badge badge-yellow">⚠️ 需密切追蹤製造期資本支出規劃</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px; color:var(--text); line-height:1.7; margin-top:10px;">此估算以淨損近似現金流出（未計入非現金項目如股票薪酬，可能高估實際現金燒錢速度；但也未計入首批NPM製造啟動後可能的資本支出激增，可能低估未來燒錢速度）。<strong>目前現金跑道充裕不代表財務無虞</strong>——公司持續透過股權而非債務融資，代表股東稀釋才是真正的「隱性利息成本」，且一旦進入實際製造/建廠階段，資本支出型態可能與目前開發期截然不同。</p>
+  </div>
+</div>
+
+<!-- 15. 債務到期時程 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-title">債務到期時程</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--green)">
+    <h3 style="color:var(--green)">✅ 零有息負債，無傳統債務到期牆</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">NuScale目前計息負債為$0 ✅，無公司債、無銀行貸款、無可轉換公司債，因此<strong>不存在傳統意義的債務到期時程表</strong>。公司總負債約$296.1M（⚠️估）主要為應付帳款、遞延收入、租賃負債等營運性質負債，非資本市場債務。這是NuScale財務結構中最正面的一項特徵——公司選擇以股權增資（ATM/公開發行）而非舉債方式融資營運虧損，避免了利率風險與到期展延壓力，但代價是持續稀釋既有股東權益。</p>
+  </div>
+</div>
+
+<!-- 16. CapEx分析 -->
+<div id="capex" class="section">
+  <div class="section-header">
+    <div class="section-num">16</div>
+    <div class="section-title">CapEx 分析</div>
+  </div>
+
+  <div class="card">
+    <h3>📊 業務模式判讀：目前為輕資產研發期，未來將轉為重資產供應鏈投資期</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">NuScale目前商業模式為<strong>技術授權+工程設計服務</strong>，本身不興建、不擁有電廠，因此當前CapEx占營收比重極低（❌公開財報未單獨揭露具體CapEx數字，推估遠低於營收規模）。然而，隨著公司邁向「首批NPM模組製造」階段，將需要投資專用製造設施、供應鏈產能保留金（如向Paragon、Framatome等夥伴的預付款/合資投入），<strong>CapEx型態預期將從近乎零轉為顯著資本投入</strong>，這是判斷未來1-2年現金跑道是否真正充裕的關鍵變數，目前財報揭露不足以精確量化，需持續追蹤後續季報。</p>
+  </div>
+</div>
+
+<!-- 17. 同業對比 -->
+<div id="comps2" class="section">
+  <div class="section-header">
+    <div class="section-num">17</div>
+    <div class="section-title">同業財務健康對比</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>公司</th>
+          <th class="num">市值</th>
+          <th class="num">營收狀態</th>
+          <th class="num">淨負債/EBITDA</th>
+          <th class="num">現金部位</th>
+          <th>財務健康</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now">
+          <td><strong>NuScale (SMR) ★</strong></td>
+          <td class="num">$4.80B</td>
+          <td class="num bad">近乎歸零，持續虧損</td>
+          <td class="num">N/A（EBITDA為負）</td>
+          <td class="num ok">$1.9B淨現金 ✅</td>
+          <td><span class="badge badge-yellow">B（現金充裕但無獲利基礎）</span></td>
+        </tr>
+        <tr>
+          <td>Oklo (OKLO)</td>
+          <td class="num">$7.67B</td>
+          <td class="num bad">近乎歸零，淨損$73.62M TTM</td>
+          <td class="num">N/A（EBITDA為負）</td>
+          <td class="num">— ⚠️未查得精確數字</td>
+          <td><span class="badge badge-yellow">B（同屬前營收階段）</span></td>
+        </tr>
+        <tr>
+          <td>BWX Technologies (BWXT)</td>
+          <td class="num">~$14.0B</td>
+          <td class="num ok">$3.37B TTM，穩定成長</td>
+          <td class="num">健康水位⚠️估</td>
+          <td class="num">正向現金流⚠️估</td>
+          <td><span class="badge badge-green">A（成熟核能供應鏈）</span></td>
+        </tr>
+        <tr>
+          <td>Constellation Energy (CEG)</td>
+          <td class="num">~$98-110B</td>
+          <td class="num ok">大型穩定電力營運商</td>
+          <td class="num">健康水位⚠️估</td>
+          <td class="num">正向現金流⚠️估</td>
+          <td><span class="badge badge-green">A（大型公用事業）</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">競爭者精確財務健康數據多為⚠️估算，僅供相對比較參考，NuScale/Oklo與BWXT/CEG本質上處於不同商業階段，比較意義有限。</p>
+</div>
+
+<!-- 18. 綜合診斷 -->
+<div id="health" class="section">
+  <div class="section-header">
+    <div class="section-num">18</div>
+    <div class="section-title">綜合財務診斷</div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:24px; margin-bottom:24px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:24px; flex-wrap:wrap;">
+    <div class="health-badge health-b">B</div>
+    <div>
+      <div style="font-size:20px; font-weight:700; color:var(--gold);">現金充裕型前營收公司 B</div>
+      <div style="font-size:13px; color:var(--text2); margin-top:4px;">零負債｜現金跑道充裕｜但無獲利基礎、持續稀釋股東權益</div>
+      <div style="font-size:13px; color:var(--text); margin-top:8px;">NuScale的財務體質不能用傳統六大比率評分，因為它根本不具備「有息負債」與「正向EBITDA」這兩個評分基礎。若單看「短期不會破產」的角度，因零負債+$1.9B現金而評分不差；但若看「能否靠自身營運撐到轉機兌現」，答案高度仰賴持續增資能力與資本市場情緒，本質上更接近一家早期創投階段公司，而非傳統意義的上市公司財務健檢對象。</div>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <div>
+      <div class="risk-card" style="background:#f0fdf4; border-color:rgba(21,128,61,0.3);">
+        <h4 style="color:var(--green)">✅ 財務優勢</h4>
+        <ul style="font-size:13px; line-height:1.8; padding-left:16px; color:var(--text);">
+          <li><strong>零有息負債</strong>：無利率風險、無到期展延壓力</li>
+          <li><strong>現金跑道充裕</strong>：以現行燒錢速度可支撐約10年，短中期無立即斷炊風險</li>
+          <li><strong>機構資金淨流入為正</strong>：過去12個月機構買賣淨額為正</li>
+        </ul>
+      </div>
+
+      <div class="risk-card">
+        <h4>⚠️ 財務結構隱憂</h4>
+        <ul style="font-size:13px; line-height:1.8; padding-left:16px; color:var(--text);">
+          <li><strong>持續且加速的股權稀釋</strong>：過去12個月股數增加50.8%，8月再登記$750M ATM額度</li>
+          <li><strong>營收無法佐證燒錢速度合理性</strong>：TTM營收僅$10.69M vs 年化燒錢速度近$190M，比率懸殊</li>
+          <li><strong>製造期資本支出不確定性高</strong>：目前財報揭露不足以估算未來CapEx規模，是最大盲點</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="risk-card">
+        <h4>📊 安全邊際計算</h4>
+        <div style="font-size:13px; line-height:1.9; color:var(--text);">
+          <strong>公司需要多少營收成長／訂單兌現才能觸及「財務轉正」？</strong><br>
+          ・目前年化淨損約$188-192M，需相當於同等規模的年化正向EBITDA貢獻才能轉正<br>
+          ・以TVA/RoPower訂單規模（合計潛在逾6.5GW）推算，僅需其中極小比例轉化為具約束力設備銷售，理論上即可大幅改善損益結構——但<strong>「理論上可行」與「財報實際兌現」之間仍有數年時間差</strong><br>
+          ・<span class="bad">安全邊際：現金跑道尚有餘裕，但獲利安全邊際趨近於零——公司完全仰賴外部資本市場信心維持營運，而非自身現金流造血能力</span>
+        </div>
+      </div>
+      <div class="card" style="margin-top:0; border-left:3px solid var(--red);">
+        <h3 style="color:var(--red)">🎯 最大風險點（具體觸發數字）</h3>
+        <p style="font-size:13px; line-height:1.7; color:var(--text)">NuScale最大風險並非傳統債務違約風險（因零負債），而是<strong>「訂單兌現時程 vs 資本市場耐心」的賽跑</strong>。具體觸發情境：若截至<strong>2027年底</strong>，TVA/ENTRA1協議仍未轉化為具約束力definitive PPA、且RoPower Module 1未實際開始建造，公司可能被迫以更折價、更頻繁的方式增資（重演2026年模式），屆時股數稀釋速度若超過<strong>年化30%</strong>，即使訂單題材長期成立，每股實質價值仍可能持續被侵蝕，形成「訂單愈晚兌現、股東稀釋愈嚴重」的負向循環。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 綜合總結：五維度卡片 ── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">★</div>
+    <div class="section-title">綜合總結</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="text-align:center;">
+      <h3>Thesis 成立度</h3>
+      <div class="big-num" style="color:var(--red)">2.0 / 5</div>
+      <div class="big-label">5根支柱中僅2根明確成立（NRC先發+現金充裕），2根未兌現，1根部分成立</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>護城河強度</h3>
+      <div class="big-num" style="color:var(--gold)">⭐⭐☆☆☆</div>
+      <div class="big-label">2.1 / 5，法規先發優勢明確但商業護城河未建立</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>成長象限</h3>
+      <div class="big-num" style="color:var(--purple); font-size:20px;">轉機股（早期）</div>
+      <div class="big-label">Peter Lynch框架下風險最高的類別，轉機尚未驗證</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>財務健康度</h3>
+      <div class="big-num" style="color:var(--gold);">B</div>
+      <div class="big-label">現金充裕型前營收公司，安全邊際趨近於零</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>估值定錨</h3>
+      <div class="big-num" style="color:var(--red); font-size:18px;">100%敘事驅動</div>
+      <div class="big-label">歷史本益比自上市以來從未可計算，與獲利完全脫鉤</div>
+    </div>
+  </div>
+
+  <!-- ── 最終操作建議總結 ── -->
+  <div class="risk-card" style="margin-top:24px; background:#fffbea; border-color:rgba(180,83,9,0.3); padding:20px 24px;">
+    <h3 style="color:var(--gold); font-size:15px; margin-bottom:10px;">⚠️ 個股小狐最終操作建議（三模式綜合）</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; font-size:13px; line-height:1.8; color:var(--text); margin-top:8px;">
+      <div>
+        <strong>📊 股票定性</strong><br>
+        前營收SMR技術授權商｜Peter Lynch轉機股（早期未驗證階段）｜與使用者「護城河/現金流/安全邊際」核心投資原則明顯不符<br><br>
+        <strong>💰 估值判斷</strong><br>
+        PE/PEG皆無法計算<br>分析師目標分歧極大（$6.50-$25）<br>DCF情境區間 $5-25，加權約$10-14<br><br>
+        <strong>🏥 財務健康</strong><br>
+        B級：零負債、現金$1.9B充裕，惟安全邊際趨近於零
+      </div>
+      <div>
+        <strong>📈 未持有建議</strong><br>
+        <span class="bad">不建議現階段建倉</span>，若堅持參與應限機會池&lt;1%倉位<br>等待具約束力訂單出現後再評估<br><br>
+        <strong>已持有建議</strong><br>
+        逢反彈分批減碼至可承受歸零之規模<br>不建議作為中長期核心/戰術池部位
+      </div>
+      <div>
+        <strong>🔍 每季必看指標</strong><br>
+        ①是否簽署具約束力訂單／PPA<br>
+        ②現金消耗速度是否加速<br>
+        ③股數稀釋速度（年化&lt;30%為可接受上限）<br>
+        ④RoPower/TVA里程碑達成狀況<br>
+        ⑤是否有Big Tech直接簽約<br><br>
+        <strong>⚠️ 核心催化劑</strong><br>
+        TVA definitive PPA簽署、<br>RoPower Module 1動工進度、<br>DOE貸款擔保核准
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 資料來源 -->
+<div class="card" style="margin-top:40px;">
+  <h3>📚 資料來源 & 免責聲明</h3>
+  <div style="font-size:12px; color:var(--text2); line-height:2;">
+    <strong>已驗證來源：</strong><br>
+    · NuScale Power IR press releases：Q1 FY2026（2026-05）、Q2 FY2026（2026-08-18）、FY2025全年（2026-02-26）✅<br>
+    · SEC EDGAR：NuScale Power Corp 10-Q（smr-20260630.htm）、10-K FY2025 ✅<br>
+    · stockanalysis.com：股價、市值、財務歷史、分析師預估 ✅<br>
+    · Zacks Investment Research：EPS/營收共識預估（2026E/2027E）✅<br>
+    · MarketBeat / TipRanks / S&P Global：分析師評等與目標價 ✅<br>
+    · 同業數據：stockanalysis.com（OKLO/BWXT/CEG/CCJ market cap與PE）✅<br>
+    · 產業新聞：World Nuclear News、PowerMag、Utility Dive、Neutron Bytes（NRC核准、RoPower FID、TVA/ENTRA1協議）✅<br><br>
+    <strong>估算來源（⚠️）：</strong>現金燒錢速度／跑道推算（以淨損近似現金流出）、PB比率（以Q2資產負債表反推）、部分同業精確財務數據、CapEx趨勢判讀。請以公司最新官方公告為準。<br><br>
+    <strong>無法取得（❌）：</strong>毛利率、EBITDA margin（因營收規模過小不具統計意義）、詳細CapEx數字、FY2028 EPS共識預估、精確總資產/總負債歷史序列。<br><br>
+    <span style="color:var(--red)"><strong>免責聲明：</strong>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</span>
+  </div>
+</div>
+
+</div><!-- end container -->
+
+<footer>
+  <p>個股小狐完整報告｜NuScale Power Corporation (SMR)｜分析日期：2026-09-09</p>
+  <p>模式一 深度研究 · 模式二 財報解析 · 模式三 財務健檢 — 三模式合一</p>
+  <p style="margin-top:6px; color:var(--border2)">本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</footer>
+
+</body>
+</html>
