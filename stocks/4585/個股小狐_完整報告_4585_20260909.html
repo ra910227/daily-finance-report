@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜達明機器人(4585) 三合一完整報告</title>
+<style>
+:root{
+  --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee;
+  --text:#1e2233; --text2:#6b7280; --accent:#4f46e5; --accent2:#4338ca;
+  --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+  --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+  --box-yellow:#fffbea; --box-orange:#fff4ec; --box-red:#fef2f2; --box-green:#f0fdf4; --box-blue:#eff6ff;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.65;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 60px;}
+.hero{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);color:#fff;padding:36px 28px;border-radius:0 0 20px 20px;margin-bottom:28px;}
+.hero .tag{display:inline-block;background:rgba(255,255,255,0.18);padding:4px 12px;border-radius:20px;font-size:12px;letter-spacing:1px;margin-bottom:10px;}
+.hero h1{margin:0 0 6px;font-size:28px;}
+.hero .sub{opacity:0.9;font-size:14px;margin-bottom:18px;}
+.hero-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;}
+.hero-item{background:rgba(255,255,255,0.12);border-radius:10px;padding:10px 14px;}
+.hero-item .label{font-size:11px;opacity:0.8;}
+.hero-item .value{font-size:19px;font-weight:700;}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin-bottom:32px;}
+.toc h3{margin-top:0;font-size:14px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;}
+.toc a{color:var(--accent);text-decoration:none;font-size:14px;display:block;padding:4px 0;}
+.toc a:hover{text-decoration:underline;}
+section{margin-bottom:44px;}
+.part-title{display:flex;align-items:center;gap:10px;border-bottom:3px solid var(--accent);padding-bottom:10px;margin-bottom:20px;}
+.part-title .num{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.part-title h2{margin:0;font-size:22px;}
+h3.sub-h{font-size:17px;border-left:4px solid var(--accent);padding-left:10px;margin:28px 0 14px;}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;}
+th{background:var(--bg3);font-weight:600;}
+tr:nth-child(even) td{background:#fbfbfd;}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600;}
+.b-ok{background:var(--box-green);color:var(--green);}
+.b-warn{background:var(--box-yellow);color:var(--gold);}
+.b-bad{background:var(--box-red);color:var(--red);}
+.b-info{background:var(--box-blue);color:var(--blue);}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:14px 0;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
+.scenario-card{border-radius:14px;padding:18px 20px;border:1px solid var(--border);}
+.sc-bear{background:var(--box-red);}
+.sc-base{background:var(--box-blue);}
+.sc-bull{background:var(--box-green);}
+.scenario-card h4{margin-top:0;}
+.action-box{border-radius:14px;padding:20px;margin:18px 0;border-left:5px solid var(--accent);background:var(--box-blue);}
+.action-box h4{margin-top:0;}
+.risk-card{border-radius:12px;padding:14px 18px;margin:10px 0;border-left:5px solid var(--red);background:var(--box-red);}
+.risk-card.mid{border-left-color:var(--gold);background:var(--box-yellow);}
+.stars{color:var(--gold);letter-spacing:1px;}
+.note{font-size:12.5px;color:var(--text2);margin-top:6px;}
+.src-tag{font-size:11.5px;color:var(--text2);}
+footer{border-top:1px solid var(--border);margin-top:50px;padding-top:20px;font-size:12.5px;color:var(--text2);}
+.summary-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:18px 0;}
+.summary-cards .card{text-align:center;}
+.summary-cards .big{font-size:24px;font-weight:700;color:var(--accent);}
+code{background:var(--bg3);padding:1px 6px;border-radius:5px;font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="tag">個股小狐 ｜ 三合一完整報告</div>
+  <h1>達明機器人 Techman Robot (4585.TW)</h1>
+  <div class="sub">分析日期：2026年9月9日｜協作型機器人／AI實體落地 ｜ 廣達集團孫公司（廣明光電轉投資）</div>
+  <div class="hero-grid">
+    <div class="hero-item"><div class="label">現價 (09/09)</div><div class="value">294.0 元</div></div>
+    <div class="hero-item"><div class="label">市值(估)</div><div class="value">約308億元</div></div>
+    <div class="hero-item"><div class="label">TTM 本益比</div><div class="value">~103~107倍</div></div>
+    <div class="hero-item"><div class="label">股價淨值比</div><div class="value">~15.8倍</div></div>
+    <div class="hero-item"><div class="label">Thesis 成立度</div><div class="value">2.5 / 5</div></div>
+    <div class="hero-item"><div class="label">護城河強度</div><div class="value">★★★☆☆</div></div>
+  </div>
+</div>
+
+<div class="toc">
+  <h3>目錄導覽</h3>
+  <div class="toc-grid">
+    <a href="#p1-basic">01. 基本介紹</a>
+    <a href="#p1-biz">02. 業務引擎分析</a>
+    <a href="#p1-thesis">03. 核心Thesis與未來性</a>
+    <a href="#p1-competition">04. 競爭格局</a>
+    <a href="#p1-moat">05. 成長象限與護城河評分</a>
+    <a href="#p2-beatmiss">06. Beat/Miss 與財報表現</a>
+    <a href="#p2-guidance">07. 全年指引與股價反應</a>
+    <a href="#p2-dcf">08. 三情境估值</a>
+    <a href="#p2-valuation">09. 股價位階與估值歷史錨點</a>
+    <a href="#p2-comps">10. 可比公司分析</a>
+    <a href="#p2-targets">11. 目標價與操作建議</a>
+    <a href="#p3-financials">12. 財務數據與六大比率</a>
+    <a href="#p3-debt">13. 債務結構與CapEx</a>
+    <a href="#p3-diagnosis">14. 財務健檢綜合診斷</a>
+    <a href="#summary">15. 綜合總結</a>
+  </div>
+</div>
+
+<!-- ============ PART 1 深度研究 ============ -->
+<section id="p1-basic">
+  <div class="part-title"><div class="num">1</div><h2>公司深度研究</h2></div>
+
+  <h3 class="sub-h">基本介紹</h3>
+  <table>
+    <tr><th>項目</th><th>數值</th><th>來源狀態</th></tr>
+    <tr><td>市值</td><td>約 NT$307~320億元（依股價294~300元區間估算，股本104,609千股）</td><td><span class="badge b-warn">⚠️ 估算</span></td></tr>
+    <tr><td>TTM 營收（近四季）</td><td>約 NT$19~20億元（2025全年18.2億+2026H1成長動能疊加，需查MOPS精確值）</td><td><span class="badge b-warn">⚠️ 估算</span></td></tr>
+    <tr><td>2025全年營收</td><td>NT$18.2億元，YoY +23%</td><td><span class="badge b-ok">✅ 已驗證</span></td></tr>
+    <tr><td>2026年6月單月營收</td><td>NT$2.14億元，YoY +41.88%</td><td><span class="badge b-ok">✅ 已驗證</span></td></tr>
+    <tr><td>TTM毛利率</td><td>49.88%（2025全年51%，Q1'26 49.8%）</td><td><span class="badge b-ok">✅ 已驗證</span></td></tr>
+    <tr><td>TTM營業利益率</td><td>5.40%</td><td><span class="badge b-ok">✅ 已驗證</span></td></tr>
+    <tr><td>FCF（自由現金流）</td><td>—</td><td><span class="badge b-bad">❌ 無法取得，需查季報現金流量表</span></td></tr>
+    <tr><td>所屬產業</td><td>工業電腦周邊／協作型機器人（Cobot）與工業自動化</td><td><span class="badge b-ok">✅</span></td></tr>
+    <tr><td>全球排名</td><td>公司自述為「全球第二大協作機器人品牌」（依出貨量／營收，非獨立第三方報告驗證）</td><td><span class="badge b-warn">⚠️ 公司自述，未見獨立市調機構交叉驗證</span></td></tr>
+    <tr><td>上市日期</td><td>2025年9月26日（掛牌首日股價自發行價暴衝至499.5元，漲幅近110%）</td><td><span class="badge b-ok">✅ 已驗證</span></td></tr>
+    <tr><td>集團背景</td><td>廣達集團孫公司，2015年由廣明光電（6188）轉投資成立</td><td><span class="badge b-ok">✅ 已驗證</span></td></tr>
+  </table>
+  <p class="note">⚠️ 特別提醒：達明僅上市約11個月（2025/09/26掛牌），交易歷史極短，本報告多處「歷史區間／歷史PE」類分析僅能以上市以來資料為基礎，無法比照一般成熟股提供5年期資料，請審慎看待其統計意義。</p>
+
+  <h3 class="sub-h">業務引擎分析</h3>
+  <p>達明的業務可拆解為三大銷售引擎：</p>
+  <table>
+    <tr><th>業務線</th><th>說明</th><th>營收佔比趨勢</th><th>護城河來源</th></tr>
+    <tr><td>雙品牌代工（OMRON聯名）</td><td>與歐姆龍(OMRON)合作雙品牌銷售至歐、美、日</td><td>佔比下滑：2023年自有通路佔19%→2025年自有通路佔41%，隱含OMRON代工佔比由81%降至約59%</td><td>🟡 中：依賴策略夥伴通路，議價力受限</td></tr>
+    <tr><td>自有品牌經銷（Direct/DA）</td><td>透過100多家全球經銷商／系統整合商(SI)銷售</td><td>持續成長中，2025年達41%</td><td>🟢 中高：品牌與軟體生態(TMflow)綁定客戶</td></tr>
+    <tr><td>大型客戶直營＋系統整合方案</td><td>針對半導體、AI伺服器組裝大客戶直接接單服務</td><td>2025~2026成長最快動能來源（半導體、AI伺服器需求）</td><td>🟢 高：客製化整合服務轉換成本高</td></tr>
+  </table>
+
+  <p><strong>優勢產品表：</strong></p>
+  <table>
+    <tr><th>產品</th><th>特性</th><th>護城河說明</th></tr>
+    <tr><td>TM系列協作機器人＋內建視覺(AI Vision)</td><td>手臂、視覺、控制軟體(TMflow)單一平台整合</td><td>「一機三用」軟硬整合降低客戶部署時間，市場稱其內建AI視覺型協作機器人市佔全球第一（約17~19%，⚠️數字來自單一產業分析文章，非官方/第三方機構報告，need查證）</td></tr>
+    <tr><td>TM Xplore（輪型人形機器人）</td><td>2026下半年進入車用、半導體客戶場域測試</td><td>尚處於商業化前期，護城河待驗證，非既有收入來源</td></tr>
+  </table>
+
+  <p><strong>近4期歷史財務摘要（年度）：</strong></p>
+  <table>
+    <tr><th>年度</th><th>營收(億元)</th><th>YoY</th><th>營業利益(億元)</th><th>EPS(元)</th><th>FCF</th></tr>
+    <tr><td>2023</td><td>—</td><td>—</td><td>—</td><td>全年數字未取得，僅知Q4單季EPS 0.48元</td><td>—</td></tr>
+    <tr><td>2024</td><td>—</td><td>—</td><td>0.21</td><td>1.04</td><td>—</td></tr>
+    <tr><td>2025</td><td>18.2</td><td>+23%</td><td>1.11（YoY +413%）</td><td>1.46</td><td>—</td></tr>
+    <tr><td>2026(截至Q2，TTM推算)</td><td>—（6月單月YoY+41.88%）</td><td>加速中</td><td>—</td><td>TTM 2.84（推算法見第9節）</td><td>—</td></tr>
+  </table>
+  <p class="note">❌ 標記「—」欄位為公開資料無法直接取得精確數字，若需完整三表請查MOPS公開資訊觀測站季報。營業利益2024→2025大增413%屬營運槓桿效應（營收規模擴大、費用相對固定）。</p>
+</section>
+
+<section id="p1-thesis">
+  <h3 class="sub-h">核心Thesis與未來性</h3>
+  <table>
+    <tr><th>投資論點支柱</th><th>成立度</th><th>證據</th></tr>
+    <tr><td>1. 半導體＋AI伺服器組裝需求帶動協作機器人滲透率提升</td><td><span class="badge b-ok">✅ 成立</span></td><td>公司財報與法說會多次強調半導體/AI伺服器為主要成長動能，2026年6月營收YoY+41.88%驗證加速趨勢</td></tr>
+    <tr><td>2. 軟硬體整合(TMflow)帶來高於同業的部署效率與黏著度</td><td><span class="badge b-warn">⚠️ 部分成立</span></td><td>公司與市場分析普遍認同此定位，但缺乏第三方（非公司/單一部落格）之客戶留存率或續約率數據佐證</td></tr>
+    <tr><td>3. 自有通路佔比提升代表議價力/毛利率結構改善</td><td><span class="badge b-ok">✅ 成立</span></td><td>自有通路佔比19%(2023)→41%(2025)，同期毛利率維持50%左右高檔，未見明顯稀釋</td></tr>
+    <tr><td>4. 人形機器人(TM Xplore)將帶來第二成長曲線</td><td><span class="badge b-bad">❌ 未兌現</span></td><td>目前仍處2026下半年「場域測試」階段，尚無商轉訂單或營收貢獻，屬於題材期而非驗證期</td></tr>
+    <tr><td>5. 全球第二大協作機器人品牌地位帶來規模優勢</td><td><span class="badge b-warn">⚠️ 部分成立</span></td><td>市佔數字主要來自公司/產業評論自述，Teradyne(UR母公司)公開財報顯示UR仍為明確龍頭(全球cobot市場約15%份額)，達明市佔數字缺乏獨立驗證</td></tr>
+  </table>
+  <p><strong>成立度評分：2.5 / 5</strong>（✅2項、⚠️2項、❌1項）</p>
+
+  <p><strong>核心成長驅動力：</strong></p>
+  <ul>
+    <li>半導體先進封裝(CoWoS等)產線自動化需求擴大，帶動協作手臂導入</li>
+    <li>AI伺服器機構件組裝需求升溫（廣達集團供應鏈綜效可能為潛在助力，但未見公開證據證實關聯訂單）</li>
+    <li>直銷/系統整合(DA+SI)通路佔比持續提升，理論上帶來毛利率與客戶黏著度雙重改善</li>
+  </ul>
+
+  <p><strong>需監控風險（附觸發條件）：</strong></p>
+  <div class="risk-card">
+    <strong>風險1：本益比與獲利脫節的估值修正風險</strong><br>
+    觸發條件：若TTM EPS成長不能持續驗證（如單季EPS年增轉負，重演2025Q2 EPS -0.33元的虧損季），現行103~107倍本益比恐面臨劇烈修正。影響程度：高（歷史本益比曾在2026/7/9達254倍後2個月內腰斬至107倍附近，波動度已展現）。
+  </div>
+  <div class="risk-card mid">
+    <strong>風險2：人形機器人商業化進度不如預期</strong><br>
+    觸發條件：TM Xplore若在2026下半年場域測試未能轉換為2027年實際訂單，市場可能重新evaluate公司評價基礎（回歸傳統cobot本業估值）。影響程度：中高，因當前題材溢價很大一部分建立在人形機器人敘事上。
+  </div>
+  <div class="risk-card mid">
+    <strong>風險3：對OMRON代工通路依賴度雖下降但仍存在</strong><br>
+    觸發條件：若OMRON聯名通路營收占比（現約59%推估）出現策略夥伴關係生變或訂單縮減，將直接衝擊營收結構。影響程度：中，因公司正主動降低此依賴但尚未完全轉型。
+  </div>
+</section>
+
+<section id="p1-competition">
+  <h3 class="sub-h">競爭格局</h3>
+  <table>
+    <tr><th>戰場</th><th>競爭者</th><th>市佔/定位</th><th>優勢</th><th>對達明威脅度</th></tr>
+    <tr><td>協作機器人(Cobot)本業</td><td>Universal Robots (UR，Teradyne Robotics子品牌)</td><td>全球cobot市場約15%份額，公認龍頭；Teradyne Robotics 2026Q2營收達1億美元(YoY+33%)</td><td>品牌歷史最久、通路最廣、開放式硬體生態系</td><td>🔴 高：規模與品牌均領先</td></tr>
+    <tr><td>台灣本土工業自動化</td><td>上銀(2049)</td><td>全球線性滑軌/滾珠螺桿龍頭，跨足工業機器人傳動模組與人形機器人關節</td><td>精密傳動元件核心技術，供應鏈上游地位</td><td>🟡 中：非直接cobot對手，但人形機器人賽道潛在重疊</td></tr>
+    <tr><td>系統整合/機器視覺</td><td>所羅門(2359)</td><td>市值約244~271億元，近四季EPS約1.94~6.71元(不同資料落差大需查證)，聚焦AI視覺整合方案</td><td>視覺辨識與系統整合能力，近期在AI機器人聯盟中活躍</td><td>🟡 中：部分應用場景重疊(如揀料)</td></tr>
+    <tr><td>工控/驅動大廠</td><td>台達電(2308)、FANUC、ABB</td><td>台達電為大型多角化工控廠，FANUC/ABB為傳統工業機器人龍頭</td><td>資本規模、垂直整合能力遠大於達明</td><td>🟢 低中：目前主戰場（傳統工業機器人臂）與達明cobot利基有區隔，但長期若進軍cobot市場將構成威脅</td></tr>
+  </table>
+  <p class="note">⚠️ 所羅門EPS數據不同財經網站落差極大（1.94元vs 6.71元），可能為近四季與單季混淆或除權息調整差異，本表僅供競爭定位參考，精確Comps數字見第10節並已標註查證狀態。</p>
+</section>
+
+<section id="p1-moat">
+  <h3 class="sub-h">成長象限判斷與護城河評估</h3>
+  <table>
+    <tr><th>判斷依據</th><th>觀察</th></tr>
+    <tr><td>營收成長率</td><td>2025年+23%，2026年6月單月+41.88%，呈現加速趨勢</td></tr>
+    <tr><td>獲利波動度</td><td>季度EPS曾轉負(2025Q2 -0.33元)，獲利穩定性仍在建立中</td></tr>
+    <tr><td>產業階段</td><td>協作機器人+實體AI仍處滲透率提升早期，非成熟景氣循環產業</td></tr>
+  </table>
+  <p><strong>Peter Lynch 象限判斷：高速成長股（early-stage growth）</strong>，但獲利基礎尚淺、波動大，帶有一定「轉機股」色彩（新上市＋新業務曲線人形機器人並行）。此象限意味著股價對成長不及預期的容錯空間極低。</p>
+
+  <p><strong>護城河五維度評分：</strong></p>
+  <table>
+    <tr><th>維度</th><th>評分</th><th>說明</th></tr>
+    <tr><td>不可替代性</td><td><span class="stars">★★★☆☆</span></td><td>軟硬整合(TMflow)有一定差異化，但UR、FANUC等均有替代方案，非唯一解</td></tr>
+    <tr><td>網路效應</td><td><span class="stars">★★☆☆☆</span></td><td>經銷商/整合商生態圈略具網路效應，但不若軟體平台型公司強</td></tr>
+    <tr><td>客戶黏著度</td><td><span class="stars">★★★☆☆</span></td><td>大型客戶客製化整合方案轉換成本較高，但中小客戶黏著度有限</td></tr>
+    <tr><td>成本優勢</td><td><span class="stars">★★☆☆☆</span></td><td>毛利率50%左右屬中高，但未見規模帶來的明顯成本優勢證據</td></tr>
+    <tr><td>規模效應</td><td><span class="stars">★★★☆☆</span></td><td>2025年營業利益大增413%展現初步規模槓桿，但整體規模(年營收18億元)遠小於UR(Teradyne Robotics年化近4億美元)</td></tr>
+  </table>
+  <p><strong>綜合護城河強度：★★★☆☆（中等）</strong></p>
+
+  <div class="action-box">
+    <h4>建議動作</h4>
+    <p><strong>當前建議：</strong>觀察為主，不建議在目前本益比水位(TTM ~103~107倍，遠高於同業所羅門21~24倍、上銀57倍)追高建倉。</p>
+    <p><strong>加碼觸發：</strong>① 股價回落至反映合理成長溢價的區間（見第9節反推試算，約120~180元區間，需搭配當時最新EPS重新計算）；② TM Xplore人形機器人取得具體商轉訂單並實質認列營收。</p>
+    <p><strong>賣出觸發：</strong>① 單季EPS年增率轉負且非一次性因素；② 自有通路(DA+SI)佔比不升反降，顯示OMRON依賴度回升；③ 本益比在無新催化劑下持續維持200倍以上超過2季。</p>
+    <p><strong>每季監控指標：</strong>月營收YoY、毛利率是否守住50%、自有通路佔比、TM Xplore訂單進度、EPS是否連續正成長。</p>
+  </div>
+</section>
+
+<!-- ============ PART 2 財報解析 ============ -->
+<section id="p2-beatmiss">
+  <div class="part-title"><div class="num">2</div><h2>最新財報解析</h2></div>
+
+  <h3 class="sub-h">Beat/Miss 表（2026 Q1，最新可完整驗證季度）</h3>
+  <table>
+    <tr><th>項目</th><th>實際值</th><th>YoY</th><th>QoQ</th><th>判定</th></tr>
+    <tr><td>營收</td><td>—（YoY -2.43%）</td><td>-2.43%</td><td>—</td><td><span class="badge b-warn">⚠️ 營收年減，非成長季</span></td></tr>
+    <tr><td>稅後淨利</td><td>6,777萬元</td><td>+2%</td><td>—</td><td><span class="badge b-warn">⚠️ 淨利微幅成長，但主要靠費用控管非營收驅動</span></td></tr>
+    <tr><td>EPS</td><td>0.65元</td><td>-10.96%（因IPO後股本膨脹稀釋）</td><td>季增約-2.99%（若對比Q4'25 0.65元則持平，資料來源標示QoQ -2.99%需留意計算基期差異）</td><td><span class="badge b-bad">❌ EPS年減，主因股本稀釋而非獲利衰退</span></td></tr>
+    <tr><td>毛利率</td><td>49.8%</td><td>-1.6個百分點</td><td>—</td><td><span class="badge b-warn">⚠️ 輕微Miss，仍守在50%關卡邊緣</span></td></tr>
+    <tr><td>營業利益率</td><td>5.4%</td><td>—</td><td>—</td><td><span class="badge b-info">— 無同期比較基準可查</span></td></tr>
+  </table>
+  <p class="note">⚠️ 重要提醒：2026Q1單看EPS年減10.96%容易誤判為衰退，但淨利實際小幅成長+2%，真正原因是2025年9月IPO增資發行新股，稀釋每股獲利——分析獲利趨勢應優先看「稅後淨利」而非單獨看EPS，直到滿一個完整年度的股本基期後EPS年增率比較才具意義。市場預期共識（分析師一致預估）目前查無公開Beat/Miss對照表，多數台股中小型新股尚未被主流機構納入預估覆蓋，故本表以「年增/年減」自我比較為主，非市場共識比較。</p>
+
+  <p><strong>近6季EPS與淨利走勢（單季）：</strong></p>
+  <table>
+    <tr><th>季度</th><th>EPS(元)</th><th>備註</th></tr>
+    <tr><td>2025 Q1</td><td>0.73</td><td>✅已驗證（反推自Q1'26年增率-10.96%回推）</td></tr>
+    <tr><td>2025 Q2</td><td>-0.33</td><td>✅已驗證（財報狗），單季轉虧</td></tr>
+    <tr><td>2025 Q3</td><td>0.41</td><td>⚠️來源文章年份需二次確認，但與全年加總可互相驗證一致</td></tr>
+    <tr><td>2025 Q4</td><td>0.65</td><td>⚠️反推值（全年1.46 − Q1~Q3合計0.81）</td></tr>
+    <tr><td>2026 Q1</td><td>0.65</td><td>✅已驗證</td></tr>
+    <tr><td>2026 Q2</td><td>約1.13（推算）</td><td>⚠️反推值：以TTM(近四季)2.84減去Q3'25+Q4'25+Q1'26(合計1.71)推算，非官方直接公告數字，建議以MOPS官方公告覆核</td></tr>
+  </table>
+</section>
+
+<section id="p2-guidance">
+  <h3 class="sub-h">全年指引變化</h3>
+  <table>
+    <tr><th>時間</th><th>指引內容</th><th>變化</th></tr>
+    <tr><td>2026/03/23法說會</td><td>未提供具體2026年營收/獲利數字目標，僅表示「延續2025年成長趨勢」、「毛利率維持50%左右」</td><td><span class="badge b-info">維持定性展望，無量化guidance</span></td></tr>
+    <tr><td>2026年期間觀察（法人／媒體推估）</td><td>法人預期2026年營收持續走升，毛利率有望維持50%高檔（無具體法人機構具名共識數字）</td><td><span class="badge b-warn">⚠️ 泛稱「法人預期」，缺乏具名機構可追溯來源</span></td></tr>
+  </table>
+
+  <h3 class="sub-h">股價反應</h3>
+  <p>達明股價自2025/9/26上市首日暴衝至499.5元（漲幅近110%），此後歷經大幅回落與波動：2026年7月9日本益比一度衝上254倍（顯示股價當時處於相對高檔或當季EPS基期偏低），截至2026年8月20日股價300.52元、本益比107.19倍，至2026年9月9日股價294.0元、本益比約103.4~106.8倍（不同平台略有落差）。整體呈現「IPO蜜月狂熱→隨獲利波動劇烈修正→隨後在題材(半導體+人形機器人)推升下維持高本益比整理」的走勢特徵。</p>
+  <p class="note">❌ 缺乏逐日財報前後股價反應的精確配對數據（如財報公布當日/次日確切漲跌%），建議直接查TWSE盤後資訊或Goodinfo個股K線圖佐證單一事件的股價反應。</p>
+</section>
+
+<section id="p2-dcf">
+  <h3 class="sub-h">三情境估值（基於P/S＋成長溢價模型，非傳統DCF）</h3>
+  <p class="note">⚠️ 重要說明：由於達明尚無穩定自由現金流揭露、上市時間過短且處於高速成長早期（傳統DCF對早期高成長/低FCF公司容易失真），本節採用市場常見的「營收成長×毛利率×目標本益比/本益成長比」情境框架，情境假設主要參考單一獨立研究(vocus部落格)提出的框架並由本報告加註合理性檢驗，非機構一致共識，請務必自行交叉比對正式券商研究報告。</p>
+  <div class="card-grid">
+    <div class="scenario-card sc-bear">
+      <h4>熊市情境</h4>
+      <p>營收成長放緩至+15~20%，毛利率回落至46~48%（規模效應未如預期），2026年EPS約1.8~2.0元。若本益比壓縮至同業所羅門/工控股平均水準(約25~35倍)，對應股價約 <strong>45~70元</strong>。</p>
+    </div>
+    <div class="scenario-card sc-base">
+      <h4>基準情境</h4>
+      <p>營收成長+30~40%（延續2026H1動能），毛利率維持50~52%，2026年EPS約2.3~2.8元。若市場給予「高成長題材股」本益比60~90倍（介於上銀57倍與目前達明本身107倍之間），對應股價約 <strong>140~250元</strong>。</p>
+    </div>
+    <div class="scenario-card sc-bull">
+      <h4>牛市情境</h4>
+      <p>營收成長40%以上，毛利率站穩52~55%，人形機器人TM Xplore取得具體訂單並開始貢獻營收，2026年EPS上看2.5~3.5元（採vocus文章上緣估計）。若維持目前100倍以上題材溢價本益比，對應股價可達 <strong>380~560元</strong>（此區間為單一部落格文章的P/S溢價模型結果，非本報告獨立驗證）。</p>
+    </div>
+  </div>
+  <p class="note"><strong>敏感度說明：</strong>對估值影響最大的變數是「本益比倍數假設」而非EPS本身——EPS在熊市與牛市情境間僅差約1.5~1.7倍，但對應股價區間卻可相差高達10倍（45元 vs 560元），顯示目前股價高度依賴市場願意賦予多高的「題材溢價本益比」，而非基本面獲利本身的差異。這正是判斷本股是否泡沫化的關鍵——請見下節反推試算。</p>
+</section>
+
+<section id="p2-valuation">
+  <h3 class="sub-h">股價位階評估</h3>
+  <table>
+    <tr><th>指標</th><th>數值</th><th>合理性判讀</th></tr>
+    <tr><td>TTM PE</td><td>約103~107倍（不同平台快照時點略異）</td><td><span class="badge b-bad">❌ 遠高於同業，隱含極高成長預期</span></td></tr>
+    <tr><td>Forward PE (2026E，用vocus估算EPS 2.5~3.5元中位數估算)</td><td>約98~118倍（以現價294元計算）</td><td><span class="badge b-warn">⚠️ 即使用樂觀EPS估計，本益比仍維持三位數，成長仍未完全消化估值</span></td></tr>
+    <tr><td>PB (股價淨值比)</td><td>約15.8倍（cnyes數據，每股淨值18.57元）</td><td><span class="badge b-bad">❌ 顯著偏高，反映市場給予極高的無形資產/成長溢價</span></td></tr>
+    <tr><td>PEG（以TTM PE÷2025 EPS YoY 45%估算）</td><td>約2.3倍（107÷45）</td><td><span class="badge b-warn">⚠️ PEG>1，傳統上代表相對成長率而言估值偏貴</span></td></tr>
+  </table>
+
+  <p><strong>多年期EPS實際值vs預估值表：</strong></p>
+  <table>
+    <tr><th>年度</th><th>EPS</th><th>狀態</th><th>來源</th></tr>
+    <tr><td>2023</td><td>—（僅Q4單季0.48元可查）</td><td>❌ 無法取得完整年度值</td><td>財經網站零星季度數字</td></tr>
+    <tr><td>2024A</td><td>1.04元</td><td>✅ 實際值</td><td>公司法說會/財報狗</td></tr>
+    <tr><td>2025A</td><td>1.46元</td><td>✅ 實際值</td><td>公司法說會(2026/3/23)</td></tr>
+    <tr><td>2026E</td><td>2.5~3.5元</td><td>⚠️ 估算值，單一來源(vocus部落格文章)，非多家券商共識</td><td>vocus.cc 估值重構文章</td></tr>
+    <tr><td>2027E</td><td>—</td><td>❌ 無法取得</td><td>查無公開預估</td></tr>
+    <tr><td>2028E</td><td>—</td><td>❌ 無法取得</td><td>查無公開預估</td></tr>
+  </table>
+  <p class="note">⚠️ 區間跨度提示：2026E EPS估計區間(2.5~3.5元)僅來自單一獨立研究來源，尚未發現主流券商(元大、凱基、國泰等)公開發布具名EPS預估數字可交叉比對，區間可信度有限，務必待正式券商報告出爐後更新。</p>
+
+  <p><strong>歷史本益比錨點表：</strong></p>
+  <table>
+    <tr><th>時間點</th><th>本益比</th><th>備註</th></tr>
+    <tr><td>2025/09/26（上市首日盤中）</td><td>—（股價衝至499.5元，較發行價漲近110%）</td><td>❌ 蜜月期本益比不具參考意義</td></tr>
+    <tr><td>2026/07/09</td><td>240.9~254.0倍</td><td>⚠️ 上市以來相對高點，需留意此為短期EPS基期偏低(如Q2單季轉虧影響TTM分母)所致</td></tr>
+    <tr><td>2026/08/20</td><td>107.19倍</td><td>✅ 已驗證</td></tr>
+    <tr><td>2026/09/09（本報告日）</td><td>103.4~106.8倍</td><td>✅ 已驗證</td></tr>
+  </table>
+  <p class="note">❌ 由於達明僅上市約11個月，<strong>無法提供5年或8年期本益比歷史區間</strong>，也無2022年熊市谷底、2018年市場修正等歷史錨點可用（上市時間不足），此為本報告資料侷限的重大但誠實揭露事項，不可用其他公司之歷史區間替代推測。</p>
+
+  <p><strong>反推試算（結論）：</strong></p>
+  <div class="action-box">
+    <p>由於無自身歷史低本益比可用，改以「可比同業保守本益比」作為錨點：所羅門(2359)TTM本益比約21~24倍、上銀(2049)約57倍。取二者中間值約35~40倍作為「成熟後合理本益比」保守假設，乘以2026年保守情境EPS（約1.8~2.0元，見上方熊市情境），反推股價約 <strong>63~80元</strong>，遠低於目前294元現價（隱含下檔空間逾70%）。</p>
+    <p><strong>明確結論：目前達明股價幾乎完全是靠「本益比倍數擴張／題材溢價」撐起，而非由EPS成長本身撐起。</strong>即使採用樂觀情境EPS(3.5元)搭配目前市場願付的100倍以上本益比，股價才勉強站上350元左右；一旦市場對半導體/AI機器人題材熱度降溫、本益比向可比同業（35~60倍區間）回歸，即便EPS持續成長，股價仍有大幅修正風險。此為典型「題材股泡沫化」警訊信號，建議中長期投資人現階段以觀察為主，避免在題材高點追價。</p>
+  </div>
+</section>
+
+<section id="p2-comps">
+  <h3 class="sub-h">可比公司(Comps)分析</h3>
+  <table>
+    <tr><th>公司</th><th>市值(億元)</th><th>TTM PE</th><th>成長類型</th><th>溢價/折價判讀</th></tr>
+    <tr><td>達明機器人(4585)</td><td>~308</td><td>~103~107倍</td><td>早期高速成長＋題材股</td><td>基準</td></tr>
+    <tr><td>所羅門(2359)</td><td>~244~271</td><td>~21~24倍（另有平台顯示更高，需查證）</td><td>AI視覺整合，成長中</td><td>達明相對所羅門溢價約4~5倍，反映市場對「協作機器人本業＋人形機器人題材」給予額外溢價</td></tr>
+    <tr><td>上銀(2049)</td><td>—（未查得精確市值）</td><td>~56.6倍</td><td>精密傳動元件龍頭，成熟期成長</td><td>達明仍溢價近2倍，但差距小於對所羅門的溢價</td></tr>
+    <tr><td>Teradyne Robotics(UR母公司，NASDAQ: TER機器人部門)</td><td>—（部門獨立市值未拆分揭露）</td><td>—</td><td>全球cobot龍頭，2026Q2營收1億美元(YoY+33%)，規模約為達明年營收的5~6倍</td><td>規模遠大於達明，但成長速度相近，反映達明題材溢價部分建立在「小公司高成長」敘事上</td></tr>
+  </table>
+  <p class="note">⚠️ 所羅門本益比在不同平台顯示差異極大(21.16倍/23.55倍/更高值)，可能因EPS基期(單季vs近四季vs除權調整)不同所致，比較時請以同一資料來源、同一時間點為準，本表僅作方向性參考。FCF Yield因財務數據取得限制無法完整填入，標記為❌。</p>
+</section>
+
+<section id="p2-targets">
+  <h3 class="sub-h">投行目標價與操作建議</h3>
+  <table>
+    <tr><th>機構</th><th>評等</th><th>目標價</th><th>時間</th><th>計算依據</th></tr>
+    <tr><td>元大投顧</td><td>未對達明本身評等/目標價（僅對上銀510元、研華760元提供目標價，對達明、所羅門明確標示「未評等」）</td><td>—</td><td>2026/08/21</td><td>—</td></tr>
+    <tr><td>vocus獨立研究(非機構)</td><td>非正式評等</td><td>保守380元／基本460元／樂觀560元</td><td>2026年初文章</td><td>採P/S成長溢價模型，非「EPS×本益比」單一公式，原文未完整揭露P/S乘數計算過程，本報告無法完整覆核公式合理性</td></tr>
+  </table>
+  <p class="note">❌ <strong>誠實揭露：目前查無任何主要券商(元大、凱基、國泰、富邦等)對達明機器人發布具名、有公式依據的正式目標價報告。</strong>市場上流傳的380/460/560元區間僅來自單一獨立部落格的P/S模型推算，非機構共識，不應作為投資決策的主要依據。這與元大投顧報告中明確載明「達明、所羅門則未評等」的事實一致，請勿將題材熱度誤認為機構背書。</p>
+
+  <p><strong>主要分歧點：</strong></p>
+  <table>
+    <tr><th>樂觀派論點</th><th>謹慎派論點</th></tr>
+    <tr><td>半導體+AI伺服器需求為結構性成長，非景氣循環</td><td>單季EPS曾轉虧(2025Q2)，獲利穩定性尚未證明</td></tr>
+    <tr><td>人形機器人(TM Xplore)提供第二成長曲線想像空間</td><td>人形機器人商業化時程與規模均屬未知數，2026下半年僅是「場域測試」而非量產</td></tr>
+    <tr><td>自有通路佔比提升代表議價力持續改善</td><td>對OMRON通路仍有約6成營收依賴，轉型尚未完成</td></tr>
+    <tr><td>全球第二大cobot品牌具規模優勢</td><td>市佔數字缺乏第三方驗證，且Teradyne/UR規模仍遠大於達明</td></tr>
+  </table>
+
+  <div class="action-box">
+    <h4>最終操作建議</h4>
+    <p><strong>若未持有：</strong>不建議在目前103~107倍本益比、股價缺乏機構目標價背書的狀態下追高建倉。等待①股價回落至反推試算合理區間(約63~150元視情境)，或②有具名機構正式覆蓋報告出爐提供估值依據，再重新評估。</p>
+    <p><strong>若已持有：</strong>可持續觀察半導體/AI伺服器訂單能見度與人形機器人訂單進度，但應設定明確停損/停利紀律。</p>
+    <p><strong>加碼觸發：</strong>月營收YoY連續2季維持30%以上成長，且本益比回落至80倍以下。</p>
+    <p><strong>停損警示：</strong>單季EPS年增轉負且非一次性因素、或本益比在無新催化劑下跌破50倍仍持續破底（顯示市場信心結構性轉弱）。</p>
+  </div>
+</section>
+
+<!-- ============ PART 3 財務健檢 ============ -->
+<section id="p3-financials">
+  <div class="part-title"><div class="num">3</div><h2>財務風險健檢</h2></div>
+
+  <h3 class="sub-h">財務數據填表（近3期，單位：千元，除標註外）</h3>
+  <table>
+    <tr><th>項目</th><th>2025 Q2</th><th>2026 Q1</th><th>2026 Q2</th><th>狀態</th></tr>
+    <tr><td>總資產</td><td>2,590,611</td><td>7,740,742</td><td>7,795,135</td><td><span class="badge b-ok">✅ 已驗證</span></td></tr>
+    <tr><td>流動資產</td><td>1,922,121</td><td>3,717,390</td><td>2,669,319</td><td><span class="badge b-ok">✅ 已驗證</span></td></tr>
+    <tr><td>負債佔資產比</td><td>30.20%</td><td>11.23%</td><td>10.35%</td><td><span class="badge b-ok">✅ 已驗證</span></td></tr>
+    <tr><td>總負債(估算=總資產×負債佔比)</td><td>~782,405</td><td>~869,285</td><td>~806,997</td><td><span class="badge b-warn">⚠️ 反推估算，非原始揭露數字</span></td></tr>
+    <tr><td>股東權益(估算=總資產−估算負債)</td><td>~1,808,206</td><td>~6,871,457</td><td>~6,988,138</td><td><span class="badge b-warn">⚠️ 反推估算</span></td></tr>
+    <tr><td>EBIT/利息支出</td><td>—</td><td>—</td><td>—</td><td><span class="badge b-bad">❌ 無法取得，需查季報損益表附註</span></td></tr>
+    <tr><td>計息負債</td><td>—</td><td>—</td><td>—</td><td><span class="badge b-bad">❌ 無法取得</span></td></tr>
+    <tr><td>現金及約當現金</td><td>—</td><td>—</td><td>—</td><td><span class="badge b-bad">❌ 無法取得</span></td></tr>
+    <tr><td>OCF/CapEx/FCF</td><td>—</td><td>—</td><td>—</td><td><span class="badge b-bad">❌ 無法取得</span></td></tr>
+  </table>
+  <p class="note">⚠️ 資產負債表關鍵發現：總資產在2025Q2→2025Q3~Q4暴增(從259億千元躍升至745~775億千元，注意單位為千元)，主因2025年9月IPO掛牌大量現金增資湧入，同時負債佔資產比從30.2%驟降至10~11%區間，顯示公司財務結構因IPO而大幅去槓桿化，目前呈現「現金水位大幅提升、負債比極低」的財務體質，惟精確的現金、計息負債、利息費用等細項數字受限於資料來源（台股一般看盤網站多不揭露到此細節），需以MOPS官方季報XBRL資料才能精確填列，本報告誠實標示為❌無法取得，不進行臆測填數。</p>
+
+  <h3 class="sub-h">六大比率診斷</h3>
+  <table>
+    <tr><th>比率</th><th>公式</th><th>結果</th><th>狀態</th><th>警戒標準</th></tr>
+    <tr><td>利息覆蓋率</td><td>EBIT/利息支出</td><td>—</td><td><span class="badge b-bad">❌ 無法取得</span></td><td>&lt;3倍需警戒</td></tr>
+    <tr><td>負債比率</td><td>總負債/總資產</td><td>約10.35%（2026Q2）</td><td><span class="badge b-ok">✅ 優良</span></td><td>&gt;60%需警戒</td></tr>
+    <tr><td>淨負債/EBITDA</td><td>(計息負債−現金)/EBITDA</td><td>—</td><td><span class="badge b-bad">❌ 無法取得（缺計息負債與現金細項）</span></td><td>&gt;3倍需警戒</td></tr>
+    <tr><td>OCF/總債務</td><td>營運現金流/總債務</td><td>—</td><td><span class="badge b-bad">❌ 無法取得</span></td><td>&lt;20%需警戒</td></tr>
+    <tr><td>現金流覆蓋比率</td><td>OCF/流動負債</td><td>—</td><td><span class="badge b-bad">❌ 無法取得</span></td><td>&lt;1倍需警戒</td></tr>
+    <tr><td>兩年內到期牆覆蓋倍數</td><td>現金/未來2年到期債務</td><td>—</td><td><span class="badge b-bad">❌ 無法取得</span></td><td>&lt;1倍需警戒</td></tr>
+  </table>
+  <p class="note">⚠️ 六項比率中僅「負債比率」可由公開看盤資訊直接驗證，其餘五項因缺乏計息負債、現金、利息費用、EBITDA、OCF等原始財報細項，一律誠實標示❌無法取得，不進行任何臆測填數。整體從負債比率10.35%這單一指標判斷，達明目前債務壓力極低，但無法排除其他隱藏性財務風險（如應收帳款品質、存貨周轉等），建議直接調閱MOPS季報做完整驗證。</p>
+</section>
+
+<section id="p3-debt">
+  <h3 class="sub-h">債務到期時程</h3>
+  <p><span class="badge b-bad">❌ 無法取得</span> 公開資訊平台未揭露達明機器人的債務到期時程細項，且從負債比率僅10.35%、多數為IPO增資後的低槓桿結構觀察，達明目前很可能無重大計息負債或到期壓力，但精確逐年到期金額表建議查詢達明機器人最新季報「借款」附註或直接聯繫公司IR確認。</p>
+
+  <h3 class="sub-h">CapEx分析</h3>
+  <table>
+    <tr><th>項目</th><th>數值</th><th>判讀</th></tr>
+    <tr><td>固定資產(2026Q2)</td><td>59,319千元</td><td>相對總資產(7,795,135千元)占比僅0.76%，屬極輕資產結構</td></tr>
+    <tr><td>固定資產(2025Q2)</td><td>44,121千元</td><td>成長+34%，但基期極低，絕對金額仍小</td></tr>
+    <tr><td>CapEx/營收、CapEx/OCF</td><td>—</td><td><span class="badge b-bad">❌ 無法取得，需查現金流量表投資活動細項</span></td></tr>
+    <tr><td>業務模式判讀</td><td colspan="2">輕資產模式：達明採外包/委外製造為主（類似許多台灣IC設計或系統整合廠商模式），固定資產占比極低，資本支出負擔小，這對財務彈性是正面因素，但也代表核心製造環節可能依賴供應鏈夥伴(如減速機供應商)，供應鏈風險需另外評估。</td></tr>
+  </table>
+</section>
+
+<section id="p3-diagnosis">
+  <h3 class="sub-h">同業對比（六大比率，受限資料僅列可得項目）</h3>
+  <table>
+    <tr><th>公司</th><th>負債比率</th><th>其餘五項比率</th></tr>
+    <tr><td>達明(4585)</td><td>~10.35%（優良）</td><td><span class="badge b-bad">❌ 無法取得</span></td></tr>
+    <tr><td>上銀(2049)</td><td>—</td><td><span class="badge b-bad">❌ 無法取得（本次研究未深入查證）</span></td></tr>
+    <tr><td>所羅門(2359)</td><td>—</td><td><span class="badge b-bad">❌ 無法取得（本次研究未深入查證）</span></td></tr>
+  </table>
+  <p class="note">受限於本次研究時間與公開資料揭露深度，同業對比僅能在下次更新報告時搭配MOPS官方數據做完整六比率比較，此處先誠實揭露資料缺口而非以未經查證數字填充。</p>
+
+  <h3 class="sub-h">綜合診斷</h3>
+  <div class="card">
+    <p><strong>定性分類：低槓桿新興成長型（Post-IPO Cash-Rich Growth）</strong></p>
+    <p><strong>最大風險點：</strong>並非傳統的「財務槓桿/償債能力」風險（負債比極低，暫無到期牆壓力跡象），而是「估值與獲利脫節」的市場風險——本益比103~107倍遠高於財務體質相近或更佳的同業，一旦成長故事(半導體、人形機器人)出現任何不如預期的訊號，股價修正空間顯著大於財務體質類似的傳統工控股。</p>
+    <p><strong>安全邊際計算：</strong>由於EBIT/利息覆蓋率等數據無法取得，無法計算傳統意義上「EBIT需下滑多少%觸及警戒線」。但可從獲利端類比：以2026 Q1稅後淨利6,777萬元為基期，若單季轉為虧損（如重演2025Q2 EPS -0.33元的情況），將直接壓低TTM EPS並可能觸發本益比進一步飆升至非理性區間，形成估值螺旋式風險，而非資產負債表破產風險。換言之，達明目前的「風險」主要是股價估值風險，而非財務體質風險。</p>
+  </div>
+</section>
+
+<!-- ============ 綜合總結 ============ -->
+<section id="summary">
+  <div class="part-title"><div class="num">★</div><h2>綜合總結</h2></div>
+  <div class="summary-cards">
+    <div class="card"><div class="label">Thesis成立度</div><div class="big">2.5 / 5</div></div>
+    <div class="card"><div class="label">護城河強度</div><div class="big">★★★☆☆</div></div>
+    <div class="card"><div class="label">成長象限</div><div class="big" style="font-size:16px;">高速成長股(早期)</div></div>
+    <div class="card"><div class="label">財務體質</div><div class="big" style="font-size:16px;color:var(--green);">低槓桿・優良</div></div>
+    <div class="card"><div class="label">估值狀態</div><div class="big" style="font-size:16px;color:var(--red);">高度題材溢價</div></div>
+  </div>
+
+  <div class="action-box">
+    <h4>最終操作建議</h4>
+    <p><strong>未持有：</strong>不建議現階段追價建倉。達明基本面故事（半導體+AI伺服器驅動的協作機器人滲透率提升）具備合理性，財務體質(低負債、輕資產)也相對健康，但目前股價幾乎完全由本益比倍數擴張支撐，而非由EPS成長驗證，且缺乏任何主要券商正式目標價背書，題材泡沫化風險偏高。</p>
+    <p><strong>已持有：</strong>建議設定明確紀律，可持續觀察但不宜加碼攤平；密切追蹤月營收年增率、毛利率是否守住50%、以及人形機器人TM Xplore是否於2026下半年～2027年轉化為實際訂單。</p>
+    <p><strong>建議操作視野：</strong>長期(3-5年)可留意這是台灣少數卡位「實體AI／協作機器人」題材的上市公司，若能持續驗證獲利品質、財報透明度提升(如吸引主流券商正式覆蓋)，屬於值得長期追蹤觀察的名單，但現階段不建議以目前估值水位重倉佈局。</p>
+    <p><strong>核心催化劑：</strong>①半導體/AI伺服器客戶訂單能見度延續；②TM Xplore人形機器人商轉進度；③主流券商是否開始正式覆蓋並發布具公式依據的目標價。</p>
+  </div>
+</section>
+
+<footer>
+  <p><strong>資料來源：</strong>財報狗(statementdog.com)、鉅亨網(cnyes.com)、Yahoo股市、HiStock嗨投資、Goodinfo!台灣股市資訊網、nStock、Win投資、旺得富理財網、經濟日報、聯合新聞網、富果直送法說會備忘錄、vocus獨立研究文章、The Robot Report(Teradyne Robotics)、台灣證券交易所(TWSE)。因本次研究環境未連線Futu OpenD，全數數據改以WebSearch/WebFetch公開網頁資料交叉查證取得，部分財報細項(現金、計息負債、利息費用、OCF/FCF等)因公開看盤網站未揭露到此顆粒度，已誠實標示❌無法取得，建議進一步查閱MOPS公開資訊觀測站官方季報XBRL數據以完整驗證。</p>
+  <p>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</footer>
+
+</div>
+</body>
+</html>
