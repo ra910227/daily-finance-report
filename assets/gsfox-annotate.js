@@ -3,12 +3,58 @@
      點擊既有的畫重點可直接取消(連同附掛的筆記一起移除)
    - 筆記與畫重點是同一份紀錄：顏色本身即代表重要度分類，筆記面板可一鍵下載成Markdown檔
    - 首頁(index.html，body帶 class="gsfox-index")：條目旁的星號評分(最多三顆)
-   - 全部資料存在瀏覽器 localStorage，僅該裝置/瀏覽器可見，不上傳伺服器 */
+   - 全部資料存在瀏覽器 localStorage；若使用者在首頁設定「同步碼」，會另外透過 Cloudflare Worker+KV
+     把資料同步到雲端，讓不同瀏覽器/裝置能看到同一份畫重點/筆記/星號評分（2026-09-10新增） */
 (function(){
   "use strict";
   var LS_HL = "gsfox_hl:" + location.pathname;
   var LS_STAR_PREFIX = "gsfox_star:";
   var COLOR_LABEL = { yellow: "黃", red: "紅", blue: "藍" };
+
+  /* ============ 雲端同步（Cloudflare Worker + KV） ============ */
+  var WORKER_URL = "https://gsfox-sync.yingbangbang2026.workers.dev";
+  var LS_SYNC_CODE = "gsfox_sync_code";
+
+  function getSyncCode(){ try{ return localStorage.getItem(LS_SYNC_CODE) || ""; }catch(e){ return ""; } }
+  function setSyncCode(code){ try{ localStorage.setItem(LS_SYNC_CODE, code); }catch(e){} }
+  function clearSyncCode(){ try{ localStorage.removeItem(LS_SYNC_CODE); }catch(e){} }
+  function cloudUrl(code){ return WORKER_URL + "/sync/" + encodeURIComponent(code); }
+
+  function pullFromCloud(code){
+    return fetch(cloudUrl(code)).then(function(r){ return r.json(); }).then(function(json){
+      var data = json && json.data && typeof json.data === "object" ? json.data : null;
+      if (data){
+        Object.keys(data).forEach(function(k){
+          if (k.indexOf("gsfox_hl:") === 0 || k.indexOf("gsfox_star:") === 0){
+            try{ localStorage.setItem(k, data[k]); }catch(e){}
+          }
+        });
+      }
+      return true;
+    }).catch(function(){ return false; });
+  }
+
+  function pushToCloudNow(code){
+    var payload = { app: "gsfox-annotate", exportedAt: new Date().toISOString(), data: collectBackupData() };
+    return fetch(cloudUrl(code), {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    }).then(function(r){ return r.ok; }).catch(function(){ return false; });
+  }
+
+  var pushTimer = null;
+  function scheduleCloudPush(){
+    var code = getSyncCode();
+    if (!code) return;
+    if (pushTimer) clearTimeout(pushTimer);
+    pushTimer = setTimeout(function(){
+      pushToCloudNow(code).then(function(ok){ setSyncStatus(ok ? "已同步" : "同步失敗，稍後會再試一次"); });
+    }, 2000);
+  }
+
+  var syncStatusEl = null;
+  function setSyncStatus(text){ if (syncStatusEl) syncStatusEl.textContent = text; }
 
   // e.target 理論上在真實使用者互動中一定是Element，但為避免極端情況(例如事件target是純文字節點)拋錯，一律用這個安全版closest
   function closestSafe(node, sel){
@@ -104,6 +150,7 @@
     list.push(rec);
     saveJSON(LS_HL, list);
     applyHighlight(rec);
+    scheduleCloudPush();
     return rec;
   }
 
@@ -111,6 +158,7 @@
     unwrapByAttr("data-hid", id);
     var list = loadJSON(LS_HL, []).filter(function(r){ return r.id !== id; });
     saveJSON(LS_HL, list);
+    scheduleCloudPush();
   }
 
   function updateNoteText(id, newText){
@@ -119,6 +167,7 @@
     saveJSON(LS_HL, list);
     var mark = document.querySelector('[data-hid="'+id+'"]');
     if (mark) mark.title = "點擊可移除這段畫重點" + (newText ? "（含筆記）" : "");
+    scheduleCloudPush();
   }
 
   function restoreHighlights(){
@@ -333,8 +382,13 @@
 
   function initAnnotation(){
     buildUI();
-    restoreHighlights();
-    renderNotesPanel();
+    var code = getSyncCode();
+    if (code){
+      pullFromCloud(code).then(function(){ restoreHighlights(); renderNotesPanel(); });
+    } else {
+      restoreHighlights();
+      renderNotesPanel();
+    }
 
     document.addEventListener("mousedown", function(e){
       if (closestSafe(e.target, ".gsfox-ui")) return;
@@ -392,6 +446,7 @@
         var next = (cur === i) ? 0 : i;
         try{ localStorage.setItem(starKey(key), String(next)); }catch(err){}
         renderStars(row);
+        scheduleCloudPush();
       });
       row.addEventListener("mousedown", function(e){ e.preventDefault(); e.stopPropagation(); });
     });
@@ -460,10 +515,64 @@
     });
   }
 
+  function initSyncWidget(){
+    var box = document.querySelector(".gsfox-sync-box");
+    if (!box) return;
+    var input = box.querySelector('[data-role="sync-code-input"]');
+    var connectBtn = box.querySelector('[data-act="sync-connect"]');
+    var disconnectBtn = box.querySelector('[data-act="sync-disconnect"]');
+    syncStatusEl = box.querySelector('[data-role="sync-status"]');
+
+    function render(){
+      var code = getSyncCode();
+      if (code){
+        input.value = code;
+        input.disabled = true;
+        connectBtn.hidden = true;
+        disconnectBtn.hidden = false;
+        setSyncStatus("已連接雲端同步");
+      } else {
+        input.value = "";
+        input.disabled = false;
+        connectBtn.hidden = false;
+        disconnectBtn.hidden = true;
+        setSyncStatus("尚未連接雲端同步");
+      }
+    }
+
+    connectBtn.addEventListener("click", function(){
+      var code = input.value.trim();
+      if (!code){ alert("請先輸入一組同步碼。"); return; }
+      setSyncCode(code);
+      render();
+      setSyncStatus("連接中…");
+      pullFromCloud(code).then(function(){
+        return pushToCloudNow(code);
+      }).then(function(ok){
+        setSyncStatus(ok ? "已連接並同步完成" : "已連接，但同步時發生問題，稍後會自動重試");
+        if (document.body.classList.contains("gsfox-index")) initStarWidgets();
+      });
+    });
+
+    disconnectBtn.addEventListener("click", function(){
+      if (!confirm("中斷雲端同步？這個瀏覽器裡目前的資料不會被刪除，只是不會再自動同步。")) return;
+      clearSyncCode();
+      render();
+    });
+
+    render();
+  }
+
   function boot(){
     if (document.body.classList.contains("gsfox-index")){
-      initStarWidgets();
+      var code = getSyncCode();
+      if (code){
+        pullFromCloud(code).then(function(){ initStarWidgets(); });
+      } else {
+        initStarWidgets();
+      }
       initBackupWidget();
+      initSyncWidget();
     } else {
       initAnnotation();
     }
