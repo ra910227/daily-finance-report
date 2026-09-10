@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜VST Vistra Corp 2026-09-09</title>
+<style>
+  :root {
+    --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6;
+    --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca;
+    --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+    --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; position: relative; overflow: hidden; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-change { font-size: 16px; color: var(--green); margin-top: 4px; }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .toc-inner a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); padding: 0 0 4px 0; }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(79,70,229,0.03); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+
+  .ok { color: var(--green); }
+  .warn { color: var(--gold); }
+  .bad { color: var(--red); }
+  .muted { color: var(--text2); }
+  .est { color: var(--gold); font-size: 11px; }
+
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); }
+  .scenario.base { border-top: 3px solid var(--blue); }
+  .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); }
+  .scenario.base h4 { color: var(--blue); }
+  .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .scenario .row:last-child { border-bottom: none; }
+
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .risk-card { background: #fef2f2; border: 1px solid rgba(220,38,38,0.20); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .risk-card h4 { color: var(--red); font-size: 13px; margin-bottom: 4px; }
+
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+
+  .comp-now { background: rgba(79,70,229,0.05); }
+  .comp-now td { font-weight: 700; }
+
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); }
+  .bar-yellow { background: var(--gold); }
+  .bar-red { background: var(--red); }
+
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; text-transform: uppercase; letter-spacing:0.5px; }
+  .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .summary-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 720px) {
+    .scenario-row { grid-template-columns: 1fr; }
+    .moat-grid { grid-template-columns: repeat(2,1fr); }
+    .hero-price-block { text-align:left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">VST</div>
+      <div class="hero-name">Vistra Corp（美國最大競爭型電力生產商之一，核能／天然氣／燃煤／電池儲能多元發電組合＋零售售電）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-09-09　資料基準：2026-09-08收盤　Beta(5Y) 1.41</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$151.72</div>
+      <div class="hero-change">▲ 2026-09-08 收盤，+$2.42（+1.62%）</div>
+      <div class="hero-mktcap">市值 $50.92B　股數 335.64M　企業價值(EV) $71.00B</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-purple">AI資料中心供電代表股</span>
+    <span class="badge badge-blue">4座核電廠／6,448MW零碳基載</span>
+    <span class="badge badge-green">2026 Adj EBITDA guidance $6.8-7.6B</span>
+    <span class="badge badge-orange">淨負債 ~$19.6B，D/E 3.6x⚠️</span>
+    <span class="badge badge-yellow">Q2'26營收Miss、Adj EPS Miss，EBITDA仍+31%</span>
+    <span class="badge badge-red">股價自52週高點回落 -31%</span>
+    <span class="badge badge-teal">Strong Buy 19/20，均價目標$217-225</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$151.72</div><div class="sub">✅ 52週 $132.66–$219.82（高點2025/9）</div></div>
+    <div class="meta-item"><label>TTM 營收</label><div class="val">$19.21B</div><div class="sub">FY25 YoY +2.98% ✅</div></div>
+    <div class="meta-item"><label>TTM 淨利／EPS</label><div class="val">$2.03B／$5.87</div><div class="sub">TTM至2026Q2 ✅</div></div>
+    <div class="meta-item"><label>PE(TTM) / Fwd PE</label><div class="val">25.86 / 14.74</div><div class="sub">PEG 0.43 ✅</div></div>
+    <div class="meta-item"><label>Thesis 成立度</label><div class="val">3.4 / 5</div><div class="sub">結構成立但財報雜訊大</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐⭐☆☆</div><div class="sub">核能稀缺性強，槓桿為隱憂</div></div>
+  </div>
+</div>
+
+<!-- ── TOC ── -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#mode1">模式一 深度研究</a>
+    <span class="toc-sep">·</span>
+    <a href="#biz">業務引擎</a>
+    <a href="#thesis">核心Thesis</a>
+    <a href="#competition">競爭格局</a>
+    <a href="#moat">成長象限</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode2">模式二 財報解析</a>
+    <span class="toc-sep">·</span>
+    <a href="#earnings">Q2 2026財報</a>
+    <a href="#eps">EPS與估值錨點</a>
+    <a href="#dcf">DCF情境</a>
+    <a href="#targets">投行目標</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode3">模式三 財務健檢</a>
+    <span class="toc-sep">·</span>
+    <a href="#ratios">六大比率</a>
+    <a href="#capex">CapEx分析</a>
+    <a href="#comps">同業對比</a>
+    <a href="#health">綜合診斷</a>
+    <span class="toc-sep">·</span>
+    <a href="#final">綜合總結</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════
+     模式一：深度研究
+══════════════════════════════════════ -->
+<div id="mode1" class="mode-divider">
+  <h2>◈ 模式一：公司深度研究</h2>
+  <p>業務引擎 · 核心Thesis · 競爭格局 · Peter Lynch成長象限 · 護城河五維評分</p>
+</div>
+
+<!-- 1. 公司基本介紹 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">公司基本介紹</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">Vistra Corp（NYSE: VST）總部德州Irving，是美國前三大競爭型（非受管制）電力生產商之一，同時經營<strong>發電（Generation）與零售售電（Retail）</strong>兩大垂直整合業務。發電組合涵蓋天然氣、燃煤、核能與電池儲能，其中核能資產（透過2024年完成的Energy Harbor併購＋原有Comanche Peak電廠，合計4座核電廠、逾6,400MW零碳基載）是2025-2026年市場重新評價Vistra的核心敘事——受惠於AI資料中心用電需求爆發，Vistra已與AWS、Meta簽署多筆20年期核能購售電合約（PPA），成為「核能稀缺性重估＋AI用電荒」雙題材的代表股之一。</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽（TTM至2026Q2）✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$19.21B</div><div class="big-label">TTM 營收</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">FY25 +2.98%</div><div class="big-label">YoY（年度基準）</div></div>
+        <div><div class="big-num" style="font-size:22px;">毛利率 — ❌</div><div class="big-label">電力生產商慣以EBITDA而非毛利率衡量</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">$2.26B</div><div class="big-label">TTM FCF ✅</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent)">
+    <h3 style="color:var(--accent)">🏭 所屬產業與市場地位</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">所屬產業：<strong>美國競爭型電力生產商（Independent Power Producer, IPP）／零售電力</strong>。2026年1月宣布收購Cogentrix Energy（10座現代化天然氣電廠，約5,500MW，約$4B交易），加上2025年10月完成的Lotus Infrastructure收購（7座氣電廠，約2,600MW），Vistra合併後裝置容量將擴大至約<strong>50,000MW</strong>，鞏固其美國最大競爭型發電商地位之一，並擁有<strong>美國最大電池儲能組合</strong>（含全球最大單一儲能設施）。✅（來源：Vistra IR、SEC 8-K、PowerMag）</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財務摘要</th>
+          <th class="num">FY2022</th>
+          <th class="num">FY2023</th>
+          <th class="num">FY2024</th>
+          <th class="num">FY2025 A</th>
+          <th class="num">TTM(2026Q2)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$13.73B ✅</td><td class="num">$14.78B ✅</td><td class="num">$17.22B ✅</td><td class="num">$17.74B ✅</td><td class="num">$19.21B ✅</td></tr>
+        <tr><td>YoY 成長</td><td class="num ok">+13.7% ✅</td><td class="num ok">+7.7% ✅</td><td class="num ok">+16.5% ✅</td><td class="num ok">+3.0% ✅</td><td class="num">— ⚠️（滾動四季）</td></tr>
+        <tr><td>Adj EBITDA</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num ok">$5.91B ✅</td><td class="num">2026指引$6.8-7.6B ✅</td></tr>
+        <tr><td>EPS（GAAP 稀釋）</td><td class="num bad">-$3.26 ✅</td><td class="num ok">$3.58 ✅</td><td class="num ok">$7.00 ✅</td><td class="num ok">$2.18 ✅⚠️（大幅回落，見下節）</td><td class="num">$5.87 ✅</td></tr>
+        <tr><td>淨利</td><td class="num bad">-$1,377M ✅</td><td class="num ok">$1,343M ✅</td><td class="num ok">$2,467M ✅</td><td class="num ok">$752M ✅</td><td class="num ok">$2,030M ✅</td></tr>
+        <tr><td>營運現金流(OCF)</td><td class="num">$485M ✅</td><td class="num ok">$5,453M ✅</td><td class="num ok">$4,563M ✅</td><td class="num ok">$4,070M ✅</td><td class="num">— ❌</td></tr>
+        <tr><td>CapEx</td><td class="num">-$1,301M ✅</td><td class="num">-$1,676M ✅</td><td class="num">-$2,078M ✅</td><td class="num">-$2,752M ✅</td><td class="num">2026指引-$2,587M ✅</td></tr>
+        <tr><td>FCF</td><td class="num bad">-$816M ✅</td><td class="num ok">$3,777M ✅</td><td class="num ok">$2,485M ✅</td><td class="num ok">$1,318M ✅</td><td class="num ok">$2,260M ✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅ 已驗證（來源：stockanalysis.com、Vistra IR、SEC EDGAR 10-K/10-Q/8-K）｜❌ 電力公司財報結構無傳統「毛利率」科目，改以Adjusted EBITDA為核心經營指標｜⚠️ FY2025 GAAP EPS由FY2024的$7.00驟降至$2.18，主因非現金商品避險部位按市值評價（mark-to-market）損益波動，非核心營運惡化，詳見模式二第7節「反推試算」。</p>
+</div>
+
+<!-- 2. 業務引擎分析 -->
+<div id="biz" class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">業務引擎分析</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>⚡ Generation（發電）— FY2025 Adj EBITDA $4.29B（72.5%）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">涵蓋天然氣（24,120MW，59%）、燃煤（8,428MW，21%）、核能（6,448MW，16%）與太陽能/電池儲能（1,474MW，4%），2024年底裝置容量合計40,657MW。2026年Q2 Generation Adj EBITDA年增68%至$994M，主因PJM容量市場價格創紀錄、彈性燃氣機組優化調度、Martin Lake燃煤1號機組復役，以及Lotus收購貢獻。✅（來源：Vistra 10-K/8-K）</p>
+    </div>
+    <div class="card">
+      <h3>🏠 Retail（零售售電）— FY2025 Adj EBITDA $1.62B（27.5%）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">向約400萬住宅/商用電力用戶提供零售售電服務，主要品牌含TXU Energy、Homefield Energy等，扮演「天然的發電避險」角色（零售端固定合約可平滑批發電價波動）。2026年Q2 Retail Adj EBITDA約$773M，優於去年同期$756M，全年財報中管理層稱創零售業務史上最佳紀錄。✅</p>
+    </div>
+    <div class="card">
+      <h3>⚛️ 核能資產＋資料中心直供電PPA（結構性成長引擎）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">2024年完成Energy Harbor併購（$3.43B），取得Beaver Valley（PA）、Davis-Besse、Perry（OH）三座核電廠，合併原有Comanche Peak（TX），共4座核電廠。2025年9月與AWS簽署<strong>20年期1,200MW</strong> PPA（Comanche Peak，2027年底起交付、2032年達滿載）；另與Meta簽署3筆20年期PPA累計<strong>2.6GW</strong>（含升功率）。這些長約支撐核電機組延役至2050年代，Comanche Peak執照已延展至2053年。✅（來源：Power-Eng、ANS Nuclear Newswire、Vistra IR）</p>
+    </div>
+    <div class="card">
+      <h3>🔧 併購驅動規模擴張：Lotus＋Cogentrix</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">2025年10月完成Lotus Infrastructure收購（7座氣電廠，約2,600MW）；2026年1月宣布收購Cogentrix Energy（10座現代化氣電廠，約5,500MW，約$4B），完成後合併裝置容量將達約50,000MW。此策略以「快速擴大彈性天然氣調度容量」應對AI資料中心用電需求，但也是導致公司槓桿持續處於高檔的主因（詳見模式三）。✅</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>核心業務線</th><th>目前狀態</th><th>護城河來源</th><th>2026-2027關鍵催化劑</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Generation（氣/煤/核/儲能）</strong></td><td class="num">Adj EBITDA佔比72.5%，Q2'26 YoY+68%</td><td>多元燃料組合＋PJM容量價格上行</td><td>Cogentrix整合、PJM 2027/28容量拍賣結果</td></tr>
+        <tr><td><strong>Retail（零售售電）</strong></td><td class="num">Adj EBITDA佔比27.5%，穩定成長</td><td>400萬用戶基礎、品牌黏著度</td><td>零售毛利率維持、客戶流失率</td></tr>
+        <tr><td><strong>核能PPA（AWS/Meta）</strong></td><td class="num">已簽約，尚未滿載交付</td><td>NRC延役執照＋稀缺零碳基載</td><td>新增Hyperscaler簽約、機組延壽審批</td></tr>
+        <tr><td><strong>Lotus/Cogentrix併購整合</strong></td><td class="num">Lotus已完成，Cogentrix簽約待closing</td><td>規模效應、彈性氣電產能</td><td>Cogentrix交割時程、綜效兌現</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 3. 核心Thesis -->
+<div id="thesis" class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">核心 Thesis 與未來成長驅動</div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 1｜AI資料中心用電需求已轉化為具約束力的長期PPA</div>
+      <div class="content">與AWS（1,200MW／20年）、Meta（累計2.6GW／3筆20年PPA）簽署的合約均為<strong>具法律約束力的長期協議</strong>，而非僅備忘錄——這與許多同業（如尚在MOU階段的SMR新創）明顯不同。已鎖定的長約收入為2027年後現金流提供高能見度。✅ 明確成立，且優於多數核能同業的訂單品質。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 2｜核能資產稀缺性帶動獲利與市場重估</div>
+      <div class="content">Comanche Peak執照延展至2053年，加上Energy Harbor三座機組，Vistra是全美少數同時擁有<strong>已商轉、已延役核能機組</strong>且股票公開交易的競爭型電力商。EV/EBITDA自過去個位數區間擴張至現行10.68倍，反映市場對核能基載稀缺性重新定價。✅ 成立，惟需留意本益比/倍數是否已部分反映此題材（見第7節）。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 3｜EBITDA與自由現金流實質成長，非故事股</div>
+      <div class="content">2026年EBITDA guidance $6.8-7.6B較FY2025實際值$5.91B成長15-29%；2027年EBITDA機會區間中值達$7.4-7.8B，管理層並重申2026 Adj FCF guidance $3.925-4.725B。Q2'26 Adj EBITDA年增30.8%屬實質營運改善（PJM容量價格、Martin Lake復役、Lotus貢獻），與尚無收入的早期核能新創（如SMR）本質不同。✅ 成立。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 4｜GAAP財報數字能否穩定反映EBITDA成長</div>
+      <div class="content">FY2025 GAAP EPS由FY2024的$7.00驟降至$2.18（-69%），Q2'26營收$4.02B較共識($5.73-6.29B)大幅落差(-30%~-36%)，調整後EPS $1.68亦不敵共識$2.05（-18%），主因是<strong>商品避險部位的非現金按市值評價（MTM）損益</strong>波動劇烈。這類會計雜訊雖不影響核心EBITDA/FCF，但持續造成財報「Miss」headline與股價短期承壓。⚠️ 部分成立——長期基本面成立，短期財報雜訊是持續的市場信心測試。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 5｜併購驅動成長不侵蝕資產負債表韌性</div>
+      <div class="content">Lotus（已完成）＋Cogentrix（約$4B，簽約待交割）均以舉債方式融資，淨負債已達約$19.6B、D/E約3.6倍。2026年4月完成$4.0B新債發行（用於償還2027到期債務並延展存續期），顯示公司選擇「以新債置換舊債＋持續舉債併購」而非優先去槓桿。⚠️ 部分成立——目前EBITDA成長速度仍快於負債成長，惟若電力批發價或PJM容量價格反轉，槓桿將快速轉為風險。</div>
+    </div>
+  </div>
+
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🚀 核心成長驅動力</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>新增Hyperscaler PPA簽約</strong>：若再有Google/Microsoft等直接向Vistra核電機組簽署長約，將進一步鎖定2030年代現金流能見度</li>
+        <li><strong>PJM 2027/2028容量拍賣結果</strong>：近年PJM容量價格屢創新高，直接放大Generation segment EBITDA槓桿</li>
+        <li><strong>Cogentrix整合綜效兌現</strong>：合併後裝置容量達50,000MW，規模效應與調度優化空間</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 核心監控風險</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>電力批發價／MTM避險損益波動</strong>：觸發條件——單季GAAP EPS或營收與共識落差再度超過20%以上，恐引發市場對財報品質的疑慮</li>
+        <li><strong>高槓桿遇上升息或EBITDA不如預期</strong>：觸發條件——淨負債/EBITDA比率突破4.0倍，或信評機構調降展望</li>
+        <li><strong>資料中心直供電/同址（co-location）監管政策風險</strong>：觸發條件——FERC或州級監管機構對核電廠直供資料中心的輸配電定價規則轉趨不利，可能影響PPA經濟性</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 競爭格局 -->
+<div id="competition" class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">競爭格局：美國核能／競爭型電力生產商對照表</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th>核能佔比／規模</th><th>資料中心合約進度</th><th>對Vistra威脅度</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Vistra（本案）</strong></td><td>4座核電廠，6,448MW（~16%發電組合）</td><td>AWS 1.2GW＋Meta 2.6GW，均為具約束力20年PPA</td><td>—</td></tr>
+        <tr><td><strong>Constellation Energy（CEG）</strong></td><td>全美最大核能發電商，核能佔比逾90%，約32GW核能裝置容量</td><td>2024年與Microsoft簽署Three Mile Island（Crane Clean Energy Center）復役20年PPA，題材先行者</td><td>🔴 高｜純核能曝險最高，市值~$98.7B遠超Vistra，估值溢價明顯高於VST</td></tr>
+        <tr><td><strong>Talen Energy（TLN）</strong></td><td>擁有Susquehanna核電廠（PA，約2.5GW），核能佔比高</td><td>2024年即與AWS簽署Susquehanna旁址資料中心PPA（產業首例），但因FERC共置爭議一度受挫</td><td>🟡 中｜規模較小（市值~$16-19B），但為資料中心「同址供電」模式先驅，PE因獲利波動呈負值</td></tr>
+        <tr><td><strong>NRG Energy（NRG）</strong></td><td>以天然氣/零售為主，核能曝險低於Vistra</td><td>近期加碼資料中心供電合作，但無自有核電廠</td><td>🟢 低｜業務結構與Vistra相近（發電+零售），但缺乏核能稀缺性題材，估值倍數EV/EBITDA 15.07x高於VST</td></tr>
+        <tr><td><strong>PPL Corporation（PPL）</strong></td><td>主要為受管制輸配電公司，核能曝險低</td><td>賓州/肯塔基電網升級受惠資料中心用電成長，非直接PPA供應商</td><td>🟢 低｜商業模式為受管制公用事業，非同一競爭維度，僅作估值對照</td></tr>
+        <tr><td><strong>PSEG（PEG）</strong></td><td>擁有Salem/Hope Creek核電廠（NJ），受管制＋競爭混合模式</td><td>紐澤西資料中心需求增溫，核能資產同樣受題材帶動重估</td><td>🟡 中｜核能資產結構與Vistra類似但受管制業務占比更高，波動性較低</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box" style="margin-top:16px;">
+    <h3>⚠️ 競爭關鍵監控：Vistra在「PPA品質」領先，但在「純核能估值溢價」落後CEG</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Vistra與Talen是目前產業中<strong>唯二已將hyperscaler需求轉化為具約束力長期PPA</strong>的公用事業/IPP（相對於仍多停留在MOU階段的SMR新創如NuScale/Oklo/X-energy）。但市場估值上，核能占比更高、業務結構更單純的Constellation Energy（CEG）享有更高的EV/EBITDA與PE溢價；Vistra因發電組合仍含燃氣/燃煤與零售業務，加上財報MTM雜訊，尚未取得同等估值溢價。每季監控重點：Vistra是否新增Hyperscaler PPA、CEG/TLN估值溢價與VST之間的差距是否收斂。</p>
+  </div>
+</div>
+
+<!-- 5. 成長象限 & 護城河評分 -->
+<div id="moat" class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Peter Lynch 成長象限 & 護城河評分</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border:2px solid var(--purple);">
+      <h3 style="color:var(--purple)">📊 Lynch 象限判斷</h3>
+      <div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">景氣循環股 → 正轉型為「快速成長股」的過渡期</div>
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <thead><tr><th>判斷標準</th><th>Vistra 現況</th><th>判定</th></tr></thead>
+          <tbody>
+            <tr><td>本質是否受電力批發價景氣循環影響</td><td>是，發電/零售EBITDA仍隨PJM容量與電價波動</td><td class="warn">⚠️ 具循環股本質</td></tr>
+            <tr><td>是否出現結構性、非循環性的新成長動能</td><td>AI資料中心PPA為20年期長約，非傳統景氣循環定價</td><td class="ok">✅ 具備結構性成長要素</td></tr>
+            <tr><td>EBITDA/獲利成長率是否達雙位數</td><td>2026 guidance中值年增~21%、2027機會區間中值續增</td><td class="ok">✅ 符合快速成長股門檻</td></tr>
+            <tr><td>估值是否已完全反映成長（Forward PE/PEG）</td><td>Forward PE 14.74、PEG 0.43，相對成長率明顯偏低</td><td class="ok">✅ 尚未完全反映，估值具吸引力</td></tr>
+            <tr><td>財報是否穩定兌現、無雜訊</td><td>GAAP EPS/營收因MTM避險損益大幅波動，非完全穩定</td><td class="warn">⚠️ 財報雜訊仍偏高</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 判斷依據：Vistra傳統上屬於「景氣循環股」（電力批發價/容量市場循環驅動獲利），但AI資料中心長約PPA與核能延役敘事，正為其注入「快速成長股」的成分——EBITDA guidance隱含年增速逾20%，且Forward PE/PEG均低於典型快速成長股估值。惟GAAP財報雜訊（MTM）與高槓桿使其尚不能完全歸類為穩定快速成長股，較貼切的定位是「循環股向結構性成長股過渡」，此階段通常伴隨最大的估值重估空間，也伴隨最大的財報雜訊風險。</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item">
+      <div class="moat-label">不可替代性</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">核能執照/延役許可極稀缺，新建核電廠審批曠日費時</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">客戶黏著度</div>
+      <div class="moat-stars">★★★☆☆</div>
+      <div class="moat-score">3.5 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">20年期PPA鎖定＋零售用戶品牌黏著，惟零售端有轉換率風險</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">網路效應</div>
+      <div class="moat-stars">★☆☆☆☆</div>
+      <div class="moat-score">1.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">電力生產／售電本質不具網路效應</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">成本優勢</div>
+      <div class="moat-stars">★★★☆☆</div>
+      <div class="moat-score">3.5 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">核能/燃煤邊際成本低，惟高槓桿墊高資金成本</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">規模效應</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">併購後裝置容量近50,000MW，美國最大電池儲能組合之一</div>
+    </div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：3.2 / 5 ⭐⭐⭐☆☆（核能稀缺性與規模效應紮實，但高槓桿與財報雜訊拉低整體評等）</div>
+
+  <div class="caution-box" style="margin-top:24px;">
+    <h3>⚠️ 建議動作（深度研究視角）</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+      <div>
+        <strong>當前建議：</strong>符合使用者「重視護城河/現金流/安全邊際」原則中的<strong>核能資產稀缺性與長約現金流</strong>兩項，但高槓桿與財報雜訊使其安全邊際不如傳統受管制公用事業。適合作為<strong>核心池衛星部位或戰術池</strong>配置，建議控制在中等倉位，不宜視為完全防禦型部位。<br><br>
+        <strong>加碼觸發（需同時滿足多項）：</strong>
+        <ul style="padding-left:16px;">
+          <li>再簽署一筆以上新的Hyperscaler直供電PPA（Google/Microsoft/OpenAI等）</li>
+          <li>淨負債/EBITDA降至3.0倍以下且維持EBITDA guidance達成率</li>
+          <li>GAAP EPS/營收連續兩季與共識落差收斂至5%以內（財報雜訊降低）</li>
+        </ul>
+      </div>
+      <div>
+        <strong>賣出/迴避觸發：</strong>
+        <ul style="padding-left:16px;">
+          <li>淨負債/EBITDA突破4.0倍且信評展望轉負向</li>
+          <li>PJM容量拍賣價格連續兩期顯著下滑，反映供給端大幅增加</li>
+          <li>任一座核電機組因安全/監管問題被迫停機超過一季</li>
+          <li>資料中心同址供電（co-location）遭FERC或州監管機構全面禁止或大幅加價</li>
+        </ul>
+        <br>
+        <strong>每季監控指標：</strong>Adj EBITDA達成率、淨負債/EBITDA、新增PPA簽約量、GAAP與Adj EPS落差幅度
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式二：財報解析
+══════════════════════════════════════ -->
+<div id="mode2" class="mode-divider">
+  <h2>◈ 模式二：最新財報解析</h2>
+  <p>Q2 2026 財報 · EPS多年期估值錨點 · DCF三情境 · 投行目標價 · 操作建議</p>
+</div>
+
+<!-- 6. Q2 2026 財報 Beat/Miss -->
+<div id="earnings" class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">Q2 2026 財報（2026-08-07發布）</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--gold); margin-bottom:20px;">
+    <h3 style="color:var(--gold)">⚠️ 營收／調整後EPS雙雙不敵共識，但EBITDA實質成長31%且全年指引維持不變</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Q2 2026營收$4.02B，較市場共識（不同機構估計$5.73B~$6.29B，落差顯示分析師模型分歧）大幅落差約30-36%；調整後EPS $1.68亦不敵共識$2.05（-18.05%）。惟這主要反映<strong>約$611M的商品衍生工具非現金按市值評價（MTM）損失</strong>，並非核心營運惡化——Ongoing Operations Adjusted EBITDA達$1.767B，年增30.8%（Generation +68%、Retail小幅成長），管理層<strong>重申全年guidance不變</strong>。財報發布當日股價開盤後下跌約1.8%至$138.79，反映市場對「營收/EPS表面miss」的短線負面反應。</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>指標</th><th class="num">實際值 ✅</th><th class="num">市場預期 ⚠️</th><th class="num">YoY 變化</th><th>判定</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>營收</td><td class="num bad">$4.02B</td><td class="num">$5.73B~$6.29B（來源分歧）</td><td class="num bad">-5.5% YoY</td><td><span class="badge badge-red">重大 Miss ❌</span></td></tr>
+        <tr><td>調整後EPS</td><td class="num bad">$1.68</td><td class="num">$2.05</td><td class="num">— ⚠️</td><td><span class="badge badge-red">Miss（-18.1%）❌</span></td></tr>
+        <tr><td>GAAP 稀釋EPS</td><td class="num">$0.76</td><td class="num">— ❌</td><td class="num bad">-6.2%（去年同期$0.81）</td><td><span class="badge badge-yellow">小幅衰退 ≈</span></td></tr>
+        <tr><td>Adj EBITDA（Ongoing Ops）</td><td class="num ok">$1.767B</td><td class="num">— ❌</td><td class="num ok">+30.8%（$1.35B→$1.767B）</td><td><span class="badge badge-green">實質大幅成長 ✅</span></td></tr>
+        <tr><td>Generation segment EBITDA</td><td class="num ok">$994M</td><td class="num">— ❌</td><td class="num ok">+68%</td><td><span class="badge badge-green">強勁成長 ✅</span></td></tr>
+        <tr><td>Retail segment EBITDA</td><td class="num ok">$773M</td><td class="num">— ❌</td><td class="num ok">+2.2%（去年同期$756M）</td><td><span class="badge badge-green">穩健成長 ✅</span></td></tr>
+        <tr><td>淨利</td><td class="num">— ⚠️</td><td class="num">— ❌</td><td class="num bad">-6.7% YoY</td><td><span class="badge badge-yellow">小幅衰退 ≈</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px; border-left:3px solid var(--green);">
+    <h3 style="color:var(--green)">全年指引變化對照</h3>
+    <div class="tbl-wrap" style="margin-top:8px;">
+      <table>
+        <thead><tr><th>指引項目</th><th class="num">財報前指引</th><th class="num">Q2'26後最新指引</th><th>變化</th></tr></thead>
+        <tbody>
+          <tr><td>2026 Adj EBITDA</td><td class="num">$6.8B–$7.6B</td><td class="num ok">$6.8B–$7.6B（重申）</td><td><span class="badge badge-green">維持不變 ✅</span></td></tr>
+          <tr><td>2026 Adj FCF before growth</td><td class="num">$3.925B–$4.725B</td><td class="num ok">$3.925B–$4.725B（重申）</td><td><span class="badge badge-green">維持不變 ✅</span></td></tr>
+          <tr><td>2027 Adj EBITDA 機會區間中值</td><td class="num">$7.4B–$7.8B</td><td class="num ok">$7.4B–$7.8B（維持）</td><td><span class="badge badge-green">維持不變 ✅</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px; color:var(--text2); margin-top:8px;">管理層明確表示<strong>預期落在Adj EBITDA與FCF guidance區間中值以上</strong>，展現對下半年執行力的信心，此為財報中對沖「表面營收/EPS Miss」負面觀感的關鍵訊號。✅（來源：Vistra 8-K、PRNewswire）</p>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>股價反應（財報前後）</h3>
+    <div style="font-size:13px; line-height:1.9; color:var(--text)">
+      <strong>財報發布（2026-08-07盤前）</strong>：股價盤前下跌約1.2%<br>
+      <strong>財報後開盤</strong>：股價下跌約1.8%至$138.79，反映營收/調整後EPS表面Miss<br>
+      <strong>近月走勢（截至9/8）</strong>：股價自財報後低點$138.79回升至$151.72（+9.3%），顯示市場在消化MTM雜訊後，逐步將焦點拉回EBITDA成長與guidance維持不變的實質面。惟股價仍較2025年9月的52週高點$219.82低約31%，反映整體AI電力題材股在2026年經歷顯著估值修正。
+    </div>
+  </div>
+</div>
+
+<!-- 7. EPS多年期表 & 歷史本益比 -->
+<div id="eps" class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">估值歷史錨點：多年期EPS ＋ 歷史本益比（★必附）</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財年</th>
+          <th class="num">EPS 實際值/預估值</th>
+          <th class="num">來源／機構</th>
+          <th class="num">參考股價</th>
+          <th class="num">隱含本益比 PE</th>
+          <th>狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>FY2023 A</strong></td>
+          <td class="num ok">$3.58 ✅</td>
+          <td class="num">stockanalysis.com</td>
+          <td class="num">— ⚠️年中股價波動大，未取得精確年末收盤</td>
+          <td class="num">單季曾低至7.09倍 ⚠️（Jun 2023）</td>
+          <td><span class="badge badge-yellow">轉盈初期，倍數仍低</span></td>
+        </tr>
+        <tr style="background:rgba(21,128,61,0.03)">
+          <td><strong>FY2024 A</strong></td>
+          <td class="num ok">$7.00 ✅</td>
+          <td class="num">stockanalysis.com</td>
+          <td class="num">$136.74 ✅（2024/12/31收盤）</td>
+          <td class="num ok">≈19.5倍 ✅（自行計算）</td>
+          <td><span class="badge badge-green">獲利創高，倍數溫和</span></td>
+        </tr>
+        <tr style="background:rgba(180,83,9,0.05)">
+          <td><strong>FY2025 A</strong></td>
+          <td class="num warn">$2.18 ✅（GAAP，較FY24驟降69%）</td>
+          <td class="num">stockanalysis.com</td>
+          <td class="num">— ⚠️（52週高點$219.82發生於2025/9）</td>
+          <td class="num warn">單季曾高達72.67倍 ⚠️（Dec 2025）</td>
+          <td><span class="badge badge-yellow">GAAP獲利雜訊使PE失真</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2026 E</strong></td>
+          <td class="num">$9.12 ✅共識均值（區間$5.84–$11.18）</td>
+          <td class="num">多家分析師共識彙整</td>
+          <td class="num">$151.72（現價）</td>
+          <td class="num">≈16.6倍 ⚠️（以現價/共識均值計算）</td>
+          <td><span class="badge badge-green">獲利大幅回升預期</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2027 E</strong></td>
+          <td class="num">$10.73 ✅共識均值（區間$8.59–$13.27）</td>
+          <td class="num">多家分析師共識彙整</td>
+          <td class="num">$151.72（現價）</td>
+          <td class="num">≈14.1倍 ⚠️</td>
+          <td><span class="badge badge-green">持續成長</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2028 E</strong></td>
+          <td class="num">— ❌（僅取得總淨利區間，非每股EPS）</td>
+          <td class="num">未查得可靠每股EPS一致來源</td>
+          <td class="num">—</td>
+          <td class="num">— ❌</td>
+          <td><span class="badge badge-red">資料缺口</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 分歧提示：FY2026E EPS共識區間橫跨$5.84~$11.18，跨度近2倍，反映分析師對MTM避險損益與電力批發價假設高度分歧，不宜只取單一數字視為共識；建議以區間思維看待。</p>
+
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr><th colspan="4" style="color:var(--accent); font-size:13px;">★ 歷史本益比錨點表（近9年区间統計）</th></tr>
+        <tr><th>期間</th><th class="num">本益比</th><th>狀態</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>近9年平均PE</td><td class="num">27.27倍 ✅</td><td><span class="badge badge-blue">長期平均</span></td><td>來源：wisesheets/historicalperatio.com季度PE統計</td></tr>
+        <tr><td>近5年平均PE</td><td class="num">31.92倍 ✅</td><td><span class="badge badge-yellow">近期均值偏高</span></td><td>反映2024-2025年題材重估拉高均值</td></tr>
+        <tr><td>近3年平均PE</td><td class="num">34.47倍 ✅</td><td><span class="badge badge-yellow">近期均值持續墊高</span></td><td>AI資料中心題材帶動估值系統性上移</td></tr>
+        <tr style="background:rgba(220,38,38,0.04)"><td><strong>歷史最低本益比（季度）</strong></td><td class="num ok">7.09倍（2023年Q2）✅</td><td><span class="badge badge-green">低點錨點</span></td><td>2023年中，公司剛轉虧為盈、市場尚未定價AI題材，估值最為便宜</td></tr>
+        <tr style="background:rgba(180,83,9,0.04)"><td><strong>歷史最高本益比（季度）</strong></td><td class="num warn">72.67倍（2025年Q4）✅</td><td><span class="badge badge-yellow">高點警訊</span></td><td>股價維持高檔但GAAP EPS因MTM大幅萎縮，PE數字失真偏高</td></tr>
+        <tr><td>目前PE（TTM，2026/9/8）</td><td class="num">25.86倍 ✅</td><td><span class="badge badge-blue">位於長期均值附近</span></td><td>低於近3-5年均值（31-34倍），但仍高於歷史最低點</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="risk-card" style="margin-top:12px;">
+    <h4>📌 反推試算結論：VST近兩年股價漲幅主要由EBITDA/獲利實質成長＋本益比倍數同步擴張共同驅動，但2025年GAAP EPS走勢已明顯偏離股價</h4>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">將FY2024→FY2025的GAAP EPS變化（$7.00→$2.18，-69%）與同期股價走勢（2025年9月創52週高點$219.82）對照，可清楚看出<strong>2025年的股價漲幅並非由GAAP每股獲利成長支撐，而是由市場對Adjusted EBITDA成長軌跡與AI核能PPA題材的「倍數重估」主導</strong>——這正是2025年Q4季度PE一度衝上72.67倍的原因：分母（GAAP EPS）因MTM避險損益暴跌，但分子（股價）因題材熱度維持高檔，兩者脫鉤。目前股價自高點回落31%至$151.72，TTM PE回落至25.86倍（接近近9年均值27.27倍），可視為<strong>「題材倍數泡沫部分擠出後，估值回歸長期均值」的過程</strong>。往前看，FY2026E/FY2027E共識EPS（$9.12/$10.73）若能兌現，隱含現價PE僅16.6倍/14.1倍，遠低於近3-5年均值（31-34倍）與過去題材高點（72.67倍）——換言之，<strong>若獲利雜訊收斂、EBITDA guidance持續兌現，目前估值對於「獲利成長股」而言並不昂貴；但若2025年式的MTM雜訊反覆出現，市場恐重新以「循環股」邏輯定價，本益比可能向長期均值甚至更低區間收斂</strong>，此為近期最需要持續觀察的估值風險點。</p>
+  </div>
+</div>
+
+<!-- 8. DCF 三情境 -->
+<div id="dcf" class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">DCF 三情境估值（以EV/EBITDA倍數情境法呈現）</div>
+  </div>
+
+  <div class="caution-box">
+    <h3>⚠️ Vistra估值方法論說明</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Vistra現金流受電力批發價與PJM容量市場循環影響，且GAAP財報因MTM避險損益雜訊大，傳統以GAAP EPS為起點的DCF精確度有限。以下採用<strong>「2027E Adjusted EBITDA × EV/EBITDA情境倍數」</strong>的簡化估值框架：以公司自身guidance的2027年EBITDA機會區間（$7.4B-$7.8B）為基礎，搭配不同情境下的EV/EBITDA倍數（現值10.68倍，同業CEG/NRG區間15-18倍、TLN因獲利波動不適用），扣除目前淨負債約$19.6B後回推每股價值。<strong>所有情境倍數與淨負債變動假設均為⚠️自製情境推演，非精確財務模型，僅供參考，與下節投行目標價分開列示以避免混淆。</strong></p>
+  </div>
+
+  <div class="scenario-row">
+    <div class="scenario bear">
+      <h4>🐻 熊市情境（30% 機率）</h4>
+      <div class="scenario-price" style="color:var(--red)">$100-120</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $151.72　-21% ~ -34%</div>
+      <div class="row"><span>2027E EBITDA假設</span><span>$7.0B（guidance下緣或未達標）</span></div>
+      <div class="row"><span>EV/EBITDA倍數</span><span>8.0-8.5倍（電力價格回落＋MTM雜訊重演）</span></div>
+      <div class="row"><span>淨負債假設</span><span>維持或擴大至$21B+（Cogentrix交割後）</span></div>
+      <div class="row"><span>對應方法</span><span>接近52週低點區間$132.66，並考量進一步下探</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：PJM容量拍賣價格回落、新一輪大額MTM虧損、槓桿突破4倍遭信評下調</div>
+    </div>
+    <div class="scenario base">
+      <h4>📊 基準情境（45% 機率）</h4>
+      <div class="scenario-price" style="color:var(--blue)">$165-195</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $151.72　+9% ~ +29%</div>
+      <div class="row"><span>2027E EBITDA假設</span><span>$7.6B（guidance中值）</span></div>
+      <div class="row"><span>EV/EBITDA倍數</span><span>10.5-11.0倍（接近現值，溫和重估）</span></div>
+      <div class="row"><span>淨負債假設</span><span>約$19-20B，Cogentrix交割後小幅上升再逐步去化</span></div>
+      <div class="row"><span>對應方法</span><span>低於分析師均值$217-225，屬相對保守的自製估算</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：guidance如期兌現、MTM雜訊收斂、無重大新增槓桿</div>
+    </div>
+    <div class="scenario bull">
+      <h4>🐂 牛市情境（25% 機率）</h4>
+      <div class="scenario-price" style="color:var(--green)">$230-270</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $151.72　+52% ~ +78%</div>
+      <div class="row"><span>2027E EBITDA假設</span><span>$8.0-8.5B（新增PPA＋Cogentrix綜效超預期）</span></div>
+      <div class="row"><span>EV/EBITDA倍數</span><span>12.5-13.5倍（向CEG/NRG估值溢價收斂）</span></div>
+      <div class="row"><span>淨負債假設</span><span>去槓桿至$17-18B（FCF加速償債）</span></div>
+      <div class="row"><span>對應方法</span><span>貼近分析師目標價上緣（$245-$305）</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：新增Big Tech直接簽約、PJM容量價格續創新高、GAAP財報雜訊明顯收斂</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent);">
+    <h3>敏感度分析：哪個變數對估值影響最大？</h3>
+    <p style="font-size:13px; color:var(--text); line-height:1.7">三情境價差（$100-120至$230-270，約2.2-2.3倍）主要由<strong>「EV/EBITDA倍數能否向核能純血同業CEG/NRG收斂」</strong>與<strong>「淨負債是否持續擴大」</strong>兩項變數共同決定，其重要性高於單純的EBITDA成長率本身——這反映市場目前對Vistra的定價，仍在「循環型IPP」與「結構性核能成長股」兩種估值框架之間拉鋸。自製情境加權估算公允價值約<strong>$170-185（⚠️情境加權平均，非精確模型）</strong>，低於分析師共識均值$217-225，顯示本報告的估值假設相對保守——主要差異來自本報告對EV/EBITDA倍數持續性與槓桿風險採取較審慎的假設，建議與下節投行目標價一併參考，不宜只採單一數字。</p>
+  </div>
+</div>
+
+<!-- 9. 股價位階評估 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">股價位階評估</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>估值倍數現況 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:20px;">25.86x</div><div class="big-label">TTM PE</div></div>
+        <div><div class="big-num" style="font-size:20px;">14.74x</div><div class="big-label">Forward PE</div></div>
+        <div><div class="big-num" style="font-size:20px;">16.96x</div><div class="big-label">P/B</div></div>
+        <div><div class="big-num" style="font-size:20px;">0.43</div><div class="big-label">PEG（相對成長極便宜）</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>企業價值倍數 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:20px;">10.68x</div><div class="big-label">EV/EBITDA</div></div>
+        <div><div class="big-num" style="font-size:20px;">3.70x</div><div class="big-label">EV/Revenue</div></div>
+        <div><div class="big-num" style="font-size:20px;">2.65x</div><div class="big-label">P/S</div></div>
+        <div><div class="big-num" style="font-size:20px;">1.41</div><div class="big-label">Beta（5年）</div></div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px; color:var(--text2)">PEG僅0.43（遠低於1.0門檻）顯示若FY2026/27共識EPS成長兌現，現價相對成長性偏便宜；惟需留意PEG計算基礎的EPS成長率本身也受MTM雜訊影響波動較大，建議搭配EV/EBITDA（更貼近核心營運）交叉檢視。</p>
+</div>
+
+<!-- Comps -->
+<div id="comps" class="section" style="margin-top:0;">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">Comps 同業對照</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th class="num">市值</th><th class="num">Trailing PE</th><th class="num">Forward PE</th><th class="num">EV/EBITDA</th><th>核心定位</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Vistra（VST）</strong></td><td class="num">$50.92B</td><td class="num">25.86x</td><td class="num">14.74x</td><td class="num">10.68x</td><td>發電+零售，核能占比~16%</td></tr>
+        <tr><td>Constellation Energy（CEG）</td><td class="num">~$98.7B ⚠️（7月數據，非同日快照）</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td>全美最大核能純血公司</td></tr>
+        <tr><td>Talen Energy（TLN）</td><td class="num">~$16-18.8B ⚠️（來源分歧）</td><td class="num bad">-511x⚠️（獲利極小/波動）</td><td class="num">— ❌</td><td class="num">— ❌</td><td>Susquehanna核電+資料中心同址供電先驅</td></tr>
+        <tr><td>NRG Energy（NRG）</td><td class="num">$25.03B</td><td class="num">32.63x</td><td class="num">12.05x</td><td class="num">15.07x</td><td>氣電+零售為主，無自有核電廠</td></tr>
+        <tr><td>PPL Corporation（PPL）</td><td class="num">— ❌（未取得同日數字）</td><td class="num">22.66x</td><td class="num">18.63x</td><td class="num">— ❌</td><td>受管制輸配電，非直接可比但作估值錨點</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 各公司數據來源與快照時間不完全一致（部分為2026年7-9月不同日期），僅供相對定位參考，不宜逐位小數精確比較。VST的Forward PE（14.74x）低於NRG（12.05x略低但trailing PE遠高於VST）、PPL（18.63x），顯示市場對VST 2026-2027年獲利成長預期偏樂觀但尚未給予CEG等級溢價。</p>
+</div>
+
+<!-- 11. 額外優勢/風險 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">額外優勢/風險</div>
+  </div>
+  <div class="card-grid">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>股票回購與股利</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">剩餘庫藏股授權額度約$1.5B ✅；季度現金股利$0.23（除息日2026/9/21），年化約$0.92，殖利率0.61-0.67%（來源略有差異），配息率僅約15.6%，顯示現金優先用於再投資與去化債務而非高配息。✅</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <h3>機構持股與內部人交易</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">機構持股比例約86.5% ✅；近一季648家機構加碼、791家減碼，呈現分歧但整體仍高度機構化持股。CEO James Burke於2026/8/24以每股$135買進2,000股，屬於股價回落後的內部人信心表態訊號 ✅。</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--gold)">
+      <h3>⚠️ 財報雜訊為近期最大額外風險</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">連續數季GAAP營收/EPS因MTM避險損益與共識產生大幅落差，即便核心EBITDA/FCF guidance均維持不變，仍造成股價短線劇烈波動（財報後單日下跌1.8-3.7%不等）。若此模式持續，可能侵蝕市場對管理層財測透明度的信任，是估值能否向核能純血同業（CEG）溢價收斂的關鍵障礙。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 12. 投行目標價 -->
+<div id="targets" class="section">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">投行目標價與操作建議</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>機構</th><th>評等</th><th class="num">目標價</th><th>日期</th></tr></thead>
+      <tbody>
+        <tr><td>JPMorgan</td><td><span class="badge badge-green">Overweight</span></td><td class="num">$239 ✅</td><td>2026年（上調）</td></tr>
+        <tr><td>BMO Capital</td><td><span class="badge badge-green">Outperform（隱含）</span></td><td class="num">$245（自$236上調）✅</td><td>2026年</td></tr>
+        <tr><td>Wells Fargo</td><td><span class="badge badge-green">Buy</span></td><td class="num">— ⚠️（未取得精確數字）</td><td>2026/9/1</td></tr>
+        <tr><td>共識彙整（20家分析師）</td><td><span class="badge badge-green">Strong Buy（19 Buy / 0 Hold / 1 Sell）</span></td><td class="num">均值$217-225 ✅，中位數$221 ✅，區間$106-$305 ✅</td><td>截至2026/9</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--gold); margin-top:16px;">
+    <h3 style="color:var(--gold)">分歧點</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">投行目標價區間極寬（$106-$305，近3倍價差），反映市場對「核能PPA題材能否持續、槓桿是否可控、MTM雜訊是否收斂」三大變數存在顯著分歧。多數頭部投行（JPMorgan $239、BMO $245）目標價遠高於本報告自製DCF情境基準值（$165-195），顯示賣方機構對EV/EBITDA倍數向CEG/NRG收斂的假設較本報告樂觀；本報告的保守假設主要反映對高槓桿與財報雜訊的審慎看待。</p>
+  </div>
+
+  <div class="action-box" style="margin-top:16px;">
+    <h3>✅ 最終操作建議（財報解析視角）</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">現價$151.72相對投行共識目標價（$217-225）存在約43-48%潛在上行空間，且相對本報告自製基準情境（$165-195）亦有小幅上行空間，加上PEG僅0.43顯示成長性尚未被充分定價。<strong>對於已持有者：可續抱，逢財報雜訊造成的非理性下跌可視為加碼機會，但需嚴格觀察槓桿指標；對於未持有者：可分批建立戰術池部位，不建議一次重倉，因財報雜訊仍可能造成短期20-30%級別的股價波動。</strong></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式三：財務健檢
+══════════════════════════════════════ -->
+<div id="mode3" class="mode-divider">
+  <h2>◈ 模式三：財務風險健檢</h2>
+  <p>六大比率診斷 · 債務到期時程 · CapEx分析 · 同業對比 · 綜合診斷</p>
+</div>
+
+<!-- 13. 財務數據填表 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">財務數據填表（近3期）</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>項目</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">2026Q2末(最新)</th></tr></thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$17.22B ✅</td><td class="num">$17.74B ✅</td><td class="num">TTM $19.21B ✅</td></tr>
+        <tr><td>Adj EBITDA</td><td class="num">— ❌</td><td class="num">$5.91B ✅</td><td class="num">2026 guidance $6.8-7.6B ✅</td></tr>
+        <tr><td>淨利</td><td class="num">$2.47B ✅</td><td class="num">$0.75B ✅</td><td class="num">TTM $2.03B ✅</td></tr>
+        <tr><td>營運現金流</td><td class="num">$4.56B ✅</td><td class="num">$4.07B ✅</td><td class="num">— ❌</td></tr>
+        <tr><td>總資產</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">$38.02B ✅</td></tr>
+        <tr><td>股東權益</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">$5.48B ✅</td></tr>
+        <tr><td>短期債務</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">$2.18B ✅</td></tr>
+        <tr><td>長期債務</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">$17.72B ✅</td></tr>
+        <tr><td>總債務</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">$19.90B ✅</td></tr>
+        <tr><td>現金及約當現金</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">$0.785B ✅</td></tr>
+        <tr><td>淨負債</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">$19.6B ✅（估算：總債務-現金）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 14. 六大比率 -->
+<div id="ratios" class="section">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">六大比率診斷</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>1. 淨負債 / EBITDA</h3>
+      <div class="big-num" style="color:var(--gold)">~3.3-3.4x ⚠️</div>
+      <div class="big-label">公式：淨負債$19.6B ÷ FY25 Adj EBITDA $5.91B（估算，若用2026guidance中值$7.2B則降至~2.7x）</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:66%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：電力生產商常態槓桿本就高於一般產業，3-3.5倍屬同業中段偏高但非危險區，惟需持續觀察EBITDA guidance是否兌現以稀釋此比率。</p>
+    </div>
+    <div class="card">
+      <h3>2. 負債比率（Debt/Equity）</h3>
+      <div class="big-num" style="color:var(--red)">3.63-3.67x ❌</div>
+      <div class="big-label">公式：總負債 ÷ 股東權益 $5.48B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:85%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">❌ 狀態：股東權益基數偏小（僅$5.48B），使負債權益比數字顯得極端，屬電力資本結構常態但仍為六項比率中最弱一環，需搭配EBITDA覆蓋能力綜合判斷，不宜單獨視為危險訊號。</p>
+    </div>
+    <div class="card">
+      <h3>3. 利息覆蓋率（估算）</h3>
+      <div class="big-num" style="color:var(--gold)">— ⚠️</div>
+      <div class="big-label">公式：EBIT或Adj EBITDA ÷ 利息費用；未取得精確利息費用數字</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:60%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：無法取得精確利息費用數字，以總債務$19.9B、假設加權平均利率約4.5-5.5%（依已知票面利率區間3.7-5.63%推估）估算年利息費用約$0.9-1.1B，Adj EBITDA $5.91-7.6B對此利息負擔的覆蓋倍數約5-7倍，屬中等偏健康，惟此為⚠️估算值，非公司揭露之精確數字。</p>
+    </div>
+    <div class="card">
+      <h3>4. OCF / 總債務覆蓋比率</h3>
+      <div class="big-num" style="color:var(--gold)">~20.5% ⚠️</div>
+      <div class="big-label">公式：FY25 OCF $4.07B ÷ 總債務$19.9B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:41%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：約5年可用營運現金流覆蓋全部債務本金，處於電力/公用事業常見區間，非危險訊號，但明顯低於輕資產企業標準。</p>
+    </div>
+    <div class="card">
+      <h3>5. 現金流覆蓋比率（FCF / 短期債務）</h3>
+      <div class="big-num" style="color:var(--green)">~104% ✅</div>
+      <div class="big-label">公式：TTM FCF $2.26B ÷ 短期債務$2.18B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:90%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">✅ 狀態：TTM自由現金流已可完全覆蓋當前短期到期債務，短期流動性壓力低。</p>
+    </div>
+    <div class="card">
+      <h3>6. 兩年內到期牆覆蓋倍數</h3>
+      <div class="big-num" style="color:var(--green)">~2.9x ✅</div>
+      <div class="big-label">公式：TTM FCF $2.26B ÷ 未來2年(2026-2027)到期債務合計約$2.6B（$500M+$800M+$1,300M）</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:80%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">✅ 狀態：即便不考慮再融資，單靠TTM自由現金流即可覆蓋未來兩年到期債務近3倍，加上2026年4月已完成$4.0B新債發行用於提前置換2027到期債務，到期牆風險已顯著降低。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 15. 債務到期時程 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-title">債務到期時程</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>到期年度</th><th>票面利率／金額</th><th class="num">合計</th><th>狀態</th></tr></thead>
+      <tbody>
+        <tr><td>2026</td><td>5.050% Senior Notes，$500M</td><td class="num">$500M ✅</td><td><span class="badge badge-yellow">年底到期，金額不大</span></td></tr>
+        <tr><td>2027</td><td>3.700% $800M（1/30）＋5.000% $1,300M（7/31）</td><td class="num">$2,100M ✅</td><td><span class="badge badge-yellow">原5.625% Feb2027 notes已提前償還</span></td></tr>
+        <tr><td>2028</td><td>4.300% $750M（10/15）＋4.550% $500M（10/30，2026年新發行）</td><td class="num">$1,250M ✅</td><td><span class="badge badge-blue">部分為2026年新發行置換債</span></td></tr>
+        <tr><td>2031/2033/2036</td><td>2026年4月新發$4.0B：2031 $1.0B(5.000%)、2033 $1.0B(5.250%)、2036 $1.5B(5.550%)</td><td class="num">$3.5B ✅</td><td><span class="badge badge-green">已延展存續期，降低近期到期壓力</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px; color:var(--text2)">✅ 整體評估：透過2026年4月的$4.0B新債發行提前置換2027年到期債務並延展至2028-2036年，Vistra已主動降低近2年債務到期牆壓力，屬正面的財務管理動作。</p>
+</div>
+
+<!-- 16. CapEx分析 -->
+<div id="capex" class="section">
+  <div class="section-header">
+    <div class="section-num">16</div>
+    <div class="section-title">CapEx分析</div>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>CapEx趨勢 ✅</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">CapEx由FY2024的$2.078B、FY2025的$2.752B，2026年guidance進一步提升至<strong>$2.587B</strong>（另有資料源顯示上看$2.587B區間），呈現逐年成長趨勢，主因是核能機組維護資本支出（延役準備）、太陽能/電池儲能新建產能，以及天然氣機組現代化改造投資。</p>
+    </div>
+    <div class="card">
+      <h3>⚠️ 核電維護Capex vs 成長型Capex拆分</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">公開資料未提供精確的「核電維護資本支出」與「成長型資本支出（新建產能/併購後整合）」拆分數字（❌），僅能定性判斷：隨著Cogentrix（~$4B併購，非CapEx項目但需另計資金來源）與既有核電延役準備需求疊加，2026-2027年整體資本支出強度預期將維持在高檔，是持續侵蝕FCF成長速度的關鍵變數，建議每季追蹤CapEx guidance是否上修。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 17. 同業對比 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">17</div>
+    <div class="section-title">同業財務體質對比</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>公司</th><th class="num">EV/EBITDA</th><th class="num">Trailing PE</th><th>槓桿概況</th></tr></thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Vistra（VST）</strong></td><td class="num">10.68x</td><td class="num">25.86x</td><td>D/E ~3.6x，淨負債/EBITDA ~3.3x⚠️，中高槓桿但到期牆已妥善管理</td></tr>
+        <tr><td>NRG Energy（NRG）</td><td class="num">15.07x</td><td class="num">32.63x</td><td>— ❌（未取得精確槓桿數字），估值倍數高於VST</td></tr>
+        <tr><td>PPL Corporation（PPL）</td><td class="num">— ❌</td><td class="num">22.66x</td><td>受管制公用事業，槓桿結構與IPP不可直接比較</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px; color:var(--text2)">VST的EV/EBITDA（10.68x）明顯低於NRG（15.07x），顯示市場尚未給予VST與同業相當的估值溢價，可能反映投資人對其槓桿與財報雜訊的疑慮尚未完全消化，也構成前述牛市情境「倍數向上收斂」的想像空間來源。</p>
+</div>
+
+<!-- 18. 綜合診斷 -->
+<div id="health" class="section">
+  <div class="section-header">
+    <div class="section-num">18</div>
+    <div class="section-title">綜合診斷</div>
+  </div>
+  <div class="card" style="display:flex; gap:24px; align-items:center; flex-wrap:wrap;">
+    <div class="health-badge health-b">B+</div>
+    <div style="flex:1; min-width:260px;">
+      <p style="font-size:13px; line-height:1.8; color:var(--text)"><strong>定性分類：中高槓桿、現金流體質健康的成長型公用事業</strong>。Vistra的短期流動性（FCF覆蓋短債104%、兩年到期牆覆蓋2.9倍）與到期時程管理（2026年新債置換延展存續期）均屬健康；但長期槓桿指標（D/E 3.6倍、淨負債/EBITDA約3.3倍）處於同業中高段，且併購驅動成長（Lotus、Cogentrix）持續消耗資產負債表空間。整體風險可控但非低風險，適合已具備風險承受度的中長期投資人配置，不建議視為防禦型部位。</p>
+    </div>
+  </div>
+
+  <div class="risk-card" style="margin-top:16px;">
+    <h4>⚠️ 最大風險點（具體觸發數字）</h4>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">若2027年PJM容量拍賣價格較2026年顯著回落（例如年減幅超過15-20%），疊加Cogentrix交割後淨負債突破$21-22B，將使淨負債/EBITDA比率可能突破<strong>4.0倍</strong>危險門檻，觸發信評機構調降展望的風險，並可能限制公司持續以低成本再融資的能力，形成「槓桿上升→融資成本上升→FCF受壓→估值倍數進一步收斂」的負向循環。</p>
+  </div>
+
+  <div class="card" style="margin-top:16px; border-left:3px solid var(--accent)">
+    <h3 style="color:var(--accent)">安全邊際計算</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">以本報告自製基準情境估值$165-195中值$180計算，現價$151.72相對此中值提供約<strong>16%的安全邊際空間（下檔保護）</strong>；若以投行共識均值$217-225計算，安全邊際更達43-48%，但此數字隱含更樂觀的EV/EBITDA倍數收斂假設，建議以本報告較保守的$165-195區間作為主要安全邊際參考基準，投行共識視為上行情境的補充佐證。</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     綜合總結
+══════════════════════════════════════ -->
+<div id="final" class="mode-divider">
+  <h2>◈ 綜合總結</h2>
+  <p>五維度卡片 · 最終操作建議</p>
+</div>
+
+<div class="section">
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis成立度</div><div class="s-val">3.4 / 5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-val">⭐⭐⭐☆☆</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-val" style="font-size:13px;">循環股→快速成長股過渡</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-val">B+</div></div>
+    <div class="summary-card"><div class="s-label">現價相對基準估值</div><div class="s-val" style="color:var(--green);">+16%上行</div></div>
+  </div>
+
+  <div class="action-box">
+    <h3>✅ 最終操作建議</h3>
+    <div style="font-size:13px; line-height:1.9; color:var(--text)">
+      <strong>已持有者：</strong>核心Thesis（AI資料中心核能PPA長約、EBITDA guidance維持）仍成立，股價自高點回落31%後，TTM PE(25.86x)已回落至接近長期均值(27.27x)，可續抱並利用財報雜訊造成的非理性下跌分批加碼；建議嚴格追蹤淨負債/EBITDA是否逼近4.0倍門檻。<br><br>
+      <strong>未持有者：</strong>可視為<strong>戰術池部位</strong>分批建立，理由是護城河（核能稀缺性＋長約PPA）與現金流覆蓋能力（短期到期牆已妥善管理）均符合使用者重視的安全邊際原則，但高槓桿與財報雜訊使其尚不足以列入核心池；建議首批倉位不超過總戰術池配置的1/3，待後續財報MTM雜訊收斂或新增PPA簽約後再行加碼。<br><br>
+      <strong>建議持有期間：</strong>長期3-5年，核心邏輯建立在AI資料中心用電需求的結構性成長與核能延役周期（Comanche Peak執照至2053年）。<br><br>
+      <strong>核心催化劑監控清單：</strong>①新增Hyperscaler PPA簽約 ②淨負債/EBITDA是否維持3.5倍以下 ③GAAP財報與共識落差是否逐季收斂 ④Cogentrix交割與整合進度 ⑤PJM 2027/2028容量拍賣結果。
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <p>
+    資料來源：stockanalysis.com、SEC EDGAR（10-K/10-Q/8-K）、Vistra Corp IR官網、Yahoo Finance、marketbeat.com、Zacks Investment Research、Power-Eng、ANS Nuclear Newswire、gurufocus.com、tipranks.com 等公開資訊，資料基準日 2026-09-08（部分同業比較數據快照時間不完全一致，已於內文標註）。<br>
+    本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。
+  </p>
+</footer>
+
+</body>
+</html>

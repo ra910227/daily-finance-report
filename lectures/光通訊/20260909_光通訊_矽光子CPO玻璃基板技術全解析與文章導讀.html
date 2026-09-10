@@ -1,0 +1,451 @@
+<meta charset="UTF-8">
+<title>光通訊技術全解析：矽光子・CPO・玻璃基板</title>
+<style>
+:root {
+  --paper: #faf8f4; --surface: #ffffff; --ink: #1c2430; --ink-soft: #5b6472;
+  --line: #e6e1d6; --accent: #24507d; --accent-soft: #eaf0f6; --gold: #a97a2f; --gold-soft: #f7efdf;
+  --serif: 'Source Serif 4', 'Noto Serif TC', serif;
+  --sans: 'Public Sans', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --paper:#faf8f4;--surface:#ffffff;--ink:#1c2430;--ink-soft:#5b6472;--line:#e6e1d6;--accent:#24507d;--accent-soft:#eaf0f6;--gold:#a97a2f;--gold-soft:#f7efdf; }
+}
+:root[data-theme="dark"] { --paper:#faf8f4;--surface:#ffffff;--ink:#1c2430;--ink-soft:#5b6472;--line:#e6e1d6;--accent:#24507d;--accent-soft:#eaf0f6;--gold:#a97a2f;--gold-soft:#f7efdf; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.9; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--gold-soft); }
+.wrap { max-width: 780px; margin: 0 auto; padding: 0 24px 100px; }
+header.course { background: linear-gradient(180deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 82%, black) 100%); color: #f5f7fa; padding: 52px 24px 38px; }
+header.course .inner { max-width: 780px; margin: 0 auto; }
+.eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #cfe0f0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; line-height: 1.6; }
+.eyebrow .dot { width: 5px; height: 5px; border-radius: 50%; background: #cfe0f0; opacity: .6; flex: none; }
+h1.title { font-family: var(--serif); font-weight: 650; font-size: clamp(1.7rem, 3.6vw, 2.4rem); margin: 14px 0 10px; text-wrap: balance; letter-spacing: 0.01em; }
+.subtitle { font-size: 0.98rem; color: #dbe6f0; max-width: 60ch; line-height: 1.7; }
+.meta-row { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+.meta-chip { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.03em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.22); color: #eef3f8; padding: 5px 12px; border-radius: 999px; }
+main { padding-top: 40px; }
+.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 22px 26px; margin: 0 0 40px; }
+.abstract h2 { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+.abstract p { margin: 0; color: var(--ink); font-size: 0.96rem; }
+.objectives { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 4px; padding: 18px 22px; margin: 0 0 44px; }
+.objectives h2 { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+.objectives ul { margin: 0; padding-left: 1.2em; color: var(--ink-soft); font-size: 0.92rem; }
+.objectives li { margin-bottom: 5px; }
+.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 20px 24px; margin: 0 0 48px; }
+.toc h2 { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+.toc ol { margin: 0; padding-left: 1.4em; }
+.toc li { margin-bottom: 6px; font-size: 0.94rem; }
+.toc .toc-time { color: var(--ink-soft); font-family: var(--mono); font-size: 0.78rem; }
+section.chapter { margin: 68px 0; }
+.chapter-num { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 6px; }
+.chapter h2 { font-family: var(--serif); font-weight: 650; font-size: 1.5rem; margin: 0 0 6px; text-wrap: balance; line-height: 1.4; }
+.chapter-source { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 0.02em; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.chapter p { margin: 0 0 18px; max-width: 68ch; font-size: 0.97rem; }
+.chapter h3 { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; margin: 34px 0 14px; }
+.chapter strong { color: var(--ink); font-weight: 600; }
+.cite { color: var(--ink-soft); font-size: 0.86em; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 22px 0 30px; }
+.stat-card { background: var(--accent-soft); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.stat-card .num { font-family: var(--serif); font-weight: 650; font-size: 1.3rem; color: var(--accent); line-height: 1.2; }
+.stat-card .lbl { font-size: 0.78rem; color: var(--ink-soft); margin-top: 4px; }
+.finding { background: var(--gold-soft); border: 1px solid color-mix(in srgb, var(--gold) 35%, var(--line)); border-radius: 8px; padding: 18px 22px; margin: 26px 0; }
+.finding .flabel { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+.finding p { margin: 0; max-width: 62ch; font-size: 0.98rem; color: var(--ink); }
+.callout { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 4px; padding: 18px 22px; margin: 24px 0; }
+.callout .clabel { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+.callout p { margin: 0 0 8px; max-width: 64ch; font-size: 0.95rem; }
+.callout p:last-child { margin-bottom: 0; }
+.deftable { width: 100%; border-collapse: collapse; margin: 18px 0 26px; font-size: 0.88rem; }
+.deftable th { text-align: left; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); border-bottom: 1px solid var(--line); padding: 8px 12px 8px 0; }
+.deftable td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.deftable tr:last-child td { border-bottom: none; }
+.deftable td.term { font-weight: 600; white-space: nowrap; color: var(--ink); }
+.table-scroll { overflow-x: auto; }
+.figure { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin: 28px 0; box-shadow: 0 8px 24px -18px rgba(20,20,20,0.4); }
+.figure .figcap { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--accent-soft); border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.04em; color: var(--accent); flex-wrap: wrap; gap: 4px; }
+.figure .figbody { padding: 18px 20px 6px; }
+.figure .figdesc { padding: 12px 16px 16px; font-size: 0.86rem; color: var(--ink-soft); }
+.outline-card { background: var(--accent); color: #f2f6fa; border-radius: 14px; padding: 30px 26px; margin: 60px 0 40px; }
+.outline-card h2 { font-family: var(--serif); font-size: 1.35rem; margin: 0 0 18px; font-weight: 650; }
+.outline-item { display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: baseline; padding: 11px 0; border-top: 1px solid rgba(255,255,255,0.2); }
+.outline-item:first-of-type { border-top: none; }
+.outline-item .oi-tab { font-family: var(--serif); font-weight: 650; color: var(--gold-soft); opacity: 0.9; font-size: 0.92rem; }
+.outline-item .oi-body b { display: block; font-size: 0.95rem; }
+.outline-item .oi-body span { display: block; font-size: 0.8rem; color: #d7e5f2; margin-top: 3px; }
+.outline-item .oi-time { font-family: var(--mono); font-size: 0.76rem; color: #cfe0f0; white-space: nowrap; }
+.recap-note { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.25); font-family: var(--mono); font-size: 0.8rem; color: #d7e5f2; }
+footer.source-note { max-width: 780px; margin: 0 auto; padding: 0 24px 60px; font-size: 0.78rem; color: var(--ink-soft); line-height: 1.75; }
+footer.source-note h2 { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); margin: 30px 0 10px; }
+footer.source-note .rule { height: 1px; background: var(--line); margin: 0 0 24px; }
+.flowbox { display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap; }
+.flownode { flex: 1 1 110px; background: var(--accent-soft); border: 1px solid var(--line); border-radius: 8px; padding: 10px 8px; text-align: center; }
+.flownode b { display: block; font-size: 0.82rem; }
+.flownode span { display: block; font-size: 0.7rem; color: var(--ink-soft); margin-top: 3px; }
+.flowarrow { flex: 0 0 20px; text-align: center; color: var(--gold); font-size: 1.1rem; }
+@media (max-width: 560px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } .flowbox{display:block;} .flowarrow{display:none;} .flownode{margin-bottom:6px;} }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<header class="course">
+  <div class="inner">
+    <div class="eyebrow">專題研究報告<span class="dot"></span>原始資料來源：台新投顧、中信投顧（2份）、開源證券法人報告，及technews、鉅亨網、中時等5篇財經媒體報導（2026年6月）</div>
+    <h1 class="title">光通訊技術全解析：矽光子・CPO・玻璃基板</h1>
+    <p class="subtitle">整理矽光子(SiPh)、共同封裝光學(CPO)、玻璃基板(Glass Substrate/TGV)三大技術分支的定義與相互關係，逐篇導讀5篇財經媒體報導與4份法人研究報告，建立可對照台股個股（聯亞、華星光等）與美股供應鏈（Corning、Marvell等）的完整投資地圖。</p>
+    <div class="meta-row">
+      <span class="meta-chip">涵蓋文章　9篇（5篇媒體報導＋4份法人報告）</span>
+      <span class="meta-chip">法人報告頁碼　已逐頁標註</span>
+      <span class="meta-chip">建議閱讀／簡報時長　約90分鐘</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="abstract">
+    <h2>摘要</h2>
+    <p>AI資料中心的運算規模正從單一機櫃走向跨機櫃、乃至跨資料中心的巨型叢集，訊號傳輸的物理限制逐漸取代晶片算力本身，成為系統效能上限的關鍵瓶頸。本報告以「光學引擎與運算晶片的物理距離」為核心座標軸，串連矽光子(Silicon Photonics)、共同封裝光學(CPO)、玻璃基板(Glass Substrate/TGV)三大技術分支的定義與演進邏輯，並逐篇導讀5篇財經媒體深度報導與4份法人研究報告（台新投顧、中信投顧×2、開源證券），交叉比對其技術論述、市場規模預測與供應鏈廠商名單，最終建立一份可直接對照台股（聯亞3081、華星光4979等）與美股（Corning、Marvell等）供應鏈的投資地圖，並提出建議閱讀順序，協助讀者依序回答「CPO跟矽光子什麼關係」「玻璃基板會不會取代CPO裡的FAU」「聯亞/華星光現在該樂觀還是悲觀」三個核心問題。</p>
+  </div>
+
+  <div class="objectives">
+    <h2>研究說明與使用方式</h2>
+    <ul>
+      <li>本報告整理、翻譯、重新論述自9篇原始資料來源（見上），數據時效性以各篇報導/報告標註之日期為準（多數為2026年6月）</li>
+      <li>全文分為9章，第三至第八章對應6篇原始文章的逐篇導讀，第九章為跨文章整合的建議閱讀順序</li>
+      <li>正文中標記「研究發現」之段落，為跨篇交叉比對後歸納出的核心論點，適合作為簡報收束或投資判斷依據</li>
+      <li>法人報告章節開頭標註對應原文頁碼，供查證與延伸閱讀；文末附「原文出處對照表」與完整參考文獻</li>
+      <li>本報告圖表為依據原文數據<strong>自行重新製表／繪圖</strong>整理呈現（非原文截圖），每張圖表均標註資料出處與頁碼，數據應以原文為準</li>
+    </ul>
+  </div>
+
+  <div class="toc">
+    <h2>章節目錄</h2>
+    <ol>
+      <li>光通訊技術分支地圖：矽光子・CPO・玻璃基板　<span class="toc-time">約10分鐘</span></li>
+      <li>入門背景知識：資料中心三層互連架構　<span class="toc-time">約8分鐘</span></li>
+      <li>矽光子基礎與全球產業鏈六大環節　<span class="toc-time">約10分鐘</span></li>
+      <li>玻璃基板：TGV製程瓶頸與供應鏈分工　<span class="toc-time">約12分鐘</span></li>
+      <li>康寧Glass Bridge：技術衝擊與客戶簽約進展　<span class="toc-time">約12分鐘</span></li>
+      <li>台灣CPO供應鏈全景（台新投顧）　<span class="toc-time">約12分鐘</span></li>
+      <li>CPO短期量產觀察與台股估值邏輯（中信投顧）　<span class="toc-time">約14分鐘</span></li>
+      <li>上游材料供給吃緊：InP擴產潮（開源證券）　<span class="toc-time">約8分鐘</span></li>
+      <li>建議閱讀順序與研究總結　<span class="toc-time">約6分鐘</span></li>
+    </ol>
+  </div>
+
+  <!-- CH1 -->
+  <section class="chapter">
+    <div class="chapter-num">第一章</div>
+    <h2>光通訊技術分支地圖：矽光子・CPO・玻璃基板</h2>
+    <div class="chapter-source">整合本報告全篇論述的核心技術座標軸</div>
+
+    <p>光通訊在AI資料中心的應用，本質上是在解決「電傳輸的物理瓶頸」問題。理解這個產業最有效的方式，是抓住一條共同座標軸——<strong>光學引擎與運算晶片之間的物理距離</strong>。所有技術名詞的演進，本質上都是「把光學元件不斷搬近晶片」的過程：</p>
+
+    <div class="figure">
+      <div class="figcap"><span>本報告自製圖1.1</span><span>光學引擎與晶片距離演進示意</span></div>
+      <div class="figbody">
+        <div class="flowbox">
+          <div class="flownode"><b>可插拔模組</b><span>Pluggable<br>電路徑最長</span></div>
+          <div class="flowarrow">→</div>
+          <div class="flownode"><b>OBO / NPO</b><span>近封裝光學<br>電路徑縮短</span></div>
+          <div class="flowarrow">→</div>
+          <div class="flownode"><b>CPO</b><span>共同封裝光學<br>電路徑僅mm級</span></div>
+          <div class="flowarrow">→</div>
+          <div class="flownode"><b>OEIC</b><span>光電合一<br>單一晶片整合</span></div>
+        </div>
+      </div>
+      <div class="figdesc">整合座標軸，用以貫穿本報告後續各章節技術討論。資料整理自：台新投顧《AI時代共同封裝光學(CPO)供應鏈的商機》，頁4-5；technews〈矽光子成為兆元賭注〉。</div>
+    </div>
+
+    <p>在這條主軸上，三個技術名詞各自扮演不同角色：</p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>名詞</th><th>白話解釋</th></tr>
+      <tr><td class="term">矽光子<br>(Silicon Photonics, SiPh)</td><td>用做半導體晶片的CMOS製程，把原本一顆顆獨立的光學元件（雷射、調變器、光偵測器）「縮小蝕刻」到矽晶片上，做成類似IC的「光子積體電路(PIC)」。是CPO得以實現的製造技術基礎。</td></tr>
+      <tr><td class="term">共同封裝光學<br>(CPO)</td><td>一種封裝方式：把交換器ASIC晶片和光學引擎(OE)放進同一個封裝載板，電訊號只需傳輸幾毫米就轉換成光，取代現在插在面板上、電訊號要跑一大段PCB才能轉光的可插拔模組。目的是省電（降50%）、提速（8倍）、省空間。<span class="cite">（台新投顧, 2026, p.5）</span></td></tr>
+      <tr><td class="term">玻璃基板<br>(Glass Substrate / TGV)</td><td>封裝載板材料的升級，跟矽光子/CPO是平行的另一條技術線，但兩者正在匯流：玻璃比現行的有機基板(ABF)更平整、更耐熱、可鑽更密的孔（TGV玻璃通孔），能承載CPO所需的高密度晶片與光波導。康寧最新的「Glass Bridge」甚至直接把光纖對位這件事整合進玻璃內部波導，威脅到現有的FAU（光纖陣列單元）廠商。</td></tr>
+    </table>
+    </div>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>矽光子＝晶片上做光學元件、CPO＝封裝時把光學和運算晶片放一起、玻璃基板＝承載這一切的下一代材料，三者疊加起來才是完整的下一代光互連架構——這是貫穿本報告後續所有文章導讀的判斷主軸。</p>
+    </div>
+  </section>
+
+  <!-- CH2 -->
+  <section class="chapter">
+    <div class="chapter-num">第二章</div>
+    <h2>入門背景知識：資料中心三層互連架構</h2>
+    <div class="chapter-source">建議在讀5篇媒體報導前先建立的兩層底層認知</div>
+
+    <p>在進入逐篇文章導讀之前，有兩層底層認知值得先建立，否則後續文章討論「為何CPO重要」時會缺乏地基：其一是「Scale-up／Scale-out／Scale-across」資料中心三層互連架構的科普認知，這是所有CPO/矽光子討論的地基，不理解GPU怎麼連線，就無法理解CPO要解決的具體問題是什麼；其二是NVIDIA Spectrum-X Photonics／Quantum-X Photonics交換器發表的技術背景，這是CPO從PPT走向實際產品的第一個指標案例。</p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>架構</th><th>連接範圍</th><th>傳輸介質</th><th>產業格局</th></tr>
+      <tr><td class="term">Scale-Up</td><td>機櫃內 GPU-GPU互連</td><td>銅互連（小於10公尺）</td><td>Nvidia較占優</td></tr>
+      <tr><td class="term">Scale-Out</td><td>機櫃間連接</td><td>光互連</td><td>Broadcom較占優</td></tr>
+      <tr><td class="term">Scale-Across</td><td>跨資料中心，超長距離</td><td>光互連</td><td>Nvidia率先提出</td></tr>
+    </table>
+    </div>
+
+    <p>台新投顧與中信投顧的簡報其實已經把這兩塊底層知識都涵蓋在內，等於幫讀者先補完了理解後續文章的必要背景，建議搭配本報告第六、七章一起閱讀。<span class="cite">（台新投顧, 2026, p.7）</span></p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>近期Nvidia新宣布的「Scale-Across」概念，聚焦橫跨數公里乃至數千公里的跨資料中心傳輸，代表光通訊的應用場景正從「機櫃內外」進一步擴張到「資料中心之間」，這是理解CPO長期市場空間時容易被忽略的第三個維度。</p>
+    </div>
+  </section>
+
+  <!-- CH3 -->
+  <section class="chapter">
+    <div class="chapter-num">第三章</div>
+    <h2>矽光子基礎與全球產業鏈六大環節</h2>
+    <div class="chapter-source">導讀①：technews〈矽光子成為兆元賭注〉——建議閱讀順序第1篇（基礎篇）</div>
+
+    <p>這篇文章是整個閱讀清單裡的基礎篇，核心論述是：矽光子＝用CMOS製程把光學元件整合到矽晶片上。文章鋪陳的技術路徑，與本報告第一章的座標軸完全一致：可插拔（現在）→OBO（規格上限低於1.6T）→NPO（規格上限低於3.2T）→CPO（6.4T以上）。</p>
+
+    <p>文章點名的關鍵玩家橫跨系統整合、代工、封裝三個層次：Nvidia＋台積電（Spectrum-X／Quantum-X平台）、Broadcom（已推進至CPO第三代產品）、台積電COUPE技術，以及Intel（矽光子領域的早期參與者，但已退出可插拔模組業務）。</p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>產業鏈環節</th><th>代表廠商</th></tr>
+      <tr><td class="term">設計</td><td>Intel、SiFotonics</td></tr>
+      <tr><td class="term">代工</td><td>台積電、GlobalFoundries、UMC</td></tr>
+      <tr><td class="term">光源</td><td>聯亞、Lumentum</td></tr>
+      <tr><td class="term">檢測器</td><td>Lumentum、Broadcom</td></tr>
+      <tr><td class="term">ASIC</td><td>Broadcom、世芯、創意</td></tr>
+      <tr><td class="term">先進封裝</td><td>台積電、日月光</td></tr>
+    </table>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num">78.6億美元</div><div class="lbl">SEMI預估2030年矽光子市場規模</div></div>
+      <div class="stat-card"><div class="num">25.7%</div><div class="lbl">對應CAGR</div></div>
+    </div>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>矽光子產業鏈的六大環節橫跨設計、代工、光源、檢測器、ASIC、先進封裝，其中「光源」環節正是台股聯亞的定位所在——這也是本報告第六章要展開的台灣供應鏈全景的第一個接點。</p>
+    </div>
+  </section>
+
+  <!-- CH4 -->
+  <section class="chapter">
+    <div class="chapter-num">第四章</div>
+    <h2>玻璃基板：TGV製程瓶頸與供應鏈分工</h2>
+    <div class="chapter-source">導讀②③：cnyes〈玻璃基板供應鏈分析〉、hao.cnyes 256629〈玻璃基板陸股評估框架〉——建議閱讀順序第4、7篇</div>
+
+    <p>玻璃基板作為第二條與矽光子/CPO平行、但正逐漸匯流的技術線，鉅亨網這篇報導鋪陳了它為何被市場關注：AI封裝正從有機基板轉向玻璃芯（Glass Core），主因是玻璃平坦度更佳、可承載更大尺寸晶片。文章指出關鍵瓶頸在於「雷射改質＋蝕刻打孔」（即TGV製程），並勾勒出四層供應鏈分工：原料（康寧／AGC／Schott）→加工（群創）→增層（欣興／三星電機）→封裝（台積電／日月光）。</p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num">×9</div><div class="lbl">康寧空白玻璃約1萬元，經雷射鍍銅加工後可達10萬元，代表加工附加值極高</div></div>
+      <div class="stat-card"><div class="num">2027／2028</div><div class="lbl">量產時程：2027年加速、2028年放量</div></div>
+    </div>
+
+    <p>hao.cnyes 256629這篇則是同一主題下更深入的評估框架，特別澄清了一個容易被誤讀的數字：「兆級玻璃賽道」指的是廣義特種玻璃生態，並非玻璃基板單一市場的規模。文中引用SEMI數據：玻璃芯基板預估2028年前後量產，2028-2040年CAGR達67.2%。</p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>公司</th><th>陸股玻璃基板進度盤點</th></tr>
+      <tr><td class="term">京東方A</td><td>測試驗證階段，尚未真正放量</td></tr>
+      <tr><td class="term">藍思科技</td><td>2026年底投產</td></tr>
+      <tr><td class="term">沃格光電</td><td>良率爬坡階段</td></tr>
+    </table>
+    </div>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>這篇文章給出的核心提醒最值得記住：評估玻璃基板個股是否真受益，要看「頭部客戶正式認證」而非僅止於送樣，2026年整體產業仍處於驗證期，不應把試驗線通線誤讀為規模量產。</p>
+    </div>
+  </section>
+
+  <!-- CH5 -->
+  <section class="chapter">
+    <div class="chapter-num">第五章</div>
+    <h2>康寧Glass Bridge：技術衝擊與客戶簽約進展</h2>
+    <div class="chapter-source">導讀④⑤：中時20260629〈康寧GlassBridge發表〉、hao.cnyes 256761〈Glass Bridge客戶簽約〉——建議閱讀順序第5、6篇</div>
+
+    <p>中時這篇報導記錄了康寧在首爾發表GlassBridge的技術衝擊面：這是一套fiber-to-PIC的玻璃光互連平台，直接威脅傳統FAU（光纖陣列單元）廠商，例如台股的上詮、波若威。文章也提出一個值得留意的緩衝因素：若NPO應用擴大，可能抵銷CPO導入延後對光收發模組廠商的衝擊，對台廠光模組業者反而呈現中性偏正的效果。</p>
+
+    <p>hao.cnyes 256761這篇是本次閱讀清單中最新、也最關鍵的一則消息：康寧Glass Bridge已與Meta、輝達、亞馬遜簽署數十億美元供貨合約，這是從技術驗證正式進入實際訂單的分水嶺。技術規格上，單顆連接器可支援24通道以上，耦合損耗低於2dB，用以取代傳統CPO架構裡的FAU光纖陣列。</p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>三個預期差</th><th>內容</th></tr>
+      <tr><td class="term">① 淘汰速度</td><td>FAU面臨的是斷崖式、而非漸進式淘汰</td></tr>
+      <tr><td class="term">② 真正瓶頸</td><td>不在耦合技術本身，而在TGV微孔良率（深寬比5:1以上）</td></tr>
+      <tr><td class="term">③ 市場成長速度</td><td>2025-2028年TGV市場CAGR達43-47%，比一般市場認知更快</td></tr>
+    </table>
+    </div>
+
+    <p>市場對這則消息的反應是光纖概念股回檔，利潤鏈開始往玻璃基板上游遷移。</p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>這兩篇文章合起來看，形成一組完整的「技術衝擊→訂單驗證」敘事：中時報導的是技術層面的威脅可能性，hao.cnyes 256761報導的則是這個威脅已經拿到頭部雲端業者的真金白銀訂單背書——這是判斷玻璃基板題材是否進入實質競爭階段的關鍵分水嶺。</p>
+    </div>
+  </section>
+
+  <!-- CH6 -->
+  <section class="chapter">
+    <div class="chapter-num">第六章</div>
+    <h2>台灣CPO供應鏈全景</h2>
+    <div class="chapter-source">導讀：台新投顧《AI時代共同封裝光學(CPO)供應鏈的商機》，2026/6/25——建議閱讀順序第3篇（建立整體投資地圖）</div>
+
+    <p>這份法人報告系統性地介紹CPO與矽光子的技術定義後，給出了一份完整的台灣供應鏈名單，橫跨晶片代工、封裝測試、磊晶製造、光收發模組、被動元件、網通交換器、設備與測試七大環節。</p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>業務範圍</th><th>相關廠商</th><th>主要產品/業務</th></tr>
+      <tr><td class="term">晶片代工</td><td>台積電(2330)</td><td>EIC與PIC晶片製造、先進封裝(CoWoS、COUPE)</td></tr>
+      <tr><td class="term">封裝測試</td><td>日月光投控(3711)、聯鈞(3450)、訊芯-KY(6451)</td><td>先進封裝、SiP封裝技術、LD封裝測試</td></tr>
+      <tr><td class="term">磊晶製造(LD/PD)</td><td>聯亞(3081)、IET-KY(4971)、全新(2455)、環宇-KY(4991)、穩懋(3105)</td><td>InP/GaAs磊晶片，矽光模組光源關鍵材料</td></tr>
+      <tr><td class="term">光收發模組/被動元件</td><td>華星光(4979)、眾達-KY(4977)、上詮(3363)、波若威(3163)、光聖(6442)</td><td>光收發模組、光纖被動元件、FAU</td></tr>
+      <tr><td class="term">網通交換器</td><td>智邦(2345)</td><td>交換器(Switches)</td></tr>
+      <tr><td class="term">設備與測試</td><td>旺矽(6223)、惠特(6706)、汎銓(6830)</td><td>探針卡、先進半導體測試設備、材料/故障分析</td></tr>
+    </table>
+    </div>
+    <p class="cite">整理自：台新投顧《AI時代共同封裝光學(CPO)供應鏈的商機》，頁10。</p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num">4,600萬→81億美元</div><div class="lbl">全球資料中心CPO市場預估，2024年→2030年<span class="cite">（p.8）</span></div></div>
+      <div class="stat-card"><div class="num">CAGR 137%</div><div class="lbl">2024-2030年複合成長率</div></div>
+      <div class="stat-card"><div class="num">35.7%</div><div class="lbl">TrendForce預估2030年CPO在資料中心光通訊模組滲透率<span class="cite">（p.8）</span></div></div>
+      <div class="stat-card"><div class="num">90%</div><div class="lbl">台灣在全球AI伺服器代工市占</div></div>
+    </div>
+
+    <p>報告也特別點出台灣在CPO技術發展上的競爭優勢：從先進矽晶圓製程到先進封裝與測試，單一地理區域即可完成關鍵製程與整合步驟；2024年SEMI與工研院及百餘家廠商更成立「SEMI矽光子產業聯盟」，由台積電與日月光號召，目標建立橫跨設計、製造、封裝、測試到系統應用的完整產業鏈。<span class="cite">（台新投顧, 2026, p.9）</span></p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>台灣供應鏈的優勢集中在「完整生態系＋系統整合能力」，而非單一環節的技術壟斷——這與美股Corning、Marvell等公司卡在單一瓶頸環節（材料、封裝架構）的競爭邏輯明顯不同，是評估台股vs.美股光通訊供應鏈投資機會時的關鍵差異點。</p>
+    </div>
+  </section>
+
+  <!-- CH7 -->
+  <section class="chapter">
+    <div class="chapter-num">第七章</div>
+    <h2>CPO短期量產觀察與台股估值邏輯</h2>
+    <div class="chapter-source">導讀：中信投顧《CPO導入進展與短期量產觀察》(2026/6/23)、《AI網路互連升級躍遷：銅線、PCB、光模組到CPO》(2026/6/25)——建議閱讀順序第2、3篇</div>
+
+    <p>《CPO導入進展與短期量產觀察》是這份閱讀清單中對台股個股估值判斷最重要的一篇。核心論點是：CPO短期（2027年前）仍難大量部署，主因是良率、成本、維護三大瓶頸尚未解決，能耗仍是銅線方案的數倍，2027年CPO交換器市場需求恐難達到原先預期的10萬台。<span class="cite">（中信投顧, 2026/6/23, p.1）</span></p>
+
+    <p>但報告接著提出一個反直覺、卻是本報告最核心的投資邏輯：CPO延後導入，對聯亞、華星光、聯鈞、全新、IET-KY等公司<strong>反而有利</strong>——因為這些廠商主要成長動能仍來自傳統光收發模組，CPO延後導入等於光收發模組需求不減反增，近期股價回檔應解讀為評價面修正而非基本面轉壞，逢回可偏多操作。相對地，波若威、上詮、前鼎、眾達-KY因市場預期建立在CPO獲利成長題材上，CPO延後導入對其評價面較為不利。<span class="cite">（中信投顧, 2026/6/23, p.1、p.5）</span></p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>個股</th><th>代碼</th><th>評等</th><th>目標價</th></tr>
+      <tr><td class="term">聯亞</td><td>3081</td><td>買進</td><td>4,000</td></tr>
+      <tr><td class="term">全新</td><td>2455</td><td>買進</td><td>重評中</td></tr>
+      <tr><td class="term">IET-KY</td><td>4971</td><td>增加持股</td><td>746</td></tr>
+      <tr><td class="term">貿聯-KY</td><td>3665</td><td>買進</td><td>2,720</td></tr>
+      <tr><td class="term">嘉澤</td><td>3533</td><td>增加持股</td><td>2,910</td></tr>
+      <tr><td class="term">智邦</td><td>2345</td><td>買進</td><td>重評中</td></tr>
+    </table>
+    </div>
+    <p class="cite">整理自：中信投顧《CPO導入進展與短期量產觀察》，頁1。</p>
+
+    <p>《AI網路互連升級躍遷》這篇補上了PCB、銅纜、光模組的完整互連材料比較，並引用高盛預估2026-2028年CPO規模約970億美元，其中Scale-up CPO TAM從2026年10億美元成長至2028年71億美元。<span class="cite">（中信投顧, 2026/6/25, p.9）</span></p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>代碼</th><th>名稱</th><th>2027E本益比</th></tr>
+      <tr><td class="term">3081</td><td>聯亞</td><td>55.6倍</td></tr>
+      <tr><td class="term">2455</td><td>全新</td><td>45.0倍</td></tr>
+      <tr><td class="term">3363</td><td>上詮</td><td>40.0倍</td></tr>
+      <tr><td class="term">3037</td><td>欣興</td><td>30.4倍</td></tr>
+      <tr><td class="term">3665</td><td>貿聯</td><td>17.9倍</td></tr>
+    </table>
+    </div>
+    <p class="cite">整理自：中信投顧《AI網路互連升級躍遷》，頁14。目前多數個股評價偏貴，但獲利成長快，2026-2027年本益比呈現快速下修軌跡。</p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>中信投顧兩份報告合起來構成本報告最重要的一組投資判斷框架：CPO放量時程遞延，短期是台股傳統光收發模組廠商（聯亞、華星光）的利多而非利空，但長期評價已提前反映相當程度的CPO題材溢價，須持續驗證獲利成長能否追上目前的評價假設。</p>
+    </div>
+  </section>
+
+  <!-- CH8 -->
+  <section class="chapter">
+    <div class="chapter-num">第八章</div>
+    <h2>上游材料供給吃緊：InP擴產潮</h2>
+    <div class="chapter-source">導讀：開源證券《光互聯產業鏈現擴產潮，鍵合設備廠商披露大額訂單》，2026/6/21——建議閱讀順序第8篇（最後補足上游材料視角）</div>
+
+    <p>這份陸資視角的報告把觀察重心放在CPO/NPO需求升溫下，光芯片全鏈條的擴產動態，核心論點是「投資主線正從下游光模組整機上移到InP材料、光晶片、矽光PIC及先進封測」這些更上游的瓶頸環節。<span class="cite">（開源證券, 2026/6/21, p.3）</span></p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num">1億→390億美元</div><div class="lbl">TrendForce估CPO/NPO市場，2025年→2030年</div></div>
+    </div>
+
+    <p>文中列舉的近期擴產動態涵蓋整條材料鏈：Coherent（InP半導體晶圓製造擴建）、Nokia（光子晶片封測產能）、JX（InP襯底供應）、IQE/Tower（矽光平台外延片供應協議）、東山精密旗下索爾思光電（常州光芯片與高速光模組擴建）。<span class="cite">（開源證券, 2026/6/21, p.4）</span></p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>上游InP材料與光芯片供應鏈的密集擴產，代表AI光互聯已從「需求預期階段」進入「全球頭部廠商資本開支落地階段」，且擴產不是單點發生，而是覆蓋襯底、外延、光芯片、封測、模組的完整產業鏈，說明產業正在為2026-2028年AI資料中心光互聯需求做前置產能準備。</p>
+    </div>
+  </section>
+
+  <div class="outline-card">
+    <h2>建議閱讀順序（總長約90分鐘）</h2>
+    <div class="outline-item"><div class="oi-tab">1</div><div class="oi-body"><b>technews矽光子基礎篇</b><span>先建立矽光子/CPO/技術路徑的概念骨架</span></div><div class="oi-time">10分鐘</div></div>
+    <div class="outline-item"><div class="oi-tab">2</div><div class="oi-body"><b>中信《CPO導入進展與短期量產觀察》</b><span>把技術概念套到台股個股，理解「CPO延後=光模組受惠」的邏輯</span></div><div class="oi-time">15分鐘</div></div>
+    <div class="outline-item"><div class="oi-tab">3</div><div class="oi-body"><b>中信《AI網路互連躍遷》</b><span>補上互連材料完整比較，及台廠評價表，建立整體投資地圖</span></div><div class="oi-time">15分鐘</div></div>
+    <div class="outline-item"><div class="oi-tab">4</div><div class="oi-body"><b>cnyes玻璃基板供應鏈分析</b><span>切入第二條技術線：玻璃基板，與矽光子/CPO互補而非競爭</span></div><div class="oi-time">8分鐘</div></div>
+    <div class="outline-item"><div class="oi-tab">5</div><div class="oi-body"><b>中時：康寧GlassBridge發表</b><span>理解玻璃基板如何威脅FAU廠商</span></div><div class="oi-time">8分鐘</div></div>
+    <div class="outline-item"><div class="oi-tab">6</div><div class="oi-body"><b>hao.cnyes 256761：Glass Bridge簽約Meta/輝達/亞馬遜</b><span>技術驗證進入訂單階段的關鍵轉折，最新消息</span></div><div class="oi-time">10分鐘</div></div>
+    <div class="outline-item"><div class="oi-tab">7</div><div class="oi-body"><b>hao.cnyes 256629：玻璃基板陸股評估框架</b><span>教導批判性評估題材股，避免把試驗線當量產</span></div><div class="oi-time">12分鐘</div></div>
+    <div class="outline-item"><div class="oi-tab">8</div><div class="oi-body"><b>開源證券《光互聯產業鏈現擴產潮》</b><span>補上游InP材料/設備視角，完整供應鏈全貌</span></div><div class="oi-time">12分鐘</div></div>
+    <div class="recap-note">總長約90分鐘，未含問答。順序邏輯：先懂技術→再連結台股個股（聯亞/華星光）→再切入平行的玻璃基板技術線→最後看訂單級消息與上游材料視角。讀完後應能回答「CPO跟矽光子什麼關係」「玻璃基板會不會取代CPO裡的FAU」「聯亞/華星光現在該樂觀還是悲觀」三個核心問題。</div>
+  </div>
+
+  <section class="chapter">
+    <div class="chapter-num">第九章</div>
+    <h2>研究總結</h2>
+    <div class="chapter-source">跨9篇文章的整合觀察</div>
+    <p>綜合本報告9篇文章的交叉比對，可歸納三項核心結論：其一，矽光子、CPO、玻璃基板三條技術線疊加，共同構成下一代光互連架構，理解三者關係的關鍵在於「光學引擎與晶片的物理距離」這條座標軸；其二，CPO短期放量進度不如預期，但這對以傳統光收發模組為主要成長動能的台股廠商（聯亞、華星光）反而是短期利多，長期則須持續驗證獲利成長能否追上評價假設；其三，玻璃基板作為平行技術線，正透過康寧Glass Bridge等具體訂單案例快速從題材驗證走向實質競爭，但仍須以「頭部客戶正式認證」而非送樣作為判斷真受益與否的準則。</p>
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>本報告建議的閱讀順序本身即是一套完整的投資研究方法論：先建立技術骨架，再逐步收斂到具體個股與供應鏈定位，最後用批判性框架檢視題材是否被過度炒作——這套方法論可延伸應用到後續任何新一輪光通訊相關報導的解讀上。</p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="chapter-num">附錄</div>
+    <h2>原文出處對照表</h2>
+    <div class="chapter-source">若需查證細節或延伸閱讀，可依此表回查原文</div>
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>章節</th><th>原文出處</th></tr>
+      <tr><td class="term">第三章</td><td>technews〈矽光子成為兆元賭注〉</td></tr>
+      <tr><td class="term">第四章</td><td>cnyes 6514504；hao.cnyes.com/post/256629</td></tr>
+      <tr><td class="term">第五章</td><td>中時新聞網 20260629；hao.cnyes.com/post/256761</td></tr>
+      <tr><td class="term">第六章</td><td>台新投顧《AI時代共同封裝光學(CPO)供應鏈的商機》，2026/6/25，全文p.2-10</td></tr>
+      <tr><td class="term">第七章</td><td>中信投顧《CPO導入進展與短期量產觀察》，2026/6/23，全文p.1-5；《AI網路互連升級躍遷》，2026/6/25，全文p.3-17</td></tr>
+      <tr><td class="term">第八章</td><td>開源證券《光互聯產業鏈現擴產潮》，2026/6/21，全文p.1-10</td></tr>
+    </table>
+    </div>
+  </section>
+
+</main>
+
+<footer class="source-note">
+  <div class="rule"></div>
+  <h2>參考文獻</h2>
+  <p>台新投顧國際產業部企業評價組（2026）。《AI時代共同封裝光學(CPO)供應鏈的商機》。2026年6月25日。</p>
+  <p>中國信託證券投資顧問（2026）。《CPO導入進展與短期量產觀察》。2026年6月23日。</p>
+  <p>中國信託證券投資顧問（2026）。《AI網路互連升級躍遷：銅線、PCB、光模組到CPO》。2026年6月25日。</p>
+  <p>開源證券行業周報（2026）。《光互聯產業鏈現擴產潮，鍵合設備廠商披露大額訂單》。2026年6月21日。</p>
+  <p>technews科技新報。〈矽光子成為兆元賭注〉。</p>
+  <p>鉅亨網cnyes。〈玻璃基板供應鏈分析〉。新聞編號6514504。</p>
+  <p>hao.cnyes.com/post/256629。〈玻璃基板陸股評估框架〉。</p>
+  <p>中時新聞網（2026）。〈康寧GlassBridge首爾發表報導〉。2026年6月29日。</p>
+  <p>hao.cnyes.com/post/256761。〈Glass Bridge客戶簽約與市場影響〉。</p>
+
+  <h2>資料與版權說明</h2>
+  <p>本報告內容整理、翻譯、重新論述自上述9項原始資料來源。文中圖表為依據原文數據<strong>自行重新製表／繪圖</strong>整理呈現，並非原文截圖，數據如與原文有出入應以原文為準；法人研究報告部分已逐頁標註引用頁碼供查證。</p>
+  <p>本報告為個人專題研究之內容整理與延伸論述，非逐字翻譯，部分段落經改寫以利邏輯銜接與論述完整性。僅供個人研究與簡報準備使用，不作公開發布或商業用途。</p>
+</footer>

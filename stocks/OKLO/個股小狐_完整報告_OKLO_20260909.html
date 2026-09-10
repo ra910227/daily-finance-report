@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜OKLO Oklo Inc 2026-09-09</title>
+<style>
+  :root {
+    --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6;
+    --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca;
+    --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+    --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 32px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-change { font-size: 16px; color: var(--green); margin-top: 4px; }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+
+  /* Nav */
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .toc-inner a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+
+  /* Layout */
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); padding: 0 0 4px 0; }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+
+  /* Cards */
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(79,70,229,0.03); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+
+  /* Indicators */
+  .ok { color: var(--green); }
+  .warn { color: var(--gold); }
+  .bad { color: var(--red); }
+  .muted { color: var(--text2); }
+  .est { color: var(--gold); font-size: 11px; }
+
+  /* Thesis grid */
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+
+  /* DCF scenarios */
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); }
+  .scenario.base { border-top: 3px solid var(--blue); }
+  .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); }
+  .scenario.base h4 { color: var(--blue); }
+  .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .scenario .row:last-child { border-bottom: none; }
+
+  /* Moat radar */
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+
+  /* Action / Caution / Warning boxes */
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .risk-card { background: #fef2f2; border: 1px solid rgba(220,38,38,0.20); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .risk-card h4 { color: var(--red); font-size: 13px; margin-bottom: 4px; }
+
+  /* Rating orb */
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+
+  /* Comp table row highlight */
+  .comp-now { background: rgba(79,70,229,0.05); }
+  .comp-now td { font-weight: 700; }
+
+  /* Ratio bar */
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); }
+  .bar-yellow { background: var(--gold); }
+  .bar-red { background: var(--red); }
+
+  /* Footer */
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+
+  @media (max-width: 720px) {
+    .scenario-row { grid-template-columns: 1fr; }
+    .moat-grid { grid-template-columns: repeat(2,1fr); }
+    .hero-price-block { text-align:left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">OKLO</div>
+      <div class="hero-name">Oklo Inc.（先進核能快中子微反應爐公司，代表產品 Aurora Powerhouse）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-09-09　⚠️ 高波動題材股，Beta 1.20</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$43.31</div>
+      <div class="hero-change">▲ 2026-09-08 收盤，單日 +4.94%（+$2.04）</div>
+      <div class="hero-mktcap">市值 $8.06B　股數 186.02M</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-purple">快中子反應爐微電廠（15-75MWe）</span>
+    <span class="badge badge-blue">DOE Reactor Pilot Program（免NRC執照先行建造）</span>
+    <span class="badge badge-red">近乎零營收，Q2首度認列$1.21M ⚠️</span>
+    <span class="badge badge-orange">現金+投資$3.0B，近乎零負債</span>
+    <span class="badge badge-yellow">Lynch：轉機股（早期）</span>
+    <span class="badge badge-red">52週跌幅 -78%（自ATH $193.84）</span>
+    <span class="badge badge-teal">前董事長Sam Altman已於2025/4卸任 ⚠️</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$43.31</div><div class="sub">✅ 2026-09-08，52週 $36.61–$193.84</div></div>
+    <div class="meta-item"><label>TTM 營收</label><div class="val">$1.21M</div><div class="sub">首度認列營收（Q2 FY2026）✅</div></div>
+    <div class="meta-item"><label>TTM 淨損</label><div class="val">-$152.77M</div><div class="sub">EPS -$0.93 ✅</div></div>
+    <div class="meta-item"><label>PE / Forward PE</label><div class="val">無法計算</div><div class="sub">持續虧損中 ✅</div></div>
+    <div class="meta-item"><label>Thesis 成立度</label><div class="val">2.5 / 5</div><div class="sub">早期轉機股，商轉未兌現但執行力領先同業</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐½☆☆</div><div class="sub">政策先發+國防背書，但商業護城河未驗證</div></div>
+  </div>
+</div>
+
+<!-- ── TOC ── -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#mode1">模式一 深度研究</a>
+    <span class="toc-sep">·</span>
+    <a href="#biz">業務引擎</a>
+    <a href="#thesis">核心Thesis</a>
+    <a href="#competition">競爭格局</a>
+    <a href="#moat">成長象限</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode2">模式二 財報解析</a>
+    <span class="toc-sep">·</span>
+    <a href="#earnings">Q2 2026財報</a>
+    <a href="#eps">EPS與估值錨點</a>
+    <a href="#dcf">DCF情境</a>
+    <a href="#targets">投行目標</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode3">模式三 財務健檢</a>
+    <span class="toc-sep">·</span>
+    <a href="#ratios">六大比率</a>
+    <a href="#capex">CapEx分析</a>
+    <a href="#comps2">同業對比</a>
+    <a href="#health">綜合診斷</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════
+     模式一：深度研究
+══════════════════════════════════════ -->
+<div id="mode1" class="mode-divider">
+  <h2>◈ 模式一：公司深度研究</h2>
+  <p>業務引擎 · 核心Thesis · 競爭格局 · Peter Lynch成長象限 · 護城河五維評分</p>
+</div>
+
+<!-- 1. 公司基本介紹 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">公司基本介紹</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">Oklo Inc.（NYSE: OKLO）成立於2013年，總部加州Santa Clara，2024年5月透過SPAC（AltC Acquisition Corp，由Sam Altman與Michael Klein共同發起）合併上市。核心產品為<strong>Aurora Powerhouse快中子微反應爐</strong>，採液態金屬（鈉）冷卻、HALEU金屬燃料，單機發電量15-75MWe（因應資料中心需求已將旗艦Aurora-INL案由50MWe升級至75MWe）。商業模式為<strong>「電廠擁有者兼營運商」（Build-Own-Operate）</strong>——與NuScale純技術授權模式不同，Oklo自建、自有、自營電廠並直接銷售電力（透過長期PPA），此模式資本支出強度遠高於NuScale，但長期毛利與現金流結構若順利兌現將更接近公用事業型態。目前仍處於「建造中、尚未商轉」的關鍵早期階段，2026年Q2首度認列非電力（同位素關聯）小額營收。</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$1.21M</div><div class="big-label">TTM 營收（首度認列）</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--red)">N/A</div><div class="big-label">YoY（去年同期為$0，無法計算倍數）</div></div>
+        <div><div class="big-num" style="font-size:22px;">毛利率 —</div><div class="big-label">❌ 營收過小無法有效計算</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--red)">FCF 深負</div><div class="big-label">建廠期資本支出加速期 ⚠️</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent)">
+    <h3 style="color:var(--accent)">🏭 所屬產業與全球排名</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">所屬產業：<strong>先進核能／微型模組化反應爐（快中子技術路線）</strong>，屬於美國「核能復興政策」（2025年5月川普四道行政命令，含DOE Reactor Pilot Program）＋「AI資料中心用電荒」雙題材受惠股龍頭之一。全球排名方面，Oklo是<strong>DOE Reactor Pilot Program下首批動工、且已在2025年9月率先於Idaho National Laboratory（INL）破土的先進反應爐商用案之一</strong>，同時是唯一同時掌握「微反應爐設計＋燃料回收再處理（Aurora Fuel Fabrication Facility）＋美軍國防合約（Eielson AFB）」三條業務線的上市公司。市值（$8.06B）已超越NuScale（$4.80B）約68%，反映市場給予其資金/大廠背書與執行進度更高溢價；惟其COL（合併執照）自2022年首次申請遭NRC以資訊不完整為由駁回後迄今尚未取得NRC最終核准，落後NuScale「已取得標準設計核准」的法規進度。</p>
+  </div>
+
+  <!-- 近4-5期歷史財務摘要 -->
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財務摘要</th>
+          <th class="num">FY2023</th>
+          <th class="num">FY2024</th>
+          <th class="num">FY2025</th>
+          <th class="num">Q1 FY2026</th>
+          <th class="num">Q2 FY2026</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num bad">$0 ✅</td><td class="num bad">$0 ✅</td><td class="num bad">$0 ✅</td><td class="num bad">$0 ✅</td><td class="num ok">$1.21M ✅（首度認列）</td></tr>
+        <tr><td>YoY 成長</td><td class="num">— ❌</td><td class="num">— ❌（連續零營收）</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">N/A（去年同期$0）</td></tr>
+        <tr><td>EBITDA margin</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td></tr>
+        <tr><td>EPS（GAAP）</td><td class="num bad">-$0.47 ✅</td><td class="num bad">-$0.74 ✅</td><td class="num bad">-$0.72 ✅</td><td class="num bad">-$0.19 ✅</td><td class="num bad">-$0.28 ✅</td></tr>
+        <tr><td>淨損</td><td class="num bad">-$32.17M ✅</td><td class="num bad">-$73.62M ✅</td><td class="num bad">-$105.66M ✅</td><td class="num bad">-$33.1M ✅</td><td class="num bad">-$48.5M ✅</td></tr>
+        <tr><td>FCF</td><td class="num">— ❌</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">深度負值 ⚠️</td></tr>
+        <tr><td>期末現金+投資</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num ok">$1.4B ✅</td><td class="num ok">$2.5B ✅（$1.18B ATM增資後）</td><td class="num ok">$3.0B ✅（$1.6B現金+$1.4B投資）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅ 已驗證（來源：Oklo IR/SEC EDGAR 10-Q、stockanalysis.com）｜❌ 無法取得或不適用（因連續零營收，YoY/毛利率/EBITDA margin不具統計意義）｜⚠️ 估算。FY2024淨損$73.62M組成：$52.8M營運虧損＋$27.9M SAFE票券公允價值變動（上市前）－$7.7M利息收入＋$0.7M稅費（來源：公司10-K揭露）。Oklo與NuScale同屬「前營收」早期公司，但Oklo已於2026年Q2出現首筆營收，時間點略早於NuScale近兩年營收反而萎縮至趨近於零的走勢。</p>
+</div>
+
+<!-- 2. 業務引擎分析 -->
+<div id="biz" class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">業務引擎分析</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>⚛️ Aurora-INL Powerhouse（旗艦電廠，DOE試點計畫）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">75MWe鈉冷快中子反應爐，2025年9月22日於愛達荷國家實驗室（INL）破土動工，屬川普總統2025年5月14301號行政命令下設立的<strong>DOE Reactor Pilot Program</strong>——依「充分控制」條款由DOE直接授權建造與試運轉，<strong>無需事先取得NRC執照</strong>即可施工，大幅壓縮傳統核能建廠的法規等待期。DOE已核准其Principal Design Criteria（設計準則）topical report（採加速審查時程，15天內受理，遠低於一般30-60天）與Preliminary Documented Safety Analysis。目標2027年底至2028年初商轉，惟多數第三方分析（如Motley Fool）預期首筆<strong>商業發電營收</strong>最快落在2028年後。與NRC正式COL執照（Aurora Phase 1）審查仍併行推進中，作為長期商業運轉的最終法規基礎。</p>
+    </div>
+    <div class="card">
+      <h3>♻️ Aurora Fuel Fabrication Facility（燃料回收再處理）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">與Argonne及INL合作完成端到端核燃料回收示範，取得5噸HALEU（高鑑度低濃縮鈾）材料處理權限，透過電解精煉將回收鈾降純化至20%以下U-235。DOE已核准其Safety Design Strategy、Conceptual Safety Design Report、Nuclear Safety Design Agreement與Preliminary DSA，並獲選加入<strong>DOE Fuel Line Pilot Program（FLPP）</strong>加速許可/建造/營運時程。2026年3月與Centrus Energy簽署合作意向，共同探討HALEU脫轉換（deconversion）服務合資機會，強化燃料供應鏈自主性——此為Oklo相對NuScale最大的差異化業務線，若成功將構成「反應爐+燃料」垂直整合護城河，惟商業化仍在早期示範階段。</p>
+    </div>
+    <div class="card">
+      <h3>🏢 資料中心/科技業PPA（Meta／Switch／Equinix，逾14GW管線）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7"><strong>Meta（2026年初簽署）</strong>：南俄亥俄州1.2GW核能開發協議，內含<strong>預付款機制</strong>提供前期資金助Oklo鎖定燃料與早期開發里程碑，首階段最快2030年商轉、分階段擴建至2034年完成1.2GW全量，屬目前最具約束力（有預付款）的商業合約。<strong>Switch（2024年12月簽署）</strong>：12GW主電力協議（Master Power Agreement），為非約束性框架，目標2044年前分階段部署。<strong>Equinix</strong>：500MW意向書，$25M預付款支持20年期PPA。合計客戶管線逾<strong>14GW</strong>（較2023年SPAC上市時約700MWe成長近20倍），但除Meta外多數仍屬非約束性協議/意向書性質。</p>
+    </div>
+    <div class="card">
+      <h3>🎖️ 國防／政府合約（Eielson空軍基地）＋ Groves同位素反應爐</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7"><strong>Eielson AFB（阿拉斯加）</strong>：美國空軍與國防後勤局（DLA）已宣布擬與Oklo簽署<strong>30年期固定價格合約</strong>，建置5MW微反應爐（電廠由Oklo自有，空軍僅購電），惟合約需待Oklo取得NRC執照後方能正式簽署，目標2030年商轉。<strong>Groves同位素試驗反應爐（德州）</strong>：2026年8月創紀錄11個月內達成首次臨界（criticality），為Oklo技術執行力的具體驗證里程碑；管理層表示<strong>首筆商業營收更可能來自NRC已核照的Idaho Radiochemistry Laboratory同位素業務，預估2027年上半年</strong>，早於Aurora-INL電力營收。</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>核心業務線</th><th>目前狀態</th><th>護城河來源</th><th>2026-2028關鍵催化劑</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Aurora-INL Powerhouse（75MWe）</strong></td><td class="num">建造中，DOE試點免NRC執照施工</td><td>川普行政命令政策先發＋DOE快軌審查</td><td>2027年底~2028年初能否如期商轉</td></tr>
+        <tr><td><strong>Aurora Fuel Fabrication Facility</strong></td><td class="num">DOE多項設計文件核准，FLPP試點</td><td>反應爐+燃料垂直整合，同業罕見</td><td>Centrus合資是否定案</td></tr>
+        <tr><td><strong>資料中心PPA（Meta/Switch/Equinix）</strong></td><td class="num">14GW管線，僅Meta具預付款約束力</td><td>Big Tech直接簽約，話題延展性強</td><td>Switch/Equinix能否轉化為具約束力合約</td></tr>
+        <tr><td><strong>Eielson AFB國防合約＋同位素業務</strong></td><td class="num">待NRC執照後正式簽約；Groves已臨界</td><td>美軍背書，非依賴商業電力市場</td><td>同位素業務2027年首筆營收能否兌現</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 3. 核心Thesis -->
+<div id="thesis" class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">核心 Thesis 與未來成長驅動</div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 1｜DOE政策先發優勢：免NRC執照即可動工</div>
+      <div class="content">Oklo是川普政府2025年5月行政命令設立的DOE Reactor Pilot Program下，率先於2025年9月在INL破土動工的先進反應爐項目之一，透過「DOE充分控制」授權跳過傳統NRC執照冗長審查即可施工，大幅壓縮傳統核能建廠時程。DOE已陸續核准其多項設計安全文件（PDC、CSDR等）。<strong>此為可驗證、已實際發生的政策紅利，非僅停留在敘事層面。</strong>✅ 明確成立，但需注意政策依賴未來行政命令若遭後續政府調整的風險。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 2｜$3.0B現金+近乎零負債，提供充裕短中期資本</div>
+      <div class="content">截至2026年Q2末，公司持有現金及約當現金$1.6B、加計短長期投資合計$3.0B流動性，總負債僅$84.33M（含$4.15M有息債務），股東權益達$3,274M。以2026年財測全年現金使用（營運$120-150M＋資本支出$400-500M，合計約$520-650M）估算，理論現金跑道逾5年（不含未來多電廠並行動工的資本支出加速情境）。✅ 成立，但需持續監控2026年單一季度資本支出指引已兩度上修的加速趨勢。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--red)">❌ 未兌現</div>
+      <div class="label">Thesis 3｜商業電力營收能否如期轉化為財報數字</div>
+      <div class="content">2026年迄今唯一營收為Q2的$1.21M，且來源並非電力銷售（推測為同位素或技術服務性質早期認列），距離Aurora-INL首次商轉發電營收（第三方預估最快2028年後）仍有數年時間差。EPS方面Q2實際-$0.28遠遜於市場預期-$0.16（重大Miss），反映成本上升速度快於營收認列速度。<strong>目前沒有任何具約束力的電力銷售長期合約已開始產生穩定現金流。</strong>❌ 明確未兌現，是最大的Thesis風險。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 4｜AI資料中心用電荒 + Big Tech直接簽約背書</div>
+      <div class="content">Meta於2026年初直接簽署1.2GW協議並提供預付款，是同業中少見「Big Tech直接付款鎖定」的案例，較NuScale至今無任何hyperscaler直接簽約更具說服力。惟Switch的12GW協議與Equinix的500MW意向書仍屬非約束性/LOI階段，且Meta案首階段商轉時點（2030年）仍遙遠。⚠️ 部分成立——題材確實存在且已有具體資金挹注證據，但距離「全面兌現」仍有相當落差。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--red)">❌ 未兌現（且有前科）</div>
+      <div class="label">Thesis 5｜首座商轉電廠如期如質完成，NRC執照最終取得</div>
+      <div class="content">Oklo原始1.5MWe Aurora設計曾於2022年1月遭NRC以「事故情境描述與安全系統分類資訊不完整」為由<strong>駁回COL申請</strong>（非安全性判定，屬程序性駁回），公司隨後重新設計為15-75MWe版本並改採DOE試點路徑先行施工。目前Aurora-INL雖已動工，但<strong>最終商業運轉仍需取得NRC正式執照</strong>，COL Phase 1審查進度未見完整揭露時程。核能建設史上成本超支、工期延宕為常態而非例外（可參照NuScale旗艦案CFPP因超支取消的前例）。❌ 尚未兌現，且Oklo自身即有NRC駁回前科。</div>
+    </div>
+  </div>
+
+  <!-- 核心成長驅動 & 監控風險 -->
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🚀 核心成長驅動力</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>Eielson AFB國防合約正式簽署</strong>：一旦Oklo取得NRC執照並與美國空軍簽署30年期固定價格合約，將提供非商業電力市場波動影響的穩定長期現金流基礎</li>
+        <li><strong>Switch/Equinix由LOI轉化為具約束力PPA</strong>：任一案若比照Meta模式加入預付款機制，將是股價重大催化劑</li>
+        <li><strong>DOE Title 17貸款擔保或其他聯邦融資核准</strong>：DOE Title 17計畫授信額度逾$250B，若Oklo成功申請大型貸款擔保，可大幅降低未來電廠融資成本</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 核心監控風險</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>Aurora-INL商轉時程延後</strong>：觸發條件——若2027年底前公司未公告具體聯網發電或試運轉里程碑，市場恐重新評估2028年商轉能見度</li>
+        <li><strong>資本支出指引持續上修加速稀釋/舉債壓力</strong>：2026財測單季內營運現金使用上修50%（$80-100M→$120-150M）、資本支出上修14%（$350-450M→$400-500M），觸發條件——若下次財報再度大幅上修，現金跑道將加速縮短</li>
+        <li><strong>DOE試點政策依賴度過高</strong>：目前免NRC執照施工的法源依據為2025年行政命令，觸發條件——若後續政府或國會透過訴訟/立法調整此授權基礎，Aurora-INL已投入的建造資本支出恐面臨法規不確定性</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 競爭格局 -->
+<div id="competition" class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">競爭格局：SMR／先進核能新創對照表</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th>技術路線／進度</th><th>優勢</th><th>對Oklo威脅度</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Oklo（本案）</strong></td><td>Aurora，15-75MWe鈉冷快中子爐，DOE試點已動工（2025/9），NRC COL審查併行推進</td><td>DOE政策快軌先發、Meta直接簽約+預付款、Eielson AFB國防合約、燃料回收垂直整合</td><td>—</td></tr>
+        <tr><td><strong>NuScale Power（SMR）</strong></td><td>VOYGR輕水式NPM，77MWe，<strong>唯一已取得NRC標準設計核准</strong>（2023/2025）</td><td>法規進度單一維度領先、RoPower Romania已FID核准</td><td>🟡 中｜法規進度領先但商業訂單/大廠背書弱於Oklo，市值已落後Oklo約68%</td></tr>
+        <tr><td><strong>X-energy（XE）</strong></td><td>Xe-100鵝卵石床高溫氣冷爐320MWe，2026年4月IPO上市，Dow Seadrift FOAK案進行中，已有ARDP服務營收</td><td>Amazon領投$500M+輪、已有可觀季營收（$43.4M/Q1）、Centrus燃料協議</td><td>🔴 高｜實際營收規模已顯著領先Oklo與NuScale，商轉時程雖同為2030年代初但財務基礎更成熟</td></tr>
+        <tr><td><strong>TerraPower</strong></td><td>Natrium鈉冷快中子爐345MWe（與Oklo同屬快中子技術路線），2026年3月取得NRC建照（40年來首張非輕水式建照），2026年5月已動工</td><td>Bill Gates創辦，Microsoft承購8座電廠合計2.8GW，取得正式NRC建照（非DOE試點）</td><td>🔴 高｜與Oklo技術路線最直接重疊，且已透過傳統NRC執照路徑動工，執行力對Oklo的DOE試點模式形成合法性對比</td></tr>
+        <tr><td><strong>Kairos Power</strong></td><td>KP-FHR氟化鹽冷卻鵝卵石床爐，Hermes/Hermes II於田納西州興建中</td><td>Google簽署Master Plant Development Agreement並取得500MW PPA，示範堆已在DOE試點下建造</td><td>🟡 中｜同屬DOE試點計畫受益者，Google背書強化資金與訂單能見度，但商轉規模較小</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box" style="margin-top:16px;">
+    <h3>⚠️ 競爭關鍵監控：Oklo在「執行力」與「大廠背書」上暫居領先，但NRC最終執照仍是最大變數</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">2025-2026年DOE Reactor Pilot Program重塑了整個先進核能競爭格局——Oklo、TerraPower、Kairos Power均已透過該計畫或傳統NRC執照實際動工，使「誰先破土」不再是唯一區隔指標，轉而聚焦「誰先商轉發電」與「誰的客戶合約含真金白銀預付款」。Oklo在Meta案的預付款機制與Eielson AFB國防合約上具備差異化優勢，但TerraPower已透過<strong>傳統NRC執照（非試點）</strong>動工，法規正當性風險低於Oklo；X-energy則已有實質營收與更成熟的財務基礎。每季監控：Oklo COL Phase 1審查是否有具體時程更新、Aurora-INL是否有聯網或試運轉里程碑。</p>
+  </div>
+</div>
+
+<!-- 5. 成長象限 & 護城河評分 -->
+<div id="moat" class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Peter Lynch 成長象限 & 護城河評分</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border:2px solid var(--purple);">
+      <h3 style="color:var(--purple)">📊 Lynch 象限判斷</h3>
+      <div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">轉機股（Turnaround），早期執行階段（優於同業平均進度）</div>
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <thead><tr><th>判斷標準</th><th>Oklo 現況</th><th>判定</th></tr></thead>
+          <tbody>
+            <tr><td>目前基本面是否慘淡</td><td>營收近乎為零、持續虧損擴大、EPS Miss</td><td class="ok">✅ 符合轉機股定義</td></tr>
+            <tr><td>是否有明確轉機催化劑</td><td>DOE試點動工、Meta預付款、Eielson AFB、Groves首臨界</td><td class="ok">✅ 有具體且部分已兌現的催化劑</td></tr>
+            <tr><td>轉機是否已被驗證</td><td>已動工＋Groves首臨界屬技術驗證，惟商業電力營收仍未兌現</td><td class="warn">⚠️ 部分驗證（技術端優於NuScale，商業端仍未驗證）</td></tr>
+            <tr><td>資產負債表能否撐到轉機</td><td>現金$3.0B、負債極低，惟資本支出指引持續上修</td><td class="warn">⚠️ 能撐但需持續監控燒錢加速趨勢</td></tr>
+            <tr><td>股價是否已反映轉機成功</td><td>現價$43.31遠低於2025年高點$193.84（-78%），但仍為NuScale市值近1.7倍</td><td class="warn">⚠️ 部分反映，波動性仍高但已明顯回落</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 判斷依據：Oklo不具備「景氣循環股」規律性，也非「高速成長股」（尚無規模化營收）、更非「穩定成長股」或「資產隱藏股」。其股價建立在「政策先發+大廠背書能否轉化為商轉現金流」的敘事之上，符合Lynch定義中的「轉機股」象限；惟相較NuScale，Oklo在「已動工」「已有Big Tech預付款」「已有國防合約雛形」三項具體證據上進度更前段，故歸類為「轉機股（早期，但執行進度優於同業）」。</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item">
+      <div class="moat-label">不可替代性</div>
+      <div class="moat-stars">★★★☆☆</div>
+      <div class="moat-score">3.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">DOE試點先發地位，惟非永久排他，TerraPower/Kairos亦受惠同計畫</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">客戶黏著度</div>
+      <div class="moat-stars">★★★☆☆</div>
+      <div class="moat-score">3.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">Meta案含預付款鎖定，優於同業純MOU模式，惟多數合約仍非約束性</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">網路效應</div>
+      <div class="moat-stars">★☆☆☆☆</div>
+      <div class="moat-score">1.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">反應爐技術本質不具網路效應</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">成本優勢</div>
+      <div class="moat-stars">★★☆☆☆</div>
+      <div class="moat-score">2.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">Build-Own-Operate模式資本密集，經濟性尚未大規模驗證</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">規模效應</div>
+      <div class="moat-stars">★★☆☆☆</div>
+      <div class="moat-score">2.5 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">反應爐+燃料回收垂直整合理論上具規模綜效，惟尚未量產驗證</div>
+    </div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：2.3 / 5 ⭐⭐½☆☆（政策先發+客戶預付款機制優於同業，但商業護城河仍未經商轉驗證）</div>
+
+  <div class="caution-box" style="margin-top:24px;">
+    <h3>⚠️ 建議動作（深度研究視角）</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+      <div>
+        <strong>當前建議：</strong>屬於<span class="bad">高風險投機性倉位</span>，不符合使用者「重視護城河/現金流/安全邊際」的核心投資原則。若已持有，建議控制在<strong>機會池小倉位（&lt;2-3%總資產）</strong>，不建議作為核心或戰術池部位；未持有者若對SMR/微反應爐題材有長期信念，可將Oklo列為機會池觀察名單，等待COL執照進度或商轉里程碑明朗後再評估加碼。<br><br>
+        <strong>加碼觸發（需同時滿足多項）：</strong>
+        <ul style="padding-left:16px;">
+          <li>NRC正式核發Aurora-INL的COL執照（非僅DOE試點授權）</li>
+          <li>Switch或Equinix比照Meta模式加入具約束力預付款機制</li>
+          <li>Aurora-INL出現具體聯網發電或試運轉里程碑公告</li>
+        </ul>
+      </div>
+      <div>
+        <strong>賣出/迴避觸發：</strong>
+        <ul style="padding-left:16px;">
+          <li>2027年底前Aurora-INL未出現任何試運轉/聯網進度</li>
+          <li>現金跑道因資本支出加速下降至&lt;2年</li>
+          <li>DOE試點授權法源遭訴訟或政策逆轉，Aurora-INL被迫停工</li>
+          <li>股數因ATM增資在12個月內再增加&gt;30%</li>
+        </ul>
+        <br>
+        <strong>每季監控指標：</strong>COL審查進度、資本支出guidance變化率、Aurora-INL施工里程碑、同位素業務首筆商業營收兌現時點</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式二：財報解析
+══════════════════════════════════════ -->
+<div id="mode2" class="mode-divider">
+  <h2>◈ 模式二：最新財報解析</h2>
+  <p>Q2 FY2026 財報 · EPS多年期估值錨點 · DCF三情境 · 投行目標價 · 操作建議</p>
+</div>
+
+<!-- 6. Q2 2026 財報 Beat/Miss -->
+<div id="earnings" class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">Q2 FY2026 財報（2026-08-07發布）</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--gold); margin-bottom:20px;">
+    <h3 style="color:var(--gold)">⚠️ 首度營收大幅超預期，但EPS Miss+虧損擴大凸顯成本升速快於營收</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Q2 2026營收$1.21M，較市場預期約$0.07-0.13M大幅超越（+近10倍），主因是公司首度自同位素/技術服務相關業務認列小額營收，具指標意義但金額規模仍極小。EPS -$0.28遠遜於市場預期-$0.16（重大Miss），淨損由去年同期$24.7M擴大至$48.5M（+96%），主因研發與建廠人力/工程支出同步大幅提升。財報發布後<strong>股價不跌反漲</strong>——盤前上漲5.38%，全天收漲約7.6%，主因Groves同位素反應爐達成首次臨界的技術里程碑、以及公司同步公布現金部位躍升至$3.0B，市場選擇聚焦「執行力驗證」而非短期EPS落差。</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>指標</th><th class="num">實際值 ✅</th><th class="num">市場預期 ⚠️</th><th class="num">YoY 變化</th><th>判定</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>營收</td><td class="num ok">$1.21M</td><td class="num">~$0.07-0.13M</td><td class="num">N/A（去年同期$0）</td><td><span class="badge badge-green">大幅 Beat ✅</span></td></tr>
+        <tr><td>EPS（GAAP）</td><td class="num bad">-$0.28</td><td class="num">-$0.16</td><td class="num bad">去年同期-$0.15左右⚠️，虧損擴大</td><td><span class="badge badge-red">重大 Miss ❌</span></td></tr>
+        <tr><td>淨損</td><td class="num bad">$48.5M</td><td class="num">— ❌</td><td class="num bad">$24.7M → $48.5M，+96% ✅</td><td><span class="badge badge-red">虧損擴大 ❌</span></td></tr>
+        <tr><td>營運現金使用（H1累計）</td><td class="num bad">$65.5M</td><td class="num">— ❌</td><td class="num bad">加速中</td><td><span class="badge badge-yellow">燒錢加速 ⚠️</span></td></tr>
+        <tr><td>資本支出（H1累計）</td><td class="num bad">$126.9M</td><td class="num">— ❌</td><td class="num bad">加速中</td><td><span class="badge badge-yellow">建廠期投入加大 ⚠️</span></td></tr>
+        <tr><td>期末現金+投資</td><td class="num ok">$3.0B</td><td class="num">— ❌</td><td class="num ok">季增約$0.5B</td><td><span class="badge badge-green">流動性強化 ✅</span></td></tr>
+        <tr><td>毛利率／營業利益率</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td><span class="badge badge-red">營收過小無法計算</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 全年指引變化 -->
+  <div class="card" style="margin-top:16px; border-left:3px solid var(--gold);">
+    <h3 style="color:var(--gold)">全年指引變化對照（★重大上修）</h3>
+    <div class="tbl-wrap" style="margin-top:8px; margin-bottom:0;">
+      <table>
+        <thead><tr><th>指引項目</th><th class="num">Q1財報原指引</th><th class="num">Q2財報更新指引</th><th class="num">變化幅度</th></tr></thead>
+        <tbody>
+          <tr><td>全年營運現金使用</td><td class="num">$80-100M</td><td class="num bad">$120-150M</td><td class="num bad">上修約+50%</td></tr>
+          <tr><td>全年資本支出（PP&E）</td><td class="num">$350-450M</td><td class="num bad">$400-500M</td><td class="num bad">上修約+13-14%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px; line-height:1.8; color:var(--text); margin-top:10px;">公司說明上修主因為<strong>「將部分專案活動提前執行以強化執行確信度」</strong>——即加速採購、電網併聯支出與Aurora-INL首例（FOAK）專案成本，下半年資本支出權重將更高。管理層強調此非一般營運燒錢加速，而是專案里程碑提前落地的正面訊號，惟投資人仍須將此視為<strong>現金消耗速度顯著快於原先財測</strong>的具體證據。</p>
+  </div>
+
+  <!-- 股價反應 -->
+  <div class="card" style="margin-top:16px;">
+    <h3>股價反應（財報前後）</h3>
+    <div style="font-size:13px; line-height:1.9; color:var(--text)">
+      <strong>財報前收盤（2026-08-06）</strong>：約$42.19<br>
+      <strong>財報後盤前</strong>：上漲5.38%至約$44.46<br>
+      <strong>財報發布當日</strong>：延續漲勢，盤中一度上漲逾7.6%至約$45.41，收盤全天上漲約15%<br>
+      <strong>財報後一週</strong>：延續漲勢，週線收在$48以上，週漲幅約25%——主因Groves反應爐首次臨界的技術驗證意義蓋過EPS Miss與資本支出上修的短期利空，反映市場現階段仍以「執行力敘事」而非傳統財務指標為主要定價依據。
+    </div>
+  </div>
+</div>
+
+<!-- 7. EPS多年期表 & 歷史本益比 -->
+<div id="eps" class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">估值歷史錨點：多年期EPS ＋ 歷史本益比（★必附）</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財年</th>
+          <th class="num">EPS 實際值/預估值</th>
+          <th class="num">來源／機構</th>
+          <th class="num">股價（年末參考⚠️）</th>
+          <th class="num">本益比 PE</th>
+          <th>狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>FY2023 A</strong></td>
+          <td class="num bad">-$0.47 ✅</td>
+          <td class="num">stockanalysis.com</td>
+          <td class="num">— ⚠️上市前SPAC階段股價不具可比性</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td><span class="badge badge-red">虧損中</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2024 A</strong></td>
+          <td class="num bad">-$0.74 ✅</td>
+          <td class="num">stockanalysis.com</td>
+          <td class="num">— ⚠️上市首年波動大</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td><span class="badge badge-red">虧損中</span></td>
+        </tr>
+        <tr style="background:rgba(220,38,38,0.03)">
+          <td><strong>FY2025 A</strong></td>
+          <td class="num bad">-$0.72 ✅</td>
+          <td class="num">stockanalysis.com</td>
+          <td class="num">$193.84（10/15 ATH）~$50區間⚠️（估，年末波動極大）</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td><span class="badge badge-red">虧損中</span></td>
+        </tr>
+        <tr style="background:rgba(180,83,9,0.04)">
+          <td><strong>FY2026 E</strong></td>
+          <td class="num bad">-$0.98 ✅共識</td>
+          <td class="num">stockanalysis.com（16家分析師）</td>
+          <td class="num">$43.31（現價）</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td><span class="badge badge-yellow">虧損持續擴大⚠️</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2027 E</strong></td>
+          <td class="num">— ❌</td>
+          <td class="num">未查得可靠免費來源（多數分析師模型須付費訂閱）</td>
+          <td class="num">—</td>
+          <td class="num">— ❌</td>
+          <td><span class="badge badge-red">資料缺口</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2028 E</strong></td>
+          <td class="num">— ❌</td>
+          <td class="num">未查得可靠免費來源</td>
+          <td class="num">—</td>
+          <td class="num">— ❌</td>
+          <td><span class="badge badge-red">資料缺口</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 分歧提示：FY2026E營收預估同樣呈現高度不確定——stockanalysis.com（16家分析師）共識營收僅$2.39M（YoY+227%，但基期極低），意味市場對「近1-2年內Aurora-INL能貢獻實質電力營收」的預期普遍保守，主要成長預期仍集中在2027年之後。FY2027/2028 EPS與營收共識因多數機構模型鎖付費牆，本報告無法取得可靠免費數字，如實標註「—」。</p>
+
+  <!-- 歷史PE錨點 -->
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr><th colspan="4" style="color:var(--accent); font-size:13px;">★ 歷史本益比錨點表（2024年SPAC上市迄今）</th></tr>
+        <tr><th>年度</th><th class="num">本益比</th><th>狀態</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>FY2023</td><td class="num bad">無法計算</td><td><span class="badge badge-red">❌</span></td><td>EPS -$0.47，上市前尚無公開股價可比</td></tr>
+        <tr><td>FY2024</td><td class="num bad">無法計算</td><td><span class="badge badge-red">❌</span></td><td>2024年5月SPAC上市首年，EPS -$0.74</td></tr>
+        <tr><td>FY2025</td><td class="num bad">無法計算</td><td><span class="badge badge-red">❌</span></td><td>EPS -$0.72，股價全年最高$193.84（10/15）至最低約$36-40區間，波動幅度極端</td></tr>
+        <tr><td>FY2026E</td><td class="num bad">無法計算</td><td><span class="badge badge-red">❌</span></td><td>共識預估EPS仍為負（-$0.98）</td></tr>
+        <tr style="background:rgba(220,38,38,0.04)"><td><strong>歷史最低本益比年份</strong></td><td class="num bad" colspan="3">不存在——Oklo自2024年SPAC上市以來從未有任何一個財年轉虧為盈，本益比在公司整段上市史上皆「無法計算」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="risk-card" style="margin-top:12px;">
+    <h4>📌 反推試算結論：股價完全由「政策/執行力敘事」與倍數重估驅動，與獲利成長完全脫鉤</h4>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">由於Oklo自2024年上市以來<strong>每一個財年、每一季度EPS均為負值</strong>，傳統「歷史最低本益比 × 保守情境EPS」反推試算法在此個股<strong>完全不適用</strong>。這意味著：Oklo股價的所有波動（從2024年上市價、到2025年10月高點$193.84、再回落至現價$43.31，區間振幅逾5倍），<strong>100%由市場對「DOE政策紅利+Big Tech PPA能否轉化為未來獲利能力」的敘事預期與倍數重估所驅動，與過去或現在的實際獲利完全無關</strong>。與NuScale相同，正確的估值框架應以「未來現金流貼現（DCF）情境」取代本益比錨定法，詳見下節。</p>
+  </div>
+</div>
+
+<!-- 8. DCF 三情境 -->
+<div id="dcf" class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">DCF 三情境估值（情境式現金流貼現，非傳統FCF折現）</div>
+  </div>
+
+  <div class="caution-box">
+    <h3>⚠️ Oklo DCF估值方法論特別說明</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Oklo目前FCF為深度負值且僅有極小額營收基礎，<strong>傳統以現有現金流為起點的DCF模型不適用</strong>。以下三情境改採「假設NRC執照核准時點 + 假設Aurora-INL商轉時點 + 假設客戶PPA轉化規模」的<strong>情境式估值法</strong>，核心假設為：①Aurora-INL何時取得NRC正式COL執照並實際聯網商轉；②Meta/Switch/Equinix/Eielson AFB訂單轉化為具約束力合約與實際發電銷售的比例；③届時的營收規模與長期電力銷售利潤率假設。<strong>所有假設均為⚠️高度不確定的情境推演，非精確財務模型，僅供參考。</strong></p>
+  </div>
+
+  <div class="scenario-row">
+    <div class="scenario bear">
+      <h4>🐻 熊市情境（30% 機率）</h4>
+      <div class="scenario-price" style="color:var(--red)">$20-28</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $43.31　下跌 -35% ~ -54%</div>
+      <div class="row"><span>假設商轉時點</span><span>2030年後或COL遭NRC二次退件</span></div>
+      <div class="row"><span>PPA轉化率</span><span>&lt;20%（Meta以外多數仍卡在LOI階段）</span></div>
+      <div class="row"><span>稀釋股數（未來3年）</span><span>+40-60%（資本支出持續加碼被迫增資）</span></div>
+      <div class="row"><span>對應方法</span><span>參考市場最低分析師目標$14-51區間下緣</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：DOE試點政策遭訴訟/逆轉、Aurora-INL重大工期延宕、COL審查遭NRC提出重大缺失</div>
+    </div>
+    <div class="scenario base">
+      <h4>📊 基本情境（45% 機率）</h4>
+      <div class="scenario-price" style="color:var(--blue)">$55-85</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $43.31　+27% ~ +96%</div>
+      <div class="row"><span>假設商轉時點</span><span>Aurora-INL 2028年商轉（較guidance略延後）</span></div>
+      <div class="row"><span>PPA轉化率</span><span>Meta案穩步推進，Eielson AFB完成正式簽約</span></div>
+      <div class="row"><span>稀釋股數（未來3年）</span><span>+20-30%（持續但趨緩的增資）</span></div>
+      <div class="row"><span>對應方法</span><span>大致貼近分析師共識均值 $79.88-$86.65</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：Aurora-INL如期完工進入試運轉、Eielson AFB正式簽約、COL執照如期取得</div>
+    </div>
+    <div class="scenario bull">
+      <h4>🐂 牛市情境（25% 機率）</h4>
+      <div class="scenario-price" style="color:var(--green)">$110-135</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $43.31　+154% ~ +212%</div>
+      <div class="row"><span>假設商轉時點</span><span>Aurora-INL提前至2027年底商轉，多案並行動工</span></div>
+      <div class="row"><span>PPA轉化率</span><span>Switch/Equinix皆轉化為具約束力合約+新增Big Tech簽約</span></div>
+      <div class="row"><span>稀釋股數（未來3年）</span><span>+10-15%（訂單能見度足夠支撐低稀釋融資/DOE Title 17貸款擔保）</span></div>
+      <div class="row"><span>對應方法</span><span>貼近分析師最高目標 $130</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：DOE Title 17大型貸款擔保核准、多座Aurora Powerhouse同步動工並取得NRC執照</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent);">
+    <h3>敏感度分析：哪個變數對估值影響最大？</h3>
+    <p style="font-size:13px; color:var(--text); line-height:1.7">三情境間價差（$20-28至$110-135，約4.5-5倍）主要由<strong>「NRC執照最終核准時點」與「Aurora-INL能否如期進入試運轉」雙變數共同主導</strong>，重要性遠高於折現率或終值假設。次要敏感變數為<strong>資本支出加速的稀釋速度</strong>：2026年單一財報週期內guidance即兩度上修，顯示公司自身對成本規劃的能見度仍有限，若持續上修恐迫使更頻繁的股權融資。<strong>加權估算公允價值約$58-72（⚠️情境加權平均，非精確模型）</strong>，高於現價$43.31，顯示情境式估值略偏樂觀，但這也與現價已較2025年10月高點大幅修正約78%、市場情緒已顯著降溫的現況相符——目前股價已反映相當程度的執行風險折價。</p>
+  </div>
+</div>
+
+<!-- 9. 股價位階評估 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">股價位階評估</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>估值指標</th><th class="num">數值</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>TTM PE</td><td class="num bad">無法計算 ❌</td><td>TTM EPS為-$0.93，持續虧損</td></tr>
+        <tr><td>Forward PE</td><td class="num bad">無法計算 ❌</td><td>FY2026E EPS共識仍為負值（-$0.98）</td></tr>
+        <tr><td>PB（股價淨值比）</td><td class="num warn">~2.46x ✅</td><td>計算依據：Q2 2026資產負債表股東權益$3,274M ÷ 186.02M股 ≈ 每股淨值$17.60，現價$43.31 ÷ $17.60</td></tr>
+        <tr><td>PEG</td><td class="num bad">無法計算 ❌</td><td>需正值EPS成長率為分母，不適用</td></tr>
+        <tr><td>EV/Revenue（TTM）</td><td class="num bad">~6,660x ⚠️估（參考用，無實質意義）</td><td>市值$8.06B（估略高於EV，因近乎零有息負債）÷ TTM營收$1.21M，數字極端反映公司仍為前營收階段，非可比估值指標</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box">
+    <h3>⚠️ EPS成長趨勢判讀：虧損逐年擴大＋股數持續增加的組合，PB為唯一可用傳統指標</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">近4期EPS趨勢：FY2023 -$0.47 → FY2024 -$0.74 → FY2025 -$0.72（略收斂，主因股數增加稀釋部分每股虧損）→ FY2026E -$0.98（共識預估虧損再度擴大，主因建廠期資本/研發支出加大）。這並非典型「獲利加速+本益比同步擴張」的戴維斯雙擊格局，而是<strong>「建廠期資本投入持續加碼、每股虧損隨規模擴大而波動」</strong>的早期成長型態，PB倍數（2.46x）目前是唯一具備計算意義的傳統估值指標，惟仍須搭配DCF情境法交叉檢視。</p>
+  </div>
+</div>
+
+<!-- 10. Comps分析 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">可比公司（Comps）分析</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th class="num">市值</th><th class="num">TTM營收</th><th class="num">PE（Trailing/Fwd）</th><th class="num">FCF Yield</th><th>成長類型</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now">
+          <td><strong>Oklo (OKLO) ★</strong></td>
+          <td class="num">$8.06B ✅</td>
+          <td class="num bad">$1.21M ✅</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td class="num bad">深度負值 ⚠️</td>
+          <td><span class="badge badge-red">轉機股（前營收，剛出現首筆營收）</span></td>
+        </tr>
+        <tr>
+          <td>NuScale Power (SMR)</td>
+          <td class="num">$4.80B ✅</td>
+          <td class="num bad">$10.69M ✅</td>
+          <td class="num bad">無法計算 ❌</td>
+          <td class="num bad">深度負值 ⚠️</td>
+          <td><span class="badge badge-red">轉機股（前營收，營收反而萎縮中）</span></td>
+        </tr>
+        <tr>
+          <td>X-energy (XE)</td>
+          <td class="num">~$7.7B ⚠️（來源分歧$7.19-8.31B）</td>
+          <td class="num warn">~$43.4M/季 ✅（Q1 2026，服務+補助收入）</td>
+          <td class="num bad">無法計算 ❌（淨損$166.2M/Q1）</td>
+          <td class="num bad">深度負值 ⚠️</td>
+          <td><span class="badge badge-yellow">轉機股（已有可觀營收但虧損擴大）</span></td>
+        </tr>
+        <tr>
+          <td>BWX Technologies (BWXT)</td>
+          <td class="num">~$16.45B ✅</td>
+          <td class="num ok">$3.8B guidance ✅</td>
+          <td class="num">47.9x / 37.7x ✅</td>
+          <td class="num">正值⚠️估</td>
+          <td><span class="badge badge-green">穩定成長股（既有核能供應鏈）</span></td>
+        </tr>
+        <tr>
+          <td>Constellation Energy (CEG)</td>
+          <td class="num">~$97-110B ⚠️（波動大）</td>
+          <td class="num">大型核能電力營運商⚠️</td>
+          <td class="num">~26.8x ✅</td>
+          <td class="num">正值⚠️估</td>
+          <td><span class="badge badge-teal">穩定成長股（既有核電運營商）</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ X-energy市值因查詢時間點不同而有$7.19B與$8.31B兩組數字，差異可能反映近期股價劇烈波動，請以最新報價為準；CEG市值全年區間亦達$81-118B，波動同樣顯著。</p>
+
+  <div class="card" style="margin-top:12px;">
+    <h3>🏆 同業對比結論</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Oklo、NuScale、X-energy三者同屬「前/準營收先進核能新創」族群，估值主要建立在未來題材而非當期財務指標，<strong>均無法用傳統PE/FCF Yield比較</strong>；相對地，BWXT、CEG屬於<strong>已有穩定現金流的核能供應鏈成熟公司</strong>，可作為「若SMR/微反應爐題材兌現後長期應有的估值型態」參照，但目前階段三者均不具直接可比性。三家新創股中，<strong>X-energy的營收規模與現金流結構已明顯領先</strong>（單季服務+補助收入逾$43M），Oklo則以「已動工+Big Tech預付款+國防合約雛形」的執行力證據取勝，NuScale則保有「唯一NRC標準設計核准」的單一法規優勢但商業訂單動能最弱。Oklo市值（$8.06B）較NuScale（$4.80B）溢價約68%，反映市場對其執行進度與客戶結構給予較高評價。</p>
+  </div>
+</div>
+
+<!-- 11. 額外優勢/風險 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">額外優勢/風險</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3 style="color:var(--red)">⚠️ 內部人持續大額出脫（核心風險）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">自2024年以來，內部人（含共同創辦人）已累計出脫逾$315M股票，其中共同創辦人（含Jacob DeWitte、Caroline Cochran）合計套現約$268M；2026年6-7月間另有多筆Rule 144申報（如40萬股約$15.53M）、近期CFO於2026/9/3出售價值$636,826.80股票。持續且規模不小的內部人出售，需留意管理層信心訊號與潛在股權稀釋壓力，惟需區分「規劃性稅務出脫（如10b5-1計畫）」與「基本面惡化訊號」——目前公開資訊未明確指出屬於後者。</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--teal)">
+      <h3 style="color:var(--teal)">⚠️ 前董事長Sam Altman已於2025年4月卸任（重要事實更正）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7"><strong>Sam Altman已於2025年4月22日卸任Oklo董事長職務</strong>，由共同創辦人暨CEO Jake DeWitte接任董事長，官方說明理由為「消除潛在利益衝突，以利Oklo更積極與更多AI/科技公司洽談供電合作」。此為Oklo與NuScale等同業比較時的重要事實基礎——市場過往「Sam Altman主導Oklo」的敘事已非現況，惟Altman卸任反而被市場解讀為<strong>正面訊號</strong>（利於Oklo與OpenAI以外的其他Big Tech客戶洽談合作，如後續Meta案簽署）。Altman目前是否仍持有股份或擔任一般董事，公開資訊未明確揭露，本報告如實標示「—」不臆測。</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--gold)">
+      <h3 style="color:var(--gold)">⚠️ 機構持股與空頭部位並存</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">機構持股約47-55%（⚠️來源分歧，因查詢時間點不同），流通在外股數約145-146M股（占總股數約78.4%）。空單比例偏高，2026年5月中旬空頭占流通股比重達24.86%（較4月的20.32%進一步攀升），顯示市場對「高估值vs執行風險」的分歧程度不小，若後續出現利多消息，理論上存在軋空（short squeeze）帶動股價急拉的可能性，惟此屬技術面而非基本面因素，不應作為投資主要依據。</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <h3 style="color:var(--blue)">✅ 無股息、無回購，但潛在DOE融資管道具想像空間</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">公司持續虧損燒錢，無股息政策，也無股票回購計畫（❌不適用於此階段公司）。政府融資方面，DOE Title 17計畫授信額度逾$250B，2026年5月已延長資金可用期限至2028年9月，Oklo截至最新財報未見具體貸款擔保核准入帳，但作為DOE Reactor Pilot Program的優先受惠者，理論上具備申請大型聯邦融資的政策順風，需持續追蹤後續進展。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 12. 投行目標價與操作建議 -->
+<div id="targets" class="section">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">投行目標價與操作建議</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>機構</th><th>評等</th><th class="num">目標價</th><th class="num">vs 現價 $43.31</th><th>異動時間／理由</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Piper Sandler</strong></td><td><span class="badge badge-green">Overweight（優於大盤）</span></td><td class="num ok">$55.00</td><td class="num ok">+27.0%</td><td>2026-09-08新啟動評等</td></tr>
+        <tr><td><strong>Citigroup</strong></td><td><span class="badge badge-yellow">Neutral（中立）</span></td><td class="num ok">$57.50</td><td class="num ok">+32.8%</td><td>2026-08-10下修（原$73.5→$76，後再調整至$57.50）</td></tr>
+        <tr><td><strong>HC Wainwright</strong></td><td><span class="badge badge-green">Buy（買進）</span></td><td class="num ok">$90.00</td><td class="num ok">+107.8%</td><td>2026-08-10重申</td></tr>
+        <tr><td><strong>Canaccord Genuity</strong></td><td><span class="badge badge-green">Buy（買進）</span></td><td class="num ok">$100.00</td><td class="num ok">+130.9%</td><td>2026-08-10下修（原目標更高）</td></tr>
+        <tr><td><strong>Wedbush</strong></td><td><span class="badge badge-green">Outperform（優於大盤）</span></td><td class="num ok">$110.00</td><td class="num ok">+154.0%</td><td>2026-05-26重申</td></tr>
+        <tr><td><strong>Tigress Financial</strong></td><td><span class="badge badge-green">Buy（買進）</span></td><td class="num ok">$130.00</td><td class="num ok">+200.2%</td><td>2026-04-27新啟動評等</td></tr>
+        <tr><td>市場共識均值（來源A，25家，S&P Global）</td><td><span class="badge badge-green">Buy（買進）</span></td><td class="num ok">$79.88</td><td class="num ok">+84.4%</td><td>stockanalysis.com；高$130／低$14／中位數$81.50</td></tr>
+        <tr><td>市場共識均值（來源B，23家）</td><td><span class="badge badge-green">Moderate Buy（適度買進）</span></td><td class="num ok">$83.26</td><td class="num ok">+92.3%</td><td>marketbeat.com；買進12／持有9／賣出1／強力買進1；高$130／低$51</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 分歧提示：不同資料源統計的最低目標價落差極大（$14 vs $51），反映Oklo分析師覆蓋度雖高（23-25家）但對「執行失敗情境」的悲觀假設差異懸殊，共識均值的參考穩定性仍低於大型成熟股。</p>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>主要分歧點：樂觀派 vs 謹慎派</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; margin-top:10px;">
+      <div>
+        <strong style="color:var(--green)">樂觀派論點（Tigress/Wedbush等）</strong>
+        <ul style="padding-left:16px; line-height:1.8;">
+          <li>DOE試點政策先發＋已實際動工，執行力領先多數同業</li>
+          <li>Meta案含預付款機制，客戶結構品質優於同業純MOU</li>
+          <li>$3.0B現金＋近乎零負債，資本市場再融資能力強</li>
+          <li>Groves反應爐已達首次臨界，技術驗證領先同業</li>
+        </ul>
+      </div>
+      <div>
+        <strong style="color:var(--red)">謹慎派論點（Citi等）</strong>
+        <ul style="padding-left:16px; line-height:1.8;">
+          <li>營收仍近乎歸零，估值與基本面高度脫鉤</li>
+          <li>NRC正式COL執照尚未取得，2022年已有一次遭駁回前科</li>
+          <li>資本支出guidance單一季度內兩度大幅上修，成本能見度不足</li>
+          <li>Switch/Equinix等多數訂單仍非約束性，兌現時間表不確定</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px; border-left:3px solid var(--accent);">
+    <h3>上行空間彙總表</h3>
+    <div class="tbl-wrap" style="margin-top:8px; margin-bottom:0;">
+      <table>
+        <thead><tr><th>參考點</th><th class="num">對應價格</th><th class="num">距現價空間</th></tr></thead>
+        <tbody>
+          <tr><td>市場最低分析師目標（marketbeat區間下緣）</td><td class="num bad">$14-51</td><td class="num bad">-67.7% ~ +17.8%</td></tr>
+          <tr><td>DCF熊市情境</td><td class="num bad">$20-28</td><td class="num bad">-35% ~ -54%</td></tr>
+          <tr><td>Citi中性目標</td><td class="num">$57.50</td><td class="num ok">+32.8%</td></tr>
+          <tr><td>DCF基本情境</td><td class="num">$55-85</td><td class="num ok">+27% ~ +96%</td></tr>
+          <tr><td>市場共識均值（多來源區間）</td><td class="num ok">$79.88-$86.65</td><td class="num ok">+84% ~ +100%</td></tr>
+          <tr><td>Tigress樂觀目標</td><td class="num ok">$130.00</td><td class="num ok">+200%</td></tr>
+          <tr><td>DCF牛市情境</td><td class="num ok">$110-135</td><td class="num ok">+154% ~ +212%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="risk-card" style="margin-top:16px; background:#fffbea; border-color:rgba(180,83,9,0.3);">
+    <h3 style="color:var(--gold)">⚠️ 財報解析操作建議：執行力領先同業的投機性題材股，仍不符合中長期價值投資核心原則</h3>
+    <div style="font-size:13px; line-height:1.8; color:var(--text)">
+      <strong>核心邏輯</strong>：Oklo目前股價仍主要由敘事與倍數重估驅動，無實質獲利、無正向FCF、僅有極小額營收，但相較NuScale，其「已動工＋Big Tech預付款＋Groves首次臨界」的具體執行證據更充分，分析師評等也明顯偏多（Buy/Moderate Buy共識，僅Citi中立、無明確Sell評等），反映機構對其執行力的信心優於NuScale。惟這仍與使用者「護城河/現金流/安全邊際」的核心投資理念<strong>存在明顯落差</strong>。
+      <br><br>
+      <strong>操作建議（若考慮參與，建議限機會池小倉位）</strong>：
+      <ul style="padding-left:16px; margin-top:6px;">
+        <li>未持有者：不建議現階段大幅建倉；若堅持參與，建議倉位控制在總資產2-3%以下，並以「高波動成長型部位」的風險認知配置</li>
+        <li>已持有者：可維持現有部位觀察COL執照進度，惟不建議在現金流未改善前加碼至戰術/核心池比重</li>
+        <li>關鍵觀察點：2026年Q3/Q4財報是否出現COL審查具體時程更新、Aurora-INL是否有聯網或試運轉里程碑</li>
+        <li>停損/止觀參考：若股價因資本支出持續上修+COL延宕跌破$28（DCF熊市情境下緣），且無新里程碑消息，應重新評估是否退出</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式三：財務健檢
+══════════════════════════════════════ -->
+<div id="mode3" class="mode-divider">
+  <h2>◈ 模式三：財務風險健檢</h2>
+  <p>財務三表 · 六大比率 · 現金燒錢速度與跑道 · CapEx分析 · 同業對比 · 綜合診斷</p>
+</div>
+
+<!-- 13. 財務三表 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">財務三表數據（近3期）</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>損益表 / 現金流</th>
+          <th class="num">FY2024 ✅</th>
+          <th class="num">FY2025 ✅</th>
+          <th class="num">H1 FY2026 ✅</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num bad">$0 ✅</td><td class="num bad">$0 ✅</td><td class="num ok">$1.21M ✅（全數來自Q2）</td></tr>
+        <tr><td>EBIT（估）</td><td class="num bad">深度負值（營運虧損$52.8M）✅</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">深度負值 ⚠️</td></tr>
+        <tr><td>利息支出</td><td class="num ok">~$0（近乎無有息負債）✅</td><td class="num ok">~$0 ✅</td><td class="num ok">~$0 ✅</td></tr>
+        <tr><td>利息收入（現金部位孳息）</td><td class="num ok">$7.7M ✅</td><td class="num">— ❌</td><td class="num">— ❌</td></tr>
+        <tr><td>淨損</td><td class="num bad">-$73.62M ✅</td><td class="num bad">-$105.66M ✅</td><td class="num bad">-$81.6M ✅（Q1 $33.1M+Q2 $48.5M）</td></tr>
+        <tr><td>OCF（營運現金流出）</td><td class="num">— ❌</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">-$65.5M ✅</td></tr>
+        <tr><td>CapEx</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num bad">$126.9M ✅</td></tr>
+        <tr><td>FCF</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">深度負值 ⚠️</td><td class="num bad">約-$192.4M ⚠️估（OCF-Capex）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr>
+          <th>資產負債表</th>
+          <th class="num">FY2025末 ✅</th>
+          <th class="num">Q2 FY2026末 ✅</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>現金+短長期投資</td><td class="num ok">$1.4B ✅</td><td class="num ok">$3.0B ✅（$1.6B現金+$1.4B投資）</td></tr>
+        <tr><td>總資產</td><td class="num">$1,528M ✅</td><td class="num ok">$3,358M ✅</td></tr>
+        <tr><td>總負債</td><td class="num">$52.25M ✅</td><td class="num ok">$84.33M ✅</td></tr>
+        <tr><td>計息債務（有息負債）</td><td class="num ok">$1.45M ✅</td><td class="num ok">$4.15M ✅ ⭐（近乎零）</td></tr>
+        <tr><td>股東權益</td><td class="num">$1,476M ✅</td><td class="num ok">$3,274M ✅</td></tr>
+        <tr><td>淨現金部位</td><td class="num ok">$1.4B（近乎全數淨現金）✅</td><td class="num ok">$3.0B（近乎全數淨現金）✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3); margin-top:4px;">⭐ Oklo目前<strong>近乎零有息負債</strong>（僅$4.15M），這是其財務結構中唯一與成熟優質公司相似的特徵——但代價是持續透過股權增資（而非債務）為建廠與營運燒錢融資，稀釋股東權益取代了利息負擔，股東權益半年內從$1,476M增至$3,274M主因增資（APIC由$1.7B增至$3.6B）而非獲利累積。</p>
+</div>
+
+<!-- 14. 六大比率診斷 -->
+<div id="ratios" class="section">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">六大財務健康比率診斷</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>比率</th><th class="num">公式</th><th class="num">OKLO現況（Q2 FY2026）</th><th>警戒標準</th><th>狀態</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. 利息覆蓋率</strong></td>
+          <td class="num">EBIT / 利息支出</td>
+          <td class="num">不適用（近乎無有息負債，分母趨近零）</td>
+          <td>&lt;3x 警戒</td>
+          <td><span class="badge badge-blue">N/A（近乎零負債）</span></td>
+        </tr>
+        <tr>
+          <td><strong>2. 負債比率</strong></td>
+          <td class="num">總負債 / 總資產</td>
+          <td class="num ok">~2.5% ✅（$84.33M/$3,358M）</td>
+          <td>&gt;70% 警戒</td>
+          <td><span class="badge badge-green">✅ 極健康（極低槓桿）</span></td>
+        </tr>
+        <tr>
+          <td><strong>3. 淨負債 / EBITDA</strong></td>
+          <td class="num">淨負債 / EBITDA</td>
+          <td class="num ok">深度淨現金狀態，且EBITDA本身為負，比率意義有限</td>
+          <td>&gt;3x 警戒</td>
+          <td><span class="badge badge-blue">N/A（淨現金但EBITDA為負）</span></td>
+        </tr>
+        <tr>
+          <td><strong>4. OCF / 計息債務</strong></td>
+          <td class="num">OCF / 計息債務</td>
+          <td class="num">不適用（計息債務僅$4.15M，OCF為負）</td>
+          <td>&lt;0.5x 警戒</td>
+          <td><span class="badge badge-blue">N/A（近乎零負債）</span></td>
+        </tr>
+        <tr>
+          <td><strong>5. 現金流覆蓋比率</strong></td>
+          <td class="num">FCF / 利息支出</td>
+          <td class="num">不適用（無實質利息支出可比）</td>
+          <td>&lt;2x 警戒</td>
+          <td><span class="badge badge-blue">N/A（近乎零負債）</span></td>
+        </tr>
+        <tr>
+          <td><strong>6. 兩年內到期牆覆蓋倍數</strong></td>
+          <td class="num">現金 / 2年內到期債務</td>
+          <td class="num ok">無到期債務（$4.15M全數非近期到期）</td>
+          <td>&lt;1x 警戒</td>
+          <td><span class="badge badge-green">✅ 無到期壓力</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="risk-card" style="margin-top:16px;">
+    <h4 style="color:var(--red)">⭐ 對Oklo而言，比六大傳統比率更關鍵的兩項指標：現金燒錢速度與現金跑道</h4>
+    <div class="tbl-wrap" style="margin-top:10px; margin-bottom:0;">
+      <table>
+        <thead><tr><th>指標</th><th class="num">計算</th><th class="num">結果</th><th>狀態</th></tr></thead>
+        <tbody>
+          <tr><td>H1 2026營運現金使用</td><td class="num">Q1+Q2實際OCF流出</td><td class="num bad">$65.5M ✅</td><td><span class="badge badge-yellow">符合全年guidance軌道</span></td></tr>
+          <tr><td>FY2026全年現金使用guidance（營運+資本支出）</td><td class="num">$120-150M（OCF）+ $400-500M（CapEx）</td><td class="num bad">$520-650M ✅（管理層guidance，區間中值約$585M）</td><td><span class="badge badge-yellow">單季內已兩度上修 ⚠️</span></td></tr>
+          <tr><td>現金跑道（以2026財測全年現金使用估算）</td><td class="num">$3.0B現金 ÷ 全年現金使用中值$585M</td><td class="num ok">~5.1年 ⚠️估</td><td><span class="badge badge-green">✅ 短中期無虞</span></td></tr>
+          <tr><td>現金跑道（若進入多電廠並行建造期，⚠️假設CapEx再上修50%）</td><td class="num">情境測試：全年現金使用×1.3-1.5</td><td class="num warn">~3.4-3.9年 ⚠️估</td><td><span class="badge badge-yellow">⚠️ 需密切追蹤後續財測guidance是否再上修</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px; color:var(--text); line-height:1.7; margin-top:10px;">此估算直接採用公司公告guidance（較以淨損近似現金流出的方法更精確），惟guidance本身在單一財報週期內即已上修約50%（營運現金使用）與13-14%（資本支出），顯示<strong>「現金跑道充裕」是動態變數而非靜態保證</strong>。相較NuScale以「輕資產研發期」燒錢型態不同，Oklo已進入「重資產建廠期」，資本支出規模（$400-500M guidance）遠高於NuScale近乎為零的CapEx，是判斷兩者財務風險本質差異的關鍵。</p>
+  </div>
+</div>
+
+<!-- 15. 債務到期時程 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-title">債務到期時程</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--green)">
+    <h3 style="color:var(--green)">✅ 近乎零有息負債，無傳統債務到期牆</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Oklo目前計息負債僅$4.15M ✅（相對於$3,358M總資產微不足道），無公司債、無銀行貸款，因此<strong>不存在傳統意義的債務到期時程表</strong>。公司總負債約$84.33M主要為應付帳款、應計費用、租賃負債等營運性質負債，非資本市場債務。這是Oklo財務結構中最正面的一項特徵——公司選擇以股權增資（ATM/私募）而非舉債方式融資建廠支出，避免了利率風險與到期展延壓力，但代價是持續稀釋既有股東權益（2026年迄今已透過ATM募得逾$1.18B）。未來若成功取得DOE Title 17貸款擔保，可能引入首筆大型計息負債，屆時債務到期結構將需重新評估。</p>
+  </div>
+</div>
+
+<!-- 16. CapEx分析 -->
+<div id="capex" class="section">
+  <div class="section-header">
+    <div class="section-num">16</div>
+    <div class="section-title">CapEx 分析</div>
+  </div>
+
+  <div class="card">
+    <h3>📊 業務模式判讀：已進入重資產建廠期，資本支出強度遠高於同業NuScale</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Oklo商業模式為<strong>Build-Own-Operate（自建自有自營電廠）</strong>，與NuScale純技術授權模式截然不同，因此CapEx規模自始即遠高於同業——2026年全年guidance達$400-500M（較Q1原guidance $350-450M再上修），H1實際支出已達$126.9M，主要投入Aurora-INL首例（FOAK）工程建造、Groves反應爐建設、Aurora Fuel Fabrication Facility設施投資。以TTM營收僅$1.21M計算，CapEx/營收比率高達逾3萬倍，凸顯目前資本支出<strong>完全由現金部位與股權融資支應，而非營運現金流內生</strong>。此為判斷Oklo財務韌性的核心變數：資本支出規模若持續加速上修，現金跑道將明顯快於NuScale此類「輕資產研發期」公司被侵蝕，惟相對地，實質建廠進度也代表Oklo在「執行力驗證」上領先於仍停留在紙上合約階段的同業。</p>
+  </div>
+</div>
+
+<!-- 17. 同業對比 -->
+<div id="comps2" class="section">
+  <div class="section-header">
+    <div class="section-num">17</div>
+    <div class="section-title">同業財務健康對比</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>公司</th>
+          <th class="num">市值</th>
+          <th class="num">營收狀態</th>
+          <th class="num">淨負債/EBITDA</th>
+          <th class="num">現金部位</th>
+          <th>財務健康</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now">
+          <td><strong>Oklo (OKLO) ★</strong></td>
+          <td class="num">$8.06B</td>
+          <td class="num bad">近乎歸零，剛出現首筆營收$1.21M</td>
+          <td class="num">N/A（EBITDA為負，淨現金）</td>
+          <td class="num ok">$3.0B淨現金 ✅</td>
+          <td><span class="badge badge-yellow">B（現金充裕但建廠期燒錢加速）</span></td>
+        </tr>
+        <tr>
+          <td>NuScale (SMR)</td>
+          <td class="num">$4.80B</td>
+          <td class="num bad">近乎歸零，且營收反而萎縮中</td>
+          <td class="num">N/A（EBITDA為負，淨現金）</td>
+          <td class="num ok">$1.9B淨現金 ✅</td>
+          <td><span class="badge badge-yellow">B（現金充裕但輕資產期燒錢較緩）</span></td>
+        </tr>
+        <tr>
+          <td>X-energy (XE)</td>
+          <td class="num">~$7.7B</td>
+          <td class="num warn">已有可觀季營收但淨損擴大</td>
+          <td class="num">N/A（淨損$166.2M/Q1）</td>
+          <td class="num">— ⚠️未查得精確現金部位數字</td>
+          <td><span class="badge badge-yellow">B（IPO後現金部位應充裕，惟燒錢速度更高）</span></td>
+        </tr>
+        <tr>
+          <td>BWX Technologies (BWXT)</td>
+          <td class="num">~$16.45B</td>
+          <td class="num ok">$3.8B guidance，穩定成長</td>
+          <td class="num">健康水位⚠️估</td>
+          <td class="num">正向現金流⚠️估</td>
+          <td><span class="badge badge-green">A（成熟核能供應鏈）</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">競爭者精確財務健康數據多為⚠️估算，僅供相對比較參考，Oklo/NuScale/X-energy與BWXT本質上處於不同商業階段，比較意義有限。</p>
+</div>
+
+<!-- 18. 綜合診斷 -->
+<div id="health" class="section">
+  <div class="section-header">
+    <div class="section-num">18</div>
+    <div class="section-title">綜合財務診斷</div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:24px; margin-bottom:24px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:24px; flex-wrap:wrap;">
+    <div class="health-badge health-b">B</div>
+    <div>
+      <div style="font-size:20px; font-weight:700; color:var(--gold);">現金充裕型建廠期公司 B</div>
+      <div style="font-size:13px; color:var(--text2); margin-top:4px;">近乎零負債｜現金跑道約5年｜但資本支出加速侵蝕跑道、尚無穩定獲利基礎</div>
+      <div style="font-size:13px; color:var(--text); margin-top:8px;">Oklo的財務體質同樣不能用傳統六大比率評分，因為它不具備「有息負債」與「正向EBITDA」這兩個評分基礎。若單看「短期不會破產」的角度，因近乎零負債+$3.0B現金而評分不差；但若看「能否靠自身營運撐到轉機兌現」，答案高度仰賴持續增資能力與資本支出guidance的穩定性——目前guidance在單一季度內即兩度上修，顯示公司對自身成本規劃的能見度仍在動態調整中，本質上更接近一家處於重資產建廠期的早期公司，而非傳統意義的上市公司財務健檢對象。</div>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <div>
+      <div class="risk-card" style="background:#f0fdf4; border-color:rgba(21,128,61,0.3);">
+        <h4 style="color:var(--green)">✅ 財務優勢</h4>
+        <ul style="font-size:13px; line-height:1.8; padding-left:16px; color:var(--text);">
+          <li><strong>近乎零有息負債</strong>：無利率風險、無到期展延壓力</li>
+          <li><strong>現金跑道以現行guidance估算約5年</strong>，短中期無立即斷炊風險</li>
+          <li><strong>Meta案含實質預付款</strong>：相較純MOU/LOI，已有真金白銀資金挹注佐證客戶承諾</li>
+        </ul>
+      </div>
+
+      <div class="risk-card">
+        <h4>⚠️ 財務結構隱憂</h4>
+        <ul style="font-size:13px; line-height:1.8; padding-left:16px; color:var(--text);">
+          <li><strong>資本支出guidance單一季度內兩度大幅上修</strong>：營運現金使用+50%、CapEx+13-14%，成本能見度不足</li>
+          <li><strong>營收無法佐證燒錢速度合理性</strong>：TTM營收僅$1.21M vs 全年現金使用guidance中值$585M，比率懸殊</li>
+          <li><strong>持續股權融資稀釋</strong>：2026年迄今已透過ATM募得逾$1.18B，內部人同期持續大額出脫股票</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="risk-card">
+        <h4>📊 安全邊際計算</h4>
+        <div style="font-size:13px; line-height:1.9; color:var(--text);">
+          <strong>公司需要多少營收成長／訂單兌現才能觸及「財務轉正」？</strong><br>
+          ・目前年化淨損約$163M（H1 $81.6M×2估算），需相當於同等規模的年化正向EBITDA貢獻才能轉正<br>
+          ・以Meta/Switch/Eielson AFB訂單規模（合計潛在逾14GW管線）推算，僅需其中極小比例轉化為具約束力設備銷售或商轉電力銷售，理論上即可大幅改善損益結構——但<strong>「理論上可行」與「財報實際兌現」之間仍有數年時間差，且需先取得NRC正式執照</strong><br>
+          ・<span class="bad">安全邊際：現金跑道尚有餘裕（約5年），但獲利安全邊際趨近於零——公司完全仰賴外部資本市場信心與聯邦政策順風維持營運，而非自身現金流造血能力</span>
+        </div>
+      </div>
+      <div class="card" style="margin-top:0; border-left:3px solid var(--red);">
+        <h3 style="color:var(--red)">🎯 最大風險點（具體觸發數字）</h3>
+        <p style="font-size:13px; line-height:1.7; color:var(--text)">Oklo最大風險並非傳統債務違約風險（因近乎零負債），而是<strong>「NRC執照最終核准與商轉時程 vs 資本支出加速消耗現金」的賽跑</strong>。具體觸發情境：若截至<strong>2027年底</strong>，Aurora-INL的COL執照審查仍未取得NRC正式核准、且未出現具體聯網或試運轉里程碑，同時資本支出guidance若再度較目前$400-500M上修逾20%，公司可能被迫以更頻繁的方式增資（重演2026年模式），屆時現金跑道恐由目前估算的5年壓縮至3年以內，形成「商轉愈晚兌現、股東稀釋愈嚴重」的負向循環——與NuScale面臨的風險本質相同，惟Oklo因資本支出強度更高，此循環一旦啟動惡化速度可能更快。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 綜合總結：五維度卡片 ── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">★</div>
+    <div class="section-title">綜合總結</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="text-align:center;">
+      <h3>Thesis 成立度</h3>
+      <div class="big-num" style="color:var(--gold)">2.5 / 5</div>
+      <div class="big-label">5根支柱中2根明確成立（DOE政策先發+現金充裕），2根未兌現，1根部分成立</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>護城河強度</h3>
+      <div class="big-num" style="color:var(--gold)">⭐⭐½☆☆</div>
+      <div class="big-label">2.3 / 5，政策先發+客戶預付款優於同業，但商業護城河未經商轉驗證</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>成長象限</h3>
+      <div class="big-num" style="color:var(--purple); font-size:20px;">轉機股（早期，執行進度領先）</div>
+      <div class="big-label">Peter Lynch框架下風險最高的類別，惟技術/建造端驗證優於同業平均</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>財務健康度</h3>
+      <div class="big-num" style="color:var(--gold);">B</div>
+      <div class="big-label">現金充裕型建廠期公司，資本支出加速侵蝕安全邊際</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3>估值定錨</h3>
+      <div class="big-num" style="color:var(--red); font-size:18px;">100%敘事驅動</div>
+      <div class="big-label">歷史本益比自上市以來從未可計算，PB為唯一可用傳統指標</div>
+    </div>
+  </div>
+
+  <!-- ── 最終操作建議總結 ── -->
+  <div class="risk-card" style="margin-top:24px; background:#fffbea; border-color:rgba(180,83,9,0.3); padding:20px 24px;">
+    <h3 style="color:var(--gold); font-size:15px; margin-bottom:10px;">⚠️ 個股小狐最終操作建議（三模式綜合）</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; font-size:13px; line-height:1.8; color:var(--text); margin-top:8px;">
+      <div>
+        <strong>📊 股票定性</strong><br>
+        前營收先進核能快中子微反應爐公司（Build-Own-Operate模式）｜Peter Lynch轉機股（早期但執行進度領先同業）｜與使用者「護城河/現金流/安全邊際」核心投資原則明顯不符<br><br>
+        <strong>💰 估值判斷</strong><br>
+        PE/PEG皆無法計算，PB約2.46x<br>分析師目標分歧極大（$14-$130）<br>DCF情境區間 $20-135，加權約$58-72<br><br>
+        <strong>🏥 財務健康</strong><br>
+        B級：近乎零負債、現金$3.0B充裕，惟資本支出guidance持續上修
+      </div>
+      <div>
+        <strong>📈 未持有建議</strong><br>
+        <span class="bad">不建議現階段大幅建倉</span>，若堅持參與應限機會池2-3%以下倉位<br>等待COL執照或商轉里程碑明朗後再評估加碼<br><br>
+        <strong>已持有建議</strong><br>
+        可維持現有部位觀察，不建議加碼至戰術/核心池比重<br>逢股價因執行風險回檔至DCF基本情境下緣（約$55）可視為長期分批布局參考區間
+      </div>
+      <div>
+        <strong>🔍 每季必看指標</strong><br>
+        ①COL執照審查具體時程更新<br>
+        ②Aurora-INL聯網/試運轉里程碑<br>
+        ③資本支出guidance是否再上修<br>
+        ④Switch/Equinix能否轉化為具約束力合約<br>
+        ⑤同位素業務首筆商業營收兌現時點<br><br>
+        <strong>⚠️ 核心催化劑</strong><br>
+        NRC正式COL執照核准、<br>Eielson AFB正式簽約、<br>DOE Title 17貸款擔保進展
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px; border-left:3px solid var(--accent);">
+    <h3 style="color:var(--accent)">🔗 與NuScale（SMR）比較結論</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">兩者同為Peter Lynch框架下「早期未驗證轉機股」，且均無法用傳統PE估值；<strong>Oklo在「執行進度」（已破土動工、Groves首次臨界、Meta預付款）與「大廠/國防背書廣度」上領先NuScale，但NuScale在「單一法規里程碑」（唯一取得NRC標準設計核准）上仍保有優勢，且Oklo的Build-Own-Operate模式資本支出強度遠高於NuScale，財務風險對執行延宕的敏感度更高</strong>——簡言之，Oklo的題材成熟度與客戶信任度略勝一籌，但NuScale的法規確定性更高，兩者風險本質不同、皆非適合中長期價值投資核心倉位的標的。</p>
+  </div>
+</div>
+
+<!-- 資料來源 -->
+<div class="card" style="margin-top:40px;">
+  <h3>📚 資料來源 & 免責聲明</h3>
+  <div style="font-size:12px; color:var(--text2); line-height:2;">
+    <strong>已驗證來源：</strong><br>
+    · Oklo Inc IR press releases：Q1 FY2026（2026-05）、Q2 FY2026（2026-08-07）✅<br>
+    · SEC EDGAR：Oklo Inc. 10-Q（oklo-20260630.htm、oklo-20260331.htm）✅<br>
+    · stockanalysis.com：股價、市值、財務歷史、分析師預估 ✅<br>
+    · marketbeat.com / tipranks.com：分析師評等與目標價明細 ✅<br>
+    · 同業數據：stockanalysis.com（NuScale/X-energy/BWXT/CEG市值與PE）、X-energy 10-Q ✅<br>
+    · 產業新聞：Utility Dive、PowerMag、World Nuclear News、ANS Nuclear Newswire、CNBC、Bloomberg（DOE Reactor Pilot Program、Meta/Switch/Equinix協議、Sam Altman卸任、Eielson AFB合約）✅<br>
+    · NuScale比較數據取自同日（2026-09-09）「個股小狐_完整報告_SMR_20260909.html」✅<br><br>
+    <strong>估算來源（⚠️）：</strong>現金跑道推算（採公司guidance而非淨損近似值）、PB比率（以Q2資產負債表反推）、FCF（以OCF-CapEx估算）、部分同業精確財務數據、X-energy/CEG市值因查詢時間點分歧。請以公司最新官方公告為準。<br><br>
+    <strong>無法取得（❌）：</strong>毛利率、EBITDA margin（因營收規模過小不具統計意義）、FY2027/FY2028 EPS與營收共識預估（多數機構模型鎖付費牆）、Sam Altman目前持股比例、Q1 2026實際vs預期詳細對照數字。<br><br>
+    <span style="color:var(--red)"><strong>免責聲明：</strong>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</span>
+  </div>
+</div>
+
+</div><!-- end container -->
+
+<footer>
+  <p>個股小狐完整報告｜Oklo Inc. (OKLO)｜分析日期：2026-09-09</p>
+  <p>模式一 深度研究 · 模式二 財報解析 · 模式三 財務健檢 — 三模式合一</p>
+  <p style="margin-top:6px; color:var(--border2)">本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,506 @@
+<meta charset="UTF-8">
+<title>AI電力產業全景研究</title>
+<style>
+:root {
+  --paper: #faf8f4; --surface: #ffffff; --ink: #1c2430; --ink-soft: #5b6472;
+  --line: #e6e1d6; --accent: #24507d; --accent-soft: #eaf0f6; --gold: #a97a2f; --gold-soft: #f7efdf;
+  --serif: 'Source Serif 4', 'Noto Serif TC', serif;
+  --sans: 'Public Sans', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --paper:#faf8f4;--surface:#ffffff;--ink:#1c2430;--ink-soft:#5b6472;--line:#e6e1d6;--accent:#24507d;--accent-soft:#eaf0f6;--gold:#a97a2f;--gold-soft:#f7efdf; }
+}
+:root[data-theme="dark"] { --paper:#faf8f4;--surface:#ffffff;--ink:#1c2430;--ink-soft:#5b6472;--line:#e6e1d6;--accent:#24507d;--accent-soft:#eaf0f6;--gold:#a97a2f;--gold-soft:#f7efdf; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.9; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--gold-soft); }
+.wrap { max-width: 800px; margin: 0 auto; padding: 0 24px 100px; }
+header.course { background: linear-gradient(180deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 82%, black) 100%); color: #f5f7fa; padding: 52px 24px 38px; }
+header.course .inner { max-width: 800px; margin: 0 auto; }
+.eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #cfe0f0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; line-height: 1.6; }
+.eyebrow .dot { width: 5px; height: 5px; border-radius: 50%; background: #cfe0f0; opacity: .6; flex: none; }
+h1.title { font-family: var(--serif); font-weight: 650; font-size: clamp(1.6rem, 3.4vw, 2.3rem); margin: 14px 0 10px; text-wrap: balance; letter-spacing: 0.01em; }
+.subtitle { font-size: 0.96rem; color: #dbe6f0; max-width: 64ch; line-height: 1.7; }
+.meta-row { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+.meta-chip { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.03em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.22); color: #eef3f8; padding: 5px 12px; border-radius: 999px; }
+main { padding-top: 40px; }
+.abstract { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 22px 26px; margin: 0 0 40px; }
+.abstract h2 { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+.abstract p { margin: 0 0 10px; color: var(--ink); font-size: 0.96rem; }
+.abstract p:last-child{margin-bottom:0;}
+.objectives { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 4px; padding: 18px 22px; margin: 0 0 44px; }
+.objectives h2 { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+.objectives ul { margin: 0; padding-left: 1.2em; color: var(--ink-soft); font-size: 0.92rem; }
+.objectives li { margin-bottom: 5px; }
+.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 20px 24px; margin: 0 0 48px; }
+.toc h2 { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+.toc ol { margin: 0; padding-left: 1.4em; }
+.toc li { margin-bottom: 6px; font-size: 0.94rem; }
+.toc .toc-time { color: var(--ink-soft); font-family: var(--mono); font-size: 0.78rem; }
+section.chapter { margin: 68px 0; }
+.chapter-num { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 6px; }
+.chapter h2 { font-family: var(--serif); font-weight: 650; font-size: 1.45rem; margin: 0 0 6px; text-wrap: balance; line-height: 1.4; }
+.chapter-source { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-soft); letter-spacing: 0.02em; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--line); line-height:1.6; }
+.chapter p { margin: 0 0 18px; max-width: 70ch; font-size: 0.97rem; }
+.chapter h3 { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; margin: 34px 0 14px; }
+.chapter strong { color: var(--ink); font-weight: 600; }
+.cite { color: var(--ink-soft); font-size: 0.86em; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 22px 0 30px; }
+.stat-card { background: var(--accent-soft); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.stat-card .num { font-family: var(--serif); font-weight: 650; font-size: 1.25rem; color: var(--accent); line-height: 1.2; }
+.stat-card .lbl { font-size: 0.76rem; color: var(--ink-soft); margin-top: 4px; }
+.finding { background: var(--gold-soft); border: 1px solid color-mix(in srgb, var(--gold) 35%, var(--line)); border-radius: 8px; padding: 18px 22px; margin: 26px 0; }
+.finding .flabel { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+.finding p { margin: 0; max-width: 64ch; font-size: 0.97rem; color: var(--ink); }
+.callout { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 4px; padding: 18px 22px; margin: 24px 0; }
+.callout .clabel { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+.callout p { margin: 0 0 8px; max-width: 66ch; font-size: 0.95rem; }
+.callout p:last-child { margin-bottom: 0; }
+.deftable { width: 100%; border-collapse: collapse; margin: 18px 0 26px; font-size: 0.88rem; }
+.deftable th { text-align: left; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-soft); border-bottom: 1px solid var(--line); padding: 8px 10px 8px 0; }
+.deftable td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.deftable tr:last-child td { border-bottom: none; }
+.deftable td.term { font-weight: 600; white-space: nowrap; color: var(--ink); }
+.table-scroll { overflow-x: auto; }
+.outline-card { background: var(--accent); color: #f2f6fa; border-radius: 14px; padding: 30px 26px; margin: 60px 0 40px; }
+.outline-card h2 { font-family: var(--serif); font-size: 1.3rem; margin: 0 0 18px; font-weight: 650; }
+.outline-item { display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: baseline; padding: 11px 0; border-top: 1px solid rgba(255,255,255,0.2); }
+.outline-item:first-of-type { border-top: none; }
+.outline-item .oi-tab { font-family: var(--serif); font-weight: 650; color: var(--gold-soft); opacity: 0.9; font-size: 0.9rem; }
+.outline-item .oi-body b { display: block; font-size: 0.93rem; }
+.outline-item .oi-body span { display: block; font-size: 0.79rem; color: #d7e5f2; margin-top: 3px; }
+.outline-item .oi-time { font-family: var(--mono); font-size: 0.74rem; color: #cfe0f0; white-space: nowrap; }
+.recap-note { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.25); font-family: var(--mono); font-size: 0.78rem; color: #d7e5f2; }
+footer.source-note { max-width: 800px; margin: 0 auto; padding: 0 24px 60px; font-size: 0.78rem; color: var(--ink-soft); line-height: 1.8; }
+footer.source-note h2 { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); margin: 30px 0 10px; }
+footer.source-note .rule { height: 1px; background: var(--line); margin: 0 0 24px; }
+footer.source-note ol { padding-left: 1.3em; }
+footer.source-note li { margin-bottom: 6px; }
+@media (max-width: 560px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<header class="course">
+  <div class="inner">
+    <div class="eyebrow">產業全景研究<span class="dot"></span>資料夾來源：研究報告／產業研究／電力產業（9篇原文，2025.1–2026.8）<span class="dot"></span>輔以2026年9月延伸查證</div>
+    <h1 class="title">AI電力需求爆發下的產業全景研究：供需缺口、供應鏈重構與地緣政治意涵</h1>
+    <p class="subtitle">整合9篇高盛全球研究院／GS SUSTAIN研究報告與元大投顧產業展望，並輔以2026年9月最新產業實證數據（PJM容量拍賣結算價、LBNL併網佇列更新、HALEU供應鏈進展、台廠訂單能見度），系統性拆解人工智慧驅動電力需求從短期缺口到長期基載的完整供應鏈全景。</p>
+    <div class="meta-row">
+      <span class="meta-chip">原文報告　9篇（2025.1–2026.8）</span>
+      <span class="meta-chip">延伸查證來源　22+（2026.9）</span>
+      <span class="meta-chip">報告性質　深度產業研究（非單次簡報稿）</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="abstract">
+    <h2>摘要</h2>
+    <p>人工智慧基礎設施對電力的結構性需求，正在重塑全球電力產業的投資邏輯與地緣政治格局。本報告以高盛全球研究院／GS SUSTAIN團隊自2025年1月至2026年8月間發布的9篇研究報告為基礎資料，輔以元大投顧2026年7月的美國電力產業展望，並透過2026年9月的延伸查證（涵蓋PJM容量拍賣實證數據、LBNL最新併網佇列統計、台灣重電廠商訂單能見度、HALEU燃料供應鏈進展等18餘項獨立來源），系統性梳理AI用電需求驅動力的演進、供需缺口的量化規模、短中長期供電解方的技術路徑，以及對應的全球供應鏈定位。</p>
+    <p>本報告的核心發現有三：第一，分析師對「2030年資料中心用電需求成長率」的預測自2025年初以來已連續五次上修，這條「持續低估、不斷追加」的軌跡本身即是理解本輪循環性質的關鍵線索；第二，近期（2025–2027年）的供給缺口規模約在8至9GW，且全美電力併網佇列中僅約19%的排隊案件最終能完工商轉，此一瓶頸已在PJM電力市場的容量拍賣結算價中獲得具體實證（三年間上漲逾1,000%）；第三，補足缺口需要依循「電表後天然氣過渡（2026–2028）→電網強化與監理改革（2028–2031）→核能與SMR低碳基載（2031年後）」三層時間軸並行推進，其中電網硬體（尤其是超高壓變壓器）是目前唯一真正的實體產能瓶頸，也是台灣重電廠商（華城、士電、中興電）訂單能見度直達2029至2031年的根本原因。</p>
+  </div>
+
+  <div class="objectives">
+    <h2>研究說明與使用方式</h2>
+    <ul>
+      <li>本報告數據分為兩個層次：原文9篇報告的數據以其標註之原始資料日期為準；延伸查證部分則以2026年9月的查證結果為準，兩者在文中以不同引註格式區分</li>
+      <li>全文分為十章，依供電時間軸（短期／中期／長期）與分析層次（需求端／供給端／總體地緣政治／供應鏈個股）組織，各章開頭標註對應原文出處</li>
+      <li>正文中標記「研究發現」之段落，為貫穿多篇原文、具代表性之核心論點；重要數據皆以自製表格呈現並標註出處，不直接複製原文圖表圖片，以符合著作權合理使用原則</li>
+      <li>核能／核融合技術之完整背景說明另有獨立學術報告可交叉參考：<span class="cite">《核能新時代：核燃料地緣政治與核能產業競爭格局研究》，2026年9月</span>，本報告第六章僅摘要並更新其後續進展，不重複全部細節</li>
+      <li>文末附「原文出處與延伸查證來源總表」，供查證與延伸閱讀</li>
+    </ul>
+  </div>
+
+  <div class="toc">
+    <h2>章節目錄</h2>
+    <ol>
+      <li>前言：研究範疇與核心論點</li>
+      <li>需求端：AI用電需求驅動力的演進——從6P到7P框架</li>
+      <li>供需缺口：預測路徑與交付現實的落差</li>
+      <li>短期解方：電表後供電（BTM）架構與天然氣過渡</li>
+      <li>中期解方：電網強化與監理改革</li>
+      <li>長期解方：核能復興與燃料供應鏈最新進展</li>
+      <li>總體視角：大宗商品競賽與美中地緣政治對比</li>
+      <li>供應鏈全景圖：六層分層定位（美股／台股）</li>
+      <li>批判性檢視：矛盾點、技術原理與產業風險</li>
+      <li>結論與投資意涵</li>
+    </ol>
+  </div>
+
+  <!-- CH 1 -->
+  <section class="chapter">
+    <div class="chapter-num">第一章</div>
+    <h2>前言：研究範疇與核心論點</h2>
+    <div class="chapter-source">研究方法：資料夾內9篇原文報告逐篇解析＋主動延伸搜索＋供應鏈定位＋矛盾點檢視＋技術原理深挖＋產業風險彙整</div>
+
+    <p>過去二十年間，美國電力需求成長曲線大致持平，製造業外移與能源效率提升，讓電力產業長期被視為低成長、低波動的公用事業板塊。這個假設在2023年前後開始鬆動，而驅動因素只有一個：人工智慧基礎設施對電力的結構性需求。本報告以此為出發點，整理資料夾內橫跨2025年1月至2026年8月的9篇研究報告——其中6篇為高盛全球研究院／GS SUSTAIN團隊的原始研究，1篇為元大投顧的產業展望，另有2篇聚焦核能技術本身（已另行整理為獨立學術報告）——並輔以2026年9月的延伸查證，嘗試回答三個層次的問題：AI用電需求究竟成長多快、供給端能不能跟上、跟不上的話缺口要靠什麼補上。</p>
+
+    <p>本報告採取的分析邏輯是一條「供電時間軸」：短期（2026–2028年）電網來不及接，只能靠資料中心自建電表後（Behind-the-Meter, BTM）發電應急；中期（2028–2031年）電網修復與監理改革陸續到位，天然氣複循環機組（CCGT）成為主力；長期（2031年後）核能、SMR等低碳基載技術逐步接棒。這條時間軸並非本報告自創，而是9篇原文報告中反覆出現的共同框架——這也是為什麼它適合作為串起整份全景研究的核心座標軸。</p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>AI電力需求不是一個單一事件，而是一條持續加速、且分析師持續低估的成長曲線；理解這條曲線「被低估的方式」——即預測值如何隨時間被反覆上修——比理解任何單一年度的預測數字本身更具分析價值，詳見第二、三章。</p>
+    </div>
+  </section>
+
+  <!-- CH 2 -->
+  <section class="chapter">
+    <div class="chapter-num">第二章</div>
+    <h2>需求端：AI用電需求驅動力的演進——從6P到7P框架</h2>
+    <div class="chapter-source">對應原文：GS SUSTAIN〈AI/Data Center Power Demand: The 6 Ps〉(2025.10.13)／〈How rising hyperscaler reinvestment...〉(2026.2.23)／〈Power demand, cyclical progression and Sustainability implications〉(2026.8.6)</div>
+
+    <p>高盛GS SUSTAIN團隊於2025年10月首次提出「6P框架」，將驅動資料中心用電需求成長與制約因素歸納為六項：<strong>Pervasiveness</strong>（AI應用的普及程度）、<strong>Productivity</strong>（伺服器與運算的能源生產力）、<strong>Price</strong>（供給擴張所需的電價）、<strong>Policy</strong>（政策誘因）、<strong>Parts</strong>（發電設備的取得速度）、<strong>People</strong>（基礎建設所需的技術人力）。2026年8月的最新報告進一步加入第七項——<strong>Physical environment</strong>（實體環境限制，如高溫、高濕、缺水地區對冷卻技術選擇的限制），形成「7P框架」，反映隨著資料中心選址向氣候條件更嚴苛的地區擴張，物理環境本身已成為獨立的制約變數。</p>
+
+    <p>驅動這套框架持續擴充的根本動力，是超大規模科技公司（hyperscaler）資本支出的連續上修。2026年2月的報告顯示，過去兩個月間分析師對2026至2027年hyperscaler資本支出加計研發支出的預測，累計上修超過3,000億美元；到2026年8月，八大hyperscaler（Alphabet、Microsoft、Meta、Amazon、Oracle、百度、騰訊、阿里巴巴——值得注意的是中國科技巨頭已被納入同一份追蹤清單）2026年與2027年的資本支出加研發支出預估，已分別上看<strong>1.2兆美元</strong>與<strong>1.7兆美元</strong>，對應的「再投資率」（資本支出+研發支出佔營運現金流的比例）在2026與2027年雙雙逼近或超過<strong>99%</strong>，2027年更被預估將首次突破100%。</p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num">$1.2T/$1.7T</div><div class="lbl">八大hyperscaler 2026E/2027E資本支出+研發支出</div></div>
+      <div class="stat-card"><div class="num">&gt;99%</div><div class="lbl">2026/2027年再投資率（逼近或超過營運現金流）</div></div>
+      <div class="stat-card"><div class="num">24×</div><div class="lbl">Agentic AI預估帶動2030年前token消耗成長倍數</div></div>
+      <div class="stat-card"><div class="num">7P</div><div class="lbl">2026.8報告新增「實體環境」變數後的完整框架</div></div>
+    </div>
+
+    <h3>AI創新週期：借用頁岩油循環的類比框架</h3>
+    <p>2026年2月的報告首次引入一套借用美國頁岩油產業發展史的類比框架，將技術創新分為五個階段：探索期（Exploration）、評估／期待期（Appraisal / Hopes &amp; Dreams）、執行／效率期（Execution / Efficiency）、技術延伸期（Technology Extension）、遺產期（Legacy）。報告將AI與GPU歸類於目前最看多、乘數擴張最明顯的「評估／期待期」；傳統資料中心與雲端/CPU則已進入「執行期」與「遺產期」。<strong>值得特別注意的是，核融合技術被歸類在風險最高、離商業化最遠的「探索期」</strong>——這比獨立核能學術報告中對核融合商業化時程的相對樂觀敘述更為保守，是兩份報告間一個值得留意的視角落差。</p>
+    <p>判斷是否邁入「執行期」的三項關鍵指標——產品由供不應求轉為供過於求、創新者財務彈性用盡、企業報酬率明顯惡化——截至2026年8月的最新報告，三項指標都尚未出現決定性轉折：運算/token需求仍供不應求（Agentic AI的普及甚至可能讓token消耗量在2030年前成長24倍）；hyperscaler淨負債/EBITDA仍低於0.5倍，財務彈性依然充足；現金投入報酬率（CROCI）雖從24%至31%的歷史區間溫和下滑，但尚未跌破區間下緣。</p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>AI電力需求的驅動力並非單一技術指標，而是一套動態擴充的分析框架（6P→7P）；更關鍵的是，hyperscaler資本支出的再投資率已逼近100%上限，這意味著未來能否維持同等擴張速度，將愈來愈取決於財務彈性與企業報酬率能否撐住，而非單純的技術樂觀情緒。</p>
+    </div>
+  </section>
+
+  <!-- CH 3 -->
+  <section class="chapter">
+    <div class="chapter-num">第三章</div>
+    <h2>供需缺口：預測路徑與交付現實的落差</h2>
+    <div class="chapter-source">對應原文：GS SUSTAIN六份報告之預測數值演進；延伸查證：LBNL《Queued Up》2025/2026版、PJM容量拍賣公開結果（2026.9查證）</div>
+
+    <h3>3.1　一條被連續五次上修的預測曲線</h3>
+    <p>本報告最重要的方法論發現，來自把六份高盛報告跨越19個月的預測值並排比對：「2030年資料中心用電需求成長率」這項核心指標，從2025年1月的<strong>+165%</strong>（相對2023年基準），一路上修到2025年10月的<strong>+175%</strong>、2026年2月的<strong>+220%</strong>（改用2023年為基期），到2026年8月改用2025年為基期後，仍呈現<strong>+170%</strong>之高速成長。與之同步上修的，還有預估新增裝置容量——從<strong>72GW</strong>（2025.10）→<strong>82GW</strong>（同份報告修訂版）→<strong>105GW</strong>（2026.2，僅計2026–2030區間）→<strong>139GW</strong>（2026.8，至2030年止）——以及美國電力需求年複合成長率預測：<strong>2.6%→3.2%→3.5%</strong>。</p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>報告日期</th><th>2030年DC用電成長率預測</th><th>新增裝置容量預測</th><th>美國電力需求CAGR</th></tr>
+      <tr><td class="term">2025.1</td><td>+165%（vs 2023）</td><td>—</td><td>—</td></tr>
+      <tr><td class="term">2025.10</td><td>+175%（vs 2023）</td><td>72→82 GW</td><td>2.6%</td></tr>
+      <tr><td class="term">2026.2</td><td>+220%（vs 2023）</td><td>105 GW（2026–30）</td><td>3.2%</td></tr>
+      <tr><td class="term">2026.8</td><td>+170%（vs 2025，同基期換算仍為上修）</td><td>139 GW（至2030）</td><td>3.5%</td></tr>
+    </table>
+    </div>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>這條「持續上修」軌跡本身就是最具說服力的訊號——它顯示分析師社群（即使是產業內對此議題投入最多研究資源的團隊）對AI用電需求規模的掌握，始終落後於現實發展速度。這對評估任何「AI電力需求已經反映在預期中」的市場論述，都是一項重要的反向校正。</p>
+    </div>
+
+    <h3>3.2　近期缺口的量化：以最新、最具體的數據為準</h3>
+    <p>2026年5月的報告提供了顆粒度最細的美國實際／近期預測數據：美國資料中心用電需求將從2025年的<strong>31GW</strong>，成長到2026年的<strong>41GW</strong>、2027年的<strong>66GW</strong>。同一份報告亦提供新增裝置容量的排程數字：2024年實際新增<strong>6.4GW</strong>、2025年實際新增<strong>8.5GW</strong>、2026年排程<strong>13.6GW</strong>、2027年排程<strong>36.3GW</strong>。</p>
+    <p>然而，排程不等於交付。同一份報告估計，歷史上僅約<strong>72%</strong>的近期（未來四季內）排程活化案件能準時上線，時間拉得愈長，準時完工的比例愈低；經保守折算，報告預估未來一年的排程容量約<strong>60%</strong>能準時上線，兩年後的排程則降至約<strong>50%</strong>。以此換算：2026年13.6GW排程中約<strong>8.2GW</strong>可能準時到位，2027年36.3GW排程中約<strong>18.2GW</strong>可能準時到位——兩年合計約26.4GW，對比同期用電需求成長35GW（31GW→66GW），<strong>近期缺口約落在8至9GW</strong>。</p>
+
+    <h3>3.3　併網佇列：規模與完工率的雙重瓶頸</h3>
+    <p>近期缺口之所以難以快速填補，根源在於美國電網的併網審查制度。勞倫斯柏克萊國家實驗室（LBNL）《Queued Up》年度報告顯示，截至2024年底，全美等待併網的容量高達<strong>2,290GW</strong>——接近現有全美發電總容量的兩倍——但這些排隊案件裡，最終真正完工商轉的比例僅約<strong>19%</strong>，平均需在佇列中等待<strong>55個月</strong>才能商轉。<span class="cite">（延伸查證，2026.9）</span></p>
+    <p>值得留意的是，2026年6月發布的最新版《Queued Up》（涵蓋至2025年底）顯示佇列總量已降至約<strong>2,060GW</strong>，是十年來首次出現年度性下滑（減少12%），另有<strong>408GW</strong>的案件已取得正式或草案併網協議、尚待商轉。這暗示美國聯邦能源管理委員會（FERC）2023號令（以「集群研究」取代舊制、淘汰投機性排隊案）等監理改革，可能已開始發揮篩選效果——這是9篇原文報告尚未反映進去的最新正面訊號。<span class="cite">（延伸查證，2026.9）</span></p>
+
+    <h3>3.4　實證：PJM容量拍賣——理論風險首次轉化為市場價格</h3>
+    <p>高盛報告多次強調「Green Reliability Premium僅占hyperscaler EBITDA的2%至3%、不構成實質阻力」，但這個論述的前提是成本主要由hyperscaler自行吸收。PJM電力市場（涵蓋維吉尼亞州——全球資料中心密度最高的地區）的容量拍賣結果，提供了另一個視角：容量結算價從2024/25交割年度的<strong>$28.92/MW-day</strong>，暴漲至2027/28交割年度的<strong>$333.44/MW-day</strong>（已觸及監理機構設定的價格上限，若無上限，估計將逼近$530/MW-day），三年間累計漲幅逾<strong>1,000%</strong>。PJM自身的市場監督機構估計，資料中心需求貢獻了這波漲幅的<strong>63%</strong>；PJM官方2026年長期負載預測顯示，2024至2030年32GW的尖峰負載成長中，<strong>94%來自資料中心</strong>。2027/28交割年度的拍賣更首次未能達到20%的裝置備轉容量目標，短缺<strong>6,625MW</strong>——這是PJM史上首次容量拍賣「拍不滿」可靠度需求。最直接的結果是消費者帳單：NRDC估計到2028年，PJM轄區一般家庭每月電費將較循環開始前增加約<strong>70美元</strong>；2025年12月的一次拍賣中，資料中心相關成本占了163億美元總成本裡的<strong>40%（65億美元）</strong>，其中62億美元是替「尚未實際建成的資料中心」預先支付的容量費用。<span class="cite">（延伸查證，2026.9）</span></p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num">~8-9 GW</div><div class="lbl">2026-2027年美國近期供給缺口估算</div></div>
+      <div class="stat-card"><div class="num">19%</div><div class="lbl">併網佇列最終完工商轉比例</div></div>
+      <div class="stat-card"><div class="num">+1,053%</div><div class="lbl">PJM容量結算價三年累計漲幅</div></div>
+      <div class="stat-card"><div class="num">$70/月</div><div class="lbl">PJM轄區家庭2028年預估電費增幅</div></div>
+    </div>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>高盛報告「電價溢酬不構成阻力」的論述，其成立前提是成本由hyperscaler吸收；但PJM的實證數據顯示，超過三分之一的容量成本正在轉嫁給一般家庭用戶，且其中大半是為「尚未建成」的資料中心預付。這代表理論上的供需缺口，已經具體轉化成一般消費者可感知的財務與政治風險，也是第九章「政策與社區反彈」風險的直接量化基礎。</p>
+    </div>
+  </section>
+
+  <!-- CH 4 -->
+  <section class="chapter">
+    <div class="chapter-num">第四章</div>
+    <h2>短期解方：電表後供電（BTM）架構與天然氣過渡</h2>
+    <div class="chapter-source">對應原文：元大投顧《AI熱潮下美國電力產業展望》(2026.7.9)；GS SUSTAIN 7P報告(2026.8.6)；延伸查證：Bloom Energy/GE Vernova/Caterpillar/Cummins 2026年度財報與新聞（2026.9查證）</div>
+
+    <p>面對第三章量化的近期缺口，唯一來得及應急的手段是電表後（Behind-the-Meter, BTM）供電——資料中心在廠址現場或鄰近地點自行發電，繞過電網併網排隊。元大投顧報告將美國資料中心供電模式區分為電表前（Front-of-the-Meter, FTM，透過公共電網取得電力）與電表後兩類，並整理出完整的現場發電技術譜系：固態氧化物燃料電池（SOFC）交期最短，模組化設計90天可交付；柴油往復式內燃機啟動最快（冷機到滿載10秒內），但空污嚴重、無法長期運轉；天然氣往復式內燃機與航改型燃氣渦輪可作為橋接電力與基載電源的中間方案；天然氣複循環機組（CCGT）效率最高（&gt;64%），但部署時間最慢（30至36個月），是目前大型資料中心長期供電的主力方案。</p>
+
+    <h3>4.1　BTM三大陣營的差異與「立即性」比較</h3>
+    <p>延伸查證發現，2026年最新財報數據顯示，三類BTM廠商的營收兌現速度存在顯著落差，不能一概而論：</p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>公司</th><th>技術</th><th>2026年度最新營收/積壓狀況</th><th>立即性評估</th></tr>
+      <tr><td class="term">Bloom Energy(BE)</td><td>SOFC固態氧化物燃料電池</td><td>2026Q2營收10.65億美元(年增165.5%)；FY2026展望上修至39-42億美元；總積壓訂單約200億美元；2026.4與Oracle簽2.8GW供應協議；2026.1與AEP簽20年/1GW長約</td><td>最高——已鎖定至2029年的確定性收入，非預期性業務</td></tr>
+      <tr><td class="term">GE Vernova(GEV)</td><td>航改型燃氣渦輪+CCGT</td><td>2026Q2燃氣設備積壓訂單達116GW(較2025年底83GW大增)；重型機種現在下單須等至2031年；惟100GW已簽約產能中僅約20%明確歸屬資料中心負載</td><td>規模最大但需稀釋——80%積壓仍屬傳統電力/工業客戶</td></tr>
+      <tr><td class="term">Caterpillar(CAT)／Cummins(CMI)</td><td>柴油/天然氣往復式引擎、備援發電機</td><td>CAT Q2營收205億美元創新高，發電機零售銷售年增44%；CMI因資料中心需求全年展望自+8%上修至+11%；兩家公司預估未來三年各增約15億美元資料中心相關營收</td><td>中等——已在兌現成長，但占公司整體營收比重相對較小，屬於本業之外的加分項</td></tr>
+    </table>
+    </div>
+    <p class="cite">資料來源：延伸查證，2026年9月，綜合各公司2026年度公開財報與媒體報導</p>
+
+    <h3>4.2　儲能：BTM架構的必要條件而非選配</h3>
+    <p>AI伺服器叢集對瞬間斷電的容忍度趨近於零，而任何現場發電設備從啟動到滿載都需要時間（SOFC需30至60分鐘，CCGT約需30分鐘）；儲能系統因此扮演三重角色：作為發電機組拉升至滿載前的瞬時供電橋接、吸收AI訓練負載的瞬間波動、以及在既有電網端被重新定位為「虛擬輸電線」（Storage as Transmission Asset, SATA），在壅塞節點快速吞吐電力以緩解特定瓶頸，功能上等同於不需實體新建輸電線的替代方案。延伸查證顯示，截至2026年，全美已有<strong>46座資料中心、合計56GW</strong>容量規劃在表後自建電廠，約當全美資料中心規劃容量的<strong>30%</strong>，此一比例與高盛2026年8月報告估計「2030年前約30%的資料中心用電成長將由BTM解決」高度吻合，構成一組獨立來源的交叉驗證。美國電氣製造商協會（NEMA）已於2026年發布資料中心園區儲能系統與微電網的自願性標準，反映此一做法已從邊緣實驗轉為產業共識。<span class="cite">（延伸查證，2026.9）</span></p>
+
+    <h3>4.3　既有電網／BTM新增／儲能的量化拆解</h3>
+    <p>整合原文與延伸查證數據，可拼出以下拆解（部分數字為推算，非原文直接給出，已於下方註明）：資料中心用電成長中約<strong>40%可由既有電網供給消化</strong>，其餘<strong>60%需仰賴新增產能</strong><span class="cite">（GS SUSTAIN, 2025.10）</span>；新增產能中約<strong>30%經由BTM</strong>完成（約當139GW新增產能中的42GW，此為本報告推算值），其餘約<strong>70%（約97GW）經由FTM電網端</strong>新建（天然氣CCGT、再生能源、核能延役／新建）。儲能未在原文報告中獲得獨立的裝置容量拆分，僅能定性描述為疊加在BTM與電網壅塞節點上的「乘數層」，精確的儲能裝置容量預測需另外查證專門的BESS市場報告，本報告暫列為待補資料，不臆測填入未經證實的數字。</p>
+
+    <h3>4.4　BYOP運動：科技巨頭集體承諾自帶電力</h3>
+    <p>2026年3月，白宮與全球七大AI與雲端業者共同簽署《白宮保護納稅人協議》（White House Ratepayer Protection Pledge），正式確立「自帶電力」（Bring Your Own Power, BYOP）模式，鼓勵資料中心自行建置電力資源、引入專屬電源或直接採購新增電力，以避免將基礎建設成本轉嫁給一般用戶。<span class="cite">元大投顧，2026.7.9</span>BYOP架構下已出現具體案例：Constellation Energy與Microsoft簽署20年PPA，全包三哩島核電廠約835MW無碳電力，DOE另提供10億美元貸款擔保，預計2027年底重新併網；Talen Energy與Amazon的Susquehanna核電廠共址案，歷經FERC於2024年底駁回純電表後模式後，雙方於2025年重新簽署17年FTM模式PPA，供應高達1,920MW核能，預計2027年春季完全轉移至新合約。</p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>BTM不是單一技術選擇，而是至少三種不同兌現速度與規模等級的解決方案並存；投資人若把「AI電力受惠股」當作單一同質類別看待，容易高估規模較大但資料中心曝險占比其實有限的公司（如GE Vernova），也可能低估規模較小但確定性最高的公司（如Bloom Energy）。儲能雖是BTM架構的必要條件，但目前產業報告尚未提供可信的獨立裝置容量預測，是整條供應鏈裡數據揭露最不透明的一環。</p>
+    </div>
+  </section>
+
+  <!-- CH 5 -->
+  <section class="chapter">
+    <div class="chapter-num">第五章</div>
+    <h2>中期解方：電網強化與監理改革</h2>
+    <div class="chapter-source">對應原文：元大投顧《AI熱潮下美國電力產業展望》(2026.7.9)；延伸查證：美國變壓器市場供需報告、台灣重電廠商法說與新聞（2026.9查證）</div>
+
+    <h3>5.1　受監管電力公司（IOU）的獲利邏輯與各州監管分級</h3>
+    <p>美國受監管電力公司（Regulated Utilities / IOU）採特許壟斷模式經營，獲利公式為「費率基數（Rate Base）× 核准報酬率（Allowed ROE，約9%至11%）」，資本支出愈高，費率基數擴張愈快，獲利成長動能愈強。<span class="cite">元大投顧，2026.7.9</span>然而，資本支出須經各州公用事業委員會（PUC）核准才能計入費率基數，元大投顧報告依委員產生方式、費率案件傾向、監管滯後性、監管機制與電費可負擔性等指標，將各州PUC劃分為五個監管友善度分級（Tier 1至Tier 5），喬治亞、科羅拉多、伊利諾、紐澤西、馬里蘭等州被列為對資本支出態度最友善的Tier 1，而德州、田納西、懷俄明等州則相對嚴格。這項分級對評估IOU類股（NextEra Energy、Dominion Energy、Duke Energy、American Electric Power、Xcel Energy、Southern Co.、Exelon、PPL等）的資本支出轉化效率具有直接參考價值。</p>
+
+    <h3>5.2　電網硬體瓶頸：超高壓變壓器是唯一真正的實體卡關點</h3>
+    <p>相較於監理制度可透過政策調整改善，電網硬體瓶頸——尤其是大型電力變壓器與發電機升壓變壓器（Generator Step-Up Transformer, GSU）——是目前整條供應鏈中唯一由實體產能決定、短期內無法靠資金快速解決的環節。延伸查證顯示，2026年一般電力變壓器平均交期已達<strong>128週</strong>，GSU平均交期<strong>144週</strong>；大容量機種交期可長達<strong>4年</strong>，2026年中下單的GSU要等到<strong>2029年</strong>才能交貨。美國本土變壓器需求預估將超出本土製造產能<strong>30%至40%，且至少持續至2028年</strong>。<span class="cite">（延伸查證，2026.9）</span>瓶頸的根本成因在於：GSU屬客製化生產（依發電機容量與電壓等級逐案設計，無法標準化量產），且上游關鍵原料——晶粒取向電磁鋼片——全球產能集中於少數鋼廠，加上繞線工序屬高技術密級的人力密集作業，兩項供給端限制疊加，使GSU交期較一般配電變壓器更長。</p>
+
+    <h3>5.3　台灣重電廠商：實體稀缺性帶來的長線訂單能見度</h3>
+    <p>這項美國本土產能缺口，正是台灣重電廠商訂單能見度直接拉到2028至2031年的根本原因——不是搭上AI概念股的順風車，而是在填補美國本土產能的真實稀缺性：</p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>公司</th><th>產品定位</th><th>2026年最新進展</th></tr>
+      <tr><td class="term">華城電機(1519)</td><td>高壓/超高壓變壓器</td><td>拿下美國德州Stargate計畫首期20億台幣變壓器訂單，為首家打入該計畫的台灣電機廠商；2024年起累計AI資料中心變壓器訂單逾120億台幣，出貨排至2028年；2025.11核准25億台幣擴產台中廠，2027Q2投產500KV以上超高壓機種，九成外銷；2026年出口占比首度突破六成</td></tr>
+      <tr><td class="term">士林電機(1503)</td><td>高壓變壓器/模組化電力方案</td><td>預估2026年北美市場銷售年增近三成，AI資料中心占北美訂單比重拉高至三成；訂單能見度已看到2029至2030年</td></tr>
+      <tr><td class="term">中興電工(1513)</td><td>電力基礎建設/配電設備</td><td>在手訂單突破400億台幣，訂單來源涵蓋電力基礎建設、AI資料中心、半導體廠擴建；已打入台積電美國亞利桑那二期廠供應鏈，預計2027Q1開始出貨；訂單能見度延伸至2029年，部分長期專案排至2031年</td></tr>
+    </table>
+    </div>
+    <p class="cite">資料來源：延伸查證，2026年9月，綜合三家公司2026年度法說會與台灣財經媒體報導</p>
+
+    <h3>5.4　比新建更快的槓桿：導線換新與電網數位化</h3>
+    <p>相較於新建輸電線動輒需要十年以上的環評與土地取得程序，既有線路的「換線」升級提供了一條速度快得多的替代路徑。高溫低垂導線（High Temperature Low Sag, HTLS）採用碳纖維複合材料核心，可在不更動既有輸電塔的前提下提升線路容量；延伸查證引用的內華達州實測案例顯示，一條原本額定300安培的線路換線後可提升至約1,000安培，容量提升逾三倍。<span class="cite">（延伸查證，2026.9）</span>配合動態線路額定容量（Dynamic Line Rating, DLR）與動態變壓器額定容量（Dynamic Transformer Rating, DTR）等數位化監測技術，即時依導線溫度與負載狀況調整可承載容量，IEA估計此類數位化技術有機會在2030年前將再生能源棄電率降低超過25%。<span class="cite">元大投顧，2026.7.9</span>這一層解方的產業意義在於：它是整條時間軸裡投資報酬率最高、卻是過去投資意願最低的一環，理論上應該是彌補缺口最快的槓桿，但目前尚無如變壓器領域般集中明確的個股標的可供對應。</p>
+
+    <h3>5.5　監理與政策時間軸</h3>
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>時間</th><th>政策</th><th>內容</th></tr>
+      <tr><td class="term">2023</td><td>FERC 2023號令</td><td>以「集群研究」（Cluster Study）取代先到先審制，搭配更嚴格財務與場址控制要求，淘汰投機性併網排隊案</td></tr>
+      <tr><td class="term">2024</td><td>FERC 1920號令</td><td>要求輸電服務業者進行至少20年期長期區域輸電規劃，每5年更新，提前納入負載成長與併網需求</td></tr>
+      <tr><td class="term">2025</td><td>EO 14262／14318</td><td>強化電網可靠度與安全；加速百MW等級資料中心之聯邦許可與財政支持</td></tr>
+      <tr><td class="term">2025</td><td>DOE Speed to Power</td><td>透過國家緊急權限及輸電便捷計畫（TFP）、電網韌性與創新夥伴計畫（GRIP）等工具加速發輸電基礎建設</td></tr>
+      <tr><td class="term">2026</td><td>FERC大型用戶併網改革令</td><td>向六大區域電網營運組織發布陳述理由命令，推動專屬接網流程與成本分攤透明化，目標90天內完成併網審核</td></tr>
+      <tr><td class="term">2026.3</td><td>White House Ratepayer Protection Pledge</td><td>七大AI/雲端業者聯合簽署，確立BYOP模式，避免資料中心基建成本轉嫁一般用戶</td></tr>
+    </table>
+    </div>
+    <p class="cite">資料來源：元大投顧，2026.7.9</p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>電網強化這一層解方存在明顯的速度落差：監理制度改革（FERC集群研究、90天審核目標）與電網數位化理論上見效最快，但硬體端（尤其GSU/超高壓變壓器）的實體產能瓶頸卻是全鏈最頑固的一環，且交期已排至2029年——這意味著即使監理端全數改革到位，變壓器供給仍將是2028至2029年前電網修復速度的硬上限，台灣重電三雄的訂單能見度正是這個硬上限的直接映射。</p>
+    </div>
+  </section>
+
+  <!-- CH 6 -->
+  <section class="chapter">
+    <div class="chapter-num">第六章</div>
+    <h2>長期解方：核能復興與燃料供應鏈最新進展</h2>
+    <div class="chapter-source">對應原文：GS〈Is nuclear energy the answer...〉(2025.1)、〈Is nuclear power set for a revival?〉(2025.6)、GS Global Institute〈The New Nuclear Age〉(2025.9)；延伸查證：SMR廠商2026年度進度、HALEU供應鏈進展（2026.9查證）</div>
+
+    <p>核能作為長期低碳基載方案的完整背景——包含核分裂復興的歷史脈絡、全球版圖、鈾供應鏈地緣政治、SMR與核融合技術路徑——已另行整理為獨立學術報告《核能新時代：核燃料地緣政治與核能產業競爭格局研究》（2026年9月），本章不重複其內容，僅摘要與本篇報告直接相關的關鍵數據，並補上該報告完成後的最新進展。</p>
+
+    <h3>6.1　核能在AI電力供給組合中的定位</h3>
+    <p>2025年1月的報告即已指出，核能無法單獨滿足AI資料中心新增用電需求——全面滿足2030年前資料中心用電成長所需的新增核能容量約85至90GW，但全球屆時實際可供給的規模不到需求的10%。<span class="cite">GS Research, 2025.1</span>核能真正的比較優勢在於碳定價情境下的長期成本：假設每噸二氧化碳訂價100美元，大型現場核能發電成本約77美元/MWh，較天然氣複循環機組（91美元/MWh）與近100%再生能源加儲能方案（87美元/MWh）更具競爭力；<span class="cite">GS Research, 2025.1</span>2026年8月最新的LCOE比較表則顯示，在天然氣價格為3.75美元/MMBtu的基準情境下，大型核能（現場）成本約93美元/MWh、SMR核能（現場）約102至107美元/MWh，仍高於天然氣CCGT基準（52美元/MWh），凸顯核能的成本競爭力高度取決於碳定價與天然氣價格假設，並非在所有情境下都具備優勢。<span class="cite">GS SUSTAIN, 2026.8</span></p>
+
+    <h3>6.2　SMR最新進度更新（截至2026年9月）</h3>
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>廠商/設計</th><th>2026年9月最新狀態</th></tr>
+      <tr><td class="term">GE Hitachi BWRX-300</td><td>加拿大Darlington首座機組預計2029年底完工、2030年商轉，將成為西方世界第一座商轉SMR；美國田納西流域管理局(TVA)於Clinch River廠址的申請已由NRC受理審查中；2026年8月，Blue Energy與GE Vernova Hitachi簽約，將於德州建置一座2.5GW的「天然氣+核能」混合電廠——此為原文報告未涵蓋的新案例</td></tr>
+      <tr><td class="term">X-energy Xe-100</td><td>NRC已公布18個月審查時程，德州Dow廠預計2026年動工、2029年運轉</td></tr>
+      <tr><td class="term">NuScale VOYGR</td><td>全球唯一取得NRC設計認證的商用SMR；2025年9月與ENTRA1、TVA啟動一項橫跨七州、規劃6GW的部署計畫，惟截至2026年9月，美國本土部署案仍未訂出正式建造時程表</td></tr>
+    </table>
+    </div>
+    <p class="cite">資料來源：延伸查證，2026年9月</p>
+
+    <h3>6.3　HALEU供應鏈：風險性質的重要修正</h3>
+    <p>獨立學術報告依據原文（截至2025年9月）指出「Rosatom子公司Tenex是全球唯一HALEU商業供應商」，構成SMR商業化的關鍵威脅。延伸查證發現一項重要的風險性質修正：<strong>美國已於2024年5月立法禁止進口俄羅斯鈾產品，Tenex目前已無法對美供貨</strong>——換言之，真正的風險不是「持續仰賴一家俄國公司」，而是「該公司產品已被本國法律排除在外、國產替代能否即時補上」。國產替代進度顯著：Centrus Energy已於2026年6月完成示範合約，累計生產逾1,900公斤HALEU；2026年1月，美國能源部（DOE）撥款9億美元支持Centrus在Piketon廠進行商業規模量產，目標年產能12公噸，首批新產能預計2029年到位；DOE同時將總額27億美元的濃縮計畫，拆分三筆各9億美元分別授予Centrus、法商Orano與新創公司General Matter，構成一個原文報告完全未涵蓋、更完整的美國HALEU國產替代全貌。<span class="cite">（延伸查證，2026.9）</span></p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>核能是唯一能提供長期、大規模、低碳基載的技術路徑，但其成本競爭力高度依賴碳定價與天然氣價格假設，且SMR距離規模化商轉仍有數年時間差；HALEU供應鏈的風險敘事需要更新——問題已從「地緣政治依賴」轉變為「國產替代速度能否追上SMR商業化時程」，這是一個政策執行力問題，而非純粹的地緣政治僵局。</p>
+    </div>
+  </section>
+
+  <!-- CH 7 -->
+  <section class="chapter">
+    <div class="chapter-num">第七章</div>
+    <h2>總體視角：大宗商品競賽與美中地緣政治對比</h2>
+    <div class="chapter-source">對應原文：GS Commodities Research〈2026 Outlook: Ride the Power Race and Supply Waves〉(2025.12.18)</div>
+
+    <p>本報告資料夾中唯一跳脫電力產業本身、拉高到大宗商品與總體地緣政治視角的報告，提出一套「商品控制循環」（Commodity Control Cycle）四階段框架：隨著全球化停滯、各國轉向內顧，商品供應鏈依序經歷①在地化／回流保護（透過關稅、補貼、投資插旗，目前銅與鋁處於此階段）、②擴大生產（目前石油與LNG處於此階段）、③提高供給集中度（透過淘汰高成本生產者）、④將主導供給地位轉化為地緣政治槓桿（稀土已進入此階段，中國對稀土出口的限制即為具體案例）。<span class="cite">GS Commodities Research, 2025.12</span></p>
+
+    <p>就電力產業直接相關的商品而言，銅因電氣化（資料中心、電網、電動車合計貢獻其需求成長的近半）被列為長線最看好的工業金屬，2026年預估均價11,400美元/噸；中國則透過對外投資（印尼鋁、非洲鋰、幾內亞鐵礦）持續擴大鋁、鋰、鐵礦供給，壓抑這些商品的長期價格。<span class="cite">GS Commodities Research, 2025.12</span></p>
+
+    <h3>美中電力備轉容量的結構性落差</h3>
+    <p>本報告資料夾中最直接凸顯美中電力供需矛盾的數據來自這份商品展望：2026年11月，美國資料中心裝置容量新增創單月歷史新高，美國電力需求年增速已逼近3%、超越GDP成長速度，多數美國區域電力市場備轉容量已逼近或跌破關鍵水位。相對地，中國目前已具備充裕的備轉容量，且預估將持續擴大——到2028年，中國有效備轉容量預估將達全球資料中心用電需求的三倍以上（約360GW對比約105GW）。<span class="cite">GS Commodities Research, 2025.12</span>報告據此判斷，電力瓶頸可能拖慢美國在AI／科技競賽中的進度——這是美中AI競爭敘事中，較少被討論但可能具有決定性的一項結構性變數。</p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num">360GW vs 105GW</div><div class="lbl">2028年中國/全球資料中心用電需求備轉容量對比</div></div>
+      <div class="stat-card"><div class="num">72%</div><div class="lbl">全美資料中心集中於1%縣市的比例</div></div>
+      <div class="stat-card"><div class="num">4階段</div><div class="lbl">商品控制循環框架（在地化→擴產→集中→槓桿化）</div></div>
+    </div>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>美國的AI電力焦慮本質上是「電網／備轉容量」焦慮，而非「發電技術」焦慮；中國在這個維度上握有結構性優勢，且這項優勢與稀土、銅等關鍵原物料的供應鏈主導權相互強化——電力供給能力，可能會成為美中AI競賽中被低估的決定性變數之一。</p>
+    </div>
+  </section>
+
+  <!-- CH 8 -->
+  <section class="chapter">
+    <div class="chapter-num">第八章</div>
+    <h2>供應鏈全景圖：六層分層定位（美股／台股）</h2>
+    <div class="chapter-source">整合元大投顧個股清單、GS SUSTAIN報告提及之受評個股，以及2026年9月延伸查證之台灣重電廠商資料</div>
+
+    <p>綜合前七章的技術脈絡，可將AI電力供應鏈依「供電時間軸」拆分為六個層級，每一層對應不同的商業模式、風險屬性與投資時間軸：</p>
+
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>層級</th><th>角色定位</th><th>美股代表</th><th>台股代表</th></tr>
+      <tr><td class="term">L1　受監管電力公司(IOU)</td><td>費率基數×核准ROE獲利模式，AI帶動資本支出加速週期，受各州PUC監理分級直接影響</td><td>NextEra(NEE)、Dominion(D)、Duke(DUK)、AEP、Xcel(XEL)、Southern(SO)、Exelon(EXC)、PPL</td><td>—</td></tr>
+      <tr><td class="term">L2　獨立發電商(IPP)</td><td>核能/氣電資產，PPA收入從現貨波動轉為長約保障</td><td>Constellation(CEG)、Vistra(VST)、NRG、Talen(TLN)</td><td>—</td></tr>
+      <tr><td class="term">L3　短期橋接電力(BTM)</td><td>天然氣/燃料電池現場發電，唯一能追上近期缺口的手段，三家公司立即性差異顯著（見第四章）</td><td>Bloom Energy(BE)、GE Vernova(GEV)、Caterpillar(CAT)、Cummins(CMI)</td><td>—</td></tr>
+      <tr><td class="term">L4　電網硬體與強化</td><td>變壓器/導線/儲能/開關設備，目前唯一真正的實體產能硬缺貨瓶頸</td><td>Quanta(PWR)、MasTec(MTZ)、Hitachi Energy、Siemens Energy、GE Vernova/Prolec GE、HD Hyundai Electric、TS Conductor(私募)、Fluence(FLNC)、Tesla Energy</td><td>華城電機(1519)、士林電機(1503)、中興電工(1513)、亞力電機、東元</td></tr>
+      <tr><td class="term">L5　長期低碳基載</td><td>核能延役/新建/SMR，成本最高但唯一根本解，商轉時程落在2029年後</td><td>Cameco(鈾礦)、Centrus Energy(濃縮)、OKLO、X-energy、NuScale、GE Vernova/Hitachi(BWRX-300)</td><td>—</td></tr>
+      <tr><td class="term">L6　上游材料/半導體</td><td>功率半導體、銅礦等關鍵原物料供應鏈</td><td>On Semiconductor(ON)、主要銅礦生產商</td><td>—</td></tr>
+    </table>
+    </div>
+    <p class="cite">資料來源：元大投顧，2026.7.9；GS SUSTAIN系列報告；延伸查證，2026.9</p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>六層分層圖中，L4（電網硬體）是唯一台股具備直接、實體稀缺性驅動之長線能見度的層級——這與L3（BTM）形成鮮明對比：L3的美股龍頭營收確定性差異極大（Bloom Energy高度確定 vs. GE Vernova需要拆分稀釋），而L4的台灣重電三雄則因產能瓶頸的物理性質，訂單能見度普遍達2028至2031年，風險屬性相對更接近「產能供不應求」而非「題材炒作」。</p>
+    </div>
+
+    <h3>8.1　指標個股深度側寫</h3>
+    <p>以下針對六層分層圖中，市場關注度最高、也最能代表各層風險屬性的指標個股，逐一整理其業務定位、最新財務/估值數據、關鍵合約與催化劑。數據以2026年第二季或最新一季公開財報與法說會揭露為準。</p>
+
+    <h4 style="font-family:var(--serif);font-weight:600;font-size:1.0rem;margin:26px 0 12px;color:var(--accent);">L1　受監管電力公司——以NextEra Energy(NEE)為例</h4>
+    <p>NextEra是全美市值最大的電力公司，受監管公用事業（佛州Florida Power &amp; Light）占其整體業務約67%，另有全美最大的再生能源開發平台NextEra Energy Resources。<span class="cite">元大投顧，2026.7.9</span>依費率基數×核准ROE的獲利公式，其費率基數規模達735億美元，2025至2029年費率基數年複合成長率達13.1%，為八家受評IOU中最高；2025至2027年調整後EPS預估為3.71美元→4.04美元→4.39美元，年複合成長率8.8%，Forward P/E約21.3倍。其受監理環境為Tier 1友善級（佛州PUC對資本支出態度相對支持），資本支出轉化為費率基數與獲利的效率在同業中相對領先。</p>
+
+    <h4 style="font-family:var(--serif);font-weight:600;font-size:1.0rem;margin:26px 0 12px;color:var(--accent);">L2　獨立發電商——CEG與VST的對比：穩健核能收租人 vs. 高槓桿成長股</h4>
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th></th><th>Constellation Energy(CEG)</th><th>Vistra(VST)</th></tr>
+      <tr><td class="term">資產組合</td><td>發電容量31,676MW，核能占比70%、化石燃料22%，93%位於PJM電網範圍內，年發電量1.47億MWh</td><td>發電容量43,641MW，核能占比僅15%、化石燃料62%，橫跨ERCOT(30%)與東岸電網(35%)</td></tr>
+      <tr><td class="term">2026年最新財測</td><td>全年調整後營業EPS展望上修至11.50–12.50美元（原10.00–12.00美元），反映上半年表現強勁；核能機隊容量因子93.0%</td><td>2026年調整後核心利潤展望維持68–76億美元（不含新簽約效益）；目標2027年前累計產生逾100億美元現金；Q2 2026 EPS 0.77美元，較去年同期0.82美元**下滑**；Q2營收40.2億美元，年減5.5%</td></tr>
+      <tr><td class="term">長期成長動能</td><td>以2026年財測基期，預估2029年前年化獲利成長率達20%；本季新簽920MW投資級客戶合約，平均合約年期18.5年，含Walmart 176MW核能PPA；已排除障礙讓Crane機組重新併網供電予Microsoft(20年PPA)</td><td>與Meta/AWS簽署合計3,800MW的20年期PPA（Meta約2.6GW橫跨PJM多座機組含功率提升、AWS 1.2GW鎖定Comanche Peak核電廠）；規劃重啟Perry核電廠；另以約40億美元收購Cogentrix的5,500MW天然氣資產組合(預計2026下半年完成)，藉此分散對核能單一資產的依賴</td></tr>
+      <tr><td class="term">投資屬性</td><td>「核能收租人」——現金流可見度最高、成長路徑最明確的AI電力受惠股，但股價已反映高度樂觀預期，估值溢價明顯</td><td>「高槓桿成長股」——PPA合約規模大、成長彈性高（2025–2027 EPS CAGR高達126.6%），但短期財報數字（EPS/營收年減）與長期成長故事存在落差，波動風險較CEG高</td></tr>
+    </table>
+    </div>
+    <p class="cite">資料來源：元大投顧，2026.7.9（FY2025基期數據）；延伸查證，2026.9（2026年最新財報與合約進展）</p>
+
+    <h4 style="font-family:var(--serif);font-weight:600;font-size:1.0rem;margin:26px 0 12px;color:var(--accent);">L3　短期橋接電力——名稱釐清：GE Vernova(GEV) ≠ GE(奇異)</h4>
+    <p>需先釐清一個常見的名稱混淆：奇異公司於2024年拆分為三家獨立上市公司——航太事業體GE Aerospace（股票代號GE，目前市場所稱「GE」多指此實體，業務與電力無關）、醫療事業體GE HealthCare（GEHC），以及電力/電網/風力事業體<strong>GE Vernova（股票代號GEV）</strong>——真正與AI電力需求直接相關、也是本報告第四章重點討論的，是GE Vernova而非GE Aerospace，投資時應注意代號區分，避免誤植。GE Vernova的燃氣設備積壓訂單與資料中心曝險比例，詳見第四章4.1節表格，此處不再重複。</p>
+
+    <h4 style="font-family:var(--serif);font-weight:600;font-size:1.0rem;margin:26px 0 12px;color:var(--accent);">L5　長期低碳基載——OKLO與NuScale(SMR)：估值遠遠跑在營收前面的兩檔指標股</h4>
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th></th><th>Oklo(OKLO)</th><th>NuScale Power(SMR)</th></tr>
+      <tr><td class="term">技術定位</td><td>Aurora快中子微型反應爐，單機發電量最高15MW，主打園區級工業負載，非傳統大型SMR</td><td>VOYGR輕水式SMR，模組化配置4/6/12機組，VOYGR-12可發電924MWe；<strong>全球唯一取得NRC商用SMR設計認證</strong>的公司</td></tr>
+      <tr><td class="term">營收現況</td><td>2026Q2錄得公司史上<strong>第一筆營收，僅120萬美元</strong>（主要來自服務性收入）；管理層明言2026、2027年仍將以里程碑與同位素銷售為主，真正的發電營收最快要到<strong>2028年</strong>才會出現</td><td>2026Q1營收僅56.5萬美元，較去年同期1,340萬美元<strong>暴跌96%</strong>（因羅馬尼亞專案收入未能延續）；單季淨損4,400萬美元，每股虧損0.14美元</td></tr>
+      <tr><td class="term">市值/估值</td><td>市值約106億美元，帳上現金約30億美元，2026年營運現金消耗指引1.2–1.5億美元</td><td>過去一年股價重挫82.9%，近三個月再跌30.4%；分析師目標價下修至16.5美元；儘管如此，股價仍相當於<strong>未來12個月營收預估的26.83倍</strong>，遠高於同業6.66倍與大盤4.97倍</td></tr>
+      <tr><td class="term">訂單/客戶進展</td><td>累計約14.1GW「客戶意向」——依會計準則<strong>不等同於已簽約積壓訂單</strong>；首座Aurora-INL電廠2025年9月動工，DOE五步驟監理路徑已完成前兩步（核能安全設計協議、初步文件化安全分析）</td><td>與TVA、ENTRA1合作的框架最高規劃6GW容量；2024年時點的積壓訂單約60億美元（時效性待更新）；2026年6月完成10億美元增資(ATM)，帳上流動性逾12億美元、無負債，用以支應商業化前的資金需求</td></tr>
+      <tr><td class="term">投資意涵</td><td colspan="2">兩者皆屬「概念驗證階段」的純SMR純網股(pure-play)——股價已計入高度樂觀的長期商業化預期，但實際發電營收都還要等到2028年以後；差別在於Oklo帳上現金消耗速度較慢、監理進度里程碑較新，NuScale則已完成大額增資但過去一年估值修正幅度更劇烈。兩者都應被歸類為高波動、長天期的「選擇權型」投資，而非現金流可預測的核心持股</td></tr>
+    </table>
+    </div>
+    <p class="cite">資料來源：延伸查證，2026年9月，綜合兩家公司2026年度公開財報、法說會與媒體報導</p>
+
+    <div class="finding">
+      <span class="flabel">研究發現</span>
+      <p>把六層供應鏈裡的指標個股攤開比較，會看到一條清楚的「確定性遞減、估值倍數遞增」曲線：L1的NEE有實體費率基數與核准ROE撐著估值；L2的CEG有93%容量因子的核能機隊與18.5年期長約撐著現金流，VST則財測與短期財報數字出現落差、波動更大；L3的Bloom Energy已在確認收入，GE Vernova規模最大但資料中心占比需拆分稀釋；到了L5的OKLO與NuScale，股價卻是建立在「2028年才會有發電營收」的長期敘事上，兩者目前的本益比/股價營收比本質上是在為一個還沒發生的未來付錢，這跟L1、L2、L3的「現金流已經在發生」屬於完全不同等級的風險。</p>
+    </div>
+  </section>
+
+  <!-- CH 9 -->
+  <section class="chapter">
+    <div class="chapter-num">第九章</div>
+    <h2>批判性檢視：矛盾點、技術原理與產業風險</h2>
+    <div class="chapter-source">綜合前八章交叉比對之發現</div>
+
+    <h3>9.1　原文報告間與原文對現實的落差</h3>
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>矛盾點</th><th>說明</th></tr>
+      <tr><td class="term">DC容量預測基期不一致</td><td>2026年2月報告稱「美國資料中心容量2030年達95GW」，但2026年5月報告卻稱「95GW是2027年底的數字」，兩者時間點相差三年，原文報告群內部未互相校準</td></tr>
+      <tr><td class="term">電價溢酬論述vs市場實證</td><td>高盛反覆強調Green Reliability Premium「僅占hyperscaler EBITDA的2%至3%、不構成阻力」，但PJM實證數據顯示成本已具體轉嫁一般用戶（每月增加70美元），且40%容量成本是替尚未建成的資料中心預付——阻力並未消失，只是承受對象改變</td></tr>
+      <tr><td class="term">供應鏈瓶頸的過渡期假設過於樂觀</td><td>多篇報告假設「BTM只是過渡3至5年，最終電網會接上」，但變壓器/GSU交期已排至2029年，與「3至5年橋接」的假設在時間軸上高度緊繃，若變壓器缺貨持續惡化，BTM恐從過渡方案變成長期常態</td></tr>
+      <tr><td class="term">鈾/HALEU供應鏈敘事需要更新</td><td>獨立學術報告（based on 2025.9原文）強調「仰賴俄國Tenex」的風險，但美國已立法禁止其對美供貨，真正風險是國產替代進度而非持續依賴，兩者政策意涵不同（見第六章6.3節）</td></tr>
+      <tr><td class="term">併網佇列規模的方向性轉折未被反映</td><td>原文引用2,290GW／19%完工率渲染危機性，但最新一年數據顯示佇列規模十年來首次下滑12%，訊號可能已從「持續惡化」轉向「開始改善」（見第三章3.3節）</td></tr>
+      <tr><td class="term">GE Vernova積壓訂單的資料中心占比被稀釋</td><td>116GW積壓訂單常被市場籠統視為「AI電力概念」，但公司自揭僅約20%明確歸屬資料中心負載，其餘80%為傳統電力/工業客戶</td></tr>
+    </table>
+    </div>
+
+    <h3>9.2　技術原理深挖</h3>
+    <p><strong>為什麼GSU比一般配電變壓器更缺貨？</strong> GSU是把發電廠輸出的中壓電力升壓至高壓、送入主幹輸電網的關鍵節點，規格須依個別發電機容量與電壓等級客製化設計，無法如配電變壓器般標準化量產；其核心原料——晶粒取向電磁鋼片——全球產能集中於少數鋼廠，加上繞線工序屬高技術密級的人力密集作業，兩項上游限制疊加，構成GSU交期特別長的根本原因。</p>
+    <p><strong>併網佇列為什麼平均要等55個月？</strong> 制度設計上採「串聯式」審查——同一電網節點上，後排隊案件須等前面所有案件完成「系統影響研究」（評估是否需升級變壓器或加蓋輸電線）才能輪到自身被研究，一旦前案退出或變更規模，後續案件的研究須重跑。FERC 2023號令改採「集群研究」（Cluster Study），將同批案件合併一次評估，是針對此一制度性瓶頸的根本性改革，而非單純增加審查人力。</p>
+    <p><strong>HALEU為什麼是SMR專屬瓶頸、傳統核電廠不受影響？</strong> 傳統輕水反應爐使用3%至5%濃縮度的低濃縮鈾（LEU），此濃縮度商業供應鏈已存在數十年、產能分散多國；多數SMR設計為求體積更小、換料週期更長，需要5%至20%濃縮度的HALEU，此濃縮度區間過去幾無商業需求（軍事用途濃縮度通常直接跳至90%以上），導致全球商業產能幾近空白——Rosatom握有既有產能，是因其本可降階利用軍工濃縮設施，而美歐商業濃縮廠過去缺乏投資此中間濃縮度的商業誘因，構成一個「需求突然浮現、供給端須從零建起」的典型供應鏈斷層案例。</p>
+
+    <h3>9.3　產業風險彙整</h3>
+    <div class="table-scroll">
+    <table class="deftable">
+      <tr><th>風險類別</th><th>具體內容</th></tr>
+      <tr><td class="term">成本超支</td><td>SMR俄中案例已出現300%至400%的成本超支，尚無成熟量產案例可證明理論LCOE可實現</td></tr>
+      <tr><td class="term">時程風險</td><td>變壓器/GSU交期已排至2029年，若持續惡化將直接推遲整條FTM供應鏈的轉換時程</td></tr>
+      <tr><td class="term">社區反彈與監理風險</td><td>德州（占美國新增DC容量13%）已出現州長行政令要求稽核揭露；維吉尼亞（占17%）已出現跨黨派暫緩開發呼聲；噪音污染、局部增溫（猶他州Stratos案）等新型態反對理由持續浮現</td></tr>
+      <tr><td class="term">財務揭露不透明</td><td>GE Vernova積壓訂單中資料中心占比僅約20%；Caterpillar/Cummins的資料中心營收占比從未單獨拆分揭露，僅能依賴第三方估算反推；儲能在BTM架構中的裝置容量規模同樣缺乏原始資料可供查證</td></tr>
+      <tr><td class="term">替代技術威脅</td><td>BTM天然氣過渡若因環評/社區反彈受阻，目前沒有同等部署速度的替代方案可即時填補</td></tr>
+    </table>
+    </div>
+  </section>
+
+  <!-- CH 10 -->
+  <section class="chapter">
+    <div class="chapter-num">第十章</div>
+    <h2>結論與投資意涵</h2>
+    <div class="chapter-source">綜合全篇論述</div>
+
+    <p>本報告梳理的核心發現，可歸納為三個層次。第一，AI電力需求並非一次性衝擊，而是一條被分析師持續低估、不斷追加預測的成長曲線——理解這條曲線的「被低估方式」，比記住任何單一年度的預測數字更具長期分析價值。第二，供需缺口在近期（2026至2027年）約落在8至9GW，其根源不在發電技術本身，而在電網併網制度與硬體產能的雙重瓶頸；PJM容量拍賣三年間逾1,000%的漲幅，已將這個理論缺口轉化為具體、可衡量的市場價格與政治風險。第三，補足缺口需要三層時間軸並行推進——電表後天然氣過渡解近渴、電網強化與監理改革治根本、核能與SMR接長期棒——而這三層解方的速度落差，正是評估整條供應鏈各環節風險屬性與投資時間軸的核心框架。</p>
+
+    <p>就投資意涵而言，六層供應鏈分層圖顯示：第四層（電網硬體，尤其變壓器）是目前風險調整後確定性最高的一層——瓶頸由實體產能決定，不受題材熱度影響，台灣重電三雄的長線訂單能見度即是明證；第三層（BTM）則需要細緻拆分，同一層內部存在確定性差異極大的公司（Bloom Energy vs. GE Vernova）；第五層（核能／SMR）潛在報酬最高，但時程最長、成本超支風險也最集中。對長期投資人而言，這三層之間的配置比例，本質上是在「確定性」與「報酬空間」之間做取捨——這也是本報告最終希望留給讀者的分析框架，而非單一的個股建議。</p>
+
+    <div class="finding">
+      <span class="flabel">總結論點</span>
+      <p>AI電力需求的供需缺口是真實存在且已被市場實證的結構性現象，但補足缺口的路徑並非單一技術的勝出，而是短期BTM應急、中期電網修復、長期核能接棒三層方案的並行賽跑；供應鏈中風險最低、確定性最高的環節，往往不是最受矚目的AI概念股，而是像變壓器這樣由實體產能瓶頸決定、與AI題材熱度脫鉤的傳統重電製造能力。</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="source-note">
+  <div class="rule"></div>
+  <h2>原文報告出處（依日期排序）</h2>
+  <ol>
+    <li>Goldman Sachs Research (2025.1.23). <i>Is nuclear energy the answer to AI data centers' power consumption?</i></li>
+    <li>Goldman Sachs Research, Lee, B. &amp; Davenport, C. (2025.6.12). <i>Is nuclear power set for a revival?</i></li>
+    <li>Lee, G., Saric, D., &amp; Sohan, M., Goldman Sachs Global Institute (2025.9). <i>The New Nuclear Age: Why the World Is Rethinking Atomic Power.</i>（完整分析見獨立學術報告：260910前 已整理之《核能新時代》）</li>
+    <li>Singer, B., Davenport, C., Schneider, J., et al., Goldman Sachs Global Investment Research／GS SUSTAIN (2025.10.13). <i>AI/Data Center Power Demand: The 6 Ps driving growth and constraints.</i></li>
+    <li>Struyven, D., Dart, S., Thomas, L., et al., Goldman Sachs Global Investment Research (2025.12.18). <i>2026 Outlook: Ride the Power Race and Supply Waves.</i></li>
+    <li>Singer, B., Davenport, C., Ng, M., et al., Goldman Sachs Global Investment Research／GS SUSTAIN (2026.2.23). <i>How rising hyperscaler reinvestment impacts the 6 Ps driving power growth/constraints.</i></li>
+    <li>Wei, H., Struyven, D., &amp; Dart, S., Goldman Sachs Research (2026.5.20). <i>US Data Center Power Demand Projected to Double by 2027.</i></li>
+    <li>元大投顧總經策略組 (2026.7.9)。《AI熱潮下美國電力產業展望》。</li>
+    <li>Singer, B., Corbett, B., Zhang, X., et al., Goldman Sachs Global Investment Research／GS SUSTAIN (2026.8.6). <i>Power demand, cyclical progression and Sustainability implications.</i></li>
+  </ol>
+
+  <h2>延伸查證來源（2026年9月）</h2>
+  <p>LBNL《Queued Up》2025/2026年版報告；PJM容量拍賣公開結果與Utility Dive／IEEFA相關報導；PowerMag／pv magazine USA／Renewable Energy World等變壓器供需專題報導；Bloom Energy／GE Vernova／Caterpillar／Cummins 2026年度公開財報與Yahoo Finance／Manufacturing Dive等媒體報導；工商時報／經濟日報／DIGITIMES／旺得富理財網等台灣財經媒體關於華城電機、士林電機、中興電工之報導；CleanTechnica關於HTLS導線之報導；Utility Dive關於資料中心儲能之NEMA標準報導；World Nuclear Association／PowerMag／SEC filings關於Centrus Energy與HALEU供應鏈之報導；GE Vernova／Hitachi Nuclear、ANS Nuclear Newswire關於SMR最新進度之報導；TIKR／Enverus／Seeking Alpha／Vistra investor relations關於Vistra(VST) 2026年度財測與Meta/AWS PPA之報導；The Motley Fool／NAI 500／Merlin Trader關於Oklo(OKLO) 2026年度營收里程碑與監理進度之報導；Simply Wall St／Yahoo Finance／Trefis關於NuScale Power(SMR) 2026年度營收與估值重置之報導；The Globe and Mail／The Motley Fool關於Constellation Energy(CEG) 2026年Q2法說會與新簽PPA之報導。完整URL清單可於原始對話紀錄中查閱。</p>
+
+  <h2>資料與版權說明</h2>
+  <p>本報告內容整理、翻譯、綜合分析自上述9篇原始報告與18餘項延伸查證來源。依據合理使用原則，本報告採「整理式摘要＋精簡引用」方式呈現，重要數據均以自製表格呈現並標註出處，不直接複製原文圖表圖片或大篇幅逐字重製原文段落。原文報告之完整內容與圖表，版權歸原發布機構（Goldman Sachs、元大投顧等）所有。</p>
+  <p>本報告為個人產業研究之綜合整理與延伸分析，非逐字翻譯，部分段落經改寫以利邏輯銜接與論述完整性；引用數據如與原文或後續更新資訊有出入，應以最新原始來源為準。僅供個人研究與投資參考使用，不構成投資建議，不作公開發布或商業用途。</p>
+</footer>
