@@ -142,7 +142,7 @@
       m.className = "gsfox-hl";
       m.setAttribute("data-color", rec.color);
       m.setAttribute("data-hid", rec.id);
-      m.title = "點擊可移除這段畫重點" + (rec.note ? "（含筆記）" : "");
+      m.title = rec.note ? "這段有附掛筆記，到📓筆記面板可編輯/刪除" : "到📓筆記面板可移除這段畫重點";
       return m;
     });
   }
@@ -171,8 +171,8 @@
     var list = loadJSON(LS_HL, []);
     list.forEach(function(r){ if (r.id === id) r.note = newText; });
     saveJSON(LS_HL, list);
-    var mark = document.querySelector('[data-hid="'+id+'"]');
-    if (mark) mark.title = "點擊可移除這段畫重點" + (newText ? "（含筆記）" : "");
+    var title = newText ? "這段有附掛筆記，到📓筆記面板可編輯/刪除" : "到📓筆記面板可移除這段畫重點";
+    document.querySelectorAll('[data-hid="'+id+'"]').forEach(function(m){ m.title = title; });
     scheduleCloudPush();
   }
 
@@ -234,17 +234,27 @@
     }
     notesBody.innerHTML = list.map(function(r){
       return '<div class="gsfox-note-card" data-color="'+r.color+'" data-note-id="'+r.id+'">'
-        + '<div class="gsfox-quote">「'+escapeHtml(r.text)+'」</div>'
+        + '<div class="gsfox-quote" title="點擊跳到文章裡的引用處">「'+escapeHtml(r.text)+'」</div>'
         + '<div class="gsfox-note-text" data-note-text="'+r.id+'">'+escapeHtml(r.note||"")+'</div>'
         + '<div class="gsfox-note-row">'
         +   '<span class="gsfox-note-time">'+fmtTime(r.ts)+'</span>'
-        +   '<span class="gsfox-note-btns"><button data-act="edit" data-id="'+r.id+'">編輯</button><button data-act="del" class="gsfox-del" data-id="'+r.id+'">刪除</button></span>'
+        +   '<span class="gsfox-note-btns"><button data-act="edit" data-id="'+r.id+'">編輯</button><button data-act="del" data-id="'+r.id+'">清空備注</button><button data-act="del-highlight" class="gsfox-del" data-id="'+r.id+'">移除畫重點</button></span>'
         + '</div></div>';
     }).join("");
   }
 
   function openNotesPanel(){ notesPanel.hidden = false; renderNotesPanel(); }
   function toggleNotesPanel(){ notesPanel.hidden = !notesPanel.hidden; if (!notesPanel.hidden) renderNotesPanel(); }
+
+  function jumpToHighlight(id){
+    var marks = document.querySelectorAll('[data-hid="'+id+'"]');
+    if (!marks.length){ alert("這段畫重點目前不在頁面上（可能已被移除）。"); return; }
+    marks[0].scrollIntoView({behavior:"smooth", block:"center"});
+    marks.forEach(function(m){
+      m.classList.add("gsfox-flash");
+      setTimeout(function(){ m.classList.remove("gsfox-flash"); }, 1600);
+    });
+  }
 
   function sanitizeFilename(s){
     return String(s).replace(/[\\/:*?"<>|]/g, "").trim().slice(0, 60) || "筆記";
@@ -352,12 +362,17 @@
       var card = closestSafe(e.target, ".gsfox-note-card");
       if (!card) return;
       var id = card.dataset.noteId;
+      var quoteEl = closestSafe(e.target, ".gsfox-quote");
+      if (quoteEl){ jumpToHighlight(id); return; }
       var btn = closestSafe(e.target, "button");
       if (!btn) return;
       if (btn.dataset.act === "del"){
-        // 這裡只清空筆記文字，畫重點本身(顏色標記)保留在文章裡不受影響；
-        // 要移除畫重點本身，直接點文章裡的螢光筆標記(見mouseup handler)
-        if (confirm("確定刪除這則筆記的備注內容？（畫重點本身不會被移除）")){ updateNoteText(id, ""); renderNotesPanel(); }
+        // 只清空筆記文字，畫重點本身(顏色標記)保留在文章裡不受影響
+        if (confirm("確定清空這則筆記的備注內容？（畫重點本身不會被移除）")){ updateNoteText(id, ""); renderNotesPanel(); }
+      } else if (btn.dataset.act === "del-highlight"){
+        // 完整移除：畫重點的顏色標記從文章裡拿掉，這筆紀錄(含筆記)也一起刪除
+        // 文章裡點擊畫重點本身不會觸發刪除，一律要從這個面板操作
+        if (confirm("確定移除這段畫重點？文章裡的顏色標記與這則筆記都會一併刪除。")){ removeHighlight(id); renderNotesPanel(); }
       } else if (btn.dataset.act === "edit"){
         var textEl = card.querySelector('[data-note-text="'+id+'"]');
         var cur = textEl.textContent;
@@ -442,8 +457,7 @@
       var sel = window.getSelection();
 
       if (sel && sel.isCollapsed){
-        var hl = closestSafe(e.target, "mark.gsfox-hl");
-        if (hl){ removeHighlight(hl.getAttribute("data-hid")); if (!notesPanel.hidden) renderNotesPanel(); else updateBadge(); return; }
+        // 點擊文章裡既有的畫重點不會刪除它——畫重點只能在📓筆記面板裡刪除(見notesPanel的del-highlight)
         hideToolbar();
         return;
       }
