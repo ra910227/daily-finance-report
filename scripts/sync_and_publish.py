@@ -376,16 +376,11 @@ h3{{font-size:0.95rem; margin:22px 0 12px; color:var(--sub); font-weight:600;}}
 <div class="sub">國際財經重點 · 個股深度研究 · 板塊資金流 · 研究摘要</div>
 <div class="updated">最新 <b>{date_pretty(latest)}</b></div>
 <div class="gsfox-sync-box">
-  <span class="gsfox-backup-label">☁️ 雲端同步（跨瀏覽器/裝置自動同步）：</span>
+  <span class="gsfox-sync-label">☁️ 雲端同步（跨瀏覽器/裝置自動同步）：</span>
   <input type="text" data-role="sync-code-input" placeholder="輸入你自己的同步碼">
   <button data-act="sync-connect">連接</button>
   <button data-act="sync-disconnect" class="gsfox-ghost" hidden>中斷連接</button>
   <span class="gsfox-sync-status" data-role="sync-status"></span>
-</div>
-<div class="gsfox-backup">
-  <span class="gsfox-backup-label">或手動匯出/匯入一個備份檔：</span>
-  <button data-act="export">💾 匯出備份檔</button>
-  <label class="gsfox-backup-import-label">📤 匯入備份檔<input type="file" accept="application/json" data-act="import" hidden></label>
 </div>
 <nav>
 {nav_html}
