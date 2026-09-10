@@ -117,6 +117,16 @@ def sync_files():
     copied += _copy_new(SRC / "研究報告/總體經濟", "*六大機構_投資機構研究摘要*.html", SITE / "research/institutions", rename=True)
     copied += _copy_new(SRC / "研究報告/產業研究/產業趨勢研究摘要", "*.html", SITE / "research/industry-trends")
 
+    # 產業研究其他子資料夾（先進封裝/光通訊/電力產業/記憶體/軍工/載板/電源/半導體測試/實體AI…）
+    # 裡完成的個別深度報告HTML：每個子資料夾＝一個產業主題，依主題分組上傳，不限於「產業趨勢研究摘要」這份週報
+    industry_root = SRC / "研究報告/產業研究"
+    if industry_root.is_dir():
+        for topic_dir in industry_root.iterdir():
+            if not topic_dir.is_dir() or topic_dir.name == "產業趨勢研究摘要":
+                continue
+            dst = SITE / "research/industry" / topic_dir.name
+            copied += _copy_new(topic_dir, "*.html", dst)
+
     for pattern in ["*元大投顧研究報告摘要*.html", "*投行研究摘要*.html",
                     "*長期多空判斷準則*.html", "*LTCMA2026投資架構整合報告*.html"]:
         copied += _copy_new(SRC / "研究報告/總體經濟", pattern, SITE / "research/long-term", rename=True)
@@ -168,7 +178,7 @@ def card(href, tag, title, date, excerpt):
 def build_index():
     # ---------- 蒐集五大分類的完整條目資料 ----------
     # 每個item: {date, tag, title, href, excerpt}
-    market_items, stock_groups, research_pinned, research_items, lecture_groups, notes_items = [], [], [], [], [], []
+    market_items, stock_groups, research_pinned, research_items, lecture_groups, notes_items, industry_groups = [], [], [], [], [], [], []
 
     # 市場分析 = 財經日報 + 市場診斷 + 板塊與資金流（2026-09-10合併為一類）
     for f in sorted((SITE / "reports").glob("*.html")):
@@ -255,9 +265,29 @@ def build_index():
             l_items.sort(key=lambda x: x["sort"])
             lecture_groups.append((course, l_items))
 
+    # 產業深度報告（原「產業研究」其他子資料夾，依主題分組，組內依日期新到舊）
+    industry_dir = SITE / "research/industry"
+    if industry_dir.is_dir():
+        for topic_dir in sorted(industry_dir.iterdir()):
+            if not topic_dir.is_dir():
+                continue
+            topic = topic_dir.name
+            i_items = []
+            for f in sorted(topic_dir.glob("*.html")):
+                d = date_from_name(f.name)
+                title = re.sub(r'^\d{2,8}_', '', f.stem)
+                i_items.append({"date": d, "tag": f"產業深度｜{topic}", "title": title,
+                                 "href": f"research/industry/{topic}/{f.name}", "excerpt": extract_excerpt(f)})
+            if not i_items:
+                continue
+            i_items.sort(key=lambda x: x["date"], reverse=True)
+            industry_groups.append((topic, i_items))
+
     # ---------- 首頁最上方「最新文章」：跨五大分類合併，依日期新到舊取前15篇 ----------
     all_dated = [it for it in (market_items + research_items + notes_items) if it["date"] != "0000-00-00"]
     for _, items in stock_groups:
+        all_dated += [it for it in items if it["date"] != "0000-00-00"]
+    for _, items in industry_groups:
         all_dated += [it for it in items if it["date"] != "0000-00-00"]
     all_dated.sort(key=lambda x: x["date"], reverse=True)
     latest_items = all_dated[:15]
@@ -276,6 +306,7 @@ def build_index():
 
     stock_count = sum(len(items) for _, items in stock_groups)
     lecture_count = sum(len(items) for _, items in lecture_groups)
+    industry_count = sum(len(items) for _, items in industry_groups)
     research_count = len(research_pinned) + len(research_items)
 
     sections = [
@@ -285,6 +316,8 @@ def build_index():
          grouped_grid(stock_groups), stock_count),
         ("research", "📚 研究摘要", "六大機構觀點彙整、產業趨勢摘要、長期研究資料庫索引、券商投顧報告",
          grid(research_pinned + research_items), research_count),
+        ("industry", "🏭 產業深度報告", "個別產業（先進封裝、光通訊、電力產業等）完整深度分析報告，依主題分類",
+         grouped_grid(industry_groups), industry_count),
         ("lectures", "📜 專題報告", "系統性主題深度報告與課程講義，依堂數順序閱讀，附原文出處對照",
          grouped_grid(lecture_groups), lecture_count),
         ("notes", "🗒️ 金融筆記", "自己整理的閱讀筆記、書籍重點與投資組合回測分析",
@@ -296,7 +329,8 @@ def build_index():
         f'<a href="{href}" class="navlink">{title}</a>'
         for href, title in [
             ("#top", "首頁"), ("#market", "市場分析"), ("#stocks", "個股小狐"),
-            ("#research", "研究摘要"), ("#lectures", "專題報告"), ("#notes", "金融筆記"),
+            ("#research", "研究摘要"), ("#industry", "產業深度報告"),
+            ("#lectures", "專題報告"), ("#notes", "金融筆記"),
         ]
     )
 
