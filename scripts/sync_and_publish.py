@@ -9,6 +9,8 @@ import shutil
 from pathlib import Path
 from urllib.parse import quote
 
+from inject_toolkit import inject_into_file
+
 SRC = Path("/Users/vovo/Desktop/VOVO/財經投資")
 SITE = Path("/Users/vovo/Desktop/VOVO/財經投資/daily-finance-report-site")
 
@@ -50,6 +52,7 @@ def _copy_new(src_glob_dir, pattern, dst, rename=False):
         target = dst / target_name
         if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
             shutil.copy2(f, target)
+            inject_into_file(target)
             copied.append(str(target))
     return copied
 
@@ -66,6 +69,7 @@ def sync_files():
         target = dst / f"{d}.html"
         if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
             shutil.copy2(f, target)
+            inject_into_file(target)
             copied.append(str(target))
 
     # 個股小狐（每個ticker一個子資料夾，原樣保留）
@@ -113,11 +117,17 @@ def sync_files():
     return copied
 
 
+def star_row(href):
+    key = html.escape(href, quote=True)
+    stars = "".join(f'<span class="gsfox-star" data-i="{i}">☆</span>' for i in (1, 2, 3))
+    return f'<span class="gsfox-star-row" data-star-key="{key}">{stars}</span>'
+
+
 def link(href, label, date):
     return (f'<li><a href="{quote(href)}">'
             f'<span class="d">{date}</span>'
             f'<span class="t">{html.escape(label)}</span>'
-            f'</a></li>')
+            f'</a>{star_row(href)}</li>')
 
 
 def build_index():
@@ -220,10 +230,11 @@ def build_index():
                     label = f"第{int(num)}堂　{title}"
                 else:
                     label = f.stem
-                l_items.append((f.name, f'<li><a href="{quote(f"lectures/{course}/{f.name}")}">'
+                lecture_href = f"lectures/{course}/{f.name}"
+                l_items.append((f.name, f'<li><a href="{quote(lecture_href)}">'
                                          f'<span class="d">{label.split("　")[0] if "　" in label else ""}</span>'
                                          f'<span class="t">{html.escape(label.split("　",1)[-1] if "　" in label else label)}</span>'
-                                         f'</a></li>'))
+                                         f'</a>{star_row(lecture_href)}</li>'))
             if not l_items:
                 continue
             l_items.sort(key=lambda x: x[0])
@@ -289,8 +300,11 @@ h3{{font-size:0.95rem; margin:18px 0 8px; color:var(--sub);}}
 .list .t{{font-weight:600; color:var(--text);}}
 .list .empty, p.empty{{color:var(--sub); font-size:0.88rem; font-style:italic;}}
 </style>
+<link rel="stylesheet" href="assets/gsfox-annotate.css">
+<script src="assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
 </head>
-<body>
+<body class="gsfox-index">
 <div class="wrap">
 <h1>財經小狐｜投資研究專欄</h1>
 <div class="sub">國際財經重點 · 個股深度研究 · 板塊資金流 · 研究摘要</div>
