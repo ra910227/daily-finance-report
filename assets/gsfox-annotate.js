@@ -355,7 +355,9 @@
       var btn = closestSafe(e.target, "button");
       if (!btn) return;
       if (btn.dataset.act === "del"){
-        if (confirm("確定刪除這段畫重點／筆記？")){ removeHighlight(id); renderNotesPanel(); }
+        // 這裡只清空筆記文字，畫重點本身(顏色標記)保留在文章裡不受影響；
+        // 要移除畫重點本身，直接點文章裡的螢光筆標記(見mouseup handler)
+        if (confirm("確定刪除這則筆記的備注內容？（畫重點本身不會被移除）")){ updateNoteText(id, ""); renderNotesPanel(); }
       } else if (btn.dataset.act === "edit"){
         var textEl = card.querySelector('[data-note-text="'+id+'"]');
         var cur = textEl.textContent;
