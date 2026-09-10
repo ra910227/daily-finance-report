@@ -343,7 +343,8 @@ def build_index():
 body{{background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif; margin:0; padding:32px 20px 64px; line-height:1.6;}}
 .wrap{{max-width:1120px; margin:0 auto;}}
 h1{{font-size:1.7rem; margin:0 0 6px;}}
-.sub{{color:var(--sub); font-size:0.92rem; margin-bottom:8px;}}
+.header-row{{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 16px; margin-bottom:8px;}}
+.sub{{color:var(--sub); font-size:0.92rem;}}
 .updated{{color:var(--sub); font-size:0.85rem; margin-bottom:24px;}}
 .updated b{{color:var(--accent);}}
 nav{{display:flex; flex-wrap:wrap; gap:4px 22px; margin-bottom:36px; position:sticky; top:0; background:var(--bg); padding:14px 0; z-index:10; border-bottom:1px solid var(--border);}}
@@ -373,15 +374,17 @@ h3{{font-size:0.95rem; margin:22px 0 12px; color:var(--sub); font-weight:600;}}
 <body class="gsfox-index">
 <div class="wrap" id="top">
 <h1>財經小狐｜投資研究專欄</h1>
-<div class="sub">國際財經重點 · 個股深度研究 · 板塊資金流 · 研究摘要</div>
-<div class="updated">最新 <b>{date_pretty(latest)}</b></div>
-<div class="gsfox-sync-box">
-  <span class="gsfox-sync-label">☁️ 雲端同步（跨瀏覽器/裝置自動同步）：</span>
-  <input type="text" data-role="sync-code-input" placeholder="輸入你自己的同步碼">
-  <button data-act="sync-connect">連接</button>
-  <button data-act="sync-disconnect" class="gsfox-ghost" hidden>中斷連接</button>
-  <span class="gsfox-sync-status" data-role="sync-status"></span>
+<div class="header-row">
+  <div class="sub">國際財經重點 · 個股深度研究 · 板塊資金流 · 研究摘要</div>
+  <div class="gsfox-sync-box">
+    <span class="gsfox-sync-label">☁️ 雲端同步：</span>
+    <input type="text" data-role="sync-code-input" placeholder="輸入你自己的同步碼">
+    <button data-act="sync-connect">連接</button>
+    <button data-act="sync-disconnect" class="gsfox-ghost" hidden>中斷連接</button>
+    <span class="gsfox-sync-status" data-role="sync-status"></span>
+  </div>
 </div>
+<div class="updated">最新 <b>{date_pretty(latest)}</b></div>
 <nav>
 {nav_html}
 </nav>

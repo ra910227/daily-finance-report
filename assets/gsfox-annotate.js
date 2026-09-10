@@ -49,7 +49,8 @@
     if (!code) return;
     if (pushTimer) clearTimeout(pushTimer);
     pushTimer = setTimeout(function(){
-      pushToCloudNow(code).then(function(ok){ setSyncStatus(ok ? "已同步" : "同步失敗，稍後會再試一次"); });
+      setSyncStatus("上傳中…");
+      pushToCloudNow(code).then(function(ok){ setSyncStatus(ok ? "上傳已完成" : "上傳失敗，稍後會再試一次"); });
     }, 2000);
   }
 
@@ -498,11 +499,12 @@
       if (!code){ alert("請先輸入一組同步碼。"); return; }
       setSyncCode(code);
       render();
-      setSyncStatus("連接中…");
+      setSyncStatus("連接中…讀取雲端資料");
       pullFromCloud(code).then(function(){
+        setSyncStatus("上傳中…");
         return pushToCloudNow(code);
       }).then(function(ok){
-        setSyncStatus(ok ? "已連接並同步完成" : "已連接，但同步時發生問題，稍後會自動重試");
+        setSyncStatus(ok ? "上傳已完成" : "上傳失敗，稍後會再試一次");
         if (document.body.classList.contains("gsfox-index")) initStarWidgets();
       });
     });
