@@ -152,21 +152,27 @@ def sync_files():
     return copied
 
 
-def star_row(href):
+def badges_row(href):
+    """已閱讀比例／筆記數／星號評分，三者都是純前端從localStorage算出來顯示，
+    這裡只輸出佔位符markup，實際數字由 gsfox-annotate.js 的 initReadNoteBadges() 填入。"""
     key = html.escape(href, quote=True)
     stars = "".join(f'<span class="gsfox-star" data-i="{i}">☆</span>' for i in (1, 2, 3))
-    return f'<span class="gsfox-star-row" data-star-key="{key}">{stars}</span>'
+    return (f'<span class="gsfox-badges" data-badges-key="{key}">'
+            f'<span class="gsfox-read-badge" title="已閱讀比例">📖<span class="gsfox-read-pct"></span></span>'
+            f'<span class="gsfox-note-badge" title="筆記數">📝<span class="gsfox-note-count"></span></span>'
+            f'<span class="gsfox-star-row" data-star-key="{key}">{stars}</span>'
+            f'</span>')
 
 
 def card(href, tag, title, date, excerpt):
-    """卡片式條目：分類tag／標題／內文摘要／日期，右上角疊加星號評分。"""
+    """卡片式條目：分類tag／標題／內文摘要／日期，右上角疊加已閱讀比例/筆記數/星號評分。"""
     return (f'<div class="card-wrap">'
             f'<a class="article-card" href="{quote(href)}">'
             f'<span class="tag">{html.escape(tag)}</span>'
             f'<span class="title">{html.escape(title)}</span>'
             f'<span class="excerpt">{html.escape(excerpt)}</span>'
             f'<span class="date">{date_pretty(date)}</span>'
-            f'</a>{star_row(href)}</div>')
+            f'</a>{badges_row(href)}</div>')
 
 
 def build_index():
@@ -360,9 +366,9 @@ h3{{font-size:0.95rem; margin:22px 0 12px; color:var(--sub); font-weight:600;}}
 /* ---- 卡片式文章列表 ---- */
 .card-grid{{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:28px 24px;}}
 .card-wrap{{position:relative;}}
-.article-card{{display:flex; flex-direction:column; gap:6px; text-decoration:none; color:inherit; height:100%; padding-right:52px;}}
-.article-card .tag{{font-size:0.72rem; letter-spacing:0.06em; color:var(--accent); font-weight:600; text-transform:uppercase;}}
-.article-card .title{{font-size:1.05rem; font-weight:700; color:var(--text); line-height:1.4;}}
+.article-card{{display:flex; flex-direction:column; gap:6px; text-decoration:none; color:inherit; height:100%;}}
+.article-card .tag{{font-size:0.72rem; letter-spacing:0.06em; color:var(--accent); font-weight:600; text-transform:uppercase; padding-right:132px;}}
+.article-card .title{{font-size:1.05rem; font-weight:700; color:var(--text); line-height:1.4; padding-right:132px;}}
 .article-card:hover .title{{color:var(--accent);}}
 .article-card .excerpt{{font-size:0.86rem; color:var(--sub); line-height:1.65; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;}}
 .article-card .date{{font-size:0.78rem; color:var(--sub); font-weight:700; margin-top:4px;}}

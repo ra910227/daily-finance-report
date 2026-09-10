@@ -9,7 +9,12 @@
   "use strict";
   var LS_HL = "gsfox_hl:" + location.pathname;
   var LS_STAR_PREFIX = "gsfox_star:";
+  var LS_READ_PREFIX = "gsfox_read:";
   var COLOR_LABEL = { yellow: "黃", red: "紅", blue: "藍" };
+
+  function isGsfoxDataKey(k){
+    return k.indexOf("gsfox_hl:") === 0 || k.indexOf("gsfox_star:") === 0 || k.indexOf(LS_READ_PREFIX) === 0;
+  }
 
   /* ============ 雲端同步（Cloudflare Worker + KV） ============ */
   var WORKER_URL = "https://gsfox-sync.yingbangbang2026.workers.dev";
@@ -25,7 +30,7 @@
       var data = json && json.data && typeof json.data === "object" ? json.data : null;
       if (data){
         Object.keys(data).forEach(function(k){
-          if (k.indexOf("gsfox_hl:") === 0 || k.indexOf("gsfox_star:") === 0){
+          if (isGsfoxDataKey(k)){
             try{ localStorage.setItem(k, data[k]); }catch(e){}
           }
         });
@@ -385,14 +390,43 @@
     setTimeout(function(){ composer.querySelector("textarea").focus(); }, 0);
   }
 
+  /* ============ 文章頁：已閱讀比例追蹤（記錄本頁曾經捲到過的最深比例） ============ */
+  function readKey(){ return LS_READ_PREFIX + location.pathname; }
+
+  function currentScrollPct(){
+    var doc = document.documentElement;
+    var scrollable = doc.scrollHeight - doc.clientHeight;
+    if (scrollable <= 0) return 100; // 整頁一屏就顯示完，視同已讀完
+    var pct = Math.round(((window.scrollY || doc.scrollTop) + doc.clientHeight) / doc.scrollHeight * 100);
+    return Math.max(0, Math.min(100, pct));
+  }
+
+  var readSaveTimer = null;
+  function trackReadProgress(){
+    var pct = currentScrollPct();
+    var prev = parseInt(localStorage.getItem(readKey()) || "0", 10);
+    if (pct <= prev) return;
+    if (readSaveTimer) clearTimeout(readSaveTimer);
+    readSaveTimer = setTimeout(function(){
+      try{ localStorage.setItem(readKey(), String(pct)); }catch(e){}
+      scheduleCloudPush();
+    }, 400);
+  }
+
+  function initReadTracking(){
+    trackReadProgress();
+    window.addEventListener("scroll", trackReadProgress, {passive:true});
+  }
+
   function initAnnotation(){
     buildUI();
     var code = getSyncCode();
     if (code){
-      pullFromCloud(code).then(function(){ restoreHighlights(); renderNotesPanel(); });
+      pullFromCloud(code).then(function(){ restoreHighlights(); renderNotesPanel(); initReadTracking(); });
     } else {
       restoreHighlights();
       renderNotesPanel();
+      initReadTracking();
     }
 
     document.addEventListener("mousedown", function(e){
@@ -422,6 +456,29 @@
 
     window.addEventListener("scroll", hideToolbar, {passive:true});
     window.addEventListener("resize", function(){ hideToolbar(); hideComposer(); });
+  }
+
+  /* ============ 首頁：已閱讀比例／筆記數徽章 ============ */
+  // 注意：星號評分的key直接用href原始字串(只在首頁讀寫，不需要對到文章頁的location.pathname)，
+  // 但畫重點/筆記與已閱讀進度是在「文章頁」用location.pathname當key存的(含GitHub Pages的repo子路徑)，
+  // 首頁要反查同一篇文章的資料時，必須把href解析成同一個絕對pathname格式，兩者字串才會對得上。
+  function resolvePathname(href){
+    try{ return new URL(href, location.href).pathname; }catch(e){ return href; }
+  }
+
+  function renderReadNoteBadge(box){
+    var href = box.getAttribute("data-badges-key");
+    var pathname = resolvePathname(href);
+    var pct = parseInt(localStorage.getItem(LS_READ_PREFIX + pathname) || "0", 10);
+    var hlList = loadJSON("gsfox_hl:" + pathname, []);
+    var pctEl = box.querySelector(".gsfox-read-pct");
+    var countEl = box.querySelector(".gsfox-note-count");
+    if (pctEl) pctEl.textContent = pct + "%";
+    if (countEl) countEl.textContent = String(hlList.length);
+  }
+
+  function initReadNoteBadges(){
+    document.querySelectorAll(".gsfox-badges").forEach(renderReadNoteBadge);
   }
 
   /* ============ 首頁：星號評分 ============ */
@@ -457,12 +514,12 @@
     });
   }
 
-  /* ============ 雲端同步用：蒐集本機所有畫重點/筆記/星號評分 ============ */
+  /* ============ 雲端同步用：蒐集本機所有畫重點/筆記/星號評分/已閱讀進度 ============ */
   function collectBackupData(){
     var data = {};
     for (var i = 0; i < localStorage.length; i++){
       var key = localStorage.key(i);
-      if (key.indexOf("gsfox_hl:") === 0 || key.indexOf("gsfox_star:") === 0){
+      if (isGsfoxDataKey(key)){
         data[key] = localStorage.getItem(key);
       }
     }
@@ -505,7 +562,7 @@
         return pushToCloudNow(code);
       }).then(function(ok){
         setSyncStatus(ok ? "上傳已完成" : "上傳失敗，稍後會再試一次");
-        if (document.body.classList.contains("gsfox-index")) initStarWidgets();
+        if (document.body.classList.contains("gsfox-index")){ initStarWidgets(); initReadNoteBadges(); }
       });
     });
 
@@ -522,9 +579,10 @@
     if (document.body.classList.contains("gsfox-index")){
       var code = getSyncCode();
       if (code){
-        pullFromCloud(code).then(function(){ initStarWidgets(); });
+        pullFromCloud(code).then(function(){ initStarWidgets(); initReadNoteBadges(); });
       } else {
         initStarWidgets();
+        initReadNoteBadges();
       }
       initSyncWidget();
     } else {

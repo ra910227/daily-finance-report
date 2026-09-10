@@ -121,13 +121,17 @@ mark.gsfox-hl:hover{ filter:brightness(0.94); }
 .gsfox-sync-box button:hover{ border-color:var(--gsfox-accent); color:var(--gsfox-accent); }
 .gsfox-sync-box button[data-act="sync-connect"]:hover{ color:#fff; opacity:0.9; }
 
-/* ---------- 首頁：文章卡片星號評分 ---------- */
+/* ---------- 首頁：文章卡片的已閱讀比例／筆記數／星號評分 ---------- */
 .card-wrap{ position:relative; }
-.gsfox-star-row{
+.gsfox-badges{
   position:absolute; right:0; top:0; z-index:2;
-  display:flex; gap:1px; user-select:none; background:var(--gsfox-surface); padding:2px 5px; border-radius:8px;
-  box-shadow:0 1px 4px rgba(0,0,0,0.08);
+  display:flex; align-items:center; gap:7px; user-select:none; background:var(--gsfox-surface);
+  padding:3px 7px; border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,0.08);
 }
+.gsfox-read-badge, .gsfox-note-badge{
+  font-size:10.5px; color:var(--gsfox-sub); display:flex; align-items:center; gap:2px; line-height:1; white-space:nowrap;
+}
+.gsfox-star-row{ display:flex; gap:1px; }
 .gsfox-star{ cursor:pointer; font-size:14px; color:var(--gsfox-star-off); line-height:1; }
 .gsfox-star.on{ color:var(--gsfox-star-on); }
 .gsfox-star:hover{ transform:scale(1.15); }
