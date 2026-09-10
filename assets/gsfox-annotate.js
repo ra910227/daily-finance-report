@@ -397,9 +397,73 @@
     });
   }
 
+  /* ============ 首頁：全站備份／還原 ============ */
+  function fmtDateStamp(){
+    var d = new Date();
+    var p = function(n){ return (n<10?"0":"")+n; };
+    return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate());
+  }
+
+  function collectBackupData(){
+    var data = {};
+    for (var i = 0; i < localStorage.length; i++){
+      var key = localStorage.key(i);
+      if (key.indexOf("gsfox_hl:") === 0 || key.indexOf("gsfox_star:") === 0){
+        data[key] = localStorage.getItem(key);
+      }
+    }
+    return data;
+  }
+
+  function exportBackup(){
+    var data = collectBackupData();
+    var count = Object.keys(data).length;
+    if (!count){ alert("目前這個瀏覽器裡還沒有任何畫重點／筆記／星號評分可以備份。"); return; }
+    var payload = { app: "gsfox-annotate", exportedAt: new Date().toISOString(), data: data };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "財經小狐備份_" + fmtDateStamp() + ".json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  }
+
+  function importBackup(file){
+    var reader = new FileReader();
+    reader.onload = function(){
+      var parsed;
+      try{ parsed = JSON.parse(reader.result); }
+      catch(e){ alert("這個檔案看起來不是有效的備份檔（JSON格式錯誤）。"); return; }
+      var data = parsed && parsed.data && typeof parsed.data === "object" ? parsed.data : null;
+      if (!data){ alert("這個檔案看起來不是財經小狐的備份檔。"); return; }
+      var keys = Object.keys(data).filter(function(k){ return k.indexOf("gsfox_hl:") === 0 || k.indexOf("gsfox_star:") === 0; });
+      if (!keys.length){ alert("這份備份檔裡沒有可以還原的內容。"); return; }
+      if (!confirm("即將把備份檔裡的 " + keys.length + " 筆資料寫入這個瀏覽器，若同一篇文章已有畫重點/筆記/評分會被備份檔內容覆蓋。確定要還原嗎？")) return;
+      keys.forEach(function(k){ try{ localStorage.setItem(k, data[k]); }catch(e){} });
+      alert("已還原 " + keys.length + " 筆資料！重新整理任何一篇文章即可看到還原的畫重點與筆記。");
+    };
+    reader.readAsText(file);
+  }
+
+  function initBackupWidget(){
+    var box = document.querySelector(".gsfox-backup");
+    if (!box) return;
+    var exportBtn = box.querySelector('[data-act="export"]');
+    var importInput = box.querySelector('[data-act="import"]');
+    if (exportBtn) exportBtn.addEventListener("click", exportBackup);
+    if (importInput) importInput.addEventListener("change", function(){
+      if (importInput.files && importInput.files[0]) importBackup(importInput.files[0]);
+      importInput.value = "";
+    });
+  }
+
   function boot(){
     if (document.body.classList.contains("gsfox-index")){
       initStarWidgets();
+      initBackupWidget();
     } else {
       initAnnotation();
     }
