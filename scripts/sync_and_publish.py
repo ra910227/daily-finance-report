@@ -117,15 +117,9 @@ def sync_files():
     copied += _copy_new(SRC / "研究報告/總體經濟", "*六大機構_投資機構研究摘要*.html", SITE / "research/institutions", rename=True)
     copied += _copy_new(SRC / "研究報告/產業研究/產業趨勢研究摘要", "*.html", SITE / "research/industry-trends")
 
-    # 產業研究其他子資料夾（先進封裝/光通訊/電力產業/記憶體/軍工/載板/電源/半導體測試/實體AI…）
-    # 裡完成的個別深度報告HTML：每個子資料夾＝一個產業主題，依主題分組上傳，不限於「產業趨勢研究摘要」這份週報
-    industry_root = SRC / "研究報告/產業研究"
-    if industry_root.is_dir():
-        for topic_dir in industry_root.iterdir():
-            if not topic_dir.is_dir() or topic_dir.name == "產業趨勢研究摘要":
-                continue
-            dst = SITE / "research/industry" / topic_dir.name
-            copied += _copy_new(topic_dir, "*.html", dst)
+    # 注意：不額外同步「研究報告/產業研究/」底下其他子資料夾(先進封裝/光通訊/電力產業等，多為PDF原始素材)。
+    # 完成的個別產業深度報告一律走 paper-to-academic-report skill 產出、存到「研究報告/專題講義/{主題}/」，
+    # 由下方「專題報告」的同步邏輯處理，不建立獨立的 research/industry/ 路徑（2026-09-10使用者裁示不需要這個資料夾）。
 
     for pattern in ["*元大投顧研究報告摘要*.html", "*投行研究摘要*.html",
                     "*長期多空判斷準則*.html", "*LTCMA2026投資架構整合報告*.html"]:
@@ -178,7 +172,7 @@ def card(href, tag, title, date, excerpt):
 def build_index():
     # ---------- 蒐集五大分類的完整條目資料 ----------
     # 每個item: {date, tag, title, href, excerpt}
-    market_items, stock_groups, research_pinned, research_items, lecture_groups, notes_items, industry_groups = [], [], [], [], [], [], []
+    market_items, stock_groups, research_pinned, research_items, lecture_groups, notes_items = [], [], [], [], [], []
 
     # 市場分析 = 財經日報 + 市場診斷 + 板塊與資金流（2026-09-10合併為一類）
     for f in sorted((SITE / "reports").glob("*.html")):
@@ -243,7 +237,10 @@ def build_index():
     research_items.sort(key=lambda x: x["date"], reverse=True)
     notes_items.sort(key=lambda x: x["date"], reverse=True)
 
-    # 專題報告（原「專題講義」，依課程分組，組內依堂數排序）
+    # 專題報告（原「專題講義」，依課程/主題分組）。
+    # 檔名有兩種可能：多堂課系列用1-2位數堂數前綴(如「01_殖利率曲線」→第1堂，不顯示日期)；
+    # 單篇深度報告(paper-to-academic-report產出)用6-8位數日期前綴(如「260909_能源_核能新時代學術報告」)，
+    # 這種前綴是發表日期不是堂數，標題只去掉日期本身、保留後面的「產業領域_報告名稱」，並正常顯示/參與日期排序。
     lectures_dir = SITE / "lectures"
     if lectures_dir.is_dir():
         for course_dir in sorted(lectures_dir.iterdir()):
@@ -252,43 +249,31 @@ def build_index():
             course = course_dir.name
             l_items = []
             for f in sorted(course_dir.glob("*.html")):
-                m = re.match(r'(\d+)_(.+)\.html$', f.name)
-                if m:
-                    num, title = m.group(1), m.group(2)
-                    label = f"第{int(num)}堂　{title}"
+                m_lecture = re.match(r'(\d{1,2})_(.+)\.html$', f.name)
+                m_dated = re.match(r'(\d{6,8})_(.+)\.html$', f.name)
+                if m_lecture and not m_dated:
+                    num, title = m_lecture.group(1), m_lecture.group(2)
+                    l_items.append({"sort": f.name, "date": "", "tag": "專題報告",
+                                     "title": f"第{int(num)}堂　{title}",
+                                     "href": f"lectures/{course}/{f.name}", "excerpt": extract_excerpt(f)})
+                elif m_dated:
+                    d = date_from_name(f.name)
+                    l_items.append({"sort": f.name, "date": d, "tag": "專題報告", "title": m_dated.group(2),
+                                     "href": f"lectures/{course}/{f.name}", "excerpt": extract_excerpt(f)})
                 else:
-                    label = f.stem
-                l_items.append({"sort": f.name, "date": "", "tag": "專題報告", "title": label,
-                                 "href": f"lectures/{course}/{f.name}", "excerpt": extract_excerpt(f)})
+                    l_items.append({"sort": f.name, "date": "", "tag": "專題報告", "title": f.stem,
+                                     "href": f"lectures/{course}/{f.name}", "excerpt": extract_excerpt(f)})
             if not l_items:
                 continue
             l_items.sort(key=lambda x: x["sort"])
             lecture_groups.append((course, l_items))
 
-    # 產業深度報告（原「產業研究」其他子資料夾，依主題分組，組內依日期新到舊）
-    industry_dir = SITE / "research/industry"
-    if industry_dir.is_dir():
-        for topic_dir in sorted(industry_dir.iterdir()):
-            if not topic_dir.is_dir():
-                continue
-            topic = topic_dir.name
-            i_items = []
-            for f in sorted(topic_dir.glob("*.html")):
-                d = date_from_name(f.name)
-                title = re.sub(r'^\d{2,8}_', '', f.stem)
-                i_items.append({"date": d, "tag": f"產業深度｜{topic}", "title": title,
-                                 "href": f"research/industry/{topic}/{f.name}", "excerpt": extract_excerpt(f)})
-            if not i_items:
-                continue
-            i_items.sort(key=lambda x: x["date"], reverse=True)
-            industry_groups.append((topic, i_items))
-
     # ---------- 首頁最上方「最新文章」：跨五大分類合併，依日期新到舊取前15篇 ----------
     all_dated = [it for it in (market_items + research_items + notes_items) if it["date"] != "0000-00-00"]
     for _, items in stock_groups:
         all_dated += [it for it in items if it["date"] != "0000-00-00"]
-    for _, items in industry_groups:
-        all_dated += [it for it in items if it["date"] != "0000-00-00"]
+    for _, items in lecture_groups:
+        all_dated += [it for it in items if it["date"] not in ("", "0000-00-00")]
     all_dated.sort(key=lambda x: x["date"], reverse=True)
     latest_items = all_dated[:15]
     latest = all_dated[0]["date"] if all_dated else "—"
@@ -306,15 +291,7 @@ def build_index():
 
     stock_count = sum(len(items) for _, items in stock_groups)
     lecture_count = sum(len(items) for _, items in lecture_groups)
-    industry_count = sum(len(items) for _, items in industry_groups)
     research_count = len(research_pinned) + len(research_items)
-
-    # 產業深度報告(先進封裝/光通訊/電力產業等主題完整報告)歸在「專題報告」底下當子分類，
-    # 不新增獨立分類——2026-09-10使用者裁示維持首頁/市場分析/個股小狐/研究摘要/專題報告/金融筆記共六個固定導覽項
-    lectures_body = grouped_grid(lecture_groups)
-    if industry_groups:
-        lectures_body += "\n<h3>產業深度報告</h3>\n" + grouped_grid(industry_groups)
-    lecture_count += industry_count
 
     sections = [
         ("market", "🧭 市場分析", "每日財經重點、21項指標市場診斷、板塊資金流與美股資金流雙軌週報",
@@ -324,7 +301,7 @@ def build_index():
         ("research", "📚 研究摘要", "六大機構觀點彙整、產業趨勢摘要、長期研究資料庫索引、券商投顧報告",
          grid(research_pinned + research_items), research_count),
         ("lectures", "📜 專題報告", "系統性主題課程講義與個別產業深度分析報告，依主題/堂數分類",
-         lectures_body, lecture_count),
+         grouped_grid(lecture_groups), lecture_count),
         ("notes", "🗒️ 金融筆記", "自己整理的閱讀筆記、書籍重點與投資組合回測分析",
          grid(notes_items), len(notes_items)),
     ]
