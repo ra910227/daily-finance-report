@@ -17,6 +17,37 @@ SITE = Path("/Users/vovo/Desktop/VOVO/財經投資/daily-finance-report-site")
 # 永遠置頂、不參與日期排序的報告（檔名關鍵字比對）
 PINNED_FIRST = ["長期研究資料庫索引"]
 
+# research/long-term 資料夾裡，屬於「金融筆記」(自己的筆記/書摘/回測)而非「研究摘要」(彙整他人研究)的檔名關鍵字
+# 2026-09-10 使用者要求把這幾類從研究摘要拆出獨立成金融筆記分類
+NOTES_KEYWORDS = [
+    "長期多空判斷準則", "標普500歷次熊市", "美股熊市落底判別手冊", "LTCMA2026投資架構整合報告",
+    "四配置科技成長組合回測比較", "基礎模式逢低加碼策略回測", "定期投資討論",
+]
+
+
+def date_pretty(d):
+    m = re.match(r'(\d{4})-(\d{2})-(\d{2})', d or "")
+    if not m:
+        return d or ""
+    return f"{m.group(1)}年{m.group(2)}月{m.group(3)}日"
+
+
+def extract_excerpt(path, length=76):
+    """抓報告內文前幾字當摘要：去除script/style/標籤後取前段文字，供首頁卡片顯示。"""
+    try:
+        raw = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return ""
+    raw = re.sub(r'<(script|style|title)\b[^>]*>.*?</\1>', ' ', raw, flags=re.S | re.I)
+    raw = re.sub(r'<!--.*?-->', ' ', raw, flags=re.S)
+    raw = re.sub(r'<[^>]+>', ' ', raw)
+    raw = html.unescape(raw)
+    raw = re.sub(r'\s+', ' ', raw).strip()
+    raw = re.sub(r'^(財經小狐|個股小狐|投資機構研究摘要|產業趨勢研究摘要)[｜:：\s]*', '', raw)
+    if len(raw) <= length:
+        return raw
+    return raw[:length].rstrip() + "…"
+
 
 def date_from_name(name):
     m = re.search(r'(\d{4})[-年](\d{2})[-月](\d{2})', name)
@@ -123,29 +154,43 @@ def star_row(href):
     return f'<span class="gsfox-star-row" data-star-key="{key}">{stars}</span>'
 
 
-def link(href, label, date):
-    return (f'<li><a href="{quote(href)}">'
-            f'<span class="d">{date}</span>'
-            f'<span class="t">{html.escape(label)}</span>'
-            f'</a>{star_row(href)}</li>')
+def card(href, tag, title, date, excerpt):
+    """卡片式條目：分類tag／標題／內文摘要／日期，右上角疊加星號評分。"""
+    return (f'<div class="card-wrap">'
+            f'<a class="article-card" href="{quote(href)}">'
+            f'<span class="tag">{html.escape(tag)}</span>'
+            f'<span class="title">{html.escape(title)}</span>'
+            f'<span class="excerpt">{html.escape(excerpt)}</span>'
+            f'<span class="date">{date_pretty(date)}</span>'
+            f'</a>{star_row(href)}</div>')
 
 
 def build_index():
-    sections = []
+    # ---------- 蒐集五大分類的完整條目資料 ----------
+    # 每個item: {date, tag, title, href, excerpt}
+    market_items, stock_groups, research_pinned, research_items, lecture_groups, notes_items = [], [], [], [], [], []
 
-    # 1. 財經日報
-    items = []
+    # 市場分析 = 財經日報 + 市場診斷 + 板塊與資金流（2026-09-10合併為一類）
     for f in sorted((SITE / "reports").glob("*.html")):
         d = date_from_name(f.name)
-        items.append((d, link(f"reports/{f.name}", "財經日報", d)))
-    items.sort(key=lambda x: x[0], reverse=True)
-    sections.append(("daily", "📰 財經日報", "每日8來源交叉比對國際財經重點、產業報告、今日焦點解讀、LWP組合觀察",
-                      "\n".join(i for _, i in items) if items else '<li class="empty">尚無報告</li>',
-                      len(items)))
+        market_items.append({"date": d, "tag": "市場分析", "title": "財經日報", "href": f"reports/{f.name}",
+                              "excerpt": extract_excerpt(f)})
+    for f in sorted((SITE / "research/market-diagnosis").glob("*.html")):
+        d = date_from_name(f.name)
+        market_items.append({"date": d, "tag": "市場分析", "title": "市場診斷＋三池策略",
+                              "href": f"research/market-diagnosis/{f.name}", "excerpt": extract_excerpt(f)})
+    for f in sorted((SITE / "research/sector-flow").glob("*.html")):
+        d = date_from_name(f.name)
+        market_items.append({"date": d, "tag": "市場分析", "title": "今日板塊流動報告",
+                              "href": f"research/sector-flow/{f.name}", "excerpt": extract_excerpt(f)})
+    for f in sorted((SITE / "research/capital-flow").glob("*.html")):
+        d = date_from_name(f.name)
+        label = f.stem.split("—")[0].strip()
+        market_items.append({"date": d, "tag": "市場分析", "title": label,
+                              "href": f"research/capital-flow/{f.name}", "excerpt": extract_excerpt(f)})
+    market_items.sort(key=lambda x: x["date"], reverse=True)
 
-    # 2. 個股小狐（依公司分子區塊）
-    stock_count = 0
-    ticker_blocks = []
+    # 個股小狐（依公司分組，組內依日期新到舊）
     for ticker_dir in sorted((SITE / "stocks").iterdir()):
         if not ticker_dir.is_dir():
             continue
@@ -155,67 +200,40 @@ def build_index():
             d = date_from_name(f.name)
             m = re.search(r'個股小狐_(.+?)_' + re.escape(ticker), f.name)
             rtype = m.group(1) if m else "報告"
-            t_items.append((d, link(f"stocks/{ticker}/{f.name}", rtype, d)))
+            t_items.append({"date": d, "tag": "個股小狐", "title": f"{ticker}　{rtype}",
+                             "href": f"stocks/{ticker}/{f.name}", "excerpt": extract_excerpt(f)})
         if not t_items:
             continue
-        t_items.sort(key=lambda x: x[0], reverse=True)
-        stock_count += len(t_items)
-        lis = "\n".join(i for _, i in t_items)
-        ticker_blocks.append(f'<h3>{html.escape(ticker)}</h3>\n<ul class="list">\n{lis}\n</ul>')
-    stocks_html = "\n".join(ticker_blocks) if ticker_blocks else '<p class="empty">尚無報告</p>'
-    sections.append(("stocks", "🦊 個股小狐", "個別股票深度研究、財報解析、財務健檢報告，依公司分類",
-                      stocks_html, stock_count))
+        t_items.sort(key=lambda x: x["date"], reverse=True)
+        stock_groups.append((ticker, t_items))
 
-    # 3. 市場診斷
-    items = []
-    for f in sorted((SITE / "research/market-diagnosis").glob("*.html")):
-        d = date_from_name(f.name)
-        items.append((d, link(f"research/market-diagnosis/{f.name}", "市場診斷＋三池策略", d)))
-    items.sort(key=lambda x: x[0], reverse=True)
-    sections.append(("diagnosis", "🎯 市場診斷", "21項指標市場風險診斷＋三池資金策略狀態，含機會池四層觸發進度",
-                      "\n".join(i for _, i in items) if items else '<li class="empty">尚無報告</li>',
-                      len(items)))
-
-    # 4. 板塊與資金流
-    items = []
-    for f in sorted((SITE / "research/sector-flow").glob("*.html")):
-        d = date_from_name(f.name)
-        items.append((d, link(f"research/sector-flow/{f.name}", "今日板塊流動報告", d)))
-    for f in sorted((SITE / "research/capital-flow").glob("*.html")):
-        d = date_from_name(f.name)
-        label = f.stem.split("—")[0].strip()
-        items.append((d, link(f"research/capital-flow/{f.name}", label, d)))
-    items.sort(key=lambda x: x[0], reverse=True)
-    sections.append(("flow", "📊 板塊與資金流", "每日板塊流動報告（四層漏斗+潛力雷達）與美股資金流雙軌週報",
-                      "\n".join(i for _, i in items) if items else '<li class="empty">尚無報告</li>',
-                      len(items)))
-
-    # 5. 研究摘要（機構週報 + 長期研究，長期研究資料庫索引永遠置頂）
-    pinned = []
-    dated_items = []
+    # 研究摘要 = 投資機構研究摘要 + 產業趨勢研究摘要 + (research/long-term 扣除金融筆記後剩下的元大/投行摘要與長期索引)
     for f in sorted((SITE / "research/institutions").glob("*.html")):
         d = date_from_name(f.name)
-        dated_items.append((d, link(f"research/institutions/{f.name}", "投資機構研究摘要", d)))
+        research_items.append({"date": d, "tag": "研究摘要", "title": "投資機構研究摘要",
+                                "href": f"research/institutions/{f.name}", "excerpt": extract_excerpt(f)})
     for f in sorted((SITE / "research/industry-trends").glob("*.html")):
         d = date_from_name(f.name)
-        dated_items.append((d, link(f"research/industry-trends/{f.name}", "產業趨勢研究摘要", d)))
+        research_items.append({"date": d, "tag": "研究摘要", "title": "產業趨勢研究摘要",
+                                "href": f"research/industry-trends/{f.name}", "excerpt": extract_excerpt(f)})
     for f in sorted((SITE / "research/long-term").glob("*.html")):
         d = date_from_name(f.name)
         title = re.sub(r'^\d{8}_|_\d{8}$|_\d{4}[-年]\d{2}[-月]\d{2}日?$', '', f.stem)
         href = f"research/long-term/{f.name}"
-        if any(k in f.name for k in PINNED_FIRST):
-            pinned.append(link(href, f"⭐ {title}", d))
+        is_note = any(k in f.name for k in NOTES_KEYWORDS)
+        is_pinned = any(k in f.name for k in PINNED_FIRST)
+        item = {"date": d, "tag": "金融筆記" if is_note else "研究摘要",
+                "title": f"⭐ {title}" if is_pinned else title, "href": href, "excerpt": extract_excerpt(f)}
+        if is_note:
+            notes_items.append(item)
+        elif is_pinned:
+            research_pinned.append(item)
         else:
-            dated_items.append((d, link(href, title, d)))
-    dated_items.sort(key=lambda x: x[0], reverse=True)
-    research_html = "\n".join(pinned) + "\n" + "\n".join(i for _, i in dated_items)
-    total_research = len(pinned) + len(dated_items)
-    sections.append(("research", "📚 研究摘要", "六大機構觀點彙整、長期研究資料庫索引、熊市歷史研究、券商投顧報告",
-                      research_html, total_research))
+            research_items.append(item)
+    research_items.sort(key=lambda x: x["date"], reverse=True)
+    notes_items.sort(key=lambda x: x["date"], reverse=True)
 
-    # 6. 專題講義（依課程分子區塊，堂數排序，不依日期）
-    lecture_count = 0
-    course_blocks = []
+    # 專題報告（原「專題講義」，依課程分組，組內依堂數排序）
     lectures_dir = SITE / "lectures"
     if lectures_dir.is_dir():
         for course_dir in sorted(lectures_dir.iterdir()):
@@ -230,28 +248,59 @@ def build_index():
                     label = f"第{int(num)}堂　{title}"
                 else:
                     label = f.stem
-                lecture_href = f"lectures/{course}/{f.name}"
-                l_items.append((f.name, f'<li><a href="{quote(lecture_href)}">'
-                                         f'<span class="d">{label.split("　")[0] if "　" in label else ""}</span>'
-                                         f'<span class="t">{html.escape(label.split("　",1)[-1] if "　" in label else label)}</span>'
-                                         f'</a>{star_row(lecture_href)}</li>'))
+                l_items.append({"sort": f.name, "date": "", "tag": "專題報告", "title": label,
+                                 "href": f"lectures/{course}/{f.name}", "excerpt": extract_excerpt(f)})
             if not l_items:
                 continue
-            l_items.sort(key=lambda x: x[0])
-            lecture_count += len(l_items)
-            lis = "\n".join(i for _, i in l_items)
-            course_blocks.append(f'<h3>{html.escape(course)}</h3>\n<ul class="list">\n{lis}\n</ul>')
-    lectures_html = "\n".join(course_blocks) if course_blocks else '<p class="empty">尚無講義</p>'
-    sections.append(("lectures", "📜 專題講義", "系統性主題課程講義，依堂數順序閱讀，附原文出處對照",
-                      lectures_html, lecture_count))
+            l_items.sort(key=lambda x: x["sort"])
+            lecture_groups.append((course, l_items))
 
-    all_html_dates = re.findall(r'<span class="d">(\d{4}-\d{2}-\d{2})</span>', "".join(s[3] for s in sections))
-    latest = max(all_html_dates) if all_html_dates else "—"
+    # ---------- 首頁最上方「最新文章」：跨五大分類合併，依日期新到舊取前15篇 ----------
+    all_dated = [it for it in (market_items + research_items + notes_items) if it["date"] != "0000-00-00"]
+    for _, items in stock_groups:
+        all_dated += [it for it in items if it["date"] != "0000-00-00"]
+    all_dated.sort(key=lambda x: x["date"], reverse=True)
+    latest_items = all_dated[:15]
+    latest = all_dated[0]["date"] if all_dated else "—"
+
+    def grid(items):
+        return '<div class="card-grid">' + "\n".join(
+            card(it["href"], it["tag"], it["title"], it["date"], it["excerpt"]) for it in items
+        ) + '</div>' if items else '<p class="empty">尚無報告</p>'
+
+    def grouped_grid(groups):
+        blocks = []
+        for name, items in groups:
+            blocks.append(f'<h3>{html.escape(name)}</h3>\n' + grid(items))
+        return "\n".join(blocks) if blocks else '<p class="empty">尚無報告</p>'
+
+    stock_count = sum(len(items) for _, items in stock_groups)
+    lecture_count = sum(len(items) for _, items in lecture_groups)
+    research_count = len(research_pinned) + len(research_items)
+
+    sections = [
+        ("market", "🧭 市場分析", "每日財經重點、21項指標市場診斷、板塊資金流與美股資金流雙軌週報",
+         grid(market_items), len(market_items)),
+        ("stocks", "🦊 個股小狐", "個別股票深度研究、財報解析、財務健檢報告，依公司分類",
+         grouped_grid(stock_groups), stock_count),
+        ("research", "📚 研究摘要", "六大機構觀點彙整、產業趨勢摘要、長期研究資料庫索引、券商投顧報告",
+         grid(research_pinned + research_items), research_count),
+        ("lectures", "📜 專題報告", "系統性主題深度報告與課程講義，依堂數順序閱讀，附原文出處對照",
+         grouped_grid(lecture_groups), lecture_count),
+        ("notes", "🗒️ 金融筆記", "自己整理的閱讀筆記、書籍重點與投資組合回測分析",
+         grid(notes_items), len(notes_items)),
+    ]
+
 
     nav_html = "\n".join(
-        f'<a href="#{key}" class="navlink">{title} <span class="count">{count}</span></a>'
-        for key, title, _, _, count in sections
+        f'<a href="{href}" class="navlink">{title}</a>'
+        for href, title in [
+            ("#top", "首頁"), ("#market", "市場分析"), ("#stocks", "個股小狐"),
+            ("#research", "研究摘要"), ("#lectures", "專題報告"), ("#notes", "金融筆記"),
+        ]
     )
+
+    latest_html = grid(latest_items)
 
     section_html = ""
     for key, title, desc, body_html, count in sections:
@@ -277,41 +326,50 @@ def build_index():
   :root{{ --bg:#14161a; --card:#1e2128; --text:#e5e7eb; --sub:#9aa1ad; --border:#2d313a; --accent:#5b9dff; }}
 }}
 *{{box-sizing:border-box;}}
-body{{background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif; margin:0; padding:32px 16px 64px; line-height:1.6;}}
-.wrap{{max-width:760px; margin:0 auto;}}
+body{{background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif; margin:0; padding:32px 20px 64px; line-height:1.6;}}
+.wrap{{max-width:1120px; margin:0 auto;}}
 h1{{font-size:1.7rem; margin:0 0 6px;}}
 .sub{{color:var(--sub); font-size:0.92rem; margin-bottom:8px;}}
 .updated{{color:var(--sub); font-size:0.85rem; margin-bottom:24px;}}
 .updated b{{color:var(--accent);}}
-nav{{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px; position:sticky; top:0; background:var(--bg); padding:10px 0; z-index:10;}}
-.navlink{{font-size:0.85rem; color:var(--text); text-decoration:none; border:1px solid var(--border); background:var(--card); padding:6px 12px; border-radius:16px; display:inline-flex; align-items:center; gap:6px;}}
-.navlink:hover{{border-color:var(--accent); color:var(--accent);}}
-.navlink .count{{color:var(--sub); font-size:0.78rem;}}
-section{{margin-bottom:40px;}}
-h2{{font-size:1.15rem; margin:0 0 4px; padding-bottom:8px; border-bottom:2px solid var(--accent); color:var(--accent); display:flex; align-items:baseline; gap:8px;}}
-h2 .count{{font-size:0.8rem; color:var(--sub); font-weight:400;}}
-h3{{font-size:0.95rem; margin:18px 0 8px; color:var(--sub);}}
-.desc{{color:var(--sub); font-size:0.85rem; margin:8px 0 14px;}}
-.list{{list-style:none; padding:0; margin:0;}}
-.list li{{margin-bottom:8px;}}
-.list a{{display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:11px 16px; text-decoration:none; color:var(--text); font-size:0.92rem; transition:border-color .15s;}}
-.list a:hover{{border-color:var(--accent);}}
-.list .d{{color:var(--sub); font-weight:400; font-size:0.8rem; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; flex-shrink:0;}}
-.list .t{{font-weight:600; color:var(--text);}}
-.list .empty, p.empty{{color:var(--sub); font-size:0.88rem; font-style:italic;}}
+nav{{display:flex; flex-wrap:wrap; gap:4px 22px; margin-bottom:36px; position:sticky; top:0; background:var(--bg); padding:14px 0; z-index:10; border-bottom:1px solid var(--border);}}
+.navlink{{font-size:0.9rem; color:var(--sub); text-decoration:none; letter-spacing:0.02em;}}
+.navlink:hover{{color:var(--accent);}}
+section{{margin-bottom:52px; scroll-margin-top:64px;}}
+h2{{font-size:1.3rem; margin:0 0 4px; padding-bottom:10px; border-bottom:2px solid var(--accent); color:var(--text); display:flex; align-items:baseline; gap:8px;}}
+h2 .count{{font-size:0.78rem; color:var(--sub); font-weight:400;}}
+h3{{font-size:0.95rem; margin:22px 0 12px; color:var(--sub); font-weight:600;}}
+.desc{{color:var(--sub); font-size:0.85rem; margin:10px 0 20px;}}
+.empty{{color:var(--sub); font-size:0.88rem; font-style:italic;}}
+
+/* ---- 卡片式文章列表 ---- */
+.card-grid{{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:28px 24px;}}
+.card-wrap{{position:relative;}}
+.article-card{{display:flex; flex-direction:column; gap:6px; text-decoration:none; color:inherit; height:100%; padding-right:52px;}}
+.article-card .tag{{font-size:0.72rem; letter-spacing:0.06em; color:var(--accent); font-weight:600; text-transform:uppercase;}}
+.article-card .title{{font-size:1.05rem; font-weight:700; color:var(--text); line-height:1.4;}}
+.article-card:hover .title{{color:var(--accent);}}
+.article-card .excerpt{{font-size:0.86rem; color:var(--sub); line-height:1.65; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;}}
+.article-card .date{{font-size:0.78rem; color:var(--sub); font-weight:700; margin-top:4px;}}
 </style>
 <link rel="stylesheet" href="assets/gsfox-annotate.css">
 <script src="assets/gsfox-annotate.js" defer></script>
 <!-- gsfox-annotate:injected -->
 </head>
 <body class="gsfox-index">
-<div class="wrap">
+<div class="wrap" id="top">
 <h1>財經小狐｜投資研究專欄</h1>
 <div class="sub">國際財經重點 · 個股深度研究 · 板塊資金流 · 研究摘要</div>
-<div class="updated">最新 <b>{latest}</b> 更新於 {latest}</div>
+<div class="updated">最新 <b>{date_pretty(latest)}</b></div>
 <nav>
 {nav_html}
 </nav>
+
+<section id="latest">
+<h2>🆕 最新文章</h2>
+<div class="desc">跨所有分類，依日期新到舊排列</div>
+{latest_html}
+</section>
 {section_html}
 </div>
 </body>
