@@ -1,12 +1,14 @@
 /* 財經小狐｜畫重點・筆記・星號評分 共用腳本（gsfox-annotate）
-   - 文章頁：選取文字→浮動工具列→畫重點(黃/紅/藍)或做筆記；點擊既有重點可取消
+   - 文章頁：選取文字→浮動工具列→點黃/紅/藍任一色畫重點，套色後自動彈出筆記撰寫視窗(可留空)；
+     點擊既有的畫重點可直接取消(連同附掛的筆記一起移除)
+   - 筆記與畫重點是同一份紀錄：顏色本身即代表重要度分類，筆記面板可一鍵下載成Markdown檔
    - 首頁(index.html，body帶 class="gsfox-index")：條目旁的星號評分(最多三顆)
    - 全部資料存在瀏覽器 localStorage，僅該裝置/瀏覽器可見，不上傳伺服器 */
 (function(){
   "use strict";
   var LS_HL = "gsfox_hl:" + location.pathname;
-  var LS_NOTE = "gsfox_note:" + location.pathname;
   var LS_STAR_PREFIX = "gsfox_star:";
+  var COLOR_LABEL = { yellow: "黃", red: "紅", blue: "藍" };
 
   // e.target 理論上在真實使用者互動中一定是Element，但為避免極端情況(例如事件target是純文字節點)拋錯，一律用這個安全版closest
   function closestSafe(node, sel){
@@ -80,7 +82,7 @@
     });
   }
 
-  /* ============ 畫重點 ============ */
+  /* ============ 畫重點＋筆記（同一份紀錄） ============ */
   function applyHighlight(rec){
     var segs = segmentsForGlobalRange(rec.gStart, rec.gEnd);
     wrapSegments(segs, function(){
@@ -88,19 +90,21 @@
       m.className = "gsfox-hl";
       m.setAttribute("data-color", rec.color);
       m.setAttribute("data-hid", rec.id);
-      m.title = "點擊可移除這段畫重點";
+      m.title = "點擊可移除這段畫重點" + (rec.note ? "（含筆記）" : "");
       return m;
     });
   }
 
   function addHighlight(range, color){
     var g = rangeToGlobal(range);
-    if (g.gStart < 0 || g.gEnd < 0 || g.gStart === g.gEnd) return;
-    var rec = { id: uid(), color: color, gStart: Math.min(g.gStart,g.gEnd), gEnd: Math.max(g.gStart,g.gEnd), text: range.toString() };
+    if (g.gStart < 0 || g.gEnd < 0 || g.gStart === g.gEnd) return null;
+    var rec = { id: uid(), color: color, gStart: Math.min(g.gStart,g.gEnd), gEnd: Math.max(g.gStart,g.gEnd),
+                text: range.toString(), note: "", ts: new Date().toISOString() };
     var list = loadJSON(LS_HL, []);
     list.push(rec);
     saveJSON(LS_HL, list);
     applyHighlight(rec);
+    return rec;
   }
 
   function removeHighlight(id){
@@ -109,48 +113,16 @@
     saveJSON(LS_HL, list);
   }
 
+  function updateNoteText(id, newText){
+    var list = loadJSON(LS_HL, []);
+    list.forEach(function(r){ if (r.id === id) r.note = newText; });
+    saveJSON(LS_HL, list);
+    var mark = document.querySelector('[data-hid="'+id+'"]');
+    if (mark) mark.title = "點擊可移除這段畫重點" + (newText ? "（含筆記）" : "");
+  }
+
   function restoreHighlights(){
     loadJSON(LS_HL, []).forEach(applyHighlight);
-  }
-
-  /* ============ 筆記 ============ */
-  function applyNoteMark(rec){
-    var segs = segmentsForGlobalRange(rec.gStart, rec.gEnd);
-    wrapSegments(segs, function(){
-      var s = document.createElement("span");
-      s.className = "gsfox-note-mark";
-      s.setAttribute("data-nid", rec.id);
-      s.title = "這段文字有筆記";
-      return s;
-    });
-  }
-
-  function addNote(range, noteText){
-    var g = rangeToGlobal(range);
-    if (g.gStart < 0 || g.gEnd < 0 || g.gStart === g.gEnd) return null;
-    var rec = { id: uid(), gStart: Math.min(g.gStart,g.gEnd), gEnd: Math.max(g.gStart,g.gEnd),
-                quote: range.toString(), note: noteText || "", ts: new Date().toISOString() };
-    var list = loadJSON(LS_NOTE, []);
-    list.push(rec);
-    saveJSON(LS_NOTE, list);
-    applyNoteMark(rec);
-    return rec;
-  }
-
-  function updateNoteText(id, newText){
-    var list = loadJSON(LS_NOTE, []);
-    list.forEach(function(r){ if (r.id === id) r.note = newText; });
-    saveJSON(LS_NOTE, list);
-  }
-
-  function removeNote(id){
-    unwrapByAttr("data-nid", id);
-    var list = loadJSON(LS_NOTE, []).filter(function(r){ return r.id !== id; });
-    saveJSON(LS_NOTE, list);
-  }
-
-  function restoreNotes(){
-    loadJSON(LS_NOTE, []).forEach(applyNoteMark);
   }
 
   /* ============ UI：浮動工具列 + 筆記撰寫彈窗 ============ */
@@ -171,7 +143,7 @@
   }
 
   function hideToolbar(){ toolbar.style.display = "none"; }
-  function hideComposer(){ composer.style.display = "none"; }
+  function hideComposer(){ composer.style.display = "none"; composer._hid = null; }
 
   function positionAt(el, rect){
     var top = rect.top + window.scrollY;
@@ -189,21 +161,21 @@
   }
 
   function updateBadge(){
-    var list = loadJSON(LS_NOTE, []);
+    var list = loadJSON(LS_HL, []);
     notesBadge.setAttribute("data-count", list.length);
     notesBadge.textContent = list.length;
   }
 
   function renderNotesPanel(){
-    var list = loadJSON(LS_NOTE, []);
+    var list = loadJSON(LS_HL, []);
     updateBadge();
     if (!list.length){
-      notesBody.innerHTML = '<div class="gsfox-notes-empty">這篇文章還沒有筆記<br>選取文字後點擊📝即可新增</div>';
+      notesBody.innerHTML = '<div class="gsfox-notes-empty">這篇文章還沒有畫重點或筆記<br>選取文字後點顏色即可新增</div>';
       return;
     }
     notesBody.innerHTML = list.map(function(r){
-      return '<div class="gsfox-note-card" data-note-id="'+r.id+'">'
-        + '<div class="gsfox-quote">「'+escapeHtml(r.quote)+'」</div>'
+      return '<div class="gsfox-note-card" data-color="'+r.color+'" data-note-id="'+r.id+'">'
+        + '<div class="gsfox-quote">「'+escapeHtml(r.text)+'」</div>'
         + '<div class="gsfox-note-text" data-note-text="'+r.id+'">'+escapeHtml(r.note||"")+'</div>'
         + '<div class="gsfox-note-row">'
         +   '<span class="gsfox-note-time">'+fmtTime(r.ts)+'</span>'
@@ -215,6 +187,43 @@
   function openNotesPanel(){ notesPanel.hidden = false; renderNotesPanel(); }
   function toggleNotesPanel(){ notesPanel.hidden = !notesPanel.hidden; if (!notesPanel.hidden) renderNotesPanel(); }
 
+  function sanitizeFilename(s){
+    return String(s).replace(/[\\/:*?"<>|]/g, "").trim().slice(0, 60) || "筆記";
+  }
+
+  function downloadNotes(){
+    var list = loadJSON(LS_HL, []).slice().sort(function(a,b){ return (a.gStart||0)-(b.gStart||0); });
+    if (!list.length){ alert("這篇文章目前還沒有畫重點或筆記可以下載。"); return; }
+    var title = document.title || location.pathname;
+    var lines = [
+      "# 筆記匯出：" + title,
+      "",
+      "來源：" + location.href,
+      "匯出時間：" + fmtTime(new Date().toISOString()),
+      "", "---", ""
+    ];
+    list.forEach(function(r){
+      lines.push("## [" + (COLOR_LABEL[r.color] || r.color) + "] " + fmtTime(r.ts));
+      lines.push("");
+      lines.push("*「" + r.text + "」*");
+      lines.push("");
+      if (r.note) lines.push(r.note);
+      else lines.push("_（尚未輸入備注）_");
+      lines.push("");
+      lines.push("---");
+      lines.push("");
+    });
+    var blob = new Blob([lines.join("\n")], { type: "text/markdown;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "筆記_" + sanitizeFilename(title) + ".md";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  }
+
   function buildUI(){
     uiRoot = document.createElement("div");
     uiRoot.className = "gsfox-ui";
@@ -225,31 +234,26 @@
     toolbar.innerHTML =
       '<button data-hl="yellow" title="黃色螢光筆"><span class="gsfox-dot yellow"></span></button>'
       + '<button data-hl="red" title="紅色螢光筆"><span class="gsfox-dot red"></span></button>'
-      + '<button data-hl="blue" title="藍色螢光筆"><span class="gsfox-dot blue"></span></button>'
-      + '<span class="gsfox-sep"></span>'
-      + '<button data-act="note" title="新增筆記">📝</button>';
+      + '<button data-hl="blue" title="藍色螢光筆"><span class="gsfox-dot blue"></span></button>';
     toolbar.addEventListener("mousedown", function(e){ e.preventDefault(); }); // 不搶走選取狀態
     toolbar.addEventListener("click", function(e){
       var btn = closestSafe(e.target, "button");
-      if (!btn || !toolbar._range) return;
-      if (btn.dataset.hl){
-        addHighlight(toolbar._range, btn.dataset.hl);
-        hideToolbar();
-        window.getSelection().removeAllRanges();
-      } else if (btn.dataset.act === "note"){
-        openComposer(toolbar._range);
-        hideToolbar();
-      }
+      if (!btn || !toolbar._range || !btn.dataset.hl) return;
+      var range = toolbar._range;
+      var rec = addHighlight(range, btn.dataset.hl);
+      hideToolbar();
+      if (rec) openComposer(range, rec);
     });
 
     composer = document.createElement("div");
     composer.className = "gsfox-composer";
     composer.style.display = "none";
     composer.innerHTML =
-      '<div class="gsfox-quote" data-role="quote"></div>'
+      '<div class="gsfox-composer-head"><span class="gsfox-dot" data-role="colordot"></span><span data-role="colorlabel"></span></div>'
+      + '<div class="gsfox-quote" data-role="quote"></div>'
       + '<textarea placeholder="輸入這段的備注(可留空)..."></textarea>'
       + '<div class="gsfox-actions">'
-      +   '<button class="gsfox-btn ghost" data-act="cancel">取消</button>'
+      +   '<button class="gsfox-btn ghost" data-act="cancel">先不寫，關閉</button>'
       +   '<button class="gsfox-btn primary" data-act="save">存入筆記區</button>'
       + '</div>';
     composer.addEventListener("mousedown", function(e){ e.stopPropagation(); });
@@ -259,7 +263,7 @@
       if (btn.dataset.act === "cancel"){ hideComposer(); window.getSelection().removeAllRanges(); }
       if (btn.dataset.act === "save"){
         var ta = composer.querySelector("textarea");
-        if (composer._range) addNote(composer._range, ta.value.trim());
+        if (composer._hid) updateNoteText(composer._hid, ta.value.trim());
         hideComposer();
         window.getSelection().removeAllRanges();
         if (!notesPanel.hidden) renderNotesPanel(); else updateBadge();
@@ -277,19 +281,22 @@
     notesPanel.className = "gsfox-notes-panel";
     notesPanel.hidden = true;
     notesPanel.innerHTML =
-      '<div class="gsfox-notes-head"><b>📓 這篇文章的筆記</b><button data-act="close">✕</button></div>'
+      '<div class="gsfox-notes-head"><b>📓 這篇文章的畫重點／筆記</b>'
+      + '<span class="gsfox-notes-head-btns"><button data-act="download" title="下載成Markdown檔">⬇︎</button><button data-act="close">✕</button></span></div>'
       + '<div class="gsfox-notes-body"></div>';
     notesBody = notesPanel.querySelector(".gsfox-notes-body");
     notesPanel.addEventListener("click", function(e){
       var closeBtn = closestSafe(e.target, '[data-act="close"]');
       if (closeBtn){ notesPanel.hidden = true; return; }
+      var downloadBtn = closestSafe(e.target, '[data-act="download"]');
+      if (downloadBtn){ downloadNotes(); return; }
       var card = closestSafe(e.target, ".gsfox-note-card");
       if (!card) return;
       var id = card.dataset.noteId;
       var btn = closestSafe(e.target, "button");
       if (!btn) return;
       if (btn.dataset.act === "del"){
-        if (confirm("確定刪除這則筆記？")){ removeNote(id); renderNotesPanel(); }
+        if (confirm("確定刪除這段畫重點／筆記？")){ removeHighlight(id); renderNotesPanel(); }
       } else if (btn.dataset.act === "edit"){
         var textEl = card.querySelector('[data-note-text="'+id+'"]');
         var cur = textEl.textContent;
@@ -313,19 +320,20 @@
     document.body.appendChild(uiRoot);
   }
 
-  function openComposer(range){
+  function openComposer(range, rec){
     var rect = range.getBoundingClientRect();
-    composer.querySelector('[data-role="quote"]').textContent = "「" + range.toString() + "」";
+    composer.querySelector('[data-role="quote"]').textContent = "「" + rec.text + "」";
+    composer.querySelector('[data-role="colordot"]').className = "gsfox-dot " + rec.color;
+    composer.querySelector('[data-role="colorlabel"]').textContent = (COLOR_LABEL[rec.color] || rec.color) + "色重點";
     composer.querySelector("textarea").value = "";
     positionAt(composer, rect);
-    composer._range = range.cloneRange();
+    composer._hid = rec.id;
     setTimeout(function(){ composer.querySelector("textarea").focus(); }, 0);
   }
 
   function initAnnotation(){
     buildUI();
     restoreHighlights();
-    restoreNotes();
     renderNotesPanel();
 
     document.addEventListener("mousedown", function(e){
@@ -340,9 +348,7 @@
 
       if (sel && sel.isCollapsed){
         var hl = closestSafe(e.target, "mark.gsfox-hl");
-        if (hl){ removeHighlight(hl.getAttribute("data-hid")); return; }
-        var nm = closestSafe(e.target, "span.gsfox-note-mark");
-        if (nm){ openNotesPanel(); var id = nm.getAttribute("data-nid"); var card = notesBody.querySelector('[data-note-id="'+id+'"]'); if (card) card.scrollIntoView({block:"center", behavior:"smooth"}); return; }
+        if (hl){ removeHighlight(hl.getAttribute("data-hid")); if (!notesPanel.hidden) renderNotesPanel(); else updateBadge(); return; }
         hideToolbar();
         return;
       }

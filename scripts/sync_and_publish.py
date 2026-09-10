@@ -309,6 +309,13 @@ def build_index():
     industry_count = sum(len(items) for _, items in industry_groups)
     research_count = len(research_pinned) + len(research_items)
 
+    # 產業深度報告(先進封裝/光通訊/電力產業等主題完整報告)歸在「專題報告」底下當子分類，
+    # 不新增獨立分類——2026-09-10使用者裁示維持首頁/市場分析/個股小狐/研究摘要/專題報告/金融筆記共六個固定導覽項
+    lectures_body = grouped_grid(lecture_groups)
+    if industry_groups:
+        lectures_body += "\n<h3>產業深度報告</h3>\n" + grouped_grid(industry_groups)
+    lecture_count += industry_count
+
     sections = [
         ("market", "🧭 市場分析", "每日財經重點、21項指標市場診斷、板塊資金流與美股資金流雙軌週報",
          grid(market_items), len(market_items)),
@@ -316,21 +323,17 @@ def build_index():
          grouped_grid(stock_groups), stock_count),
         ("research", "📚 研究摘要", "六大機構觀點彙整、產業趨勢摘要、長期研究資料庫索引、券商投顧報告",
          grid(research_pinned + research_items), research_count),
-        ("industry", "🏭 產業深度報告", "個別產業（先進封裝、光通訊、電力產業等）完整深度分析報告，依主題分類",
-         grouped_grid(industry_groups), industry_count),
-        ("lectures", "📜 專題報告", "系統性主題深度報告與課程講義，依堂數順序閱讀，附原文出處對照",
-         grouped_grid(lecture_groups), lecture_count),
+        ("lectures", "📜 專題報告", "系統性主題課程講義與個別產業深度分析報告，依主題/堂數分類",
+         lectures_body, lecture_count),
         ("notes", "🗒️ 金融筆記", "自己整理的閱讀筆記、書籍重點與投資組合回測分析",
          grid(notes_items), len(notes_items)),
     ]
-
 
     nav_html = "\n".join(
         f'<a href="{href}" class="navlink">{title}</a>'
         for href, title in [
             ("#top", "首頁"), ("#market", "市場分析"), ("#stocks", "個股小狐"),
-            ("#research", "研究摘要"), ("#industry", "產業深度報告"),
-            ("#lectures", "專題報告"), ("#notes", "金融筆記"),
+            ("#research", "研究摘要"), ("#lectures", "專題報告"), ("#notes", "金融筆記"),
         ]
     )
 
