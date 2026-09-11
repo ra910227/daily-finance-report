@@ -1,7 +1,7 @@
 /* 財經小狐｜畫重點・筆記・星號評分 共用腳本（gsfox-annotate）
    - 文章頁：選取文字→浮動工具列→點黃/紅/藍任一色畫重點，套色後自動彈出筆記撰寫視窗(可留空)；
-     點擊既有的畫重點可直接取消(連同附掛的筆記一起移除)
-   - 筆記與畫重點是同一份紀錄：顏色本身即代表重要度分類，筆記面板可一鍵下載成Markdown檔
+     點擊文章裡既有的畫重點會導向📓筆記面板對應的卡片(不會刪除)，所有刪除/移除動作都在面板裡進行
+   - 筆記與畫重點是同一份紀錄：顏色本身即代表重要度分類，筆記面板可一鍵下載成Markdown檔，卡片可按住拖曳排序
    - 首頁(index.html，body帶 class="gsfox-index")：條目旁的星號評分(最多三顆)
    - 全部資料存在瀏覽器 localStorage；若使用者在首頁設定「同步碼」，會另外透過 Cloudflare Worker+KV
      把資料同步到雲端，讓不同瀏覽器/裝置能看到同一份畫重點/筆記/星號評分（2026-09-10新增） */
@@ -142,7 +142,7 @@
       m.className = "gsfox-hl";
       m.setAttribute("data-color", rec.color);
       m.setAttribute("data-hid", rec.id);
-      m.title = rec.note ? "這段有附掛筆記，到📓筆記面板可編輯/刪除" : "到📓筆記面板可移除這段畫重點";
+      m.title = rec.note ? "點擊可到📓筆記面板查看/編輯這則筆記" : "點擊可到📓筆記面板查看，並可在那裡移除";
       return m;
     });
   }
@@ -171,7 +171,7 @@
     var list = loadJSON(LS_HL, []);
     list.forEach(function(r){ if (r.id === id) r.note = newText; });
     saveJSON(LS_HL, list);
-    var title = newText ? "這段有附掛筆記，到📓筆記面板可編輯/刪除" : "到📓筆記面板可移除這段畫重點";
+    var title = newText ? "點擊可到📓筆記面板查看/編輯這則筆記" : "點擊可到📓筆記面板查看，並可在那裡移除";
     document.querySelectorAll('[data-hid="'+id+'"]').forEach(function(m){ m.title = title; });
     scheduleCloudPush();
   }
@@ -457,7 +457,9 @@
       var sel = window.getSelection();
 
       if (sel && sel.isCollapsed){
-        // 點擊文章裡既有的畫重點不會刪除它——畫重點只能在📓筆記面板裡刪除(見notesPanel的del-highlight)
+        // 點擊文章裡既有的畫重點不會刪除它(刪除只能在📓筆記面板裡做)，而是導向面板裡對應的那張筆記卡片
+        var hl = closestSafe(e.target, "mark.gsfox-hl");
+        if (hl){ jumpToNoteCard(hl.getAttribute("data-hid")); return; }
         hideToolbar();
         return;
       }
