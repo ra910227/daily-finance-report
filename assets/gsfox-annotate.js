@@ -234,6 +234,7 @@
     }
     notesBody.innerHTML = list.map(function(r){
       return '<div class="gsfox-note-card" data-color="'+r.color+'" data-note-id="'+r.id+'">'
+        + '<span class="gsfox-drag-handle" title="按住拖曳可調整順序">⠿</span>'
         + '<div class="gsfox-quote" title="點擊跳到文章裡的引用處">「'+escapeHtml(r.text)+'」</div>'
         + '<div class="gsfox-note-text" data-note-text="'+r.id+'">'+escapeHtml(r.note||"")+'</div>'
         + '<div class="gsfox-note-row">'
@@ -241,6 +242,59 @@
         +   '<span class="gsfox-note-btns"><button data-act="edit" data-id="'+r.id+'">編輯</button><button data-act="del" data-id="'+r.id+'">清空備注</button><button data-act="del-highlight" class="gsfox-del" data-id="'+r.id+'">移除畫重點</button></span>'
         + '</div></div>';
     }).join("");
+  }
+
+  /* ============ 筆記卡片拖曳排序 ============ */
+  var dragState = null;
+
+  function getDragAfterElement(container, y){
+    var els = Array.prototype.slice.call(container.querySelectorAll(".gsfox-note-card:not(.gsfox-dragging)"));
+    var closest = { offset: -Infinity, element: null };
+    els.forEach(function(child){
+      var box = child.getBoundingClientRect();
+      var offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) closest = { offset: offset, element: child };
+    });
+    return closest.element;
+  }
+
+  function persistNoteOrder(){
+    var ids = Array.prototype.slice.call(notesBody.querySelectorAll(".gsfox-note-card")).map(function(c){ return c.dataset.noteId; });
+    var list = loadJSON(LS_HL, []);
+    var byId = {};
+    list.forEach(function(r){ byId[r.id] = r; });
+    var reordered = ids.map(function(id){ return byId[id]; }).filter(Boolean);
+    saveJSON(LS_HL, reordered);
+    scheduleCloudPush();
+  }
+
+  function initNoteDragReorder(){
+    notesBody.addEventListener("pointerdown", function(e){
+      var handle = closestSafe(e.target, ".gsfox-drag-handle");
+      if (!handle) return;
+      var card = closestSafe(e.target, ".gsfox-note-card");
+      if (!card) return;
+      e.preventDefault();
+      dragState = { card: card, pointerId: e.pointerId };
+      card.classList.add("gsfox-dragging");
+      try{ handle.setPointerCapture(e.pointerId); }catch(err){}
+    });
+
+    notesBody.addEventListener("pointermove", function(e){
+      if (!dragState) return;
+      var after = getDragAfterElement(notesBody, e.clientY);
+      if (after == null) notesBody.appendChild(dragState.card);
+      else notesBody.insertBefore(dragState.card, after);
+    });
+
+    function endDrag(){
+      if (!dragState) return;
+      dragState.card.classList.remove("gsfox-dragging");
+      dragState = null;
+      persistNoteOrder();
+    }
+    notesBody.addEventListener("pointerup", endDrag);
+    notesBody.addEventListener("pointercancel", endDrag);
   }
 
   function openNotesPanel(){ notesPanel.hidden = false; renderNotesPanel(); }
@@ -254,6 +308,15 @@
       m.classList.add("gsfox-flash");
       setTimeout(function(){ m.classList.remove("gsfox-flash"); }, 1600);
     });
+  }
+
+  function jumpToNoteCard(id){
+    openNotesPanel();
+    var card = notesBody.querySelector('[data-note-id="'+id+'"]');
+    if (!card) return;
+    card.scrollIntoView({behavior:"smooth", block:"center"});
+    card.classList.add("gsfox-flash-card");
+    setTimeout(function(){ card.classList.remove("gsfox-flash-card"); }, 1600);
   }
 
   function sanitizeFilename(s){
@@ -437,6 +500,7 @@
 
   function initAnnotation(){
     buildUI();
+    initNoteDragReorder();
     var code = getSyncCode();
     if (code){
       pullFromCloud(code).then(function(){ restoreHighlights(); renderNotesPanel(); initReadTracking(); });
