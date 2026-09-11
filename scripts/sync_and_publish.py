@@ -24,6 +24,36 @@ NOTES_KEYWORDS = [
     "四配置科技成長組合回測比較", "基礎模式逢低加碼策略回測", "定期投資討論",
 ]
 
+# 個股小狐分組標題用「代號+簡稱」顯示(如「2308台達電」)，2026-09-11使用者要求。
+# 各報告HTML的<title>標籤格式不一致(有些含公司名、有些沒有，尤其美股)，無法穩定用程式解析，
+# 改用這份手動維護的對照表；新增股票代號時記得順手補一筆，查無對照表的ticker會直接只顯示代號。
+STOCK_SHORT_NAMES = {
+    "000660": "SK海力士",
+    "2308": "台達電",
+    "2313": "華通",
+    "2382": "廣達",
+    "2383": "台光電",
+    "3081": "聯亞光電",
+    "3324": "雙鴻",
+    "4585": "達明機器人",
+    "6274": "台燿科技",
+    "6944": "兆聯實業",
+    "AVGO": "博通",
+    "BABA": "阿里巴巴",
+    "GLW": "康寧",
+    "NOW": "ServiceNow",
+    "NVDA": "輝達",
+    "OKLO": "Oklo",
+    "PLTR": "Palantir",
+    "SMR": "NuScale",
+    "VST": "Vistra",
+}
+
+
+def stock_group_label(ticker):
+    name = STOCK_SHORT_NAMES.get(ticker, "")
+    return f"{ticker}{name}" if name else ticker
+
 
 def date_pretty(d):
     m = re.match(r'(\d{4})-(\d{2})-(\d{2})', d or "")
@@ -210,12 +240,12 @@ def build_index():
             d = date_from_name(f.name)
             m = re.search(r'個股小狐_(.+?)_' + re.escape(ticker), f.name)
             rtype = m.group(1) if m else "報告"
-            t_items.append({"date": d, "tag": "個股小狐", "title": f"{ticker}　{rtype}",
+            t_items.append({"date": d, "tag": "個股小狐", "title": f"{stock_group_label(ticker)}　{rtype}",
                              "href": f"stocks/{ticker}/{f.name}", "excerpt": extract_excerpt(f)})
         if not t_items:
             continue
         t_items.sort(key=lambda x: x["date"], reverse=True)
-        stock_groups.append((ticker, t_items))
+        stock_groups.append((stock_group_label(ticker), t_items))
 
     # 研究摘要 = 投資機構研究摘要 + 產業趨勢研究摘要 + (research/long-term 扣除金融筆記後剩下的元大/投行摘要與長期索引)
     for f in sorted((SITE / "research/institutions").glob("*.html")):
