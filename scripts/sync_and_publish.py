@@ -52,7 +52,7 @@ STOCK_SHORT_NAMES = {
 
 def stock_group_label(ticker):
     name = STOCK_SHORT_NAMES.get(ticker, "")
-    return f"{ticker}{name}" if name else ticker
+    return f"{ticker} {name}" if name else ticker
 
 
 def date_pretty(d):
