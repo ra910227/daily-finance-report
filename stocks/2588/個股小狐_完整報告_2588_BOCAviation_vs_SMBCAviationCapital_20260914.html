@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 雙雄對決｜BOC Aviation vs SMBC Aviation Capital 2026-09-14</title>
+<style>
+  :root {
+    --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6;
+    --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca;
+    --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+    --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 44px 32px 36px; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero h1 { font-size: 26px; font-weight: 800; color: var(--accent2); letter-spacing: -0.5px; }
+  .hero .sub { font-size: 14px; color: var(--text2); margin-top: 6px; }
+  .hero .qbox { background: rgba(255,255,255,0.7); border: 1px solid var(--border2); border-radius: 10px; padding: 12px 16px; margin-top: 18px; font-size: 13.5px; color: var(--text); font-weight: 600; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 16px; font-size: 12.5px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; }
+  .toc-inner a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+
+  .container { max-width: 1120px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 19px; font-weight: 700; color: var(--text); }
+  .subhead { font-size: 14.5px; font-weight: 700; color: var(--accent2); margin: 22px 0 10px; }
+
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; margin-bottom: 14px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 14px; }
+  .card h3 { font-size: 13px; font-weight: 700; color: var(--text2); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 26px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 11.5px; color: var(--text3); margin-top: 2px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
+  .company-card { border-radius: 12px; padding: 20px 22px; border: 1px solid var(--border); }
+  .company-card.boc { background: linear-gradient(135deg,#fef9f0,#fffef9); border-top: 4px solid var(--gold); }
+  .company-card.smbc { background: linear-gradient(135deg,#f0f5ff,#f9fbff); border-top: 4px solid var(--blue); }
+  .company-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
+  .company-card .sub { font-size: 12px; color: var(--text2); margin-bottom: 12px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(79,70,229,0.03); }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .ok { color: var(--green); font-weight:700; }
+  .warn { color: var(--gold); font-weight:700; }
+  .bad { color: var(--red); font-weight:700; }
+  .muted { color: var(--text2); }
+
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .verdict-box { background: linear-gradient(135deg,#fef2f2,#fdf9f7); border: 1px solid #fca5a5; border-radius: 10px; padding: 22px 24px; margin-bottom: 16px; }
+  .verdict-box h3 { color: var(--red); font-size: 16px; margin-bottom: 12px; }
+  .risk-card { background: #fef2f2; border: 1px solid rgba(220,38,38,0.20); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .risk-card h4 { color: var(--red); font-size: 13px; margin-bottom: 4px; }
+  .note { font-size: 12px; color: var(--text3); margin-top: 8px; line-height: 1.6; }
+
+  .rating-orb { display: inline-flex; flex-direction:column; align-items: center; justify-content: center; width: 92px; height: 92px; border-radius: 50%; flex-shrink:0; }
+  .orb-boc { background: rgba(180,83,9,0.08); border: 3px solid var(--gold); }
+  .orb-smbc { background: rgba(37,99,235,0.08); border: 3px solid var(--blue); }
+  .orb-grade { font-size: 22px; font-weight: 800; }
+  .orb-label { font-size: 10px; color: var(--text2); }
+
+  .flow-step { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 8px; display:flex; gap:12px; align-items:flex-start; }
+  .flow-num { width:22px;height:22px;border-radius:50%;background:var(--accent2);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+
+  @media (max-width: 720px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <h1>✈️ 飛機租賃雙雄對決：BOC Aviation vs SMBC Aviation Capital</h1>
+      <div class="sub">個股小狐完整報告｜分析日期：2026-09-14｜HKEX: 2588（BOC Aviation Limited，有公開股價）vs 私有未上市債券發行人（SMBC Aviation Capital Limited）</div>
+      <div class="qbox">🎯 核心問題：SMBC Aviation Capital機隊規模(994架，含492自有+258代管+244訂單)遠大於BOC Aviation(811架，含479自有+11代管+321訂單)，為什麼Fitch給BOC Aviation的評等(A-)反而比SMBC Aviation Capital(BBB+)高一級？本報告用兩家公司2026年5月Fitch評等報告原文逐項拆解答案。</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-yellow">BOC Aviation：Fitch A- / S&P A-</span>
+    <span class="badge badge-blue">SMBC Aviation Capital：Fitch BBB+ / S&P A-</span>
+    <span class="badge badge-green">兩者評等皆由「母公司支持」主導，非獨立信用體質</span>
+    <span class="badge badge-purple">關鍵差異：「core」vs「strategically important, not core」</span>
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#s0">0. 快速比較</a>
+    <a href="#s1">1. BOC Aviation 深度剖析</a>
+    <a href="#s2">2. SMBC Aviation Capital 深度剖析</a>
+    <a href="#s3">3. 機隊規模的迷思</a>
+    <a href="#s4">4. 評等落差完整解析</a>
+    <a href="#s5">5. 結論與觀察重點</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============ SECTION 0 ============ -->
+<div class="section" id="s0">
+  <div class="section-header"><div class="section-num">0</div><div class="section-title">快速比較：兩家公司一次看懂</div></div>
+
+  <div class="two-col">
+    <div class="company-card boc">
+      <h3>🏦 BOC Aviation Limited</h3>
+      <div class="sub">HKEX: 2588｜新加坡註冊｜1993年成立(原新加坡飛機租賃公司)</div>
+      <table>
+        <tr><td class="muted">大股東</td><td><b>中國銀行(Bank of China)直接持股70%</b></td></tr>
+        <tr><td class="muted">機隊(2026年H1)</td><td>811架飛機/引擎組合(479自有+11代管+321訂單)</td></tr>
+        <tr><td class="muted">自有機隊淨值(Fitch,2025年底)</td><td>462架，帳面淨值US$228億</td></tr>
+        <tr><td class="muted">機隊平均機齡</td><td>5.0年</td></tr>
+        <tr><td class="muted">客戶</td><td>88家航空公司，45個國家/地區</td></tr>
+        <tr><td class="muted">槓桿(Fitch口徑)</td><td>2.5倍(2025)，低於3.5倍長期上限</td></tr>
+        <tr><td class="muted">信用評等</td><td class="ok">Fitch A-(穩定) / S&P A-</td></tr>
+        <tr><td class="muted">股東支持評等(SSR)</td><td class="ok">a-</td></tr>
+      </table>
+    </div>
+    <div class="company-card smbc">
+      <h3>🏦 SMBC Aviation Capital Limited</h3>
+      <div class="sub">未上市，都柏林(愛爾蘭)註冊｜2001年成立(原Lombard Aviation Capital)</div>
+      <table>
+        <tr><td class="muted">大股東</td><td>Sumitomo Mitsui Finance and Leasing 68%＋SMBC銀行直接32%；最終受益：SMFG 66%／住友商事34%</td></tr>
+        <tr><td class="muted">機隊(2025年底)</td><td>994架(492自有+258代管+244訂單)</td></tr>
+        <tr><td class="muted">自有機隊平均機齡</td><td>5.49年</td></tr>
+        <tr><td class="muted">客戶</td><td>150-170家航空/投資人客戶，50+國家</td></tr>
+        <tr><td class="muted">槓桿(Fitch口徑)</td><td>2.6倍(2025年底)，低於3.0倍管理層目標</td></tr>
+        <tr><td class="muted">信用評等</td><td class="warn">Fitch BBB+(穩定) / S&P A-</td></tr>
+        <tr><td class="muted">股東支持評等(SSR)</td><td class="warn">bbb+</td></tr>
+      </table>
+    </div>
+  </div>
+  <p class="note">⚠️ 兩家公司機隊統計口徑與日期不完全相同(BOC Aviation為2026年H1公司自結數字，SMBC AC為2025年底官方Fast Facts)，屬正常的申報時點差異，不影響本報告核心結論。SMBC Aviation Capital在2026年4月完成收購Air Lease Corporation(更名Sumisho Air Lease)後，2026年3月止財年新聞稿另揭露「自有/服務/承諾」機隊達1,700架的預估口徑，詳見第2節。</p>
+</div>
+
+<!-- ============ SECTION 1 ============ -->
+<div class="section" id="s1">
+  <div class="section-header"><div class="section-num">1</div><div class="section-title">BOC Aviation Limited 深度剖析</div></div>
+
+  <div class="subhead">股權結構：中國銀行直接控股70%，是集團內建制化的飛機租賃平台</div>
+  <p>BOC Aviation前身為1993年成立的新加坡飛機租賃公司(Singapore Aircraft Leasing Enterprise)，2006年由中國銀行收購，2014年於香港交易所掛牌上市(2588.HK)。<b>中國銀行目前直接持股約70%</b>，並在董事會有代表席次，兩者之間另有流動性支持協議。中國銀行是中國「四大行」之一，也是全球系統性重要銀行(G-SIB)，其對BOC Aviation的支持關係被Fitch明確定義為「取得非凡支持的機率非常高(very high probability of extraordinary support)」——這是母子公司支持評等中的最高分類之一，也是BOC Aviation評等的核心支柱。</p>
+
+  <div class="subhead">機隊組合與營運規模</div>
+  <div class="card-grid">
+    <div class="card"><h3>總機隊(2026年H1)</h3><div class="big-num">811架</div><div class="big-label">飛機+引擎，479自有/11代管/321訂單</div></div>
+    <div class="card"><h3>訂單簿</h3><div class="big-num">320架</div><div class="big-label">交機期程至2032年</div></div>
+    <div class="card"><h3>平均機齡(自有)</h3><div class="big-num">5.0年</div><div class="big-label">86%+為新世代機型</div></div>
+    <div class="card"><h3>平均剩餘租期</h3><div class="big-num">7.7-7.8年</div><div class="big-label">以帳面淨值加權</div></div>
+  </div>
+  <p>機隊以Airbus A320NEO家族(364架)與Boeing 737-8/9(210架)為主力，客戶涵蓋88家航空公司、45個國家/地區，屬於典型的「核心窄體機、全球分散客群」策略——與同業做法一致，差異不大，這也是為什麼機隊組合本身不是評等差異的主因(詳見第4節)。</p>
+
+  <div class="subhead">財務體質</div>
+  <div class="card-grid">
+    <div class="card"><h3>2026H1淨利</h3><div class="big-num ok">US$357M</div><div class="big-label">+4.4% YoY</div></div>
+    <div class="card"><h3>槓桿比率</h3><div class="big-num ok">2.5倍</div><div class="big-label">2025年，較2024年2.6倍下降，低於3.5倍長期上限</div></div>
+    <div class="card"><h3>淨利差</h3><div class="big-num">5.2%</div><div class="big-label">2025年</div></div>
+    <div class="card"><h3>流動性覆蓋率</h3><div class="big-num ok">2.2倍</div><div class="big-label">未動用信用額度US$65億</div></div>
+  </div>
+  <p>融資成本方面，2025年平均舉債成本約4.5%，受惠於A-評等與超過50家往來銀行的多元資金來源；股利方面2026H1宣布股利上調22%。整體而言，BOC Aviation的槓桿長期穩定運行在自訂3.5倍上限之下，且近年持續下降，展現相對保守的資本紀律。</p>
+
+  <div class="subhead">信用評等：Fitch 'A-'／展望穩定（2026年5月確認）</div>
+  <div class="card" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+    <div class="rating-orb orb-boc"><div class="orb-grade" style="color:var(--gold);">A-</div><div class="orb-label">IDR/優先無擔保</div></div>
+    <div style="flex:1;min-width:260px;">
+      <p><b>股東支持評等(SSR)：a-</b>——與發行人違約評等(IDR)完全等同，代表評等機構幾乎完全依賴母公司支持假設，而非BOC Aviation自身的財務指標。</p>
+      <p style="margin-top:6px;"><b>下調觸發因子</b>：中國銀行自身評等被調降、中國銀行持股或支持意願實質減弱、或BOC Aviation自身營運大幅惡化。<b>上調可能</b>：中國銀行評等提升，惟評等機構認為與母公司整合進一步加深的機率較低。</p>
+      <p style="margin-top:6px;" class="muted">風險揭露：殘值風險曝險、地緣政治敏感度(報告特別點名中東地緣衝突可能導致燃油短缺與客戶要求延租)。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SECTION 2 ============ -->
+<div class="section" id="s2">
+  <div class="section-header"><div class="section-num">2</div><div class="section-title">SMBC Aviation Capital Limited 深度剖析</div></div>
+
+  <div class="subhead">股權結構：透過租賃控股公司間接持有，非銀行直接控股</div>
+  <p>SMBC Aviation Capital前身為RBS集團旗下的Lombard Aviation Capital，2012年由日本兩大集團——三井住友金融集團(SMFG)與住友商事(Sumitomo Corporation)——以US$73億收購，當時創下航空租賃業最大宗收購交易紀錄。<b>股權結構值得特別注意</b>：直接股東是Sumitomo Mitsui Finance and Leasing(SMFL，持股68%)與SMBC銀行本身(直接持股僅32%)；SMFL本身又是SMFG與住友商事共同持有的租賃合資公司。往上追溯至最終受益股權，SMFG持有66%、住友商事持有34%。也就是說，SMBC Aviation Capital與其銀行體系母公司之間<b>隔著一層租賃控股公司</b>，且有三分之一權益屬於非金融業的貿易商社(住友商事)——這與BOC Aviation由中國銀行直接持股70%的結構明顯不同(詳見第4節的評等意涵)。</p>
+
+  <div class="subhead">機隊組合與營運規模</div>
+  <div class="card-grid">
+    <div class="card"><h3>總機隊(2025年底)</h3><div class="big-num">994架</div><div class="big-label">492自有/258代管/244訂單</div></div>
+    <div class="card"><h3>平均機齡(自有)</h3><div class="big-num">5.49年</div><div class="big-label">89%窄體機，78%新世代機型</div></div>
+    <div class="card"><h3>客戶</h3><div class="big-num">150+</div><div class="big-label">航空/投資人客戶，50+國家</div></div>
+    <div class="card"><h3>地域分布</h3><div class="big-num">EMEA 41%</div><div class="big-label">亞洲33%／南美15%／北美11%</div></div>
+  </div>
+  <p>2022年收購Goshawk Management後，SMBC Aviation Capital躍升為全球第二大飛機租賃商(按機隊數量)、日資最大飛機租賃商。公司另有一項全球獨特的優勢：<b>資產負債表100%無擔保</b>，代表其舉債完全不依賴特定飛機資產抵押，融資彈性優於多數同業。</p>
+
+  <div class="subhead">2026年最大事件：以財團形式收購Air Lease Corporation（更名Sumisho Air Lease）</div>
+  <div class="flow-step"><div class="flow-num">1</div><div>2025年9月宣布：住友商事(37.5%)＋SMBC Aviation Capital(24.99%)＋Apollo(18.75%)＋Brookfield(18.75%)四方財團，以100%現金交易收購美國上市飛機租賃商Air Lease Corporation，股權對價約US$74億，含承接/再融資債務後總交易金額約US$282億</div></div>
+  <div class="flow-step"><div class="flow-num">2</div><div>融資結構：SMBC銀行、花旗、高盛提供US$121億承諾融資，交易大部分由新增債務支應</div></div>
+  <div class="flow-step"><div class="flow-num">3</div><div>2026年4月8日完成交割，合併後實體更名為Sumisho Air Lease Corporation(SALC)</div></div>
+  <div class="flow-step"><div class="flow-num">4</div><div><b>關鍵：SMBC Aviation Capital在SALC中僅持有24.99%少數股權</b>，是財團共同投資架構，而非SMBC Aviation Capital本身的合併子公司——SMFG在SMBC Aviation Capital自身的66%股權並未因此交易被稀釋</div></div>
+
+  <div class="subhead">財務體質</div>
+  <div class="card-grid">
+    <div class="card"><h3>FY2026(至2026/3)稅前利潤</h3><div class="big-num ok">US$707M</div><div class="big-label">調整後+20% YoY</div></div>
+    <div class="card"><h3>租賃收入</h3><div class="big-num">US$19.73億</div><div class="big-label">+US$3,800萬YoY</div></div>
+    <div class="card"><h3>槓桿比率</h3><div class="big-num warn">2.6倍</div><div class="big-label">2025年底，較2024年底2.9倍改善(受惠俄羅斯保險理賠一次性挹注)</div></div>
+    <div class="card"><h3>流動性</h3><div class="big-num ok">US$150億+</div><div class="big-label">另有US$37億銀行綜合授信</div></div>
+  </div>
+  <p class="note">Fitch評估：SALC訂單簿收購案完成後，SMBC Aviation Capital自身槓桿中期可能小幅回升，但預期仍將維持在管理層3.0倍的目標上限之下。</p>
+
+  <div class="subhead">信用評等：Fitch 'BBB+'／展望穩定（2026年5月確認，評等行動：維持不變）</div>
+  <div class="card" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+    <div class="rating-orb orb-smbc"><div class="orb-grade" style="color:var(--blue);">BBB+</div><div class="orb-label">IDR/優先無擔保</div></div>
+    <div style="flex:1;min-width:260px;">
+      <p><b>股東支持評等(SSR)：bbb+</b>——同樣與IDR完全等同，代表評等一樣是「支持驅動型」，但支持力道被評為比BOC Aviation低一級。</p>
+      <p style="margin-top:6px;"><b>Fitch明確將SMBC Aviation Capital定位為「策略上重要，但非核心(strategically important, but not core)」子公司</b>——這是母子公司支持分類中，比BOC Aviation所屬等級更弱的一檔。</p>
+      <p style="margin-top:6px;">支持依據：獲利紀錄穩定、SMFG的整合策略、資金奧援、品牌共通性、董事會代表席次。<b>獨立信用面的制約因素</b>：單一產業(僅做飛機租賃)集中度、槓桿偏好較高、殘值風險曝險、對外部融資的依賴。</p>
+      <p style="margin-top:6px;" class="muted">下調觸發因子：SMFG自身評等下調、SMFG支持意願實質減弱(如策略重要性下降)、SMFG減持股權、或營運績效大幅惡化。上調可能：SMFG評等提升，或SMBC Aviation Capital與母公司整合加深/重要性提升。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SECTION 3 ============ -->
+<div class="section" id="s3">
+  <div class="section-header"><div class="section-num">3</div><div class="section-title">機隊規模的迷思：「722 vs 442」真的代表SMBC比較大嗎？</div></div>
+  <p>報導常引用的機隊數字（SMBC Aviation Capital 722架 vs BOC Aviation約442架）容易讓人直覺推論「SMBC規模大很多，評等卻比較低，很奇怪」。但拆解機隊結構後會發現：這個比較混合了兩種性質完全不同的機隊——<b>自有機隊(on-balance-sheet，承擔資產與槓桿風險)</b>與<b>代管機隊(off-balance-sheet，只賺取服務費、不承擔資產風險)</b>。</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>口徑</th><th>BOC Aviation</th><th>SMBC Aviation Capital</th><th>解讀</th></tr></thead>
+      <tbody>
+        <tr><td><b>自有機隊</b>(承擔槓桿與資產風險)</td><td class="num">462~479架</td><td class="num">492架</td><td>兩者幾乎<b>完全相同規模</b>，差距僅約3%~6%</td></tr>
+        <tr><td>代管機隊(僅賺服務費，第三方持有)</td><td class="num">11架</td><td class="num">258架</td><td>SMBC的「代管服務」業務線規模大很多</td></tr>
+        <tr><td>訂單簿(未交機)</td><td class="num">320~321架</td><td class="num">244架</td><td>BOC訂單簿占比反而更高</td></tr>
+        <tr><td><b>總計(常被媒體引用的數字)</b></td><td class="num">811架</td><td class="num">994架(722＝492+230附近，視統計口徑)</td><td>此為誤導性比較的來源</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box">
+    <h3>為什麼這個區別對評等至關重要</h3>
+    <p>信用評等機構關心的是<b>資產負債表槓桿、資金成本與資本結構</b>，而不是「管了多少架飛機」。代管業務(SMBC口徑258架)本質上是資產管理/服務收費業務，不占用資產負債表、不需要舉債融資，對信用風險的貢獻遠低於自有機隊。當你把比較基礎修正為「自有機隊」（真正承擔資產與槓桿風險的部分），BOC Aviation與SMBC Aviation Capital的規模其實<b>幾乎沒有差距</b>——換句話說，SMBC Aviation Capital「規模看起來大很多」主要來自它多做了一塊代管服務業務，而不是它真的在信用風險維度上比BOC Aviation大得多。這也直接說明了：<b>機隊規模與信用評等之間，在這兩家公司的案例裡並沒有必然關係</b>，真正決定評等的是第4節要談的母公司支持結構。</p>
+  </div>
+</div>
+
+<!-- ============ SECTION 4 ============ -->
+<div class="section" id="s4">
+  <div class="section-header"><div class="section-num">4</div><div class="section-title">核心問題完整解析：為什麼BOC Aviation評等比SMBC Aviation Capital高一級？</div></div>
+
+  <div class="verdict-box">
+    <h3>🎯 一句話結論</h3>
+    <p>兩家公司的評等<b>都不是靠自己的財務體質獨立賺來的</b>——Fitch明確把兩者的發行人違約評等(IDR)直接等同於「股東支持評等(SSR)」，也就是說，評等幾乎完全由「母公司會不會出手相救」這個假設決定。而Fitch把BOC Aviation歸類為中國銀行「機率非常高的非凡支持」對象，卻把SMBC Aviation Capital定位為SMFG「策略上重要，但非核心」的子公司——這一級之差的支持分類，直接對應到a-與bbb+的SSR落差，幾乎解釋了全部的評等差距。機隊規模、獲利能力、甚至最近的Air Lease收購案，都不是主因。</p>
+  </div>
+
+  <div class="subhead">原因一（主因）：母公司支持分類——「核心」vs「策略上重要但非核心」</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>比較項目</th><th>BOC Aviation</th><th>SMBC Aviation Capital</th></tr></thead>
+      <tbody>
+        <tr><td>Fitch支持機率用語</td><td class="ok">「非凡支持機率非常高」(very high probability of extraordinary support)</td><td class="warn">「策略上重要，但非核心」(strategically important, but not core)</td></tr>
+        <tr><td>股東支持評等(SSR)</td><td class="ok">a-</td><td class="warn">bbb+</td></tr>
+        <tr><td>持股結構</td><td><b>中國銀行直接持股70%</b>，董事會席次＋流動性協議</td><td>透過SMFL(租賃合資公司)間接持股68%＋SMBC銀行直接僅32%；最終受益SMFG 66%／住友商事34%</td></tr>
+        <tr><td>母公司本身屬性</td><td>中國銀行——中國四大行之一，全球系統性重要銀行(G-SIB)</td><td>SMFG——日本三大金融集團之一，但SMBC AC股權有三分之一落在非金融業的住友商事(貿易商社)手中</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>「核心(core)」與「策略上重要但非核心(strategically important, but not core)」是評等機構評估集團子公司支持力道時的標準分類架構——「核心」子公司幾乎會被視為集團不可分割的一部分，評等幾乎等同母公司；「策略上重要但非核心」雖然仍享有高機率的支持，但評等機構保留一定的不確定性空間，通常會給予比母公司低1-2個級距的評等。BOC Aviation對中國銀行而言，是集團內建制化、直接持股、董事會深度介入的飛機租賃平台；SMBC Aviation Capital對SMFG而言，雖然重要，但股權結構透過租賃控股公司間接持有、且與非金融業夥伴住友商事共享所有權，兩者在「與母公司融為一體」的程度上有結構性落差，這正是Fitch分類不同的根本原因。</p>
+
+  <div class="subhead">原因二：獨立信用面，Fitch明確點名SMBC Aviation Capital的制約因素</div>
+  <p>即使母公司支持是主因，Fitch的報告也同時列出SMBC Aviation Capital在獨立信用評估上被點名的弱項，而這些用語沒有出現在BOC Aviation報告的對應段落：</p>
+  <div class="risk-card"><h4>單一產業集中度(single-industry business)</h4><p class="muted">業務完全集中在飛機租賃單一產業，缺乏跨業務多元化緩衝</p></div>
+  <div class="risk-card"><h4>槓桿偏好較高(higher leverage appetite)</h4><p class="muted">2.6倍槓桿雖然低於自訂3.0倍上限，但上限設定本身就比BOC Aviation的3.5倍上限更「緊」，反映管理層對槓桿的容忍度差異，且近年一度來到2.9倍</p></div>
+  <div class="risk-card"><h4>殘值風險曝險與融資依賴(residual value risk / funding reliance)</h4><p class="muted">與BOC Aviation面臨相似的產業共通風險，但在SMBC AC報告中被列為需要留意的獨立信用制約因素</p></div>
+
+  <div class="subhead">原因三：Air Lease／Sumisho Air Lease收購案——並非評等落差的原因，Fitch反而視為正面</div>
+  <p>許多人直覺會認為，SMBC Aviation Capital剛完成一筆US$282億的鉅額收購案，槓桿必然大幅推升，才導致評等偏低。<b>但這個推論並不成立</b>：Fitch在2026年5月的報告中明確將此收購案評為「漸進正面(incrementally positive)」——理由是SALC(Sumisho Air Lease)將提升營運規模與機隊組成、改善現金流生成能力，SALC的股利與服務費收入預期將溫和強化並分散SMBC Aviation Capital的收入基礎，信用狀況預期將「中等幅度改善」。更關鍵的是，<b>SMBC Aviation Capital在SALC中僅持有24.99%的少數股權</b>，收購案的US$121億融資主要落在SALC這個獨立的合資實體身上，並未直接大幅推升SMBC Aviation Capital自身資產負債表的槓桿；而SMFG對SMBC Aviation Capital的66%股權也未因此交易被稀釋。換句話說，這筆交易是近期最大的新聞事件，卻<b>不是</b>造成評等落差的原因——評等落差是更早、更結構性的母公司支持分類差異。</p>
+
+  <div class="subhead">歷史脈絡補充：SMBC Aviation Capital曾經與BOC Aviation同級</div>
+  <p>值得注意的是，SMBC Aviation Capital並非一直都是BBB+——根據公司自己揭露的歷史時間軸，Fitch曾在2015年將其評等<b>上調至A-</b>，S&P也於2018年跟進上調至A-，當時與BOC Aviation處於相近評等區間。目前公開資料顯示其Fitch評等已回落至BBB+多年(至少自2023-2024年的公開評等確認新聞稿即為BBB+)，S&P則仍維持A-至今——這也解釋了為什麼「快速比較」表中S&P對兩家公司的評等差距(皆為A-)遠小於Fitch的評等差距(A- vs BBB+)：<b>不同評等機構對「核心 vs 策略重要」支持力道的判斷本來就可能不同</b>，這正是使用者提供的兩篇文章都出自Fitch、而非同時對照S&P的原因所在。</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>驅動因素</th><th>對評等落差的解釋力</th><th>結論</th></tr></thead>
+      <tbody>
+        <tr><td>機隊規模(722 vs 442/811)</td><td class="bad">極低</td><td>比較口徑混淆自有與代管機隊，修正後兩者自有機隊規模幾乎相同</td></tr>
+        <tr><td>母公司支持分類(核心 vs 策略重要非核心)</td><td class="ok">主要(解釋大部分落差)</td><td>SSR直接對應：a- vs bbb+，與IDR落差幾乎完全一致</td></tr>
+        <tr><td>持股結構直接性(70%直接持股 vs 間接透過SMFL)</td><td class="ok">高(支持前述分類的結構性成因)</td><td>直接銀行持股通常換得更強的支持假設</td></tr>
+        <tr><td>獨立信用面(槓桿偏好、單一產業集中度)</td><td class="warn">次要</td><td>兩者槓桿實際數字接近(2.5倍 vs 2.6倍)，但Fitch用語顯示對SMBC AC的容忍度評估較保守</td></tr>
+        <tr><td>Air Lease/SALC收購案</td><td class="bad">幾乎無關，且方向為正面</td><td>Fitch明確定調「漸進正面」，非降評理由</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============ SECTION 5 ============ -->
+<div class="section" id="s5">
+  <div class="section-header"><div class="section-num">5</div><div class="section-title">結論與觀察重點</div></div>
+
+  <div class="action-box">
+    <h3>給投資人/債券持有人的重點提醒</h3>
+    <p>1. 若持有或考慮兩家公司發行的債券，<b>信用風險評估的重心應放在母公司(中國銀行 vs SMFG)本身的信用趨勢</b>，而非兩家租賃公司各自的機隊擴張速度——因為兩者評等都直接掛勾母公司支持假設。</p>
+    <p>2. BOC Aviation因評等較高，理論上舉債成本應更低(其2025年平均舉債成本約4.5%)，這是其相對於SMBC Aviation Capital的結構性資金成本優勢，長期有助於維持較高的淨利差與獲利穩定性。</p>
+    <p>3. SMBC Aviation Capital完成Air Lease收購後規模躍居全球前列，且Fitch評為信用面「漸進正面」，中期若SALC整合順利、且SMFG的支持力道或整合深度出現進一步強化的訊號，未來評等有機會朝正向調整；反之若SMFG策略重心轉移或減持，則是主要的下行風險。</p>
+    <p>4. 兩家公司的獨立信用指標(槓桿2.5倍 vs 2.6倍、機隊平均機齡5.0年 vs 5.49年、平均租期7.7年 vs 相近水準)其實相當接近，並非評等差距的主要成因，這提醒我們評等落差的根源需要往「誰是母公司、支持關係多直接」去找，而不是先入為主比較營運數字。</p>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <p>資料來源：Fitch Ratings「Fitch Affirms BOC Aviation at 'A'; Outlook Stable」與「Fitch Affirms SMBC Aviation Capital at 'BBB+'; Outlook Stable」(皆2026年5月8日發布)；BOC Aviation公司財報/投資人簡報(H1 2026)；SMBC Aviation Capital官方Fast Facts(2025年12月31日)與FY2026(至2026年3月31日)財報新聞稿；BiggO財經新聞(伊藤忠收購ACG報導，內含機隊數字對照)；Sumisho Air Lease/Air Lease Corporation收購案公開新聞稿(businesswire/flightglobal)。</p>
+  <p>⚠️ 本報告僅供研究參考，不構成投資或授信建議；信用評等資訊取自評等機構公開發布之新聞稿，實際評等報告全文可能包含本報告未能完整呈現的細節，請以評等機構官方發布之完整報告為準；歷史績效與現行評等不代表未來表現或評等結果。</p>
+</footer>
+
+</body>
+</html>
