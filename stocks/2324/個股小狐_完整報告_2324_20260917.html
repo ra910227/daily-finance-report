@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜仁寶電腦(2324) 完整報告</title>
+<style>
+:root {
+  --bg: #ffffff; --bg2: #f7f8fc; --bg3: #eef0f7; --border: #e1e4ee;
+  --text: #1e2233; --text2: #6b7280; --accent: #4f46e5; --accent2: #4338ca;
+  --red: #dc2626; --green: #15803d; --gold: #b45309; --orange: #c2410c;
+  --blue: #2563eb; --purple: #7c3aed; --teal: #0d9488;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  line-height: 1.65; font-size: 15px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px 60px; }
+.hero {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #fff; padding: 36px 24px 30px; margin-bottom: 24px;
+}
+.hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+.hero .tag { display:inline-block; background: rgba(255,255,255,.18); padding: 3px 12px; border-radius: 20px; font-size: 12.5px; margin-bottom: 12px; }
+.hero h1 { margin: 0 0 6px; font-size: 26px; }
+.hero .sub { opacity: .9; font-size: 14px; margin-bottom: 18px; }
+.hero-stats { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-stat { background: rgba(255,255,255,.12); border-radius: 10px; padding: 10px 16px; min-width: 110px; }
+.hero-stat .l { font-size: 12px; opacity: .85; }
+.hero-stat .v { font-size: 19px; font-weight: 700; margin-top: 2px; }
+nav.toc {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px 20px; margin-bottom: 28px; font-size: 13.5px;
+}
+nav.toc .grp-title { font-weight: 700; color: var(--accent2); margin: 10px 0 6px; font-size: 13px; }
+nav.toc .grp-title:first-child { margin-top: 0; }
+nav.toc a { color: var(--text); text-decoration: none; display: inline-block; margin: 2px 14px 2px 0; }
+nav.toc a:hover { color: var(--accent); text-decoration: underline; }
+section { margin-bottom: 40px; scroll-margin-top: 16px; }
+h2.sec-title {
+  font-size: 20px; border-left: 5px solid var(--accent); padding-left: 12px;
+  margin: 0 0 4px;
+}
+.sec-mode { font-size: 12px; color: var(--text2); padding-left: 17px; margin-bottom: 16px; }
+h3 { font-size: 16.5px; margin: 22px 0 10px; color: var(--accent2); }
+p { color: var(--text); }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; font-size: 13.5px; }
+th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+th { background: var(--bg3); font-weight: 700; }
+tr:nth-child(even) td { background: #fbfbfd; }
+.badge { display:inline-block; padding: 2px 9px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.b-ok { background:#dcfce7; color:var(--green); }
+.b-warn { background:#fef3c7; color:var(--gold); }
+.b-bad { background:#fee2e2; color:var(--red); }
+.b-info { background:#e0e7ff; color:var(--accent2); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px; margin: 14px 0; }
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.card h4 { margin: 0 0 6px; font-size: 14px; color: var(--accent2); }
+.card .big { font-size: 22px; font-weight: 700; }
+.scenario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 14px; margin: 14px 0; }
+.scenario-card { border-radius: 12px; padding: 16px; border: 1px solid var(--border); }
+.scenario-card.bear { background: #fef2f2; }
+.scenario-card.base { background: #eef2ff; }
+.scenario-card.bull { background: #f0fdf4; }
+.scenario-card h4 { margin: 0 0 8px; }
+.scenario-card ul { margin: 6px 0; padding-left: 18px; font-size: 13px; }
+.scenario-card .target { font-size: 20px; font-weight: 800; margin-top: 8px; }
+.risk-card { border-left: 4px solid var(--red); background: #fff5f5; padding: 12px 16px; border-radius: 8px; margin: 10px 0; }
+.risk-card.mid { border-left-color: var(--gold); background: #fffbeb; }
+.action-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 16px 0; }
+.action-box h4 { margin-top: 0; color: var(--accent2); }
+.note { font-size: 12.5px; color: var(--text2); margin-top: 6px; }
+.moat-row { display:flex; align-items:center; gap:10px; margin:6px 0; font-size:13.5px; }
+.moat-row .label { width: 130px; flex-shrink:0; }
+.stars { color: var(--gold); letter-spacing: 2px; }
+.divider { border:none; border-top:1px solid var(--border); margin: 30px 0; }
+footer { font-size: 12px; color: var(--text2); border-top: 1px solid var(--border); padding-top: 16px; margin-top: 40px; }
+.src-status { font-size:11.5px; }
+code { background: var(--bg3); padding: 1px 6px; border-radius: 4px; font-size: 12.5px; }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="tag">個股小狐｜三合一完整報告</span>
+    <h1>仁寶電腦工業(2324.TW) Compal Electronics</h1>
+    <div class="sub">分析日期：2026/09/17　｜　產業：電腦及週邊設備／NB代工ODM＋AI伺服器</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="l">股價(09/16收盤)</div><div class="v">37.35 元</div></div>
+      <div class="hero-stat"><div class="l">市值(自算)</div><div class="v">約1,646億</div></div>
+      <div class="hero-stat"><div class="l">PE(TTM)</div><div class="v">18.77 倍</div></div>
+      <div class="hero-stat"><div class="l">PB</div><div class="v">約1.15 倍</div></div>
+      <div class="hero-stat"><div class="l">成長象限</div><div class="v">轉機股</div></div>
+      <div class="hero-stat"><div class="l">Thesis成立度</div><div class="v">2.5 / 5</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<nav class="toc">
+  <div class="grp-title">摘要</div>
+  <a href="#summary">綜合總結卡片</a>
+  <div class="grp-title">① 公司深度研究</div>
+  <a href="#s1-basic">基本介紹</a>
+  <a href="#s1-engine">業務引擎分析</a>
+  <a href="#s1-thesis">核心Thesis與未來性</a>
+  <a href="#s1-comp">競爭格局</a>
+  <a href="#s1-quad">成長象限與護城河</a>
+  <div class="grp-title">② 最新財報解析</div>
+  <a href="#s2-beatmiss">財報表現與指引</a>
+  <a href="#s2-dcf">三情境估值</a>
+  <a href="#s2-valuation">股價位階評估(含PE歷史錨點)</a>
+  <a href="#s2-comps">可比公司分析</a>
+  <a href="#s2-target">法人動向與操作建議</a>
+  <div class="grp-title">③ 財務風險健檢</div>
+  <a href="#s3-data">財務數據</a>
+  <a href="#s3-ratio">六大比率診斷</a>
+  <a href="#s3-debt">債務到期與CapEx</a>
+  <a href="#s3-final">同業對比與綜合診斷</a>
+  <div class="grp-title">總結</div>
+  <a href="#final-action">最終操作建議</a>
+</nav>
+
+<section id="summary">
+<h2 class="sec-title">綜合總結：五維度快照</h2>
+<div class="card-grid">
+  <div class="card"><h4>Thesis成立度</h4><div class="big">2.5 / 5</div><div class="note">AI伺服器占比仍低、毛利率未見改善</div></div>
+  <div class="card"><h4>護城河強度</h4><div class="big stars">★★☆☆☆</div><div class="note">典型ODM代工，差異化與定價權有限</div></div>
+  <div class="card"><h4>成長象限</h4><div class="big">轉機股</div><div class="note">NB本業成熟／AI伺服器第二曲線待驗證</div></div>
+  <div class="card"><h4>估值位階</h4><div class="big">溫和偏貴</div><div class="note">PE高於5年均值，但仍由EPS成長支撐</div></div>
+  <div class="card"><h4>財務體質</h4><div class="big">中性偏緊</div><div class="note">Q2營運現金流轉負，擴產期資金壓力上升</div></div>
+</div>
+<p class="note">本報告整合「公司深度研究」「最新財報解析」「財務風險健檢」三模式內容。資料來源以 WebSearch／WebFetch／瀏覽器實查台股公開資訊平台（CMoney、HiStock、鉅亨網、Yahoo股市、TechNews等）為主，本次工作階段未啟用 Futu OpenD。凡標示 ⚠️ 為估算值，❌ 為查無資料，禁止臆測填入精確數字。</p>
+</section>
+
+<hr class="divider">
+<h1 style="font-size:18px;color:var(--accent2);">① 公司深度研究</h1>
+
+<section id="s1-basic">
+<h2 class="sec-title">基本介紹</h2>
+<table>
+<tr><th>項目</th><th>數據</th><th>來源狀態</th></tr>
+<tr><td>市值</td><td>約 1,646 億元（自算：股本440.71億÷面額10元＝4.407億股 × 37.35元）</td><td class="src-status"><span class="badge b-warn">⚠️估算</span></td></tr>
+<tr><td>2025年合併營收(TTM基期)</td><td>7,575.1 億元（年減17%）</td><td class="src-status"><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>2026年前8月累計營收</td><td>5,879.41 億元（年增18.3%）</td><td class="src-status"><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>2026Q2單季毛利率</td><td>4.62%（營業毛利111.0億／營收238.3億）</td><td class="src-status"><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>2026Q2單季營業利益率</td><td>約1.20%（營業利益28.5億／營收238.3億）</td><td class="src-status"><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>2026Q2自由現金流</td><td>-357.6億元（營業現金流-276.7億＋投資現金流-25.8億）</td><td class="src-status"><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>所屬產業與全球排名</td><td>全球第二大NB ODM廠（市佔約20-25%），近年積極轉型AI伺服器/L10-L11機櫃代工</td><td class="src-status"><span class="badge b-warn">⚠️估算(市佔為媒體估算值)</span></td></tr>
+</table>
+<p>仁寶電腦（Compal Electronics）為台灣筆記型電腦與智慧裝置ODM大廠，主要客戶涵蓋Dell、HP、Lenovo、Acer、Asus等全球NB品牌，並為Amazon、Apple等公司代工智慧音箱／智慧家庭裝置。近三年NB本業成長趨緩、2025年營收甚至年減17%，公司自2025年起將AI伺服器、車用電子、智慧醫療列為第二成長曲線，2026年資本支出大舉上修至約180億元（去年僅80億元），並於桃園大溪啟用AI伺服器製造中心（總投資40.3億元，聚焦L10系統／L11機櫃組裝與液冷技術）。</p>
+</section>
+
+<section id="s1-engine">
+<h2 class="sec-title">業務引擎分析</h2>
+<h3>核心業務線</h3>
+<table>
+<tr><th>業務線</th><th>概況</th><th>護城河來源</th></tr>
+<tr><td>筆記型電腦ODM(本業)</td><td>全球前二大NB代工廠，客戶含Dell/HP/Lenovo/Acer/Asus；2025年營收年減17%，2026年前8月因換機潮及AI PC題材年增18.3%，但8月單月已現月減16.9%的季節性波動</td><td>規模經濟＋長期認證關係，但可替代性中等，同業（廣達/緯創/英業達）皆可承接</td></tr>
+<tr><td>AI伺服器／機櫃(L10/L11)</td><td>2026年目標伺服器營收占比突破10%，Q2 AI伺服器已占伺服器營收70-80%；2027年目標伺服器占比拉高至30-40%，PC/非PC營收各半；大溪廠、越南廠、美國德州兩廠採「三角分工」布局</td><td>製造與系統整合能力，但屬產業鏈中相對後段進入者，落後鴻海/廣達/緯創的機櫃出貨規模</td></tr>
+<tr><td>其他5C／新事業(車用電子、智慧醫療、穿戴)</td><td>公司列為長期多元化方向，惟目前占比與具體財務貢獻未見充分揭露</td><td>❌ 無法取得具體營收占比，需查年報分部資訊</td></tr>
+</table>
+
+<h3>近4期歷史財務摘要（單季，合併）</h3>
+<table>
+<tr><th>季度</th><th>營收(億)</th><th>QoQ</th><th>YoY</th><th>毛利率</th><th>營業利益率</th><th>EPS</th></tr>
+<tr><td>2025Q3</td><td>1,871.2</td><td>-6.1%</td><td>—</td><td>5.66%</td><td>1.43%</td><td>0.45</td></tr>
+<tr><td>2025Q4</td><td>1,908.5</td><td>+2.0%</td><td>—</td><td>5.82%</td><td>1.38%</td><td>0.32</td></tr>
+<tr><td>2026Q1</td><td>2,013.0</td><td>+5.5%</td><td>+1.1%(估)</td><td>5.27%</td><td>1.31%</td><td>0.45</td></tr>
+<tr><td>2026Q2</td><td>2,382.9</td><td>+18.4%</td><td>+32.1%</td><td>4.62%</td><td>1.20%</td><td>0.73</td></tr>
+</table>
+<p class="note">⚠️ 毛利率與營業利益率隨AI伺服器營收占比提高呈現逐季下滑趨勢（5.82%→4.62%），反映伺服器代工毛利率結構性低於NB本業，規模效應尚未完全對沖稀釋效果；2026Q1 YoY為估算值（去年同期營收基期未逐一核對）。</p>
+</section>
+
+<section id="s1-thesis">
+<h2 class="sec-title">核心Thesis與未來性</h2>
+<h3>投資論點支柱</h3>
+<table>
+<tr><th>論點</th><th>狀態</th><th>證據</th></tr>
+<tr><td>AI伺服器帶動非PC營收占比擴大，開啟第二成長曲線</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>Q2營收年增32%創高、AI伺服器占伺服器營收70-80%；但AI伺服器占「整體營收」目前仍僅約一成出頭，距2027年30-40%目標仍有明顯落差</td></tr>
+<tr><td>NB本業維持全球前二地位，提供現金流與規模基礎</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>2025年NB營收仍年減17%，2026年8月單月營收月減16.9%，顯示本業波動仍大，非穩定現金牛</td></tr>
+<tr><td>大溪廠／越南廠／美國廠三角產能布局帶來規模效益與毛利率改善</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>大溪廠Q4才開始貢獻營收，尚未反映在財報；同期毛利率反而逐季下滑，規模效益未兌現</td></tr>
+<tr><td>與新客戶(Exascale等)合作拓展GPU伺服器版圖</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>2026/09/14僅簽署LOI(合作意向書)，非具約束力正式合約，尚待後續轉單驗證</td></tr>
+</table>
+
+<h3>核心成長驅動力</h3>
+<ul>
+<li>AI伺服器/機櫃放量：2026年伺服器營收占比目標超過10%，2027年目標30-40%，為未來1-2年最大變數</li>
+<li>資本支出大舉擴張：2026年資本支出約180億元(去年80億)，聚焦伺服器產能與液冷技術，為中期產能與客戶信心指標</li>
+</ul>
+
+<h3>需監控風險（含觸發條件）</h3>
+<div class="risk-card mid"><b>毛利率持續下滑</b>：若合併毛利率跌破4%（目前4.62%），代表AI伺服器放量對毛利率的稀釋效果超出規模效益，需重新檢視轉型效益</div>
+<div class="risk-card mid"><b>營運現金流持續為負</b>：2026Q2單季OCF已轉為-276.7億元，若連續2季OCF為負，顯示擴產期營運資金壓力擴大，需觀察後續是否靠短期借款/發債支應</div>
+<div class="risk-card"><b>AI伺服器合作意向未能轉化為正式訂單</b>：與Exascale等新客戶目前僅止於LOI，若未能於未來1-2季內簽署具約束力合約或看到具體出貨，第二曲線題材恐面臨市場重新評價</div>
+</section>
+
+<section id="s1-comp">
+<h2 class="sec-title">競爭格局</h2>
+<h3>戰場一：筆記型電腦ODM</h3>
+<table>
+<tr><th>公司</th><th>概況</th><th>對仁寶威脅度</th></tr>
+<tr><td>廣達(2382)</td><td>全球最大NB ODM，同時是AI伺服器機櫃出貨龍頭之一（約2,100櫃，全球第二），PE僅14.65倍為同業最低估值</td><td><span class="badge b-bad">🔴高</span></td></tr>
+<tr><td>緯創(3231)</td><td>AI伺服器占伺服器營收已逾95%，2026Q2 EPS 4.72元創歷史新高，轉型速度全產業最快</td><td><span class="badge b-bad">🔴高</span></td></tr>
+<tr><td>英業達(2356)</td><td>同為NB+伺服器雙棲，估值最高(PE 23.53倍)，市場給予較高轉型溢價</td><td><span class="badge b-warn">🟡中</span></td></tr>
+<tr><td>和碩(4938)</td><td>以組裝(蘋果供應鏈)與NB為主，伺服器布局相對次要</td><td><span class="badge b-ok">🟢低</span></td></tr>
+</table>
+
+<h3>戰場二：AI伺服器／機櫃代工</h3>
+<table>
+<tr><th>公司</th><th>概況</th><th>對仁寶威脅度</th></tr>
+<tr><td>鴻海(2317)</td><td>2026年4月AI機櫃市占率超過44%，產業絕對龍頭</td><td><span class="badge b-bad">🔴高</span></td></tr>
+<tr><td>廣達(2382)</td><td>機櫃出貨約2,100櫃，全球第二，資本支出2026年上修至約300億元</td><td><span class="badge b-bad">🔴高</span></td></tr>
+<tr><td>緯創(3231)</td><td>機櫃出貨約1,300-1,400櫃，第三</td><td><span class="badge b-warn">🟡中</span></td></tr>
+<tr><td>仁寶(2324)</td><td>2026年大溪廠／美國廠才開始放量，機櫃出貨規模落後上述三者，屬追趕者角色</td><td>—</td></tr>
+</table>
+<p class="note">仁寶在AI伺服器機櫃代工戰場屬於後進者，短期內出貨規模與客戶認證進度仍落後鴻海/廣達/緯創，此為判斷「AI伺服器題材兌現速度」的關鍵觀察點。</p>
+</section>
+
+<section id="s1-quad">
+<h2 class="sec-title">成長象限判斷與護城河評估</h2>
+<h3>Peter Lynch 成長象限判斷</h3>
+<table>
+<tr><th>判斷依據</th><th>觀察</th></tr>
+<tr><td>營收/獲利趨勢</td><td>2018-2025年EPS在1.38~2.90元區間反覆震盪，無持續複合成長軌跡，屬成熟期公司</td></tr>
+<tr><td>轉型動能</td><td>自2025年起以AI伺服器/機櫃作為第二成長曲線，資本支出年增125%，屬明確的「轉機股」佈局</td></tr>
+<tr><td>本業循環性</td><td>NB本業受PC庫存循環、季節性(8月營收月減16.9%)影響明顯，帶有「景氣循環股」特徵</td></tr>
+</table>
+<p><b>結論：主要歸類為「轉機股」（Turnaround），兼具「景氣循環股」特徵。</b>公司試圖以AI伺服器第二曲線扭轉NB本業的估值天花板，但截至2026Q2，AI伺服器占整體營收仍僅一成出頭，轉型效益（尤其毛利率）尚未在財報上兌現，屬於「題材確立但財務驗證中」階段。</p>
+
+<h3>護城河五維度評分</h3>
+<div class="moat-row"><span class="label">不可替代性</span><span class="stars">★★☆☆☆</span><span>(2/5) ODM代工可替代性高，L10/L11系統整合能力提供一定差異化但非獨家</span></div>
+<div class="moat-row"><span class="label">網路效應</span><span class="stars">★☆☆☆☆</span><span>(1/5) B2B代工模式無網路效應</span></div>
+<div class="moat-row"><span class="label">客戶黏著度</span><span class="stars">★★★☆☆</span><span>(3/5) 與Dell/HP/Lenovo長期合作關係與產線認證構成中等轉換成本，但品牌客戶多採多家ODM分散下單策略</span></div>
+<div class="moat-row"><span class="label">成本優勢</span><span class="stars">★★★☆☆</span><span>(3/5) 全球化產能布局(台灣/越南/美國)具規模採購優勢，惟淨利率僅約1.5%反映定價權有限</span></div>
+<div class="moat-row"><span class="label">規模效應</span><span class="stars">★★★★☆</span><span>(4/5) 全球第二大NB ODM規模，有利爭取大型雲端業者的機櫃代工訂單</span></div>
+<p style="margin-top:10px;"><b>護城河總評：★★☆☆☆（偏弱）</b>，屬典型代工型企業，缺乏定價權與差異化，長期投資價值高度依賴「能否在AI伺服器賽道建立技術/規模領先」的執行力，而非既有護城河。</p>
+
+<div class="action-box">
+<h4>建議動作</h4>
+<p><b>目前建議：</b>觀察為主，不建議在當前PE已高於5年均值的位階大幅加碼。</p>
+<p><b>加碼觸發：</b>① AI伺服器營收占比單季突破15%且毛利率同步回升至5%以上；② 與Exascale等新客戶簽署具約束力正式合約並公告具體訂單金額；③ 股價回落至PE 15倍以下（約對應2026E EPS 2.2元×15倍≈33元）提供更佳安全邊際</p>
+<p><b>賣出觸發：</b>① 連續兩季營運現金流為負且資本支出未見對應營收貢獻；② AI伺服器機櫃客戶認證進度明顯落後鴻海/廣達/緯創，市占率被邊緣化；③ NB本業營收年減幅度重新擴大至雙位數</p>
+<p><b>每季監控指標：</b>伺服器營收占比、合併毛利率、營運現金流、資本支出執行進度</p>
+</div>
+</section>
+
+<hr class="divider">
+<h1 style="font-size:18px;color:var(--accent2);">② 最新財報解析</h1>
+
+<section id="s2-beatmiss">
+<h2 class="sec-title">財報表現與指引變化</h2>
+<h3>2026Q2實際表現 vs 歷史趨勢</h3>
+<table>
+<tr><th>指標</th><th>2026Q2實際</th><th>YoY</th><th>QoQ</th><th>市場預期對照</th><th>判定</th></tr>
+<tr><td>合併營收</td><td>238.29億元</td><td>+32.06%</td><td>+18.38%</td><td>❌ 無法取得財報公布前的市場一致預期數字</td><td><span class="badge b-ok">趨勢優於本業歷史常態</span></td></tr>
+<tr><td>EPS</td><td>0.73元</td><td>+564%(對2025Q2低基期0.11元)</td><td>+62%</td><td>❌ 無法取得財報公布前的市場一致預期EPS</td><td><span class="badge b-ok">年增顯著，惟需注意2025Q2為異常低基期</span></td></tr>
+<tr><td>毛利率</td><td>4.62%</td><td>—</td><td>-0.65個百分點(對2026Q1 5.27%)</td><td>—</td><td><span class="badge b-warn">季減，AI伺服器稀釋效果顯現</span></td></tr>
+<tr><td>營業利益率</td><td>1.20%</td><td>—</td><td>-0.11個百分點</td><td>—</td><td><span class="badge b-warn">連4季緩步下滑</span></td></tr>
+</table>
+<p class="note">⚠️ 本次搜尋未能取得公認的「財報公布前市場一致預期(consensus)」逐項數字，故無法完整比對Beat/Miss，僅能以YoY/QoQ趨勢佐證。已取得的唯一明確共識指標為FactSet對2026全年EPS預估（見下方股價位階章節），非單季預期。</p>
+
+<h3>全年指引變化</h3>
+<table>
+<tr><th>時間點</th><th>指引內容</th><th>方向</th></tr>
+<tr><td>2026年初(法說會)</td><td>目標2026年伺服器營收占總營收突破10%</td><td>—</td></tr>
+<tr><td>2026年中(法說會)</td><td>Q3伺服器營收「高雙位數季增」，2027年將非常亮眼；2027年目標伺服器占比拉高至30-40%，PC/非PC營收各半</td><td><span class="badge b-ok">上調(展望期拉長、幅度加大)</span></td></tr>
+</table>
+
+<h3>股價反應</h3>
+<p>2026年上半年股價隨AI伺服器題材發酵大幅波動：本益比自年初約20倍一度於5月衝高至27.59倍新高，隨後於6-9月逐步回落至18.77-20倍區間，顯示市場對AI伺服器兌現速度的預期一度過熱後回歸理性；近一週(09/07-09/11)外資轉為賣超仁寶9.82萬張，居台股外資賣超首位，需留意籌碼面轉弱訊號。</p>
+</section>
+
+<section id="s2-dcf">
+<h2 class="sec-title">三情境估值</h2>
+<p class="note">⚠️ 以下DCF為根據現有公開財測與產業假設之簡化估算，非嚴謹逐年現金流折現模型，因仁寶為代工型企業、資本支出波動大，估值結果僅供參考區間，非精確目標價。</p>
+<div class="scenario-grid">
+<div class="scenario-card bear">
+<h4>🐻 熊市情境</h4>
+<ul>
+<li>AI伺服器占比成長不及預期，2027年僅達20%</li>
+<li>合併毛利率維持4%左右，未見規模效益</li>
+<li>2027E EPS：約2.2元（僅小幅高於2026E）</li>
+<li>合理PE：12-14倍（回歸NB代工歷史保守估值）</li>
+</ul>
+<div class="target">目標價 26-31元</div>
+</div>
+<div class="scenario-card base">
+<h4>⚖️ 基準情境</h4>
+<ul>
+<li>依現有法說指引，2027年伺服器占比達30%左右</li>
+<li>毛利率隨規模效益溫和回升至5%上下</li>
+<li>2027E EPS：2.86元（採FactSet共識中位數）</li>
+<li>合理PE：15倍（5年歷史平均PE）</li>
+</ul>
+<div class="target">目標價 約43元</div>
+</div>
+<div class="scenario-card bull">
+<h4>🐂 牛市情境</h4>
+<ul>
+<li>AI伺服器占比達到或超過2027年30-40%高端目標，新客戶(Exascale等)合作轉化為正式訂單</li>
+<li>毛利率顯著改善至6%以上</li>
+<li>2028E EPS：3.51元（FactSet共識）提前於2027年反映</li>
+<li>合理PE：18-20倍(比照緯創等轉型成功同業估值)</li>
+</ul>
+<div class="target">目標價 約53-58元</div>
+</div>
+</div>
+<p class="note"><b>敏感度說明：</b>對估值影響最大的變數為「AI伺服器占營收比重」與「合併毛利率能否隨規模放大回升」，兩者互為因果——若毛利率持續受稀釋（目前已連續下滑至4.62%），即便營收占比達標，獲利成長也可能不如預期，是本次估值最大的不確定性來源。</p>
+</section>
+
+<section id="s2-valuation">
+<h2 class="sec-title">股價位階評估</h2>
+
+<h3>多年期EPS實際值 vs 預估值</h3>
+<table>
+<tr><th>年度</th><th>EPS</th><th>類型</th><th>YoY</th></tr>
+<tr><td>2023</td><td>1.76元</td><td>A實際</td><td>+5.4%</td></tr>
+<tr><td>2024</td><td>2.30元</td><td>A實際</td><td>+30.7%</td></tr>
+<tr><td>2025</td><td>1.38元</td><td>A實際</td><td>-40.0%</td></tr>
+<tr><td>2026</td><td>2.20元（區間1.92-2.60元，9位分析師，FactSet 2026/08/31調查）</td><td>E預估</td><td>+59.4%(中位數)</td></tr>
+<tr><td>2027</td><td>2.86元</td><td>E預估</td><td>+30.0%</td></tr>
+<tr><td>2028</td><td>3.51元</td><td>E預估</td><td>+22.7%</td></tr>
+</table>
+<p class="note">✅ 2023-2025為實際值（HiStock/CMoney財報數據交叉核對一致），2026-2028為FactSet 9位分析師調查中位數（來源：鉅亨網 2026/08/31報導）。2026年上半年實際EPS已達1.18元，年增93%，與全年預估2.20元方向一致但仍待下半年AI伺服器旺季驗證。</p>
+
+<h3>歷史本益比錨點（2021/04-2026/09，月度資料）</h3>
+<table>
+<tr><th>年度</th><th>最低PE</th><th>最高PE</th><th>年度均值(約)</th><th>備註</th></tr>
+<tr><td>2021(4-12月)</td><td>7.19倍(11月)</td><td>11.63倍(4月)</td><td>約8.7倍</td><td>疫情後PC需求高峰期估值基期</td></tr>
+<tr><td>2022</td><td><b>7.67倍(4月)</b></td><td>10.67倍(12月)</td><td>約8.5倍</td><td><b>近5年最低本益比年份</b>，對應當年全球股市重挫、NB需求急凍</td></tr>
+<tr><td>2023</td><td>10.46倍(1月)</td><td>24.91倍(12月)</td><td>約17.6倍</td><td>PC庫存去化尾聲，估值逐步回升</td></tr>
+<tr><td>2024</td><td>16.12倍(8月)</td><td>22.81倍(2月)</td><td>約18.7倍</td><td>估值站上近5年新常態區間</td></tr>
+<tr><td>2025</td><td>11.84倍(4月)</td><td>20.13倍(12月)</td><td>約15.5倍</td><td>4月因EPS走弱(全年僅1.38元)一度回落</td></tr>
+<tr><td>2026(至9月)</td><td>18.77倍(9月)</td><td>27.59倍(5月)</td><td>約22.6倍(YTD)</td><td>AI伺服器題材推升估值全年新高後回落</td></tr>
+</table>
+<p><b>5年平均本益比（2021/04-2026/09加權）：約15.2倍</b>。2018年最低本益比：<span class="badge b-bad">❌無法取得</span>——資料來源網站(Goodinfo)有反機器人驗證機制無法存取，本次未能取得2018年市場修正期的完整月度本益比數據，建議日後改用付費資料庫或Futu OpenD補齊。</p>
+
+<h3>反推試算：目前股價由EPS成長還是本益比擴張撐起？</h3>
+<table>
+<tr><th>試算基礎</th><th>計算</th><th>反推股價</th><th>與現價(37.35元)比較</th></tr>
+<tr><td>2022年最低PE × 2026E保守EPS(1.92元)</td><td>7.67 × 1.92</td><td>約14.7元</td><td>現價溢價達154%</td></tr>
+<tr><td>5年均PE(15.2倍) × 2026E中位數EPS(2.20元)</td><td>15.2 × 2.20</td><td>約33.4元</td><td>現價溢價約12%</td></tr>
+<tr><td>5年均PE(15.2倍) × 2027E EPS(2.86元)</td><td>15.2 × 2.86</td><td>約43.5元</td><td>現價折價約14%</td></tr>
+<tr><td>當前PE(18.77倍) × 2026E中位數EPS(2.20元)</td><td>18.77 × 2.20</td><td>約41.3元</td><td>隱含現價對應約2026E EPS的PE已達17倍</td></tr>
+</table>
+<p><b>結論：</b>目前股價（37.35元）用「2022年熊市底部估值×保守獲利」反推僅值約14.7元，顯示與絕對估值低點相比溢價相當可觀；但用「5年歷史平均PE×2026年共識EPS」反推約33.4元，現價僅溫和高出約12%，尚未到達「純靠本益比堆疊」的極端泡沫化程度。換言之，<b>目前股價主要仍是靠市場對2026-2027年EPS大幅回升（+59%、+30%）的預期在支撐，而非單純的本益比無限擴張</b>；但2026年5月本益比一度衝上27.59倍的紀錄顯示，短線情緒面確實出現過明顯的多頭超前反應，之後已隨PE回落至18.77倍完成部分修正。若下半年AI伺服器營收占比或毛利率不如預期，仍有本益比進一步向5年均值(15.2倍)甚至更低回歸的風險。</p>
+</section>
+
+<section id="s2-comps">
+<h2 class="sec-title">可比公司(Comps)分析</h2>
+<table>
+<tr><th>公司</th><th>PE(TTM)</th><th>相對同業平均(24.97倍)</th><th>成長類型</th><th>2026Q2營運亮點</th></tr>
+<tr><td><b>仁寶(2324)</b></td><td>18.77倍</td><td>折價約25%</td><td>轉機股(NB本業+AI伺服器起步)</td><td>營收年增32%，AI伺服器占伺服器營收70-80%</td></tr>
+<tr><td>廣達(2382)</td><td>14.65倍</td><td>折價約41%(同業最低)</td><td>成熟成長股(NB+伺服器雙引擎最成熟)</td><td>Q2 EPS 7.43元創新高，機櫃出貨全球第二</td></tr>
+<tr><td>緯創(3231)</td><td>17.65倍</td><td>折價約29%</td><td>高速成長股(AI伺服器占比最高)</td><td>Q2 EPS 4.72元創新高，AI伺服器占伺服器營收逾95%</td></tr>
+<tr><td>英業達(2356)</td><td>23.53倍</td><td>接近同業平均</td><td>轉型溢價股</td><td>市場給予同業中最高估值溢價</td></tr>
+</table>
+<p class="note">仁寶目前PE折價於廣達、緯創之上但低於英業達，反映市場認為其AI伺服器轉型進度落後緯創(占比95% vs 仁寶約一成)，但優於尚未大力著墨此題材的傳統NB同業。此折價結構本身合理，並非明顯低估或高估。</p>
+</section>
+
+<section id="s2-target">
+<h2 class="sec-title">法人動向與操作建議</h2>
+<table>
+<tr><th>指標</th><th>數據</th><th>來源狀態</th></tr>
+<tr><td>FactSet共識目標價</td><td>40元（2026/08/31，9位分析師調查）</td><td><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>近一週外資買賣超</td><td>賣超9.82萬張，居台股外資賣超首位(2026/09/07-09/11)</td><td><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>庫藏股</td><td>2026/05-07買回計畫，目標10萬張(占股本2.27%)，實際完成7.42萬張，均價約41元，用於員工獎酬(非銷除)</td><td><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>內部人持股</td><td>董監+經理人合計約5.37%</td><td><span class="badge b-warn">⚠️估算(取自單一媒體引用，未逐一核對最新申報)</span></td></tr>
+<tr><td>股息殖利率</td><td>2025年配息1.1元，殖利率約3.5%(以除息前股價計)；近5年平均殖利率約5.07%</td><td><span class="badge b-ok">✅已驗證</span></td></tr>
+</table>
+
+<h3>上行空間彙總</h3>
+<table>
+<tr><th>參考基準</th><th>對應價位</th><th>距現價(37.35元)空間</th></tr>
+<tr><td>FactSet共識目標價</td><td>40元</td><td>+7.1%</td></tr>
+<tr><td>5年均PE×2026E EPS(反推)</td><td>約33.4元</td><td>-10.6%</td></tr>
+<tr><td>5年均PE×2027E EPS(反推)</td><td>約43.5元</td><td>+16.5%</td></tr>
+<tr><td>DCF基準情境</td><td>約43元</td><td>+15.1%</td></tr>
+<tr><td>DCF熊市情境</td><td>26-31元</td><td>-30%至-17%</td></tr>
+</table>
+
+<div class="action-box">
+<h4>操作建議</h4>
+<p><b>已持有者：</b>可續抱觀察，惟需留意近期外資轉賣超與PE已高於5年均值的訊號，不建議此位階加碼。</p>
+<p><b>考慮建倉者：</b>建議等待回檔至33元附近（對應5年均PE×2026E EPS的合理區間）分批布局，可降低下檔風險。</p>
+<p><b>加碼觸發：</b>股價回落至30-33元區間，且伺服器營收占比/毛利率未惡化</p>
+<p><b>停損警示：</b>若毛利率跌破4%且營運現金流連續2季為負，應重新檢視轉型論點是否成立</p>
+</div>
+</section>
+
+<hr class="divider">
+<h1 style="font-size:18px;color:var(--accent2);">③ 財務風險健檢</h1>
+
+<section id="s3-data">
+<h2 class="sec-title">財務數據（近3期，合併，單位：百萬元）</h2>
+<table>
+<tr><th>項目</th><th>2025Q4</th><th>2026Q1</th><th>2026Q2</th></tr>
+<tr><td>營業收入</td><td>190,852.23</td><td>201,303.54</td><td>238,294.68</td></tr>
+<tr><td>營業利益(EBIT估)</td><td>2,634.50</td><td>2,644.08</td><td>2,854.75</td></tr>
+<tr><td>稅前純益</td><td>2,514.50</td><td>3,090.60</td><td>4,639.42</td></tr>
+<tr><td>總資產</td><td>438,907.28</td><td>452,433.93</td><td>521,782.74</td></tr>
+<tr><td>總負債</td><td>291,230.37</td><td>306,525.21</td><td>368,220.68</td></tr>
+<tr><td>權益總計</td><td>147,676.91</td><td>145,908.73</td><td>153,562.06</td></tr>
+<tr><td>現金及約當現金</td><td>83,290.35</td><td>84,569.62</td><td>82,928.77</td></tr>
+<tr><td>長期負債</td><td>11,940.11</td><td>11,898.45</td><td>12,531.78</td></tr>
+<tr><td>營業活動現金流(OCF)</td><td>-8,184.80</td><td>14,011.74</td><td>-27,669.65</td></tr>
+<tr><td>投資活動現金流</td><td>-4,672.98</td><td>-2,794.01</td><td>-2,577.02</td></tr>
+<tr><td>自由現金流(FCF估)</td><td>-12,853.23</td><td>10,809.04</td><td>-35,761.69</td></tr>
+</table>
+<p class="note">✅ 資產負債表與損益/現金流量表數據取自CMoney財務分析頁面(季合併報表)，交叉比對官方公告數字一致。<b>短期銀行借款細項未單獨揭露</b>（財報總負債中主要為應付帳款179,466M，屬營運性負債而非有息負債，符合代工業高週轉特性）——<span class="badge b-bad">❌利息費用/利息保障倍數 無法取得</span>，需查10-K等值之年報財務報表附注（台股為年報附註）原文，本次因資料源存取限制(Goodinfo反機器人驗證、財報狗頁面阻擋)未能取得精確數字。</p>
+</section>
+
+<section id="s3-ratio">
+<h2 class="sec-title">六大比率診斷</h2>
+<table>
+<tr><th>比率</th><th>公式</th><th>2026Q2結果</th><th>狀態</th><th>警戒標準</th></tr>
+<tr><td>利息覆蓋率</td><td>EBIT/利息支出</td><td>❌無法取得(利息費用未拆分)</td><td><span class="badge b-bad">❌無法取得</span></td><td>&lt;3倍為警戒</td></tr>
+<tr><td>負債比率</td><td>總負債/總資產</td><td>70.6%(368,220.68/521,782.74)</td><td><span class="badge b-warn">⚠️偏高</span></td><td>&gt;70%需留意，惟代工業因應付帳款/預收款項高，此比率天生偏高，非直接對應違約風險</td></tr>
+<tr><td>淨負債/EBITDA</td><td>(有息負債-現金)/EBITDA</td><td>❌無法取得(缺EBITDA拆分與有息負債細項)</td><td><span class="badge b-bad">❌無法取得</span></td><td>&gt;3倍為警戒</td></tr>
+<tr><td>OCF/總負債</td><td>營業現金流/總負債</td><td>2026Q2單季為負(-7.5%)，2026Q1為+4.6%</td><td><span class="badge b-warn">⚠️波動大</span></td><td>需觀察未來2季是否轉正</td></tr>
+<tr><td>現金流覆蓋比率</td><td>現金及約當現金/流動負債</td><td>24.0%(82,928.77/345,137.62)</td><td><span class="badge b-warn">⚠️中等</span></td><td>&lt;20%需留意</td></tr>
+<tr><td>兩年內到期牆覆蓋倍數</td><td>現金/2年內到期債務</td><td>❌無法取得(到期時程未揭露)</td><td><span class="badge b-bad">❌無法取得</span></td><td>—</td></tr>
+</table>
+<p class="note">仁寶的負債結構以「應付帳款」為主體（179,466M，占總負債近49%），屬於ODM代工業常見的「營運性負債」（向零組件供應商的應付款），而非銀行借款等「財務性負債」，因此傳統負債比率解讀需搭配業務模式調整，不宜直接比照一般製造業標準。真正需要關注的是現金水位是否足以支撐擴產期的營運資金缺口。</p>
+</section>
+
+<section id="s3-debt">
+<h2 class="sec-title">債務到期時程與CapEx分析</h2>
+<p><span class="badge b-bad">❌ 逐年到期金額表無法取得</span>——仁寶公開資訊未揭露細項到期時程，且本次資料源(年報/財報附注)存取受限，建議查閱公開資訊觀測站(MOPS)年報附注之「借款到期日」章節取得精確數字。</p>
+
+<h3>CapEx分析</h3>
+<table>
+<tr><th>指標</th><th>數據</th><th>判讀</th></tr>
+<tr><td>2026年資本支出預估</td><td>約180億元(去年80億元，年增125%)</td><td>大幅擴張，聚焦AI伺服器產能(約60億)與台灣總部建設(約40億)</td></tr>
+<tr><td>大溪AI伺服器製造中心</td><td>總投資40.3億元，2026/08啟用</td><td>已完工投產，Q4開始貢獻營收</td></tr>
+<tr><td>CapEx/OCF(近4季平均)</td><td>⚠️估算：因OCF近期波動大且部分季度為負，比率意義有限，建議待OCF穩定後重新評估</td><td>—</td></tr>
+<tr><td>業務模式判讀</td><td>傳統NB代工屬輕資產外包模式，惟AI伺服器機櫃/液冷產線需較高自建產能投入，公司正從「輕資產」轉向「中度資產」型態</td><td><span class="badge b-warn">⚠️轉型中</span></td></tr>
+</table>
+</section>
+
+<section id="s3-final">
+<h2 class="sec-title">同業對比與綜合診斷</h2>
+<table>
+<tr><th>比較項目</th><th>仁寶(2324)</th><th>廣達(2382)</th><th>緯創(3231)</th><th>英業達(2356)</th></tr>
+<tr><td>PE(TTM)</td><td>18.77倍</td><td>14.65倍</td><td>17.65倍</td><td>23.53倍</td></tr>
+<tr><td>2026Q2毛利率</td><td>4.62%</td><td>❌待查</td><td>❌待查</td><td>❌待查</td></tr>
+<tr><td>2026Q2 EPS</td><td>0.73元</td><td>7.43元(股本規模不同，不宜直接比較絕對值)</td><td>4.72元(同上)</td><td>❌待查</td></tr>
+<tr><td>AI伺服器占伺服器營收</td><td>約70-80%</td><td>❌待查(機櫃出貨規模全球第二)</td><td>逾95%</td><td>❌待查</td></tr>
+</table>
+<p class="note">因時間與資料源限制，廣達/緯創/英業達的毛利率、EPS等細項數字本次未逐一查證，僅列出已交叉驗證之PE與AI伺服器占比供参考，避免以片面搜尋結果臆測填入。</p>
+
+<h3>綜合診斷</h3>
+<div class="action-box">
+<h4>定性分類：轉型擴張型（非槓桿警戒型）</h4>
+<p><b>最大風險點：</b>並非傳統的違約/流動性風險（負債以營運性應付帳款為主，長期負債僅125億元，占總資產比重低），而是「轉型執行風險」——資本支出年增125%、Q2營運現金流轉為-277億元的情況下，若AI伺服器訂單放量速度不如預期，公司將面臨「擴產已投入、營收未跟上」的資金效率風險。</p>
+<p><b>安全邊際：</b>目前現金水位829億元，加計庫藏股/融資彈性，短期內尚無流動性疑慮；但若後續2-3季OCF持續為負，將需要更密切觀察是否透過短期借款或發行公司債支應資本支出缺口，屆時財務結構將從「營運性負債為主」轉向「財務性負債增加」，需重新評估負債比率的意義。</p>
+</div>
+</section>
+
+<section id="final-action">
+<h2 class="sec-title">最終操作建議</h2>
+<div class="action-box">
+<h4>總結：AI伺服器題材確立中的轉機股，估值已部分反映預期，執行力是勝負關鍵</h4>
+<p>仁寶正處於「NB本業成熟、AI伺服器第二曲線建立中」的轉折點。截至2026Q2，AI伺服器占整體營收仍僅約一成出頭，毛利率隨營收結構轉變不升反降，護城河偏弱（★★☆☆☆），屬於典型代工廠的體質。但市場已提前給予一定估值溢價：目前PE(18.77倍)高於5年均值(15.2倍)約23%，反推試算顯示現價主要仍由「2026-2027年EPS大幅回升」的預期支撐，尚非純粹本益比堆疊的泡沫化型態。</p>
+<p><b>已持有：</b>可續抱，但因近期外資轉賣超、PE已高於歷史均值，不建議在此位階加碼，密切觀察下半年伺服器營收占比與毛利率是否兌現法說會指引。</p>
+<p><b>未持有：</b>建議等待回檔至33元附近（對應5年均PE×2026E共識EPS的合理區間）再行分批布局，避免追高。</p>
+<p><b>長期(3-5年)角度：</b>若AI伺服器占比能如期於2027年達到30-40%且毛利率同步改善，仁寶有機會複製緯創式的估值重估路徑；反之若轉型不如預期，估值恐向NB代工業歷史保守本益比(12-15倍)回歸。</p>
+<p><b>核心催化劑：</b>①下半年AI伺服器營收占比與毛利率數據 ②與Exascale等新客戶合作能否從LOI轉化為正式訂單 ③2027年PC/非PC營收各半目標的階段性進度</p>
+</div>
+</section>
+
+<footer>
+<p><b>資料來源：</b>CMoney財務分析、HiStock嗨投資、鉅亨網(cnyes)、Yahoo股市台灣、TechNews科技新報、UDN經濟日報/聯合新聞網、統一投顧/元大等媒體轉述之FactSet分析師調查、公司法說會公開報導。本次工作階段因未啟用Futu OpenD，改以WebSearch/WebFetch/瀏覽器實查台股公開資訊平台為主；Goodinfo、財報狗(statementdog)、鉅亨網(cnyes.com)首頁因反機器人驗證/存取限制，部分細項數據(如2018年本益比、利息費用拆分、逐年到期債務)未能取得，已於內文標示❌並建議後續查證管道。</p>
+<p style="margin-top:10px;"><b>免責聲明：</b>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</footer>
+
+</div>
+</body>
+</html>
