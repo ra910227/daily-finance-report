@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜AVGO Broadcom Inc. 2026-09-16</title>
+<style>
+  :root { --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6; --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca; --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c; --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+  .ok { color: var(--green); } .warn { color: var(--gold); } .bad { color: var(--red); }
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); } .scenario.base { border-top: 3px solid var(--blue); } .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); } .scenario.base h4 { color: var(--blue); } .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+  .comp-now { background: rgba(79,70,229,0.05); } .comp-now td { font-weight: 700; }
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); } .bar-yellow { background: var(--gold); } .bar-red { background: var(--red); }
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--accent); }
+  @media (max-width: 900px) { .summary-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 720px) { .scenario-row { grid-template-columns: 1fr; } .moat-grid { grid-template-columns: repeat(2,1fr); } .hero-price-block { text-align:left; } }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">AVGO</div>
+      <div class="hero-name">Broadcom Inc.（半導體+基礎設施軟體雙引擎，AI客製化XPU設計龍頭，為Google/Meta/OpenAI/Anthropic打造專屬AI加速晶片，VMware併購後軟體業務規模化）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-09-16　資料基準：2026-09-15附近收盤　財年制：FY2026於2026年11月結束</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$367</div>
+      <div class="hero-mktcap">市值 ≈$1.77T</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-purple">Q3FY26 AI半導體營收$16.7B，YoY+221%</span>
+    <span class="badge badge-blue">Q4guidance AI半導體$21.7B，YoY+236%</span>
+    <span class="badge badge-green">管理層guide FY27 AI營收$115B/FY28 $230B</span>
+    <span class="badge badge-orange">目標FY28 EPS超過$30</span>
+    <span class="badge badge-yellow">客製XPU集中於4-6大客戶⚠️</span>
+    <span class="badge badge-red">Google傳考慮更多自研，客戶內部化風險</span>
+    <span class="badge badge-teal">Strong Buy 49位，共識目標價$525.97</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$367</div><div class="sub">✅ 52週$289.96–$495.00</div></div>
+    <div class="meta-item"><label>Q3FY26營收</label><div class="val">$29.59B</div><div class="sub">YoY +86% ✅</div></div>
+    <div class="meta-item"><label>Q3FY26調整後EPS</label><div class="val">$3.32</div><div class="sub">優於共識$3.24 ✅</div></div>
+    <div class="meta-item"><label>PE(TTM)/Fwd PE</label><div class="val">61.83/23.55</div><div class="sub">TTM受VMware攤銷扭曲⚠️</div></div>
+    <div class="meta-item"><label>Thesis成立度</label><div class="val">4.0/5</div><div class="sub">AI ASIC需求強勁，客戶集中度是最大風險</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐⭐⭐☆</div><div class="sub">客製化晶片設計know-how+VMware軟體協同</div></div>
+  </div>
+</div>
+
+<nav class="toc"><div class="toc-inner">
+  <a href="#mode1">模式一深度研究</a><span class="toc-sep">·</span><a href="#biz">業務引擎</a><a href="#thesis">核心Thesis</a><a href="#competition">競爭格局</a><a href="#moat">成長象限</a>
+  <span class="toc-sep">·</span><a href="#mode2">模式二財報解析</a><span class="toc-sep">·</span><a href="#earnings">Q3財報</a><a href="#eps">EPS錨點</a><a href="#dcf">DCF情境</a><a href="#targets">投行目標</a>
+  <span class="toc-sep">·</span><a href="#mode3">模式三財務健檢</a><span class="toc-sep">·</span><a href="#ratios">六大比率</a><a href="#health">綜合診斷</a>
+  <span class="toc-sep">·</span><a href="#final">綜合總結</a>
+</div></nav>
+
+<div class="container">
+
+<div id="mode1" class="mode-divider"><h2>◈ 模式一：公司深度研究</h2><p>業務引擎 · 核心Thesis · 競爭格局 · 成長象限 · 護城河評分</p></div>
+
+<div class="section">
+  <div class="section-header"><div class="section-num">1</div><div class="section-title">公司基本介紹</div></div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">Broadcom（NASDAQ: AVGO）市值≈$1.77兆，業務分「半導體解決方案」與「基礎設施軟體」（VMware，2023年併購）兩大板塊。半導體業務中，<strong>客製化AI加速晶片（XPU）</strong>是核心成長引擎——為Google（TPU）、Meta、OpenAI、Anthropic等客戶量身打造專屬AI晶片，讓客戶得以繞開Nvidia GPU的定價與供給限制。Google合約規模據報導達「每年數百億美元等級的TPU訂單」。Q3 FY26 AI半導體營收$16.7B，年增221%，已佔公司總營收56%。✅</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽（Q3 FY2026，最新單季）✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$29.59B</div><div class="big-label">Q3'26營收</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">+86% YoY</div><div class="big-label">半導體營收逾三倍成長至$16.7B</div></div>
+        <div><div class="big-num" style="font-size:22px;">AI半導體佔比56%</div><div class="big-label">$16.7B／$29.59B</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">$3.32</div><div class="big-label">調整後EPS，優於共識$3.24</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>財務摘要</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025(部分)</th><th class="num">FY2026 Q3</th></tr></thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$35.8B ✅</td><td class="num">$51.6B ✅（+44%，含VMware全年併表）</td><td class="num">單季$15B ✅（+20%）</td><td class="num">單季$29.59B ✅（+86%）</td></tr>
+        <tr><td>淨利</td><td class="num">$14.1B ✅</td><td class="num warn">$5.9B ✅（VMware攤銷/重組費用侵蝕）</td><td class="num">單季$4.95B ✅（+124%）</td><td class="num">— ⚠️</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅ 已驗證｜⚠️ FY2024淨利大幅低於FY2023（$5.9B vs $14.1B），主因2023年11月完成的VMware併購（約$86.3B現金+股票）帶來鉅額攤銷與重組費用，非核心營運惡化，TTM PE 61.83倍即是此會計效應的殘留反映，Forward PE 23.55倍更貼近正常化獲利水準。</p>
+</div>
+
+<div id="biz" class="section">
+  <div class="section-header"><div class="section-num">2</div><div class="section-title">業務引擎分析</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>🤖 AI客製化XPU（核心成長引擎）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">Q3'26營收$16.7B(+221%YoY,+54%QoQ)，Q4 guidance $21.7B(+236%)。管理層guide FY27 AI營收達$115B、FY28達$230B，目標FY28 EPS超過$30。核心客戶為Google（TPU，多代路線圖）、Meta、OpenAI、Anthropic，「4-6大客戶」貢獻絕大部分AI營收。✅</p></div>
+    <div class="card"><h3>📡 網通/其他半導體（成熟業務）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">傳統網通晶片、寬頻、儲存等業務提供穩定現金流基礎，非成長敘事核心但維持公司整體獲利韌性。✅</p></div>
+    <div class="card"><h3>☁️ VMware基礎設施軟體（併購後整合）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">2023年約$86.3B併購VMware後，Broadcom近期推出VMware為基礎的私有AI雲端平台，嘗試將AI營收基礎從純硬體客製晶片擴大至企業級軟體基礎設施，是分散單一客戶集中度風險的策略之一。✅</p></div>
+    <div class="card"><h3>💰 股利政策</h3><p style="font-size:13px; color:var(--text); line-height:1.7">Broadcom長期為穩定配息成長股，即便AI敘事主導股價，仍保持每季配息，兼具成長與價值股特徵。✅</p></div>
+  </div>
+</div>
+
+<div id="thesis" class="section">
+  <div class="section-header"><div class="section-num">3</div><div class="section-title">核心Thesis與未來成長驅動</div></div>
+  <div class="thesis-grid">
+    <div class="thesis-card"><div class="thesis-status ok">✅ 成立</div><div class="label">Thesis 1｜客製化AI晶片需求爆發，非題材</div><div class="content">AI半導體營收連續加速(+221%→guide+236%)，是實質營收而非題材炒作，管理層三年期guidance($58B→$115B→$230B)提供罕見的長期能見度。✅ 成立。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div><div class="label">Thesis 2｜客戶集中度風險可控</div><div class="content">4-6大客戶貢獻絕大部分AI營收，管理層雖強調長期產能承諾，但Google傳出考慮加大自研晶片比重，任何核心客戶轉向內部化都可能造成營收大幅波動。⚠️ 部分成立，是本檔最大結構性風險。</div></div>
+    <div class="thesis-card"><div class="thesis-status ok">✅ 成立</div><div class="label">Thesis 3｜VMware整合分散客戶/業務集中度</div><div class="content">私有AI雲端平台將AI營收基礎從純硬體XPU擴大至企業軟體，長期有助分散對少數hyperscaler客戶的依賴。✅ 成立但仍處早期階段。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div><div class="label">Thesis 4｜FY28 EPS>$30目標可達成</div><div class="content">建立在AI營收guidance如期兌現的前提下，若任一大客戶CapEx或自研計畫生變，此目標的達成路徑將受挑戰。⚠️ 部分成立，高度依賴guidance兌現度。</div></div>
+  </div>
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)"><h3>🚀核心成長驅動力</h3><ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)"><li>Google TPU多代路線圖合約持續放量</li><li>Meta/OpenAI/Anthropic訂單擴大</li><li>VMware私有AI雲端平台開拓企業客戶</li></ul></div>
+    <div class="card" style="border-left:3px solid var(--red)"><h3>⚠️核心監控風險</h3><ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)"><li>Google加大自研晶片比重，觸發：任一季度Google訂單占比明顯下滑</li><li>4-6大客戶中任一家CapEx延遲，觸發：AI營收guidance未達標</li><li>VMware訂閱制費用引發客戶不滿，觸發：VMware客戶流失率上升</li></ul></div>
+  </div>
+</div>
+
+<div id="competition" class="section">
+  <div class="section-header"><div class="section-num">4</div><div class="section-title">競爭格局</div></div>
+  <div class="tbl-wrap">
+    <table><thead><tr><th>戰場</th><th>公司</th><th>現況</th><th>對AVGO威脅度</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="2"><strong>客製化AI晶片</strong></td><td>Marvell（本組另一檔MRVL）</td><td>同屬客製ASIC設計商，服務部分重疊客戶</td><td>🟡 中｜直接競爭客製晶片設計訂單</td></tr>
+        <tr><td>客戶自研（Google/Amazon內部團隊）</td><td>Google/Amazon持續擴大內部晶片設計能力</td><td>🔴 高｜長期最大威脅，客戶既是夥伴也是潛在競爭者</td></tr>
+        <tr><td><strong>Merchant GPU</strong></td><td>Nvidia（本組NVDA）</td><td>客製ASIC正是為了繞開Nvidia GPU的定價與供給限制而生</td><td>🟢 低（互補關係大於直接競爭）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="caution-box" style="margin-top:16px;"><h3>⚠️ 競爭關鍵監控：AVGO最大的「競爭對手」其實是客戶自己</h3><p style="font-size:13px; line-height:1.7; color:var(--text)">與NVDA面對外部競爭者不同，AVGO面臨的最大風險是核心客戶（尤其Google）選擇將更多晶片設計能力內部化，這種「客戶兼競爭者」的動態關係在半導體產業中較為獨特，需要以「客戶是否持續擴大委外設計比重」而非傳統市佔率變化作為監控指標。</p></div>
+</div>
+
+<div id="moat" class="section">
+  <div class="section-header"><div class="section-num">5</div><div class="section-title">Peter Lynch成長象限&護城河評分</div></div>
+  <div class="card-grid"><div class="card" style="border:2px solid var(--purple);"><h3 style="color:var(--purple)">📊 Lynch象限判斷</h3><div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">快速成長股，惟客戶集中度使循環股風險升高</div><p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 AI半導體營收三位數成長且管理層提供三年期具體guidance，符合快速成長股定義；惟高度集中於4-6大客戶的收入結構，使其比NVDA（客戶基礎更分散）多了一層「大客戶決策風險」，本質介於快速成長股與客製化代工循環股之間。</p></div></div>
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item"><div class="moat-label">不可替代性</div><div class="moat-stars">★★★★☆</div><div class="moat-score">4.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">客製晶片設計know-how難以短期複製</div></div>
+    <div class="moat-item"><div class="moat-label">客戶黏著度</div><div class="moat-stars">★★★☆☆</div><div class="moat-score">3.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">長期合約鎖定但客戶自研能力持續提升</div></div>
+    <div class="moat-item"><div class="moat-label">網路效應</div><div class="moat-stars">★★☆☆☆</div><div class="moat-score">2.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">客製代工模式不具典型網路效應</div></div>
+    <div class="moat-item"><div class="moat-label">成本優勢</div><div class="moat-stars">★★★★☆</div><div class="moat-score">4.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">大規模客製設計經驗降低單位成本</div></div>
+    <div class="moat-item"><div class="moat-label">規模效應</div><div class="moat-stars">★★★★☆</div><div class="moat-score">4.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">半導體+軟體雙業務規模效應顯著</div></div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：3.4/5 ⭐⭐⭐☆☆（技術/成本優勢紮實，惟客戶黏著度與網路效應相對受限於客製代工商業模式）</div>
+  <div class="caution-box" style="margin-top:24px;"><h3>⚠️建議動作</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+    <div><strong>當前建議：</strong>可作為核心池衛星部位，AI ASIC需求趨勢明確，惟客戶集中度風險使其不宜作為單一最大持倉。<br><br><strong>加碼觸發：</strong><ul style="padding-left:16px;"><li>新增第5/6大客戶確認大型訂單</li><li>Q4 guidance如期或超越兌現</li></ul></div>
+    <div><strong>賣出/迴避觸發：</strong><ul style="padding-left:16px;"><li>Google或其他核心客戶明確宣布縮減委外設計比重</li><li>AI半導體YoY成長率連續兩季跌破100%</li></ul><br><strong>每季監控：</strong>AI半導體營收/佔比、客戶集中度變化、VMware整合進度</div>
+  </div></div>
+</div>
+
+<div id="mode2" class="mode-divider"><h2>◈ 模式二：最新財報解析</h2><p>Q3 FY2026財報 · EPS估值錨點 · DCF三情境 · 投行目標價</p></div>
+
+<div id="earnings" class="section">
+  <div class="section-header"><div class="section-num">6</div><div class="section-title">Q3 FY2026財報（2026-09-04發布）</div></div>
+  <div class="card" style="border-left:3px solid var(--green); margin-bottom:20px;"><h3 style="color:var(--green)">✅ 營收/EPS雙雙優於預期，AI半導體連續加速，Q4 guidance再上修</h3><p style="font-size:13px; line-height:1.7; color:var(--text)">Q3營收$29.59B(+86%YoY)，調整後EPS$3.32優於共識$3.24；半導體營收逾三倍成長至$16.7B超越平均預估$15.2B；AI半導體營收$16.7B(+221%YoY,+54%QoQ)佔總營收56%。Q4 guidance AI半導體上修至$21.7B(+236%YoY)。✅</p></div>
+  <div class="tbl-wrap"><table><thead><tr><th>指標</th><th class="num">實際值✅</th><th class="num">市場預期⚠️</th><th class="num">YoY</th><th>判定</th></tr></thead>
+    <tbody>
+      <tr><td>營收</td><td class="num ok">$29.59B</td><td class="num">— ⚠️（優於預期）</td><td class="num ok">+86%</td><td><span class="badge badge-green">Beat✅</span></td></tr>
+      <tr><td>調整後EPS</td><td class="num ok">$3.32</td><td class="num">$3.24</td><td class="num">— ⚠️</td><td><span class="badge badge-green">Beat✅</span></td></tr>
+      <tr><td>半導體營收</td><td class="num ok">$16.7B</td><td class="num">$15.2B</td><td class="num ok">逾三倍成長</td><td><span class="badge badge-green">Beat✅</span></td></tr>
+      <tr><td>AI半導體營收</td><td class="num ok">$16.7B</td><td class="num">— ⚠️</td><td class="num ok">+221%</td><td><span class="badge badge-green">大幅Beat✅</span></td></tr>
+      <tr><td>Q4 AI半導體guidance</td><td class="num ok">$21.7B</td><td class="num">— ⚠️</td><td class="num ok">+236%</td><td><span class="badge badge-green">上修✅</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<div id="eps" class="section">
+  <div class="section-header"><div class="section-num">7</div><div class="section-title">估值歷史錨點</div></div>
+  <div class="tbl-wrap"><table><thead><tr><th>財年</th><th class="num">營收/淨利概況</th><th class="num">YoY</th><th>狀態</th></tr></thead>
+    <tbody>
+      <tr><td><strong>FY2023 A</strong></td><td class="num ok">營收$35.8B/淨利$14.1B✅</td><td class="num ok">+8%</td><td><span class="badge badge-blue">併購前基期</span></td></tr>
+      <tr><td><strong>FY2024 A</strong></td><td class="num warn">營收$51.6B/淨利$5.9B✅</td><td class="num ok">+44%營收，惟淨利因VMware攤銷驟降</td><td><span class="badge badge-yellow">VMware整合期</span></td></tr>
+      <tr><td><strong>FY2026 Q3</strong></td><td class="num ok">營收$29.59B(單季)✅</td><td class="num ok">+86%</td><td><span class="badge badge-green">AI驅動再加速</span></td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ TTM PE 61.83倍受VMware併購攤銷費用扭曲，Forward PE 23.55倍更貼近正常化獲利水準，與AI半導體三位數成長率相比，隱含估值並不算昂貴。</p>
+</div>
+
+<div id="dcf" class="section">
+  <div class="section-header"><div class="section-num">8</div><div class="section-title">④ 三情境DCF估值（外部分析師情境法）</div></div>
+  <div class="caution-box"><h3>⚠️ 方法論說明</h3><p style="font-size:13px; color:var(--text)">採用外部研究已發布情境（FinanceFeeds），⚠️非本報告獨立建模。</p></div>
+  <div class="scenario-row">
+    <div class="scenario bear"><h4>🐻熊市（20%）</h4><div class="scenario-price" style="color:var(--red)">$300</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$367　-18.3%</div><div class="row"><span>假設</span><span>客製ASIC份額被客戶自研取代</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：核心客戶轉向內部化</div></div>
+    <div class="scenario base"><h4>📊基準（45%）</h4><div class="scenario-price" style="color:var(--blue)">$470-530</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$367　+28.1%~+44.4%</div><div class="row"><span>假設</span><span>AI營收guidance如期兌現</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：guidance持續達標</div></div>
+    <div class="scenario bull"><h4>🐂牛市（35%）</h4><div class="scenario-price" style="color:var(--green)">$630</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$367　+71.7%</div><div class="row"><span>假設</span><span>新客戶加入，FY28 $230B/EPS>$30兌現</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：客戶群持續擴大</div></div>
+  </div>
+  <div class="card" style="border-left:3px solid var(--accent);"><h3>敏感度分析</h3><p style="font-size:13px; color:var(--text); line-height:1.7">價差主要由「客戶集中度風險能否化解」決定。共識目標價$525.97落於基準情境上緣，現價$367提供約43%上行空間，是本組B-2中隱含空間最大者之一，惟客戶集中度是需要持續驗證的核心變數。</p></div>
+</div>
+
+<div id="targets" class="section">
+  <div class="section-header"><div class="section-num">9</div><div class="section-title">投行目標價與操作建議</div></div>
+  <div class="tbl-wrap"><table><thead><tr><th>機構/來源</th><th>評等</th><th class="num">目標價</th><th>日期</th></tr></thead>
+    <tbody><tr><td>共識彙整（45-49位分析師）</td><td><span class="badge badge-green">Strong Buy</span></td><td class="num">均值$525.97-533.41✅</td><td>2026年9月</td></tr></tbody>
+  </table></div>
+  <div class="action-box" style="margin-top:16px;"><h3>✅最終操作建議</h3><p style="font-size:13px; line-height:1.8; color:var(--text)">現價$367相對共識目標價（$526-533）有約43-45%上行空間。<strong>已持有者：</strong>續抱作為核心池衛星部位；<strong>未持有者：</strong>可分批建立部位，惟因客戶集中度風險（4-6大客戶），建議控制單一持倉權重，不宜作為唯一AI半導體核心部位，可與NVDA互補配置。</p></div>
+</div>
+
+<div id="mode3" class="mode-divider"><h2>◈ 模式三：財務風險健檢</h2></div>
+<div id="ratios" class="section">
+  <div class="section-header"><div class="section-num">10</div><div class="section-title">六大比率診斷</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>1. AI營收佔比</h3><div class="big-num" style="color:var(--green)">56%✅</div><div class="big-label">$16.7B/$29.59B</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:70%"></div></div></div>
+    <div class="card"><h3>2. 客戶集中度</h3><div class="big-num" style="color:var(--gold)">高⚠️</div><div class="big-label">4-6大客戶貢獻絕大部分AI營收</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:60%"></div></div></div>
+    <div class="card"><h3>3. VMware併購債務負擔</h3><div class="big-num" style="color:var(--gold)">中高⚠️</div><div class="big-label">~$86.3B併購部分債務融資</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:55%"></div></div></div>
+    <div class="card"><h3>4. 營收成長率</h3><div class="big-num" style="color:var(--green)">+86%✅</div><div class="big-label">Q3'26單季YoY</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:80%"></div></div></div>
+    <div class="card"><h3>5. 配息穩定性</h3><div class="big-num" style="color:var(--green)">穩定✅</div><div class="big-label">長期配息成長股紀錄</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:75%"></div></div></div>
+    <div class="card"><h3>6. Forward PE合理性</h3><div class="big-num" style="color:var(--green)">23.55x✅</div><div class="big-label">相對三位數AI營收成長率而言不算昂貴</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:70%"></div></div></div>
+  </div>
+</div>
+<div id="health" class="section">
+  <div class="section-header"><div class="section-num">11</div><div class="section-title">財務體質綜合診斷</div></div>
+  <div class="card" style="display:flex; align-items:center; gap:24px;"><div class="health-badge health-a">A</div><div><p style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px;">財務體質評等：A（獲利品質健康，VMware債務與客戶集中度為主要觀察點）</p><p style="font-size:13px; color:var(--text2); line-height:1.7">AI半導體業務獲利品質優異且配息穩定，主要風險非財務性而是客戶集中度與VMware併購後的整合執行。</p></div></div>
+</div>
+
+<div id="final" class="section">
+  <div class="section-header"><div class="section-num">12</div><div class="section-title">綜合總結</div></div>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis成立度</div><div class="s-val">4.0/5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-val">⭐⭐⭐⭐☆</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-val" style="font-size:13px;">快速成長股</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-val">A</div></div>
+    <div class="summary-card"><div class="s-label">現價/共識目標價</div><div class="s-val" style="font-size:13px;">$367/$526-533</div></div>
+  </div>
+  <div class="action-box"><h3>✅最終操作建議</h3><p style="font-size:13px; line-height:1.8; color:var(--text)"><strong>已持有者：</strong>續抱作為核心池衛星部位。<strong>未持有者：</strong>可分批建立部位，共識目標價隱含43-45%上行空間為本組最大，惟客戶集中度風險使其適合與NVDA搭配、而非單押。<strong>核心催化劑：</strong>①Google/Meta/OpenAI/Anthropic訂單是否持續擴大②Q4 guidance兌現度③VMware私有AI雲整合進度④是否新增第5/6大客戶。</p></div>
+</div>
+
+</div>
+<footer><p>資料來源：Broadcom IR（Q3 FY2026 8-K）、SEC EDGAR、stockanalysis.com、CNBC、Seeking Alpha、24/7 Wall St.、FinanceFeeds、其他公開財經媒體報導<br>✅已驗證　⚠️估算/近似值或資料源分歧　❌無法取得，禁止臆測填入<br>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p></footer>
+</body>
+</html>

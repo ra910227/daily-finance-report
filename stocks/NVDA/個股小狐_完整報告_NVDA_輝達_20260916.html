@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜NVDA NVIDIA Corp 2026-09-16</title>
+<style>
+  :root {
+    --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6;
+    --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca;
+    --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+    --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-change { font-size: 16px; color: var(--green); margin-top: 4px; }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; }
+  .toc-inner a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); padding: 0 0 4px 0; }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(79,70,229,0.03); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+  .ok { color: var(--green); } .warn { color: var(--gold); } .bad { color: var(--red); } .muted { color: var(--text2); } .est { color: var(--gold); font-size: 11px; }
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); } .scenario.base { border-top: 3px solid var(--blue); } .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); } .scenario.base h4 { color: var(--blue); } .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .scenario .row:last-child { border-bottom: none; }
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .risk-card { background: #fef2f2; border: 1px solid rgba(220,38,38,0.20); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .risk-card h4 { color: var(--red); font-size: 13px; margin-bottom: 4px; }
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+  .comp-now { background: rgba(79,70,229,0.05); } .comp-now td { font-weight: 700; }
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); } .bar-yellow { background: var(--gold); } .bar-red { background: var(--red); }
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; text-transform: uppercase; letter-spacing:0.5px; }
+  .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--accent); }
+  @media (max-width: 900px) { .summary-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 720px) { .scenario-row { grid-template-columns: 1fr; } .moat-grid { grid-template-columns: repeat(2,1fr); } .hero-price-block { text-align:left; } }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">NVDA</div>
+      <div class="hero-name">NVIDIA Corporation（全球AI加速運算龍頭，GPU/Blackwell架構市佔絕對主導，CUDA軟體生態系為核心護城河，全球市值最大公司之一）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-09-16　資料基準：2026-09-15收盤　Beta(5Y) 2.22　財年制：FY2027=截至2027年1月</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$212.17</div>
+      <div class="hero-change">2026-09-15 收盤</div>
+      <div class="hero-mktcap">市值 ≈$5.1T</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-purple">Q2 FY27營收$96.2B，YoY+106%</span>
+    <span class="badge badge-blue">Q3 FY27 guidance $108B±2%，優於預期</span>
+    <span class="badge badge-green">五大雲端明年合計CapEx guide $1.3兆(從$800B)</span>
+    <span class="badge badge-orange">淨現金部位$41.8B，槓桿極低(D/E 4.3%)</span>
+    <span class="badge badge-yellow">客製化ASIC(TPU/Trainium)成長44.6%快於GPU 16.1%⚠️</span>
+    <span class="badge badge-red">中國市場出口限制持續為缺口</span>
+    <span class="badge badge-teal">Strong Buy 58/59，共識目標價$268.22</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$212.17</div><div class="sub">✅ 52週 $164.27–$236.54</div></div>
+    <div class="meta-item"><label>FY26 營收</label><div class="val">$215.9B</div><div class="sub">YoY +65.5% ✅</div></div>
+    <div class="meta-item"><label>PE(TTM) / Fwd PE</label><div class="val">27.60 / 18.12</div><div class="sub">✅ stockanalysis.com</div></div>
+    <div class="meta-item"><label>Data Center營收成長</label><div class="val">主引擎</div><div class="sub">佔營收約88%（業界估算）⚠️</div></div>
+    <div class="meta-item"><label>Thesis 成立度</label><div class="val">4.2 / 5</div><div class="sub">AI capex循環未見降溫，客製化ASIC是長期變數</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐⭐⭐⭐</div><div class="sub">CUDA軟體生態系+硬體效能雙重壟斷</div></div>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#mode1">模式一 深度研究</a><span class="toc-sep">·</span>
+    <a href="#biz">業務引擎</a><a href="#thesis">核心Thesis</a><a href="#competition">競爭格局</a><a href="#moat">成長象限</a>
+    <span class="toc-sep">·</span><a href="#mode2">模式二 財報解析</a><span class="toc-sep">·</span>
+    <a href="#earnings">Q2財報</a><a href="#eps">EPS與估值錨點</a><a href="#dcf">DCF情境</a><a href="#targets">投行目標</a>
+    <span class="toc-sep">·</span><a href="#mode3">模式三 財務健檢</a><span class="toc-sep">·</span>
+    <a href="#ratios">六大比率</a><a href="#comps">同業對比</a><a href="#health">綜合診斷</a>
+    <span class="toc-sep">·</span><a href="#final">綜合總結</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<div id="mode1" class="mode-divider"><h2>◈ 模式一：公司深度研究</h2><p>業務引擎 · 核心Thesis · 競爭格局 · Peter Lynch成長象限 · 護城河五維評分</p></div>
+
+<div class="section">
+  <div class="section-header"><div class="section-num">1</div><div class="section-title">公司基本介紹</div></div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">NVIDIA（NASDAQ: NVDA）市值≈$5.1兆，是本輪AI浪潮絕對核心受惠股，以GPU加速運算硬體＋CUDA軟體生態系構築業界最深護城河。Q2 FY2027（截至2026年7月）營收達$96.22B，年增106%，Data Center事業群持續占據絕對主體地位。Blackwell架構是目前核心成長引擎，Jensen Huang稱需求「off the charts」。管理層guidance五大雲端巨頭明年（2027）合計資本支出將由2026年的$800B大增至$1.3兆，為NVDA未來營收提供強力總量支撐。✅</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽（FY2026，最近完整財年）✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$215.9B</div><div class="big-label">FY26 營收</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">+65.5% YoY</div><div class="big-label">（FY25：$130.5B）</div></div>
+        <div><div class="big-num" style="font-size:22px;">Q2FY27單季+106%</div><div class="big-label">$96.22B，加速中非放緩</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">淨現金$41.8B</div><div class="big-label">槓桿極低，財務體質業界最強之一</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="border-left:3px solid var(--accent)">
+    <h3 style="color:var(--accent)">🏭 所屬產業與市場地位</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">所屬產業：<strong>AI加速運算/GPU設計（Fabless）</strong>。NVDA在資料中心GPU市場市佔率長期維持80-90%以上區間（業界共識認知），Blackwell世代持續供不應求。惟需留意<strong>客製化ASIC（Google TPU、AWS Trainium等）2026年出貨成長預估達44.6%，遠快於merchant GPU的16.1%成長</strong>，顯示雲端巨頭正加速分散對NVDA的依賴，這是中長期最需要持續追蹤的結構性變數。✅⚠️（來源：NVIDIA Newsroom、CNBC、Tom's Hardware）</p>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>財務摘要</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">FY2026</th></tr></thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$27.0B ✅</td><td class="num">$60.9B ✅</td><td class="num">$130.5B ✅</td><td class="num">$215.9B ✅</td></tr>
+        <tr><td>YoY 成長</td><td class="num">~持平 ✅</td><td class="num ok">+126% ✅</td><td class="num ok">+114% ✅</td><td class="num ok">+65.5% ✅</td></tr>
+        <tr><td>營業利益</td><td class="num">— ⚠️</td><td class="num ok">$33.0B ✅（+681%）</td><td class="num ok">$81.5B ✅（+147%）</td><td class="num">— ⚠️</td></tr>
+        <tr><td>稀釋EPS</td><td class="num">— ⚠️</td><td class="num">— ⚠️</td><td class="num ok">$2.94 ✅（+147%）</td><td class="num warn">淨利$42.96B⚠️（資料源存疑，見下方註記）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅ 已驗證（來源：NVIDIA IR/10-K/8-K、MacroTrends、CNBC）｜⚠️ FY2026淨利數字（$42.96B）與營收(+65.5%)成長幅度相比顯得不成比例地低，可能為資料源誤植或截取特定期間/口徑數字，建議以Q2 FY2027單季GAAP EPS $2.46（優於預期）及營收+106%的最新動能為主要參考，FY2026全年淨利精確數字待後續驗證。</p>
+</div>
+
+<div id="biz" class="section">
+  <div class="section-header"><div class="section-num">2</div><div class="section-title">業務引擎分析</div></div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>🖥️ Data Center（核心引擎，佔營收絕對主體）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">Blackwell架構持續放量，是Q2 FY27營收$96.2B年增106%的主要貢獻者，受惠全球雲端巨頭資本支出加速（五大雲端2027年合計CapEx guide達$1.3兆）。✅</p>
+    </div>
+    <div class="card">
+      <h3>🎮 Gaming（次要業務，佔比持續稀釋）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">遊戲GPU業務佔營收比重已降至約11.45%（據Yahoo Finance報導），雖仍具穩定現金流貢獻，但已非公司成長敘事核心，是與AMD/Intel傳統GPU市場的主戰場。✅</p>
+    </div>
+    <div class="card">
+      <h3>🚗 汽車與機器人（新興業務，長期成長選項）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">自駕/機器人運算平台（DRIVE、Jetson等）佔比雖小，但被視為公司下一波成長曲線的潛在來源，非本次分析主要焦點但值得長期關注。⚠️</p>
+    </div>
+    <div class="card">
+      <h3>💻 CUDA軟體生態系（無形護城河核心）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">CUDA是NVDA最深的護城河來源——開發者生態系與既有程式碼庫的轉換成本極高，即便AMD/客製化ASIC硬體規格具競爭力，軟體生態遷移成本仍是客戶轉換的最大障礙。✅</p>
+    </div>
+  </div>
+</div>
+
+<div id="thesis" class="section">
+  <div class="section-header"><div class="section-num">3</div><div class="section-title">核心 Thesis 與未來成長驅動</div></div>
+  <div class="thesis-grid">
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 1｜AI capex循環持續加速，非見頂</div>
+      <div class="content">Q2 FY27營收+106%為加速而非放緩，Q3 guidance $108B同樣優於預期，五大雲端巨頭2027年合計CapEx guide由2026年$800B大增至$1.3兆（+62.5%），為NVDA未來1-2年營收提供強力總量支撐。✅ 成立。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 2｜CUDA軟體護城河短期難以被硬體規格戰打破</div>
+      <div class="content">即便AMD MI系列與客製化ASIC硬體效能持續進步，開發者生態系與既有程式碼遷移成本仍是客戶轉換的最大障礙，這是NVDA毛利率能長期維持高檔的核心原因。✅ 成立。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 3｜市佔率能維持絕對主導，不受客製化ASIC侵蝕</div>
+      <div class="content">2026年客製化ASIC（Google TPU、AWS Trainium等）出貨成長預估達44.6%，遠快於merchant GPU的16.1%，AWS Trainium3更於12月發布。這代表「餅在變大，但份額正在重新分配」——NVDA大機率仍維持領先，但邊際毛利率與訂價權可能面臨壓力，尤其在推理（inference）與成本敏感型訓練工作負載上。⚠️ 部分成立，是長期最需要監控的結構性變數。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 4｜中國市場限制不影響整體成長軌跡</div>
+      <div class="content">中國持續加大自研AI晶片（華為昇騰等）投資以降低對NVDA依賴，DeepSeek V4已展示在華為昇騰上以極低成本訓練出具競爭力模型的可能性。美國出口限制持續使中國市場貢獻趨近於零，惟目前整體營收成長仍主要由美系雲端巨頭支撐，中國缺口尚未實質拖累整體動能。⚠️ 部分成立，中國市場是永久性缺口而非短期問題。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 5｜財務體質極度健康，無槓桿風險</div>
+      <div class="content">淨現金部位約$41.8B（現金及有價證券$50.3B減總債務$8.5B），D/E僅4.3%，OCF覆蓋債務達1483%，是本次31檔清單中財務體質最強健的公司之一，即便AI capex週期出現波動，公司自身資產負債表韌性完全無虞。✅ 成立。</div>
+    </div>
+  </div>
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🚀 核心成長驅動力</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>五大雲端2027年CapEx大幅加碼</strong>：guide達$1.3兆，是短期最明確的營收見底保證</li>
+        <li><strong>Blackwell持續放量、下一代架構(Rubin等)接續</strong>：產品週期節奏维持業界最快</li>
+        <li><strong>機器人/自駕等新興運算平台</strong>：長期第二成長曲線選項</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 核心監控風險</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>客製化ASIC份額持續侵蝕</strong>：觸發條件——連續兩季主要雲端客戶資本支出中，自研晶片占比明顯提升</li>
+        <li><strong>AI capex消化期來臨</strong>：觸發條件——主要雲端客戶下修CapEx guidance</li>
+        <li><strong>估值隱含「零中國市場+完美執行」，任何負面驚奇可能引發劇烈修正</strong>：觸發條件——毛利率或Data Center成長率連續兩季不如預期</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="competition" class="section">
+  <div class="section-header"><div class="section-num">4</div><div class="section-title">競爭格局</div></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>戰場</th><th>公司</th><th>現況</th><th>對NVDA威脅度</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="2"><strong>Merchant GPU</strong></td><td>AMD（MI系列）</td><td>硬體規格持續進步，惟軟體生態（ROCm vs CUDA）仍明顯落後</td><td>🟡 中｜長期最主要的merchant競爭者</td></tr>
+        <tr><td>Intel（Gaudi等）</td><td>市佔極小，非主要威脅</td><td>🟢 低</td></tr>
+        <tr><td rowspan="3"><strong>雲端自研ASIC</strong></td><td>Google TPU</td><td>Google Cloud內部大量自用，外部銷售有限</td><td>🟡 中｜份額成長最快的類別之一</td></tr>
+        <tr><td>AWS Trainium/Inferentia</td><td>Trainium3將於2026年12月發布</td><td>🟡 中｜Amazon內部工作負載持續轉移</td></tr>
+        <tr><td>Broadcom（協助設計客製ASIC）</td><td>與多家雲端/模型公司合作設計客製晶片，本組B-2另一檔AVGO</td><td>🟡 中｜代工客製晶片的「軍火商」角色，間接侵蝕NVDA份額</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="caution-box" style="margin-top:16px;">
+    <h3>⚠️ 競爭關鍵監控：「餅變大、份額重分配」是未來2-3年的主旋律</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">外部研究一致認為NVDA大機率維持領先地位，但邊際毛利率與增量份額可能被客製化ASIC逐步蠶食，尤其在推理與成本敏感型工作負載。這不是「NVDA會被取代」的敘事，而是「NVDA的成長速度可能從業界唯一選擇，逐漸過渡到業界最強選擇之一」的溫和變化，需要以季度為單位觀察Data Center毛利率與主要客戶資本支出結構的變化。</p>
+  </div>
+</div>
+
+<div id="moat" class="section">
+  <div class="section-header"><div class="section-num">5</div><div class="section-title">Peter Lynch 成長象限 & 護城河評分</div></div>
+  <div class="card-grid">
+    <div class="card" style="border:2px solid var(--purple);">
+      <h3 style="color:var(--purple)">📊 Lynch 象限判斷</h3>
+      <div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">快速成長股，基期已達兆美元級但成長率仍逆勢加速</div>
+      <p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 判斷依據：Q2 FY27營收+106%，在$5.1兆市值的基期上仍能維持三位數成長率，是史無前例的規模化成長案例。Forward PE僅18.12倍（相對成長率而言極低），顯示市場對其成長可持續性存在一定程度的謹慎，而非過度樂觀定價，PEG隱含極低，是本次31檔清單中「成長與估值最不對稱」的正面案例之一。</p>
+    </div>
+  </div>
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item"><div class="moat-label">不可替代性</div><div class="moat-stars">★★★★★</div><div class="moat-score">5.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">CUDA生態系為AI訓練/推理事實標準</div></div>
+    <div class="moat-item"><div class="moat-label">客戶黏著度</div><div class="moat-stars">★★★★★</div><div class="moat-score">5.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">軟體遷移成本極高</div></div>
+    <div class="moat-item"><div class="moat-label">網路效應</div><div class="moat-stars">★★★★☆</div><div class="moat-score">4.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">開發者生態系網路效應強</div></div>
+    <div class="moat-item"><div class="moat-label">成本優勢</div><div class="moat-stars">★★★★☆</div><div class="moat-score">4.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">規模化採購與先進封裝優先權</div></div>
+    <div class="moat-item"><div class="moat-label">規模效應</div><div class="moat-stars">★★★★★</div><div class="moat-score">5.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">全球最大AI晶片供應商</div></div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：4.6 / 5 ⭐⭐⭐⭐⭐（軟體生態系護城河為半導體設計股中最深）</div>
+  <div class="caution-box" style="margin-top:24px;">
+    <h3>⚠️ 建議動作（深度研究視角）</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+      <div><strong>當前建議：</strong>護城河與財務體質完全符合核心池配置標準，適合作為<strong>核心池主力持倉</strong>。<br><br><strong>加碼觸發：</strong><ul style="padding-left:16px;"><li>Data Center毛利率維持高檔且連續兩季優於預期</li><li>五大雲端CapEx guidance持續上修</li></ul></div>
+      <div><strong>賣出/迴避觸發：</strong><ul style="padding-left:16px;"><li>主要雲端客戶自研ASIC占比連續兩季顯著提升</li><li>Data Center YoY成長率連續兩季跌破50%</li></ul><br><strong>每季監控：</strong>Data Center營收/毛利率、CapEx guidance變化、ASIC份額</div>
+    </div>
+  </div>
+</div>
+
+<div id="mode2" class="mode-divider"><h2>◈ 模式二：最新財報解析</h2><p>Q2 FY2027財報 · EPS估值錨點 · DCF三情境 · 投行目標價 · 操作建議</p></div>
+
+<div id="earnings" class="section">
+  <div class="section-header"><div class="section-num">6</div><div class="section-title">Q2 FY2027 財報（2026-08-26/28發布）</div></div>
+  <div class="card" style="border-left:3px solid var(--green); margin-bottom:20px;">
+    <h3 style="color:var(--green)">✅ 營收/EPS雙雙優於預期，guidance再度上修，成長動能未見任何降溫跡象</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Q2 FY27營收$96.22B（+106% YoY），GAAP EPS $2.46、Non-GAAP EPS $2.22均優於預期，Q3 guidance上修至$108B±2%（優於分析師預估$104.2B）。管理層並喊出FY2028營收成長可望達70%，遠高於市場預期。✅</p>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>指標</th><th class="num">實際值 ✅</th><th class="num">市場預期 ⚠️</th><th class="num">YoY 變化</th><th>判定</th></tr></thead>
+      <tbody>
+        <tr><td>營收</td><td class="num ok">$96.22B</td><td class="num">— ⚠️（優於預期）</td><td class="num ok">+106%</td><td><span class="badge badge-green">大幅Beat ✅</span></td></tr>
+        <tr><td>GAAP EPS</td><td class="num ok">$2.46</td><td class="num">— ⚠️</td><td class="num">— ⚠️</td><td><span class="badge badge-green">Beat ✅</span></td></tr>
+        <tr><td>Non-GAAP EPS</td><td class="num ok">$2.22</td><td class="num">— ⚠️（優於LSEG共識）</td><td class="num">— ⚠️</td><td><span class="badge badge-green">Beat ✅</span></td></tr>
+        <tr><td>Q3 FY27 guidance</td><td class="num ok">$108B±2%</td><td class="num">$104.2B</td><td class="num">— ⚠️</td><td><span class="badge badge-green">Guidance優於預期 ✅</span></td></tr>
+        <tr><td>FY28全年成長guidance</td><td class="num ok">~70%</td><td class="num">遠低於此</td><td class="num">— ⚠️</td><td><span class="badge badge-green">大幅優於市場預期 ✅</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="eps" class="section">
+  <div class="section-header"><div class="section-num">7</div><div class="section-title">估值歷史錨點：多年期EPS ＋ 歷史本益比</div></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>財年</th><th class="num">EPS/營收概況</th><th class="num">YoY成長</th><th>狀態</th></tr></thead>
+      <tbody>
+        <tr><td><strong>FY2024 A</strong></td><td class="num ok">營收$60.9B ✅</td><td class="num ok">+126%</td><td><span class="badge badge-green">爆發起點</span></td></tr>
+        <tr><td><strong>FY2025 A</strong></td><td class="num ok">EPS $2.94 ✅，營收$130.5B</td><td class="num ok">+114%（營收）+147%（EPS）</td><td><span class="badge badge-green">加速</span></td></tr>
+        <tr><td><strong>FY2026 A</strong></td><td class="num ok">營收$215.9B ✅</td><td class="num ok">+65.5%</td><td><span class="badge badge-green">持續高速成長</span></td></tr>
+        <tr><td><strong>FY2027 Q2（最新單季）</strong></td><td class="num ok">EPS $2.46(GAAP) ✅，營收$96.22B</td><td class="num ok">+106%（單季，較FY26全年增速再加速）</td><td><span class="badge badge-green">再加速 ✅</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="risk-card" style="margin-top:12px;">
+    <h4>📌 反推試算結論：Forward PE僅18.12倍，相對成長率而言隱含估值並不昂貴</h4>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">在$5.1兆市值的基期上，NVDA仍能維持三位數的單季營收成長率，但Forward PE僅18.12倍——這個組合在成長股歷史上相對罕見，顯示市場並未給予NVDA典型高成長股應有的估值溢價，某種程度反映投資人對「AI capex能否永續」仍抱持審慎態度。若成長軌跡持續兌現，目前估值提供相對堅實的安全邊際。</p>
+  </div>
+</div>
+
+<div id="dcf" class="section">
+  <div class="section-header"><div class="section-num">8</div><div class="section-title">④ 三情境DCF估值（採外部分析師情境法呈現）</div></div>
+  <div class="caution-box"><h3>⚠️ 方法論說明</h3><p style="font-size:13px; line-height:1.7; color:var(--text)">採用外部研究已發布的Bear/Base/Bull情境（含具體假設），取代自製精確建模。⚠️ 均為外部研究彙整。</p></div>
+  <div class="scenario-row">
+    <div class="scenario bear"><h4>🐻 熊市情境（20%機率）</h4><div class="scenario-price" style="color:var(--red)">$150</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$212.17　-29.3%</div><div class="row"><span>核心假設</span><span>多重壓縮，中國市場歸零，capex週期見頂</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：客戶CapEx下修、地緣政治風險升溫</div></div>
+    <div class="scenario base"><h4>📊 基準情境（50%機率）</h4><div class="scenario-price" style="color:var(--blue)">$230-260</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$212.17　+8.4%~+22.6%</div><div class="row"><span>核心假設</span><span>Blackwell持續放量，共識目標價$268.22</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：guidance如期兌現</div></div>
+    <div class="scenario bull"><h4>🐂 牛市情境（30%機率）</h4><div class="scenario-price" style="color:var(--green)">$320-500</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$212.17　+50.8%~+135.7%</div><div class="row"><span>核心假設</span><span>Blackwell需求"off the charts"持續超預期</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：FY28成長率兌現70%guidance</div></div>
+  </div>
+  <div class="card" style="border-left:3px solid var(--accent);"><h3>敏感度分析</h3><p style="font-size:13px; color:var(--text); line-height:1.7">三情境價差主要由「AI capex循環能否延續」與「客製化ASIC侵蝕速度」共同決定。分析師共識$268.22落於基準情境，現價$212.17提供約26%上行空間，風險報酬比在本次31檔清單中屬前段班。</p></div>
+</div>
+
+<div class="section">
+  <div class="section-header"><div class="section-num">9</div><div class="section-title">股價位階評估</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>估值倍數現況 ✅</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;"><div><div class="big-num" style="font-size:20px;">27.60x</div><div class="big-label">TTM PE</div></div><div><div class="big-num" style="font-size:20px; color:var(--green)">18.12x</div><div class="big-label">Forward PE</div></div><div><div class="big-num" style="font-size:20px;">2.22</div><div class="big-label">Beta（5年）</div></div><div><div class="big-num" style="font-size:20px;">-10.3%</div><div class="big-label">距52週高點</div></div></div></div>
+  </div>
+</div>
+
+<div id="comps" class="section" style="margin-top:0;">
+  <div class="section-header"><div class="section-num">10</div><div class="section-title">Comps 同業對照</div></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>公司</th><th class="num">市值</th><th class="num">Fwd PE</th><th class="num">最新季營收YoY</th><th>核心定位</th></tr></thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>NVIDIA（NVDA）</strong></td><td class="num">$5.1T</td><td class="num">18.12x</td><td class="num">+106%</td><td>GPU/CUDA生態系絕對龍頭</td></tr>
+        <tr><td>AMD（本組另一檔）</td><td class="num">— ❌（待AMD報告，惟本次31檔未含AMD）</td><td class="num">— ❌</td><td class="num">— ❌</td><td>Merchant GPU次要競爭者</td></tr>
+        <tr><td>Broadcom（AVGO，本組另一檔）</td><td class="num">— ❌（待AVGO報告）</td><td class="num">— ❌</td><td class="num">— ❌</td><td>客製ASIC設計服務，間接競爭</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><div class="section-num">11</div><div class="section-title">額外優勢/風險</div></div>
+  <div class="card-grid">
+    <div class="card" style="border-left:3px solid var(--green)"><h3>財務體質業界最強</h3><p style="font-size:13px; color:var(--text); line-height:1.7">淨現金部位$41.8B，D/E僅4.3%，是本次31檔清單中槓桿最低、財務韌性最強的公司之一。✅</p></div>
+    <div class="card" style="border-left:3px solid var(--blue)"><h3>分析師評等一致樂觀</h3><p style="font-size:13px; color:var(--text); line-height:1.7">59位分析師中58位Buy，僅1位Sell，是本次31檔清單中最一致看多的個股之一。✅</p></div>
+    <div class="card" style="border-left:3px solid var(--gold)"><h3>⚠️ 客製化ASIC份額侵蝕與中國市場缺口</h3><p style="font-size:13px; color:var(--text); line-height:1.7">客製化ASIC成長速度(44.6%)已超越merchant GPU(16.1%)，加上中國市場因出口管制長期貢獻趨近於零，是中長期最需要持續監控的兩大結構性風險。⚠️</p></div>
+  </div>
+</div>
+
+<div id="targets" class="section">
+  <div class="section-header"><div class="section-num">12</div><div class="section-title">投行目標價與操作建議</div></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>機構/來源</th><th>評等</th><th class="num">目標價</th><th>日期</th></tr></thead>
+      <tbody>
+        <tr><td>共識彙整（59位分析師）</td><td><span class="badge badge-green">Strong Buy（58 Buy/1 Sell）</span></td><td class="num">均值$268.22 ✅，區間$180-$515 ✅</td><td>2026年9月</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="action-box" style="margin-top:16px;">
+    <h3>✅ 最終操作建議</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">現價$212.17相對共識目標價$268.22有約26%上行空間。<strong>已持有者：續抱作為核心池主力部位；未持有者：可分批建立核心池部位</strong>，財務體質、護城河、成長動能三者兼具，是本次半導體設計族群中最具代表性的核心持倉候選。</p>
+  </div>
+</div>
+
+<div id="mode3" class="mode-divider"><h2>◈ 模式三：財務風險健檢</h2><p>六大比率診斷 · 同業對比 · 綜合診斷</p></div>
+
+<div id="ratios" class="section">
+  <div class="section-header"><div class="section-num">13</div><div class="section-title">六大比率診斷</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>1. 淨現金部位</h3><div class="big-num" style="color:var(--green)">$41.8B ✅</div><div class="big-label">現金及有價證券$50.3B-總債務$8.5B</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:95%"></div></div></div>
+    <div class="card"><h3>2. D/E比率</h3><div class="big-num" style="color:var(--green)">4.3% ✅</div><div class="big-label">總債務/股東權益</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:95%"></div></div></div>
+    <div class="card"><h3>3. OCF覆蓋債務</h3><div class="big-num" style="color:var(--green)">1483% ✅</div><div class="big-label">營運現金流對總債務覆蓋倍數</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:95%"></div></div></div>
+    <div class="card"><h3>4. 營收成長率</h3><div class="big-num" style="color:var(--green)">+106%✅</div><div class="big-label">Q2FY27單季YoY，逆勢再加速</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:95%"></div></div></div>
+    <div class="card"><h3>5. 客製化ASIC份額侵蝕速度</h3><div class="big-num" style="color:var(--gold)">44.6%⚠️</div><div class="big-label">2026年ASIC出貨成長預估，快於GPU</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:55%"></div></div></div>
+    <div class="card"><h3>6. 中國市場貢獻</h3><div class="big-num" style="color:var(--gold)">趨近於零⚠️</div><div class="big-label">出口管制導致，長期結構性缺口</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:40%"></div></div></div>
+  </div>
+</div>
+
+<div id="health" class="section">
+  <div class="section-header"><div class="section-num">14</div><div class="section-title">財務體質綜合診斷</div></div>
+  <div class="card" style="display:flex; align-items:center; gap:24px;">
+    <div class="health-badge health-aa">AA</div>
+    <div><p style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px;">財務體質評等：AA（本次31檔清單中財務體質最強健者之一）</p><p style="font-size:13px; color:var(--text2); line-height:1.7">淨現金部位龐大、槓桿極低、成長動能逆勢加速，主要風險為結構性（份額侵蝕、地緣政治）而非財務性。</p></div>
+  </div>
+</div>
+
+<div id="final" class="section">
+  <div class="section-header"><div class="section-num">15</div><div class="section-title">綜合總結</div></div>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis成立度</div><div class="s-val">4.2/5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-val">⭐⭐⭐⭐⭐</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-val" style="font-size:13px;">快速成長股</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-val">AA</div></div>
+    <div class="summary-card"><div class="s-label">現價/共識目標價</div><div class="s-val" style="font-size:13px;">$212.17/$268.22</div></div>
+  </div>
+  <div class="action-box">
+    <h3>✅ 最終操作建議</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)"><strong>已持有者：</strong>續抱，核心池主力持倉，CUDA軟體護城河與財務體質在31檔清單中名列前茅。<strong>未持有者：</strong>可分批建立核心池部位，Forward PE 18倍相對三位數成長率而言估值並不昂貴，提供相對堅實安全邊際。<strong>核心催化劑：</strong>①Blackwell持續放量②五大雲端CapEx guidance③客製化ASIC份額侵蝕速度④中國市場政策變化。</p>
+  </div>
+</div>
+
+</div>
+<footer><p>資料來源：NVIDIA Newsroom/IR（Q2 FY2027 8-K/10-Q）、SEC EDGAR、stockanalysis.com、MacroTrends、CNBC、Tom's Hardware、FinanceFeeds、其他公開財經媒體報導<br>✅ 已驗證　⚠️ 估算/近似值或資料源分歧　❌ 無法取得，禁止臆測填入<br>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p></footer>
+
+</body>
+</html>

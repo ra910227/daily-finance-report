@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜AMZN Amazon.com 2026-09-16</title>
+<style>
+  :root {
+    --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6;
+    --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca;
+    --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+    --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; position: relative; overflow: hidden; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-change { font-size: 16px; color: var(--green); margin-top: 4px; }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .toc-inner a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); padding: 0 0 4px 0; }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(79,70,229,0.03); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+
+  .ok { color: var(--green); }
+  .warn { color: var(--gold); }
+  .bad { color: var(--red); }
+  .muted { color: var(--text2); }
+  .est { color: var(--gold); font-size: 11px; }
+
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); }
+  .scenario.base { border-top: 3px solid var(--blue); }
+  .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); }
+  .scenario.base h4 { color: var(--blue); }
+  .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .scenario .row:last-child { border-bottom: none; }
+
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .risk-card { background: #fef2f2; border: 1px solid rgba(220,38,38,0.20); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .risk-card h4 { color: var(--red); font-size: 13px; margin-bottom: 4px; }
+
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+
+  .comp-now { background: rgba(79,70,229,0.05); }
+  .comp-now td { font-weight: 700; }
+
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); }
+  .bar-yellow { background: var(--gold); }
+  .bar-red { background: var(--red); }
+
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; text-transform: uppercase; letter-spacing:0.5px; }
+  .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .summary-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 720px) {
+    .scenario-row { grid-template-columns: 1fr; }
+    .moat-grid { grid-template-columns: repeat(2,1fr); }
+    .hero-price-block { text-align:left; }
+  }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">AMZN</div>
+      <div class="hero-name">Amazon.com, Inc.（全球最大電商平台＋雲端運算龍頭AWS＋成長最快的數位廣告業務之一，Anthropic最大策略股東之一）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-09-16　資料基準：2026-09-15收盤　Beta(5Y) 1.45</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$253.54</div>
+      <div class="hero-change">2026-09-15 收盤</div>
+      <div class="hero-mktcap">市值 ≈$2.768T</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-purple">AWS Q2'26 +37%，18季來最快</span>
+    <span class="badge badge-blue">AWS雲端市佔28%，全球第一</span>
+    <span class="badge badge-green">廣告業務Q2 +26%達$19.8B</span>
+    <span class="badge badge-orange">TTM FCF轉負(-$7.6B)⚠️，長債半年翻倍至$128.9B</span>
+    <span class="badge badge-yellow">Q2'26 EPS $5.75含$53.4B Anthropic帳面利得</span>
+    <span class="badge badge-red">2026 CapEx上修至$220B</span>
+    <span class="badge badge-teal">零Sell評等，共識目標價$328</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$253.54</div><div class="sub">✅ 52週 $196.00–$287.20</div></div>
+    <div class="meta-item"><label>FY25 營收</label><div class="val">$775.7B</div><div class="sub">YoY +8.2% ✅</div></div>
+    <div class="meta-item"><label>FY25 EPS</label><div class="val">$7.17</div><div class="sub">GAAP稀釋 ✅</div></div>
+    <div class="meta-item"><label>Trailing PE</label><div class="val">21.42</div><div class="sub">✅ stockanalysis.com</div></div>
+    <div class="meta-item"><label>Thesis 成立度</label><div class="val">3.3 / 5</div><div class="sub">AWS/廣告強，但FCF與槓桿是最大隱憂</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐⭐⭐☆</div><div class="sub">電商規模+雲端寡占雙重護城河</div></div>
+  </div>
+</div>
+
+<!-- ── TOC ── -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#mode1">模式一 深度研究</a>
+    <span class="toc-sep">·</span>
+    <a href="#biz">業務引擎</a>
+    <a href="#thesis">核心Thesis</a>
+    <a href="#competition">競爭格局</a>
+    <a href="#moat">成長象限</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode2">模式二 財報解析</a>
+    <span class="toc-sep">·</span>
+    <a href="#earnings">Q2 2026財報</a>
+    <a href="#eps">EPS與估值錨點</a>
+    <a href="#dcf">DCF情境</a>
+    <a href="#targets">投行目標</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode3">模式三 財務健檢</a>
+    <span class="toc-sep">·</span>
+    <a href="#ratios">六大比率</a>
+    <a href="#comps">同業對比</a>
+    <a href="#health">綜合診斷</a>
+    <span class="toc-sep">·</span>
+    <a href="#final">綜合總結</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════
+     模式一：深度研究
+══════════════════════════════════════ -->
+<div id="mode1" class="mode-divider">
+  <h2>◈ 模式一：公司深度研究</h2>
+  <p>業務引擎 · 核心Thesis · 競爭格局 · Peter Lynch成長象限 · 護城河五維評分</p>
+</div>
+
+<!-- 1. 公司基本介紹 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">公司基本介紹</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">Amazon.com（NASDAQ: AMZN）總部Seattle，市值≈$2.77兆，業務涵蓋<strong>北美電商零售、國際電商、AWS雲端運算、數位廣告</strong>四大板塊。AWS是全球市佔第一的公有雲服務商（28%市佔），2024年起大舉投資自研Trainium AI晶片並成為Anthropic最大股東之一（21%股權），使Amazon與Microsoft/OpenAI呈現類似的「雲端出租算力＋AI模型策略股東」雙重定位。CEO Andy Jassy公開表示AWS「很可能成為年營收兆美元等級的事業」，較先前預期的「數千億美元」大幅上修，反映管理層對AI驅動雲端需求的高度信心。✅</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽（FY2025，最近完整財年）✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$775.7B</div><div class="big-label">FY25 營收</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">+8.2% YoY</div><div class="big-label">（FY24：$716.9B）</div></div>
+        <div><div class="big-num" style="font-size:22px;">營益率 12.1%</div><div class="big-label">營業利益$93.71B／營收$775.7B（自算）</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--red)">$11.0B→轉負⚠️</div><div class="big-label">FY25 FCF $11B，TTM(截至Q2'26)已轉負-$7.6B</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent)">
+    <h3 style="color:var(--accent)">🏭 所屬產業與市場地位</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">所屬產業：<strong>電子商務／公有雲基礎設施（IaaS+PaaS）／數位廣告</strong>。AWS以28%市佔穩居全球公有雲龍頭（次於它的是Azure 20%、Google Cloud 15%），AWS年化營收run-rate已達$169B，Q2'26單季成長37%為18季以來最快，且管理層坦言2026-2027年運算產能仍將供不應求（需求大於供給）。電商業務（北美+國際）仍是營收主體但成長已放緩至15-16%區間，數位廣告則是成長最快、獲利率最高的新引擎（Q2 +26%）。✅（來源：Amazon Q2 2026 8-K、CNBC、Fool）</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財務摘要</th>
+          <th class="num">FY2022</th>
+          <th class="num">FY2023</th>
+          <th class="num">FY2024</th>
+          <th class="num">FY2025</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$514.0B ✅</td><td class="num">$638.0B ✅</td><td class="num">$716.9B ✅</td><td class="num">$775.7B ✅</td></tr>
+        <tr><td>YoY 成長</td><td class="num">+9.4% ✅</td><td class="num ok">+12.0% ✅</td><td class="num ok">+11.0% ✅</td><td class="num ok">+8.2% ✅</td></tr>
+        <tr><td>營業利益</td><td class="num">$12.25B ✅</td><td class="num">$36.85B ✅</td><td class="num ok">$79.98B ✅</td><td class="num ok">$93.71B ✅</td></tr>
+        <tr><td>EPS（GAAP 稀釋）</td><td class="num bad">-$0.27 ✅（虧損）</td><td class="num ok">$2.90 ✅</td><td class="num ok">$5.53 ✅</td><td class="num ok">$7.17 ✅</td></tr>
+        <tr><td>營運現金流(OCF)</td><td class="num">$46.75B ✅</td><td class="num ok">$84.95B ✅</td><td class="num ok">$115.88B ✅</td><td class="num ok">$139.51B ✅</td></tr>
+        <tr><td>FCF</td><td class="num bad">-$11.5B ✅</td><td class="num ok">$36.8B ✅</td><td class="num ok">$38.2B ✅</td><td class="num warn">$11.0B ✅（CapEx年增$50.7B所致）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅ 已驗證（來源：Amazon 10-K/8-K、SEC EDGAR、stockanalysis.com、The Motley Fool）｜⚠️ FY2026進行中：TTM FCF截至Q2'26已進一步轉負至約-$7.6B，較FY2025全年的$11.0B進一步惡化，主因2026年CapEx guidance上修至$220B，是本報告最重要的風險監控指標，詳見模式三財務健檢。</p>
+</div>
+
+<!-- 2. 業務引擎分析 -->
+<div id="biz" class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">業務引擎分析</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>☁️ AWS — Q2'26營收$42.2B（單季，YoY +37%，18季來最快）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">全球市佔28%公有雲龍頭，Q2'26營業利益$16.6B（去年同期$10.2B），營益率高達39.4%，貢獻AMZN整體營業利益約<strong>60%</strong>。年化營收run-rate達$169B，訂單backlog達$496B、年增達三位數。AWS AI／自研晶片（Trainium）相關業務run-rate已超過$25B並以三位數速度成長，Anthropic與OpenAI均已承諾多年期、多GW等級的Trainium運算容量採購。管理層坦言2026-2027年運算產能仍供不應求。✅（來源：Amazon 8-K、CNBC、Fool）</p>
+    </div>
+    <div class="card">
+      <h3>🛒 北美電商 — Q2'26營收$116.2B（單季，YoY +16%）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">Amazon最大營收來源，成長已從疫情期間的爆發式成長回落至穩健的雙位數區間，主要驅動力為Prime會員黏著度、物流時效持續優化與第三方賣家平台佣金。此板塊獲利率遠低於AWS，是公司「規模龐大但利潤率結構性偏低」的主因。✅</p>
+    </div>
+    <div class="card">
+      <h3>🌍 國際電商 — Q2'26營收$42.2B（單季，YoY +15%）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">涵蓋歐洲、印度、日本等海外市場，成長速度與北美相近，面臨Temu/Shein等低價跨境電商的競爭壓力，惟Amazon透過物流基礎設施與Prime會員生態系維持相對優勢。✅</p>
+    </div>
+    <div class="card">
+      <h3>📣 數位廣告 — Q2'26營收$19.8B（單季，YoY +26%，成長最快板塊）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">依附於電商流量與Prime Video/直播廣告的高毛利業務，成長速度為四大板塊之首，是公司獲利結構持續優化的關鍵引擎，惟仍面臨Google／Meta／TikTok的廣告預算競爭。✅</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>核心業務線</th><th>Q2'26 YoY成長</th><th>護城河來源</th><th>2026-2027關鍵催化劑</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>AWS</strong></td><td class="num ok">+37%（18季最快）</td><td>雲端規模第一、Trainium自研晶片成本優勢</td><td>運算產能瓶頸何時紓解、AWS能否真的邁向兆美元營收</td></tr>
+        <tr><td><strong>北美電商</strong></td><td class="num">+16%</td><td>物流網路規模、Prime會員生態系</td><td>Prime會員續訂率、物流成本效率</td></tr>
+        <tr><td><strong>國際電商</strong></td><td class="num">+15%</td><td>跨境物流基礎設施</td><td>能否抵禦Temu/Shein低價競爭</td></tr>
+        <tr><td><strong>數位廣告</strong></td><td class="num ok">+26%（成長最快）</td><td>電商流量變現、高毛利</td><td>Prime Video廣告滲透率、能否持續蠶食Google/Meta廣告份額</td></tr>
+        <tr><td><strong>Anthropic股權（21%）</strong></td><td class="num">帳面價值$190.4B（6月底）</td><td>AI模型策略卡位、Trainium綁定採購</td><td>Anthropic IPO時程與定價（傳2026年10月那斯達克掛牌）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 3. 核心Thesis -->
+<div id="thesis" class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">核心 Thesis 與未來成長驅動</div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 1｜AWS重新加速，且供不應求（需求端無虞）</div>
+      <div class="content">Q2'26 AWS成長37%為18季以來最快，backlog達$496B、年增三位數，管理層明確表示運算產能將持續供不應求至2027年——這是「需求旺到產能跟不上」的正面訊號，而非需求疑慮。✅ 明確成立，且是三大雲端巨頭中加速幅度最顯著的一家（相對Azure 43%、GCP 82%，AWS的37%雖不是最快但「加速」本身最出乎市場意料）。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 2｜數位廣告成為第二成長引擎，優化整體獲利結構</div>
+      <div class="content">廣告業務Q2'26營收+26%達$19.8B，為四大板塊中成長最快且毛利率最高者，持續稀釋電商零售的低毛利拖累，是Amazon整體獲利率結構性改善的關鍵驅動力之一。✅ 成立。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--red)">❌ 尚待驗證</div>
+      <div class="label">Thesis 3｜Anthropic股權增值是真實股東價值，非帳面幻覺</div>
+      <div class="content">Q2'26 GAAP EPS $5.75中，約$53.4B（2026上半年累計$62.8B）來自Anthropic投資公允價值重估的非現金利得，是推動GAAP獲利表面亮眼的最大單一因素。惟Anthropic目前仍為未上市公司，此利得基於Level 3公允價值模型（含次級市場成交價推估），尚未經公開市場流動性驗證。若2026年10月傳聞中的那斯達克掛牌未如期發生或定價不如預期，這塊利得的「含金量」將面臨市場重新檢視。❌ 尚待驗證——這是本報告最大的獲利品質疑慮。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--red)">❌ 尚待驗證</div>
+      <div class="label">Thesis 4｜巨額CapEx能否維持自我造血，而非仰賴舉債</div>
+      <div class="content">2026年CapEx guidance由$200B上修至$220B（因記憶體晶片漲價），TTM FCF已轉負至約-$7.6B（去年同期為正）；長期債務半年內由$65.6B暴增至$128.9B，顯示公司<strong>已從「用營運現金流支應AI建設」轉向「部分仰賴舉債融資」</strong>，另有約$286B表外承諾未列入資產負債表。❌ 尚待驗證——這是三大雲端巨頭中槓桿惡化速度最快、FCF轉負最明確的一家，需持續緊盯。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 5｜AWS市佔龍頭地位穩固，尚未被Azure/GCP超車</div>
+      <div class="content">AWS以28%市佔持續領先Azure（20%）與Google Cloud（15%），雖然GCP成長率（82%）遠高於AWS（37%），但基期差距仍大，短期內市佔龍頭地位無虞。✅ 成立，惟GCP的加速趨勢是中長期最大競爭變數，需持續追蹤市佔率消長。</div>
+    </div>
+  </div>
+
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🚀 核心成長驅動力</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>AWS運算產能瓶頸紓解</strong>：若2026-2027年產能擴張如期落地，可直接轉化為backlog兌現與營收加速</li>
+        <li><strong>廣告業務持續蠶食Google/Meta份額</strong>：Prime Video廣告與直播電商廣告仍處早期滲透階段</li>
+        <li><strong>Anthropic若成功上市</strong>：可為21%股權提供公開市場流動性驗證，若估值落在$1.2-2兆區間，AMZN帳面股權價值可達$252-280B+</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 核心監控風險</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>FCF持續為負且槓桿加速攀升</strong>：觸發條件——連續兩季TTM FCF維持負值，或長期債務再翻倍突破$250B</li>
+        <li><strong>Anthropic估值重新調整（若IPO延遲或定價不如預期）</strong>：觸發條件——傳聞中10月掛牌延後或定價低於次級市場$1.2兆估值</li>
+        <li><strong>AWS產能瓶頸若無法如期紓解，可能讓客戶轉向Azure/GCP</strong>：觸發條件——backlog兌現速度連續兩季低於guidance</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 競爭格局 -->
+<div id="competition" class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">競爭格局：依四大戰場列示</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>戰場</th><th>公司</th><th>現況</th><th>對AMZN威脅度</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td rowspan="3"><strong>公有雲</strong></td><td><strong>AWS（本案，市佔第一）</strong></td><td>市佔28%，Q2'26成長37%（18季最快），run-rate $169B</td><td>—</td></tr>
+        <tr><td>Azure（Microsoft）</td><td>市佔20%，FY26全年+41%、Q4單季+43%</td><td>🟡 中｜成長率持續優於AWS，規模差距仍大但持續縮小</td></tr>
+        <tr><td>Google Cloud（Alphabet）</td><td>市佔15%但成長最猛，Q2'26 +82%，營益率大幅改善</td><td>🔴 高｜三家中加速度最快，長期市佔版圖最大變數</td></tr>
+        <tr><td rowspan="2"><strong>電商零售</strong></td><td>Walmart</td><td>線下優勢+持續加碼電商與廣告業務</td><td>🟡 中｜傳統零售巨頭轉型電商速度加快</td></tr>
+        <tr><td>Temu／Shein</td><td>低價跨境電商，快速搶占價格敏感客群</td><td>🟡 中｜對國際電商板塊壓力較北美更明顯</td></tr>
+        <tr><td rowspan="2"><strong>數位廣告</strong></td><td>Google／Meta</td><td>廣告市場傳統雙巨頭，仍占最大廣告預算份額</td><td>🟢 低｜Amazon廣告成長最快但基期仍小，短期非正面對決</td></tr>
+        <tr><td>TikTok</td><td>直播電商+廣告快速崛起，尤其年輕客群</td><td>🟡 中｜長期需關注流量與廣告預算排擠效應</td></tr>
+        <tr><td><strong>AI模型/算力</strong></td><td>Anthropic（Amazon持股21%）vs OpenAI（Microsoft持股27%）</td><td>兩大雲端巨頭均選擇「投資頭部AI模型商＋綁定雲端算力採購」的相同策略</td><td>—（策略對稱，非直接威脅）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box" style="margin-top:16px;">
+    <h3>⚠️ 競爭關鍵監控：AWS「量」的優勢仍在，但「速度」已落後Azure與GCP</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">AWS以28%市佔穩居雲端龍頭，Q2'26的37%成長更是自身18季以來最快，看似強勁；但橫向比較，Azure（41-43%）與GCP（82%）的成長速度均明顯超越AWS，顯示雲端三強的「速度排名」目前是GCP>Azure>AWS。若這個排序在未來4-8季持續，AWS的市佔領先優勢可能逐步被侵蝕（尤其GCP營益率同步大幅改善，代表其擴張並非以犧牲獲利換取成長）。每季監控重點：三家雲端市佔率變化、AWS backlog兌現速度是否受產能瓶頸拖累。</p>
+  </div>
+</div>
+
+<!-- 5. 成長象限 & 護城河評分 -->
+<div id="moat" class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Peter Lynch 成長象限 & 護城河評分</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border:2px solid var(--purple);">
+      <h3 style="color:var(--purple)">📊 Lynch 象限判斷</h3>
+      <div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">穩定成長股，AWS/廣告局部呈現快速成長股特徵，惟獲利品質正在弱化</div>
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <thead><tr><th>判斷標準</th><th>Amazon 現況</th><th>判定</th></tr></thead>
+          <tbody>
+            <tr><td>整體營收規模與成長率</td><td>FY25營收$775.7B，YoY+8.2%（電商成熟、AWS/廣告仍快）</td><td class="warn">⚠️ 整體成長已放緩至個位數，惟結構優化中</td></tr>
+            <tr><td>高毛利板塊（AWS/廣告）成長是否夠快</td><td>AWS+37%、廣告+26%，均達雙位數快速成長股門檻</td><td class="ok">✅ 具快速成長股特徵（限高毛利板塊）</td></tr>
+            <tr><td>獲利品質（FCF）是否同步成長</td><td>TTM FCF已轉負，且主因舉債支應CapEx而非單純投資週期</td><td class="bad">❌ 獲利品質明顯惡化，為三大雲端巨頭中最弱</td></tr>
+            <tr><td>GAAP獲利是否可信、無重大會計雜訊</td><td>Q2'26 EPS $5.75中近$53.4B來自未上市公司股權公允價值重估</td><td class="bad">❌ 獲利品質雜訊極大，需以Adj EPS $1.97為核心參考</td></tr>
+            <tr><td>估值是否已充分反映風險</td><td>Trailing PE 21.42倍，為三巨頭中最低</td><td class="ok">✅ 估值相對保守，部分反映上述疑慮</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 判斷依據：Amazon本質上是「電商成熟＋雲端/廣告高速成長」的複合體，AWS與廣告業務具備快速成長股特徵，但公司整體正經歷「GAAP獲利被未上市公司股權重估大幅扭曲＋FCF轉負＋舉債擴張」三重獲利品質弱化過程，這與MSFT/GOOGL相對乾淨的財報形成對比。目前21.42倍的trailing PE明顯低於MSFT（27倍）與GOOGL（28倍），某種程度已反映市場對這些疑慮的定價，但若Anthropic股權重估利得無法兌現為真實流動性，或FCF持續為負超過2-3季，目前的相對低估值可能不足以提供安全邊際。</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item">
+      <div class="moat-label">不可替代性</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">物流網路規模+雲端寡占地位短期難以複製</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">客戶黏著度</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">Prime會員生態系+AWS企業遷移成本高</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">網路效應</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">第三方賣家平台具雙邊網路效應</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">成本優勢</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">規模化物流+自研Trainium晶片降低AI運算成本</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">規模效應</div>
+      <div class="moat-stars">★★★★★</div>
+      <div class="moat-score">5.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">全球最大電商+雲端龍頭雙重規模效應</div>
+    </div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：4.2 / 5 ⭐⭐⭐⭐☆（多元業務護城河紮實，惟近期獲利品質與槓桿惡化是評分未能更高的主因）</div>
+
+  <div class="caution-box" style="margin-top:24px;">
+    <h3>⚠️ 建議動作（深度研究視角）</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+      <div>
+        <strong>當前建議：</strong>護城河強度符合使用者「重視護城河/現金流/安全邊際」原則中的護城河一項，但<strong>現金流與安全邊際目前明顯弱化</strong>（FCF轉負、槓桿半年翻倍），建議列為<strong>戰術池觀察部位</strong>，暫不建議列入核心池重倉，待FCF/槓桿趨勢明朗化後再評估升級。<br><br>
+        <strong>加碼觸發（需同時滿足多項）：</strong>
+        <ul style="padding-left:16px;">
+          <li>TTM FCF連續兩季轉正且改善趨勢明確</li>
+          <li>Anthropic完成上市且定價驗證目前$190B+帳面估值的合理性</li>
+          <li>AWS產能瓶頸紓解、backlog兌現速度加快</li>
+        </ul>
+      </div>
+      <div>
+        <strong>賣出/迴避觸發：</strong>
+        <ul style="padding-left:16px;">
+          <li>長期債務再翻倍突破$250B且信評展望轉負向</li>
+          <li>Anthropic IPO大幅延遲或定價顯著低於次級市場估值</li>
+          <li>AWS市佔率連續兩季顯著流失（跌破25%）</li>
+        </ul>
+        <br>
+        <strong>每季監控指標：</strong>TTM FCF趨勢、長期債務水位、AWS/廣告YoY成長率、Anthropic上市進度
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式二：財報解析
+══════════════════════════════════════ -->
+<div id="mode2" class="mode-divider">
+  <h2>◈ 模式二：最新財報解析</h2>
+  <p>Q2 2026 財報 · EPS多年期估值錨點 · DCF三情境 · 投行目標價 · 操作建議</p>
+</div>
+
+<!-- 6. Q2 2026 財報 Beat/Miss -->
+<div id="earnings" class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">Q2 2026 財報（2026-07-30發布）</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--gold); margin-bottom:20px;">
+    <h3 style="color:var(--gold)">⚠️ 營收與調整後EPS均優於預期，AWS加速為最大亮點，但GAAP EPS品質受Anthropic重估嚴重扭曲</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Q2 2026營收$200.6B，年增20%，優於市場預期。GAAP稀釋EPS $5.75，較去年同期大增，惟其中包含約<strong>$53.4B的Anthropic投資非現金公允價值重估利得</strong>；剔除此項後的調整後EPS為$1.97，仍優於市場預期的$1.82。AWS營收$42.2B（+37%，18季最快），營業利益率39.4%創佳績；廣告業務+26%至$19.8B。惟財報後市場反應呈現「同樣策略、相反反應」的特殊現象——儘管數字亮眼，市場對CapEx上修與FCF轉負仍存疑慮。✅</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>指標</th><th class="num">實際值 ✅</th><th class="num">市場預期 ⚠️</th><th class="num">YoY 變化</th><th>判定</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>營收</td><td class="num ok">$200.6B</td><td class="num">— ⚠️（優於預期）</td><td class="num ok">+20%</td><td><span class="badge badge-green">Beat ✅</span></td></tr>
+        <tr><td>GAAP稀釋EPS</td><td class="num ok">$5.75</td><td class="num">— ❌</td><td class="num">— ⚠️（含$53.4B非現金利得）</td><td><span class="badge badge-yellow">數字亮眼但品質存疑 ⚠️</span></td></tr>
+        <tr><td>調整後EPS（剔除Anthropic重估）</td><td class="num ok">$1.97</td><td class="num">$1.82</td><td class="num">— ⚠️</td><td><span class="badge badge-green">Beat ✅（+8.2%）</span></td></tr>
+        <tr><td>AWS營收成長</td><td class="num ok">+37%</td><td class="num">— ⚠️（優於預期）</td><td class="num ok">18季來最快</td><td><span class="badge badge-green">大幅Beat ✅</span></td></tr>
+        <tr><td>AWS營業利益率</td><td class="num ok">39.4%</td><td class="num">— ❌</td><td class="num ok">優於去年同期</td><td><span class="badge badge-green">獲利品質優異 ✅</span></td></tr>
+        <tr><td>廣告營收</td><td class="num ok">$19.8B</td><td class="num">— ❌</td><td class="num ok">+26%</td><td><span class="badge badge-green">強勁成長 ✅</span></td></tr>
+        <tr><td>TTM FCF</td><td class="num bad">約-$7.6B ⚠️</td><td class="num">— ❌</td><td class="num bad">由正轉負</td><td><span class="badge badge-red">重大隱憂 ❌</span></td></tr>
+        <tr><td>2026 CapEx guidance</td><td class="num bad">上修至$220B</td><td class="num">原guidance $200B</td><td class="num">— ⚠️</td><td><span class="badge badge-yellow">上修，市場疑慮 ⚠️</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>股價反應（財報前後）</h3>
+    <div style="font-size:13px; line-height:1.9; color:var(--text)">
+      <strong>財報發布（2026-07-30）</strong>：儘管營收/調整後EPS均優於預期、AWS加速明顯，市場反應相對保守，反映CapEx上修與FCF轉負的疑慮部分抵銷了亮眼數字的正面效果 ⚠️<br>
+      <strong>近月走勢（截至9/15）</strong>：股價$253.54，距52週高點$287.20回落約11.7%，距52週低點$196.00則高出約29.4%，處於區間中段偏上，市場仍在消化AWS加速利多與槓桿/FCF疑慮之間的拉鋸。
+    </div>
+  </div>
+</div>
+
+<!-- 7. EPS多年期表 & 歷史本益比 -->
+<div id="eps" class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">估值歷史錨點：多年期EPS ＋ 歷史本益比（★必附）</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財年</th>
+          <th class="num">EPS 實際值/預估值</th>
+          <th class="num">來源／機構</th>
+          <th class="num">參考股價</th>
+          <th class="num">隱含本益比 PE</th>
+          <th>狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>FY2022 A</strong></td>
+          <td class="num bad">-$0.27 ✅（虧損）</td>
+          <td class="num">Amazon 10-K</td>
+          <td class="num">— ❌</td>
+          <td class="num">不適用（虧損）</td>
+          <td><span class="badge badge-red">虧損年度</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2023 A</strong></td>
+          <td class="num ok">$2.90 ✅</td>
+          <td class="num">Amazon 10-K</td>
+          <td class="num">— ⚠️</td>
+          <td class="num">— ⚠️</td>
+          <td><span class="badge badge-green">轉盈</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2024 A</strong></td>
+          <td class="num ok">$5.53 ✅</td>
+          <td class="num">Amazon 10-K</td>
+          <td class="num">— ⚠️</td>
+          <td class="num">— ⚠️</td>
+          <td><span class="badge badge-green">大幅成長 +90.7%</span></td>
+        </tr>
+        <tr style="background:rgba(21,128,61,0.03)">
+          <td><strong>FY2025 A</strong></td>
+          <td class="num ok">$7.17 ✅</td>
+          <td class="num">Amazon 10-K/ARS</td>
+          <td class="num">— ⚠️</td>
+          <td class="num">— ⚠️</td>
+          <td><span class="badge badge-green">持續成長 +29.7%</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2026 進行中</strong></td>
+          <td class="num">Q2單季$5.75（含$53.4B Anthropic利得）／調整後Q2 $1.97 ✅</td>
+          <td class="num">Amazon Q2'26 8-K</td>
+          <td class="num">$253.54（現價）</td>
+          <td class="num">21.42倍（trailing，官方揭露）</td>
+          <td><span class="badge badge-yellow">GAAP獲利雜訊極大 ⚠️</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2027 E</strong></td>
+          <td class="num">— ❌（未查得可靠共識EPS數字）</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">— ❌</td>
+          <td><span class="badge badge-red">資料缺口</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ FY2026 GAAP EPS因Anthropic股權公允價值重估產生巨大季度波動（Q2單季即認列$53.4B非現金利得），不宜直接套用GAAP EPS計算本益比；建議以trailing PE 21.42倍（官方/stockanalysis.com揭露，應已採用更平滑的TTM基期）或調整後EPS $1.97（單季）為核心參考。</p>
+
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr><th colspan="4" style="color:var(--accent); font-size:13px;">★ 歷史本益比錨點表</th></tr>
+        <tr><th>期間</th><th class="num">本益比</th><th>狀態</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>目前 Trailing PE（2026/9/15）</td><td class="num ok">21.42倍 ✅</td><td><span class="badge badge-green">三大雲端巨頭中最低</span></td><td>低於MSFT(27x)、GOOGL(28x)</td></tr>
+        <tr><td>52週股價區間</td><td class="num">$196.00–$287.20 ✅</td><td><span class="badge badge-blue">現價處中段偏上</span></td><td>距高點-11.7%，距低點+29.4%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="risk-card" style="margin-top:12px;">
+    <h4>📌 反推試算結論：AMZN的「便宜」很大程度上是市場對其獲利品質疑慮的合理折價，而非純粹低估</h4>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">AMZN目前21.42倍的trailing PE在三大雲端巨頭中最低，表面上看似「相對便宜」，但這個折價需要與其獨特風險並列檢視：（1）GAAP獲利含大量未上市公司股權重估的非現金利得，真實經常性獲利能力需以調整後EPS或AWS/廣告板塊獲利判斷；（2）TTM FCF已轉負，且公司開始舉債支應資本支出，這在雲端三巨頭中是獨有現象（MSFT/GOOGL的FCF雖也因CapEx承壓而下滑，但均仍維持正值）。<strong>換言之，AMZN目前的估值折價本質上是市場對「AWS/廣告基本面強勁 vs. 財務體質快速惡化」兩股力量拉鋸的合理反映，而非明顯的錯殺式低估</strong>，投資人不宜僅憑本益比數字較低就直接視為便宜，需持續緊盯FCF與槓桿趨勢能否在未來2-3季改善。</p>
+  </div>
+</div>
+
+<!-- 8. DCF 三情境 -->
+<div id="dcf" class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">④ 三情境DCF估值（採外部分析師情境法呈現）</div>
+  </div>
+
+  <div class="caution-box">
+    <h3>⚠️ Amazon估值方法論說明</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">由於AMZN近期GAAP EPS受Anthropic股權重估嚴重扭曲、傳統DCF現金流預測基礎（FCF）已轉負使模型參數極不穩定，本報告採用<strong>外部分析師已發布、且方法論具體（含AWS backlog、capex強度、Anthropic重估假設）的Bear/Base/Bull三情境</strong>，並標註其核心假設，取代自製精確DCF模型，以避免在FCF基礎不穩的情況下產出誤導性的精確數字。<strong>以下情境數字均為⚠️外部研究彙整，已標明來源與假設，非本報告獨立建模</strong>。</p>
+  </div>
+
+  <div class="scenario-row">
+    <div class="scenario bear">
+      <h4>🐻 熊市情境（25% 機率）</h4>
+      <div class="scenario-price" style="color:var(--red)">$190</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $253.54　-25.1%</div>
+      <div class="row"><span>核心假設</span><span>AWS成長不如預期放緩、FCF持續為負</span></div>
+      <div class="row"><span>Anthropic重估假設</span><span>IPO延遲或定價不如次級市場預期，利得縮水</span></div>
+      <div class="row"><span>槓桿假設</span><span>長期債務持續攀升未見改善</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：TTM FCF連續惡化、Anthropic上市大幅延遲或估值大幅下修</div>
+    </div>
+    <div class="scenario base">
+      <h4>📊 基準情境（50% 機率）</h4>
+      <div class="scenario-price" style="color:var(--blue)">$290</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $253.54　+14.4%</div>
+      <div class="row"><span>核心假設</span><span>AWS維持30%+成長、廣告持續雙位數成長</span></div>
+      <div class="row"><span>Anthropic重估假設</span><span>維持目前$190B左右帳面估值，未大幅調整</span></div>
+      <div class="row"><span>槓桿假設</span><span>債務成長趨緩，FCF逐步改善但仍偏弱</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：guidance如期兌現、CapEx增速隨營收成長趨緩</div>
+    </div>
+    <div class="scenario bull">
+      <h4>🐂 牛市情境（25% 機率）</h4>
+      <div class="scenario-price" style="color:var(--green)">$340</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $253.54　+34.1%</div>
+      <div class="row"><span>核心假設</span><span>AWS產能瓶頸紓解、backlog加速兌現，邁向兆美元營收敘事強化</span></div>
+      <div class="row"><span>Anthropic重估假設</span><span>成功上市且估值達次級市場預期$1.2-2兆區間，股權價值上修至$252-280B+</span></div>
+      <div class="row"><span>槓桿假設</span><span>FCF重回正成長，債務占比穩定</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：Anthropic成功上市且定價強勁、AWS營收加速確認</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent);">
+    <h3>敏感度分析：哪個變數對估值影響最大？</h3>
+    <p style="font-size:13px; color:var(--text); line-height:1.7">三情境價差（$190至$340，約1.8倍）主要由<strong>「Anthropic股權能否成功兌現為可驗證的市場價值」與「FCF能否止跌回升」</strong>兩項變數共同決定，重要性甚至高於AWS本身的營收成長率——因為AWS基本面在三種情境下差異相對有限（均維持成長，僅速度不同），真正決定股價方向的是「這一整套仰賴未上市公司股權重估與舉債支應的獲利/資產負債表結構，能否被市場信任」。外部分析師共識加權估算約<strong>$290-310（⚠️外部研究彙整，非本報告獨立建模）</strong>，另有其他研究機構給出Bear $207/Bull $370的類似區間版本，可視為交叉驗證，核心結論一致：現價$253.54大致落在熊市與基準情境之間，尚未明顯反映牛市假設。</p>
+  </div>
+</div>
+
+<!-- 9. 股價位階評估 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">股價位階評估</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>估值倍數現況 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:20px;">21.42x</div><div class="big-label">Trailing PE</div></div>
+        <div><div class="big-num" style="font-size:20px;">1.45</div><div class="big-label">Beta（5年）</div></div>
+        <div><div class="big-num" style="font-size:20px;">$2.768T</div><div class="big-label">市值</div></div>
+        <div><div class="big-num" style="font-size:20px;">-11.7%</div><div class="big-label">距52週高點</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>與雲端三巨頭比較 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:20px; color:var(--green)">21.4x</div><div class="big-label">AMZN trailing PE，三家最低</div></div>
+        <div><div class="big-num" style="font-size:20px;">27.4x</div><div class="big-label">MSFT trailing PE</div></div>
+        <div><div class="big-num" style="font-size:20px;">28x</div><div class="big-label">GOOGL trailing PE</div></div>
+        <div><div class="big-num" style="font-size:20px; color:var(--red)">37%</div><div class="big-label">AWS成長，三家雲端中最慢</div></div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px; color:var(--text2)">AMZN估值最低但AWS成長率也是三朵雲中最慢的一朵，這個「估值最便宜＝成長最慢」的對應關係邏輯上是合理的，不宜單純解讀為「AMZN被低估」，需同時考量其獲利品質（GAAP EPS雜訊）與槓桿惡化的額外折價因素。</p>
+</div>
+
+<!-- Comps -->
+<div id="comps" class="section" style="margin-top:0;">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">Comps 同業對照</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th class="num">市值</th><th class="num">Trailing PE</th><th class="num">雲端市佔</th><th class="num">雲端YoY成長</th><th>核心定位</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Amazon（AMZN）</strong></td><td class="num">$2.768T</td><td class="num">21.42x</td><td class="num">28%（第一）</td><td class="num">AWS +37%</td><td>電商+雲端龍頭+Anthropic 21%股東</td></tr>
+        <tr><td>Microsoft（MSFT）</td><td class="num">~$3.75T</td><td class="num">27.43x</td><td class="num">20%（第二）</td><td class="num">Azure +41%(FY)</td><td>企業軟體+雲端+OpenAI 27%股東</td></tr>
+        <tr><td>Alphabet（GOOGL）</td><td class="num">~$2.4T ⚠️（估算）</td><td class="num">28x</td><td class="num">15%（第三）</td><td class="num">GCP +82%</td><td>搜尋廣告核心+雲端成長最快</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 部分市值為粗略估算，非同日精確快照。三巨頭呈現清晰對應關係：估值（PE）與雲端成長率大致呈反向排序（AMZN估值最低/成長最慢，GOOGL成長最快/估值中等，MSFT估值最高/成長居中），惟MSFT/GOOGL均無AMZN獨有的FCF轉負與GAAP獲利雜訊問題。</p>
+</div>
+
+<!-- 11. 額外優勢/風險 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">額外優勢/風險</div>
+  </div>
+  <div class="card-grid">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>市場地位與分析師評等</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">61位分析師覆蓋，15 Strong Buy、44 Buy、2 Hold，<strong>零Sell評等</strong>，是市場情緒最一致樂觀的雲端巨頭之一。市值長期穩居全球前五大公司之列。✅</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <h3>AWS供不應求：需求端無虞的稀有訊號</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">管理層明確表示2026-2027年AWS運算產能仍將供不應求，這在AI資本支出疑慮升溫的大環境下，是相對稀有的「需求端無虞」正面訊號——公司面臨的是產能執行問題，而非需求疑慮。✅</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 獲利品質與槓桿是近期最大額外風險</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">TTM FCF轉負、長期債務半年翻倍、約$286B表外承諾未列資產負債表、GAAP EPS嚴重依賴未上市公司股權重估——這四項因素疊加，使AMZN在三大雲端巨頭中呈現財務體質惡化速度最快的態勢，是本報告給予相對保守Thesis成立度（3.3/5）評分的主因。⚠️</p>
+    </div>
+  </div>
+</div>
+
+<!-- 12. 投行目標價 -->
+<div id="targets" class="section">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">投行目標價與操作建議</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>機構/來源</th><th>評等</th><th class="num">目標價</th><th>日期</th></tr></thead>
+      <tbody>
+        <tr><td>共識彙整（61位分析師）</td><td><span class="badge badge-green">Strong Buy（15 Strong Buy+44 Buy / 2 Hold / 0 Sell）</span></td><td class="num">均值$328.17 ✅</td><td>2026年9月</td></tr>
+        <tr><td>另一批分析師彙整（S&P Global系）</td><td><span class="badge badge-green">Strong Buy</span></td><td class="num">均值$307.77 ✅</td><td>2026年9月</td></tr>
+        <tr><td>外部研究 Bear/Base/Bull</td><td><span class="badge badge-yellow">情境分析</span></td><td class="num">$190 / $290 / $340 ✅</td><td>2026年9月14日基準</td></tr>
+        <tr><td>另一版本Bear/Bull（不同機構）</td><td><span class="badge badge-yellow">交叉參考</span></td><td class="num">$207 / $370 ✅</td><td>2026年</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--gold); margin-top:16px;">
+    <h3 style="color:var(--gold)">分歧點</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">分析師目標價區間（$190-$370）跨度接近2倍，核心分歧在於「Anthropic股權重估利得是否具備真實經濟價值」與「FCF轉負是暫時性投資週期還是結構性惡化」。多數分析師仍給予Buy/Strong Buy評等且零Sell評等，顯示華爾街整體對AWS基本面與長期敘事仍有信心，但目標價共識（$307-328）與現價（$253.54）之間存在約21-29%的樂觀落差，本報告建議以基準情境$290作為較中性的參考錨點，而非直接採信共識均值上緣。</p>
+  </div>
+
+  <div class="action-box" style="margin-top:16px;">
+    <h3>✅ 最終操作建議（財報解析視角）</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">現價$253.54相對投行共識目標價（$307-328）存在約21-29%潛在上行空間，相對本報告基準情境（$290）則約+14%，表面上具吸引力，但需將「AWS/廣告基本面強勁」與「FCF轉負、槓桿快速攀升、GAAP獲利品質雜訊」兩股力量並列權衡。<strong>對於已持有者：可續抱但建議控制倉位，密切追蹤未來2-3季FCF與槓桿趨勢是否改善；對於未持有者：不建議在目前階段重倉建立部位，建議等待FCF止跌或Anthropic上市驗證其估值後，再考慮分批布局，現階段較適合作為戰術池的小倉位觀察部位而非核心池主力持倉。</strong></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式三：財務健檢
+══════════════════════════════════════ -->
+<div id="mode3" class="mode-divider">
+  <h2>◈ 模式三：財務風險健檢</h2>
+  <p>六大比率診斷 · CapEx分析 · 同業對比 · 綜合診斷</p>
+</div>
+
+<!-- 13. 財務數據填表 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">財務數據填表（近3期）</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>項目</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">2026Q2末(最新)</th></tr></thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$716.9B ✅</td><td class="num">$775.7B ✅</td><td class="num">Q2單季$200.6B ✅</td></tr>
+        <tr><td>營業利益</td><td class="num">$79.98B ✅</td><td class="num">$93.71B ✅</td><td class="num">— ⚠️（未取得單季精確值）</td></tr>
+        <tr><td>營運現金流(TTM)</td><td class="num">$115.88B ✅</td><td class="num">$139.51B ✅</td><td class="num">— ⚠️（上升但CapEx增速更快）</td></tr>
+        <tr><td>CapEx（年度guidance）</td><td class="num">— ❌</td><td class="num">$200B（原guidance）</td><td class="num bad">$220B ✅（上修後）</td></tr>
+        <tr><td>自由現金流(TTM)</td><td class="num">$38.2B ✅</td><td class="num">$11.0B ✅</td><td class="num bad">約-$7.6B ✅（轉負）</td></tr>
+        <tr><td>長期債務</td><td class="num">— ❌</td><td class="num">$65.6B ✅</td><td class="num bad">$128.9B ✅（半年翻倍）</td></tr>
+        <tr><td>表外承諾（未列資產負債表）</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num warn">~$286B ✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 14. 六大比率 -->
+<div id="ratios" class="section">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">六大比率診斷</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>1. 長期債務半年變化率</h3>
+      <div class="big-num" style="color:var(--red)">+96.5% ⚠️</div>
+      <div class="big-label">公式：($128.9B-$65.6B)÷$65.6B，2025年底→2026年Q2末</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:90%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：半年內長期債務幾乎翻倍，是三大雲端巨頭中槓桿惡化速度最快者，反映公司已從「用OCF支應CapEx」轉向「部分仰賴舉債」，為本次健檢中最需要留意的單一指標。</p>
+    </div>
+    <div class="card">
+      <h3>2. FCF Margin（FCF/營收）</h3>
+      <div class="big-num" style="color:var(--red)">轉負 ❌</div>
+      <div class="big-label">TTM FCF約-$7.6B，對比FY2025全年FCF $11.0B（margin僅1.4%）</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:85%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">❌ 狀態：三大雲端巨頭中唯一FCF轉負者（MSFT/GOOGL的FCF雖也因CapEx承壓下滑，但均維持正值），是本報告評分保守的核心原因。</p>
+    </div>
+    <div class="card">
+      <h3>3. 營業利益率</h3>
+      <div class="big-num" style="color:var(--gold)">12.1% ⚠️</div>
+      <div class="big-label">公式：FY25營業利益$93.71B ÷ 營收$775.7B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:40%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：整體營益率遠低於MSFT（46.8%）與GOOGL，主因電商零售板塊利潤率結構性偏低，AWS（39.4%營益率）雖優異但占比不足以拉高整體平均，是集團型企業的常態，非單獨警訊。</p>
+    </div>
+    <div class="card">
+      <h3>4. AWS營業利益貢獻集中度</h3>
+      <div class="big-num" style="color:var(--gold)">~60% ⚠️</div>
+      <div class="big-label">AWS貢獻Q2整體營業利益約60%，惟營收占比僅約21%（$42.2B/$200.6B）</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:60%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：公司獲利高度集中於AWS單一板塊，若AWS成長或獲利率遇到逆風（如產能瓶頸惡化或價格戰），對集團整體獲利的衝擊將不成比例地大，屬集中度風險。</p>
+    </div>
+    <div class="card">
+      <h3>5. 表外承諾/年營收比率</h3>
+      <div class="big-num" style="color:var(--gold)">36.9% ⚠️（自算）</div>
+      <div class="big-label">公式：表外承諾$286B ÷ FY25營收$775.7B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:50%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：約當年營收37%的承諾未反映在資產負債表上（多為資料中心租賃等長期採購承諾），雖為雲端業界常見做法，但疊加已攀升的表內債務，實質財務槓桿高於資產負債表表面數字。</p>
+    </div>
+    <div class="card">
+      <h3>6. GAAP獲利雜訊佔比</h3>
+      <div class="big-num" style="color:var(--red)">極高 ❌</div>
+      <div class="big-label">2026上半年累計$62.8B非經常性Anthropic重估利得，遠超同期核心經營獲利</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:80%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">❌ 狀態：GAAP財報數字已高度失真，投資人必須以調整後EPS或分部營業利益判斷經常性獲利能力，不宜直接引用GAAP淨利/EPS進行估值計算。</p>
+    </div>
+  </div>
+</div>
+
+<!-- Comps健檢 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-title">同業財務體質對比</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th class="num">FCF趨勢(最新)</th><th class="num">槓桿變化</th><th class="num">GAAP獲利品質</th><th>財務體質定性</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Amazon（AMZN）</strong></td><td class="num bad">轉負(-$7.6B TTM)</td><td class="num bad">半年+96.5%</td><td class="num bad">嚴重失真(Anthropic重估)</td><td>三巨頭中財務體質惡化最明顯</td></tr>
+        <tr><td>Microsoft（MSFT）</td><td class="num warn">仍正但年減6.4%</td><td class="num">— ⚠️（槓桿極低，非風險焦點）</td><td class="num warn">部分失真(OpenAI利得/虧損)</td><td>核心體質健康，CapEx為唯一觀察點</td></tr>
+        <tr><td>Alphabet（GOOGL）</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td>GCP營益率大幅改善，資料待GOOGL個股報告補齊</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 綜合診斷 -->
+<div id="health" class="section">
+  <div class="section-header">
+    <div class="section-num">16</div>
+    <div class="section-title">財務體質綜合診斷</div>
+  </div>
+  <div class="card" style="display:flex; align-items:center; gap:24px;">
+    <div class="health-badge health-b">B</div>
+    <div>
+      <p style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px;">財務體質評等：B（核心業務健康，惟現金流與槓桿趨勢是三巨頭中最弱的一環）</p>
+      <p style="font-size:13px; color:var(--text2); line-height:1.7">AWS獲利率優異（39.4%營益率）、廣告業務高速成長且高毛利，核心經營面無虞；但TTM FCF轉負、長期債務半年翻倍、GAAP獲利高度依賴未上市公司股權重估，三項因素疊加使AMZN的財務體質評等低於MSFT，是本次31檔個股健檢中需要持續以季度為單位緊盯現金流與槓桿趨勢的代表案例之一。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     綜合總結
+══════════════════════════════════════ -->
+<div id="final" class="section">
+  <div class="section-header">
+    <div class="section-num">17</div>
+    <div class="section-title">綜合總結</div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis 成立度</div><div class="s-val">3.3 / 5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-val">⭐⭐⭐⭐☆</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-val" style="font-size:13px;">穩定成長股＋局部快速成長</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-val">B</div></div>
+    <div class="summary-card"><div class="s-label">現價/共識目標價</div><div class="s-val" style="font-size:13px;">$253.54 / $307-328</div></div>
+  </div>
+
+  <div class="action-box">
+    <h3>✅ 最終操作建議</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">
+      <strong>已持有者：</strong>可續抱但建議控制倉位規模，不建議在此階段加碼至核心池等級部位。AWS重新加速（37%，18季最快）與廣告業務（+26%）是紮實的正面訊號，但TTM FCF轉負、長期債務半年翻倍、GAAP獲利高度依賴Anthropic未上市股權重估，三項疊加使AMZN成為本次31檔清單中財務體質惡化速度最快的一檔，需以季度為單位密切追蹤。<br><br>
+      <strong>未持有者：</strong>不建議現階段重倉建立部位，可視為戰術池小倉位觀察部位，待FCF止跌回升或Anthropic完成上市驗證股權價值後，再評估是否加碼至核心池。目前$253.54的估值（21.4倍trailing PE，三巨頭最低）某種程度已反映上述疑慮，非明顯錯殺式低估。<br><br>
+      <strong>核心催化劑：</strong>①TTM FCF能否止跌回升 ②Anthropic上市進度與定價（傳2026年10月那斯達克掛牌） ③AWS運算產能瓶頸能否如期紓解、backlog兌現速度 ④長期債務水位是否持續攀升。
+    </p>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <p>
+    資料來源：Amazon Investor Relations（Q2 2026 8-K/10-Q）、SEC EDGAR、stockanalysis.com、The Motley Fool、CNBC、Fool.com、24/7 Wall St.、其他公開財經媒體報導（詳見各段落標註）<br>
+    ✅ 已驗證　⚠️ 估算/近似值或資料源分歧　❌ 無法取得，禁止臆測填入<br>
+    本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。
+  </p>
+</footer>
+
+</body>
+</html>

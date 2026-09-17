@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜INTC Intel Corporation 2026-09-16</title>
+<style>
+  :root {
+    --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6;
+    --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca;
+    --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+    --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; position: relative; overflow: hidden; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-change { font-size: 16px; color: var(--green); margin-top: 4px; }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .toc-inner a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); padding: 0 0 4px 0; }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(79,70,229,0.03); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+
+  .ok { color: var(--green); }
+  .warn { color: var(--gold); }
+  .bad { color: var(--red); }
+  .muted { color: var(--text2); }
+  .est { color: var(--gold); font-size: 11px; }
+
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); }
+  .scenario.base { border-top: 3px solid var(--blue); }
+  .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); }
+  .scenario.base h4 { color: var(--blue); }
+  .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .scenario .row:last-child { border-bottom: none; }
+
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .risk-card { background: #fef2f2; border: 1px solid rgba(220,38,38,0.20); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .risk-card h4 { color: var(--red); font-size: 13px; margin-bottom: 4px; }
+
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+
+  .comp-now { background: rgba(79,70,229,0.05); }
+  .comp-now td { font-weight: 700; }
+
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); }
+  .bar-yellow { background: var(--gold); }
+  .bar-red { background: var(--red); }
+
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; text-transform: uppercase; letter-spacing:0.5px; }
+  .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .summary-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 720px) {
+    .scenario-row { grid-template-columns: 1fr; }
+    .moat-grid { grid-template-columns: repeat(2,1fr); }
+    .hero-price-block { text-align:left; }
+  }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">INTC</div>
+      <div class="hero-name">Intel Corporation（美國唯一具規模的IDM半導體廠，正從「純產品公司」轉型為「產品+晶圓代工雙引擎」，美國政府／Nvidia／SoftBank三方策略股東加持的國家隊turnaround故事）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-09-16　資料基準：2026-09-15附近收盤　Beta(5Y) 3.35（極高波動）</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$100.32</div>
+      <div class="hero-change">2026年9月，單日-5.57%</div>
+      <div class="hero-mktcap">市值 ≈$544.2B</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-purple">2026年迄今股價+163%~+170%，turnaround故事主角</span>
+    <span class="badge badge-blue">Q2'26營收+25%，15年來最快</span>
+    <span class="badge badge-green">Data Center&AI營收+59%</span>
+    <span class="badge badge-red">Q2 GAAP淨損-$11B，因CHIPS Act託管股按市值評價損失$12.5B</span>
+    <span class="badge badge-orange">美國政府9.9%＋Nvidia~4%＋SoftBank~2%三方策略股東</span>
+    <span class="badge badge-yellow">18A良率>60%但2026-2027才轉為成本正貢獻</span>
+    <span class="badge badge-teal">分析師普遍給Hold，目標價僅打平現價</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$100.32</div><div class="sub">✅ 52週 $24.45–$142.35（極端區間）</div></div>
+    <div class="meta-item"><label>Q2'26 營收</label><div class="val">$16.1B</div><div class="sub">YoY +25% ✅</div></div>
+    <div class="meta-item"><label>Q2'26 調整後EPS</label><div class="val">$0.42</div><div class="sub">優於共識$0.21 ✅</div></div>
+    <div class="meta-item"><label>Forward PE</label><div class="val">42.80x</div><div class="sub">✅ GuruFocus，"顯著高估"標籤</div></div>
+    <div class="meta-item"><label>Thesis 成立度</label><div class="val">2.6 / 5</div><div class="sub">turnaround初步驗證但未完成，估值已price in大量利多</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐☆☆☆</div><div class="sub">代工地位尚在重建，x86仍持續失守AMD</div></div>
+  </div>
+</div>
+
+<!-- ── TOC ── -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#mode1">模式一 深度研究</a>
+    <span class="toc-sep">·</span>
+    <a href="#biz">業務引擎</a>
+    <a href="#thesis">核心Thesis</a>
+    <a href="#competition">競爭格局</a>
+    <a href="#moat">成長象限</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode2">模式二 財報解析</a>
+    <span class="toc-sep">·</span>
+    <a href="#earnings">Q2 2026財報</a>
+    <a href="#eps">EPS與估值錨點</a>
+    <a href="#dcf">DCF情境</a>
+    <a href="#targets">投行目標</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode3">模式三 財務健檢</a>
+    <span class="toc-sep">·</span>
+    <a href="#ratios">六大比率</a>
+    <a href="#comps">同業對比</a>
+    <a href="#health">綜合診斷</a>
+    <span class="toc-sep">·</span>
+    <a href="#final">綜合總結</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════
+     模式一：深度研究
+══════════════════════════════════════ -->
+<div id="mode1" class="mode-divider">
+  <h2>◈ 模式一：公司深度研究</h2>
+  <p>業務引擎 · 核心Thesis · 競爭格局 · Peter Lynch成長象限 · 護城河五維評分</p>
+</div>
+
+<!-- 1. 公司基本介紹 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">公司基本介紹</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">Intel（NASDAQ: INTC）總部Santa Clara，市值≈$544B，是美國唯一僅存具規模的IDM（垂直整合製造商），正經歷公司史上最重大的策略轉型——從「純CPU設計/製造公司」轉型為「產品業務（Client/Data Center）+晶圓代工業務（Intel Foundry）雙引擎」。2025年8-9月密集獲得<strong>美國政府（9.9%股權，CHIPS Act）、Nvidia（約4%，$5B投資）、SoftBank（約2%，$2B投資）</strong>三方策略股東加持，是本次B-1組別中唯一具備「國家隊」性質的公司。股價2026年迄今累計上漲約163-170%（不同計算基期），是本輪半導體turnaround故事中漲幅最驚人的個股。✅</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽（Q2 2026，最新單季）✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$16.1B</div><div class="big-label">Q2'26 營收</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">+25% YoY</div><div class="big-label">15年來最快單季成長</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--red)">-$11B GAAP淨損</div><div class="big-label">主因CHIPS Act託管股MTM損失$12.5B</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">$0.42</div><div class="big-label">調整後EPS，優於共識$0.21</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent)">
+    <h3 style="color:var(--accent)">🏭 所屬產業與市場地位</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">所屬產業：<strong>x86處理器設計＋晶圓代工（IDM）</strong>。Data Center and AI事業群Q2'26營收+59%達$6.3B，Client Computing事業群+13%達$8.9B，均優於預期，是Q2營收創15年最快成長的主因。Intel Foundry方面，18A製程良率已突破60%關鍵門檻（Panther Lake，月增約7%），2026年1月起廣泛上市，惟管理層坦承要到2026年底或2027年良率才會完全轉為成本正貢獻。傳出Apple已加入Intel Foundry客戶名單、Nvidia也在評估2028年「Feynman」GPU使用Intel代工，若成真將是Foundry業務重大驗證。✅（來源：Intel 8-K、CNBC、Yahoo Finance、TechPowerUp）</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財務摘要</th>
+          <th class="num">FY2022</th>
+          <th class="num">FY2023</th>
+          <th class="num">FY2024</th>
+          <th class="num">FY2025</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$63.1B ✅</td><td class="num">$54.2B ✅</td><td class="num">$53.1B ✅</td><td class="num">$52.9B ✅</td></tr>
+        <tr><td>YoY 成長</td><td class="num bad">-20.2% ✅</td><td class="num bad">-14.0% ✅</td><td class="num bad">-2.0% ✅</td><td class="num bad">-0.5% ✅</td></tr>
+        <tr><td>淨利／稀釋EPS</td><td class="num">$8.0B／$1.94 ✅</td><td class="num warn">$1.7B／$0.40 ✅</td><td class="num bad">EPS $(4.38) ⚠️（大幅虧損年度，資料源對淨利數字有分歧）</td><td class="num warn">Q1-Q3合計$4.1B／$0.90 ✅（全年止血跡象）</td></tr>
+        <tr><td>FCF</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num bad">-$4.95B ✅（仍為負值）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅ 已驗證（來源：Intel 10-K/8-K、SEC EDGAR、MacroTrends）｜⚠️ FY2024淨利數字資料源分歧（一說$1.0B正值，另一說EPS為$(4.38)大幅虧損），已知Intel FY2024因重大資產減損認列鉅額GAAP虧損，本報告以EPS走勢為主要判斷依據，$1.0B淨利數字疑為資料誤植，標記存疑。FY2022-2025營收連續四年衰退（-20.2%→-14.0%→-2.0%→-0.5%），直到FY2026 Q2才出現+25%的顯著反轉，是判斷turnaround是否真正確立的關鍵轉折點。</p>
+</div>
+
+<!-- 2. 業務引擎分析 -->
+<div id="biz" class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">業務引擎分析</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🖥️ Client Computing Group — Q2'26營收$8.9B（YoY +13%）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">PC處理器核心業務，受惠Panther Lake（18A製程首款AI PC平台）2026年1月起廣泛上市，加上AMD當期無新架構推出的空窗期，Intel有機會在這個冬季重新奪回部分市佔與話語權。惟長期而言，Intel在伺服器與PC市場仍持續流失份額給AMD，本次回升能否轉化為結構性市佔止穩，仍需觀察。✅</p>
+    </div>
+    <div class="card">
+      <h3>☁️ Data Center and AI — Q2'26營收$6.3B（YoY +59%，成長最快事業群）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">受惠資料中心CPU需求回升與AI伺服器搭配銷售，是Q2營收創15年最快成長的主要貢獻者。惟需留意此板塊基期較低（相對Client Computing），高成長率部分反映基期效應，非單純市佔搶回。✅</p>
+    </div>
+    <div class="card">
+      <h3>⚙️ Intel Foundry — 18A製程進入量產，良率突破60%關鍵門檻</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">18A製程良率以月增約7%的速度爬升，Panther Lake（18A首款商用晶片）2026年1月起廣泛上市。管理層明確表示良率要到2026年底或2027年才會完全轉為成本正貢獻，意味Foundry業務短中期內仍是獲利拖累而非貢獻。傳出Apple已加入Foundry客戶名單、Nvidia評估2028年「Feynman」GPU代工，若外部客戶訂單能實質兌現，將是驗證Foundry能否成為TSMC真正對手的關鍵。✅⚠️</p>
+    </div>
+    <div class="card">
+      <h3>🤝 三方策略股東：美國政府＋Nvidia＋SoftBank</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">2025年8-9月密集完成：美國政府透過CHIPS Act取得9.9%股權（換取$5.7B加速撥款）、Nvidia以$23.28/股價格購入約4%股權（$5B，較現價$100.32已大幅價內）、SoftBank以約$23/股投資$2B取得約2%股權。三方投資不僅提供資金，更象徵美國半導體「國家隊」戰略地位，Nvidia並宣布與Intel共同開發多代資料中心/PC客製化產品。✅（來源：itiger、CNBC、NBC News）</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>核心業務線</th><th>Q2'26 YoY成長</th><th>護城河來源</th><th>2026-2027關鍵催化劑</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Client Computing</strong></td><td class="num ok">+13%</td><td>x86生態系、Panther Lake AI PC平台</td><td>能否在AMD空窗期實質奪回市佔</td></tr>
+        <tr><td><strong>Data Center and AI</strong></td><td class="num ok">+59%（最快，惟基期較低）</td><td>企業伺服器既有客戶基礎</td><td>能否持續轉化為市佔止穩而非基期效應</td></tr>
+        <tr><td><strong>Intel Foundry</strong></td><td class="num">18A良率>60%，仍非成本正貢獻</td><td>美國本土先進製程稀缺性（地緣政治溢價）</td><td>Apple/Nvidia等外部客戶訂單能否實質兌現</td></tr>
+        <tr><td><strong>三方策略股東</strong></td><td class="num">合計約16%股權由政府/Nvidia/SoftBank持有</td><td>國家隊戰略地位、與Nvidia產品合作</td><td>Nvidia Feynman GPU代工評估結果</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 3. 核心Thesis -->
+<div id="thesis" class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">核心 Thesis 與未來成長驅動</div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 1｜營收成長已出現實質反轉，非僅題材</div>
+      <div class="content">Q2'26營收+25%為15年來最快，終結FY2022-2025連續四年營收衰退（-20.2%→-14.0%→-2.0%→-0.5%）的趨勢，且Q3guidance（$15.8-16.8B）同樣優於分析師預期（$15.1B）。連續兩季優於預期（管理層稱"7th straight beat"）顯示這不是單季偶發現象。✅ 成立，是turnaround故事最重要的實證基礎。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 2｜18A製程技術問題已解決，Foundry業務即將轉虧為盈</div>
+      <div class="content">18A良率確已突破60%關鍵門檻且持續改善，是重大技術里程碑；但管理層自己承認要到2026年底或2027年才會「完全轉為成本正貢獻」，意味Foundry業務短期內仍持續虧損拖累整體獲利。⚠️ 部分成立——技術問題大幅緩解，但財務貢獻的時間點仍有1-1.5年落差，不宜過早視為已完全解決。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 3｜外部客戶（Apple/Nvidia）將驗證Foundry具備TSMC替代性</div>
+      <div class="content">傳出Apple加入Intel Foundry客戶名單、Nvidia評估2028年Feynman GPU代工，若成真將是Foundry業務轉骨的關鍵訊號。惟截至目前這些多為「評估中」或「傳聞」階段，尚未有具約束力的大額代工合約正式簽署並公開量化的訂單金額。⚠️ 部分成立——潛在催化劑明確但尚未兌現，是外部研究認為的「牛市情境」核心觸發條件，非已發生事實。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--red)">❌ 尚待驗證</div>
+      <div class="label">Thesis 4｜GAAP獲利能力已實質改善</div>
+      <div class="content">Q2'26 GAAP淨損達$11B（-$2.16/股），主因CHIPS Act託管股票的$12.5B非現金按市值評價損失——這是一個獨特且反直覺的現象：<strong>股價上漲反而導致公司認列更大的GAAP帳面虧損</strong>（因為政府持股的會計處理方式與MSFT/AMZN/GOOGL的「私人公司股權增值認列利得」邏輯完全相反）。調整後EPS雖優於預期（$0.42 vs $0.21），但GAAP數字的持續性虧損，加上FY2025全年FCF仍為負值（-$4.95B），顯示公司整體獲利能力的實質改善程度不宜高估。❌ 尚待驗證，是本報告對INTC給予五檔中最低Thesis成立度的核心原因。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--red)">❌ 尚待驗證</div>
+      <div class="label">Thesis 5｜目前股價（+163-170% YTD）已充分反映合理的turnaround價值</div>
+      <div class="content">外部研究明確指出「股價已上漲約500%（另一基期計算），price in了大量利多」，若未來兩季沒有新的外部代工大客戶確認、Nvidia的多晶圓專案評估未能轉化為實質訂單，重新評價的論述可能停滯，本益比可能向下壓縮至「產品公司」估值水準（bear case $90，甚至tail risk $45若18A經濟性令人失望）。❌ 尚待驗證——目前Forward PE高達42.80倍（"顯著高估"標籤），估值已經隱含相當樂觀的執行預期，安全邊際明顯不足。</div>
+    </div>
+  </div>
+
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🚀 核心成長驅動力</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>Nvidia Feynman GPU代工評估若確認採用Intel</strong>：將是Foundry業務最強力的第三方驗證</li>
+        <li><strong>Panther Lake在AMD空窗期搶占PC市佔</strong>：本季是難得的市佔反攻機會窗口</li>
+        <li><strong>18A良率持續以7%/月速度改善</strong>：若維持此速度，成本正貢獻時點可能提前</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 核心監控風險</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>連續兩季無新外部代工大客戶確認</strong>：觸發條件——Q3/Q4財報電話會議未能提供Apple/Nvidia代工進展的具體更新</li>
+        <li><strong>FCF持續為負，資產負債表槓桿攀升</strong>：觸發條件——總債務$50.54B持續攀升且現金部位($29.73B)未見改善</li>
+        <li><strong>AMD推出新架構終結目前的市佔反攻窗口</strong>：觸發條件——AMD新一代Zen架構提前發布或效能大幅超越Panther Lake</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 競爭格局 -->
+<div id="competition" class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">競爭格局：依兩大戰場列示</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>戰場</th><th>公司</th><th>現況</th><th>對INTC威脅度</th></tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="1"><strong>x86處理器（PC/伺服器）</strong></td><td>AMD</td><td>持續侵蝕Intel伺服器市佔，惟2026年冬季無新架構推出，處於空窗期</td><td>🔴 高｜長期市佔流失趨勢未逆轉，僅短期窗口期對Intel有利</td></tr>
+        <tr class="comp-now"><td rowspan="3"><strong>晶圓代工</strong></td><td><strong>Intel Foundry（本案）</strong></td><td>18A良率>60%，2026-2027才轉正貢獻，外部大客戶尚在評估階段</td><td>—</td></tr>
+        <tr><td>TSMC（本組另一檔TSM）</td><td>先進製程技術領先幅度全產業最大，良率與量產經驗遠優於Intel Foundry</td><td>🔴 高｜Intel Foundry要追上TSMC仍需數年執行證明，短期差距巨大</td></tr>
+        <tr><td>Samsung Foundry</td><td>與Intel同為「追趕者」定位，兩者傳出可能結盟對抗TSMC</td><td>🟡 中｜潛在合作對象而非純粹威脅，惟結盟若成真對雙方均是機會而非零和</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box" style="margin-top:16px;">
+    <h3>⚠️ 競爭關鍵監控：Intel在「產品」與「代工」兩條戰線都是追趕者，turnaround需要雙線同時成功</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">與TSM（純代工龍頭，護城河最深厚）或NVDA/AVGO（純設計，護城河來自產品力）不同，Intel需要同時在「x86產品對AMD的市佔保衛戰」與「晶圓代工對TSMC的技術追趕戰」兩條戰線都取得進展，turnaround的執行複雜度顯著更高。目前的樂觀敘事很大程度建立在「18A良率改善」與「三方策略股東信心」之上，但這些都還未轉化為可驗證的市佔數字或大額外部代工合約，是本報告將INTC列為本次半導體族群中風險最高、護城河評分最低的一檔的核心原因。</p>
+  </div>
+</div>
+
+<!-- 5. 成長象限 & 護城河評分 -->
+<div id="moat" class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Peter Lynch 成長象限 & 護城河評分</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border:2px solid var(--purple);">
+      <h3 style="color:var(--purple)">📊 Lynch 象限判斷</h3>
+      <div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">轉機股（Turnaround），尚未完成轉型驗證</div>
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <thead><tr><th>判斷標準</th><th>Intel 現況</th><th>判定</th></tr></thead>
+          <tbody>
+            <tr><td>是否曾經歷重大衰退/危機</td><td>FY2022-2025營收連續四年衰退，FY2024出現鉅額GAAP虧損</td><td class="bad">❌ 典型轉機股背景，非穩定/成長股</td></tr>
+            <tr><td>是否出現實質營收反轉訊號</td><td>Q2'26營收+25%，15年最快，連續多季優於預期</td><td class="ok">✅ 初步反轉訊號明確</td></tr>
+            <tr><td>獲利能力是否已實質改善</td><td>GAAP仍虧損(Q2淨損$11B)，FY2025 FCF仍為負(-$4.95B)</td><td class="bad">❌ 獲利能力尚未實質轉正，轉機尚未完成</td></tr>
+            <tr><td>估值是否已充分反映轉機預期</td><td>Forward PE 42.80倍"顯著高估"，股價年內已上漲163-170%+</td><td class="bad">❌ 估值已price in大量樂觀預期，安全邊際不足</td></tr>
+            <tr><td>轉機的關鍵驗證指標是否已出現</td><td>18A良率改善但未完全成本正貢獻，外部大客戶訂單未正式確認</td><td class="warn">⚠️ 部分驗證，尚未完全達標</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 判斷依據：Intel是本次31檔清單中最典型的「轉機股」案例——公司確實展現出初步且實質的營收反轉訊號（+25%營收成長、連續7季優於預期），但獲利能力（GAAP持續虧損、FCF仍負）與最終驗證指標（外部大客戶代工訂單）均尚未完全到位。轉機股投資的核心風險在於「市場提前為尚未兌現的轉機定價」，Intel目前42.80倍的Forward PE與年內163-170%的漲幅，顯示市場已經給予相當樂觀的定價，若後續1-2季未能提供新的實質驗證（如Apple/Nvidia代工訂單正式簽署），股價修正風險不容小覷。</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item">
+      <div class="moat-label">不可替代性</div>
+      <div class="moat-stars">★★★☆☆</div>
+      <div class="moat-score">3.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">美國本土唯一具規模先進製程IDM，地緣政治稀缺性提供部分不可替代性</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">客戶黏著度</div>
+      <div class="moat-stars">★★☆☆☆</div>
+      <div class="moat-score">2.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">x86生態系仍具黏著度，惟持續流失份額給AMD顯示黏著度正在弱化</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">網路效應</div>
+      <div class="moat-stars">★★☆☆☆</div>
+      <div class="moat-score">2.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">x86軟體生態系具一定網路效應，惟隨ARM架構滲透而弱化</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">成本優勢</div>
+      <div class="moat-stars">★★☆☆☆</div>
+      <div class="moat-score">2.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">18A良率仍在爬升，成本結構尚未具備對TSMC的競爭優勢</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">規模效應</div>
+      <div class="moat-stars">★★★☆☆</div>
+      <div class="moat-score">3.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">仍具一定製造規模，惟相對TSMC規模差距顯著</div>
+    </div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：2.4 / 5 ⭐⭐☆☆☆（本次半導體族群中護城河評分最低，地緣政治稀缺性是主要支撐，惟技術/成本優勢仍在重建中）</div>
+
+  <div class="caution-box" style="margin-top:24px;">
+    <h3>⚠️ 建議動作（深度研究視角）</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+      <div>
+        <strong>當前建議：</strong>目前的護城河強度與獲利品質<strong>不符合</strong>使用者「重視護城河/現金流/安全邊際」原則中的多數要件（GAAP持續虧損、FCF為負、護城河仍在重建），不建議列入核心池，若要參與turnaround故事，建議僅以<strong>機會池小倉位</strong>參與，且需嚴格設定停損與定期驗證催化劑是否兌現。<br><br>
+        <strong>加碼觸發（需同時滿足多項）：</strong>
+        <ul style="padding-left:16px;">
+          <li>Apple或Nvidia正式簽署具約束力的Intel Foundry代工合約並揭露訂單規模</li>
+          <li>連續兩季GAAP獲利轉正（排除CHIPS Act託管股MTM等非經常性項目後）</li>
+          <li>FCF轉正且連續改善</li>
+        </ul>
+      </div>
+      <div>
+        <strong>賣出/迴避觸發：</strong>
+        <ul style="padding-left:16px;">
+          <li>連續兩季無新外部代工客戶確認，市場開始質疑Foundry轉骨故事</li>
+          <li>AMD推出新架構終結市佔反攻窗口，Client Computing成長率重新轉負</li>
+          <li>股價/估值持續上漲但基本面驗證指標未跟上，Forward PE突破50倍以上</li>
+        </ul>
+        <br>
+        <strong>每季監控指標：</strong>18A良率與成本結構、外部代工客戶進展、GAAP獲利趨勢（排除MTM雜訊）、FCF趨勢、x86市佔率變化
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式二：財報解析
+══════════════════════════════════════ -->
+<div id="mode2" class="mode-divider">
+  <h2>◈ 模式二：最新財報解析</h2>
+  <p>Q2 2026 財報 · EPS多年期估值錨點 · DCF三情境 · 投行目標價 · 操作建議</p>
+</div>
+
+<!-- 6. Q2 2026 財報 Beat/Miss -->
+<div id="earnings" class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">Q2 2026 財報（2026-07-23發布）</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--gold); margin-bottom:20px;">
+    <h3 style="color:var(--gold)">⚠️ 營收/調整後EPS大幅優於預期，惟GAAP淨損$11B源自政府股權MTM會計特殊性，需審慎解讀</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Q2 2026營收$16.1B，年增25%，為15年來最快單季成長，遠優於市場預估的$14.42B；調整後EPS $0.42，大幅優於共識$0.21。惟GAAP基礎下公司認列$11B淨損（每股-$2.16），主因CHIPS Act託管股票產生$12.5B的非現金按市值評價損失——這是一個與MSFT/AMZN/GOOGL的私人公司股權利得完全相反的會計現象：<strong>股價上漲使政府持股的公允價值上升，但因這批股票的會計處理方式（可能涉及認股權證/或有負債的公允價值變動），反而讓公司認列更大帳面虧損</strong>。這是Intel財報解讀上最容易造成混淆之處，投資人應以調整後EPS與營收成長為主要判斷依據。✅</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>指標</th><th class="num">實際值 ✅</th><th class="num">市場預期 ⚠️</th><th class="num">YoY 變化</th><th>判定</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>營收</td><td class="num ok">$16.1B</td><td class="num">$14.42B</td><td class="num ok">+25%（15年最快）</td><td><span class="badge badge-green">大幅Beat ✅</span></td></tr>
+        <tr><td>調整後EPS</td><td class="num ok">$0.42</td><td class="num">$0.21</td><td class="num">— ⚠️</td><td><span class="badge badge-green">大幅Beat ✅（2倍）</span></td></tr>
+        <tr><td>GAAP EPS</td><td class="num bad">-$2.16</td><td class="num">— ❌</td><td class="num">— ⚠️</td><td><span class="badge badge-red">淨損，惟主因非經常性MTM項目 ⚠️</span></td></tr>
+        <tr><td>Data Center and AI營收</td><td class="num ok">$6.3B</td><td class="num">— ❌</td><td class="num ok">+59%</td><td><span class="badge badge-green">大幅成長 ✅</span></td></tr>
+        <tr><td>Client Computing營收</td><td class="num ok">$8.9B</td><td class="num">— ❌</td><td class="num ok">+13%</td><td><span class="badge badge-green">穩健成長 ✅</span></td></tr>
+        <tr><td>Q3'26 EPS guidance</td><td class="num ok">$0.38</td><td class="num">$0.27</td><td class="num">— ⚠️</td><td><span class="badge badge-green">guidance優於共識 ✅</span></td></tr>
+        <tr><td>Q3'26營收guidance</td><td class="num ok">$15.8-16.8B</td><td class="num">$15.1B</td><td class="num">— ⚠️</td><td><span class="badge badge-green">guidance優於共識 ✅</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>股價反應（財報前後）</h3>
+    <div style="font-size:13px; line-height:1.9; color:var(--text)">
+      <strong>財報發布前</strong>：股價年內已累計上漲163%，選擇權市場定價financial報後單日波動幅度達15%，反映市場對這份財報極度敏感 ⚠️<br>
+      <strong>近況（截至9月）</strong>：即便財報大幅優於預期，公司報告日期附近股價曾單日下跌5.57%，顯示「利多出盡」與「估值已price in大量樂觀預期」的動態持續發酵，市場對Intel的反應已不再是單純的「beat就漲」模式。
+    </div>
+  </div>
+</div>
+
+<!-- 7. EPS多年期表 & 歷史本益比 -->
+<div id="eps" class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">估值歷史錨點：多年期EPS ＋ 歷史本益比（★必附）</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財年</th>
+          <th class="num">EPS 實際值</th>
+          <th class="num">來源／機構</th>
+          <th class="num">YoY變化</th>
+          <th class="num">狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>FY2021 A</strong></td>
+          <td class="num ok">$4.86 ✅</td>
+          <td class="num">Intel 10-K</td>
+          <td class="num">歷史高峰期</td>
+          <td><span class="badge badge-blue">巔峰期</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2022 A</strong></td>
+          <td class="num warn">$1.94 ✅</td>
+          <td class="num">Intel 10-K</td>
+          <td class="num bad">-60.1%</td>
+          <td><span class="badge badge-red">大幅衰退</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2023 A</strong></td>
+          <td class="num warn">$0.40 ✅</td>
+          <td class="num">Intel 10-K</td>
+          <td class="num bad">-79.4%</td>
+          <td><span class="badge badge-red">谷底期</span></td>
+        </tr>
+        <tr style="background:rgba(220,38,38,0.05)">
+          <td><strong>FY2024 A</strong></td>
+          <td class="num bad">$(4.38) ⚠️（資料源分歧）</td>
+          <td class="num">MacroTrends（另一源稱淨利$1.0B，存疑）</td>
+          <td class="num bad">鉅額虧損年度</td>
+          <td><span class="badge badge-red">危機年度</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2025（Q1-Q3累計）</strong></td>
+          <td class="num ok">$0.90 ✅</td>
+          <td class="num">Intel 10-Q彙整</td>
+          <td class="num ok">止血/回升跡象</td>
+          <td><span class="badge badge-yellow">復甦初期</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2026 Q2（單季）</strong></td>
+          <td class="num ok">調整後$0.42／GAAP$(2.16) ✅</td>
+          <td class="num">Intel Q2'26 8-K</td>
+          <td class="num">— ⚠️（GAAP受MTM扭曲）</td>
+          <td><span class="badge badge-yellow">turnaround進行中</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ Intel的EPS軌跡是本次31檔清單中波動最劇烈者：FY2021高峰$4.86→FY2023谷底$0.40→FY2024鉅額虧損→FY2026 Q2調整後EPS初步回升。這種V型（甚至更劇烈）的獲利軌跡使傳統本益比錨點分析的參考價值大幅降低，Forward PE 42.80倍需搭配「這是否為谷底反轉初期的合理溢價，還是過度樂觀定價」的質化判斷，無法單純用歷史PE區間比較。</p>
+
+  <div class="risk-card" style="margin-top:12px;">
+    <h4>📌 反推試算結論：42.80倍Forward PE隱含市場對「完整turnaround成功」的高度信心，安全邊際薄弱</h4>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">Intel目前的估值邏輯與TSM/NVDA等基本面已充分驗證的公司截然不同——42.80倍Forward PE（"顯著高估"標籤）反映市場已經為「18A完全成功、外部代工客戶大量湧入、GAAP獲利完全轉正」這個尚未發生的完整劇本定價。外部研究明確將$90（bear case）與$150（bull case）並列，中位數分析師目標價僅$100.97（幾乎等於現價，隱含0%上行空間），顯示即便是相對樂觀的華爾街分析師群體，整體也並未給予明確的額外上行空間——這與MSFT/AMZN/GOOGL/TSM的分析師共識普遍隱含15-30%+上行空間的情況形成鮮明對比，是INTC風險報酬比明顯遜於其他標的的量化證據。</p>
+  </div>
+</div>
+
+<!-- 8. DCF 三情境 -->
+<div id="dcf" class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">④ 三情境DCF估值（採外部分析師情境法呈現）</div>
+  </div>
+
+  <div class="caution-box">
+    <h3>⚠️ Intel估值方法論說明</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">由於Intel近三年獲利軌跡劇烈波動（含鉅額虧損年度）、且GAAP數字持續受CHIPS Act託管股MTM會計雜訊干擾，傳統DCF模型的參數穩定性極低。本報告採用<strong>外部研究已發布的Bear/Bull情境數字</strong>（含具體假設條件），並標註不同來源的差異版本，取代自製精確建模。<strong>以下情境數字均為⚠️外部研究彙整，非本報告獨立建模，且INTC是本組唯一存在「尾部風險」情境（$44-45）的個股，需特別留意</strong>。</p>
+  </div>
+
+  <div class="scenario-row">
+    <div class="scenario bear">
+      <h4>🐻 熊市情境（35% 機率）</h4>
+      <div class="scenario-price" style="color:var(--red)">$90（尾部風險$44-45）</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $100.32　-10.3%（尾部風險-55%~-56%）</div>
+      <div class="row"><span>核心假設</span><span>連續兩季無新外部代工客戶確認，Nvidia多晶圓專案未轉化為訂單</span></div>
+      <div class="row"><span>18A假設</span><span>經濟性令人失望，成本正貢獻時點進一步遞延</span></div>
+      <div class="row"><span>對應方法</span><span>估值向「產品公司」水準壓縮，多個外部研究版本交叉確認</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：18A良率改善停滯、AMD新架構提前發布終結市佔窗口期</div>
+    </div>
+    <div class="scenario base">
+      <h4>📊 基準情境（40% 機率）</h4>
+      <div class="scenario-price" style="color:var(--blue)">$100-117</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $100.32　0% ~ +16.6%</div>
+      <div class="row"><span>核心假設</span><span>營收成長延續但增速放緩，Foundry轉正貢獻時點如期在2026年底/2027年</span></div>
+      <div class="row"><span>18A假設</span><span>良率持續改善但外部客戶進展緩慢</span></div>
+      <div class="row"><span>對應方法</span><span>貼近34位分析師Hold共識$100.97與55位分析師均值$116.79</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：guidance如期兌現、無重大負面驚奇</div>
+    </div>
+    <div class="scenario bull">
+      <h4>🐂 牛市情境（25% 機率）</h4>
+      <div class="scenario-price" style="color:var(--green)">$148-150</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $100.32　+47.5% ~ +49.6%</div>
+      <div class="row"><span>核心假設</span><span>Nvidia或AMD等旗艦客戶確認高量代工委託，18A/14A良率里程碑達標</span></div>
+      <div class="row"><span>Foundry假設</span><span>市場開始將Intel Foundry定價為「真正的TSMC對手」</span></div>
+      <div class="row"><span>對應方法</span><span>貼近Melius Research/Benchmark等機構樂觀目標價</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：具約束力大額外部代工合約正式簽署並公開量化</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent);">
+    <h3>敏感度分析：哪個變數對估值影響最大？</h3>
+    <p style="font-size:13px; color:var(--text); line-height:1.7">三情境價差（尾部風險$44至牛市$150，約3.4倍；一般熊市$90至牛市$150，約1.7倍）是本次31檔清單中<strong>相對價差最大的一檔</strong>，核心變數是<strong>「是否出現具約束力的外部代工大客戶訂單」</strong>——這是一個二元性（binary）很強的催化劑，一旦兌現可能帶動股價快速重新評價向牛市情境靠攏，但若持續落空，「turnaround故事」的敘事動能可能迅速消退，向熊市甚至尾部風險情境修正。這種高波動、高不確定性的風險報酬結構，與TSM（護城河已充分驗證，價差主要來自地緣政治折價）或NVDA等公司（基本面已高度確定，價差主要來自成長率假設）的性質截然不同，屬於典型的「事件驅動型」轉機股估值邏輯。</p>
+  </div>
+</div>
+
+<!-- 9. 股價位階評估 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">股價位階評估</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>估值倍數現況 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:20px; color:var(--red)">42.80x</div><div class="big-label">Forward PE（"顯著高估"標籤）</div></div>
+        <div><div class="big-num" style="font-size:20px; color:var(--red)">3.35</div><div class="big-label">Beta（5年，本組最高）</div></div>
+        <div><div class="big-num" style="font-size:20px;">$24.45-$142.35</div><div class="big-label">52週區間（極端波動）</div></div>
+        <div><div class="big-num" style="font-size:20px; color:var(--red)">+163-170%</div><div class="big-label">2026年迄今累計漲幅</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>分析師評等分歧 ⚠️</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:20px;">Hold</div><div class="big-label">34位分析師共識評等</div></div>
+        <div><div class="big-num" style="font-size:20px;">$100.97</div><div class="big-label">34位分析師均值（幾乎打平現價）</div></div>
+        <div><div class="big-num" style="font-size:20px; color:var(--green)">+30.4%</div><div class="big-label">另一批55位分析師均值$116.79隱含空間</div></div>
+        <div><div class="big-num" style="font-size:20px;">$44-150</div><div class="big-label">熊牛目標價全區間</div></div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px; color:var(--text2)">⚠️ 兩批分析師樣本（34位vs55位）給出的共識評等與目標價差異頗大（Hold/$100.97 vs 隱含+30.4%上行空間），反映市場對Intel的分歧程度在本次31檔清單中數一數二地高，這種「分析師群體內部高度分歧」本身就是風險訊號，建議投資人不宜只採信單一樂觀數字。</p>
+</div>
+
+<!-- Comps -->
+<div id="comps" class="section" style="margin-top:0;">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">Comps 同業對照</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th class="num">市值</th><th class="num">Forward PE</th><th class="num">最新季營收YoY</th><th class="num">FCF狀態</th><th>核心定位</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Intel（INTC）</strong></td><td class="num">$544.2B</td><td class="num">42.80x</td><td class="num">+25%</td><td class="num bad">FY25仍負(-$4.95B)</td><td>IDM turnaround，代工+產品雙引擎重建中</td></tr>
+        <tr><td>TSMC（TSM，本組另一檔）</td><td class="num">$2.18-2.28T</td><td class="num">31-32x（trailing）</td><td class="num">+36%</td><td class="num ok">持續正值</td><td>純代工龍頭，護城河已充分驗證</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">與同組TSM相比，INTC的Forward PE（42.80x）反而高於TSM的trailing PE（31-32x），但基本面驗證程度（FCF、護城河、客戶信任）明顯遜於TSM，這個「估值溢價 vs 基本面折價」的反差，是本組B-1（晶圓/晶圓代工）比較表中最值得警惕的落差。</p>
+</div>
+
+<!-- 11. 額外優勢/風險 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">額外優勢/風險</div>
+  </div>
+  <div class="card-grid">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>三方策略股東的信心背書</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">美國政府、Nvidia、SoftBank在極短時間內（2025年8-9月）密集完成合計約16%的策略投資，且Nvidia更進一步宣布產品合作，這種「國家隊+產業龍頭」雙重背書在半導體產業史上相對罕見，某種程度降低了Intel「徹底失敗」的尾部風險（美國政府不太可能坐視其唯一先進IDM倒下）。✅</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <h3>AMD空窗期的短期市佔反攻機會</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">2026年冬季AMD無新一代架構推出，是Intel近年少見能夠透過Panther Lake實質搶回PC市佔與話語權的窗口期，若能有效把握，可能成為市場重新評價的短期催化劑。✅</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 估值已大幅超前基本面驗證進度，是近期最大額外風險</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">股價年內已上漲163-170%+，Forward PE達42.80倍"顯著高估"，惟GAAP獲利仍虧損、FCF仍為負、外部代工大客戶訂單尚未正式確認。這種「敘事先行、財務驗證滯後」的落差，使INTC成為本次31檔清單中最典型的「預期已跑在基本面前面」的個股，任何催化劑落空都可能引發劇烈修正（Beta高達3.35為本組最高）。⚠️</p>
+    </div>
+  </div>
+</div>
+
+<!-- 12. 投行目標價 -->
+<div id="targets" class="section">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">投行目標價與操作建議</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>機構/來源</th><th>評等</th><th class="num">目標價</th><th>日期</th></tr></thead>
+      <tbody>
+        <tr><td>共識彙整（34位分析師）</td><td><span class="badge badge-yellow">Hold</span></td><td class="num">均值$100.97 ✅（幾乎等於現價）</td><td>2026年9月14日</td></tr>
+        <tr><td>另一批共識（55位分析師）</td><td><span class="badge badge-yellow">分歧較大</span></td><td class="num">均值$116.79 ✅（隱含+30.4%）</td><td>2026年9月</td></tr>
+        <tr><td>Melius Research／Benchmark（樂觀）</td><td><span class="badge badge-green">看多</span></td><td class="num">~$148-150 ✅</td><td>2026年</td></tr>
+        <tr><td>外部研究悲觀情境（含尾部風險）</td><td><span class="badge badge-red">看空</span></td><td class="num">$90（尾部$44-45）✅</td><td>2026年</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--gold); margin-top:16px;">
+    <h3 style="color:var(--gold)">分歧點</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">分析師評等本身即呈現罕見的「Hold為多數共識」格局（不同於本次其他30檔清單普遍是Strong Buy/Buy為主），且目標價區間（$44-150）跨度達3.4倍，是本次清單中分歧程度最高者。這個分歧不僅反映對財務數字的不同解讀，更反映對「turnaround故事能否最終成功」這個根本性、二元性問題的立場分歧——這與其他标的多屬「基本面已確認，僅是成長速度/估值倍數」的分歧性質不同。</p>
+  </div>
+
+  <div class="action-box" style="margin-top:16px;">
+    <h3>✅ 最終操作建議（財報解析視角）</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">現價$100.32相對34位分析師Hold共識（$100.97）幾乎完全打平，相對55位分析師均值（$116.79）則約有30%空間，但這個較樂觀的數字本身也存在相當不確定性。<strong>對於已持有者：建議嚴格控制倉位規模，密切追蹤外部代工客戶進展與GAAP獲利趨勢，不建議在目前估值水準加碼；對於未持有者：不建議現階段以核心池邏輯建立部位，若要參與turnaround故事，建議僅以機會池小倉位（且能承受Beta 3.35級別波動）參與，並設定明確停損，因基本面驗證（獲利轉正、外部客戶訂單）明顯落後於股價已反映的樂觀預期。</strong></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式三：財務健檢
+══════════════════════════════════════ -->
+<div id="mode3" class="mode-divider">
+  <h2>◈ 模式三：財務風險健檢</h2>
+  <p>六大比率診斷 · CapEx分析 · 同業對比 · 綜合診斷</p>
+</div>
+
+<!-- 13. 財務數據填表 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">財務數據填表（2026Q2末）</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>項目</th><th class="num">數值</th><th>狀態</th></tr></thead>
+      <tbody>
+        <tr><td>現金及短期投資</td><td class="num">$29.73B ✅</td><td><span class="badge badge-yellow">中等</span></td></tr>
+        <tr><td>總債務</td><td class="num">$50.54B ✅</td><td><span class="badge badge-red">偏高</span></td></tr>
+        <tr><td>淨債務（自算）</td><td class="num bad">~$20.81B ⚠️</td><td><span class="badge badge-yellow">需持續監控</span></td></tr>
+        <tr><td>FY2025 FCF</td><td class="num bad">-$4.95B ✅</td><td><span class="badge badge-red">仍為負值</span></td></tr>
+        <tr><td>JV股權回購新增舉債</td><td class="num warn">~$6.5B（新債）✅</td><td><span class="badge badge-yellow">槓桿持續攀升</span></td></tr>
+        <tr><td>政府/Nvidia/SoftBank合計持股</td><td class="num">~15.9%⚠️（自算，9.9%+4%+2%）</td><td><span class="badge badge-blue">策略性資金支持</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 14. 六大比率 -->
+<div id="ratios" class="section">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">六大比率診斷</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>1. 淨債務部位</h3>
+      <div class="big-num" style="color:var(--gold)">~$20.8B ⚠️</div>
+      <div class="big-label">公式：總債務$50.54B - 現金及短期投資$29.73B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:60%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：淨債務部位中等，且JV股權回購還需再舉債約$6.5B，槓桿呈上升趨勢，在FCF仍為負的情況下需持續留意再融資風險，惟三方策略股東的資金挹注提供一定緩衝。</p>
+    </div>
+    <div class="card">
+      <h3>2. FCF連續性</h3>
+      <div class="big-num" style="color:var(--red)">仍為負值 ❌</div>
+      <div class="big-label">FY2025 FCF -$4.95B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:75%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">❌ 狀態：本次B-1組別（晶圓/晶圓代工）中，TSM維持高額正FCF，INTC則持續為負，兩者財務體質差距顯著，是本組比較表中最鮮明的對比。</p>
+    </div>
+    <div class="card">
+      <h3>3. 營收成長轉折</h3>
+      <div class="big-num" style="color:var(--green)">+25% ✅（Q2單季）</div>
+      <div class="big-label">15年來最快，終結連續四年衰退</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:70%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">✅ 狀態：是本次健檢中少數的正面訊號，惟需連續3-4季確認才能判斷是否為結構性反轉，而非單季高基期或庫存回補效應。</p>
+    </div>
+    <div class="card">
+      <h3>4. GAAP獲利穩定性</h3>
+      <div class="big-num" style="color:var(--red)">極不穩定 ❌</div>
+      <div class="big-label">Q2單季GAAP淨損$11B，主因CHIPS Act託管股MTM</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:80%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">❌ 狀態：GAAP數字雜訊程度為本次31檔清單中最高者之一，且雜訊方向與MSFT/AMZN/GOOGL相反（股價漲反而認列更大帳面虧損），投資人務必以調整後EPS為核心參考，不宜直接引用GAAP數字。</p>
+    </div>
+    <div class="card">
+      <h3>5. Beta（股價波動性）</h3>
+      <div class="big-num" style="color:var(--red)">3.35 ❌</div>
+      <div class="big-label">本組（及本次31檔清單中）最高</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:90%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">❌ 狀態：極高波動性反映市場對turnaround故事成敗的高度不確定性定價，投資人需有能力承受單日15%級別的財報後波動（選擇權市場隱含波動率所示）。</p>
+    </div>
+    <div class="card">
+      <h3>6. 分析師評等分歧度</h3>
+      <div class="big-num" style="color:var(--gold)">Hold為主 ⚠️</div>
+      <div class="big-label">與本次其他30檔多為Buy/Strong Buy形成鮮明對比</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:50%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：34位分析師共識為Hold且目標價幾乎打平現價，顯示專業機構投資人整體上並未認同目前估值有明顯上行空間，這個評等格局本身即是重要的風險訊號。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 綜合診斷 -->
+<div id="health" class="section">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-title">財務體質綜合診斷</div>
+  </div>
+  <div class="card" style="display:flex; align-items:center; gap:24px;">
+    <div class="health-badge health-c">C</div>
+    <div>
+      <p style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px;">財務體質評等：C（turnaround初步啟動但尚未完成，財務體質為本次31檔清單中最弱之列）</p>
+      <p style="font-size:13px; color:var(--text2); line-height:1.7">營收成長轉折（+25%）是重要的正面訊號，但GAAP獲利持續虧損、FCF仍為負、淨債務中等且持續攀升，加上估值（Forward PE 42.80倍）已大幅超前基本面驗證進度，財務體質評等明顯低於同組TSM（AA）以及本次已檢討的MSFT/AMZN/GOOGL。適合以高度風險意識的機會池小倉位參與，不適合核心池配置。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     綜合總結
+══════════════════════════════════════ -->
+<div id="final" class="section">
+  <div class="section-header">
+    <div class="section-num">16</div>
+    <div class="section-title">綜合總結</div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis 成立度</div><div class="s-val">2.6 / 5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-val">⭐⭐☆☆☆</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-val" style="font-size:13px;">轉機股（未完成驗證）</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-val">C</div></div>
+    <div class="summary-card"><div class="s-label">現價/共識目標價</div><div class="s-val" style="font-size:13px;">$100.32 / $100.97-116.79</div></div>
+  </div>
+
+  <div class="action-box">
+    <h3>✅ 最終操作建議</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">
+      <strong>已持有者：</strong>建議嚴格控制倉位規模，不建議在目前估值水準（Forward PE 42.80倍）加碼。Q2營收+25%的turnaround初步訊號值得肯定，但GAAP獲利持續虧損、FCF仍負、外部代工大客戶訂單尚未正式確認，基本面驗證明顯落後於股價已反映的樂觀預期。<br><br>
+      <strong>未持有者：</strong>不建議現階段以核心池邏輯建立部位。若要參與這個turnaround/國家隊故事，建議僅以能承受高波動（Beta 3.35，財報後單日波動可達15%）的機會池小倉位參與，並設定明確停損價位，密切追蹤Apple/Nvidia代工進展等關鍵驗證指標。這是本次31檔清單中風險報酬結構最具「事件驅動型二元性」的一檔，不適合以傳統護城河/現金流/安全邊際框架評估。<br><br>
+      <strong>核心催化劑：</strong>①Apple或Nvidia是否正式簽署具約束力的Foundry代工合約 ②18A良率能否持續以7%/月速度改善並如期在2026年底/2027年轉為成本正貢獻 ③GAAP獲利（排除MTM雜訊後）能否連續兩季轉正 ④FCF能否止跌回升 ⑤AMD空窗期市佔反攻成效。
+    </p>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <p>
+    資料來源：Intel Investor Relations（Q2 2026 8-K/10-Q）、SEC EDGAR、stockanalysis.com、MacroTrends、GuruFocus、CNBC、Yahoo Finance、FinanceFeeds、TechPowerUp、24/7 Wall St.、其他公開財經媒體報導（詳見各段落標註）<br>
+    ✅ 已驗證　⚠️ 估算/近似值或資料源分歧　❌ 無法取得，禁止臆測填入<br>
+    本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。
+  </p>
+</footer>
+
+</body>
+</html>

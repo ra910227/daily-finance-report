@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜MSFT Microsoft Corp 2026-09-16</title>
+<style>
+  :root {
+    --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6;
+    --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca;
+    --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+    --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; position: relative; overflow: hidden; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-change { font-size: 16px; color: var(--green); margin-top: 4px; }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .toc-inner a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); padding: 0 0 4px 0; }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(79,70,229,0.03); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+
+  .ok { color: var(--green); }
+  .warn { color: var(--gold); }
+  .bad { color: var(--red); }
+  .muted { color: var(--text2); }
+  .est { color: var(--gold); font-size: 11px; }
+
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); }
+  .scenario.base { border-top: 3px solid var(--blue); }
+  .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); }
+  .scenario.base h4 { color: var(--blue); }
+  .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .scenario .row:last-child { border-bottom: none; }
+
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .risk-card { background: #fef2f2; border: 1px solid rgba(220,38,38,0.20); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .risk-card h4 { color: var(--red); font-size: 13px; margin-bottom: 4px; }
+
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+
+  .comp-now { background: rgba(79,70,229,0.05); }
+  .comp-now td { font-weight: 700; }
+
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); }
+  .bar-yellow { background: var(--gold); }
+  .bar-red { background: var(--red); }
+
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; text-transform: uppercase; letter-spacing:0.5px; }
+  .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .summary-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 720px) {
+    .scenario-row { grid-template-columns: 1fr; }
+    .moat-grid { grid-template-columns: repeat(2,1fr); }
+    .hero-price-block { text-align:left; }
+  }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">MSFT</div>
+      <div class="hero-name">Microsoft Corporation（全球最大企業軟體／雲端服務商之一，Azure雲端＋Microsoft 365生產力套件＋Windows/Xbox個人運算三大引擎，OpenAI最大策略股東）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-09-16　資料基準：2026-09-15收盤　Beta(5Y) 1.11</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$505.41</div>
+      <div class="hero-change">2026-09-15 收盤</div>
+      <div class="hero-mktcap">市值 ≈$3.75T　股數 ≈7.43B　（FY2026財年於2026/6/30結束）</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-purple">AI ARR run-rate $37B，年增123%</span>
+    <span class="badge badge-blue">Azure FY26全年破$100B，+41%</span>
+    <span class="badge badge-green">FY26營收$331.8B +18%／EPS $17.95 +32%</span>
+    <span class="badge badge-orange">FY26 CapEx暴增至$115.9B，FCF年減6.4%⚠️</span>
+    <span class="badge badge-yellow">Q4'26 Adj EPS $4.74優於共識約12%</span>
+    <span class="badge badge-red">FTC「雲端捆綁」反壟斷調查進行中</span>
+    <span class="badge badge-teal">Strong Buy 52/52，共識目標價~$573-592</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$505.41</div><div class="sub">✅ 52週 $349.20–$553.72</div></div>
+    <div class="meta-item"><label>FY26 營收</label><div class="val">$331.8B</div><div class="sub">YoY +18% ✅</div></div>
+    <div class="meta-item"><label>FY26 淨利／EPS</label><div class="val">$133.7B／$17.95</div><div class="sub">GAAP，含OpenAI帳面利得 ✅</div></div>
+    <div class="meta-item"><label>PE(TTM) / Fwd PE</label><div class="val">27.43 / 24.93</div><div class="sub">✅ stockanalysis.com</div></div>
+    <div class="meta-item"><label>Thesis 成立度</label><div class="val">3.8 / 5</div><div class="sub">雲端/AI敘事強，惟FCF與Copilot兌現度待驗證</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐⭐⭐☆</div><div class="sub">企業軟體轉換成本極高，雲端寡占地位穩固</div></div>
+  </div>
+</div>
+
+<!-- ── TOC ── -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#mode1">模式一 深度研究</a>
+    <span class="toc-sep">·</span>
+    <a href="#biz">業務引擎</a>
+    <a href="#thesis">核心Thesis</a>
+    <a href="#competition">競爭格局</a>
+    <a href="#moat">成長象限</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode2">模式二 財報解析</a>
+    <span class="toc-sep">·</span>
+    <a href="#earnings">Q4 FY2026財報</a>
+    <a href="#eps">EPS與估值錨點</a>
+    <a href="#dcf">DCF情境</a>
+    <a href="#targets">投行目標</a>
+    <span class="toc-sep">·</span>
+    <a href="#mode3">模式三 財務健檢</a>
+    <span class="toc-sep">·</span>
+    <a href="#ratios">六大比率</a>
+    <a href="#comps">同業對比</a>
+    <a href="#health">綜合診斷</a>
+    <span class="toc-sep">·</span>
+    <a href="#final">綜合總結</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════
+     模式一：深度研究
+══════════════════════════════════════ -->
+<div id="mode1" class="mode-divider">
+  <h2>◈ 模式一：公司深度研究</h2>
+  <p>業務引擎 · 核心Thesis · 競爭格局 · Peter Lynch成長象限 · 護城河五維評分</p>
+</div>
+
+<!-- 1. 公司基本介紹 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">公司基本介紹</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">Microsoft（NASDAQ: MSFT）總部Redmond，是全球市值最大公司之一（≈$3.75兆），業務涵蓋<strong>雲端運算（Azure）、企業生產力軟體（Microsoft 365/Office/LinkedIn/Dynamics）、作業系統與遊戲（Windows/Xbox）</strong>三大引擎。2019年起與OpenAI建立獨家雲端運算夥伴關係並多輪注資，目前持有<strong>OpenAI約27%股權</strong>，是這波生成式AI浪潮中，少數同時具備「AI基礎建設出租方（Azure算力）」與「AI應用/模型最大股東」雙重身份的公司。FY2026（截至2026/6/30）Azure年營收首度突破$100B，AI相關業務ARR run-rate達$37B、年增123%，是本輪AI資本支出循環中商業化進度最快的雲端巨頭之一。✅</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽（FY2026，截至2026/6/30）✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$331.8B</div><div class="big-label">FY26 營收</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">+18% YoY</div><div class="big-label">（FY25：$281.7B）</div></div>
+        <div><div class="big-num" style="font-size:22px;">營益率 46.8%</div><div class="big-label">營業利益$155.2B／營收$331.8B（自算）</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--gold)">$67.0B ⚠️</div><div class="big-label">FY26 FCF，年減6.4%（CapEx暴增所致）</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent)">
+    <h3 style="color:var(--accent)">🏭 所屬產業與市場地位</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">所屬產業：<strong>企業軟體／公有雲基礎設施（IaaS+PaaS+SaaS）／個人運算</strong>。Azure為全球第二大公有雲（次於AWS），FY2026成長速度（41% FY，Q4單季43%）已連續多季超越AWS（Q2'26 +37%），且獲利率大幅改善（Intelligent Cloud含Azure在內Q4營益率明顯優化）；Microsoft 365則是全球企業生產力軟體的事實標準，換系統成本極高。公司同時是<strong>美股市值最大公司</strong>之一，與Apple/Nvidia輪番爭奪全球市值王座。✅（來源：Microsoft FY26 Q4 Press Release、SEC 10-K）</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財務摘要</th>
+          <th class="num">FY2023</th>
+          <th class="num">FY2024</th>
+          <th class="num">FY2025</th>
+          <th class="num">FY2026</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$211.9B ✅</td><td class="num">$245.1B ✅</td><td class="num">$281.7B ✅</td><td class="num">$331.8B ✅</td></tr>
+        <tr><td>YoY 成長</td><td class="num ok">+7% ✅</td><td class="num ok">+16% ✅</td><td class="num ok">+14.9% ✅（自算）</td><td class="num ok">+18% ✅</td></tr>
+        <tr><td>營業利益</td><td class="num">$88.5B ✅</td><td class="num">$109.4B ✅</td><td class="num">$128.5B ✅</td><td class="num">$155.2B ✅</td></tr>
+        <tr><td>淨利</td><td class="num">$72.4B ✅</td><td class="num">$88.1B ✅</td><td class="num">$101.8B ✅</td><td class="num ok">$133.7B ✅（含OpenAI帳面利得$4.96B）</td></tr>
+        <tr><td>EPS（GAAP 稀釋）</td><td class="num">$9.68 ✅</td><td class="num">$11.80 ✅</td><td class="num">$13.64 ✅</td><td class="num ok">$17.95 ✅（+32%；剔除OpenAI利得約$17.28）</td></tr>
+        <tr><td>營運現金流(OCF)</td><td class="num">$87.6B ✅</td><td class="num">$118.5B ✅</td><td class="num">$136.2B ✅</td><td class="num ok">$182.9B ✅（+34.4%）</td></tr>
+        <tr><td>CapEx</td><td class="num">-$28.1B ✅</td><td class="num">-$44.5B ✅</td><td class="num">-$64.6B ✅</td><td class="num bad">-$115.9B ✅（+79.5%）</td></tr>
+        <tr><td>FCF</td><td class="num">$59.5B ✅</td><td class="num">$74.1B ✅</td><td class="num">$71.6B ✅</td><td class="num warn">$67.0B ✅（-6.4%）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅ 已驗證（來源：Microsoft IR/SEC 10-K/8-K、stockanalysis.com現金流量表）｜⚠️ FY2026 GAAP淨利/EPS受OpenAI投資公允價值利得墊高（+$4.96B／+$0.67每股），另需留意FY2026同期亦認列OpenAI相關約$3.1B虧損認列（權益法/減損混合影響，兩項非核心損益方向相反，需綜合看待，非單純美化數字）；核心營運層面的營業利益（+21% YoY）與OCF（+34.4%）成長皆為實質改善。</p>
+</div>
+
+<!-- 2. 業務引擎分析 -->
+<div id="biz" class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">業務引擎分析</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>☁️ Intelligent Cloud — FY26營收$137.8B（41.5%）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">涵蓋Azure公有雲、Windows Server、SQL Server、GitHub、企業服務。Azure FY2026全年營收首度突破<strong>$100B</strong>、年增41%；Q4單季成長43%（優於AWS同期37%、但低於Google Cloud同期82%）。管理層公開guidance未來Azure以固定匯率計算成長約45%。Commercial RPO（未來已簽約待認列收入）達$678B，年增84%，為未來2-3年營收提供高能見度。✅（來源：Microsoft FY26 Q4 IR）</p>
+    </div>
+    <div class="card">
+      <h3>📊 Productivity & Business Processes — FY26營收$140.0B（42.2%，最大分部）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">涵蓋Microsoft 365（Word/Excel/Teams）、LinkedIn、Dynamics 365。此分部FY2026成長最快（YoY +15.9%，由$120.8B增至$140.0B），主因M365 Copilot訂閱滲透率提升與LinkedIn廣告/招聘業務回溫（Q4 LinkedIn營收+12%）。惟第三方分析師估算M365 Copilot實際年營收僅約$1.4-3.2B ⚠️，遠低於市場先前預期，是本季度財報電話會議中被追問最多的議題之一。✅⚠️</p>
+    </div>
+    <div class="card">
+      <h3>🖥️ More Personal Computing — FY26營收$54.1B（16.3%，最小且唯一衰退分部）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">涵蓋Windows OEM授權、Surface裝置、Xbox遊戲與搜尋廣告（Bing/Copilot搜尋）。Xbox板塊FY2026營收約$21.79B，年減7%（硬體銷售大跌33%為主因，內容/服務營收亦下滑約10%），管理層已公開承諾FY2027重回成長軌道。此分部佔比持續萎縮，非公司成長敘事核心。✅</p>
+    </div>
+    <div class="card">
+      <h3>🤝 OpenAI策略股權＋AI ARR（結構性成長引擎）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">Microsoft持有OpenAI約<strong>27%股權</strong>（OpenAI最新估值約$4T），並為OpenAI獨家/主要雲端運算供應商。公司AI相關業務（含Azure AI消費+Copilot，不含純OpenAI股權增值）ARR run-rate已達<strong>$37B</strong>，年增123%（Q3 FY26數據）。此為FY2026資本支出暴增至$115.9B背後的核心敘事——賭注AI推理/訓練需求將持續指數成長。⚠️ 惟FY2026財報亦認列約$3.1B的OpenAI相關投資虧損，顯示這項策略押注短期內帳面波動劇烈，非穩定收益來源。✅⚠️</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>核心業務線</th><th>FY26營收佔比</th><th>護城河來源</th><th>2026-2027關鍵催化劑</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Intelligent Cloud（Azure為主）</strong></td><td class="num">41.5%，YoY +29.6%</td><td>寡占雲端基礎設施、企業遷移轉換成本高</td><td>Azure能否維持40%+成長、RPO兌現速度</td></tr>
+        <tr><td><strong>Productivity（M365/LinkedIn/Dynamics）</strong></td><td class="num">42.2%，YoY +15.9%</td><td>企業辦公軟體事實標準、極高轉換成本</td><td>M365 Copilot付費滲透率能否加速兌現</td></tr>
+        <tr><td><strong>More Personal Computing（Windows/Xbox）</strong></td><td class="num">16.3%，YoY -1.1%</td><td>Windows裝機量基礎、惟成長動能最弱</td><td>Xbox FY27能否如管理層承諾重回成長</td></tr>
+        <tr><td><strong>OpenAI股權＋AI ARR</strong></td><td class="num">未單獨揭露營收，ARR $37B</td><td>獨家雲端夥伴關係＋27%股權綁定</td><td>OpenAI後續募資估值、FTC監管調查結果</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 3. 核心Thesis -->
+<div id="thesis" class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">核心 Thesis 與未來成長驅動</div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 1｜Azure雲端規模持續擴大且加速，非放緩</div>
+      <div class="content">Azure FY2026全年營收突破$100B里程碑、年增41%，Q4單季成長更擴大至43%，且管理層guidance未來成長約45%（固定匯率）。Commercial RPO達$678B（+84%），為近2-3年營收提供極高能見度。✅ 明確成立，雲端成長動能在三大巨頭中屬中上段班。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 2｜企業軟體護城河穩固，Productivity分部持續兩位數成長</div>
+      <div class="content">Productivity & Business Processes分部FY2026年增15.9%達$140B（公司最大分部），LinkedIn Q4營收+12%。Microsoft 365在企業辦公軟體市場的轉換成本極高，即便Google Workspace積極競爭，市佔流失速度緩慢。✅ 成立，為公司提供穩定現金流基礎。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 3｜AI投資能否轉化為對等的獲利成長（Capex ROI）</div>
+      <div class="content">FY2026 CapEx暴增至$115.9B（+79.5%），導致FCF由FY2025的$71.6B降至$67.0B（-6.4%），為近年首見「營收成長但FCF反向下滑」。AI ARR雖達$37B、年增123%，但第三方估算M365 Copilot實際營收僅$1.4-3.2B，遠低於原先市場期待，顯示終端應用層的AI貨幣化速度慢於基礎設施投資速度。⚠️ 部分成立——Azure/基礎設施層兌現度高，但應用層（Copilot）貨幣化證據仍薄弱，是最大的估值爭議點。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 4｜OpenAI股權是穩健的策略資產，非財務風險</div>
+      <div class="content">27%股權對應OpenAI約$4T估值，理論帳面價值龐大，但FY2026同時認列約$3.1B的OpenAI相關投資虧損（權益法認列OpenAI鉅額研發虧損），顯示這項資產短期內對MSFT損益表是雙面刃：估值上漲時貢獻帳面利得（FY26認列+$4.96B），但OpenAI燒錢虧損也需按比例認列虧損。⚠️ 部分成立——長期策略價值高，但短期財報波動與治理/監管風險（見風險欄）不可忽視。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--red)">❌ 尚未兌現</div>
+      <div class="label">Thesis 5｜More Personal Computing（Windows/Xbox）能重回成長</div>
+      <div class="content">FY2026此分部營收年減1.1%，Xbox營收年減7%（硬體銷售重挫33%），管理層雖公開承諾FY2027重回成長，但截至目前尚無具體數據佐證。❌ 尚未兌現，此分部佔比雖僅16.3%且持續萎縮，非核心成長引擎，但仍是公司多元化故事中最弱的一環。</div>
+    </div>
+  </div>
+
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🚀 核心成長驅動力</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>Azure容量持續擴張＋RPO兌現</strong>：$678B待認列訂單若持續轉化為實際營收，可支撐未來2-3年雙位數以上成長</li>
+        <li><strong>M365 Copilot付費滲透率若加速</strong>：目前實際貨幣化規模仍小（估$1.4-3.2B），若能顯著放大將是股價重估的最大單一催化劑</li>
+        <li><strong>OpenAI後續估值/募資進展</strong>：27%股權隨OpenAI估值上升而帳面增值，惟需同步關注虧損認列與監管風險</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 核心監控風險</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>CapEx持續失控但營收/獲利成長未同步加速</strong>：觸發條件——連續兩季FCF年減幅度擴大，或CapEx占營收比率突破40%</li>
+        <li><strong>FTC「雲端捆綁」反壟斷調查升溫</strong>：觸發條件——FTC正式提起訴訟或要求業務拆分／行為矯正令，可能衝擊Azure與資安/AI工具捆綁銷售模式</li>
+        <li><strong>OpenAI治理或財務風險外溢</strong>：觸發條件——OpenAI再度出現管理層動盪、鉅額虧損擴大或監管機構要求MSFT減持股權</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 競爭格局 -->
+<div id="competition" class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">競爭格局：依三大戰場列示</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>戰場</th><th>公司</th><th>現況</th><th>對MSFT威脅度</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td rowspan="3"><strong>公有雲</strong></td><td><strong>Azure（本案，市佔約第二）</strong></td><td>FY26營收破$100B，+41%；Q4 +43%</td><td>—</td></tr>
+        <tr><td>AWS（Amazon）</td><td>雲端龍頭，市佔第一；Q2'26成長37%（優於預期，2021年來最快）</td><td>🟡 中｜規模仍最大，但成長率已低於Azure</td></tr>
+        <tr><td>Google Cloud（Alphabet）</td><td>市佔第三但成長最猛，Q2'26營收+82%，營益率大幅跳升至35.6%</td><td>🔴 高｜成長速度與獲利改善幅度均超越Azure，長期市佔差距可能收斂</td></tr>
+        <tr><td rowspan="2"><strong>企業生產力軟體</strong></td><td>Google Workspace</td><td>企業辦公軟體主要挑戰者，價格與AI整合（Gemini）積極進攻中小企業市場</td><td>🟢 低｜M365企業轉換成本仍極高，市佔流失速度緩慢</td></tr>
+        <tr><td>Salesforce／Slack等SaaS專業廠商</td><td>各自在CRM/協作利基市場競爭，非全面對抗</td><td>🟢 低｜分散於個別功能領域，未直接威脅M365整體套件地位</td></tr>
+        <tr><td rowspan="2"><strong>遊戲主機/內容</strong></td><td>Sony PlayStation</td><td>主機市佔持續領先Xbox，MSFT轉向Game Pass訂閱與跨平台策略應對</td><td>🟡 中｜Xbox硬體銷售持續衰退（FY26 -33%），非核心戰場但拖累整體觀感</td></tr>
+        <tr><td>Nintendo</td><td>獨立生態系，非直接正面競爭</td><td>🟢 低</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box" style="margin-top:16px;">
+    <h3>⚠️ 競爭關鍵監控：Google Cloud的成長與獲利改善速度是最大變數</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">三大雲端巨頭中，Azure雖以絕對規模穩居第二，但Google Cloud在FY2026呈現「成長率＋獲利率」雙重加速的態勢（+82%營收成長、營益率由20.7%跳升至35.6%），是三者中改善幅度最顯著的一家；AWS則從過去的「成熟放緩」轉為「意外加速」（37%，優於預期且為2021年來最快）。Azure的43%成長雖穩健，但若GCP/AWS的加速趨勢延續，Azure在雲端三強中的相對地位可能面臨擠壓，這是後續每季財報比較三家雲端成長率時的核心觀察點。</p>
+  </div>
+</div>
+
+<!-- 5. 成長象限 & 護城河評分 -->
+<div id="moat" class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Peter Lynch 成長象限 & 護城河評分</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border:2px solid var(--purple);">
+      <h3 style="color:var(--purple)">📊 Lynch 象限判斷</h3>
+      <div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">穩定成長股，局部（Azure/AI）帶有快速成長股特徵</div>
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <thead><tr><th>判斷標準</th><th>Microsoft 現況</th><th>判定</th></tr></thead>
+          <tbody>
+            <tr><td>營收規模是否已達巨型公司量級</td><td>FY26營收$331.8B，市值~$3.75兆，全球最大公司之一</td><td class="warn">⚠️ 基期龐大，難以維持早期倍數成長</td></tr>
+            <tr><td>整體營收成長率是否達雙位數</td><td>FY26 +18% YoY，優於典型「穩定成長股」個位數水準</td><td class="ok">✅ 具快速成長股特徵</td></tr>
+            <tr><td>獲利品質（FCF）是否同步成長</td><td>FY26 FCF年減6.4%，CapEx吃掉大部分OCF增量</td><td class="bad">❌ 獲利品質未同步成長，偏離典型成長股定義</td></tr>
+            <tr><td>股利/配息政策</td><td>持續配發並調升股利，兼具價值股防禦特徵</td><td class="ok">✅ 具穩定成長股的股東回饋特徵</td></tr>
+            <tr><td>估值是否已充分反映成長</td><td>Fwd PE ~25-26倍，低於歷史AI題材高點，但仍高於傳統穩定成長股均值</td><td class="warn">⚠️ 中性偏高，非明顯低估</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 判斷依據：以整體規模與配息政策衡量，Microsoft核心屬於「穩定成長股」（大型、獲利穩健、持續配息調升），但Azure/AI相關業務的成長率（40%+）與ARR增速（+123%）具備「快速成長股」特徵，使公司呈現「雙速」結構——核心業務穩健複利，AI/雲端業務貢獻超額成長，惟FY2026 FCF罕見負成長（因CapEx暴增），是最需要持續觀察「這筆巨額投資能否如期轉化為獲利」的關鍵訊號，此階段股價對CapEx紀律與Copilot貨幣化證據的敏感度將明顯提高。</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item">
+      <div class="moat-label">不可替代性</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">Windows/Office生態系深植企業IT架構，短期難以取代</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">客戶黏著度</div>
+      <div class="moat-stars">★★★★★</div>
+      <div class="moat-score">5.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">企業級軟體轉換成本全市場最高之一，M365+Azure交叉綁定</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">網路效應</div>
+      <div class="moat-stars">★★★☆☆</div>
+      <div class="moat-score">3.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">LinkedIn具社交網路效應，Azure/M365網路效應中等（生態系而非純網路效應）</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">成本優勢</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">巨大規模帶來資料中心採購/融資成本優勢，惟AI晶片成本上升壓縮毛利</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">規模效應</div>
+      <div class="moat-stars">★★★★★</div>
+      <div class="moat-score">5.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">全球最大企業軟體+第二大雲端基礎設施，規模效應顯著</div>
+    </div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：4.2 / 5 ⭐⭐⭐⭐☆（企業軟體轉換成本與規模效應為業界頂級，網路效應相對其他大科技股偏弱）</div>
+
+  <div class="caution-box" style="margin-top:24px;">
+    <h3>⚠️ 建議動作（深度研究視角）</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+      <div>
+        <strong>當前建議：</strong>護城河強度與現金流規模完全符合使用者「重視護城河/現金流/安全邊際」原則，適合作為<strong>核心池主要持倉</strong>，長期複利屬性明確；惟目前CapEx紀律尚未獲驗證，不建議在此階段重倉加碼，適合分批＋逢回檔布局。<br><br>
+        <strong>加碼觸發（需同時滿足多項）：</strong>
+        <ul style="padding-left:16px;">
+          <li>FCF年增率轉正且連續兩季改善（CapEx增速低於OCF增速）</li>
+          <li>M365 Copilot營收規模有具體、可驗證的數字揭露且顯著優於目前估算的$1.4-3.2B</li>
+          <li>股價回落至Forward PE 22-24倍區間（接近近3年均值下緣）</li>
+        </ul>
+      </div>
+      <div>
+        <strong>賣出/迴避觸發：</strong>
+        <ul style="padding-left:16px;">
+          <li>FCF連續三季以上負成長，且CapEx占營收比率持續突破40%未見改善</li>
+          <li>FTC反壟斷調查升級為正式訴訟並可能要求業務拆分</li>
+          <li>Azure成長率連續兩季跌破30%（低於AWS/GCP，喪失雲端競爭相對優勢）</li>
+        </ul>
+        <br>
+        <strong>每季監控指標：</strong>Azure YoY成長率、Commercial RPO年增率、CapEx/OCF比率、M365 Copilot ARR揭露進度
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式二：財報解析
+══════════════════════════════════════ -->
+<div id="mode2" class="mode-divider">
+  <h2>◈ 模式二：最新財報解析</h2>
+  <p>Q4 FY2026 財報 · EPS多年期估值錨點 · DCF三情境 · 投行目標價 · 操作建議</p>
+</div>
+
+<!-- 6. Q4 FY2026 財報 Beat/Miss -->
+<div id="earnings" class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">Q4 FY2026 財報（2026-07-29發布，FY2026全年於2026/6/30結束）</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--green); margin-bottom:20px;">
+    <h3 style="color:var(--green)">✅ 營收與調整後EPS雙雙優於共識，Azure與RPO為最大亮點，CapEx暴增為最大隱憂</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Q4 FY2026營收$90.01B，年增18%（去年同期$76.44B）；調整後EPS $4.74，剔除OpenAI投資影響後年增23%，優於市場共識約$4.21-4.24（約高出12%）。Azure單季成長43%，全年Azure營收首度突破$100B里程碑（+41%）。Commercial RPO達$678B，年增84%，為公司史上最大訂單能見度紀錄。惟FY2026全年CapEx暴增至$115.9B（+79.5%），FCF反而年減6.4%至$67.0B，是財報電話會議中被分析師追問最多的議題。✅</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>指標</th><th class="num">實際值 ✅</th><th class="num">市場預期 ⚠️</th><th class="num">YoY 變化</th><th>判定</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Q4營收</td><td class="num ok">$90.01B</td><td class="num">~$87-89B ⚠️</td><td class="num ok">+18%</td><td><span class="badge badge-green">Beat ✅</span></td></tr>
+        <tr><td>調整後EPS</td><td class="num ok">$4.74</td><td class="num">$4.21-4.24</td><td class="num ok">+23%（剔除OpenAI影響）</td><td><span class="badge badge-green">大幅Beat ✅（約+12%）</span></td></tr>
+        <tr><td>GAAP稀釋EPS（FY全年）</td><td class="num ok">$17.95</td><td class="num">— ❌</td><td class="num ok">+32%</td><td><span class="badge badge-green">大幅成長 ✅（含OpenAI帳面利得）</span></td></tr>
+        <tr><td>Azure營收成長</td><td class="num ok">+43%（單季）／+41%（FY全年）</td><td class="num">~40% ⚠️</td><td class="num ok">優於預期</td><td><span class="badge badge-green">Beat ✅</span></td></tr>
+        <tr><td>Intelligent Cloud營收</td><td class="num ok">$39.3B</td><td class="num">— ❌</td><td class="num ok">+32%</td><td><span class="badge badge-green">強勁成長 ✅</span></td></tr>
+        <tr><td>Commercial RPO</td><td class="num ok">$678B</td><td class="num">— ❌</td><td class="num ok">+84%</td><td><span class="badge badge-green">大幅成長 ✅</span></td></tr>
+        <tr><td>FY26 CapEx</td><td class="num bad">$115.9B</td><td class="num">— ❌</td><td class="num bad">+79.5%</td><td><span class="badge badge-yellow">遠超預期，市場疑慮 ⚠️</span></td></tr>
+        <tr><td>FY26 FCF</td><td class="num warn">$67.0B</td><td class="num">— ❌</td><td class="num bad">-6.4%</td><td><span class="badge badge-yellow">近年首見負成長 ⚠️</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>股價反應（財報前後）</h3>
+    <div style="font-size:13px; line-height:1.9; color:var(--text)">
+      <strong>財報發布（2026-07-29盤後）</strong>：Q4營收/EPS均優於共識，Azure與RPO大幅超預期，帶動盤後股價走揚 ✅<br>
+      <strong>近月走勢（截至9/15）</strong>：股價自財報後持續於$490-553區間整理，9/15收$505.41，較52週高點$553.72回落約8.7%，市場在消化「Azure強勁成長」與「CapEx暴增侵蝕FCF」兩股力量的拉鋸，尚未出現單一方向的明確突破。⚠️
+    </div>
+  </div>
+</div>
+
+<!-- 7. EPS多年期表 & 歷史本益比 -->
+<div id="eps" class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">估值歷史錨點：多年期EPS ＋ 歷史本益比（★必附）</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財年</th>
+          <th class="num">EPS 實際值/預估值</th>
+          <th class="num">來源／機構</th>
+          <th class="num">參考股價</th>
+          <th class="num">隱含本益比 PE</th>
+          <th>狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>FY2023 A</strong></td>
+          <td class="num ok">$9.68 ✅</td>
+          <td class="num">Microsoft IR/10-K</td>
+          <td class="num">— ⚠️（未取得年末精確收盤）</td>
+          <td class="num">— ⚠️</td>
+          <td><span class="badge badge-blue">穩健成長</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2024 A</strong></td>
+          <td class="num ok">$11.80 ✅</td>
+          <td class="num">Microsoft IR/10-K</td>
+          <td class="num">— ⚠️</td>
+          <td class="num">— ⚠️</td>
+          <td><span class="badge badge-green">加速成長</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2025 A</strong></td>
+          <td class="num ok">$13.64 ✅</td>
+          <td class="num">Microsoft IR/10-K</td>
+          <td class="num">— ⚠️</td>
+          <td class="num">— ⚠️</td>
+          <td><span class="badge badge-green">持續成長</span></td>
+        </tr>
+        <tr style="background:rgba(21,128,61,0.03)">
+          <td><strong>FY2026 A</strong></td>
+          <td class="num ok">$17.95 ✅（GAAP，含OpenAI利得；剔除後約$17.28⚠️）</td>
+          <td class="num">Microsoft IR FY26 Q4</td>
+          <td class="num">$505.41（現價）</td>
+          <td class="num ok">≈28.2倍（GAAP）／≈29.2倍（剔除後⚠️）</td>
+          <td><span class="badge badge-green">大幅成長 +32%</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2027 E</strong></td>
+          <td class="num">$19.38 ✅共識估算（早2026年資料，可能已隨後續財報微調）</td>
+          <td class="num">分析師共識彙整</td>
+          <td class="num">$505.41（現價）</td>
+          <td class="num">≈26.1倍 ⚠️</td>
+          <td><span class="badge badge-green">持續成長預期</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2028 E</strong></td>
+          <td class="num">— ❌（未查得可靠共識數字）</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">— ❌</td>
+          <td><span class="badge badge-red">資料缺口</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ FY2026 GAAP EPS $17.95受OpenAI投資公允價值利得（+$0.67/股）墊高，若以剔除後基礎（約$17.28）計算，現價隱含PE約29.2倍；股票分析平台另給出TTM PE 27.43x／Fwd PE 24.93x（可能採用略有差異的EPS基期），數字略有出入屬正常，建議以區間思維看待（約25-29倍）。</p>
+
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr><th colspan="4" style="color:var(--accent); font-size:13px;">★ 歷史本益比錨點表</th></tr>
+        <tr><th>期間</th><th class="num">本益比</th><th>狀態</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>目前 TTM PE（2026/9/15）</td><td class="num">27.43倍 ✅</td><td><span class="badge badge-blue">中性偏高</span></td><td>來源：stockanalysis.com</td></tr>
+        <tr><td>目前 Forward PE</td><td class="num">24.93倍 ✅</td><td><span class="badge badge-blue">三大雲端巨頭中最便宜</span></td><td>低於GOOGL(28x)、AMZN(35x)</td></tr>
+        <tr><td>52週股價區間</td><td class="num">$349.20–$553.72 ✅</td><td><span class="badge badge-yellow">現價距高點-8.7%</span></td><td>來源：stockanalysis.com</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="risk-card" style="margin-top:12px;">
+    <h4>📌 反推試算結論：MSFT估值目前處於「三大雲端巨頭中最便宜」但「絕對倍數不算便宜」的雙重狀態</h4>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">以FY2027E EPS共識$19.38計算，現價隱含Forward PE約26.1倍（與stockanalysis.com揭露的24.93倍略有出入，屬EPS基期差異，可視為25-26倍區間）。橫向比較，這個倍數低於GOOGL（28x）與AMZN（35x），顯示市場目前給予MSFT三巨頭中最保守的估值——某種程度反映CapEx暴增侵蝕FCF的疑慮已部分反映在股價中。惟這個倍數仍高於MSFT自身過去（非AI題材時期）的歷史均值區間（約20-25倍），顯示<strong>「AI題材溢價」尚未完全退去，仍需持續驗證Copilot等應用層貨幣化能否追上Azure基礎設施層的投資速度</strong>，這是判斷目前26倍左右估值是否合理的核心關鍵。</p>
+  </div>
+</div>
+
+<!-- 8. DCF 三情境 -->
+<div id="dcf" class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">④ 三情境DCF估值（以Forward P/E情境法呈現）</div>
+  </div>
+
+  <div class="caution-box">
+    <h3>⚠️ Microsoft估值方法論說明</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">以<strong>「FY2027E EPS（共識$19.38為基準）× 不同情境Forward PE倍數」</strong>的簡化估值框架推算三情境股價，倍數區間參考MSFT近3-5年歷史PE波動範圍與AI題材溢價/折價可能性。<strong>以下情境倍數與EPS假設均為⚠️自製情境推演，非精確財務模型</strong>，與下節投行目標價分開列示以避免混淆；已同步交叉參照市場已發布的Bear/Bull分析師情境數字（$446.40／$600.73）供校準。</p>
+  </div>
+
+  <div class="scenario-row">
+    <div class="scenario bear">
+      <h4>🐻 熊市情境（25% 機率）</h4>
+      <div class="scenario-price" style="color:var(--red)">$430-460</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $505.41　-9% ~ -15%</div>
+      <div class="row"><span>FY2027E EPS假設</span><span>$18.0-18.5（Azure降至30%以下、Copilot貨幣化持續疲弱）</span></div>
+      <div class="row"><span>Forward PE倍數</span><span>21-23倍（CapEx ROI疑慮持續發酵、倍數壓縮）</span></div>
+      <div class="row"><span>對應方法</span><span>貼近外部分析師Bear Case $446.40</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：FCF連續季度負成長擴大、FTC訴訟升級、Azure成長跌破30%</div>
+    </div>
+    <div class="scenario base">
+      <h4>📊 基準情境（50% 機率）</h4>
+      <div class="scenario-price" style="color:var(--blue)">$505-570</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $505.41　0% ~ +13%</div>
+      <div class="row"><span>FY2027E EPS假設</span><span>$19.0-19.5（Azure維持35-40%，Copilot緩步放量）</span></div>
+      <div class="row"><span>Forward PE倍數</span><span>26-29倍（貼近現值，反映雲端龍頭中相對保守估值）</span></div>
+      <div class="row"><span>對應方法</span><span>接近分析師共識均值$573-592下緣</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：guidance如期兌現、CapEx增速隨營收成長趨緩</div>
+    </div>
+    <div class="scenario bull">
+      <h4>🐂 牛市情境（25% 機率）</h4>
+      <div class="scenario-price" style="color:var(--green)">$610-680</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $505.41　+21% ~ +35%</div>
+      <div class="row"><span>FY2027E EPS假設</span><span>$20.5-21.5（Azure維持40%+、Copilot明確加速兌現）</span></div>
+      <div class="row"><span>Forward PE倍數</span><span>30-32倍（AI應用層貨幣化證據明確，倍數重新擴張）</span></div>
+      <div class="row"><span>對應方法</span><span>貼近外部分析師Bull Case $600.73，上緣趨近共識目標價上限</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：M365 Copilot營收規模具體揭露且顯著超越目前估算、FCF重回成長</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent);">
+    <h3>敏感度分析：哪個變數對估值影響最大？</h3>
+    <p style="font-size:13px; color:var(--text); line-height:1.7">三情境價差（$430-460至$610-680，約1.4-1.5倍）主要由<strong>「Forward PE倍數能否維持在AI題材溢價區（26倍以上）」</strong>這個單一變數主導，遠比EPS成長率本身敏感——因為MSFT核心EPS成長路徑在三種情境下差異其實不大（$18.0至$21.5），真正決定股價方向的是市場願意為「CapEx轉化為獲利」這個尚未完全證實的敘事付多少倍數。自製情境加權估算公允價值約<strong>$515-545（⚠️情境加權平均，非精確模型）</strong>，與現價$505.41相近、略低於分析師共識均值$573-592，顯示本報告對Forward PE倍數持續性採取相對審慎的假設，主要差異來自對CapEx/FCF疑慮的保守看待，建議與下節投行目標價一併參考。</p>
+  </div>
+</div>
+
+<!-- 9. 股價位階評估 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">股價位階評估</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>估值倍數現況 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:20px;">27.43x</div><div class="big-label">TTM PE</div></div>
+        <div><div class="big-num" style="font-size:20px;">24.93x</div><div class="big-label">Forward PE</div></div>
+        <div><div class="big-num" style="font-size:20px;">— ❌</div><div class="big-label">P/B（未取得同日數字）</div></div>
+        <div><div class="big-num" style="font-size:20px;">1.11</div><div class="big-label">Beta（5年）</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>與雲端三巨頭比較 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:20px; color:var(--green)">23x⚠️/25x</div><div class="big-label">MSFT trailing/fwd PE，三家最低</div></div>
+        <div><div class="big-num" style="font-size:20px;">28x</div><div class="big-label">GOOGL trailing PE</div></div>
+        <div><div class="big-num" style="font-size:20px;">35x</div><div class="big-label">AMZN trailing PE，三家最高</div></div>
+        <div><div class="big-num" style="font-size:20px;">+8.7%</div><div class="big-label">現價距52週高點回落幅度</div></div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px; color:var(--text2)">⚠️ 不同資料源對MSFT trailing PE數字略有出入（本報告hero區採27.43x，另一批比較資料源引用23x），差異主要來自EPS基期是否剔除OpenAI一次性利得，建議以區間（23-27倍）看待。三家雲端巨頭中，MSFT估值最保守但成長率（Azure 41-43%）居中，這個估值落差是否合理，取決於市場能否驗證CapEx→獲利的轉換效率。</p>
+</div>
+
+<!-- Comps -->
+<div id="comps" class="section" style="margin-top:0;">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">Comps 同業對照</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th class="num">市值</th><th class="num">Trailing PE</th><th class="num">Forward PE</th><th class="num">雲端YoY成長</th><th>核心定位</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Microsoft（MSFT）</strong></td><td class="num">~$3.75T</td><td class="num">27.43x</td><td class="num">24.93x</td><td class="num">Azure +41%(FY)/+43%(Q4)</td><td>雲端+企業軟體+OpenAI最大股東</td></tr>
+        <tr><td>Alphabet（GOOGL）</td><td class="num">~$2.4T ⚠️（估算）</td><td class="num">28x</td><td class="num">— ❌</td><td class="num">GCP +82%</td><td>雲端第三但成長最快，搜尋廣告核心</td></tr>
+        <tr><td>Amazon（AMZN）</td><td class="num">~$2.6T ⚠️（估算）</td><td class="num">35x</td><td class="num">— ❌</td><td class="num">AWS +37%</td><td>雲端龍頭+電商+廣告</td></tr>
+        <tr><td>Oracle（ORCL）</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td>企業資料庫轉型雲端/AI基礎設施，非同量級但常被列為AI capex比較對象</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 市值為粗略估算（非同日精確快照），僅供相對定位參考。三大雲端巨頭中MSFT估值最低、GCP成長最快、AWS規模最大，MSFT目前處於「估值最保守但基本面均衡」的位置。</p>
+</div>
+
+<!-- 11. 額外優勢/風險 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">額外優勢/風險</div>
+  </div>
+  <div class="card-grid">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>股票回購與股利</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">Microsoft持續配發並調升季度股利，屬於少數同時兼具「AI高成長敘事」與「穩定股東回饋」的大型科技股，回購/配息政策未見縮減跡象，反映管理層對長期現金流的信心（即便短期FCF因CapEx承壓）。✅</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <h3>機構持股與市場地位</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">MSFT為全球機構投資人核心持倉之一，市值長期在全球前三大公司間輪動。分析師覆蓋率極高（97位分析師覆蓋），90%以上給予Buy/Strong Buy評等，市場關注度與流動性居全球之冠。✅</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--gold)">
+      <h3>⚠️ FTC「雲端捆綁」反壟斷調查為近期最大額外風險</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">FTC正對Microsoft展開「雲端捆綁」（cloud tying）調查，質疑其將資安/AI工具與Azure捆綁銷售的行為涉及反競爭。此議題與OpenAI獨家夥伴關係的監管審查（美國/英國）疊加，是MSFT相對GOOGL/AMZN多出的一項獨特監管風險，若演變為正式訴訟或矯正令，可能影響Azure的捆綁銷售模式與獲利率結構。⚠️</p>
+    </div>
+  </div>
+</div>
+
+<!-- 12. 投行目標價 -->
+<div id="targets" class="section">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">投行目標價與操作建議</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>機構/來源</th><th>評等</th><th class="num">目標價</th><th>日期</th></tr></thead>
+      <tbody>
+        <tr><td>S&P Global（55位分析師）</td><td><span class="badge badge-green">Strong Buy</span></td><td class="num">均值$572.92 ✅，區間$400-$870 ✅</td><td>2026年9月</td></tr>
+        <tr><td>大型券商彙整（97位分析師）</td><td><span class="badge badge-green">Strong Buy（52 Buy / 0 Sell）</span></td><td class="num">均值$589-592 ✅</td><td>2026年9月</td></tr>
+        <tr><td>外部研究 Bear Case</td><td><span class="badge badge-yellow">保守情境</span></td><td class="num">$446.40 ✅</td><td>2026年</td></tr>
+        <tr><td>外部研究 Bull Case</td><td><span class="badge badge-green">樂觀情境</span></td><td class="num">$600.73 ✅</td><td>2026年</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--gold); margin-top:16px;">
+    <h3 style="color:var(--gold)">分歧點</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">分析師目標價區間橫跨$400-$870（S&P Global極端值），跨度超過2倍，反映市場對「CapEx能否轉化為對等獲利成長」的判斷高度分歧。多數投行共識均值（$573-592）高於本報告自製DCF基準情境（$505-570），顯示賣方機構對Forward PE倍數維持在26倍以上、甚至擴張的假設較本報告樂觀；本報告的相對保守立場主要反映對FY2026 FCF罕見負成長與M365 Copilot貨幣化證據薄弱的審慎看待。</p>
+  </div>
+
+  <div class="action-box" style="margin-top:16px;">
+    <h3>✅ 最終操作建議（財報解析視角）</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">現價$505.41相對投行共識目標價（$573-592）存在約13-17%潛在上行空間，相對本報告自製基準情境（$505-570）則約持平至+13%，屬於「估值合理、非明顯低估亦非明顯高估」的中性偏正面區間。<strong>對於已持有者：可續抱作為核心池長期部位，Azure/雲端基本面持續強勁支撐長期複利邏輯；對於未持有者：可分批建立部位，但因CapEx/FCF疑慮與FTC監管風險仍是未解變數，不建議在Forward PE突破28-29倍時追高，宜等待財報進一步驗證Copilot貨幣化證據或股價回落至24-25倍區間再加碼。</strong></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     模式三：財務健檢
+══════════════════════════════════════ -->
+<div id="mode3" class="mode-divider">
+  <h2>◈ 模式三：財務風險健檢</h2>
+  <p>六大比率診斷 · CapEx分析 · 同業對比 · 綜合診斷</p>
+</div>
+
+<!-- 13. 財務數據填表 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">財務數據填表（近3期）</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>項目</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">FY2026（最新）</th></tr></thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$245.1B ✅</td><td class="num">$281.7B ✅</td><td class="num">$331.8B ✅</td></tr>
+        <tr><td>營業利益</td><td class="num">$109.4B ✅</td><td class="num">$128.5B ✅</td><td class="num">$155.2B ✅</td></tr>
+        <tr><td>淨利</td><td class="num">$88.1B ✅</td><td class="num">$101.8B ✅</td><td class="num">$133.7B ✅</td></tr>
+        <tr><td>營運現金流</td><td class="num">$118.5B ✅</td><td class="num">$136.2B ✅</td><td class="num">$182.9B ✅</td></tr>
+        <tr><td>CapEx</td><td class="num">$44.5B ✅</td><td class="num">$64.6B ✅</td><td class="num">$115.9B ✅</td></tr>
+        <tr><td>自由現金流</td><td class="num">$74.1B ✅</td><td class="num">$71.6B ✅</td><td class="num">$67.0B ✅</td></tr>
+        <tr><td>總債務</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">~$106.9B ✅（含融資租賃負債）</td></tr>
+        <tr><td>現金及約當現金</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">$20.9B ⚠️（不含短期投資，未查得合併總現金部位）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 現金部位僅取得「現金及約當現金」單項數字，MSFT實際流動性部位（含短期投資）歷來遠高於此數字，惟本次未查得精確合併總額，不宜僅以$20.9B判斷流動性風險，需標註為資料缺口。</p>
+</div>
+
+<!-- 14. 六大比率 -->
+<div id="ratios" class="section">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">六大比率診斷</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>1. 淨負債 / EBITDA</h3>
+      <div class="big-num" style="color:var(--green)">極低⚠️</div>
+      <div class="big-label">總債務$106.9B，遠低於FY26營業利益$155.2B，現金部位（未完整揭露）通常足以覆蓋大部分債務</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:15%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">✅ 狀態：MSFT為全市場少數擁有AAA/近AAA信評的公司之一，槓桿水準在大型科技股中屬最健康之列，非本次健檢的風險焦點。</p>
+    </div>
+    <div class="card">
+      <h3>2. CapEx / OCF 比率（AI投資強度）</h3>
+      <div class="big-num" style="color:var(--red)">63.4% ⚠️</div>
+      <div class="big-label">公式：FY26 CapEx $115.9B ÷ OCF $182.9B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:80%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：此比率由FY2025的47.4%（$64.6B/$136.2B）快速攀升至63.4%，是FY2026 FCF罕見負成長的直接原因，屬六項比率中最需要持續監控的一項，若持續攀升將進一步壓縮股東可分配現金流。</p>
+    </div>
+    <div class="card">
+      <h3>3. 營業利益率</h3>
+      <div class="big-num" style="color:var(--green)">46.8% ✅</div>
+      <div class="big-label">公式：FY26營業利益$155.2B ÷ 營收$331.8B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:90%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">✅ 狀態：46.8%為全球大型科技公司中數一數二的營業利益率水準，且較FY25（45.6%，自算）持續改善，顯示核心營運效率並未因CapEx壓力而惡化。</p>
+    </div>
+    <div class="card">
+      <h3>4. FCF 成長率</h3>
+      <div class="big-num" style="color:var(--gold)">-6.4% ⚠️</div>
+      <div class="big-label">FY26 FCF $67.0B，較FY25 $71.6B下滑</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:55%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：近5年來首見FCF年減，主因CapEx增速（+79.5%）遠超OCF增速（+34.4%）。若此趨勢延續2-3季以上，將是股價重新評價的關鍵風險點；若CapEx增速隨營收同步放緩，則屬正常投資週期波動。</p>
+    </div>
+    <div class="card">
+      <h3>5. RPO覆蓋率（訂單能見度）</h3>
+      <div class="big-num" style="color:var(--green)">2.04x ✅（自算）</div>
+      <div class="big-label">公式：Commercial RPO $678B ÷ FY26營收$331.8B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:85%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">✅ 狀態：待認列訂單已達年營收的2倍以上，且年增84%遠快於營收成長（18%），為未來2-3年營收提供極高能見度，是本次健檢中最正面的訊號之一。</p>
+    </div>
+    <div class="card">
+      <h3>6. ROE（股東權益報酬率）</h3>
+      <div class="big-num" style="color:var(--gold)">— ⚠️</div>
+      <div class="big-label">未取得同日股東權益精確數字，無法完整計算</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:50%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：MSFT歷史ROE長期維持35-45%高檔區間（業界共識認知），本次未查得FY2026精確股東權益基期數字以完成計算，標記為資料缺口，非判斷公司體質的核心障礙（獲利與現金流數據已充分佐證財務體質健康）。</p>
+    </div>
+  </div>
+</div>
+
+<!-- Comps健檢 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-title">同業財務體質對比</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th class="num">FY26營業利益率</th><th class="num">CapEx/OCF</th><th class="num">FCF YoY</th><th>財務體質定性</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Microsoft（MSFT）</strong></td><td class="num">46.8%</td><td class="num">63.4%</td><td class="num bad">-6.4%</td><td>獲利率最高，惟CapEx強度近年最猛</td></tr>
+        <tr><td>Alphabet（GOOGL）</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td>GCP營益率大幅改善(20.7%→35.6%)，capex guide $195-205B</td></tr>
+        <tr><td>Amazon（AMZN）</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">— ❌</td><td>AWS利潤率貢獻主要獲利，capex guide $220B</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 三雲端巨頭FY2026合計capex guide／實際值合計約$530-540B，資料未能逐項取得同基準比較數字，僅列MSFT精確數字供參，橫向比較留待GOOGL/AMZN個別報告補齊。</p>
+</div>
+
+<!-- 綜合診斷 -->
+<div id="health" class="section">
+  <div class="section-header">
+    <div class="section-num">16</div>
+    <div class="section-title">財務體質綜合診斷</div>
+  </div>
+  <div class="card" style="display:flex; align-items:center; gap:24px;">
+    <div class="health-badge health-a">A</div>
+    <div>
+      <p style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px;">財務體質評等：A（穩健，CapEx強度為唯一觀察重點）</p>
+      <p style="font-size:13px; color:var(--text2); line-height:1.7">槓桿水準極低、營業利益率業界頂尖、訂單能見度（RPO）大幅成長，核心財務體質無虞。唯一扣分項是FY2026 FCF罕見負成長（因CapEx暴增所致），這並非資產負債表風險，而是「投資紀律能否轉化為未來獲利」的執行力風險，需持續以季度為單位追蹤CapEx/OCF比率與RPO兌現速度。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     綜合總結
+══════════════════════════════════════ -->
+<div id="final" class="section">
+  <div class="section-header">
+    <div class="section-num">17</div>
+    <div class="section-title">綜合總結</div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis 成立度</div><div class="s-val">3.8 / 5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-val">⭐⭐⭐⭐☆</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-val" style="font-size:13px;">穩定成長股＋局部快速成長</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-val">A</div></div>
+    <div class="summary-card"><div class="s-label">現價/共識目標價</div><div class="s-val" style="font-size:13px;">$505 / $573-592</div></div>
+  </div>
+
+  <div class="action-box">
+    <h3>✅ 最終操作建議</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">
+      <strong>已持有者：</strong>續抱，作為核心池長期部位。Azure雲端規模與RPO能見度是同業中數一數二的紮實成長引擎，企業軟體護城河（客戶黏著度5/5、規模效應5/5）在五大巨頭中名列前茅，配息政策穩定，符合長期複利持股邏輯。<br><br>
+      <strong>未持有者：</strong>可分批建立核心池部位，不建議一次重倉在Forward PE突破28-29倍時追高。目前$505.41的估值在三大雲端巨頭中最保守（Fwd PE ~25倍 vs GOOGL 28倍、AMZN 35倍），提供一定安全邊際，但FY2026 FCF罕見負成長（CapEx/OCF比率63.4%）與FTC反壟斷調查是尚未解決的變數，建議分批布局並以每季CapEx紀律與M365 Copilot貨幣化證據作為加碼依據。<br><br>
+      <strong>核心催化劑：</strong>①Azure成長率能否維持40%以上並持續優於AWS ②M365 Copilot營收規模是否有具體、超預期的揭露 ③FY2027 CapEx增速是否隨營收成長趨緩、FCF能否恢復正成長 ④FTC反壟斷調查進展。
+    </p>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <p>
+    資料來源：Microsoft Investor Relations（FY26 Q4 Press Release/10-K/8-K）、SEC EDGAR、stockanalysis.com、S&P Global共識彙整、24/7 Wall St.、FinancialContent、其他公開財經媒體報導（詳見各段落標註）<br>
+    ✅ 已驗證　⚠️ 估算/近似值或資料源分歧　❌ 無法取得，禁止臆測填入<br>
+    本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。
+  </p>
+</footer>
+
+</body>
+</html>
