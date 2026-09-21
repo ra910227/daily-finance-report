@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜SMCI Super Micro Computer 2026-09-16</title>
+<style>
+  :root { --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6; --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca; --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c; --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+  .ok { color: var(--green); } .warn { color: var(--gold); } .bad { color: var(--red); }
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); } .scenario.base { border-top: 3px solid var(--blue); } .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); } .scenario.base h4 { color: var(--blue); } .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+  .comp-now { background: rgba(79,70,229,0.05); } .comp-now td { font-weight: 700; }
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); } .bar-yellow { background: var(--gold); } .bar-red { background: var(--red); }
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--accent); }
+  @media (max-width: 900px) { .summary-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 720px) { .scenario-row { grid-template-columns: 1fr; } .moat-grid { grid-template-columns: repeat(2,1fr); } .hero-price-block { text-align:left; } }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">SMCI</div>
+      <div class="hero-name">Super Micro Computer, Inc.（AI伺服器ODM/系統整合商，營收成長驚人但毛利率極薄，公司治理史上多次爆發會計爭議，目前董事會正就出口管制相關交易進行獨立審查中）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-09-16　資料基準：2026-09-16收盤　財年制：FY結束於6月底</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$36.85</div>
+      <div class="hero-mktcap">市值 ≈$24.0B</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-purple">FY26營收$39.1B創紀錄，YoY+78%</span>
+    <span class="badge badge-blue">FY27 guidance $65-72B，目標最快成長年</span>
+    <span class="badge badge-orange">Q4毛利率僅17.6%(前季10.1%)，本次31檔最薄</span>
+    <span class="badge badge-red">⚠️董事會正調查出口管制相關交易，結果可能影響財測與過去財報</span>
+    <span class="badge badge-red">⚠️2024年Ernst&Young審計期間辭任、遭Hindenburg指控會計舞弊</span>
+    <span class="badge badge-yellow">淨負債攀升至$7.5B，D/E比69.8%</span>
+    <span class="badge badge-teal">分析師Neutral(5 Buy/3 Sell)，目標價區間$15-$60極端分歧</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$36.85</div><div class="sub">✅ 52週$19.48–$58.78</div></div>
+    <div class="meta-item"><label>FY26營收</label><div class="val">$39.1B</div><div class="sub">YoY+78% ✅</div></div>
+    <div class="meta-item"><label>FY26 Non-GAAP EPS</label><div class="val">$3.63</div><div class="sub">YoY+76%(⚠️2024年10:1股票分割後基礎)</div></div>
+    <div class="meta-item"><label>毛利率</label><div class="val">17.6%</div><div class="sub">⚠️歷史極端波動(10-18%區間)</div></div>
+    <div class="meta-item"><label>Thesis成立度</label><div class="val">2.2/5</div><div class="sub">營收爆發但治理風險是本次31檔最高</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐☆☆☆☆</div><div class="sub">ODM組裝模式門檻低，治理疑慮進一步侵蝕信任護城河</div></div>
+  </div>
+</div>
+
+<nav class="toc"><div class="toc-inner">
+  <a href="#mode1">模式一深度研究</a><span class="toc-sep">·</span><a href="#biz">業務引擎</a><a href="#thesis">核心Thesis</a><a href="#competition">競爭格局</a><a href="#moat">成長象限</a>
+  <span class="toc-sep">·</span><a href="#mode2">模式二財報解析</a><span class="toc-sep">·</span><a href="#earnings">Q4財報</a><a href="#eps">EPS錨點</a><a href="#dcf">DCF情境</a><a href="#targets">投行目標</a>
+  <span class="toc-sep">·</span><a href="#mode3">模式三財務健檢</a><span class="toc-sep">·</span><a href="#ratios">六大比率</a><a href="#health">綜合診斷</a>
+  <span class="toc-sep">·</span><a href="#final">綜合總結</a>
+</div></nav>
+
+<div class="container">
+
+<div id="mode1" class="mode-divider"><h2>◈ 模式一：公司深度研究</h2><p>業務引擎 · 核心Thesis · 競爭格局 · 成長象限 · 護城河評分</p></div>
+
+<div class="section">
+  <div class="section-header"><div class="section-num">1</div><div class="section-title">公司基本介紹</div></div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">Super Micro（NASDAQ: SMCI）市值≈$24.0B，是AI伺服器/資料中心系統整合商（ODM），以「快速導入新技術+高度客製化」為競爭策略，AI伺服器業務佔近期營收逾50%。<strong>本檔是本次31檔清單中公司治理風險最高者</strong>：2020年曾因提前認列營收與低估費用遭SEC罰款；2024年底遭短賣機構Hindenburg Research指控會計操縱、未揭露關聯方交易（CEO Charles Liang兄弟控制的供應商三年內收取$983M款項）與違反美國出口禁令，隨後審計機構Ernst & Young在審計期間辭任並表示「不願與管理層編製之財務報表產生關聯」，DOJ亦介入調查；2026年3月又爆發新一輪爭議事件致股價單日重挫27%（同日Dell股價卻上漲5%）；截至最新一期財報，<strong>公司再度揭露董事會正就「出口管制相關交易」進行獨立審查，且明確表示審查結果可能影響財測與過去已公布財報數字</strong>。❌</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽（FY2026，最近完整財年）✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$39.1B</div><div class="big-label">FY26營收創紀錄</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">+78% YoY</div><div class="big-label">（FY25：$22.0B）</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--gold)">毛利率10.1%→17.6%⚠️</div><div class="big-label">Q3→Q4'26，極端波動</div></div>
+        <div><div class="big-num" style="font-size:22px;">Non-GAAP EPS $3.63</div><div class="big-label">+76%YoY（FY25：$2.06）</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="tbl-wrap">
+    <table><thead><tr><th>財務摘要</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">FY2026</th></tr></thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$7.12B✅</td><td class="num ok">$14.94B✅（+109%）</td><td class="num ok">$22.0B✅（+47.3%）</td><td class="num ok">$39.1B✅（+78%）</td></tr>
+        <tr><td>淨利</td><td class="num">$640M✅</td><td class="num">$1.2-1.21B✅⚠️（來源略有出入）</td><td class="num bad">$1.0B✅（較FY24下滑）</td><td class="num">— ⚠️</td></tr>
+        <tr><td>EPS(分割後基礎)</td><td class="num">— ⚠️</td><td class="num">$1.92✅（10:1分割調整後）</td><td class="num bad">$1.68✅（-12.5%）</td><td class="num ok">$3.63✅（Non-GAAP，+76%）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅已驗證（來源：Super Micro IR/8-K、MacroTrends）｜⚠️ 公司2024年執行10:1股票分割，歷史EPS數字需注意計價基礎是否一致；更值得注意的是<strong>FY2025淨利與EPS較FY2024明顯下滑（EPS -12.5%），即便當年營收成長47.3%</strong>——這正是毛利率極端波動（10-18%區間）侵蝕獲利品質的直接證據，「營收暴增但獲利不成比例成長」是本檔財報最大的隱憂，需與FY2026的+76%EPS成長率一併對照觀察是否僅為單季/單年度的財報雜訊反彈。</p>
+</div>
+
+<div id="biz" class="section">
+  <div class="section-header"><div class="section-num">2</div><div class="section-title">業務引擎分析</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>🖥️ AI伺服器系統整合（核心業務，佔營收過半）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">以快速導入Nvidia最新GPU平台（Blackwell等）並提供高度客製化系統整合服務為核心競爭力，Q4訂單創紀錄$60B，帶動FY2027 guidance上修至$65-72B（管理層目標「最快成長年」）。✅</p></div>
+    <div class="card"><h3>⚠️ 出口管制相關交易獨立審查（重大未解決事項）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">最新一期財報揭露董事會正就「出口管制相關交易」進行獨立審查，公司明確表示審查結果可能影響財測與<strong>過去已公布的財報數字</strong>。這是與2024年Hindenburg指控中「違反美國出口禁令」高度相關的延續性議題，非全新事件，顯示相關爭議尚未完全解決。❌</p></div>
+    <div class="card"><h3>📉 毛利率結構性偏薄（ODM組裝模式本質）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">Q4'26毛利率17.6%（前季僅10.1%），公司解釋為「客戶與產品組合改善+庫存準備金降低」，惟此區間本身遠低於NVDA/ASML等技術密集型公司，反映ODM組裝業務的低附加價值本質，議價權明顯弱於晶片設計/設備廠商。⚠️</p></div>
+    <div class="card"><h3>🏛️ 公司治理歷史包袱（持續性風險）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">2020年SEC罰款（提前認列營收/低估費用）→2024年Hindenburg指控+E&Y辭任+DOJ調查→2026年3月新爭議股價重挫27%→最新財報再揭露出口管制審查，形成長達6年、多次復發的公司治理風險模式，非單一事件。❌</p></div>
+  </div>
+</div>
+
+<div id="thesis" class="section">
+  <div class="section-header"><div class="section-num">3</div><div class="section-title">核心Thesis與未來成長驅動</div></div>
+  <div class="thesis-grid">
+    <div class="thesis-card"><div class="thesis-status ok">✅ 成立</div><div class="label">Thesis 1｜AI伺服器需求爆發帶動營收快速成長</div><div class="content">FY2026營收+78%達$39.1B、訂單創紀錄$60B、FY2027 guidance $65-72B，顯示公司在AI伺服器組裝這個特定利基上確實抓住了需求爆發的機會。✅ 成立，惟需與下方風險並列權衡。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--red)">❌ 需高度警惕</div><div class="label">Thesis 2｜公司治理風險已充分消化，不會再度爆發</div><div class="content">從2020年SEC罰款到2024年Hindenburg指控/審計師辭任/DOJ調查，再到2026年3月新爭議與最新財報揭露的出口管制獨立審查，公司治理問題呈現「反覆復發」而非「一次性事件已解決」的模式。❌ 需高度警惕，是本檔最核心的風險，且直接影響對其財報數字的信任度。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div><div class="label">Thesis 3｜營收成長能轉化為對等的獲利成長</div><div class="content">FY2025營收成長47.3%但EPS反而下滑12.5%，顯示毛利率的極端波動性（10-18%區間）使「營收暴增」不必然等同「獲利同步成長」。FY2026 EPS+76%的反彈是否可持續，需要更多季度驗證，不宜線性外推。⚠️ 部分成立。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--red)">❌ 需高度警惕</div><div class="label">Thesis 4｜能在與Dell/HPE的競爭中維持市佔</div><div class="content">Dell擁有$43B積壓訂單與強勁股價動能，被市場視為AI伺服器新龍頭，而SMCI股東正面臨「深度負面情緒」的處境。SMCI雖曾在2024年Q4短暫與Dell並列市佔第一（各約6.5%），但2023年數據顯示Dell(19.3%)遠超SMCI(5.3%)，長期市佔地位並不穩固，且治理疑慮可能進一步侵蝕大型企業/政府客戶的採購信心。❌ 需高度警惕。</div></div>
+  </div>
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)"><h3>🚀核心成長驅動力</h3><ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)"><li>AI伺服器訂單/backlog持續創紀錄</li><li>新一代Nvidia平台(Blackwell等)快速導入優勢</li><li>毛利率若能穩定在17%以上區間，獲利品質可望改善</li></ul></div>
+    <div class="card" style="border-left:3px solid var(--red)"><h3>⚠️核心監控風險</h3><ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)"><li>出口管制獨立審查結果不利，觸發：審查發現需重編過去財報或涉及重大違規</li><li>毛利率再度崩落至10%以下，觸發：連續兩季毛利率下滑</li><li>Dell/HPE持續搶占市佔，觸發：大型客戶訂單流向競爭對手</li></ul></div>
+  </div>
+</div>
+
+<div id="competition" class="section">
+  <div class="section-header"><div class="section-num">4</div><div class="section-title">競爭格局</div></div>
+  <div class="tbl-wrap">
+    <table><thead><tr><th>公司</th><th>市佔/現況</th><th>對SMCI威脅度</th></tr></thead>
+      <tbody>
+        <tr><td>Dell</td><td>市佔約19.3%(2023)，擁有$43B積壓訂單，市場視為AI伺服器新龍頭，股價動能強勁</td><td>🔴 高｜規模、資源與市場信任度全面領先</td></tr>
+        <tr><td>HPE</td><td>傳統伺服器大廠，同步加碼AI伺服器布局</td><td>🟡 中｜資源與品牌信任度優於SMCI</td></tr>
+        <tr class="comp-now"><td><strong>Super Micro（本案）</strong></td><td>市佔約5.3%(2023)，2024年Q4曾短暫與Dell並列第一(各6.5%)，惟公司治理疑慮持續侵蝕客戶信任</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="caution-box" style="margin-top:16px;"><h3>⚠️ 競爭關鍵監控：SMCI的最大威脅不是技術落後，而是治理疑慮侵蝕大型客戶信任</h3><p style="font-size:13px; line-height:1.7; color:var(--text)">SMCI在技術導入速度上具備競爭力（快速搭載最新Nvidia平台），但2024年以來的一系列公司治理爭議，很可能使風險趨避的大型企業/政府客戶轉而選擇Dell/HPE等信譽更穩固的供應商，這是比單純產品規格競爭更根本的長期挑戰。</p></div>
+</div>
+
+<div id="moat" class="section">
+  <div class="section-header"><div class="section-num">5</div><div class="section-title">Peter Lynch成長象限&護城河評分</div></div>
+  <div class="card-grid"><div class="card" style="border:2px solid var(--purple);"><h3 style="color:var(--purple)">📊 Lynch象限判斷</h3><div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">高風險轉機股/題材股，公司治理疑慮使其不適用一般成長股框架</div><p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 SMCI的營收成長數字（FY26 +78%）表面上符合快速成長股定義，但公司治理的持續復發模式（2020/2024/2026三度爆發爭議）意味著即便財報數字亮眼，其<strong>可信度本身就是需要打折扣的變數</strong>——這與本次31檔清單中任何其他個股的風險性質都不同：其他個股的風險多屬「基本面/競爭/週期」層面，SMCI的風險則是「財報數字本身能否被信任」這個更根本的層面。分析師評等罕見呈現Neutral（5 Buy/3 Sell）且目標價區間達$15-$60（4倍差距），反映機構投資人對此的高度分歧與不信任。</p></div></div>
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item"><div class="moat-label">不可替代性</div><div class="moat-stars">★★☆☆☆</div><div class="moat-score">2.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">ODM組裝門檻相對低，快速導入能力是主要差異化</div></div>
+    <div class="moat-item"><div class="moat-label">客戶黏著度</div><div class="moat-stars">★☆☆☆☆</div><div class="moat-score">1.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">治理疑慮持續侵蝕大型客戶信任</div></div>
+    <div class="moat-item"><div class="moat-label">網路效應</div><div class="moat-stars">★☆☆☆☆</div><div class="moat-score">1.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">組裝業務不具網路效應</div></div>
+    <div class="moat-item"><div class="moat-label">成本優勢</div><div class="moat-stars">★★☆☆☆</div><div class="moat-score">2.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">毛利率結構性偏薄，成本優勢有限</div></div>
+    <div class="moat-item"><div class="moat-label">規模效應</div><div class="moat-stars">★★☆☆☆</div><div class="moat-score">2.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">規模仍遠小於Dell，規模效應有限</div></div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：1.6/5 ⭐☆☆☆☆（本次31檔清單中護城河評分最低者，公司治理疑慮是額外的信任折價因素）</div>
+  <div class="caution-box" style="margin-top:24px;"><h3>⚠️建議動作</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+    <div><strong>當前建議：</strong>鑑於持續復發的公司治理疑慮與極薄且波動的毛利率，<strong>不建議列入核心池或戰術池</strong>，若仍要參與，僅建議以能承受歸零風險的機會池極小倉位參與，且務必等待出口管制獨立審查結果明朗化後再評估。<br><br><strong>加碼觸發：</strong><ul style="padding-left:16px;"><li>出口管制獨立審查結案且無重大不利發現</li><li>毛利率連續兩季穩定在15%以上</li></ul></div>
+    <div><strong>賣出/迴避觸發：</strong><ul style="padding-left:16px;"><li>審查發現需重編過去財報或涉及重大違規（優先迴避訊號）</li><li>再度出現審計師異動或延遲財報揭露</li><li>Dell/HPE持續擴大市佔差距</li></ul><br><strong>每季監控：</strong>出口管制審查進度、毛利率趨勢、審計師/內控狀態、市佔率變化</div>
+  </div></div>
+</div>
+
+<div id="mode2" class="mode-divider"><h2>◈ 模式二：最新財報解析</h2></div>
+<div id="earnings" class="section">
+  <div class="section-header"><div class="section-num">6</div><div class="section-title">Q4 FY2026財報（截至2026年6月30日止財年）</div></div>
+  <div class="card" style="border-left:3px solid var(--gold); margin-bottom:20px;"><h3 style="color:var(--gold)">⚠️ 營收/訂單數字亮眼，惟出口管制審查揭露為最大變數</h3><p style="font-size:13px; line-height:1.7; color:var(--text)">Q4營收$11.1B（YoY+93%，QoQ+9%），Non-GAAP EPS $1.70優於guidance。FY2026全年營收創紀錄$39.1B（+78%），Non-GAAP EPS $3.63（+76%）。Q4毛利率17.6%（前季10.1%）。Q4新增訂單創紀錄$60B，backlog進入FY2027處於歷史高點。FY2027 guidance營收$65-72B、Q1'27營收$14.5-15.5B、EPS $1.01-1.10。惟財報同時揭露董事會正就出口管制相關交易進行獨立審查，且明確表示可能影響財測與過去財報數字。✅⚠️</p></div>
+  <div class="tbl-wrap"><table><thead><tr><th>指標</th><th class="num">實際值✅</th><th class="num">YoY/QoQ</th><th>判定</th></tr></thead>
+    <tbody>
+      <tr><td>營收</td><td class="num ok">$11.1B</td><td class="num ok">+93%YoY/+9%QoQ</td><td><span class="badge badge-green">大幅成長✅</span></td></tr>
+      <tr><td>Non-GAAP EPS</td><td class="num ok">$1.70</td><td class="num">— ⚠️（優於guidance）</td><td><span class="badge badge-green">Beat✅</span></td></tr>
+      <tr><td>毛利率</td><td class="num warn">17.6%</td><td class="num ok">前季10.1%</td><td><span class="badge badge-yellow">改善但仍偏薄⚠️</span></td></tr>
+      <tr><td>Q4新增訂單</td><td class="num ok">$60B</td><td class="num">— ⚠️（創紀錄）</td><td><span class="badge badge-green">強勁✅</span></td></tr>
+      <tr><td>出口管制獨立審查</td><td class="num bad">進行中</td><td class="num">— ❌</td><td><span class="badge badge-red">重大未解決事項❌</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<div id="eps" class="section">
+  <div class="section-header"><div class="section-num">7</div><div class="section-title">估值歷史錨點</div></div>
+  <p style="font-size:12px; color:var(--text2); margin-bottom:12px;">EPS軌跡：FY24 $1.92(分割調整後)→FY25 $1.68(-12.5%，毛利率壓縮)→FY26 $3.63(+76%，毛利率回升+訂單放量)，波動幅度反映公司獲利品質的結構性不穩定。</p>
+  <div class="risk-card" style="margin-top:12px; background:#fef2f2; border:1px solid rgba(220,38,38,0.2); border-radius:8px; padding:14px 16px;"><h4 style="color:var(--red); font-size:13px;">📌 任何本益比計算都建立在「過去財報數字可信」的前提上，而這個前提目前正受到質疑</h4><p style="font-size:13px; line-height:1.8; color:var(--text)">與本次31檔清單其他個股不同，SMCI的估值分析存在一個更根本的問題：公司自己揭露的財測與過去財報數字「可能」因出口管制獨立審查結果而需要調整。這意味著任何基於當前已知EPS數字計算出的本益比，都帶有「數字本身可能不是最終版本」的額外不確定性，這是評估SMCI估值時必須放在所有財務比率之前的優先考量。</p></div>
+</div>
+
+<div id="dcf" class="section">
+  <div class="section-header"><div class="section-num">8</div><div class="section-title">④ 三情境DCF估值</div></div>
+  <div class="caution-box"><h3>⚠️ 方法論說明</h3><p style="font-size:13px; color:var(--text)">⚠️採用分析師目標價區間法，鑑於治理不確定性與財報可信度疑慮，本檔的DCF估值意義有限，僅供參考。</p></div>
+  <div class="scenario-row">
+    <div class="scenario bear"><h4>🐻熊市（35%，治理風險需給最高機率）</h4><div class="scenario-price" style="color:var(--red)">$15</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$36.85　-59.3%</div><div class="row"><span>假設</span><span>出口管制審查發現重大違規，需重編財報</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：審查結果不利或再度延遲財報</div></div>
+    <div class="scenario base"><h4>📊基準（40%）</h4><div class="scenario-price" style="color:var(--blue)">$38-45</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$36.85　+3.1%~+22.1%</div><div class="row"><span>假設</span><span>審查無重大發現，訂單/毛利率延續現有軌跡</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：guidance如期兌現且無新爭議</div></div>
+    <div class="scenario bull"><h4>🐂牛市（25%）</h4><div class="scenario-price" style="color:var(--green)">$60</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$36.85　+62.8%</div><div class="row"><span>假設</span><span>治理疑慮完全解除，毛利率穩定改善，市佔止穩</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：連續兩季無新負面事件+毛利率突破20%</div></div>
+  </div>
+  <div class="card" style="border-left:3px solid var(--accent);"><h3>敏感度分析</h3><p style="font-size:13px; color:var(--text); line-height:1.7">三情境價差達4倍，是本次31檔清單中最極端者之一，核心變數是「出口管制審查結果」這個二元性極強、且投資人幾乎無法提前預判的事件。這種風險結構使SMCI更接近「事件驅動型」投機標的，而非可用傳統成長/循環股框架分析的一般個股。</p></div>
+</div>
+
+<div id="targets" class="section">
+  <div class="section-header"><div class="section-num">9</div><div class="section-title">投行目標價與操作建議</div></div>
+  <div class="tbl-wrap"><table><thead><tr><th>機構/來源</th><th>評等</th><th class="num">目標價</th></tr></thead>
+    <tbody><tr><td>共識彙整（8位分析師）</td><td><span class="badge badge-yellow">Neutral（5 Buy/3 Sell）</span></td><td class="num">均值$42.38✅，區間$15-$60✅</td></tr></tbody>
+  </table></div>
+  <div class="action-box" style="margin-top:16px;"><h3>✅最終操作建議</h3><p style="font-size:13px; line-height:1.8; color:var(--text)">現價$36.85相對共識目標價$42.38有約15%上行空間，惟分析師評等本身已呈現罕見的高度分歧（5 Buy/3 Sell）。<strong>已持有者：</strong>建議嚴格控制倉位，密切追蹤出口管制審查進展，任何負面訊號應優先考慮減碼；<strong>未持有者：</strong>不建議現階段以核心池或戰術池邏輯建立部位，若堅持參與AI伺服器題材，建議優先考慮Dell等治理紀錄更穩固的替代標的，SMCI僅適合能承受歸零風險的機會池極小倉位。</p></div>
+</div>
+
+<div id="mode3" class="mode-divider"><h2>◈ 模式三：財務風險健檢</h2></div>
+<div id="ratios" class="section">
+  <div class="section-header"><div class="section-num">10</div><div class="section-title">六大比率診斷</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>1. 淨負債</h3><div class="big-num" style="color:var(--red)">$7.5B⚠️</div><div class="big-label">近期攀升，工作資本需求驅動</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:65%"></div></div></div>
+    <div class="card"><h3>2. D/E比率</h3><div class="big-num" style="color:var(--red)">69.8%⚠️</div><div class="big-label">槓桿較歷史明顯攀升</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:65%"></div></div></div>
+    <div class="card"><h3>3. 毛利率穩定性</h3><div class="big-num" style="color:var(--red)">10-18%⚠️</div><div class="big-label">本次31檔清單波動最劇烈</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:70%"></div></div></div>
+    <div class="card"><h3>4. 公司治理事件次數</h3><div class="big-num" style="color:var(--red)">3次以上❌</div><div class="big-label">2020/2024/2026年多次復發</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:85%"></div></div></div>
+    <div class="card"><h3>5. 分析師評等分歧度</h3><div class="big-num" style="color:var(--gold)">Neutral⚠️</div><div class="big-label">5 Buy/3 Sell，本次31檔分歧最大</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:60%"></div></div></div>
+    <div class="card"><h3>6. 財報可信度</h3><div class="big-num" style="color:var(--red)">存疑❌</div><div class="big-label">公司自承過去數字可能因審查而調整</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:80%"></div></div></div>
+  </div>
+</div>
+<div id="health" class="section">
+  <div class="section-header"><div class="section-num">11</div><div class="section-title">財務體質綜合診斷</div></div>
+  <div class="card" style="display:flex; align-items:center; gap:24px;"><div class="health-badge health-c">C</div><div><p style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px;">財務體質評等：C（本次31檔清單中風險最高者，公司治理疑慮凌駕於財務數字本身）</p><p style="font-size:13px; color:var(--text2); line-height:1.7">即便營收/訂單數字表面亮眼，槓桿攀升、毛利率極端波動，加上持續復發的公司治理爭議與現正進行的出口管制獨立審查，使本檔財務體質評等必須維持在最低檔，且是唯一一檔投資人需要對「財報數字本身是否可信」抱持根本疑慮的個股。</p></div></div>
+</div>
+
+<div id="final" class="section">
+  <div class="section-header"><div class="section-num">12</div><div class="section-title">綜合總結</div></div>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis成立度</div><div class="s-val">2.2/5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-val">⭐☆☆☆☆</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-val" style="font-size:13px;">高風險事件驅動型題材股</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-val">C</div></div>
+    <div class="summary-card"><div class="s-label">現價/共識目標價</div><div class="s-val" style="font-size:13px;">$36.85/$42.38</div></div>
+  </div>
+  <div class="action-box"><h3>✅最終操作建議</h3><p style="font-size:13px; line-height:1.8; color:var(--text)"><strong>已持有者：</strong>建議嚴格控制倉位規模，密切追蹤出口管制獨立審查進展，此為本次31檔清單中唯一存在「財報數字本身可信度」疑慮的個股，任何負面訊號應優先考慮減碼而非加碼。<strong>未持有者：</strong>不建議以核心池或戰術池邏輯建立部位，若堅持參與AI伺服器組裝這個利基題材，建議優先考慮公司治理紀錄更穩固的Dell等替代標的。<strong>核心催化劑：</strong>①出口管制獨立審查結果②毛利率能否穩定在15%以上③是否再度出現審計師異動或財報延遲揭露④與Dell/HPE的市佔競爭態勢。</p></div>
+</div>
+
+</div>
+<footer><p>資料來源：Super Micro Computer IR（Q4 FY2026 8-K）、SEC EDGAR、stockanalysis.com、MacroTrends、Hindenburg Research、The Motley Fool、24/7 Wall St.、其他公開財經媒體報導<br>✅已驗證　⚠️估算/近似值或資料源分歧　❌無法取得或存在重大不確定性，禁止臆測填入<br>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p></footer>
+</body>
+</html>

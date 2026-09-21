@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜COHR Coherent Corp 2026-09-16</title>
+<style>
+  :root { --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6; --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca; --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c; --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+  .ok { color: var(--green); } .warn { color: var(--gold); } .bad { color: var(--red); }
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); } .scenario.base { border-top: 3px solid var(--blue); } .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); } .scenario.base h4 { color: var(--blue); } .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+  .comp-now { background: rgba(79,70,229,0.05); } .comp-now td { font-weight: 700; }
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); } .bar-yellow { background: var(--gold); } .bar-red { background: var(--red); }
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--accent); }
+  @media (max-width: 900px) { .summary-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 720px) { .scenario-row { grid-template-columns: 1fr; } .moat-grid { grid-template-columns: repeat(2,1fr); } .hero-price-block { text-align:left; } }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">COHR</div>
+      <div class="hero-name">Coherent Corp.（光學元件/雷射大廠，AI資料中心光收發器(800G/1.6T)與CPO共同封裝光學核心供應商，Nvidia策略投資$2B並建立多年期非獨家合作關係）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-09-16　資料基準：2026-09收盤　財年制：FY結束於6月底</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$271.17</div>
+      <div class="hero-mktcap">市值 ≈$53.3B</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-purple">FY26營收$7.12B，YoY+22.5%</span>
+    <span class="badge badge-blue">Q4'26資料中心營收+59%達總營收79%</span>
+    <span class="badge badge-green">Nvidia策略投資$2B+多年非獨家合作</span>
+    <span class="badge badge-orange">CPO潛在市場(SAM)上修至$15B</span>
+    <span class="badge badge-yellow">訂單能見度已排到2028年</span>
+    <span class="badge badge-red">股價自52週高點$440回落38%，客戶集中度風險⚠️</span>
+    <span class="badge badge-teal">Buy 23位，共識目標價$415.36(+52.7%)</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$271.17</div><div class="sub">✅ 52週$84.35–$440.00</div></div>
+    <div class="meta-item"><label>FY26營收</label><div class="val">$7.12B</div><div class="sub">YoY+22.5% ✅</div></div>
+    <div class="meta-item"><label>FY26 Non-GAAP EPS</label><div class="val">$5.61</div><div class="sub">FY25為$3.53 ✅</div></div>
+    <div class="meta-item"><label>PE(TTM)/Fwd PE</label><div class="val">66.03/28.89</div><div class="sub">Fwd反映獲利加速預期 ✅</div></div>
+    <div class="meta-item"><label>Thesis成立度</label><div class="val">3.9/5</div><div class="sub">AI光通訊需求強勁，客戶集中度是最大變數</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐⭐☆☆</div><div class="sub">InP雷射材料技術領先，惟光通訊元件業競爭激烈</div></div>
+  </div>
+</div>
+
+<nav class="toc"><div class="toc-inner">
+  <a href="#mode1">模式一深度研究</a><span class="toc-sep">·</span><a href="#biz">業務引擎</a><a href="#thesis">核心Thesis</a><a href="#competition">競爭格局</a><a href="#moat">成長象限</a>
+  <span class="toc-sep">·</span><a href="#mode2">模式二財報解析</a><span class="toc-sep">·</span><a href="#earnings">Q4財報</a><a href="#eps">EPS錨點</a><a href="#dcf">DCF情境</a><a href="#targets">投行目標</a>
+  <span class="toc-sep">·</span><a href="#mode3">模式三財務健檢</a><span class="toc-sep">·</span><a href="#ratios">六大比率</a><a href="#health">綜合診斷</a>
+  <span class="toc-sep">·</span><a href="#final">綜合總結</a>
+</div></nav>
+
+<div class="container">
+
+<div id="mode1" class="mode-divider"><h2>◈ 模式一：公司深度研究</h2><p>業務引擎 · 核心Thesis · 競爭格局 · 成長象限 · 護城河評分</p></div>
+
+<div class="section">
+  <div class="section-header"><div class="section-num">1</div><div class="section-title">公司基本介紹</div></div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">Coherent（NYSE: COHR）市值≈$53.3B，是全球領先的光學元件/雷射廠商，核心成長引擎為<strong>AI資料中心光收發器（800G/1.6T）與共同封裝光學（CPO）</strong>。2026年3月Nvidia宣布投資$2B取得Coherent普通股，並建立<strong>非獨家</strong>多年期策略合作（涵蓋光學技術開發、採購承諾與產能取用），是繼Intel（Nvidia $5B）之後，Nvidia又一筆對供應鏈夥伴的策略性股權投資。資料中心與通訊業務Q4'26營收+59%，已佔總營收79%，是公司轉型為「AI基礎設施光學核心供應商」的關鍵證據。✅</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽（FY2026，最近完整財年）✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$7.12B</div><div class="big-label">FY26營收</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">+22.5% YoY</div><div class="big-label">（FY25：$5.81B）</div></div>
+        <div><div class="big-num" style="font-size:22px;">Q4創紀錄$2.05B</div><div class="big-label">QoQ+13%/YoY+34%</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">Non-GAAP EPS $5.61</div><div class="big-label">FY25為$3.53，+59%</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="tbl-wrap">
+    <table><thead><tr><th>財務摘要</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">FY2026</th></tr></thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$5.16B✅</td><td class="num">~$4.71B⚠️（推估）</td><td class="num ok">$5.81B✅（+23.4%）</td><td class="num ok">$7.12B✅（+22.5%）</td></tr>
+        <tr><td>GAAP淨利/EPS</td><td class="num bad">-$259M/-$2.93✅（虧損）</td><td class="num">— ⚠️</td><td class="num bad">GAAP EPS -$0.52✅（仍虧損）</td><td class="num">— ⚠️</td></tr>
+        <tr><td>Non-GAAP EPS</td><td class="num">— ⚠️</td><td class="num">~$1.21⚠️（推估）</td><td class="num ok">$3.53✅（+191%）</td><td class="num ok">$5.61✅（+59%）</td></tr>
+        <tr><td>OCF</td><td class="num">— ⚠️</td><td class="num">$546M✅</td><td class="num ok">$634M✅</td><td class="num">— ⚠️</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅已驗證（來源：Coherent IR/10-K、MacroTrends）｜⚠️ 公司FY2025仍呈現GAAP淨損（-$0.52/股），惟Non-GAAP獲利大幅成長（+191%），差異主因併購相關攤銷費用（Coherent Inc.與II-VI於2022年合併）持續侵蝕GAAP數字，投資人應以Non-GAAP EPS作為核心經營表現的參考基礎。</p>
+</div>
+
+<div id="biz" class="section">
+  <div class="section-header"><div class="section-num">2</div><div class="section-title">業務引擎分析</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>📡 800G/1.6T光收發器（核心成長引擎）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">6吋磷化銦(InP)產能提前擴增一倍，Q4雷射產出年增80%支援800G/1.6T收發器出貨，訂單能見度已延伸至2028年。✅</p></div>
+    <div class="card"><h3>🔌 CPO共同封裝光學（下一階段成長曲線）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">CPO潛在市場(SAM)於2026年OFC展會上修至$15B。Scale-out應用CPO營收預計2026年下半年開始貢獻，Scale-up應用CPO營收則要到2027年下半年才開始。與Nvidia矽光子交換器技術合作是此業務的核心驗證來源。✅</p></div>
+    <div class="card"><h3>🔬 雷射/材料科學（成熟業務基礎）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">工業雷射、感測、特殊材料等傳統業務提供基礎現金流，惟成長動能已明顯讓位給AI資料中心光學業務。✅</p></div>
+    <div class="card"><h3>🤝 Nvidia策略投資與合作（催化劑與風險並存）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">Nvidia投資$2B並建立非獨家多年合作，提供強力背書與訂單能見度，惟同時也是本檔最大的客戶集中度風險來源——2026年已有兩家客戶佔營收逾10%，市場普遍認為其中之一與Nvidia生態系高度相關。✅⚠️</p></div>
+  </div>
+</div>
+
+<div id="thesis" class="section">
+  <div class="section-header"><div class="section-num">3</div><div class="section-title">核心Thesis與未來成長驅動</div></div>
+  <div class="thesis-grid">
+    <div class="thesis-card"><div class="thesis-status ok">✅ 成立</div><div class="label">Thesis 1｜AI資料中心光通訊需求是實質營收爆發</div><div class="content">資料中心/通訊營收Q4'26 +59%已佔總營收79%，訂單能見度排到2028年，是實際財報數字而非題材。✅ 成立。</div></div>
+    <div class="thesis-card"><div class="thesis-status ok">✅ 成立</div><div class="label">Thesis 2｜Nvidia策略投資提供技術與訂單雙重背書</div><div class="content">$2B股權投資+CPO技術合作，雖為非獨家安排，但顯示Nvidia對Coherent光學能力的高度認可，是CPO SAM能上修至$15B的信心來源。✅ 成立。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div><div class="label">Thesis 3｜FCF能跟上獲利與營收的成長速度</div><div class="content">FY2025 FCF僅$0.193B（較FY2024的$0.199B還略降3.09%），遠不成比例於營收/EPS的高速成長，反映公司正處於資本支出高峰期（InP產能擴增等），現金轉換效率仍待改善。⚠️ 部分成立，是判斷獲利品質的重要觀察點。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--red)">❌ 需高度警惕</div><div class="label">Thesis 4｜客戶集中度風險可控</div><div class="content">2026年已有兩家客戶合計貢獻營收逾10%，且產業普遍認知Coherent的AI光學業務高度綁定Nvidia生態系的架構迭代節奏——Nvidia架構更新速度異常快，任何規格轉換都可能造成訂單波動。雖然雙方合作為非獨家性質提供一定緩衝，但集中度風險本質未消除。❌ 需高度警惕，是本檔最大不確定性來源。</div></div>
+  </div>
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)"><h3>🚀核心成長驅動力</h3><ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)"><li>Scale-out CPO營收2026下半年起貢獻</li><li>1.6T收發器持續放量</li><li>InP產能持續擴增支援訂單能見度</li></ul></div>
+    <div class="card" style="border-left:3px solid var(--red)"><h3>⚠️核心監控風險</h3><ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)"><li>客戶集中度風險兌現，觸發：任一大客戶架構轉換導致訂單驟降</li><li>FCF持續無法跟上獲利成長，觸發：連續兩季FCF margin未見改善</li><li>Lumentum等競爭對手份額侵蝕，觸發：毛利率連續下滑</li></ul></div>
+  </div>
+</div>
+
+<div id="competition" class="section">
+  <div class="section-header"><div class="section-num">4</div><div class="section-title">競爭格局</div></div>
+  <div class="tbl-wrap">
+    <table><thead><tr><th>公司</th><th>現況</th><th>對COHR威脅度</th></tr></thead>
+      <tbody>
+        <tr><td>Lumentum（LITE）</td><td>創紀錄營收、利潤率擴張、OCS(光電路交換)積壓訂單逾$400M，部分分析指出正「拉開差距」領先Coherent</td><td>🔴 高｜本組同族群最直接競爭者，近期動能略勝一籌</td></tr>
+        <tr><td>IPG Photonics／MKS Instruments／Novanta／nLight</td><td>雷射與光學元件領域傳統競爭者，各有利基市場</td><td>🟡 中｜傳統工業雷射業務的競爭壓力，非AI資料中心核心戰場</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="caution-box" style="margin-top:16px;"><h3>⚠️ 競爭關鍵監控：Lumentum近期動能略勝Coherent，非COHR獨占AI光通訊紅利</h3><p style="font-size:13px; line-height:1.7; color:var(--text)">外部分析明確指出Lumentum在利潤率擴張與訂單能見度方面正拉開與Coherent的差距，顯示AI資料中心光通訊這塊大餅雖持續成長，但COHR並非唯一或必然的最大受惠者，需要橫向比較兩者的毛利率與訂單品質趨勢，而非僅看COHR自身的成長率數字。</p></div>
+</div>
+
+<div id="moat" class="section">
+  <div class="section-header"><div class="section-num">5</div><div class="section-title">Peter Lynch成長象限&護城河評分</div></div>
+  <div class="card-grid"><div class="card" style="border:2px solid var(--purple);"><h3 style="color:var(--purple)">📊 Lynch象限判斷</h3><div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">快速成長股，惟FCF轉換效率與客戶集中度是待驗證的軟肋</div><p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 COHR具備快速成長股的營收/EPS雙位數甚至更高的成長率特徵，惟FCF成長明顯落後於獲利成長（FY25 FCF僅$0.193B，反觀EPS成長191%），加上客戶集中度風險，使其護城河與獲利品質的「含金量」需要更審慎評估，不宜僅憑亮眼的營收/EPS數字直接類比NVDA/ASML等現金流體質更佳的成長股。</p></div></div>
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item"><div class="moat-label">不可替代性</div><div class="moat-stars">★★★☆☆</div><div class="moat-score">3.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">InP雷射技術具優勢，惟非唯一供應商</div></div>
+    <div class="moat-item"><div class="moat-label">客戶黏著度</div><div class="moat-stars">★★★☆☆</div><div class="moat-score">3.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">Nvidia合作提供黏著度，惟非獨家性質使黏著度有限</div></div>
+    <div class="moat-item"><div class="moat-label">網路效應</div><div class="moat-stars">★☆☆☆☆</div><div class="moat-score">1.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">光學元件製造不具網路效應</div></div>
+    <div class="moat-item"><div class="moat-label">成本優勢</div><div class="moat-stars">★★★☆☆</div><div class="moat-score">3.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">InP產能規模提供一定成本優勢</div></div>
+    <div class="moat-item"><div class="moat-label">規模效應</div><div class="moat-stars">★★★☆☆</div><div class="moat-score">3.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">光學元件業界主要廠商之一，惟規模不及半導體巨頭</div></div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：2.6/5 ⭐⭐⭐☆☆（技術領先具一定優勢，惟光通訊元件業競爭激烈、客戶集中度使護城河評分中等）</div>
+  <div class="caution-box" style="margin-top:24px;"><h3>⚠️建議動作</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+    <div><strong>當前建議：</strong>可作為戰術池或核心池衛星部位參與AI光通訊成長故事，惟因FCF轉換效率待改善與客戶集中度風險，不建議重壓。<br><br><strong>加碼觸發：</strong><ul style="padding-left:16px;"><li>FCF margin連續兩季明顯改善</li><li>Scale-out CPO營收具體規模化揭露</li></ul></div>
+    <div><strong>賣出/迴避觸發：</strong><ul style="padding-left:16px;"><li>主要客戶架構轉換導致訂單驟降</li><li>Lumentum等競爭對手持續搶占份額，COHR毛利率連續下滑</li></ul><br><strong>每季監控：</strong>資料中心營收佔比、FCF趨勢、CPO SAM兌現進度、客戶集中度變化</div>
+  </div></div>
+</div>
+
+<div id="mode2" class="mode-divider"><h2>◈ 模式二：最新財報解析</h2></div>
+<div id="earnings" class="section">
+  <div class="section-header"><div class="section-num">6</div><div class="section-title">Q4 FY2026財報（2026-08-12/19發布）</div></div>
+  <div class="card" style="border-left:3px solid var(--green); margin-bottom:20px;"><h3 style="color:var(--green)">✅ 營收創紀錄，管理層目標FY2027單季破$30億</h3><p style="font-size:13px; line-height:1.7; color:var(--text)">Q4營收創紀錄$2.05B（QoQ+13%，YoY+34%），Non-GAAP EPS $1.74（YoY+74%）。資料中心與通訊營收YoY+59%達總營收79%。Q1 FY2027 guidance營收$2.2-2.4B、Non-GAAP EPS $1.85-2.05。管理層目標FY2027財年底前達成單季營收突破$30億，且EPS成長速度將持續快於營收。✅</p></div>
+  <div class="tbl-wrap"><table><thead><tr><th>指標</th><th class="num">實際值✅</th><th class="num">YoY/QoQ</th><th>判定</th></tr></thead>
+    <tbody>
+      <tr><td>營收</td><td class="num ok">$2.05B</td><td class="num ok">+34%YoY/+13%QoQ</td><td><span class="badge badge-green">創紀錄✅</span></td></tr>
+      <tr><td>Non-GAAP EPS</td><td class="num ok">$1.74</td><td class="num ok">+74%YoY</td><td><span class="badge badge-green">大幅成長✅</span></td></tr>
+      <tr><td>資料中心/通訊營收</td><td class="num ok">佔79%</td><td class="num ok">+59%YoY</td><td><span class="badge badge-green">結構轉型明確✅</span></td></tr>
+      <tr><td>Q1'27 guidance營收</td><td class="num ok">$2.2-2.4B</td><td class="num">— ⚠️</td><td><span class="badge badge-green">續創新高✅</span></td></tr>
+      <tr><td>FY27目標</td><td class="num ok">單季破$3B</td><td class="num">— ⚠️</td><td><span class="badge badge-green">積極guidance✅</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<div id="eps" class="section">
+  <div class="section-header"><div class="section-num">7</div><div class="section-title">估值歷史錨點</div></div>
+  <p style="font-size:12px; color:var(--text2); margin-bottom:12px;">FY2023 GAAP虧損-$2.93/股（併購整合期）→FY2025 Non-GAAP EPS $3.53（+191%）→FY2026 $5.61（+59%），呈現併購後獲利品質快速修復並加速的軌跡。</p>
+  <div class="risk-card" style="margin-top:12px; background:#fef2f2; border:1px solid rgba(220,38,38,0.2); border-radius:8px; padding:14px 16px;"><h4 style="color:var(--red); font-size:13px;">📌 股價已自高點回落38%，反映市場對客戶集中度疑慮的定價</h4><p style="font-size:13px; line-height:1.8; color:var(--text)">COHR股價曾於52週高點觸及$440，目前$271.17已回落約38%，即便財報數字持續優於預期，顯示市場正逐步將「客戶集中度」與「FCF轉換效率待改善」這兩項疑慮反映進股價，Forward PE 28.89倍相對其獲利成長速度（+59%）而言並不算貴，惟這個折價某種程度是合理的風險溢價，而非純粹錯殺。</p></div>
+</div>
+
+<div id="dcf" class="section">
+  <div class="section-header"><div class="section-num">8</div><div class="section-title">④ 三情境DCF估值</div></div>
+  <div class="caution-box"><h3>⚠️ 方法論說明</h3><p style="font-size:13px; color:var(--text)">⚠️採用分析師目標價區間法，非自製精確模型。52週區間($84.35-$440.00)反映市場對客戶集中度風險的巨大分歧。</p></div>
+  <div class="scenario-row">
+    <div class="scenario bear"><h4>🐻熊市（25%）</h4><div class="scenario-price" style="color:var(--red)">$150</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$271.17　-44.7%</div><div class="row"><span>假設</span><span>主要客戶架構轉換導致訂單驟降，FCF未見改善</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：客戶集中度風險兌現</div></div>
+    <div class="scenario base"><h4>📊基準（45%）</h4><div class="scenario-price" style="color:var(--blue)">$350-400</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$271.17　+29.1%~+47.5%</div><div class="row"><span>假設</span><span>guidance如期兌現，CPO Scale-out如期貢獻</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：貼近共識均值$415.36</div></div>
+    <div class="scenario bull"><h4>🐂牛市（30%）</h4><div class="scenario-price" style="color:var(--green)">$440</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$271.17　+62.2%</div><div class="row"><span>假設</span><span>CPO SAM持續上修，FCF轉換效率明顯改善</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：重返52週高點區間</div></div>
+  </div>
+  <div class="card" style="border-left:3px solid var(--accent);"><h3>敏感度分析</h3><p style="font-size:13px; color:var(--text); line-height:1.7">三情境價差近3倍，核心變數是客戶集中度風險的兌現與否。共識均值$415.36隱含52.7%上行空間，惟考量FCF體質與Lumentum的競爭壓力，本報告建議以基準情境區間下緣作為較保守的參考。</p></div>
+</div>
+
+<div id="targets" class="section">
+  <div class="section-header"><div class="section-num">9</div><div class="section-title">投行目標價與操作建議</div></div>
+  <div class="tbl-wrap"><table><thead><tr><th>機構/來源</th><th>評等</th><th class="num">目標價</th></tr></thead>
+    <tbody><tr><td>共識彙整（23位分析師）</td><td><span class="badge badge-green">Buy</span></td><td class="num">均值$415.36✅（+52.69%）</td></tr></tbody>
+  </table></div>
+  <div class="action-box" style="margin-top:16px;"><h3>✅最終操作建議</h3><p style="font-size:13px; line-height:1.8; color:var(--text)">現價$271.17相對共識目標價$415.36有約53%上行空間，惟股價已自高點回落38%反映市場疑慮。<strong>已持有者：</strong>續抱但控制倉位，密切追蹤FCF與客戶集中度變化；<strong>未持有者：</strong>可分批小倉位參與，建議與GLW/ANET搭配配置分散單一光通訊個股風險，不宜單押COHR作為光通訊核心部位。</p></div>
+</div>
+
+<div id="mode3" class="mode-divider"><h2>◈ 模式三：財務風險健檢</h2></div>
+<div id="ratios" class="section">
+  <div class="section-header"><div class="section-num">10</div><div class="section-title">六大比率診斷</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>1. 總債務</h3><div class="big-num" style="color:var(--gold)">~$4.1B⚠️</div><div class="big-label">併購(II-VI合併)後遺留槓桿</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:55%"></div></div></div>
+    <div class="card"><h3>2. FCF Margin</h3><div class="big-num" style="color:var(--gold)">偏低⚠️</div><div class="big-label">FY25 FCF $0.193B／營收$5.81B，僅約3.3%</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:35%"></div></div></div>
+    <div class="card"><h3>3. 資料中心營收佔比</h3><div class="big-num" style="color:var(--green)">79%✅</div><div class="big-label">Q4'26，YoY+59%</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:80%"></div></div></div>
+    <div class="card"><h3>4. 客戶集中度</h3><div class="big-num" style="color:var(--gold)">高⚠️</div><div class="big-label">2大客戶合計逾10%營收</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:60%"></div></div></div>
+    <div class="card"><h3>5. GAAP vs Non-GAAP落差</h3><div class="big-num" style="color:var(--gold)">大⚠️</div><div class="big-label">GAAP仍虧損，Non-GAAP大幅獲利</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:50%"></div></div></div>
+    <div class="card"><h3>6. 訂單能見度</h3><div class="big-num" style="color:var(--green)">至2028年✅</div><div class="big-label">創紀錄積壓訂單</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:75%"></div></div></div>
+  </div>
+</div>
+<div id="health" class="section">
+  <div class="section-header"><div class="section-num">11</div><div class="section-title">財務體質綜合診斷</div></div>
+  <div class="card" style="display:flex; align-items:center; gap:24px;"><div class="health-badge health-b">B</div><div><p style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px;">財務體質評等：B（營收/獲利成長強勁，惟FCF轉換效率與槓桿水準拉低整體評等）</p><p style="font-size:13px; color:var(--text2); line-height:1.7">併購遺留的槓桿與資本支出高峰期的FCF偏低，是COHR財務體質不及NVDA/ASML等現金流機器的主因，惟訂單能見度與獲利成長速度仍屬正面。</p></div></div>
+</div>
+
+<div id="final" class="section">
+  <div class="section-header"><div class="section-num">12</div><div class="section-title">綜合總結</div></div>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis成立度</div><div class="s-val">3.9/5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-val">⭐⭐⭐☆☆</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-val" style="font-size:13px;">快速成長股</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-val">B</div></div>
+    <div class="summary-card"><div class="s-label">現價/共識目標價</div><div class="s-val" style="font-size:13px;">$271.17/$415.36</div></div>
+  </div>
+  <div class="action-box"><h3>✅最終操作建議</h3><p style="font-size:13px; line-height:1.8; color:var(--text)"><strong>已持有者：</strong>續抱但控制倉位，AI光通訊需求趨勢明確，惟FCF與客戶集中度是需要持續驗證的軟肋。<strong>未持有者：</strong>可分批小倉位參與，建議與同組GLW/ANET搭配配置以分散單一光通訊個股風險。<strong>核心催化劑：</strong>①Scale-out CPO營收貢獻進度②FCF margin能否改善③客戶集中度是否進一步分散④與Lumentum的競爭態勢變化。</p></div>
+</div>
+
+</div>
+<footer><p>資料來源：Coherent IR（Q4 FY2026 8-K/10-K）、SEC EDGAR、stockanalysis.com、MacroTrends、Futurum、24/7 Wall St.、NVIDIA Newsroom、其他公開財經媒體報導<br>✅已驗證　⚠️估算/近似值或資料源分歧　❌無法取得，禁止臆測填入<br>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p></footer>
+</body>
+</html>
