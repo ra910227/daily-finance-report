@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜OKLO Oklo Inc. 2026-09-16</title>
+<style>
+  :root { --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6; --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca; --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c; --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-change { font-size: 16px; color: var(--red); margin-top: 4px; }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+  .ok { color: var(--green); } .warn { color: var(--gold); } .bad { color: var(--red); }
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); } .scenario.base { border-top: 3px solid var(--blue); } .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); } .scenario.base h4 { color: var(--blue); } .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+  .comp-now { background: rgba(79,70,229,0.05); } .comp-now td { font-weight: 700; }
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); } .bar-yellow { background: var(--gold); } .bar-red { background: var(--red); }
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--accent); }
+  @media (max-width: 900px) { .summary-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 720px) { .scenario-row { grid-template-columns: 1fr; } .moat-grid { grid-template-columns: repeat(2,1fr); } .hero-price-block { text-align:left; } }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">OKLO</div>
+      <div class="hero-name">Oklo Inc.（小型模組化反應爐(SMR)開發商，採「自建自營自售電」商業模式，Aurora反應爐已與Meta簽署1.2GW供電承諾，惟仍處於近乎零營收的前商轉階段）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-09-16　資料基準：2026-09-20收盤</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$38.12</div>
+      <div class="hero-change">2026年迄今股價重挫約50%</div>
+      <div class="hero-mktcap">市值 ≈$7.07B</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-purple">Groves反應爐8月達成臨界，重大技術里程碑</span>
+    <span class="badge badge-blue">與Meta簽署1.2GW Aurora供電承諾(俄亥俄)</span>
+    <span class="badge badge-green">DOE已核准Aurora-INL安全分析</span>
+    <span class="badge badge-orange">Q2'26營收僅$1.2M，仍近乎零營收</span>
+    <span class="badge badge-red">⚠️9/11宣布最高$10億ATM增發，股價應聲下跌</span>
+    <span class="badge badge-yellow">現金$30億但年化燒錢加速(營運現金用量上修至$1.2-1.5億)</span>
+    <span class="badge badge-teal">Buy 16/17，共識目標價$78.69(隱含+106%)</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$38.12</div><div class="sub">✅ 近52週低點附近</div></div>
+    <div class="meta-item"><label>Q2'26營收</label><div class="val">$1.2M</div><div class="sub">優於預期1332%但絕對值極小 ✅</div></div>
+    <div class="meta-item"><label>Q2'26 EPS</label><div class="val">-$0.28</div><div class="sub">Miss預期-$0.16 ✅</div></div>
+    <div class="meta-item"><label>PE(TTM)</label><div class="val">-40.43x</div><div class="sub">虧損中，PE不具意義</div></div>
+    <div class="meta-item"><label>Thesis成立度</label><div class="val">2.8/5</div><div class="sub">技術里程碑真實，惟商轉時程長且稀釋風險持續</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐☆☆☆</div><div class="sub">先行者優勢+獨特商業模式，惟尚無營運實績驗證</div></div>
+  </div>
+</div>
+
+<nav class="toc"><div class="toc-inner">
+  <a href="#mode1">模式一深度研究</a><span class="toc-sep">·</span><a href="#biz">業務引擎</a><a href="#thesis">核心Thesis</a><a href="#competition">競爭格局</a><a href="#moat">成長象限</a>
+  <span class="toc-sep">·</span><a href="#mode2">模式二財報解析</a><span class="toc-sep">·</span><a href="#earnings">Q2財報</a><a href="#eps">估值錨點</a><a href="#dcf">DCF情境</a><a href="#targets">投行目標</a>
+  <span class="toc-sep">·</span><a href="#mode3">模式三財務健檢</a><span class="toc-sep">·</span><a href="#ratios">六大比率</a><a href="#health">綜合診斷</a>
+  <span class="toc-sep">·</span><a href="#final">綜合總結</a>
+</div></nav>
+
+<div class="container">
+
+<div id="mode1" class="mode-divider"><h2>◈ 模式一：公司深度研究</h2><p>業務引擎 · 核心Thesis · 競爭格局 · 成長象限 · 護城河評分</p></div>
+
+<div class="section">
+  <div class="section-header"><div class="section-num">1</div><div class="section-title">公司基本介紹</div></div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">Oklo（NYSE: OKLO）市值≈$7.07B，是小型模組化反應爐(SMR)開發商，採取與同業截然不同的<strong>「自建、自營、自售電」（Build-Own-Operate）</strong>商業模式——不同於NuScale等公司「設計授權售予電廠業者」的模式，Oklo打算自行興建Aurora快中子反應爐並直接向客戶（如資料中心）銷售電力，本質上是想成為新型態的獨立電力生產商(IPP)。2026年8月，公司的Groves反應爐達成臨界（核反應鏈式反應成功啟動），是SMR產業罕見的實質技術驗證里程碑；已與Meta簽署俄亥俄州1.2GW Aurora供電承諾。惟公司目前仍處於近乎零營收的前商轉階段，2026年迄今股價已重挫約50%。✅</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽（Q2 2026，最新單季）✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$1.2M</div><div class="big-label">Q2'26營收，優於預期1332%但絕對值極小</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--red)">EPS -$0.28</div><div class="big-label">Miss預期-$0.16</div></div>
+        <div><div class="big-num" style="font-size:22px;">現金$30億</div><div class="big-label">含2026年ATM增發$19億</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--red)">YTD淨損$8,160萬</div><div class="big-label">燒錢速度持續加快</div></div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅已驗證（來源：Oklo IR/8-K、Motley Fool、Foreign Policy Journal）｜這是本次31檔清單中唯一近乎零營收、完全依賴股權融資支撐營運的「pre-revenue」公司，財務體質評估框架與其他30檔有本質性差異，不宜套用一般的EPS/PE分析方法。</p>
+</div>
+
+<div id="biz" class="section">
+  <div class="section-header"><div class="section-num">2</div><div class="section-title">業務引擎分析</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>⚛️ Aurora-INL（首座商轉標的，核心進度）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">DOE已核准Aurora-INL的安全分析，目標2028年商轉。這是公司最接近商轉的計畫，2028年商轉時程若能維持，將是驗證「自建自營」商業模式的首個實績。✅</p></div>
+    <div class="card"><h3>🔬 Groves反應爐臨界（重大技術驗證）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">2026年8月達成臨界，證明公司的反應爐設計確實能啟動核反應鏈式反應，是SMR新創公司中少數具備實質技術驗證的案例，惟距離商業化發電仍有相當距離。✅</p></div>
+    <div class="card"><h3>🤝 Meta 1.2GW Aurora供電承諾（俄亥俄）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">與VST/CEG等傳統電力商的PPA性質不同，Oklo與Meta的合約是基於尚未商轉的反應爐產能，時程與執行風險遠高於已運轉核電廠的長約供電，惟仍是驗證「AI巨頭對SMR需求是真實的」的重要指標。✅</p></div>
+    <div class="card"><h3>☢️ 同位素業務（早期額外營收來源）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">首筆同位素營收預計2027年初從愛達荷州設施產生，是在主力發電業務商轉前，公司少數具備較短期營收可能性的業務線。⚠️</p></div>
+  </div>
+</div>
+
+<div id="thesis" class="section">
+  <div class="section-header"><div class="section-num">3</div><div class="section-title">核心Thesis與未來成長驅動</div></div>
+  <div class="thesis-grid">
+    <div class="thesis-card"><div class="thesis-status ok">✅ 成立</div><div class="label">Thesis 1｜核反應技術已獲實質驗證，非僅概念階段</div><div class="content">Groves反應爐達成臨界是可驗證的物理事實，DOE也已核准Aurora-INL的安全分析，顯示公司的技術路線已通過重要的監理與工程檢驗關卡，非停留在簡報階段的概念股。✅ 成立。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div><div class="label">Thesis 2｜AI巨頭對SMR的需求是真實且具體的</div><div class="content">Meta的1.2GW Aurora供電承諾提供具體佐證，惟需注意這是基於「尚未商轉」的產能承諾，與VST/CEG等公司已運轉核電廠的長約PPA性質不同，執行風險與時程不確定性遠高。⚠️ 部分成立。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--red)">❌ 需高度警惕</div><div class="label">Thesis 3｜現有現金部位足以支撐至商轉且不需持續稀釋股權</div><div class="content">公司2026年營運現金用量guidance已上修至$1.2-1.5億（原$0.8-1.0億）、CapEx guidance上修至$4-5億（原$3.5-4.5億），且9月11日宣布最高$10億的ATM增發計畫，股價應聲下跌至52週低點附近。這顯示即便現金部位達$30億，燒錢速度加快與持續稀釋股權的風險仍是股價的主要壓力來源。❌ 需高度警惕，是本檔最大的財務風險。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--red)">❌ 需持續驗證</div><div class="label">Thesis 4｜2028年商轉時程能如期兌現</div><div class="content">SMR產業歷史上普遍存在時程延遲的紀錄，即便DOE已核准安全分析，從核准到實際商轉之間仍有大量工程與監理變數，2028年時程能否兌現需要每季持續追蹤驗證，不宜提前假設必然如期。❌ 需持續驗證。</div></div>
+  </div>
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)"><h3>🚀核心成長驅動力</h3><ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)"><li>Aurora-INL商轉進度持續兌現</li><li>新增更多Hyperscaler供電承諾</li><li>同位素業務2027年初開始貢獻營收</li></ul></div>
+    <div class="card" style="border-left:3px solid var(--red)"><h3>⚠️核心監控風險</h3><ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)"><li>持續股權稀釋侵蝕每股價值，觸發：新增大規模增發計畫</li><li>商轉時程延遲，觸發：2028年目標時程出現官方延後公告</li><li>燒錢速度失控，觸發：現金消耗速度超越guidance且未見改善</li></ul></div>
+  </div>
+</div>
+
+<div id="competition" class="section">
+  <div class="section-header"><div class="section-num">4</div><div class="section-title">競爭格局</div></div>
+  <div class="tbl-wrap">
+    <table><thead><tr><th>公司</th><th>商業模式</th><th>監理進度</th><th>對OKLO威脅度</th></tr></thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Oklo（本案）</strong></td><td>自建自營自售電(IPP模式)</td><td>Aurora-INL已獲DOE安全分析核准</td><td>—</td></tr>
+        <tr><td>NuScale Power</td><td>設計授權售予電廠業者</td><td>唯一取得NRC完整設計認證的SMR(77MWe，2023年1月)</td><td>🟡 中｜監理領先但商業模式與Oklo定位不同，非直接零和競爭</td></tr>
+        <tr><td>X-energy</td><td>透過DOE示範計畫推進Xe-100</td><td>NRC targeting 18個月審查建照，可能2026年底取得</td><td>🟡 中｜同屬DOE支持的示範計畫，進度接近</td></tr>
+        <tr><td>TerraPower</td><td>大型Natrium電廠（8座，2.8GW）</td><td>與Hyperscaler簽署最大規模單一核能承諾之一</td><td>🟡 中｜規模更大，惟屬傳統大型電廠而非Oklo的小型分散式模式</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="caution-box" style="margin-top:16px;"><h3>⚠️ 競爭關鍵監控：SMR產業目前仍是「監理與工程進度賽跑」，非市佔率競爭</h3><p style="font-size:13px; line-height:1.7; color:var(--text)">SMR產業目前仍處於產業發展早期，各家公司的競爭焦點在於「誰能最快通過監理審查並實現商轉」，而非傳統意義上的市佔率爭奪——整體市場需求（AI資料中心用電）遠大於任何單一廠商的產能。Oklo在Groves反應爐臨界與DOE安全分析核准上取得先機，惟NuScale在正式監理認證上仍領先，需持續追蹤各家的商轉時程進展。</p></div>
+</div>
+
+<div id="moat" class="section">
+  <div class="section-header"><div class="section-num">5</div><div class="section-title">Peter Lynch成長象限&護城河評分</div></div>
+  <div class="card-grid"><div class="card" style="border:2px solid var(--purple);"><h3 style="color:var(--purple)">📊 Lynch象限判斷</h3><div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">早期題材股/轉機股前身，尚未進入可用傳統成長股框架評估的階段</div><p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 Oklo目前近乎零營收（Q2'26僅$1.2M）、持續虧損擴大且需仰賴股權融資支撐營運，本質上更接近早期生技/科技新創的估值邏輯，而非傳統Peter Lynch框架下的任何一種成長股類別。技術驗證（Groves臨界）與客戶承諾（Meta 1.2GW）是真實的正面進展，但距離「產生穩定現金流」仍有數年時間，投資人應將其視為高風險、高波動的「選擇權式」投資，而非可用DCF或本益比常規評估的標的。</p></div></div>
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item"><div class="moat-label">不可替代性</div><div class="moat-stars">★★★☆☆</div><div class="moat-score">3.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">Aurora技術與DOE合作關係具一定先行者優勢</div></div>
+    <div class="moat-item"><div class="moat-label">客戶黏著度</div><div class="moat-stars">★★☆☆☆</div><div class="moat-score">2.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">Meta承諾具體但尚未進入實際供電階段</div></div>
+    <div class="moat-item"><div class="moat-label">網路效應</div><div class="moat-stars">★☆☆☆☆</div><div class="moat-score">1.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">電力生產不具網路效應</div></div>
+    <div class="moat-item"><div class="moat-label">成本優勢</div><div class="moat-stars">★★☆☆☆</div><div class="moat-score">2.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">成本結構尚未經商轉驗證</div></div>
+    <div class="moat-item"><div class="moat-label">規模效應</div><div class="moat-stars">★★☆☆☆</div><div class="moat-score">2.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">規模效應尚待未來機組陸續商轉後驗證</div></div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：2.0/5 ⭐⭐☆☆☆（技術先行者優勢初步驗證，惟商業化實績仍付之闕如）</div>
+  <div class="caution-box" style="margin-top:24px;"><h3>⚠️建議動作</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+    <div><strong>當前建議：</strong>屬於高度投機性的早期題材股，僅建議以能承受大幅波動甚至歸零風險的<strong>機會池極小倉位</strong>參與，不建議按核心池或戰術池邏輯配置。<br><br><strong>加碼觸發：</strong><ul style="padding-left:16px;"><li>Aurora-INL商轉時程持續維持2028年目標無延遲</li><li>新增具體Hyperscaler供電承諾</li><li>股權融資需求明顯放緩</li></ul></div>
+    <div><strong>賣出/迴避觸發：</strong><ul style="padding-left:16px;"><li>2028年商轉時程出現官方延遲公告</li><li>現金消耗速度持續失控且需要更大規模增發</li><li>Meta等大客戶承諾出現變卦或延遲</li></ul><br><strong>每季監控：</strong>商轉時程進度、現金消耗速度與剩餘跑道、新增客戶承諾、股權稀釋幅度</div>
+  </div></div>
+</div>
+
+<div id="mode2" class="mode-divider"><h2>◈ 模式二：最新財報解析</h2></div>
+<div id="earnings" class="section">
+  <div class="section-header"><div class="section-num">6</div><div class="section-title">Q2 2026財報與近期動態</div></div>
+  <div class="card" style="border-left:3px solid var(--gold); margin-bottom:20px;"><h3 style="color:var(--gold)">⚠️ 技術里程碑正面，惟財務燒錢速度加快與增發計畫是股價重挫主因</h3><p style="font-size:13px; line-height:1.7; color:var(--text)">Q2營收$1.2M（優於預期1332%但絕對值仍極小），EPS -$0.28不及預期-$0.16。財報後股價一度上漲5.4%至$44.46，惟隨後公司於9月11日宣布最高$10億的ATM增發計畫，股價應聲重挫至52週低點附近的$38.12，2026年迄今累計跌幅約50%。公司同時上修2026年營運現金用量guidance至$1.2-1.5億（原$0.8-1.0億）與CapEx guidance至$4-5億（原$3.5-4.5億），反映加速專案進度但也意味更快的現金消耗。✅⚠️</p></div>
+  <div class="tbl-wrap"><table><thead><tr><th>指標</th><th class="num">實際值✅</th><th class="num">市場預期</th><th>判定</th></tr></thead>
+    <tbody>
+      <tr><td>營收</td><td class="num ok">$1.2M</td><td class="num">— ⚠️（優於預期1332%，惟基期極小）</td><td><span class="badge badge-yellow">數字亮眼但無實質意義⚠️</span></td></tr>
+      <tr><td>EPS</td><td class="num bad">-$0.28</td><td class="num">-$0.16</td><td><span class="badge badge-red">Miss❌</span></td></tr>
+      <tr><td>2026營運現金用量guidance</td><td class="num bad">$1.2-1.5億</td><td class="num">原$0.8-1.0億</td><td><span class="badge badge-red">上修，燒錢加速❌</span></td></tr>
+      <tr><td>ATM增發計畫</td><td class="num bad">最高$10億</td><td class="num">— ❌</td><td><span class="badge badge-red">股權稀釋風險升高❌</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<div id="eps" class="section">
+  <div class="section-header"><div class="section-num">7</div><div class="section-title">估值錨點說明</div></div>
+  <div class="risk-card" style="background:#fef2f2; border:1px solid rgba(220,38,38,0.2); border-radius:8px; padding:14px 16px;"><h4 style="color:var(--red); font-size:13px;">📌 傳統本益比/EPS歷史錨點分析不適用於OKLO</h4><p style="font-size:13px; line-height:1.8; color:var(--text)">由於OKLO近乎零營收且持續虧損，傳統的多年期EPS表與歷史本益比錨點分析在此不具意義（TTM PE -40.43倍本身即反映虧損狀態，非估值參考）。投資人評估OKLO應改用「里程碑達成進度＋現金跑道剩餘時間＋潛在市場規模」的框架，而非任何盈餘倍數方法。</p></div>
+</div>
+
+<div id="dcf" class="section">
+  <div class="section-header"><div class="section-num">8</div><div class="section-title">④ 三情境DCF估值</div></div>
+  <div class="caution-box"><h3>⚠️ 方法論說明</h3><p style="font-size:13px; color:var(--text)">⚠️採用分析師目標價區間法，OKLO近乎零營收且無正向現金流，傳統DCF模型完全不適用，情境本質上反映的是「商轉時程與里程碑兌現機率」的定性判斷。</p></div>
+  <div class="scenario-row">
+    <div class="scenario bear"><h4>🐻熊市（35%，需給最高機率）</h4><div class="scenario-price" style="color:var(--red)">$14</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$38.12　-63.3%</div><div class="row"><span>假設</span><span>商轉時程明顯延遲，需要更大規模稀釋性增發</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：2028年目標官方延後或現金跑道告急</div></div>
+    <div class="scenario base"><h4>📊基準（40%）</h4><div class="scenario-price" style="color:var(--blue)">$55-70</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$38.12　+44.3%~+83.6%</div><div class="row"><span>假設</span><span>Aurora-INL商轉時程維持2028年，無重大延遲</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：里程碑持續按guidance兌現</div></div>
+    <div class="scenario bull"><h4>🐂牛市（25%）</h4><div class="scenario-price" style="color:var(--green)">$130</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$38.12　+241.0%</div><div class="row"><span>假設</span><span>商轉提前、新增大型Hyperscaler客戶群</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：多重正面里程碑同步兌現</div></div>
+  </div>
+  <div class="card" style="border-left:3px solid var(--accent);"><h3>敏感度分析</h3><p style="font-size:13px; color:var(--text); line-height:1.7">三情境價差高達9.3倍，是本次31檔清單中波動幅度最極端者，完全反映「pre-revenue核能新創」的binary事件驅動本質。共識均值$78.69隱含106%上行空間，惟這個共識高度依賴「商轉時程如期兌現」這個尚未證實的假設，投資人須有承受大幅波動甚至情境失效的心理準備。</p></div>
+</div>
+
+<div id="targets" class="section">
+  <div class="section-header"><div class="section-num">9</div><div class="section-title">投行目標價與操作建議</div></div>
+  <div class="tbl-wrap"><table><thead><tr><th>機構/來源</th><th>評等</th><th class="num">目標價</th></tr></thead>
+    <tbody><tr><td>共識彙整（17位分析師）</td><td><span class="badge badge-green">Buy（16 Buy/1 Sell）</span></td><td class="num">均值$78.69✅，區間$14-$130✅</td></tr></tbody>
+  </table></div>
+  <div class="action-box" style="margin-top:16px;"><h3>✅最終操作建議</h3><p style="font-size:13px; line-height:1.8; color:var(--text)">現價$38.12相對共識目標價$78.69隱含約106%上行空間，惟這是本次31檔清單中風險最極端的個股之一。<strong>已持有者：</strong>建議嚴格控制倉位規模，密切追蹤商轉時程與增發計畫；<strong>未持有者：</strong>不建議以一般成長股邏輯建立部位，若堅持參與SMR核能新創題材，建議僅以機會池極小倉位、且做好長期持有並承受大幅波動的心理準備。</p></div>
+</div>
+
+<div id="mode3" class="mode-divider"><h2>◈ 模式三：財務風險健檢</h2></div>
+<div id="ratios" class="section">
+  <div class="section-header"><div class="section-num">10</div><div class="section-title">六大比率診斷</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>1. 現金部位</h3><div class="big-num" style="color:var(--green)">$30億✅</div><div class="big-label">含2026年ATM增發$19億</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:75%"></div></div></div>
+    <div class="card"><h3>2. 燒錢速度</h3><div class="big-num" style="color:var(--red)">加速中⚠️</div><div class="big-label">營運現金用量guidance上修至$1.2-1.5億</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:55%"></div></div></div>
+    <div class="card"><h3>3. 營收規模</h3><div class="big-num" style="color:var(--red)">近乎零❌</div><div class="big-label">Q2'26僅$1.2M</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:80%"></div></div></div>
+    <div class="card"><h3>4. 股權稀釋風險</h3><div class="big-num" style="color:var(--red)">高⚠️</div><div class="big-label">最高$10億ATM增發計畫</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:60%"></div></div></div>
+    <div class="card"><h3>5. 技術驗證進度</h3><div class="big-num" style="color:var(--green)">正面✅</div><div class="big-label">Groves反應爐已達臨界</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:65%"></div></div></div>
+    <div class="card"><h3>6. 客戶承諾具體度</h3><div class="big-num" style="color:var(--gold)">初步⚠️</div><div class="big-label">Meta 1.2GW承諾，惟基於未商轉產能</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:50%"></div></div></div>
+  </div>
+</div>
+<div id="health" class="section">
+  <div class="section-header"><div class="section-num">11</div><div class="section-title">財務體質綜合診斷</div></div>
+  <div class="card" style="display:flex; align-items:center; gap:24px;"><div class="health-badge health-c">C</div><div><p style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px;">財務體質評等：C（現金部位尚充裕，惟燒錢速度加快與持續增發是核心風險）</p><p style="font-size:13px; color:var(--text2); line-height:1.7">技術驗證進展正面，惟公司本質上仍是完全依賴股權市場融資的pre-revenue企業，財務體質評等反映這個高度不確定性的資本結構，而非傳統意義上的財務健康與否。</p></div></div>
+</div>
+
+<div id="final" class="section">
+  <div class="section-header"><div class="section-num">12</div><div class="section-title">綜合總結</div></div>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis成立度</div><div class="s-val">2.8/5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-val">⭐⭐☆☆☆</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-val" style="font-size:13px;">早期題材股(pre-revenue)</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-val">C</div></div>
+    <div class="summary-card"><div class="s-label">現價/共識目標價</div><div class="s-val" style="font-size:13px;">$38.12/$78.69</div></div>
+  </div>
+  <div class="action-box"><h3>✅最終操作建議</h3><p style="font-size:13px; line-height:1.8; color:var(--text)"><strong>已持有者：</strong>建議嚴格控制倉位規模，Groves反應爐臨界是真實的技術進展，惟燒錢加速與持續增發是近期股價重挫的主因，需持續觀察。<strong>未持有者：</strong>不建議以核心池或戰術池邏輯建立部位，這是本次31檔清單中風險最極端的個股之一，若堅持參與，僅建議機會池極小倉位並做好長期波動的心理準備。<strong>核心催化劑：</strong>①Aurora-INL商轉時程能否維持2028年目標②現金消耗速度與後續增發規模③新增Hyperscaler供電承諾④同位素業務2027年初能否如期貢獻營收。</p></div>
+</div>
+
+</div>
+<footer><p>資料來源：Oklo IR、SEC EDGAR、Motley Fool、Foreign Policy Journal、Investing.com、Yahoo Finance、其他公開財經媒體報導<br>✅已驗證　⚠️估算/近似值或資料源分歧　❌無法取得，禁止臆測填入<br>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p></footer>
+</body>
+</html>
