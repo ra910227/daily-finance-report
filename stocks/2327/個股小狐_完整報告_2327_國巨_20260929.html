@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜國巨*(2327) 三合一完整報告</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1c2430; --sub:#5b6472; --line:#e4e8ee;
+    --brand:#b5651d; --brand-light:#f3e6d8; --accent:#1f6f5c;
+    --green:#1a8754; --green-bg:#e8f7ef;
+    --amber:#b8860b; --amber-bg:#fdf3d9;
+    --red:#c23b3b; --red-bg:#fbe9e9;
+    --blue:#2a5da8; --blue-bg:#eaf1fb;
+    --gray-bg:#f0f1f3;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.65;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px 80px;}
+  a{color:var(--blue);}
+  h1,h2,h3,h4{font-weight:700;color:var(--ink);}
+  .hero{background:linear-gradient(135deg,#2a2f3a,#40352b);color:#fff;padding:36px 24px;margin-bottom:8px;}
+  .hero-inner{max-width:1180px;margin:0 auto;}
+  .hero-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;}
+  .tag{display:inline-block;padding:3px 12px;border-radius:20px;font-size:12px;background:rgba(255,255,255,.15);color:#fff;}
+  .hero h1{color:#fff;font-size:28px;margin:6px 0 4px;}
+  .hero .sub{color:#d8cdbf;font-size:14px;}
+  .hero-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:20px;}
+  .hero-stat{background:rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;}
+  .hero-stat .label{font-size:12px;color:#cfc4b4;margin-bottom:4px;}
+  .hero-stat .value{font-size:20px;font-weight:700;color:#fff;}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:20px 0 28px;box-shadow:0 1px 3px rgba(0,0,0,.03);}
+  .toc h3{margin:0 0 10px;font-size:15px;color:var(--brand);}
+  .toc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 20px;}
+  .toc a{text-decoration:none;color:var(--ink);font-size:13.5px;display:block;padding:4px 0;border-bottom:1px dashed transparent;}
+  .toc a:hover{border-bottom-color:var(--brand);}
+  .part-header{margin:44px 0 18px;padding-bottom:10px;border-bottom:3px solid var(--brand);}
+  .part-header .part-eyebrow{font-size:13px;color:var(--brand);font-weight:700;letter-spacing:1px;}
+  .part-header h2{font-size:24px;margin:4px 0 0;}
+  .sec{margin:28px 0;}
+  .sec h3{font-size:18px;border-left:4px solid var(--brand);padding-left:10px;margin-bottom:12px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.03);}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:center;}
+  th{background:var(--gray-bg);font-weight:700;color:var(--ink);}
+  td.left, th.left{text-align:left;}
+  tr:nth-child(even) td{background:#fbfbfc;}
+  .badge{display:inline-block;padding:2px 9px;border-radius:12px;font-size:12px;font-weight:700;}
+  .b-green{background:var(--green-bg);color:var(--green);}
+  .b-amber{background:var(--amber-bg);color:var(--amber);}
+  .b-red{background:var(--red-bg);color:var(--red);}
+  .b-blue{background:var(--blue-bg);color:var(--blue);}
+  .b-gray{background:var(--gray-bg);color:var(--sub);}
+  .src{font-size:11.5px;color:var(--sub);}
+  .src.v::before{content:"✅ ";}
+  .src.e::before{content:"⚠️ ";}
+  .src.n::before{content:"❌ ";}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+  @media(max-width:900px){.grid2,.grid3,.grid5{grid-template-columns:1fr;}}
+  .scenario-card{border-radius:12px;padding:16px 18px;border:1px solid var(--line);}
+  .scenario-card.bear{background:var(--red-bg);border-color:#f0caca;}
+  .scenario-card.base{background:var(--blue-bg);border-color:#c9d9f0;}
+  .scenario-card.bull{background:var(--green-bg);border-color:#c3ecd6;}
+  .scenario-card h4{margin:0 0 8px;}
+  .scenario-card table{background:transparent;font-size:12.5px;}
+  .scenario-card td,.scenario-card th{border-color:rgba(0,0,0,.08);}
+  .risk-card{border-left:4px solid var(--red);background:var(--red-bg);border-radius:8px;padding:12px 16px;margin-bottom:10px;}
+  .risk-card.mid{border-left-color:var(--amber);background:var(--amber-bg);}
+  .risk-card h4{margin:0 0 4px;font-size:14.5px;}
+  .action-box{border:2px solid var(--brand);border-radius:12px;padding:18px 22px;background:var(--brand-light);}
+  .action-box h4{margin:0 0 10px;color:var(--brand);}
+  .action-box .row{margin-bottom:8px;font-size:14px;}
+  .action-box .row b{color:var(--ink);}
+  .stars{color:#c98a1f;letter-spacing:2px;}
+  .pillar{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:10px;}
+  .pillar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+  .note{font-size:12.5px;color:var(--sub);background:var(--gray-bg);border-radius:8px;padding:10px 14px;margin:10px 0;}
+  .summary-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center;}
+  .summary-card .big{font-size:22px;font-weight:800;color:var(--brand);margin:6px 0;}
+  footer{margin-top:50px;padding:24px 0;border-top:1px solid var(--line);color:var(--sub);font-size:12px;text-align:center;}
+  .timeline{border-left:3px solid var(--brand);padding-left:16px;margin:12px 0;}
+  .timeline .t-item{margin-bottom:10px;}
+  .timeline .t-date{font-weight:700;color:var(--brand);font-size:12.5px;}
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <span class="tag">個股小狐｜三合一完整報告</span>
+      <span class="tag">被動元件 / MLCC</span>
+      <span class="tag">台灣證券交易所上市</span>
+    </div>
+    <h1>國巨*（YAGEO）2327.TW</h1>
+    <div class="sub">分析日期：2026-09-29　｜　全球前三大被動元件廠，AI伺服器/記憶體特殊規格MLCC + 漲價循環驅動</div>
+    <div class="hero-grid">
+      <div class="hero-stat"><div class="label">股價（2026-09-29 盤中）</div><div class="value">555.00 元 (-4.31%)</div></div>
+      <div class="hero-stat"><div class="label">市值（試算）</div><div class="value">約 1.15 兆元</div></div>
+      <div class="hero-stat"><div class="label">TTM 本益比</div><div class="value">約 37～39 倍</div></div>
+      <div class="hero-stat"><div class="label">52週高／低</div><div class="value">約1,220~1,274 / 164~171元</div></div>
+      <div class="hero-stat"><div class="label">Thesis 成立度</div><div class="value">3.5 / 5</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="toc">
+  <h3>報告導覽</h3>
+  <div class="toc-grid">
+    <a href="#p1-1">Part1-1 基本介紹</a>
+    <a href="#p1-2">Part1-2 業務引擎分析</a>
+    <a href="#p1-3">Part1-3 核心Thesis與未來性</a>
+    <a href="#p1-4">Part1-4 競爭格局</a>
+    <a href="#p1-5">Part1-5 成長象限與護城河</a>
+    <a href="#p2-1">Part2-1 Beat/Miss</a>
+    <a href="#p2-2">Part2-2 全年指引變化</a>
+    <a href="#p2-3">Part2-3 股價反應</a>
+    <a href="#p2-4">Part2-4 三情境DCF</a>
+    <a href="#p2-5">Part2-5 股價位階評估</a>
+    <a href="#p2-6">Part2-6 Comps分析</a>
+    <a href="#p2-7">Part2-7 額外優勢/風險</a>
+    <a href="#p2-8">Part2-8 投行目標價</a>
+    <a href="#p2-9">Part2-9 估值歷史錨點</a>
+    <a href="#p3-1">Part3-1 財務數據</a>
+    <a href="#p3-2">Part3-2 六大比率診斷</a>
+    <a href="#p3-3">Part3-3 債務到期時程</a>
+    <a href="#p3-4">Part3-4 CapEx分析</a>
+    <a href="#p3-5">Part3-5 同業對比</a>
+    <a href="#p3-6">Part3-6 綜合診斷</a>
+    <a href="#final">綜合總結與操作建議</a>
+  </div>
+</div>
+
+<!-- ============ PART 1 ============ -->
+<div class="part-header" id="p1"><div class="part-eyebrow">PART 1</div><h2>公司深度研究</h2></div>
+
+<div class="sec" id="p1-1">
+<h3>1. 基本介紹</h3>
+<div class="card">
+<table>
+<tr><th class="left">項目</th><th>數值</th><th class="left">來源／狀態</th></tr>
+<tr><td class="left">股價（2026-09-29 盤中）</td><td>555.00元（-25元，-4.31%；前收580元）</td><td class="left"><span class="src v">nstock.tw，2026-09-29 11:06</span></td></tr>
+<tr><td class="left">市值（試算）</td><td>約1.15兆元（555元 × 20.71億股）</td><td class="left"><span class="src e">個股小狐試算：股數20,714,654,84股×股價；市值官方數字未同步更新</span></td></tr>
+<tr><td class="left">TTM EPS（近四季）</td><td>14.85～14.86元</td><td class="left"><span class="src v">cnyes/histock，2026-09-24～29</span></td></tr>
+<tr><td class="left">TTM本益比</td><td>37.34倍（cnyes）／39.06倍（histock、wantgoo）</td><td class="left"><span class="src v">來源數字略有落差，已列出各家：cnyes 37.34、histock 39.06、wantgoo 39.06</span></td></tr>
+<tr><td class="left">股價淨值比(PB)</td><td>約6.7～6.8倍（每股淨值約81.15元）</td><td class="left"><span class="src v">histock 6.74；每股淨值81.15元為中信投顧(2026-07-30)報告揭露</span></td></tr>
+<tr><td class="left">52週高點</td><td>約1,220～1,274元（2026年7月初，AI熱潮高點，分割後歷史新高）</td><td class="left"><span class="src v">鉅亨網「股價登1200元再創分割後新高」；histock「自今年高點-54.5%」反推約1,274元</span></td></tr>
+<tr><td class="left">52週低點</td><td>約164～171元（約2025年9月，股票分割剛完成後）</td><td class="left"><span class="src e">histock「自今年低點+238.9%」反推約171元；個股小狐試算</span></td></tr>
+<tr><td class="left">2026年7月法說會後急跌低點</td><td>約456.5元（自1,220元高點腰斬逾六成）</td><td class="left"><span class="src v">今周刊/自由財經報導，2026-07-28～31</span></td></tr>
+<tr><td class="left">TTM營收（近四季，估）</td><td>約1,600～1,700億元區間（以2026年1-7月累計987.5億元、YoY+32.52%外推）</td><td class="left"><span class="src e">個股小狐依使用者提供之月營收數字外推，非官方公告TTM數字</span></td></tr>
+<tr><td class="left">2026年7月／8月營收</td><td>7月161.3億元(MoM+5.03%、YoY+51.51%)；8月163.32億元創單月新高(YoY約+50%)</td><td class="left"><span class="src v">使用者提供數字＋WebSearch交叉核對（8月創單月新高、連6個月破紀錄）</span></td></tr>
+<tr><td class="left">毛利率（2Q26單季）</td><td>38.5%</td><td class="left"><span class="src v">中信投顧(2026-07-30)、法說會</span></td></tr>
+<tr><td class="left">FCF（2025全年，營業現金流-資本支出）</td><td>約252.75億元</td><td class="left"><span class="src v">中信投顧報告財報數字換算：OCF 30,863M - CapEx 5,588M</span></td></tr>
+<tr><td class="left">所屬產業與市場地位</td><td>被動元件（MLCC、鉭電容、電阻、電感、天線、主動元件），全球前三大被動元件廠，MLCC市佔僅次於Murata、Samsung Electro-Mechanics</td><td class="left"><span class="src v">背景資訊＋TrendForce相關報導交叉確認</span></td></tr>
+</table>
+<div class="note">重要事件：國巨已於2025年8月25日完成「1股拆4股」股票分割（面額由10元改為2.5元），流通股數自5.18億股增至約20.71億股。因此本報告在跨越分割時點比較歷史本益比、EPS時，均已註明是否為分割前後基準，避免誤判估值高低。</div>
+</div>
+</div>
+
+<div class="sec" id="p1-2">
+<h3>2. 業務引擎分析</h3>
+<div class="card">
+<h4>核心業務線拆解</h4>
+<table>
+<tr><th class="left">業務線</th><th>2Q26營收占比</th><th class="left">客戶結構</th><th class="left">護城河來源</th></tr>
+<tr><td class="left">MLCC（積層陶瓷電容）</td><td>約24%</td><td class="left">AI伺服器/資料中心、車用、工業、消費性電子；含高階特殊規格MLCC</td><td class="left">規模經濟、Kemet/Pulse併購後完整料號涵蓋、車用認證門檻</td></tr>
+<tr><td class="left">電阻</td><td>約14%</td><td class="left">泛用型+車用/工業特殊規格電阻</td><td class="left">原料半成品一條龍垂直整合、成本優勢</td></tr>
+<tr><td class="left">鉭質電容/基膜陶瓷電容等</td><td>約19%（基膜陶瓷電容）</td><td class="left">AI伺服器電源供應、工業設備</td><td class="left">高階規格技術壁壘，供給集中度高</td></tr>
+<tr><td class="left">天線與主動元件、其他</td><td>約11%／8%</td><td class="left">通訊、消費性電子、車用</td><td class="left">產品組合完整度、交叉銷售能力</td></tr>
+</table>
+<div class="note">占比來源：中信投顧(2026-07-30)報告封面「營業比重(2Q26)」圓餅圖，經個股小狐轉譯為表格；細項比重為概略讀取，非官方逐項揭露之精確百分比，僅供結構參考。</div>
+
+<h4>近4期歷史財務摘要</h4>
+<table>
+<tr><th>年度</th><th>營收(億元)</th><th>YoY</th><th>毛利率</th><th>EBITDA margin</th><th>EPS(元，重編後)</th><th>FCF(億元)</th></tr>
+<tr><td>2023</td><td>1,076.1</td><td>-11.13%</td><td>33.48%</td><td>29.26%</td><td>8.41（拆分後基準試算）</td><td>150.5</td></tr>
+<tr><td>2024</td><td>1,216.7</td><td>+13.06%</td><td>34.36%</td><td>28.19%</td><td>9.53（官方）</td><td>248.0</td></tr>
+<tr><td>2025</td><td>1,329.3</td><td>+9.26%</td><td>36.21%</td><td>29.63%</td><td>11.51（官方）</td><td>252.8</td></tr>
+<tr><td>2026F</td><td>1,858.7</td><td>+39.83%</td><td>39.17%</td><td>34.60%</td><td>19.73（中信預估）</td><td>—（未提供CapEx指引，無法完整試算）</td></tr>
+</table>
+<div class="src v">來源：中信投顧(2026-07-30)報告財務數據頁，經個股小狐依現行20.71億股股本重新換算EPS以利跨分割年度比較。</div>
+</div>
+</div>
+
+<div class="sec" id="p1-3">
+<h3>3. 核心Thesis與未來性</h3>
+<div class="card">
+<h4>投資論點支柱</h4>
+<div class="pillar"><div class="pillar-head"><b>① AI伺服器/記憶體/SSD特殊規格MLCC放量</b><span class="badge b-green">✅ 成立</span></div>
+AI相關營收占比由1Q26約14~15%提升至2Q26約16%；多位AI客戶主動簽訂LTA（長約）並願付溢價確保6~18個月供貨，合作範圍由MLCC延伸至鉭電容、電阻、電感。<span class="src v">中信投顧(2026-07-30)</span></div>
+<div class="pillar"><div class="pillar-head"><b>② 漲價循環+產能利用率提升帶動毛利率擴張</b><span class="badge b-amber">⚠️ 部分成立</span></div>
+BB Ratio由1Q26約1.3~1.5升至2Q26的2.2，3Q26F特殊品與標準品稼動率估達90%以上；惟2Q26實際毛利率38.5%仍略低於市場預期1~2個百分點，顯示原物料成本上升、標準品需求回升部分抵銷漲價效益，漲價紅利尚未完全兌現在毛利率數字上。<span class="src v">中信投顧(2026-07-30)、法說會</span></div>
+<div class="pillar"><div class="pillar-head"><b>③ 月營收連續創高，動能延續至7~8月</b><span class="badge b-green">✅ 成立</span></div>
+7月營收161.3億元(YoY+51.51%)、8月163.32億元創單月新高，已連續6個月刷新紀錄。<span class="src v">使用者資料＋WebSearch交叉確認</span></div>
+<div class="pillar"><div class="pillar-head"><b>④ 「評價已修正至合理甚至便宜」的說法</b><span class="badge b-red">❌ 未兌現／需高度存疑</span></div>
+中信投顧於7/30以股價507元、目標本益比自40倍下修至35倍稱評價「已回落至具吸引力區間」；但截至9/29股價已反彈至555元，TTM本益比達37~39倍，已逼近甚至超過該報告下修後的目標倍數，顯示「評價已便宜」的判斷在其後股價反彈中很快被打回；且股價本身在7月初曾衝上1,220元又於法說會後兩根跌停崩落至507元，波動度遠高於基本面調整幅度，顯示評價論點的時效性極短。<span class="src v">中信投顧(2026-07-30)＋後續股價走勢交叉比對</span></div>
+<div class="pillar"><div class="pillar-head"><b>⑤ 高雄Y3廠低資本支出擴產</b><span class="badge b-amber">⚠️ 部分成立</span></div>
+Y3廠為AI需求爆發前已提前布局的資產，目前主要透過增加退火設備（而非新建廠房）擴充產能，資本支出效率高；但公司未提供2026全年CapEx明確指引（截至7/30僅投入低於30億元），能否跟上「特殊品+標準品稼動率90%以上」的需求成長仍待驗證。<span class="src v">中信投顧(2026-07-30)</span></div>
+
+<h4>成長驅動力</h4>
+<ul>
+<li><b>AI伺服器/資料中心電源供應與運算板卡對高階MLCC、鉭電容的結構性需求</b>——被視為2026~2027年最主要成長引擎。</li>
+<li><b>被動元件全產業性漲價循環</b>——Samsung Electro-Mechanics、太陽誘電等同業同步於2026年8~9月調漲MLCC價格逾30%，顯示漲價非國巨單一現象而是產業級供需缺口。<span class="src v">TrendForce，2026-07-29</span></li>
+</ul>
+
+<h4>需監控風險（觸發條件與影響程度）</h4>
+<table>
+<tr><th class="left">風險</th><th class="left">觸發條件</th><th>影響程度</th></tr>
+<tr><td class="left">被動元件景氣循環反轉</td><td class="left">月營收年增轉負、BB Ratio跌破1.0、客戶端庫存回補結束轉為去化</td><td><span class="badge b-red">高</span></td></tr>
+<tr><td class="left">AI資本支出需求降溫</td><td class="left">主要雲端業者財報下修資本支出指引、LTA客戶要求延遲交貨</td><td><span class="badge b-red">高</span></td></tr>
+<tr><td class="left">競爭者加速擴產稀釋漲價效益</td><td class="left">Murata/Samsung Electro-Mechanics/太陽誘電大幅擴充高階MLCC產能</td><td><span class="badge b-amber">中</span></td></tr>
+<tr><td class="left">中美貿易關稅/地緣政治</td><td class="left">關稅政策反覆曾於2025年造成國巨股價「摔破400元大關」，顯示對關稅消息敏感度高</td><td><span class="badge b-amber">中</span></td></tr>
+<tr><td class="left">散戶過度集中、籌碼不穩定</td><td class="left">報導稱7月崩跌期間近48萬散戶受傷，籌碼面波動度遠高於基本面，易放大股價超漲超跌</td><td><span class="badge b-amber">中</span></td></tr>
+</table>
+</div>
+</div>
+
+<div class="sec" id="p1-4">
+<h3>4. 競爭格局</h3>
+<div class="card">
+<table>
+<tr><th class="left">公司</th><th>市佔（概略）</th><th class="left">優勢</th><th>威脅度</th></tr>
+<tr><td class="left">Murata（村田製作所，日本）</td><td>MLCC市佔逾40%（全市場）／消費性電子約34%</td><td class="left">技術與品牌領導者，車用/高階規格覆蓋最完整，PBR約6.44倍反映市場對其穩定性溢價</td><td><span class="badge b-red">高</span></td></tr>
+<tr><td class="left">Samsung Electro-Mechanics（三星電機，韓國）</td><td>消費性電子MLCC約24%</td><td class="left">2026年8月起調漲MLCC價格30%，Forward PE約90.2倍反映市場給予其AI伺服器概念極高溢價，市值約1,589億美元等值(2026/5)</td><td><span class="badge b-red">高</span></td></tr>
+<tr><td class="left">TDK（日本）</td><td>消費性電子MLCC約12%</td><td class="left">多元化電子元件組合，磁性材料技術領先</td><td><span class="badge b-amber">中</span></td></tr>
+<tr><td class="left">華新科(2492)</td><td>台灣MLCC同業，全球前五大</td><td class="left">2026年AI需求爆發下獲利年增逾4倍，本益比約35倍（同業平均約49倍）</td><td><span class="badge b-amber">中</span></td></tr>
+<tr><td class="left">禾伸堂(3026)</td><td>台灣MLCC同業</td><td class="left">聚焦AI伺服器電源用NP0規格MLCC，本益比高達約79倍，反映市場對其AI含量給予更高評價</td><td><span class="badge b-amber">中</span></td></tr>
+</table>
+<div class="note">市佔數字為多來源交叉引用之概略區間（TrendForce、Passive Components產業媒體），非單一權威機構逐年精確統計，僅供競爭格局參考。</div>
+</div>
+</div>
+
+<div class="sec" id="p1-5">
+<h3>5. 成長象限判斷與護城河評估</h3>
+<div class="grid2">
+<div class="card">
+<h4>Peter Lynch 成長象限判斷</h4>
+<table>
+<tr><th class="left">判斷依據</th><th class="left">數據支持</th></tr>
+<tr><td class="left">營收/獲利波動度</td><td class="left">2023年營收衰退11.13%，2024~2025溫和成長9~13%，2026F暴衝39.83%——典型景氣循環股特徵</td></tr>
+<tr><td class="left">股價波動度</td><td class="left">近12個月股價由171元附近上衝至1,220~1,274元，再腰斬至456.5元，後反彈至555元——高波動、高貝他值</td></tr>
+<tr><td class="left">歷史前例</td><td class="left">2018年同樣因MLCC缺貨漲價衝上1,310元(分割前)，其後3個月內重挫逾7成至287元——與本輪走勢高度相似的循環劇本</td></tr>
+</table>
+<div class="note"><b>判斷結論：景氣循環股（Cyclical），目前正處於AI驅動的循環上升階段，短期內帶有快速成長股（Fast Grower）特徵，但本質仍是循環股，須以「循環相對低點布局、循環高點提前減碼」的邏輯操作，而非以永續成長股邏輯長抱。</b></div>
+</div>
+<div class="card">
+<h4>護城河五維度評分</h4>
+<table>
+<tr><td class="left">規模經濟/成本優勢</td><td class="stars">★★★★☆</td></tr>
+<tr><td class="left">轉換成本（客戶認證）</td><td class="stars">★★★☆☆</td></tr>
+<tr><td class="left">無形資產/專利技術</td><td class="stars">★★★☆☆</td></tr>
+<tr><td class="left">網絡效應</td><td class="stars">★☆☆☆☆</td></tr>
+<tr><td class="left">品牌/通路</td><td class="stars">★★★☆☆</td></tr>
+</table>
+<div class="note">平均約2.8星，四捨五入為<b>3星（滿5星）</b>。被動元件產業整體技術門檻低於半導體，護城河主要來自規模、垂直整合與客戶認證黏性，而非結構性壟斷。</div>
+</div>
+</div>
+
+<div class="action-box">
+<h4>建議動作 Box</h4>
+<div class="row"><b>當前建議：</b>已持有者續抱觀察，嚴設波動停利；未持有者不建議現在追高全額建倉（現價本益比已明顯高於歷史河流圖中緣）。</div>
+<div class="row"><b>加碼觸發：</b>股價回落至約400~450元區間，且月營收YoY、BB Ratio等基本面指標未同步惡化。</div>
+<div class="row"><b>賣出觸發：</b>月營收年增轉負、BB Ratio跌破1.0，或AI客戶LTA出現實質取消/遞延。</div>
+<div class="row"><b>監控指標：</b>月營收YoY、BB Ratio、毛利率QoQ、Y3廠稼動率、競爭者調漲/擴產動態。</div>
+</div>
+</div>
+
+<!-- ============ PART 2 ============ -->
+<div class="part-header" id="p2"><div class="part-eyebrow">PART 2</div><h2>最新財報解析</h2></div>
+
+<div class="sec" id="p2-1">
+<h3>1. Beat/Miss表（2Q26，2026-07-29公布）</h3>
+<div class="card">
+<table>
+<tr><th class="left">項目</th><th>實際數</th><th>中信預估</th><th>差異</th><th>市場共識</th><th>差異</th><th>判定</th></tr>
+<tr><td class="left">營業收入(百萬元)</td><td>44,456</td><td>40,204</td><td>+10.6%</td><td>42,712</td><td>+4.1%</td><td><span class="badge b-green">✅ Beat</span></td></tr>
+<tr><td class="left">營業毛利(百萬元)</td><td>17,116</td><td>15,711</td><td>+8.9%</td><td>16,620</td><td>+3.0%</td><td><span class="badge b-green">✅ Beat</span></td></tr>
+<tr><td class="left">營業利益(百萬元)</td><td>11,749</td><td>10,685</td><td>+10.0%</td><td>11,413</td><td>+2.9%</td><td><span class="badge b-green">✅ Beat</span></td></tr>
+<tr><td class="left">稅後純益(百萬元)</td><td>9,418</td><td>8,395</td><td>+12.2%</td><td>9,156</td><td>+2.9%</td><td><span class="badge b-green">✅ Beat</span></td></tr>
+<tr><td class="left">EPS(元)</td><td>4.59</td><td>4.05</td><td>+13.3%</td><td>4.45</td><td>+3.1%</td><td><span class="badge b-green">✅ Beat</span></td></tr>
+<tr><td class="left">毛利率</td><td>38.5%</td><td>39.1%</td><td>-0.6ppt</td><td>38.9%</td><td>-0.4ppt</td><td><span class="badge b-amber">⚠️ 輕微Miss</span></td></tr>
+<tr><td class="left">營益率</td><td>26.4%</td><td>26.6%</td><td>-0.1ppt</td><td>26.7%</td><td>-0.3ppt</td><td><span class="badge b-amber">⚠️ 輕微Miss</span></td></tr>
+</table>
+<div class="note">絕對金額全面Beat（受惠營收超預期），但毛利率、營益率兩項比率指標小幅Miss市場預期1個百分點以內——顯示漲價效益尚未完全反映、原物料成本上升與標準品回補部分抵銷了AI高階產品組合改善的效果。若排除保留盈餘稅提列影響，2Q26調整後EPS為4.81元（高於原始4.59元）。<span class="src v">中信投顧(2026-07-30)整理Bloomberg市場共識數據</span></div>
+</div>
+</div>
+
+<div class="sec" id="p2-2">
+<h3>2. 全年指引變化（法人預估調整幅度）</h3>
+<div class="card">
+<table>
+<tr><th class="left">年度</th><th>營收調整</th><th>毛利調整</th><th>營業利益調整</th><th>稅後純益調整</th><th>EPS調整</th></tr>
+<tr><td class="left">2026F（調整後 vs 調整前）</td><td>+8.8%</td><td>+7.1%</td><td>+8.2%</td><td>+8.4%</td><td>+8.6%</td></tr>
+<tr><td class="left">2026F（調整後 vs 市場共識）</td><td>+4.9%</td><td>+4.0%</td><td>+4.4%</td><td>+5.0%</td><td>+3.4%</td></tr>
+<tr><td class="left">2027F（調整後 vs 調整前）</td><td>+20.8%</td><td>+19.7%</td><td>+19.9%</td><td>+19.5%</td><td>+19.5%</td></tr>
+<tr><td class="left">2027F（調整後 vs 市場共識）</td><td>+31.6%</td><td>+35.8%</td><td>+41.4%</td><td>+43.0%</td><td>+38.4%</td></tr>
+</table>
+<div class="note">中信投顧於2Q26財報後大幅上修2027年全年預估（各項指標較市場共識高逾30~40%），顯示該機構對AI循環延續性遠比市場共識樂觀；此積極假設本身即是需要持續追蹤驗證的風險點。<span class="src v">中信投顧(2026-07-30)</span></div>
+</div>
+</div>
+
+<div class="sec" id="p2-3">
+<h3>3. 股價反應（財報前後）</h3>
+<div class="card">
+<div class="timeline">
+<div class="t-item"><div class="t-date">2026-07-01</div>公司傳出調漲電容價格，股價衝上1,220元，創分割後新高。</div>
+<div class="t-item"><div class="t-date">2026-07-中旬~07-28</div>市場獲利了結+風險偏好下降，股價開始重挫，一度跌至最低456.5元，波段跌幅逾六成（19天腰斬）。</div>
+<div class="t-item"><div class="t-date">2026-07-29</div>2Q26法說會公布，EPS 4.59元創新高、季增17.7%、年增88.4%，主要財務數字全面Beat，但股價當天及隔日連續兩根跌停，收507元——顯示市場在意的是「評價已提前反映過多樂觀預期」而非基本面本身。</div>
+<div class="t-item"><div class="t-date">2026-07-30</div>中信投顧發布報告，前日收盤507元，調降目標本益比（40倍→35倍），但仍維持買進評等，目標價1,042元。</div>
+<div class="t-item"><div class="t-date">2026-07-31~08-03</div>股價連兩日漲停反彈至552元附近。</div>
+<div class="t-item"><div class="t-date">2026-08-28</div>股價約597元。</div>
+<div class="t-item"><div class="t-date">2026-09-10</div>財經媒體報導專家示警股價恐再度重挫至200多元區間，將本輪走勢與2018年崩跌相提並論。</div>
+<div class="t-item"><div class="t-date">2026-09-24～09-29</div>股價在555~580元區間震盪，9/29盤中下跌4.31%至555元。</div>
+</div>
+<div class="note">結論：本次財報是明確的獲利Beat，但股價對「基本面兌現」的反應是負面的——這是景氣循環股在評價已提前透支時的典型現象，須與「財報好壞」脫鉤解讀。<span class="src v">今周刊、自由財經、中國時報、口袋學堂等多篇報導交叉確認</span></div>
+</div>
+</div>
+
+<div class="sec" id="p2-4">
+<h3>4. 三情境DCF估值</h3>
+<div class="note">以下DCF為個股小狐依中信投顧2026F/2027F財測外推之情境模型自行建構，WACC與終值成長率為分析假設而非市場共識數字，僅供情境參考，非精確估值結論。</div>
+<div class="grid3">
+<div class="scenario-card bear">
+<h4>🐻 熊市情境</h4>
+<table>
+<tr><td class="left">2026-2028營收CAGR</td><td>約15%（AI需求2027年後降溫）</td></tr>
+<tr><td class="left">EBITDA margin</td><td>28%（回落至近3年低點附近）</td></tr>
+<tr><td class="left">FCF conversion</td><td>約45%</td></tr>
+<tr><td class="left">WACC</td><td>10.5%</td></tr>
+<tr><td class="left">終值成長率</td><td>2.0%</td></tr>
+</table>
+<div class="note" style="background:transparent;padding:4px 0;">試算目標價區間：約<b>350~420元</b></div>
+</div>
+<div class="scenario-card base">
+<h4>⚖️ 基準情境</h4>
+<table>
+<tr><td class="left">2026-2028營收CAGR</td><td>約25%（依中信2026F/2027F後放緩）</td></tr>
+<tr><td class="left">EBITDA margin</td><td>34~36%</td></tr>
+<tr><td class="left">FCF conversion</td><td>約55%</td></tr>
+<tr><td class="left">WACC</td><td>9.0%</td></tr>
+<tr><td class="left">終值成長率</td><td>2.5%</td></tr>
+</table>
+<div class="note" style="background:transparent;padding:4px 0;">試算目標價區間：約<b>650~800元</b></div>
+</div>
+<div class="scenario-card bull">
+<h4>🐂 牛市情境</h4>
+<table>
+<tr><td class="left">2026-2028營收CAGR</td><td>約33%（AI supercycle延續至2028）</td></tr>
+<tr><td class="left">EBITDA margin</td><td>38~40%</td></tr>
+<tr><td class="left">FCF conversion</td><td>約62%</td></tr>
+<tr><td class="left">WACC</td><td>8.5%</td></tr>
+<tr><td class="left">終值成長率</td><td>3.0%</td></tr>
+</table>
+<div class="note" style="background:transparent;padding:4px 0;">試算目標價區間：約<b>1,000~1,250元</b></div>
+</div>
+</div>
+<div class="card">
+<div class="note">敏感度：終值成長率每±0.5ppt、WACC每±0.5ppt，基準情境目標價約變動±8~12%。目前現價555元落在熊市情境上緣與基準情境下緣之間，反映市場尚未完全押注牛市情境，但也已脫離熊市情境的低檔。</div>
+</div>
+</div>
+
+<div class="sec" id="p2-5">
+<h3>5. 股價位階評估</h3>
+<div class="card">
+<table>
+<tr><th class="left">指標</th><th>數值</th><th class="left">說明</th></tr>
+<tr><td class="left">TTM PE</td><td>37.3～39.1倍</td><td class="left">近四季EPS 14.85元為基礎</td></tr>
+<tr><td class="left">Forward PE(2026F)</td><td>約28.1倍</td><td class="left">555元 ÷ 中信2026F EPS 19.73元</td></tr>
+<tr><td class="left">Forward PE(2027F)</td><td>約18.6倍</td><td class="left">555元 ÷ 中信2027F EPS 29.79元（惟市場共識2027F EPS僅21.53元，對應PE約25.8倍）</td></tr>
+<tr><td class="left">PB</td><td>約6.7~6.8倍</td><td class="left">每股淨值約81.15元</td></tr>
+<tr><td class="left">PEG（以2026F EPS YoY+71%估）</td><td>約0.40（Forward）／遠高於1（TTM PE÷近1年EPS YoY）</td><td class="left">Forward基礎顯示成長性尚可支撐評價；但以TTM角度看評價已偏貴</td></tr>
+</table>
+<h4>EPS成長趨勢（近4期YoY）與戴維斯雙擊判讀</h4>
+<table>
+<tr><th>期別</th><th>EPS(元)</th><th>YoY</th></tr>
+<tr><td>1Q26</td><td>3.86（調整前）／3.9(財報狗版本)</td><td>+44.69%（純益）</td></tr>
+<tr><td>2Q26</td><td>4.59</td><td>+88.44%（純益YoY）</td></tr>
+<tr><td>3Q26F</td><td>5.30（中信預估）</td><td>+72.63%（純益YoY，預估）</td></tr>
+<tr><td>4Q26F</td><td>5.97（中信預估）</td><td>+83.30%（純益YoY，預估）</td></tr>
+</table>
+<div class="note"><b>判讀：</b>國巨近1年正處於EPS高速成長（YoY連續逼近或超過70~90%）疊加本益比同步從長期均值附近向上擴張（TTM PE從個位數/十餘倍擴張至37~39倍）的<b>戴維斯雙擊階段</b>，但雙擊已進行相當幅度，目前更接近「評價擴張已提前透支未來1~2年成長」的後段，而非雙擊初升段——此判斷與第9節估值歷史錨點的反推試算結論一致。</div>
+</div>
+</div>
+
+<div class="sec" id="p2-6">
+<h3>6. Comps分析</h3>
+<div class="card">
+<table>
+<tr><th class="left">公司</th><th>市值</th><th>PE</th><th>EV/Rev</th><th>FCF Yield</th><th class="left">成長類型</th></tr>
+<tr><td class="left">國巨*(2327)</td><td>約1.15兆元</td><td>37.3~39.1倍(TTM)／28.1倍(2026F)</td><td>—</td><td>—</td><td class="left">循環成長股（AI驅動上升段）</td></tr>
+<tr><td class="left">華新科(2492)</td><td>約1,511億元</td><td>35.00倍</td><td>—</td><td>—</td><td class="left">循環成長股（同族群）</td></tr>
+<tr><td class="left">禾伸堂(3026)</td><td>—</td><td>79.02倍</td><td>—</td><td>—</td><td class="left">循環成長股（AI伺服器NP0 MLCC聚焦）</td></tr>
+<tr><td class="left">Samsung Electro-Mechanics(韓)</td><td>約NT$3.3兆等值($105.4B，2026/5)</td><td>Forward約90.2倍</td><td>—</td><td>—</td><td class="left">循環成長股（AI+高階MLCC）</td></tr>
+</table>
+<div class="note">❌ EV/Revenue、FCF Yield等指標因本次查詢未能取得可靠即時數字，均標示「—」，避免臆測；市值/PE已標明資料日期與來源（histock/statementdog搜尋結果、9/24前後）。可比同業之間PE落差極大（35～90倍），反映市場對「AI含量」與「特殊規格占比」給予顯著不同的評價溢價，並非單純被動元件同業就該給予相同倍數。</div>
+</div>
+</div>
+
+<div class="sec" id="p2-7">
+<h3>7. 額外優勢/風險</h3>
+<div class="card">
+<table>
+<tr><th class="left">項目</th><th class="left">內容</th></tr>
+<tr><td class="left">庫藏股</td><td class="left">2026-07-31完成庫藏股註銷及實收資本額變更登記</td></tr>
+<tr><td class="left">法人持股</td><td class="left">外資持股比48.08%（中信投顧2026-07-30揭露）</td></tr>
+<tr><td class="left">股利政策</td><td class="left">已連續13年配息；2025年股利6.00元，2026-06-12發放現金股利5.998元；中信預估2026F股利9.84元、2027F股利14.89元；目前現金殖利率僅約1.0~1.08%（評價偏貴使殖利率相對偏低）</td></tr>
+<tr><td class="left">董監持股</td><td class="left">30.53%（中信投顧2026-07-30揭露）</td></tr>
+<tr><td class="left">內部人交易</td><td class="left">❌ 近期具體內部人買賣超交易明細未能於本次查詢中取得可靠數字，標示「—」，建議使用者自行查MOPS內部人持股轉讓公告</td></tr>
+</table>
+</div>
+</div>
+
+<div class="sec" id="p2-8">
+<h3>8. 投行目標價與操作建議</h3>
+<div class="card">
+<h4>法人評等目標價表（依時間排序，含公式揭露）</h4>
+<table>
+<tr><th class="left">機構/來源</th><th>日期</th><th>目標價</th><th>評等</th><th class="left">計算公式（如原文有揭露）</th></tr>
+<tr><td class="left">中國信託投顧</td><td>2026-07-30</td><td>1,042元</td><td>買進</td><td class="left">FY2027 調整後EPS 29.79元 × 35倍PER（目標PER自40倍下修）</td></tr>
+<tr><td class="left">某投顧機構（readmo引用，日期未明確標示）</td><td>約2026年中</td><td>780元</td><td>—</td><td class="left">2027年EPS 24.46元 × 32倍PER</td></tr>
+<tr><td class="left">Factset共識調查（鉅亨網報導）</td><td>2026-06-08</td><td>927元（中位數，自892.5元上修+3.87%）</td><td>—</td><td class="left">14位分析師預估中位數，區間330~1,080元，未揭露統一公式</td></tr>
+<tr><td class="left">Factset最新調查（FTNN新聞網報導）</td><td>約2026年9月</td><td>1,275元</td><td>—</td><td class="left">2026年EPS共識上修至19.59元；隱含PE約65倍（個股小狐反推，非原文明示倍數）</td></tr>
+<tr><td class="left">兩家證券商（旺得富報導）</td><td>約2026年1月20日（股價尚在300元階段，時效性已低）</td><td>300→360元</td><td>—</td><td class="left">未揭露PER倍數，僅提及「被動元件議價能力增強」與「資料中心電力升級大單」題材</td></tr>
+<tr><td class="left">兩家證券商（區間彙整）</td><td>日期未明確標示</td><td>346~400元</td><td>—</td><td class="left">對應2026年營收預估約1,634.9~1,847.98億元、EPS 16.82~18.94元，未揭露PER倍數</td></tr>
+</table>
+<div class="note"><b>分歧點：</b>各機構目標價從300元到1,275元不等，差異超過4倍，主要來自（1）發布時間點不同——1月時股價僅300多元、7~9月已歷經衝上1,220元又腰斬的劇烈重估；（2）對2027年EPS假設差異達24.46~29.79元；（3）給予的PER倍數從約20~35倍不等，反映對「AI循環能否延續到2027年」信心程度不同。<b>近期（6~9月）更新的目標價集中在927~1,275元</b>，較舊、較保守的300~400元目標價已明顯過時，不具現時參考性。</div>
+<h4>上行空間彙總（以現價555元為基礎）</h4>
+<table>
+<tr><th class="left">目標價</th><th>上行空間</th></tr>
+<tr><td class="left">927元（Factset 6月中位數）</td><td>+67.0%</td></tr>
+<tr><td class="left">1,042元（中信7月）</td><td>+87.7%</td></tr>
+<tr><td class="left">1,275元（Factset 9月）</td><td>+129.7%</td></tr>
+<tr><td class="left">780元（某投顧）</td><td>+40.5%</td></tr>
+</table>
+</div>
+<div class="action-box">
+<h4>操作建議 Box（具體數值門檻）</h4>
+<div class="row"><b>若已持有：</b>可續抱，但建議在股價重新站上700~800元（對應多數近期目標價下緣）時開始分批獲利了結，避免重演7月「1,220元見頂急殺至456.5元」的劇本。</div>
+<div class="row"><b>若未持有：</b>現價555元對應TTM PE 37~39倍，已高於本報告估算之河流圖歷史中緣（約16倍，詳見第9節），不建議追高全額建倉；可等待回落至450元以下（對應2026F PE約22.8倍）分批布局，或等待Q3實際財報驗證漲價效益是否真正反映在毛利率數字上。</div>
+<div class="row"><b>止損參考：</b>若月營收年增轉負或跌破456.5元前波低點，應重新檢視持股邏輯。</div>
+</div>
+</div>
+
+<div class="sec" id="p2-9">
+<h3>9. 估值歷史錨點（強制規則專節）</h3>
+<div class="card">
+<h4>① EPS多年期表</h4>
+<table>
+<tr><th>年度</th><th>2024A</th><th>2025A</th><th>2026E</th><th>2027E</th><th>2028E</th></tr>
+<tr><td class="left">EPS(元)</td><td>9.53</td><td>11.51</td><td>19.73（中信）／19.59（Factset）／19.07（市場共識）／16.82~18.94（另兩家）</td><td>29.79（中信）／24.46（某投顧）／21.53（市場共識）</td><td>—</td></tr>
+<tr><td class="left">狀態</td><td>✅已驗證(官方申報，依現行股本重編)</td><td>✅已驗證(官方申報)</td><td>⚠️預估(多家機構落差達16.82~19.73元)</td><td>⚠️預估(多家機構落差達21.53~29.79元)</td><td>❌查無任何機構公開預估</td></tr>
+</table>
+
+<h4>② 歷史本益比參考</h4>
+<table>
+<tr><th class="left">指標</th><th>數值</th><th class="left">計算依據與狀態</th></tr>
+<tr><td class="left">5年平均PE(TTM)</td><td>約16倍（估算值，非精確5年平均）</td><td class="left"><span class="src e">⚠️估算：以wantgoo「本益比河流圖」近5年區間中緣倍數為基礎（中緣=16倍），因Goodinfo/財報狗詳細歷史河流圖逐日數據頁面本次查詢無法有效擷取(403/空白回應)，此為次佳可得之估算，非精確5年平均計算值，建議使用者自行至Goodinfo「本益比河流圖」頁面查證精確數字。</span></td></tr>
+<tr><td class="left">2022年最低PE</td><td>—</td><td class="left"><span class="src n">❌ 無法取得：本次查詢無法取得2022年度國巨可靠的最低股價數字（Goodinfo年K線頁面、鉅亨網歷史行情頁面因反爬蟲/JS渲染機制均無法有效擷取內容），為避免臆測精確數字，此欄位標示「—」。建議使用者自行查Goodinfo「ShowK_Chart.asp?STOCK_ID=2327&CHT_CAT=YEAR」頁面。</span></td></tr>
+<tr><td class="left">2018年最低PE（上次主要市場修正估值）</td><td>約3.6倍（估算值）</td><td class="left"><span class="src e">⚠️估算：2018年低點約287元（分割前基準）÷ 2018年全年EPS 80.3元（分割前基準）＝約3.57倍。PE比值不受股票分割影響（分子分母同比例調整），故此倍數可直接沿用。來源：今周刊「歷史劇本重演」報導、工商時報/TechNews報導2018年EPS 80.3元。</span></td></tr>
+</table>
+
+<h4>③ 反推試算（結論）</h4>
+<div class="note" style="background:var(--brand-light);">
+<b>試算一（悲觀情境）：</b>2018年谷底PE 3.6倍 × 保守EPS情境16.82元（最低機構2026F預估）＝約<b>61元</b>——遠低於現價555元。此為極端景氣循環谷底情境，代表若被動元件景氣循環出現類似2018年等級的急速反轉，理論上股價有大幅修正空間，但不必然重演。<br><br>
+<b>試算二（中性情境）：</b>河流圖歷史中緣PE 16倍 × 2026F調整後EPS 19.73元（中信預估）＝約<b>316元</b>——同樣低於現價555元。<br><br>
+<b>試算三（機構樂觀情境，原文公式）：</b>中信投顧 35倍 × 2027F EPS 29.79元＝<b>1,042元</b>——高於現價555元。<br><br>
+<b>結論：</b>現價555元對應TTM PE 37~39倍、2026F Forward PE約28.1倍，兩者皆已明顯高於個股小狐估算之歷史河流圖中緣（約16倍），也高於試算一、二的保守/中性情境隱含股價（61~316元）。換言之，<b>目前股價主要是靠「本益比倍數提前擴張、market pricing in未來1~2年AI高成長」撐起，而非單純的低估值安全邊際買點</b>；雖然EPS本身也確實在快速成長（近四季14.85元、YoY約+29%，2026F更預估年增逾70%），但成長幅度尚不足以完全解釋本益比從十餘倍擴張到37~39倍的漲幅，屬於戴維斯雙擊的後段而非初升段。唯一能為現價提供支撐的，是中信投顧等機構對2027年EPS給予的35倍PER樂觀假設（隱含目標價1,042元）——若此假設落空（例如AI需求不如預期延續、或市場重新給予被動元件股較低的循環股折價倍數），現價的下修風險不容忽視。</div>
+</div>
+</div>
+
+<!-- ============ PART 3 ============ -->
+<div class="part-header" id="p3"><div class="part-eyebrow">PART 3</div><h2>財務風險健檢</h2></div>
+
+<div class="sec" id="p3-1">
+<h3>1. 財務數據填表（近3期對照，百萬元）</h3>
+<div class="card">
+<table>
+<tr><th class="left">損益表項目</th><th>2023</th><th>2024</th><th>2025</th></tr>
+<tr><td class="left">EBIT（營業利益近似值）</td><td>20,430</td><td>23,386</td><td>29,801</td></tr>
+<tr><td class="left">利息支出</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td class="left">EBITDA</td><td>31,485</td><td>34,302</td><td>39,383</td></tr>
+<tr><td class="left">D&A（折舊攤銷，現金流量表口徑）</td><td>8,726</td><td>9,629</td><td>9,834</td></tr>
+</table>
+<table>
+<tr><th class="left">資產負債表項目</th><th>2023</th><th>2024</th><th>2025</th></tr>
+<tr><td class="left">總資產</td><td>332,170</td><td>366,676</td><td>390,789</td></tr>
+<tr><td class="left">總負債</td><td>194,811</td><td>204,123</td><td>216,793</td></tr>
+<tr><td class="left">計息債務（細項）</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td class="left">現金及約當現金</td><td>52,951</td><td>61,118</td><td>81,473</td></tr>
+<tr><td class="left">短期到期債務</td><td>—</td><td>—</td><td>—</td></tr>
+</table>
+<table>
+<tr><th class="left">現金流量表項目</th><th>2023</th><th>2024</th><th>2025</th></tr>
+<tr><td class="left">OCF（營業活動現金流）</td><td>31,067</td><td>31,162</td><td>30,863</td></tr>
+<tr><td class="left">CapEx（資本支出淨額）</td><td>16,021</td><td>6,363</td><td>5,588</td></tr>
+<tr><td class="left">FCF（OCF - CapEx）</td><td>15,046</td><td>24,799</td><td>25,275</td></tr>
+</table>
+<div class="note">❌ 利息支出、計息債務細項、短期到期債務三項本次查詢無法取得（中信投顧報告摘要未列示附註等級明細，MOPS財報附註需逐頁查閱本次未能完成），標示「—」。以下六大比率診斷中涉及此三項者，將以總負債/總資產等可得數字之替代proxy呈現並明確標註限制，避免臆測精確數字。來源：中信投顧(2026-07-30)整理之資產負債表、損益表、現金流量表。</div>
+</div>
+</div>
+
+<div class="sec" id="p3-2">
+<h3>2. 六大比率診斷</h3>
+<div class="card">
+<table>
+<tr><th class="left">比率</th><th class="left">公式</th><th>結果(2025/1Q26)</th><th>狀態</th><th class="left">警戒標準</th></tr>
+<tr><td class="left">利息覆蓋率</td><td class="left">EBIT ÷ 利息支出</td><td>—</td><td><span class="badge b-gray">無法計算</span></td><td class="left">❌利息支出數字未能取得，無法計算精確倍數；以營業利益規模(2025年298億元)遠高於負債總額之量級觀察，經營獲利對利息支出的覆蓋能力應屬充裕，但缺乏精確倍數佐證，不可臆測數字</td></tr>
+<tr><td class="left">負債比率</td><td class="left">總負債 ÷ 總資產</td><td>55.5%(2025) / 57.9%(1Q26)</td><td><span class="badge b-amber">中度</span></td><td class="left">一般製造業警戒線約60~65%，目前尚在安全區間但呈上升趨勢</td></tr>
+<tr><td class="left">淨負債/EBITDA</td><td class="left">(總負債-現金) ÷ EBITDA</td><td>約3.44倍（2025，粗略代理指標）</td><td><span class="badge b-amber">中度</span></td><td class="left"><span class="src e">⚠️此為粗略代理指標，非精確「計息淨負債/EBITDA」（因總負債含應付帳款等非計息項目，公司未拆分計息負債明細），實際計息淨負債槓桿應更低於此數字，僅供參考上限</span>；一般資本密集製造業警戒線約3~4倍</td></tr>
+<tr><td class="left">OCF/總債務</td><td class="left">營業活動現金流 ÷ 總負債</td><td>14.2%(2025)</td><td><span class="badge b-green">健康</span></td><td class="left">一般警戒線低於10%需留意，目前尚屬健康</td></tr>
+<tr><td class="left">現金流覆蓋比率</td><td class="left">現金 ÷ 總負債</td><td>37.6%(2025) / 37.3%(1Q26)</td><td><span class="badge b-green">健康</span></td><td class="left">現金部位對總負債覆蓋比例逾三分之一，流動性充裕</td></tr>
+<tr><td class="left">兩年內到期牆覆蓋倍數</td><td class="left">現金+未來2年OCF預估 ÷ 未來2年到期債務</td><td>—</td><td><span class="badge b-gray">無法計算</span></td><td class="left">❌債務到期時程細項未能取得（詳見第3節），無法計算精確覆蓋倍數</td></tr>
+</table>
+</div>
+</div>
+
+<div class="sec" id="p3-3">
+<h3>3. 債務到期時程</h3>
+<div class="card">
+<div class="note">❌ 無法取得：本次以WebSearch/WebFetch查詢MOPS公開資訊觀測站、鉅亨網「海外公司債月報」頁面，均未能取得國巨逐年債務到期金額的具體細項數字（頁面為空白或需要進一步互動查詢，非本次查詢工具可直接擷取）。為避免臆測，逐年到期金額表暫標示「—」，建議使用者直接查閱：(1) MOPS國巨2025年報附註「借款」與「應付公司債」章節；(2) 鉅亨網 https://www.cnyes.com/twstock/ocb.aspx?code=2327 海外公司債月報頁面。</div>
+<table>
+<tr><th>到期年度</th><th>2026</th><th>2027</th><th>2028</th><th>2029以後</th></tr>
+<tr><td class="left">到期金額(百萬元)</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</table>
+<div class="note">可得替代參考：資產負債表顯示「非流動負債」2025年底為80,713百萬元、1Q26為81,940百萬元，其中應包含長期借款與應付公司債，但無法進一步拆分逐年到期結構。</div>
+</div>
+</div>
+
+<div class="sec" id="p3-4">
+<h3>4. CapEx分析</h3>
+<div class="card">
+<table>
+<tr><th>年度</th><th>CapEx(百萬元)</th><th>CapEx/營收</th><th>CapEx/OCF</th></tr>
+<tr><td>2022</td><td>12,631</td><td>10.4%</td><td>38.3%</td></tr>
+<tr><td>2023</td><td>16,021</td><td>14.9%</td><td>51.6%</td></tr>
+<tr><td>2024</td><td>6,363</td><td>5.2%</td><td>20.4%</td></tr>
+<tr><td>2025</td><td>5,588</td><td>4.2%</td><td>18.1%</td></tr>
+<tr><td>1Q26(單季)</td><td>493</td><td>1.3%(單季)</td><td>5.5%(單季)</td></tr>
+</table>
+<div class="note"><b>趨勢判讀：</b>CapEx強度自2023年高點（14.9%營收、51.6%OCF）大幅下降至2025年僅4.2%營收、18.1%OCF，2026年至7月底累計投入金額仍低於30億元（中信投顧2026-07-30）。<b>業務模式判讀：</b>被動元件製造本質上屬資本密集產業（需晶圓級燒結、精密塗佈設備），但國巨本輪AI循環擴產策略側重「既有廠房加裝退火設備提升稼動率」而非新建晶圓廠等重資產投資，使CapEx強度顯著低於典型資本密集電子製造業，FCF轉換效率因此提升；惟若AI需求延續超出既有產能極限，未來仍可能面臨追加資本支出的壓力，目前公司尚未提供2026全年CapEx明確指引。</div>
+</div>
+</div>
+
+<div class="sec" id="p3-5">
+<h3>5. 同業對比（六大比率）</h3>
+<div class="card">
+<table>
+<tr><th class="left">比率</th><th>國巨(2327)</th><th>華新科(2492)</th><th>禾伸堂(3026)</th></tr>
+<tr><td class="left">負債比率</td><td>55.5%(2025)</td><td>—</td><td>—</td></tr>
+<tr><td class="left">淨負債/EBITDA(粗略代理)</td><td>約3.44倍</td><td>—</td><td>—</td></tr>
+<tr><td class="left">OCF/總債務</td><td>14.2%</td><td>—</td><td>—</td></tr>
+<tr><td class="left">TTM PE(估值面對比)</td><td>37.3~39.1倍</td><td>35.00倍</td><td>79.02倍</td></tr>
+</table>
+<div class="note">❌ 華新科、禾伸堂的負債比率、淨負債/EBITDA、OCF/總債務等資產負債表細節，本次WebSearch未能取得可靠公開數字（需查各公司財報附註或財報狗付費頁面），均標示「—」，僅保留三家均可查得的PE估值面比較。就PE而言，國巨與華新科估值相近(35~39倍)，禾伸堂因聚焦AI伺服器NP0 MLCC題材而享有明顯更高溢價(79倍)。</div>
+</div>
+</div>
+
+<div class="sec" id="p3-6">
+<h3>6. 綜合診斷</h3>
+<div class="card">
+<table>
+<tr><th class="left">定性分類</th><td><span class="badge b-green">穩健偏中性</span>——現金部位充裕、負債比率處於安全區間，惟計息負債結構、利息覆蓋率、債務到期牆因資料不足無法精確驗證，不能完全排除潛在槓桿風險</td></tr>
+</table>
+<div class="risk-card mid">
+<h4>最大風險點</h4>
+2025年營業利益298億元，若被動元件循環反轉導致<b>營業利益（EBIT）較目前水準下滑超過約35~40%</b>（安全邊際粗估：以總負債216,793百萬元與現金81,473百萬元的緩衝空間反推，假設公司需維持基本利息與營運資金覆蓋），現金流覆蓋能力將明顯轉趨吃緊——惟因缺乏精確利息支出數字，此為方向性粗估而非精確觸發點，建議使用者留意月營收YoY轉負、BB Ratio跌破1.0作為更即時的領先指標。
+</div>
+<div class="note">安全邊際計算方式：因利息支出、計息負債細項均無法取得精確數字（詳見第1、2節），本節「EBIT需下滑多少%才觸及警戒線」僅能以總負債/現金覆蓋率的方向性推估表示，非精確財務模型計算結果，請使用者自行查閱MOPS年報附註以取得精確利息支出數字後重新計算。</div>
+</div>
+</div>
+
+<!-- ============ FINAL SUMMARY ============ -->
+<div class="part-header" id="final"><div class="part-eyebrow">綜合總結</div><h2>五維度總覽與最終操作建議</h2></div>
+
+<div class="grid5">
+<div class="summary-card"><div>Thesis成立度</div><div class="big">3.5 / 5</div><div class="src">AI/漲價論點成立，「評價已便宜」論點被打臉</div></div>
+<div class="summary-card"><div>護城河強度</div><div class="big stars">★★★☆☆</div><div class="src">規模+客戶認證優勢，技術門檻中等</div></div>
+<div class="summary-card"><div>成長象限</div><div class="big" style="font-size:15px;">景氣循環股<br>(AI上升段)</div><div class="src">Peter Lynch框架：Cyclical</div></div>
+<div class="summary-card"><div>財務體質</div><div class="big" style="font-size:15px;">穩健偏中性</div><div class="src">現金充裕，槓桿細節資料不足</div></div>
+<div class="summary-card"><div>目標價區間</div><div class="big" style="font-size:16px;">780~1,275元</div><div class="src">中樞約1,000元（近期機構共識）</div></div>
+</div>
+
+<div class="action-box" style="margin-top:24px;">
+<h4>最終操作建議</h4>
+<div class="row"><b>已持有者：</b>2026年以來獲利已實質兌現（月營收連6個月創高），可續抱參與AI循環，但務必記取7月「1,220元見頂→456.5元腰斬」的教訓，建議設定分批停利點（如700~800元起分批減碼），避免評價過度透支後的劇烈修正。</div>
+<div class="row"><b>未持有者：</b>現價555元的TTM PE（37~39倍）已明顯高於個股小狐估算之歷史河流圖中緣（約16倍），且短期波動度極高，不建議現在追高建倉；可等待回落至450元以下、或等Q3財報（約10月底公布）驗證漲價效益是否真正反映在毛利率數字上，再考慮分批進場。</div>
+<div class="row"><b>建議持有期間：</b>若以中長期波段（3~5年）角度持有，需接受被動元件景氣循環的高波動特性，本質上更適合「逢循環低點分批布局、循環高點分批獲利了結」的波段操作邏輯，而非單純長期持有等待估值修復。</div>
+<div class="row"><b>核心催化劑：</b>AI伺服器/記憶體/SSD客戶LTA持續放量、3Q26特殊品與標準品稼動率達90%以上、漲價效益逐季反映於毛利率。</div>
+<div class="row"><b>風險提示：</b>本股高度受市場情緒與籌碼面影響（2026年7月一個月內經歷衝上千金與腰斬），基本面Beat不等於股價上漲，投資人須嚴格區分「財報好壞」與「評價是否已透支」兩件事；9月已有媒體示警重演2018年式崩跌可能性，須持續追蹤而非忽視。</div>
+</div>
+
+<div class="note" style="margin-top:24px;">
+<b>完整資料缺口清單（標示「—」之欄位）：</b>
+(1) 2022年最低本益比與對應股價；
+(2) 5年精確平均本益比（以河流圖中緣16倍估算值替代）；
+(3) 利息支出、計息負債細項、短期到期債務；
+(4) 逐年債務到期時程金額（2026/2027/2028/2029以後）；
+(5) 利息覆蓋率、兩年內到期牆覆蓋倍數（因上述利息/到期數字缺失而無法精確計算）；
+(6) 華新科、禾伸堂之負債比率、淨負債/EBITDA、OCF/總債務等資產負債表細節；
+(7) Murata、TDK精確目前PE倍數（僅取得Samsung Electro-Mechanics與PBR部分數字）；
+(8) 2028年EPS市場預估；
+(9) Comps分析中之EV/Revenue、FCF Yield欄位；
+(10) 近期具體內部人買賣超交易明細。
+以上均因公開資料本次查詢範圍內未能取得可靠數字，依規則標示為「—」或明確註記估算方法，未填入任何未經查證之精確數字。
+</div>
+
+</div>
+
+<footer>
+本報告由「個股小狐」整理製作，資料來源包含：中國信託證券投資顧問《國巨*(2327 TT)》個股報告(2026-07-30)、Goodinfo、財報狗(StatementDog)、鉅亨網、histock、nstock、wantgoo、今周刊、工商時報、TechNews、TrendForce及公開新聞報導等，並以WebSearch/WebFetch於2026-09-29進行交叉查證。<br>
+本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。
+</footer>
+
+</div>
+</body>
+</html>

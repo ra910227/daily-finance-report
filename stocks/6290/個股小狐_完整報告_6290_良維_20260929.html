@@ -1,0 +1,604 @@
+<title>個股小狐｜良維 6290</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#ffffff; --text:#1a1f2b; --text-dim:#5b6472; --text-faint:#8a93a3;
+  --border:#e3e6eb; --accent:#1a56db; --accent-dim:#e8eefc;
+  --green:#0f9d58; --green-bg:#e6f4ea; --amber:#b7791f; --amber-bg:#fdf3e0;
+  --red:#d93025; --red-bg:#fce8e6; --purple:#7c3aed; --purple-bg:#f1e9fe;
+  --gray-bg:#eef0f3;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ } }
+:root[data-theme="dark"]{ }
+*{box-sizing:border-box;}
+body{background:var(--bg); color:var(--text); margin:0; line-height:1.65; font-size:15px;}
+.wrap{max-width:1180px; margin:0 auto; padding:0 20px 80px;}
+h1,h2,h3,h4{font-weight:700; letter-spacing:.01em;}
+a{color:var(--accent);}
+.hero{background:linear-gradient(135deg,#1a56db 0%,#1e3a8a 100%); color:#fff; padding:36px 28px; border-radius:0 0 20px 20px; margin-bottom:28px;}
+.hero-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;}
+.hero-title{font-size:28px; margin:0 0 4px;}
+.hero-sub{opacity:.85; font-size:14px; margin:0;}
+.hero-stats{display:flex; gap:28px; flex-wrap:wrap; margin-top:22px;}
+.hero-stat .label{font-size:12px; opacity:.75;}
+.hero-stat .value{font-size:22px; font-weight:700; margin-top:2px;}
+.hero-badges{display:flex; gap:8px; flex-wrap:wrap; margin-top:16px;}
+.pill{background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); border-radius:999px; padding:4px 12px; font-size:12.5px;}
+.toc{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:18px 22px; margin-bottom:30px;}
+.toc h4{margin:0 0 10px; font-size:13px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.06em;}
+.toc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:6px 20px;}
+.toc a{display:block; padding:4px 0; font-size:13.5px; color:var(--text); text-decoration:none; border-bottom:1px dashed transparent;}
+.toc a:hover{color:var(--accent); border-color:var(--accent);}
+section{margin-bottom:44px;}
+.part-header{display:flex; align-items:center; gap:12px; margin:56px 0 18px; padding-bottom:10px; border-bottom:3px solid var(--accent);}
+.part-header .num{background:var(--accent); color:#fff; font-weight:700; border-radius:8px; padding:6px 12px; font-size:14px;}
+.part-header h2{margin:0; font-size:22px;}
+h3.sub{font-size:17px; margin:30px 0 12px; padding-left:10px; border-left:4px solid var(--accent-dim); color:var(--text);}
+h3.sub span.tag{font-size:11px; background:var(--accent-dim); color:var(--accent); padding:2px 8px; border-radius:6px; margin-left:8px; vertical-align:middle;}
+.card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px 22px; margin-bottom:16px;}
+table{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0 6px;}
+th,td{border:1px solid var(--border); padding:7px 10px; text-align:center;}
+th{background:var(--gray-bg); font-weight:700; white-space:nowrap;}
+td.left, th.left{text-align:left;}
+.tblwrap{overflow-x:auto;}
+.badge{display:inline-block; padding:2px 9px; border-radius:6px; font-size:12px; font-weight:700;}
+.badge.ok{background:var(--green-bg); color:var(--green);}
+.badge.warn{background:var(--amber-bg); color:var(--amber);}
+.badge.bad{background:var(--red-bg); color:var(--red);}
+.badge.info{background:var(--accent-dim); color:var(--accent);}
+.note{font-size:12.5px; color:var(--text-faint); margin-top:6px;}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr;} .toc-grid{grid-template-columns:1fr 1fr;}}
+.scenario-card{border-radius:14px; padding:18px 20px; border:1.5px solid var(--border);}
+.scenario-card.bear{border-color:#f3b3ac; background:#fff8f7;}
+.scenario-card.base{border-color:#a9c2f5; background:#f6f9ff;}
+.scenario-card.bull{border-color:#9fd8b4; background:#f4fbf6;}
+.scenario-card h4{margin:0 0 4px; font-size:16px;}
+.scenario-card .tp{font-size:20px; font-weight:800; margin:6px 0 10px;}
+.scenario-card ul{margin:6px 0; padding-left:18px; font-size:13px;}
+.risk-card{border-left:4px solid var(--red); background:var(--red-bg); border-radius:8px; padding:12px 16px; margin:10px 0; font-size:13.5px;}
+.risk-card.amber{border-color:var(--amber); background:var(--amber-bg);}
+.action-box{background:linear-gradient(135deg,#eef4ff,#f7f5ff); border:1.5px solid var(--accent-dim); border-radius:14px; padding:20px 22px;}
+.action-box h4{margin-top:0; color:var(--accent);}
+.stars{color:#e0a800; letter-spacing:2px;}
+.moat-row{display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border); font-size:13.5px;}
+.summary-cards{display:grid; grid-template-columns:repeat(5,1fr); gap:14px;}
+@media(max-width:1000px){.summary-cards{grid-template-columns:repeat(2,1fr);}}
+.sumcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; text-align:center;}
+.sumcard .lab{font-size:12px; color:var(--text-dim); margin-bottom:6px;}
+.sumcard .val{font-size:18px; font-weight:800; color:var(--accent);}
+footer{margin-top:60px; padding-top:24px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-faint);}
+.src{font-size:11.5px; color:var(--text-faint);}
+code{background:var(--gray-bg); padding:1px 5px; border-radius:4px; font-size:12px;}
+.conflict-box{background:var(--purple-bg); border-left:4px solid var(--purple); border-radius:8px; padding:12px 16px; margin:10px 0; font-size:13px;}
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+
+
+<div class="hero">
+  <div class="wrap" style="padding:0;">
+    <div class="hero-top">
+      <div>
+        <p class="hero-sub">個股小狐｜三模式合一報告（深度研究＋財報解析＋財務健檢）</p>
+        <h1 class="hero-title">良維 6290 <span style="font-weight:400; opacity:.8; font-size:18px;">(6290.TWO 上櫃)</span></h1>
+        <p class="hero-sub">分析日期：2026-09-29　｜　資料時間戳：2026-09-29 11:08（盤中股價）／2026Q2財報（2026-08-07董事會通過）／8月營收（2026-09-10公告）</p>
+      </div>
+      <div class="hero-badges">
+        <span class="pill">電源傳輸線組／連接元件</span>
+        <span class="pill">AI伺服器大電流電源線題材股</span>
+        <span class="pill">上櫃OTC</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="label">股價</div><div class="value">NT$269.00</div></div>
+      <div class="hero-stat"><div class="label">市值</div><div class="value">≈NT$458.1億</div></div>
+      <div class="hero-stat"><div class="label">TTM本益比</div><div class="value">≈28–29倍</div></div>
+      <div class="hero-stat"><div class="label">Thesis成立度</div><div class="value">3/5</div></div>
+      <div class="hero-stat"><div class="label">護城河</div><div class="value">★★★☆☆</div></div>
+      <div class="hero-stat"><div class="label">成長象限</div><div class="value">高速成長股（轉機切入期）</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="toc">
+  <h4>報告導覽</h4>
+  <div class="toc-grid">
+    <a href="#dd">【模式一】基本介紹</a>
+    <a href="#dd2">【模式一】業務引擎分析</a>
+    <a href="#dd3">【模式一】核心Thesis</a>
+    <a href="#dd4">【模式一】競爭格局</a>
+    <a href="#dd5">【模式一】成長象限＋護城河</a>
+    <a href="#er1">【模式二】Beat/Miss</a>
+    <a href="#er2">【模式二】指引變化</a>
+    <a href="#er3">【模式二】股價反應</a>
+    <a href="#er4">【模式二】三情境估值</a>
+    <a href="#er5">【模式二】股價位階</a>
+    <a href="#er6">【模式二】Comps分析</a>
+    <a href="#er7">【模式二】額外優勢/風險</a>
+    <a href="#er8">【模式二】目標價與建議</a>
+    <a href="#er9">【模式二】估值歷史錨點★</a>
+    <a href="#rk1">【模式三】財務數據</a>
+    <a href="#rk2">【模式三】六大比率</a>
+    <a href="#rk3">【模式三】債務到期</a>
+    <a href="#rk4">【模式三】CapEx分析</a>
+    <a href="#rk5">【模式三】同業對比</a>
+    <a href="#rk6">【模式三】綜合診斷</a>
+    <a href="#final">綜合總結與操作建議</a>
+  </div>
+</div>
+
+<div class="card conflict-box">
+<b>📌 資料衝突解決摘要（先讀）：</b> 本環境無Futu OpenD工具，全數改用WebSearch／Claude瀏覽器直讀鉅亨網、財報狗(statementdog)、HiStock、Yahoo奇摩股市、Goodinfo（遭Cloudflare阻擋，改用其餘來源）、Yahoo Finance歷史股價，並交叉核對群益投顧2026/6/29「良維(6290 TT) Trading Buy」原文報告(已存本機資料夾)。本次發現並解決之主要資料落差：①<b>上櫃掛牌日期</b>：鉅亨網顯示2002/12/27，另有多個網路來源（含使用者提供背景）顯示2005/6/3，兩者皆保留並標註；②<b>每股淨值/PB</b>：鉅亨網顯示BVPS 36.48元／PB 7.40倍，財報狗以2026Q2實際資產負債表(淨值8,138,156千元÷約1.696億股)反推約47.98元／PB≈5.6–5.9倍，本報告採財報狗直接反推值為主；③<b>EPS歷史數列基準不同</b>：群益模型全期以最新股本16.94億元回推EPS(如2023A=3.76元)，HiStock/財報狗以「當年度實際股本」計算EPS(2023A=4.17元)，兩者對稅後淨利本身無爭議，純屬股數基礎差異，本報告以HiStock「當年度實際股本」數列作為歷史本益比反推之主要依據，並於各處註明換算基礎；④<b>2026Q2單季表現</b>：實際EPS 1.82–1.83元、營收26.96億元，皆顯著低於群益6/29報告對2Q26F的預估(EPS 2.60元、營收29.55億元)，構成本報告Beat/Miss分析之核心發現。詳見各節內文標註。
+</div>
+
+<!-- ================= PART A 深度研究 ================= -->
+<div class="part-header"><span class="num">模式一</span><h2>公司深度研究</h2></div>
+
+<h3 class="sub" id="dd">1. 基本介紹</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">項目</th><th>數值</th><th class="left">狀態／說明</th></tr>
+<tr><td class="left">股價（2026-09-29 11:08盤中）</td><td>NT$269.00（-5.00，-1.82%）</td><td class="left"><span class="badge ok">✅已驗證</span> 鉅亨網／WebSearch同步報價</td></tr>
+<tr><td class="left">流通在外股數／股本</td><td>≈1.70億股／股本16.96億元</td><td class="left"><span class="badge ok">✅已驗證</span> 鉅亨網</td></tr>
+<tr><td class="left">市值</td><td><b>≈NT$458.06億元</b></td><td class="left"><span class="badge ok">✅已驗證</span> 鉅亨網盤中揭露</td></tr>
+<tr><td class="left">TTM營收（2025Q3–2026Q2，實際加總）</td><td>≈NT$105.11億元</td><td class="left"><span class="badge warn">⚠️估算</span> 由財報狗季損益表加總：25.30+26.74+26.10+26.96億元</td></tr>
+<tr><td class="left">2026年1–8月累計營收YoY</td><td>+9.34%（累計71.83億元）；8月單月YoY+18.19%（9.75億元）</td><td class="left"><span class="badge ok">✅已驗證</span> 公司公告，TechNews／MoneyDJ轉載</td></tr>
+<tr><td class="left">TTM毛利率（2025Q3–2026Q2加總計算）</td><td>≈30.5%</td><td class="left"><span class="badge warn">⚠️估算</span> 毛利合計3,320.1M÷營收合計10,510.75M；鉅亨網面板顯示31.19%為較早一期快照，兩者屬同一區間之不同估算基礎</td></tr>
+<tr><td class="left">TTM自由現金流(FCF)</td><td>NT$386.4百�万元(＋)</td><td class="left"><span class="badge ok">✅已驗證</span> 財報狗現金流量表「近四季自由現金流」欄位</td></tr>
+<tr><td class="left">所屬產業</td><td>電子零組件－連接元件／電源傳輸線組</td><td class="left"><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">市場地位</td><td>市場報導指良維為AWS資料中心大電流電源線最大供應商之一（市佔逾半）</td><td class="left"><span class="badge warn">⚠️估算</span> 出自CMoney股市爆料同學會轉述業界說法，非官方揭露之精確市佔數字，僅供方向性參考</td></tr>
+<tr><td class="left">董事長暨總經理</td><td>李淳正</td><td class="left"><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">成立日期</td><td>1972年9月5日</td><td class="left"><span class="badge ok">✅已驗證</span> 鉅亨網／使用者背景資料一致</td></tr>
+<tr><td class="left">上櫃掛牌日期</td><td>鉅亨網：2002/12/27；另有資料源（含使用者背景）：2005/6/3</td><td class="left"><span class="badge warn">⚠️估算</span> 兩來源不一致，本報告如實併陳，未能單獨查證公開資訊觀測站原始掛牌公告以判定何者為準，建議使用者自行查核MOPS</td></tr>
+</table></div>
+<div class="note">來源：<a href="https://www.cnyes.com/twstock/6290" target="_blank">鉅亨網-良維總覽</a>、<a href="https://statementdog.com/analysis/6290" target="_blank">財報狗</a>、群益投顧《良維(6290 TT) Trading Buy》2026/6/29</div>
+</div>
+
+<h3 class="sub" id="dd2">2. 業務引擎分析</h3>
+<div class="card">
+<p>良維科技成立於1972年9月，主要經營電源傳輸線組及轉接頭、訊號傳輸線組及其他產品，為全球電視（TV）電源線龍頭廠之一，近年積極轉型切入AI伺服器與資料中心所需的大電流電源線產品。依群益投顧2026/6/29報告揭露，2025年按產品類別營收占比為：各類電源傳輸線組91%、訊號傳輸線組6%、充電樁接頭與一體式充電器2%、其他1%。<span class="badge ok">✅已驗證</span>（參考群益投顧報告，2026-06-29）</p>
+
+<h4 style="margin-top:20px;">應用領域結構（依終端應用分類，2025年）</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">應用領域</th><th>2025年營收占比</th><th class="left">護城河來源／客戶結構</th></tr>
+<tr><td class="left">資料中心及伺服器（含AI大電流電源線）</td><td>≈36%</td><td class="left">五年前(約2020年)占比不到10%，2024年提升至24%，2025年增至約36%，為近兩年營收成長主要動能；主要客戶為CSP雲端服務供應商，市場報導其為AWS資料中心大電流電源線主要供應商之一。認證週期長、大電流/高功率技術門檻較高，是目前護城河最深的區塊</td></tr>
+<tr><td class="left">電腦及週邊設備</td><td>45%</td><td class="left">傳統基本盤業務，技術成熟、競爭相對激烈，毛利率較資料中心產品線低</td></tr>
+<tr><td class="left">影音視聽設備（TV電源線等傳統本業）</td><td>12%</td><td class="left">公司發跡本業，全球TV電源線龍頭地位，但為成熟型市場，成長動能有限</td></tr>
+<tr><td class="left">IoT物聯網及家用電器</td><td>4%</td><td class="left">利基型應用，占比穩定</td></tr>
+<tr><td class="left">電動車及充電站</td><td>3%</td><td class="left">公司明確表示目前對此領域「看法保守」，主因大陸市場競爭強烈、大陸車廠多採大陸供應鏈，台廠機會不大，投資與成長重點已轉向資料中心</td></tr>
+</table></div>
+<div class="note"><span class="badge ok">✅已驗證</span> 群益投顧2026/6/29報告內文（應用領域占比與五年前/2024/2025比較皆為報告原文數字）。伺服器內部連接線領域：公司訊號線業務受紅色供應鏈競爭，占比逐年下降，目前正積極尋找業界夥伴合作切入伺服器內部連接線市場，惟尚未有具體進度可驗證。</div>
+
+<h4 style="margin-top:20px;">近4期歷史財務摘要（單位：NT$百萬，除EPS外；EPS採當年度實際股本計算）</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">期間</th><th>營收</th><th>YoY</th><th>毛利率</th><th>營益率</th><th>EPS(元)</th><th>OCF</th></tr>
+<tr><td class="left">FY2022A</td><td>—</td><td>—</td><td>—</td><td>—</td><td>5.50</td><td>—</td></tr>
+<tr><td class="left">FY2023A</td><td>7,360</td><td>-5.49%</td><td>23.93%</td><td>8.19%</td><td>4.17</td><td>1,895</td></tr>
+<tr><td class="left">FY2024A</td><td>8,040</td><td>+9.24%</td><td>24.86%</td><td>11.89%</td><td>6.41</td><td>365</td></tr>
+<tr><td class="left">FY2025A</td><td>10,159</td><td>+26.34%</td><td>31.42%</td><td>17.87%</td><td>8.73</td><td>1,183</td></tr>
+<tr><td class="left">2026Q1+Q2（半年累計）</td><td>5,306</td><td>—</td><td>≈30.7%</td><td>≈15.2%</td><td>4.51</td><td>151（Q1+Q2合計，季度波動大）</td></tr>
+</table></div>
+<div class="note"><span class="badge ok">✅已驗證</span> HiStock歷年EPS表、財報狗損益表與現金流量表、群益投顧模型（2023-2025A營收/毛利率/營益率取群益報告資產負債表與損益表頁，OCF取群益現金流量表）。2022A僅EPS可查證，營收/毛利率等未見於本次取得資料源，標「—」。</div>
+
+<h4 style="margin-top:20px;">客戶結構與轉型進度</h4>
+<p style="font-size:13.5px;">良維近兩年成長動能主要來自資料中心及伺服器相關客戶（多為國際CSP雲端服務供應商）。生產基地方面，目前約7-8成大電流電源線在泰國生產，主要供應美國市場；泰國廠產能利用率約70-80%，並持續擴充中（泰國舊廠已由一廠擴充至二廠，並已購地籌建全新廠房），另有大陸新廠區及印度工廠擴產計畫。<span class="badge ok">✅已驗證</span>（參考群益投顧報告，2026-06-29）。<b>前五大客戶集中度：</b><span class="badge bad">❌無法取得</span>——本次查詢未取得公開揭露之精確集中度百分比，標「—」，建議查公司年報「主要客戶」章節。</p>
+</div>
+
+<h3 class="sub" id="dd3">3. 核心Thesis與未來性</h3>
+<div class="card">
+<h4>投資論點支柱</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">論點</th><th>狀態</th><th class="left">證據</th></tr>
+<tr><td class="left">① AI伺服器/資料中心大電流電源線帶動結構性成長</td><td><span class="badge ok">✅成立</span></td><td class="left">資料中心及伺服器營收占比由5年前不到10%提升至2025年約36%；2025年營收YoY+26.34%創近年新高；2026年8月單月營收年增18.19%創歷史新高</td></tr>
+<tr><td class="left">② 產品組合優化帶動毛利率結構性上升</td><td><span class="badge ok">✅成立</span></td><td class="left">毛利率由2023年23.93%→2024年24.86%→2025年31.42%，提升幅度顯著，與大電流產品占比擴大時序一致</td></tr>
+<tr><td class="left">③ 近期(2026Q2)獲利動能能否延續原模型節奏</td><td><span class="badge bad">❌未兌現</span></td><td class="left">2026Q2實際EPS僅1.82-1.83元、營收26.96億元，較群益6/29報告預估(EPS2.60元、營收29.55億元)明顯落後，季度營益率由Q1的17.0%降至Q2的13.4%（詳見模式二Beat/Miss分析）；顯示轉型故事雖方向正確，但短期兌現節奏出現雜訊，不宜線性外推</td></tr>
+<tr><td class="left">④ 伺服器內部連接線／訊號線新戰場拓展</td><td><span class="badge warn">⚠️部分成立</span></td><td class="left">公司明確表態積極尋找業界夥伴合作切入，惟截至本次查詢尚未見具體合作進度或訂單揭露，屬於未來性描述而非已驗證成果</td></tr>
+<tr><td class="left">⑤ 電動車領域為第二成長曲線</td><td><span class="badge bad">❌未兌現</span></td><td class="left">公司自身對電動車領域已轉為「保守」看法，明確表示大陸市場競爭強烈、台廠機會不大，此一度為市場想像空間的題材已被公司自己降溫</td></tr>
+</table></div>
+<p style="font-size:13px; color:var(--text-dim);">5根支柱中2根成立、1根部分成立、2根未兌現（近期執行節奏、電動車第二曲線），故Thesis成立度評為 <b>3/5</b>——核心「傳產線材轉AI伺服器電源」大方向確立，但最新一季財務數字尚未能驗證題材延續的線性度，需下一季（2026Q3，預估11月中公告）數字進一步確認。</p>
+
+<h4 style="margin-top:20px;">核心成長驅動力</h4>
+<ul>
+<li><b>CSP客戶大電流電源線需求持續放量：</b>AWS等雲端服務供應商資料中心資本支出擴張，帶動高毛利大電流產品線占比持續提升</li>
+<li><b>泰國/印度/大陸新產能陸續開出：</b>泰國廠稼動率70-80%並持續擴產，若如期投產可支撐未來1-2年出貨能力</li>
+<li><b>單月營收動能創高：</b>2026年7、8月連續雙位數年增，8月創歷史單月新高，顯示短期訂單能見度尚屬健康</li>
+</ul>
+
+<h4 style="margin-top:20px;">需監控風險（含觸發條件）</h4>
+<div class="risk-card"><b>風險①　題材炒作與獲利兌現節奏落差：</b> 觸發條件——若2026Q3(預估11月中公告)單季EPS/營益率再度顯著低於市場預期(如營益率跌破15%或EPS年增轉負)，將驗證Q2弱勢並非單季雜訊而是趨勢反轉，屆時本益比(現約28-29倍，遠高於5年均值約14.9倍)存在快速向下修正風險。影響程度：<span class="badge bad">高</span></div>
+<div class="risk-card amber"><b>風險②　客戶認證期長、大電流技術門檻被追趕：</b> 觸發條件——若主要CSP客戶轉單至其他線材廠或自行整合供應鏈，資料中心營收占比成長停滯。影響程度：<span class="badge warn">中</span></div>
+<div class="risk-card amber"><b>風險③　銅價與原物料成本波動：</b> 電源線組主要原料為銅，銅價大幅上漲將壓縮毛利率，觸發條件——毛利率連續兩季低於28%（2025年基準約31%）。影響程度：<span class="badge warn">中</span></div>
+<div class="risk-card amber"><b>風險④　融資模式依賴可轉債（借新還舊疑慮）：</b> 觸發條件——公司歷史上已發行至少9-10次無擔保轉換公司債（良維九、良維十等），市場論壇對此有「借債養債」之質疑；若未來仍需頻繁發債稀釋股本，將侵蝕每股價值。影響程度：<span class="badge warn">中</span>（詳見模式三財務健檢）</div>
+</div>
+
+<h3 class="sub" id="dd4">4. 競爭格局</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">公司</th><th>2026年8月累計營收YoY</th><th class="left">市場定位／優勢</th><th>對良維威脅度</th></tr>
+<tr><td class="left">貿聯-KY（3665）</td><td>+40.01%（累計626.33億元）</td><td class="left">全球連接線組大廠，規模遠大於良維（市值約4,670億元），名列NVIDIA 800VDC電源解決方案供應商名單，AI伺服器與電動車兩大賽道同時布局，成長速度更快</td><td><span class="badge bad">🔴 高</span></td></tr>
+<tr><td class="left">信邦（3023）</td><td>+13.93%（累計238.35億元）</td><td class="left">連接器/線材多元布局（含無人機、醫療、工業等），市值約769億元，規模與良維有一定差距但業務範疇更廣泛分散</td><td><span class="badge warn">🟡 中</span></td></tr>
+<tr><td class="left">健和興（3003）</td><td>+42.13%（累計40.83億元）</td><td class="left">市值約89億元，規模與良維接近，同屬電源線/連接器中小型廠，AI/資料中心題材同步發酵</td><td><span class="badge warn">🟡 中</span></td></tr>
+<tr><td class="left">大陸「紅色供應鏈」線材廠</td><td>—</td><td class="left">於訊號傳輸線組領域對良維形成長期價格競爭壓力，為良維該產品線占比逐年下滑之主因</td><td><span class="badge warn">🟡 中</span></td></tr>
+<tr><td class="left">傳統TV/家電電源線同業（未點名之中小型廠）</td><td>—</td><td class="left">成熟市場、價格競爭為主</td><td><span class="badge ok">🟢 低</span></td></tr>
+</table></div>
+<p style="font-size:12.5px; color:var(--text-faint);">良維個別在AI伺服器大電流電源線之全球精確市佔率<span class="badge bad">❌無法取得</span>，公開資料僅有市場論壇「市佔逾半」之轉述說法，未見官方或第三方研調機構之精確數字，標「—」。</p>
+</div>
+
+<h3 class="sub" id="dd5">5. 成長象限判斷與護城河評估</h3>
+<div class="grid2">
+<div class="card">
+<h4>Peter Lynch 成長象限判斷</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">判斷依據</th><th class="left">數據</th></tr>
+<tr><td class="left">2025年營收YoY</td><td class="left">+26.34%</td></tr>
+<tr><td class="left">2026H1營收YoY</td><td class="left">2026年1-8月累計+9.34%，8月單月+18.19%（成長率呈波動而非線性加速）</td></tr>
+<tr><td class="left">EPS YoY</td><td class="left">2025年+39.14%（實際股本口徑則2024→2025為+36.2%）；2026H1累計YoY+24%</td></tr>
+<tr><td class="left">產業本質</td><td class="left">電源線/連接元件屬電子零組件產業，需求與終端資本支出週期（資料中心、消費性電子）連動，具一定循環性</td></tr>
+<tr><td class="left">短期分類</td><td class="left"><b>高速成長股（Fast Grower）</b>——2025年營收/EPS增速遠超20%門檻，惟2026Q2已見放緩訊號</td></tr>
+<tr><td class="left">中長期本質</td><td class="left">傳統本業（TV/家電電源線）已進入成熟期，若扣除AI伺服器貢獻，公司整體成長性有限；目前正處於「傳產轉型科技題材」的<b>轉機股（Turnaround）</b>切入階段</td></tr>
+</table></div>
+<p style="font-size:13px; color:var(--text-dim);">綜合判斷：<b>現階段呈現高速成長股外觀，但本質更接近「傳產轉機股」</b>——真正驅動股價的是資料中心業務占比能否持續由36%再往上提升，一旦此一轉型故事的成長曲線趨緩，市場給予的高本益比評價基礎將動搖。</p>
+</div>
+<div class="card">
+<h4>護城河五維度評分</h4>
+<div class="moat-row"><span>不可替代性（大電流技術/認證門檻）</span><span class="stars">★★★☆☆</span></div>
+<div class="moat-row"><span>網路效應</span><span class="stars">★☆☆☆☆</span></div>
+<div class="moat-row"><span>客戶黏著度（CSP認證轉換成本）</span><span class="stars">★★★☆☆</span></div>
+<div class="moat-row"><span>成本優勢（東南亞產能佈局）</span><span class="stars">★★★☆☆</span></div>
+<div class="moat-row"><span>規模效應</span><span class="stars">★★☆☆☆</span></div>
+<p style="margin-top:14px; font-weight:700;">綜合評分：★★★☆☆（3.0／5）</p>
+<p style="font-size:13px; color:var(--text-dim);">護城河主要來自泰國等海外產能佈局與客戶認證黏著度，惟規模遠小於貿聯-KY等同業（市值約為貿聯-KY的十分之一），規模效應與議價能力相對有限，技術門檻亦非獨家不可取代。</p>
+</div>
+</div>
+
+<div class="action-box" style="margin-top:16px;">
+<h4>建議動作</h4>
+<p><b>當前建議：</b>若已持有，因2026Q2財報明顯遜於原模型預期（詳見模式二），且目前本益比(約28-29倍)遠高於5年均值(約14.9倍)與2022年熊市谷底估值(約8.7倍)，建議持有觀察但嚴設停利/停損，非新資金加碼時點；若未持有，不建議在Q3財報公布前（預估11月中）追高建倉，宜等待財報驗證轉型節奏是否重回軌道。</p>
+<p><b>加碼觸發（具體門檻）：</b>2026Q3單季EPS年增率恢復至20%以上、營益率回升至17%以上，且股價拉回至PE 18-20倍區間（約對應180-210元附近，⚠️估算基準）。</p>
+<p><b>賣出觸發（具體門檻）：</b>①單季營益率連續兩季低於15%；②資料中心/伺服器營收占比成長停滯或下滑；③再度發行新一輪可轉換公司債且稀釋幅度顯著；④毛利率連續兩季低於28%。</p>
+<p><b>每季監控指標：</b>月營收YoY、資料中心/伺服器營收占比、泰國廠稼動率與擴產進度、營益率變化、可轉債發行/轉換動態。</p>
+</div>
+
+<!-- ================= PART B 財報解析 ================= -->
+<div class="part-header"><span class="num">模式二</span><h2>最新財報解析（2026Q2，2026/8/7董事會通過）</h2></div>
+
+<h3 class="sub" id="er1">1. Beat/Miss 表</h3>
+<div class="card">
+<p style="font-size:13px; color:var(--text-dim);">良維並無廣泛法人覆蓋之即時市場共識資料庫可查（屬台股中小型OTC股，法人覆蓋家數有限），本節以群益投顧2026/6/29報告對2026Q2的預估值（2Q26F，發布時point-in-time最新模型）作為比較基準。</p>
+<div class="tblwrap"><table>
+<tr><th class="left">指標</th><th>2026Q2實際</th><th>群益6/29預估(2Q26F)</th><th>差異</th><th>YoY</th><th>判定</th></tr>
+<tr><td class="left">營業收入（百萬元）</td><td>2,696</td><td>2,955</td><td>-8.8%</td><td>+11.5%（估）</td><td><span class="badge bad">❌Miss</span></td></tr>
+<tr><td class="left">毛利（百萬元）</td><td>815</td><td>923</td><td>-11.7%</td><td>—</td><td><span class="badge bad">❌Miss</span></td></tr>
+<tr><td class="left">營業利益（百萬元，估算）</td><td>361（毛利815-營業費用454）</td><td>557</td><td>-35.2%</td><td>—</td><td><span class="badge bad">❌Miss</span></td></tr>
+<tr><td class="left">稅前純益（百萬元）</td><td>439</td><td>571</td><td>-23.1%</td><td>—</td><td><span class="badge bad">❌Miss</span></td></tr>
+<tr><td class="left">稅後純益－母公司業主（百萬元）</td><td>310</td><td>440</td><td>-29.5%</td><td>—</td><td><span class="badge bad">❌Miss</span></td></tr>
+<tr><td class="left">EPS（元）</td><td>1.82–1.83</td><td>2.60</td><td>-29.6%</td><td>+72%（YoY對比2025Q2的低基期0.99-1.06元）</td><td><span class="badge bad">❌Miss</span></td></tr>
+<tr><td class="left">毛利率</td><td>30.23%</td><td>31.24%</td><td>-1.0ppt</td><td>—</td><td><span class="badge warn">⚠️輕微Miss</span></td></tr>
+<tr><td class="left">營業利益率（估算）</td><td>13.38%</td><td>18.87%</td><td>-5.5ppt</td><td>—</td><td><span class="badge bad">❌Miss</span></td></tr>
+</table></div>
+<p style="font-size:13px;"><b>結論：</b>2026Q2財報全面遜於群益投顧6/29模型預期，營收、毛利、營業利益、EPS皆為顯著Miss，其中營業利益率降幅最大（-5.5ppt）。細看財報狗損益表明細，Q2營業費用達454.3百萬元（Q1為369.7百萬元，QoQ+22.9%），其中研發費用由31.1百萬元躍升至45.9百萬元（QoQ+47.6%）、銷售費用亦由269.1百萬元增至324.3百萬元（QoQ+20.5%），推測與新客戶/新產能認證投入及拓展資料中心業務相關費用增加有關；惟因公司未於公開資料中說明費用增加具體原因，此為<span class="badge warn">⚠️推論</span>而非官方證實之解釋，建議查閱法說會簡報或財報附註確認。單看YoY，因2025Q2為低基期（EPS僅0.99-1.06元，受業外損失影響），故EPS年增仍達+72%，但此高成長率主要是「低基期」效果，QoQ環比實際下滑32%，不宜僅憑YoY判斷動能加速。</p>
+<div class="note">來源：財報狗損益表（2026Q1/Q2實際數字）；群益投顧《良維(6290 TT) Trading Buy》2026/6/29報告表格（2Q26F預估欄位）</div>
+</div>
+
+<h3 class="sub" id="er2">2. 全年指引變化</h3>
+<div class="card">
+<p style="font-size:13px; color:var(--text-dim);">良維未發布正式財測guidance（台灣中小型股常態），本節以市場法人預估修正幅度替代呈現。</p>
+<div class="tblwrap"><table>
+<tr><th class="left">項目</th><th>2026/6/29（群益模型）</th><th>2026/9月（法人共識，經cmoney/readmo轉述）</th><th>調幅</th></tr>
+<tr><td class="left">2026F EPS</td><td>10.73元（群益單家模型）</td><td>10.35元（2家機構共識，9月轉述）</td><td>▼約-3.5%（下修，時間點在Q2財報公布之後）</td></tr>
+<tr><td class="left">2027F EPS</td><td>11.86元</td><td>11.86元（1家機構，9月轉述，數字未變）</td><td>持平</td></tr>
+<tr><td class="left">本報告以「Q1實際+Q2實際+群益Q3F/Q4F」滾動試算之2026F EPS</td><td colspan="2">≈9.95元（2.68+1.83+2.74+2.71，⚠️估算）</td><td>較群益原模型再低約-7.3%</td></tr>
+<tr><td class="left">投資評等（群益）</td><td>Trading Buy（區間操作），目標價323元</td><td>本次查詢未見公開之評等調整公告</td><td>—</td></tr>
+</table></div>
+<div class="note"><span class="badge warn">⚠️估算</span> 「2026/9月法人共識10.35元/11.86元」出自cmoney/readmo.ai彙整文章轉述之「2家機構」「1家機構」預估，未能取得各機構具體名稱與原始報告，數字精確度有限，僅供方向參考；本報告另以已知Q1/Q2實際值+群益Q3F/Q4F滾動試算之9.95元作為更保守的內部估算對照。三個數字（10.73／10.35／9.95）呈現遞減趨勢，反映市場對下半年獲利預期隨Q2財報Miss而逐步下修。</div>
+</div>
+
+<h3 class="sub" id="er3">3. 股價反應</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">時間點</th><th>股價</th><th class="left">說明</th></tr>
+<tr><td class="left">2026/6/2（波段高點）</td><td>365.71元</td><td class="left">AI伺服器/資料中心題材市場情緒高點，籌碼面資料顯示知名分點於此波段大舉買超約1,385張，帳上獲利一度達2.1億元</td></tr>
+<tr><td class="left">2026/6/29（群益報告發布日）</td><td>前日收盤300.50元</td><td class="left">群益投顧發布Trading Buy評等、目標價323元（隱含當時潛在漲幅約7.5%）</td></tr>
+<tr><td class="left">2026年7月初</td><td>股價跌破季線</td><td class="left">籌碼面顯示前波主力分點於此時整體出場，落袋約9,262萬元獲利</td></tr>
+<tr><td class="left">2026/8/7（2026Q2財報董事會通過）</td><td>約220-230元區間（估）</td><td class="left">財報顯示EPS/營收/營益率全面Miss群益模型，惟8月營收同期公告創新高，市場情緒分歧</td></tr>
+<tr><td class="left">2026/8/24-25</td><td>227→239元（單日+7.33%）</td><td class="left">8月營收創新高消息帶動股價反彈，市場聚焦AI伺服器與資料中心題材延續</td></tr>
+<tr><td class="left">2026/9/4</td><td>盤中觸及漲停268元</td><td class="left">量能明顯放大，投資人追捧題材</td></tr>
+<tr><td class="left">2026/9/29（分析當日）</td><td>269.00元（盤中，-1.82%）</td><td class="left">股價自6月高點365.71元回落約26.5%，目前於260-280元區間高檔震盪</td></tr>
+</table></div>
+<div class="note">來源：cmoney readmo.ai彙整文章（籌碼面說明）、鉅亨網股價與公告紀錄、群益投顧報告</div>
+</div>
+
+<h3 class="sub" id="er4">4. 三情境估值（自建情境框架，非引用單一機構DCF）</h3>
+<div class="card">
+<p style="font-size:13px; color:var(--text-dim);"><span class="badge warn">⚠️估算</span> 良維為台股中小型OTC股，公開可得之法人報告（群益投顧）採本益比法給目標價，並無公開之完整多年期DCF模型可供引用。本節依營收/獲利假設自建三情境本益比推算框架，並以現金流概況輔助檢視，假設參數均為本報告推算估計值，非引用單一機構之正式DCF模型，請審慎參考。</p>
+<div class="grid3">
+<div class="scenario-card bear">
+<h4>熊市 Bear</h4>
+<div class="tp">NT$130–150元</div>
+<ul>
+<li>營收假設：Q3/Q4 2026成長動能持續放緩，全年營收YoY降至個位數(<10%)，資料中心業務認證/放量不如預期</li>
+<li>2026F EPS：≈9.0元（Q2 Miss延續至下半年）</li>
+<li>本益比：向5年均值(≈14.9倍)以下修正，反映AI敘事降溫，採14-16倍</li>
+<li>對應：9.0元 × 14-16倍 ≈ NT$126-144元</li>
+</ul>
+</div>
+<div class="scenario-card base">
+<h4>基準 Base</h4>
+<div class="tp">NT$210–250元</div>
+<ul>
+<li>營收假設：全年營收YoY恢復至10-15%，資料中心占比穩定提升但非加速</li>
+<li>2026F EPS：≈10.0-10.35元（採9月法人共識中樞）</li>
+<li>本益比：維持高於5年均值但低於現值的21-24倍（反映AI溢價但已計入Q2 Miss疑慮）</li>
+<li>對應：10.0-10.35元 × 21-24倍 ≈ NT$210-248元</li>
+</ul>
+</div>
+<div class="scenario-card bull">
+<h4>牛市 Bull</h4>
+<div class="tp">NT$320–360元</div>
+<ul>
+<li>營收假設：Q3/Q4強力回升驗證轉型故事，2027F EPS 11.86元提前反映</li>
+<li>本益比：維持現行28-30倍高檔（等同6月題材高峰時之評價水準）</li>
+<li>對應：11.86元(2027F) × 27-30倍 ≈ NT$320-356元；亦接近群益原目標價323元</li>
+</ul>
+</div>
+</div>
+<p style="font-size:13px; margin-top:14px;"><b>敏感度說明：</b>對估值影響最大的變數是「本益比倍數假設」而非EPS本身——同一EPS(約10元)在14倍與29倍本益比下，對應股價差距達2倍以上(140元 vs 290元)。這反映良維目前的評價高度仰賴「AI伺服器故事能否持續兌現」的市場情緒，而非單純財務模型可精算，此為題材股估值的典型特徵，亦是本節無法採用傳統穩定成長股DCF模型的根本原因。目前股價269元落在基準情境上緣至牛市情境下緣之間，顯示市場定價仍偏樂觀，尚未完全消化Q2 Miss的疑慮。</p>
+</div>
+
+<h3 class="sub" id="er5">5. 股價位階評估</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">絕對估值指標</th><th>數值</th><th class="left">判讀</th></tr>
+<tr><td class="left">TTM PE（近四季EPS≈9.4-9.6元）</td><td>≈28.0-29.2倍</td><td class="left"><span class="badge warn">⚠️估算</span> 不同來源(鉅亨網28.02倍／財報狗29.17倍)因快照時間點股價不同而略有差異；遠高於5年均值(≈14.9倍)</td></tr>
+<tr><td class="left">Forward PE（2026F EPS，採法人共識中樞10.35元）</td><td>≈26.0倍（以現價269元計）</td><td class="left">若採本報告保守滾動估算9.95元，則Forward PE≈27.0倍，估值仍偏貴</td></tr>
+<tr><td class="left">PB（BVPS，以2026Q2財報淨值反推≈47.98元計）</td><td>≈5.6倍</td><td class="left"><span class="badge warn">⚠️估算</span> 鉅亨網面板另顯示PB 7.40倍（BVPS 36.48元），財報狗顯示5.89倍，三者基礎不一致，本報告採財報狗與自行反推較接近之5.6-5.9倍區間</td></tr>
+<tr><td class="left">PEG（TTM PE 28.5倍 ÷ 2025年EPS YoY 39.1%）</td><td>≈0.73</td><td class="left"><span class="badge warn">⚠️估算</span> 若改用2026F預期EPS成長率(以9.95-10.35元對2025年8.73元計算，YoY僅約14-19%)，PEG將升至約1.5-2.0，顯示若採前瞻成長率而非落後成長率計算，目前估值已不算便宜</td></tr>
+</table></div>
+<h4 style="margin-top:18px;">EPS成長趨勢（近4期單季YoY，％）</h4>
+<div class="tblwrap"><table>
+<tr><th>期間</th><th>2025Q3</th><th>2025Q4</th><th>2026Q1</th><th>2026Q2</th></tr>
+<tr><td class="left">EPS（元）</td><td>2.57</td><td>2.54</td><td>2.68</td><td>1.82-1.83</td></tr>
+<tr><td class="left">YoY</td><td>+246.6%（低基期）</td><td>+25.9%</td><td>+11.2%</td><td>+72%（低基期）</td></tr>
+</table></div>
+<p style="font-size:13px;"><b>判讀：</b>EPS YoY近4季波動極大（+246.6%→+25.9%→+11.2%→+72%），主要受2025Q2單季基期異常偏低影響（0.99-1.06元），而非穩定加速。若改看QoQ環比，2026Q2實際上是「季減32%」，與本益比同期維持在28-29倍高檔形成落差——即獲利動能環比走弱，但估值倍數並未同步收斂，屬於「估值尚未跟上基本面轉弱」的風險狀態，而非典型戴維斯雙擊（EPS與估值同步加速）的健康型態，提醒投資人不宜僅憑YoY數字判斷公司正處於加速成長期。</p>
+</div>
+
+<h3 class="sub" id="er6">6. Comps分析（同業比較）</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">公司</th><th>市值</th><th>本益比(TTM)</th><th>2026年8月累計營收YoY</th><th>2026Q2 EPS YoY</th><th class="left">成長類型</th></tr>
+<tr><td class="left"><b>良維 6290</b></td><td>≈458.1億元</td><td>≈28.0-29.2倍</td><td>+9.34%</td><td>+72%（低基期）</td><td class="left">傳產轉型AI題材股（轉機切入期）</td></tr>
+<tr><td class="left">貿聯-KY 3665</td><td>≈4,670.1億元</td><td>≈50.9倍</td><td>+40.01%</td><td>+46%</td><td class="left">全球化連接線組龍頭型成長股</td></tr>
+<tr><td class="left">信邦 3023</td><td>≈769.4億元</td><td>≈24.0倍</td><td>+13.93%</td><td>+19%</td><td class="left">多元業務布局型穩健成長股</td></tr>
+<tr><td class="left">健和興 3003</td><td>≈88.9億元</td><td>≈23.0倍</td><td>+42.13%</td><td>—</td><td class="left">同體量AI/資料中心受惠型中小型股</td></tr>
+</table></div>
+<p style="font-size:13px;"><b>溢價/折價合理性：</b>良維本益比(28-29倍)高於信邦(24.0倍)、健和興(23.0倍)兩家規模相近或更活躍成長的同業，卻低於規模遠大、成長更快的龍頭貿聯-KY(50.9倍)。值得注意的是，良維8月累計營收YoY(+9.34%)明顯落後於健和興(+42.13%)、貿聯-KY(+40.01%)甚至信邦(+13.93%)，但估值倍數並未相對折價，顯示市場目前給予良維的評價更多是「題材溢價」而非「基本面相對優勢」的反映，此為股價位階評估中「估值尚未跟上基本面」判讀的另一佐證。EV/Revenue、FCF Yield等進一步指標<span class="badge bad">❌無法取得</span>可靠可比數字，標「—」。</p>
+<div class="note">來源：WebSearch整合鉅亨網/statementdog/各公司月營收公告，2026年9月數據</div>
+</div>
+
+<h3 class="sub" id="er7">7. 額外優勢／風險</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">項目</th><th class="left">內容</th><th>狀態</th></tr>
+<tr><td class="left">股票回購（庫藏股）</td><td class="left">本次查詢未見現行庫藏股買回計畫公告</td><td><span class="badge bad">❌無法取得</span></td></tr>
+<tr><td class="left">外資持股</td><td class="left">2026/6/29為15.22%；9月市場資訊顯示已降至約6-8%左右（呈明顯下降趨勢）</td><td><span class="badge warn">⚠️估算</span> 9月數字精確度有限，僅供趨勢參考，建議查台灣證交所三大法人買賣超日報確認精確值</td></tr>
+<tr><td class="left">投信持股</td><td class="left">2026/6/29為0.00%</td><td><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">董監持股</td><td class="left">2026/6/29為7.46%</td><td><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">融資餘額</td><td class="left">2026/6/29為16,089張，散戶信用交易參與度不低，波動風險需留意</td><td><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">股利政策</td><td class="left">2025年度現金股息配發率71.02%；年股利6.19元；殖利率2.26%（以現價269元計）</td><td><span class="badge ok">✅已驗證</span></td></tr>
+<tr><td class="left">可轉債動態（內部人稀釋風險相關）</td><td class="left">「良維十」(629010)發行總額8億元，因流通餘額低於原發行10%，公司已行使贖回權，2026/9/1-9/30收回、10/1終止櫃買；另「良維九」(62909)轉換率已達96.32%，2027/3/7到期。歷史上公司已發行至少9-10次無擔保轉換公司債，市場論壇對此有「借新還舊」式財務操作之質疑</td><td><span class="badge warn">⚠️估算</span> CB本身是財務事實(已驗證)，惟「借債養債」屬論壇評論性質意見，非官方立場，列為中性風險觀察點</td></tr>
+<tr><td class="left">ESG</td><td class="left">深圳廠(良穎電子)維持ISO 14001/45001認證，依ISO 14064-1執行溫室氣體盤查，訂有2030年減碳30%目標</td><td><span class="badge ok">✅已驗證</span> 參考群益投顧報告(2026-06-29)</td></tr>
+</table></div>
+<div class="note">來源：群益投顧報告(2026-06-29)、鉅亨網公告、WebSearch整合CB相關新聞公告</div>
+</div>
+
+<h3 class="sub" id="er8">8. 投行目標價與操作建議</h3>
+<div class="card">
+<h4>投行評等目標價表</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">機構</th><th>日期</th><th>評等</th><th>目標價</th><th class="left">計算依據</th></tr>
+<tr><td class="left">群益投顧</td><td>2026-06-29</td><td>Trading Buy（區間操作）</td><td>NT$323（3個月與12個月目標價相同）</td><td class="left">報告原文未於內文明列「EPS×PE」計算公式文字，僅列出目標價數字；經本報告反推，323元約當2026F EPS 10.73元的30.1倍、或2027F EPS 11.86元的27.2倍，落在報告揭露之Forward PE Band圖表(7X/14X/21X/28X/35X)的28-35倍區間內，屬於報告自身河流圖框架下的中高檔區</td></tr>
+<tr><td class="left">市場法人（2家機構，9月轉述）</td><td>2026年9月（cmoney/readmo轉述，未附機構名稱）</td><td>—（未見評等文字）</td><td>—（原文未提供目標價，僅提供EPS預估10.35元）</td><td class="left">原文以「目前股價/明年預估獲利」回推前瞻本益比約22.43倍(股價283.5元時點)，並非正式目標價，標「—」</td></tr>
+</table></div>
+<div class="note"><span class="badge warn">⚠️估算</span> 本次查詢僅取得群益投顧單一份完整原文報告，其餘為WebSearch二手轉述之片段EPS預估，並無法找到具名機構之最新目標價公告，反映良維作為中小型OTC股，法人覆蓋家數確實有限，不宜將少數轉述數字視為「市場共識」。</div>
+
+<h4 style="margin-top:20px;">主要分歧點</h4>
+<div class="grid2">
+<div class="card" style="background:var(--green-bg); border:none;">
+<b>樂觀派論點</b>
+<ul style="font-size:13px;">
+<li>資料中心/伺服器營收占比五年內由不到10%大幅提升至36%，轉型趨勢方向明確</li>
+<li>8月營收創歷史新高，7-8月連續雙位數年增，短期訂單能見度尚屬健康</li>
+<li>泰國/印度新產能持續開出，具備中期產能擴張支撐</li>
+</ul>
+</div>
+<div class="card" style="background:var(--amber-bg); border:none;">
+<b>謹慎派論點</b>
+<ul style="font-size:13px;">
+<li>2026Q2財報全面Miss群益模型，營益率QoQ明顯走弱，獲利兌現節奏出現雜訊</li>
+<li>現行本益比(28-29倍)遠高於5年均值(14.9倍)與2022年估值低點(8.7倍)，安全邊際薄弱</li>
+<li>公司歷史上高度依賴連續發行可轉換公司債籌資，存在稀釋股本疑慮</li>
+<li>累計營收YoY(9.34%)遠低於同業健和興(42.13%)、貿聯-KY(40.01%)，成長相對優勢不明顯卻享有題材溢價</li>
+</ul>
+</div>
+</div>
+
+<h4 style="margin-top:20px;">上行空間彙總表（基準現價NT$269.00）</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">參考點</th><th>對應股價</th><th>相對現價空間</th></tr>
+<tr><td class="left">群益投顧目標價（2026/6/29）</td><td>323元</td><td>+20.1%</td></tr>
+<tr><td class="left">本報告基準情境（Base）</td><td>210-250元</td><td>-21.9%~-7.1%</td></tr>
+<tr><td class="left">本報告牛市情境（Bull）</td><td>320-360元</td><td>+19.0%~+33.8%</td></tr>
+<tr><td class="left">本報告熊市情境（Bear）</td><td>130-150元</td><td>-51.7%~-44.2%</td></tr>
+<tr><td class="left">5年平均PE反推（詳見估值歷史錨點）</td><td>約148-154元</td><td>-45.0%~-42.8%</td></tr>
+</table></div>
+
+<div class="action-box" style="margin-top:16px;">
+<h4>操作建議</h4>
+<p><b>已持有：</b>2026Q2財報Miss疊加估值處於歷史高檔，建議嚴設停損（跌破220元／季線視為轉弱訊號），部位不宜加碼，可等待Q3財報（預估11月中）驗證後再決定去留。</p>
+<p><b>考慮建倉：</b>不建議現階段追高，建議等待股價拉回至PE 20倍以下（約對應200元附近，⚠️估算）或Q3財報明確驗證營益率回升至17%以上再行評估。</p>
+<p><b>加碼觸發：</b>Q3單季EPS年增(排除基期效應)＞20%且營益率回升至17%以上。</p>
+<p><b>停損警示：</b>股價跌破220元（約當PE 22倍，接近同業信邦/健和興估值水準）且伴隨營收YoY轉負。</p>
+</div>
+</div>
+
+<h3 class="sub" id="er9">9. 估值歷史錨點 ★（強制規則）</h3>
+<div class="card">
+<h4>多年期EPS實際值vs預估值表</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">年度</th><th>EPS（元）</th><th class="left">性質／來源</th></tr>
+<tr><td class="left">2022</td><td>5.50</td><td class="left">A（實際，當年度實際股本口徑，HiStock）</td></tr>
+<tr><td class="left">2023</td><td>4.17</td><td class="left">A（實際，當年度實際股本口徑，HiStock；群益模型以最新股本換算為3.76）</td></tr>
+<tr><td class="left">2024</td><td>6.41</td><td class="left">A（實際，當年度實際股本口徑，HiStock；群益模型換算5.97）</td></tr>
+<tr><td class="left">2025</td><td>8.73</td><td class="left">A（實際，HiStock／財報狗一致；群益模型換算8.30）</td></tr>
+<tr><td class="left">2026</td><td>10.73（群益6/29單家模型）／10.35（2家機構9月共識，cmoney轉述）／9.95（本報告以Q1+Q2實際+群益Q3F/Q4F滾動試算）</td><td class="left">E（預估，三個數字並列，呈遞減趨勢，區間跨度約-7.3%，分歧不算極端但方向一致向下修正，反映Q2 Miss影響）</td></tr>
+<tr><td class="left">2027</td><td>11.86</td><td class="left">E（群益模型，9月轉述1家機構數字未變）</td></tr>
+<tr><td class="left">2028</td><td>—</td><td class="left">❌無法取得，本次查詢未見任何機構2028年預估</td></tr>
+</table></div>
+<div class="note">⚠️提醒：2026年EPS預估三個來源(10.73/10.35/9.95)分歧不算極端但呈現一致下修趨勢，反映Q2財報公布後市場對下半年獲利的疑慮上升，不可僅取單一數字視為共識。</div>
+
+<h4 style="margin-top:20px;">歷史本益比錨點表</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">錨點</th><th>本益比</th><th class="left">計算基礎</th></tr>
+<tr><td class="left">2018年最低本益比（上次主要市場修正估值）</td><td>約20.5倍</td><td class="left">2018年10月盤中低點23.40元 ÷ 2018年EPS 1.14元（⚠️估算）。附註：2018年適逢公司自身獲利同步走弱（EPS為近年最低點），股價重挫近70%主要由獲利端主導而非純估值擠壓，此本益比低點的「估值支撐」參考意義相對較弱</td></tr>
+<tr><td class="left">2022年最低本益比（熊市谷底估值）</td><td>約8.7倍</td><td class="left">2022年10月盤中低點48.00元 ÷ 2022年EPS 5.50元（⚠️估算）。2022年全年股價區間約48-58元、相對平穩，獲利也維持一定水準，此本益比低點較能反映「非題材炒作、正常獲利」時期的估值下限，參考意義較強</td></tr>
+<tr><td class="left">5年平均本益比(TTM，2021-2025)</td><td>約14.9倍</td><td class="left">⚠️估算，以各年度12月收盤價÷當年度EPS(HiStock口徑)計算年末PE後取算術平均：2021年17.3倍、2022年9.6倍、2023年15.6倍、2024年11.5倍、2025年20.7倍，平均≈14.9倍。方法論簡化(僅用年末單一時點)，非全年逐日平均，僅供方向參考</td></tr>
+<tr><td class="left">當前TTM本益比（2026-09-29）</td><td>≈28.0-29.2倍</td><td class="left">✅已驗證（鉅亨網/財報狗），約為5年均值的1.9倍，亦高於2025年末已偏高的20.7倍</td></tr>
+</table></div>
+
+<h4 style="margin-top:20px;">反推試算（必寫結論）</h4>
+<div class="tblwrap"><table>
+<tr><th class="left">情境</th><th>採用本益比</th><th>採用EPS</th><th>反推股價</th><th>與現價269元比較</th></tr>
+<tr><td class="left">5年平均PE × 保守2026F EPS</td><td>14.9倍</td><td>9.95元（本報告保守估）</td><td>≈148元</td><td>現價溢價+81.8%</td></tr>
+<tr><td class="left">2022年熊市谷底PE × 保守2026F EPS</td><td>8.7倍</td><td>9.95元</td><td>≈87元</td><td>現價溢價+209%</td></tr>
+<tr><td class="left">5年平均PE × 群益樂觀2026F EPS</td><td>14.9倍</td><td>10.73元</td><td>≈160元</td><td>現價溢價+68.1%</td></tr>
+</table></div>
+<p style="font-size:13.5px;"><b>結論（必寫）：</b>即使採用群益投顧原始模型中相對樂觀的2026F EPS(10.73元)，以歷史5年平均本益比(14.9倍)反推之合理股價僅約160元，仍遠低於現價269元逾40%；若改用更保守的2026F EPS估算(9.95元)，反推股價僅約148元，落差更大達45%以上；若以2022年最後一次「非題材期」的估值低點(8.7倍)反推，合理股價僅約87元，落差高達68%。三種反推情境一致指向同一結論：<b>目前股價主要是由「本益比倍數擴張」撐起，而非由EPS成長撐起</b>——過去5年公司EPS確實由個位數成長至8.73元，成長性真實存在，但股價從2023年末約65元漲至現在269元(漲幅逾3倍)，遠超過同期EPS成長倍數(約2.1倍，4.17→8.73再往後展望至9.95-10.73)，顯示這波漲勢有相當大比例來自「AI伺服器故事」帶動的估值重估(re-rating)，而非純粹獲利驅動。疊加2026Q2財報已出現Miss訊號，若後續EPS成長不能持續加速驗證題材，本益比向歷史區間（甚至僅是5年均值14.9倍）回歸的下修風險不低，這是本報告對「操作建議」設定嚴格停損門檻的核心依據。</p>
+</div>
+
+<!-- ================= PART C 財務健檢 ================= -->
+<div class="part-header"><span class="num">模式三</span><h2>財務風險健檢</h2></div>
+
+<h3 class="sub" id="rk1">1. 財務數據填表（近3期對照）</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">損益表項目（百萬元）</th><th>2025Q3</th><th>2025Q4</th><th>2026Q1</th><th>2026Q2</th></tr>
+<tr><td class="left">營業收入</td><td>2,530</td><td>2,674</td><td>2,610</td><td>2,696</td></tr>
+<tr><td class="left">營業利益（估算=毛利-營業費用）</td><td>396</td><td>427</td><td>444</td><td>361</td></tr>
+<tr><td class="left">EBITDA（估算=營業利益+折舊攤銷）</td><td>458</td><td>492</td><td>513</td><td>430</td></tr>
+<tr><td class="left">折舊＋攤銷</td><td>61</td><td>65</td><td>69</td><td>69</td></tr>
+<tr><td class="left">利息支出</td><td colspan="4" style="text-align:center;">❌無法取得（未單獨揭露，多數季度短期借款為0，⚠️估計實際現金利息支出極低，建議查季報附註「財務成本」）</td></tr>
+</table></div>
+<div class="tblwrap" style="margin-top:16px;"><table>
+<tr><th class="left">資產負債表項目（百萬元）</th><th>2025Q3</th><th>2025Q4</th><th>2026Q2</th></tr>
+<tr><td class="left">總資產</td><td>10,244</td><td>11,189</td><td>13,583</td></tr>
+<tr><td class="left">總負債</td><td>3,201</td><td>2,963</td><td>5,445</td></tr>
+<tr><td class="left">淨值</td><td>7,043</td><td>8,227</td><td>8,138</td></tr>
+<tr><td class="left">現金及約當現金</td><td>1,276</td><td>1,591</td><td>2,786</td></tr>
+<tr><td class="left">計息負債合計（短期借款+一年內到期長期負債+長期負債）</td><td>—</td><td>—</td><td>1,486</td></tr>
+<tr><td class="left">一年內到期長期負債</td><td>9（估）</td><td>12</td><td>278</td></tr>
+</table></div>
+<div class="tblwrap" style="margin-top:16px;"><table>
+<tr><th class="left">現金流量表項目（百萬元）</th><th>2025Q3</th><th>2025Q4</th><th>2026Q1</th><th>2026Q2</th></tr>
+<tr><td class="left">營業活動現金流(OCF)</td><td>219</td><td>301</td><td>137</td><td>14</td></tr>
+<tr><td class="left">資本支出(CapEx)</td><td>-163</td><td>-70</td><td>-29</td><td>-23</td></tr>
+<tr><td class="left">自由現金流(FCF)</td><td>56</td><td>231</td><td>109</td><td>-9</td></tr>
+</table></div>
+<div class="note"><span class="badge ok">✅已驗證</span> 財報狗損益表/總資產/負債和股東權益/現金流量表頁面，2025Q3-2026Q2四季實際數字。總負債於2026Q1/Q2明顯攀升，主因「良維十」可轉換公司債(發行總額8億元)於當時仍大部分列於資產負債表計息負債項下，詳見下節說明。</div>
+</div>
+
+<h3 class="sub" id="rk2">2. 六大比率診斷</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">比率</th><th class="left">公式</th><th>結果（2026Q2/TTM）</th><th>狀態</th><th class="left">警戒標準</th></tr>
+<tr><td class="left">利息覆蓋率</td><td class="left">EBIT ÷ 利息支出</td><td><span class="badge bad">❌無法取得</span>精確值；方向性判斷極高(計息負債多為低/零票息可轉債，短期銀行借款多數季度為0)</td><td><span class="badge info">方向健康</span></td><td class="left">＜3倍為警戒</td></tr>
+<tr><td class="left">負債比率</td><td class="left">總負債 ÷ 總資產</td><td>40.1%（2026Q2：5,445÷13,583）</td><td><span class="badge warn">⚠️需留意</span></td><td class="left">＞60%為警戒；惟本期偏高主因可轉債未完全轉換(見下方說明)，非傳統銀行融資槓桿</td></tr>
+<tr><td class="left">淨負債/EBITDA</td><td class="left">(計息負債-現金) ÷ TTM EBITDA</td><td>≈-0.69倍（淨現金部位：計息負債1,486M－現金2,786M＝淨現金1,300M；TTM EBITDA≈1,892M）</td><td><span class="badge ok">✅健康</span></td><td class="left">＞3倍為警戒；本公司為淨現金部位，遠優於警戒線</td></tr>
+<tr><td class="left">OCF/計息負債</td><td class="left">TTM OCF ÷ 計息負債</td><td>≈45.2%（TTM OCF約671M ÷ 計息負債1,486M）</td><td><span class="badge ok">✅健康</span></td><td class="left">＜20%為警戒</td></tr>
+<tr><td class="left">現金流覆蓋比率</td><td class="left">TTM OCF ÷ 一年內到期長期負債</td><td>≈2.41倍（671M÷278M）</td><td><span class="badge ok">✅健康</span></td><td class="left">＜1倍為警戒</td></tr>
+<tr><td class="left">兩年內到期牆覆蓋倍數</td><td class="left">現金 ÷ (短期借款+一年內到期長期負債)</td><td>≈10.0倍（現金2,786M÷278M，短期借款為0）；⚠️若保守假設2年內到期負債為1年內數字之1.5倍，覆蓋倍數仍約6.7倍</td><td><span class="badge ok">✅健康</span></td><td class="left">＜1倍為警戒</td></tr>
+</table></div>
+<div class="note"><b>重要說明：</b>2026Q2總負債／負債比率明顯較2025Q4攀升，主因「良維十」無擔保轉換公司債（發行總額NT$8億元）截至2026年6月30日資產負債表日仍大部分列於計息負債項下；惟截至2026/8/25，該可轉債流通餘額已降至僅620萬元（轉換價74.4元遠低於當時股價239元，促使債權人大量轉股），公司已依規行使贖回權，債券已於2026/10/1終止櫃檯買賣。換言之，帳面上「總負債攀升」實質是股權稀釋(可轉債轉換為普通股)而非現金償還壓力，實際流動性風險遠低於負債比率數字表面顯示的程度。惟另需留意：公司歷史上已連續發行至少9-10次無擔保轉換公司債（良維九、良維十等），此融資模式若持續，將構成長期股本稀釋壓力，屬於財務體質的「隱性風險」而非「流動性風險」。</div>
+</div>
+
+<h3 class="sub" id="rk3">3. 債務到期時程</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">債務工具</th><th>發行總額</th><th>到期日</th><th>最新狀態（2026年9月）</th></tr>
+<tr><td class="left">良維九（62909）無擔保轉換公司債</td><td>—（本次未查得原始發行總額）</td><td>2027/3/7</td><td>轉換率已達96.32%，剩餘餘額極小，實質到期償還壓力極低</td></tr>
+<tr><td class="left">良維十（629010）無擔保轉換公司債</td><td>NT$800,000千元（8億元）</td><td>原定2028/5/13</td><td>因流通餘額低於原發行額10%，公司已行使提前贖回權，2026/9/1-9/30收回、2026/10/1終止櫃買，實質已提前清理完畢</td></tr>
+<tr><td class="left">短期銀行借款</td><td>—</td><td>—</td><td>2026Q2為0（多數近期季度皆為0），無到期壓力</td></tr>
+<tr><td class="left">一年內到期長期負債（一般定義，非可轉債專屬）</td><td>—</td><td>1年內</td><td>NT$278百萬元（2026Q2），現金2,786百萬元可覆蓋逾10倍</td></tr>
+</table></div>
+<div class="note"><span class="badge warn">⚠️估算/建議查原文</span> 公開資料未揭露超過2年以上之細項到期排程，上表為本次查詢可得之公開可轉債與資產負債表資訊彙整，非完整之10-K式到期時程表；台灣公司財報附註通常於MOPS完整財報「長期借款」附註中列有逐年到期明細，建議查閱該原文確認精確數字。整體而言，良維近1-2年並無重大到期償還壓力，主要「債務」實質上是透過可轉債轉換為股權而非現金清償。</div>
+</div>
+
+<h3 class="sub" id="rk4">4. CapEx分析</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">指標</th><th>數值（TTM，2025Q3-2026Q2）</th><th class="left">判讀</th></tr>
+<tr><td class="left">CapEx/營收</td><td>≈2.71%（CapEx 285M ÷ 營收10,511M）</td><td class="left">屬於輕資產／中低資本密集度製造模式，與電源線/連接元件組裝型業務本質相符</td></tr>
+<tr><td class="left">CapEx/OCF</td><td>≈42.4%（CapEx 285M ÷ OCF 671M）</td><td class="left">資本支出可由自身營運現金流充分覆蓋，無需額外融資即可支應目前規模的擴產</td></tr>
+<tr><td class="left">CapEx季度趨勢</td><td>163M→70M→29M→23M（2025Q3至2026Q2持續下滑）</td><td class="left"><span class="badge warn">⚠️觀察</span> 資本支出近4季持續縮減，與公司報告中「泰國廠持續擴充、購地籌建新廠房」之敘事方向似有落差；可能原因包括支出季度間分布不均(lumpy)、擴產已進入尾聲轉為設備到位期，或實際擴產步調慢於市場敘事預期，本報告未能取得公司官方說明，列為需在下季法說會追蹤確認的觀察點，非確定結論</td></tr>
+</table></div>
+<div class="note"><span class="badge ok">✅已驗證</span>（財報狗現金流量表原始數字）；<span class="badge warn">⚠️推論</span>（CapEx趨勢與擴產敘事落差之解讀）</div>
+</div>
+
+<h3 class="sub" id="rk5">5. 同業對比（六大比率簡化版）</h3>
+<div class="card">
+<div class="tblwrap"><table>
+<tr><th class="left">公司</th><th>負債比率</th><th>淨現金/淨負債部位</th><th>本益比(TTM)</th><th class="left">財務體質特徵</th></tr>
+<tr><td class="left">良維 6290</td><td>40.1%（含未轉換可轉債）</td><td>淨現金≈13.0億元</td><td>28-29倍</td><td class="left">帳面負債率因可轉債暫時偏高，實質為淨現金部位；歷史依賴連續發行可轉債籌資</td></tr>
+<tr><td class="left">貿聯-KY 3665</td><td>—</td><td>—</td><td>50.9倍</td><td class="left"><span class="badge bad">❌無法取得</span> 本次查詢未及取得詳細資產負債表比率，標「—」</td></tr>
+<tr><td class="left">信邦 3023</td><td>—</td><td>—</td><td>24.0倍</td><td class="left"><span class="badge bad">❌無法取得</span> 同上，標「—」</td></tr>
+<tr><td class="left">健和興 3003</td><td>—</td><td>—</td><td>23.0倍</td><td class="left"><span class="badge bad">❌無法取得</span> 同上，標「—」</td></tr>
+</table></div>
+<div class="note">因研究時間有限，僅完整取得良維本身之資產負債表明細，同業之負債比率/淨現金部位等細項比率本次未及查證，誠實標示「—」，不臆測填入，建議後續針對個別同業另行查證財報狗/公開資訊觀測站。</div>
+</div>
+
+<h3 class="sub" id="rk6">6. 綜合診斷</h3>
+<div class="card">
+<p><b>定性分類：</b><span class="badge ok">淨現金穩健型，惟籌資模式仰賴可轉債稀釋</span>——良維目前帳上為淨現金部位(約13.0億元)，短期流動性與到期覆蓋能力皆屬健康，並非傳統意義上的「槓桿警戒型」公司；惟其融資歷史高度依賴連續發行無擔保轉換公司債（累計至少9-10次），此模式雖不構成立即的現金償還壓力，但長期而言構成股本持續稀釋的隱性成本，且可能反映公司自有現金流(尤其近期OCF明顯轉弱，2026Q2僅14百萬元)不足以完全支應成長期資本需求。</p>
+<div class="risk-card amber" style="margin-top:14px;"><b>最大風險點：</b>營運面現金流轉弱疊加獲利Miss——2026Q2 OCF驟降至僅14百�万元(較Q1的137百萬元大幅下滑)、FCF轉為小幅負值(-9百萬元)，若此弱化趨勢延續至Q3/Q4，且公司仍選擇以發行新可轉債方式籌資(而非依賴自身現金流)，將驗證市場對「借新還舊」的疑慮，並對每股價值形成實質稀釋壓力。觸發數字：若單季OCF連續兩季為負值，或宣布發行第11次可轉換公司債，應視為風險升級訊號。</div>
+<p style="margin-top:14px;"><b>安全邊際計算：</b>以TTM EBITDA≈1,892百萬元、TTM利息支出因未揭露精確數字而無法據以計算精確的「EBIT需下滑多少%觸及警戒線」；惟由於公司目前為淨現金部位且無顯著銀行計息負債，傳統利息覆蓋率警戒情境（如覆蓋率跌破3倍）在現行資本結構下觸發機率極低，除非公司未來大幅增加銀行借款或可轉債票息負擔顯著上升。就負債比率而言，若總負債維持在目前5,445百�万元不變，總資產需萎縮至約9,075百萬元以下（即較目前下滑約33%）才會使負債比率突破60%警戒線，此一情境需總資產大幅減損才會發生，短期內機率極低。整體安全邊際評估為<span class="badge ok">尚屬充足</span>，惟盈餘品質(OCF)的邊際變化值得密切追蹤。</p>
+</div>
+
+<!-- ================= 綜合總結 ================= -->
+<h2 class="part-header" id="final" style="border-bottom:3px solid var(--accent); padding-bottom:10px;"><span class="num" style="background:var(--accent); color:#fff; border-radius:8px; padding:6px 12px; font-size:14px; margin-right:10px;">總結</span>綜合總結與操作建議</h2>
+
+<div class="summary-cards">
+<div class="sumcard"><div class="lab">Thesis成立度</div><div class="val">3/5</div></div>
+<div class="sumcard"><div class="lab">護城河強度</div><div class="val">★★★☆☆</div></div>
+<div class="sumcard"><div class="lab">成長象限</div><div class="val" style="font-size:14px;">高速成長股外觀／傳產轉機股本質</div></div>
+<div class="sumcard"><div class="lab">財務體質</div><div class="val" style="font-size:14px;">淨現金穩健／籌資模式待觀察</div></div>
+<div class="sumcard"><div class="lab">目標價區間</div><div class="val" style="font-size:15px;">NT$150–323元</div></div>
+</div>
+
+<div class="card" style="margin-top:20px;">
+<h4>三大部分核心結論摘要</h4>
+<p style="font-size:13.5px;"><b>公司深度研究：</b>良維由傳統TV/家電電源線廠成功切入AI伺服器大電流電源線供應鏈，資料中心營收占比五年內由不到10%提升至2025年約36%，帶動毛利率由24%左右結構性躍升至31%以上，轉型方向確立且已有財務數字驗證；惟公司規模遠小於貿聯-KY等龍頭同業，護城河評分3星，電動車第二成長曲線已被公司自身降溫，Thesis成立度3/5。</p>
+<p style="font-size:13.5px;"><b>最新財報解析：</b>2026Q2財報全面Miss群益投顧6/29模型——營收/毛利/營業利益/EPS皆顯著遜於預期，營益率由Q1的17.0%降至Q2的13.4%；反推試算顯示，即使採用相對樂觀的2026F EPS(10.73元)以5年平均本益比(14.9倍)反推，合理股價僅約160元，遠低於現價269元逾40%，顯示目前股價主要由本益比倍數擴張撐起而非EPS成長撐起，估值安全邊際薄弱。</p>
+<p style="font-size:13.5px;"><b>財務風險健檢：</b>公司目前為淨現金部位(約13.0億元)，短期流動性、到期覆蓋倍數等六大比率多數健康，帳面負債比率攀升主因可轉債尚未完全轉換之會計列示而非真實槓桿風險；惟歷史上連續發行9-10次可轉換公司債的籌資模式，加上近期OCF明顯轉弱(2026Q2僅14百萬元、FCF轉負)，構成中長期股本稀釋與現金流品質的觀察重點。</p>
+</div>
+
+<div class="action-box" style="margin-top:20px;">
+<h4>最終操作建議</h4>
+<p><b>若已持有：</b>核心轉型故事(AI伺服器大電流電源線)方向正確且已有財務數字部分驗證，可續抱觀察，但鑑於2026Q2明顯Miss且估值處於歷史高檔（TTM PE 28-29倍 vs 5年均值14.9倍、2022年低點8.7倍），建議嚴設停損（跌破220元或季線、營收YoY轉負視為轉弱訊號確認），部位不宜加碼，並密切追蹤2026Q3財報（預估11月中公告）是否驗證營益率回升。</p>
+<p><b>若未持有：</b>不建議現階段追高建倉。建議等待以下任一條件成立後再評估：①股價拉回至PE 18-20倍區間（約對應180-215元）；②Q3財報明確驗證營益率回升至17%以上、營收YoY恢復雙位數成長。</p>
+<p><b>建議持有期間：</b>若題材與財務數字重新同步驗證，可視為3-5年中長期波段核心持股候選（資料中心/AI伺服器供應鏈具結構性成長性）；若Q3財報再度Miss，則應重新評估是否僅為短中期題材股而非長期核心持股。</p>
+<p><b>核心催化劑：</b>2026Q3財報(11月中)、CSP客戶新一輪資本支出指引、泰國/印度新產能開出進度、月營收年增率變化。</p>
+<p><b>風險提示：</b>①Q3/Q4財報若再度Miss，本益比向5年均值(14.9倍)甚至2022年低點(8.7倍)回歸的下修風險不低；②歷史上依賴連續發行可轉換公司債籌資，若未來再度發行新一輪可轉債，將構成股本稀釋壓力；③電動車第二成長曲線題材已遭公司自身降溫，題材延展性有限；④近期外資持股由15.22%降至個位數(6-8%左右，⚠️精確度有限)，法人籌碼動向轉弱值得留意。</p>
+</div>
+
+<footer>
+<p><b>資料來源：</b>鉅亨網(Anue)、財報狗(statementdog.com)、HiStock嗨投資、Yahoo奇摩股市、Yahoo Finance歷史股價、TechNews科技新報、MoneyDJ理財網、CMoney股市爆料同學會／readmo.ai彙整、群益投顧《良維(6290 TT) Trading Buy》研究報告(2026-06-29，已存放本機資料夾並作為交叉核對基準)。因分析環境無Futu OpenD工具，全數改以WebSearch與Claude瀏覽器直接讀取上述公開網站完成；Goodinfo因Cloudflare機器人驗證阻擋未能直接讀取，已以其餘來源交叉補齊。</p>
+<p><b>資料缺口與限制：</b>①良維個別在AI伺服器大電流電源線之精確全球/北美市佔率無法取得；②前五大客戶集中度無法取得；③2028年EPS預估無法取得（查無任何機構預估）；④利息支出/EBIT精確數字未單獨揭露，僅能方向性判斷；⑤2年以上完整債務到期排程未能取得完整原文明細；⑥同業(貿聯-KY/信邦/健和興)之負債比率、淨現金部位等資產負債表細項比率本次未及查證；⑦上櫃掛牌日期(2002/12/27 vs 2005/6/3)、BVPS/PB(36.48元/7.40倍 vs 47.98元/5.6-5.9倍)存在源間分歧，已於文中並陳說明，未能單獨查證MOPS原始公告以完全排除歧異。</p>
+<p style="margin-top:14px; font-weight:600;">本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</footer>
+
+</div>

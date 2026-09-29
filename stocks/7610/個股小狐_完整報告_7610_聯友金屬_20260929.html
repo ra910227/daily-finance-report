@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜聯友金屬-創(7610) 三合一完整報告</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#ffffff; --ink:#1a2233; --sub:#5b6472; --line:#e4e8ee;
+  --brand:#b8722f; --brand-light:#fdf1e6;
+  --green:#1f8a4c; --green-bg:#e9f7ee;
+  --amber:#b6790a; --amber-bg:#fdf3d9;
+  --red:#c62f2f; --red-bg:#fdeaea;
+  --blue:#2660c9; --blue-bg:#eaf1fd;
+  --grey:#6b7280; --grey-bg:#eef0f3;
+  --shadow: 0 1px 3px rgba(20,30,50,0.06), 0 6px 20px rgba(20,30,50,0.05);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  line-height:1.65; font-size:15.5px;
+}
+a{color:var(--blue); text-decoration:none;}
+a:hover{text-decoration:underline;}
+.wrap{max-width:1080px; margin:0 auto; padding:0 20px 80px;}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#1f2937 0%,#2d3b52 55%,#3a3226 100%);
+  color:#fff; padding:38px 24px 30px; margin-bottom:0;
+}
+.hero-inner{max-width:1080px; margin:0 auto;}
+.hero-top{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:16px;}
+.hero-title{font-size:15px; letter-spacing:1px; color:#d8c9a8; margin:0 0 6px;}
+.hero-name{font-size:30px; font-weight:800; margin:0 0 4px;}
+.hero-code{font-size:16px; color:#c9d2df; font-weight:500;}
+.hero-date{font-size:13px; color:#aab4c4; text-align:right;}
+.hero-stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:14px; margin-top:24px;}
+.hstat{background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); border-radius:10px; padding:12px 14px;}
+.hstat .lbl{font-size:12px; color:#b9c2d1; margin-bottom:4px;}
+.hstat .val{font-size:19px; font-weight:700; color:#fff;}
+.hstat .sub{font-size:11.5px; color:#9aa6ba; margin-top:2px;}
+
+/* TOC */
+.toc{
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  margin:-22px auto 28px; max-width:1040px; padding:18px 22px; box-shadow:var(--shadow); position:relative; z-index:2;
+}
+.toc h3{margin:0 0 10px; font-size:14px; color:var(--sub); letter-spacing:1px;}
+.toc-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px 18px;}
+.toc a{font-size:14px; color:var(--ink); padding:4px 0; display:block; border-bottom:1px dashed transparent;}
+.toc a:hover{color:var(--brand); border-color:var(--brand);}
+.toc .part-label{font-weight:700; color:var(--brand); font-size:12.5px; margin-top:8px;}
+
+section{margin:36px 0;}
+.part-header{
+  display:flex; align-items:center; gap:12px; margin-bottom:4px; padding-bottom:10px; border-bottom:3px solid var(--brand);
+}
+.part-num{background:var(--brand); color:#fff; font-weight:800; font-size:14px; padding:4px 12px; border-radius:20px;}
+.part-title{font-size:23px; font-weight:800; margin:0;}
+.part-sub{color:var(--sub); font-size:13.5px; margin:6px 0 20px;}
+
+h3.sec{font-size:18px; font-weight:800; margin:28px 0 12px; padding-left:10px; border-left:4px solid var(--brand);}
+h4.subsec{font-size:15.5px; font-weight:700; margin:18px 0 8px; color:var(--ink);}
+
+.card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; box-shadow:var(--shadow); margin:14px 0;}
+p{margin:8px 0;}
+
+table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+th,td{padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top;}
+th{background:var(--grey-bg); font-weight:700; color:var(--ink); font-size:13px;}
+tr:hover td{background:#fafbfc;}
+.tbl-wrap{overflow-x:auto;}
+
+.badge{display:inline-block; padding:2px 9px; border-radius:20px; font-size:12px; font-weight:700; white-space:nowrap;}
+.b-green{background:var(--green-bg); color:var(--green);}
+.b-amber{background:var(--amber-bg); color:var(--amber);}
+.b-red{background:var(--red-bg); color:var(--red);}
+.b-blue{background:var(--blue-bg); color:var(--blue);}
+.b-grey{background:var(--grey-bg); color:var(--grey);}
+
+.source-tag{font-size:11.5px; padding:1px 7px; border-radius:5px; font-weight:600; margin-left:4px;}
+.s-verified{background:var(--green-bg); color:var(--green);}
+.s-est{background:var(--amber-bg); color:var(--amber);}
+.s-na{background:var(--grey-bg); color:var(--grey);}
+
+.risk-card{border-left:5px solid var(--red); background:var(--red-bg); border-radius:8px; padding:14px 16px; margin:10px 0;}
+.risk-card h5{margin:0 0 6px; color:var(--red); font-size:14.5px;}
+.watch-card{border-left:5px solid var(--amber); background:var(--amber-bg); border-radius:8px; padding:14px 16px; margin:10px 0;}
+.watch-card h5{margin:0 0 6px; color:var(--amber); font-size:14.5px;}
+.good-card{border-left:5px solid var(--green); background:var(--green-bg); border-radius:8px; padding:14px 16px; margin:10px 0;}
+.good-card h5{margin:0 0 6px; color:var(--green); font-size:14.5px;}
+
+.scenario-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; margin:14px 0;}
+.scenario-card{border-radius:12px; padding:16px 18px; border:1px solid var(--line);}
+.scenario-card.bear{background:#fdf4f4; border-top:4px solid var(--red);}
+.scenario-card.base{background:#f5f8fd; border-top:4px solid var(--blue);}
+.scenario-card.bull{background:#f2f9f4; border-top:4px solid var(--green);}
+.scenario-card h5{margin:0 0 10px; font-size:16px;}
+.scenario-card ul{margin:0; padding-left:18px; font-size:13.5px;}
+.scenario-card li{margin:4px 0;}
+.scenario-card .tp{margin-top:10px; font-size:20px; font-weight:800;}
+
+.action-box{background:#fbf7ee; border:2px solid var(--brand); border-radius:12px; padding:18px 20px; margin:16px 0;}
+.action-box h5{margin:0 0 10px; color:var(--brand); font-size:16px;}
+.action-box .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+@media (max-width:600px){.action-box .grid2{grid-template-columns:1fr;}}
+
+.stars{color:#d9a441; letter-spacing:2px; font-size:15px;}
+.moat-row{display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--line);}
+
+.summary-cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; margin:18px 0;}
+.summary-card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; text-align:center; box-shadow:var(--shadow);}
+.summary-card .lbl{font-size:12.5px; color:var(--sub); margin-bottom:6px;}
+.summary-card .big{font-size:22px; font-weight:800; color:var(--ink);}
+
+.callout{background:var(--blue-bg); border-left:4px solid var(--blue); border-radius:8px; padding:12px 16px; font-size:14px; margin:14px 0;}
+.callout.warn{background:var(--amber-bg); border-color:var(--amber);}
+.callout.crit{background:var(--red-bg); border-color:var(--red);}
+
+.foot{margin-top:56px; padding-top:22px; border-top:1px solid var(--line); font-size:12.5px; color:var(--sub);}
+.foot a{color:var(--sub); text-decoration:underline;}
+
+.small{font-size:12.5px; color:var(--sub);}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+.na{color:var(--grey); font-weight:600;}
+.top-link{display:inline-block; font-size:12px; margin-top:6px; color:var(--sub);}
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div>
+        <p class="hero-title">個股小狐｜三合一完整報告</p>
+        <p class="hero-name">聯友金屬-創 <span class="hero-code">7610.TW（台灣創新板）</span></p>
+        <p class="hero-code">循環回收鎢／鈷稀有金屬原料製造商</p>
+      </div>
+      <div class="hero-date">
+        分析日期：2026/09/29<br>
+        資料查證截止：2026/09/26～29<br>
+        <span class="small" style="color:#d8c9a8;">語言：繁體中文（台灣）｜白底主題</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="lbl">參考股價（2026/9/26收盤）</div><div class="val">1,900～2,030元</div><div class="sub">⚠️近期振幅劇烈，請以當下報價為準</div></div>
+      <div class="hstat"><div class="lbl">估算市值</div><div class="val">約1,150～1,180億元</div><div class="sub">⚠️股數58,305,456股×參考股價自算</div></div>
+      <div class="hstat"><div class="lbl">TTM本益比</div><div class="val">約46x～102x</div><div class="sub">⚠️各平台近四季EPS基期落差極大</div></div>
+      <div class="hstat"><div class="lbl">Thesis成立度</div><div class="val">3 / 5</div><div class="sub">結構性優勢成立，循環可持續性存疑</div></div>
+      <div class="hstat"><div class="lbl">護城河強度</div><div class="val">★★★☆☆</div><div class="sub">技術+認證+客戶結構中等偏上</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="toc">
+  <h3>報告導覽 TOC</h3>
+  <div class="toc-grid">
+    <div>
+      <div class="part-label">Part 1．公司深度研究</div>
+      <a href="#p1-1">1.1 基本介紹</a>
+      <a href="#p1-2">1.2 業務引擎分析</a>
+      <a href="#p1-3">1.3 核心Thesis與未來性</a>
+      <a href="#p1-4">1.4 競爭格局</a>
+      <a href="#p1-5">1.5 成長象限與護城河評估</a>
+    </div>
+    <div>
+      <div class="part-label">Part 2．最新財報解析</div>
+      <a href="#p2-1">2.1 Beat/Miss表</a>
+      <a href="#p2-2">2.2 全年指引變化</a>
+      <a href="#p2-3">2.3 股價反應</a>
+      <a href="#p2-4">2.4 三情境估值</a>
+      <a href="#p2-5">2.5 股價位階評估</a>
+      <a href="#p2-6">2.6 Comps分析</a>
+      <a href="#p2-7">2.7 額外優勢/風險</a>
+      <a href="#p2-8">2.8 投行目標價</a>
+      <a href="#p2-9">2.9 估值歷史錨點</a>
+    </div>
+    <div>
+      <div class="part-label">Part 3．財務風險健檢</div>
+      <a href="#p3-1">3.1 財務數據填表</a>
+      <a href="#p3-2">3.2 六大比率診斷</a>
+      <a href="#p3-3">3.3 債務到期時程</a>
+      <a href="#p3-4">3.4 CapEx分析</a>
+      <a href="#p3-5">3.5 同業對比</a>
+      <a href="#p3-6">3.6 綜合診斷</a>
+      <div class="part-label">綜合總結</div>
+      <a href="#final">最終操作建議</a>
+    </div>
+  </div>
+</div>
+
+<div class="callout warn">
+<b>⚠️ 資料品質總覽提醒：</b>聯友金屬2025/9/9才於創新板掛牌，公開歷史資料僅約1年，且近期股價與財務快照在不同平台間出現顯著落差（例如「近四季EPS」在16.46～32.14元之間、股價在1,750～2,030元之間、股本在4.86億～5.83億之間皆有出現）。本報告已交叉比對多來源並以<b>股本583,054,560元／58,305,456股</b>（多方交叉驗證後最一致的數字）為基礎自行換算市值等衍生指標，凡屬本報告自行推算者一律標示⚠️，凡查無可靠來源者一律標示「—」，絕不臆測精確數字。
+</div>
+
+<!-- ============ PART 1 ============ -->
+<section id="part1">
+  <div class="part-header"><span class="part-num">PART 1</span><h2 class="part-title">公司深度研究</h2></div>
+  <p class="part-sub">觸發模式：個股小狐・公司深度研究｜聚焦業務引擎、投資Thesis、競爭格局、成長象限與護城河</p>
+
+  <h3 class="sec" id="p1-1">1.1 基本介紹</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>項目</th><th>數值</th><th>狀態</th></tr>
+    <tr><td>股票代號／板別</td><td>7610／台灣證券交易所創新板</td><td><span class="badge b-green">✅已驗證</span></td></tr>
+    <tr><td>成立／掛牌日期</td><td>2018/5/29成立；2025/9/9創新板掛牌（競拍底價43.86元，暫定承銷價50元）</td><td><span class="badge b-green">✅已驗證</span></td></tr>
+    <tr><td>股本／發行股數</td><td>583,054,560元／58,305,456股</td><td><span class="badge b-green">✅已驗證</span></td></tr>
+    <tr><td>參考股價（2026/9/26收盤）</td><td>約2,030元（單日跌9.78%）；另有snapshot顯示1,750～1,945元不等</td><td><span class="badge b-amber">⚠️波動劇烈</span></td></tr>
+    <tr><td>估算市值</td><td>≈1,150～1,180億元（58,305,456股×參考股價，本報告自算）</td><td><span class="badge b-amber">⚠️估算</span></td></tr>
+    <tr><td>TTM營收（近四季）</td><td>—（各平台計算基期不一致，見1.2節說明）；已知2025年全年營收7.66億元、2026H1營收29.29億元</td><td><span class="badge b-amber">⚠️部分可得</span></td></tr>
+    <tr><td>營收YoY（最新月）</td><td>2026年8月營收11.34億元，YoY +852.63%，累計至8月50.34億元，YoY +563.52%</td><td><span class="badge b-green">✅已驗證</span></td></tr>
+    <tr><td>毛利率（最新季）</td><td>2026Q2毛利率67.73%；2026Q1毛利率74.0%；對照2025Q3僅28.61%</td><td><span class="badge b-green">✅已驗證</span></td></tr>
+    <tr><td>FCF（自由現金流）</td><td>—（未查得OCF與CapEx逐季拆分數據，僅知屏東新廠規劃投資6.5億元）</td><td><span class="badge b-red">❌無法取得</span></td></tr>
+    <tr><td>每股淨值(BVPS)</td><td>約64.14元（2026年某季快照）</td><td><span class="badge b-amber">⚠️估算/近似</span></td></tr>
+    <tr><td>所屬產業／市場地位</td><td>循環回收鎢、鈷稀有金屬原料；中國以外全球前三大鎢酸鈉製造商，中國出口管制後為對日等市場出口量躍居全球前列；獲RMI國際責任礦產倡議組織認證為非衝突礦產冶煉廠</td><td><span class="badge b-green">✅已驗證</span></td></tr>
+  </table>
+  </div>
+  <p class="small">來源：Goodinfo、鉅亨網、Yahoo奇摩股市、財報狗statementdog、中央社、公司法說會（富果直送法說會筆記2026/8/13）。</p>
+
+  <h3 class="sec" id="p1-2">1.2 業務引擎分析</h3>
+
+  <h4 class="subsec">業務線一：鎢酸鈉（主產品，鎢產業鏈上游原料）</h4>
+  <div class="card">
+    <p><b>產品定位：</b>透過獨門濕式冶金專利技術，將半導體、精密加工業產生的二次硬質合金與廢鎢資源（刀具、鑽頭、削屑等）回收、純化、精煉為鎢酸鈉及仲鎢酸銨(APT)，屬鎢產業鏈上游原料。</p>
+    <p><b>客戶結構：</b>下游應用涵蓋半導體封裝模具、航太引擎、汽車零組件、醫療器材、工具機、軍事國防；市場報導指出終端客戶結構含台積電、蘋果供應鏈（⚠️多為間接下游客戶，非直接終端銷售對象，具體客戶佔比未揭露，標示「—」）。</p>
+    <p><b>原料來源：</b>廢料來源高度仰賴歐美、日本、菲律賓等海外市場的二次硬質合金與廢鎢（<span class="badge b-red">此為本報告風險重點，見1.3節與美國新規分析</span>）。</p>
+    <p><b>護城河來源：</b>①RMI國際責任礦產倡議組織認證，符合半導體/航太等客戶ESG合規要求，具轉換成本；②獨門濕式冶金專利技術降低同業複製難度；③中國以外非中系稀有產能，在中國近年出口管制下具戰略稀缺性。</p>
+  </div>
+
+  <h4 class="subsec">業務線二：硫酸鈷（副產品，往電池級/金屬鈷粉延伸）</h4>
+  <div class="card">
+    <p><b>產品定位：</b>子公司聯友能源科技跨足電池級硫酸鈷，並向金屬鈷粉高值化產品延伸，已取得UL認證。</p>
+    <p><b>客戶結構：</b>—（公開資訊未揭露具體客戶名單與訂單佔比）</p>
+    <p><b>原料來源：</b>與鎢酸鈉業務共用的廢棄硬質合金回收料流，鈷為硬質合金（碳化鎢+鈷結合劑）回收過程的副產物。</p>
+    <p><b>護城河來源：</b>電池級規格認證帶來一定轉換成本；但相較鎢酸鈉業務，鈷業務規模與放量進度高度依賴鎢粉產能排程（<span class="badge b-amber">目前放量已因鎢粉供應緊張、產能優先排給鎢而延後至2026下半年，詳見1.3節與Part2</span>）。</p>
+  </div>
+
+  <h4 class="subsec">優勢產品表</h4>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>產品</th><th>毛利率貢獻</th><th>成長動能</th><th>風險敞口</th></tr>
+    <tr><td>鎢酸鈉／APT</td><td>2026H1整體毛利率67.73～74.0%，主要由鎢酸鈉貢獻</td><td>中國對日等出口管制持續、非中系稀缺性溢價、屏東新廠2027/9投產鎢粉/碳化鎢</td><td>APT價格8月起走弱（中國FOB均價月減1.15%，見1.3節）、美國廢鎢出口新規影響原料取得</td></tr>
+    <tr><td>硫酸鈷／鈷粉</td><td>—（未單獨揭露此業務線毛利率）</td><td>電池級認證、金屬鈷粉高值化延伸</td><td>放量延後至2026H2，撞上鈷價近一個月重挫約29.6%的時間點</td></tr>
+  </table>
+  </div>
+
+  <h4 class="subsec">近期歷史財務摘要表</h4>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>期間</th><th>營收</th><th>YoY</th><th>毛利率</th><th>EPS(單季/期)</th><th>EBITDA margin</th><th>FCF</th></tr>
+    <tr><td>2024全年</td><td>—</td><td>—</td><td>—</td><td>1.71元</td><td>—</td><td>—</td></tr>
+    <tr><td>2025全年</td><td>7.66億元</td><td>—</td><td>—</td><td>5.45元</td><td>—</td><td>—</td></tr>
+    <tr><td>2025Q3</td><td>—</td><td>—</td><td>28.61%（淨利率14.97%）</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>2026Q1</td><td>10.01億元</td><td>—</td><td>74.0%</td><td>10.87元</td><td>—</td><td>—</td></tr>
+    <tr><td>2026Q2</td><td>≈19.28億元（H1減Q1推算，⚠️自算）</td><td>—</td><td>67.73%（營益率61.5%、淨利率49.1%、ROE 36.0%）</td><td>14.5元（另一來源16.32元，⚠️數據落差待核）</td><td>—</td><td>—</td></tr>
+    <tr><td>2026H1合計</td><td>29.29億元</td><td>—</td><td>≈70%</td><td>稅前淨利18.54億元</td><td>—</td><td>—</td></tr>
+    <tr><td>2026年4-8月月營收</td><td>4月5.6億(YoY+345%)／5月6.15億(YoY+462.18%)／8月11.34億(YoY+852.63%)</td><td>連續三位數YoY，8月創新高</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+  </table>
+  </div>
+  <p class="small">⚠️ EBITDA margin與FCF因公司未在公開資訊平台揭露完整攤提/現金流細項，且聯友上市僅約1年，歷史季度財報公開期數有限，如實標示「—」，不臆測。2026Q2 EPS在14.5元與16.32元兩來源間有落差，已如實並陳。</p>
+
+  <h3 class="sec" id="p1-3">1.3 核心Thesis與未來性</h3>
+
+  <h4 class="subsec">投資Thesis支柱（5項，含使用者要求之兩項強制主題）</h4>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>#</th><th>Thesis</th><th>狀態</th><th>證據</th></tr>
+    <tr><td>1</td><td><b>中國鎢出口管制帶來的非中系供應鏈稀缺性紅利</b></td><td><span class="badge b-green">✅成立</span></td><td>中國自2026年1月起對日本的碳化鎢、高純鎢粉等核心戰略工業材料出口近乎歸零（2-4月已完全歸零），中國自身進口廢鎢也已連續2個月為零；日本自美進口廢鎢3月已較去年同期增加約10倍，顯示非中系供應鏈需求正在快速轉單，聯友作為中國以外前三大鎢酸鈉製造商直接受惠。</td></tr>
+    <tr><td>2</td><td><b>鎢鈷價格超級循環是否可持續</b></td><td><span class="badge b-amber">⚠️部分成立/轉弱訊號浮現</span></td><td>中國APT(88.5%)8月均價月減3.5%至60.31萬人民幣/噸（YoY仍+94.8%但增速已較7月收斂42.92個百分點）；鈷現貨價9月17日18.20美元/磅，較月初25.53美元/磅重挫約28.7-29.6%（DRC出口配額放寬+終端需求疲弱）。兩項核心原物料同步出現價格見頂訊號，超級循環的延續性需持續觀察，⚠️定性判斷為「循環是否見頂尚待確認，非結構性保證」。</td></tr>
+    <tr><td>3</td><td>RMI認證+台積電/蘋果供應鏈綁定的客戶護城河</td><td><span class="badge b-green">✅成立</span></td><td>RMI非衝突礦產冶煉廠認證屬硬性合規門檻，具轉換成本；但客戶佔營收比例未揭露，成立度受限於資訊透明度。</td></tr>
+    <tr><td>4</td><td>硫酸鈷放量對獲利結構的貢獻加速</td><td><span class="badge b-amber">⚠️部分成立/時點風險</span></td><td>原市場預期2026Q2放量，因鎢粉供應緊張、產能優先排給鎢粉業務而延後至下半年，恰與本次鈷價重挫29.6%的時間點重疊，貢獻兌現時點與幅度存在不確定性。</td></tr>
+    <tr><td>5</td><td>掛牌後公司治理與籌碼穩定度</td><td><span class="badge b-red">❌未兌現</span></td><td>2026年7月股價自2,730元高點6個交易日累計重挫42.78%遭列處置股（7/27-8/7、7/30-8/12兩度分盤交易），原200萬股現金增資案於7/23公告後緊急撤銷，顯示公司資本市場操作與籌碼面尚未穩定，波動風險顯著高於一般個股。</td></tr>
+  </table>
+  </div>
+
+  <h4 class="subsec">核心成長驅動力（2-3項）</h4>
+  <div class="good-card"><h5>① 屏東新廠產能擴充</h5><p>屏東科學園區投資6.5億元新廠，預計2027年9月量產鎢粉與碳化鎢，為中期產能成長的具體時間表。</p></div>
+  <div class="good-card"><h5>② 非中系供應鏈訂單/單價雙升</h5><p>中國對日等地出口管制持續，日本等下游客戶被迫尋求替代來源，聯友作為稀缺產能受惠於轉單與議價權提升。</p></div>
+  <div class="good-card"><h5>③ 硫酸鈷/鈷粉高值化延伸</h5><p>電池級硫酸鈷UL認證+金屬鈷粉延伸，雖放量延後，仍是中期第二成長曲線。</p></div>
+
+  <h4 class="subsec">需監控風險（3項，含使用者要求之三項強制主題）</h4>
+  <div class="risk-card">
+    <h5>風險1：鎢鈷價格回落對毛利率的雙向影響機制</h5>
+    <p>聯友的獲利模式是「用當期市場價格收購廢鎢/廢鈷原料，再以精煉後的鎢酸鈉/硫酸鈷市場價格出售」。當鎢價上漲時，採購成本同步墊高，能否將成本轉嫁到產品售價，直接決定毛利率；<b>但若鎢價轉為下跌（如8月APT均價已月減3.5%），則風險方向相反</b>——公司可能仍持有先前在高價階段收購、尚未加工出貨的廢料庫存，若出貨時的鎢酸鈉/APT市場售價已隨行情下修，將產生「高價庫存、低價出貨」的價差擠壓（存貨跌價風險，詳見Part3.6）。⚠️因公司未揭露存貨週轉天數與庫存規模，無法精確量化影響金額，僅能定性判斷此風險已隨8月數據走弱而升溫。</p>
+  </div>
+  <div class="risk-card">
+    <h5>風險2：美國廢料出口新規對原料供給的風險</h5>
+    <p>美國商務部工業與安全局規定，自2026/8/27起一年內，美國本土鎢廢料與「黑粉」(電池廢棄物)原則上須100%優先供應美國本土買家，除非取得豁免；出口須納入許可管制。聯友原料高度仰賴歐美、日本、菲律賓等海外市場，此規定可能直接限縮聯友從美國取得廢鎢原料的管道，迫使公司轉向歐洲、日本、菲律賓等地增加採購，可能推升原料取得成本或限制原料供給量。⚠️因未揭露各地區原料採購佔比，無法精確量化衝擊金額，僅能定性標註「原料供給集中度風險上升」。</p>
+  </div>
+  <div class="risk-card">
+    <h5>風險3：硫酸鈷放量延後撞上鈷價崩跌的時間點風險</h5>
+    <p>市場原預期硫酸鈷2026Q2進入放量階段，實際因鎢粉供應緊張、產能優先排給鎢粉業務而延後至下半年。此延後恰與本次鈷價重挫29.6%（9/17現貨18.20美元/磅，較月初25.53美元/磅）的時間點高度重疊——意味著聯友最終放量出貨硫酸鈷時，可能是在一個比原先規劃時更低的鈷價環境下銷售，直接壓縮這條第二成長曲線原本被市場期待的獲利貢獻。⚠️定性判斷：此為疊加性風險（延後+降價同時發生），對2026下半年鈷業務貢獻應下修預期。</p>
+  </div>
+
+  <h3 class="sec" id="p1-4">1.4 競爭格局</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>競爭者/類別</th><th>市佔／規模</th><th>優勢</th><th>威脅度</th></tr>
+    <tr><td>中國國內鎢廠（如廈門鎢業、中鎢高新等，⚠️代表性業者，非逐一查證）</td><td>中國掌握全球約80-85%鎢礦產量</td><td>礦源規模、成本結構、政策支持</td><td><span class="badge b-amber">🟡中</span>（主要服務中國內需與非制裁市場，短期與聯友非直接搶單，但長期若中國出口政策鬆綁，非中系稀缺溢價可能被稀釋）</td></tr>
+    <tr><td>日本國內回收體系（新興建置中）</td><td>—（規模尚小，處於加速建置階段）</td><td>地緣接近下游客戶、政策扶植</td><td><span class="badge b-amber">🟡中</span>（短期仍高度依賴進口廢鎢，尚不足以取代聯友供給，中長期若日本自建回收量能提升則分流風險上升）</td></tr>
+    <tr><td>其他區域二次鎢鈷回收冶煉商</td><td>—</td><td>—</td><td><span class="badge b-grey">產業稀缺性高，缺乏直接可比同業</span></td></tr>
+    <tr><td>台灣資本市場題材類比公司（如創鉅材料7918）</td><td>—</td><td>—</td><td><span class="badge b-grey">⚠️非同一產業，勿混淆</span>（創鉅材料為半導體先進製程相關材料公司，市場報導中的目標價2,800元係針對創鉅材料本身，並非聯友金屬，本報告特此澄清避免資料誤植）</td></tr>
+  </table>
+  </div>
+  <div class="callout warn"><b>誠實揭露：</b>多方查證後，台灣資本市場與國際市場上均無業務範疇、規模與聯友金屬高度相近的直接上市可比同業（獨立分析報告「領趨投資觀點」亦明確指出「鎢、鈷的關鍵礦物上游，台灣沒有規模與業務完全相近的直接上市同業，缺乏直接可比的本地倍數」）。本報告Comps分析（2.6節）將改採「產業稀缺性溢價」角度呈現。</div>
+
+  <h3 class="sec" id="p1-5">1.5 成長象限判斷與護城河評估</h3>
+
+  <h4 class="subsec">Peter Lynch框架判斷</h4>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>判斷依據</th><th>觀察</th><th>傾向</th></tr>
+    <tr><td>營收成長驅動力</td><td>主要由「原物料售價飆漲」驅動（鎢酸鈉/APT售價隨鎢價超級循環大漲），而非純粹「銷量放大」，2024全年EPS僅1.71元、2025全年5.45元，2026Q1單季即達10.87元</td><td>偏「景氣循環股」</td></tr>
+    <tr><td>毛利率穩定性</td><td>2025Q3毛利率僅28.61%，2026Q1/Q2飆升至67.73-74.0%，波動幅度達45個百分點以上，遠非穩定成長股的特徵</td><td>偏「景氣循環股」</td></tr>
+    <tr><td>客戶結構與轉換成本</td><td>RMI認證+半導體/航太客戶結構具一定黏著度與結構性優勢</td><td>偏「利基型成長股」</td></tr>
+    <tr><td>股價/籌碼行為</td><td>短短數月股價從個位數百元飆漲至2,730元又腰斬，伴隨現增喊卡、處置股等籌碼面異常事件</td><td>偏「投機題材股」</td></tr>
+  </table>
+  </div>
+  <div class="callout"><b>綜合判斷：</b>聯友金屬目前呈現的高成長數字，主要由鎢/鈷原物料超級循環的「量價雙漲」帶動，尚不足以歸類為Peter Lynch定義下穩定的「快速成長股(Fast Grower)」；較貼近的分類是<b>「景氣循環成長股(Cyclical Growth Stock)」</b>——具備結構性的利基地位（RMI認證+非中系稀缺產能+客戶結構），但短期財務數字高度受commodity price cycle牽動。是否能在鎢鈷價格正常化後仍維持顯著高於2024-2025年基期（EPS 1.71-5.45元）的獲利水準，是判斷其能否晉升為結構性成長股的關鍵觀察點，目前證據尚不足以下定論。</div>
+
+  <h4 class="subsec">護城河五維度評分</h4>
+  <div class="card">
+    <div class="moat-row"><span>① 技術門檻（獨門濕式冶金專利）</span><span class="stars">★★★★☆</span></div>
+    <div class="moat-row"><span>② 客戶黏著度/轉換成本（RMI認證+半導體航太客戶）</span><span class="stars">★★★★☆</span></div>
+    <div class="moat-row"><span>③ 原料取得與規模門檻（非中系稀缺產能）</span><span class="stars">★★★☆☆</span></div>
+    <div class="moat-row"><span>④ 監理/認證優勢（RMI非衝突礦產認證）</span><span class="stars">★★★★☆</span></div>
+    <div class="moat-row"><span>⑤ 成本結構定價權（原料成本轉嫁能力）</span><span class="stars">★★☆☆☆</span></div>
+  </div>
+  <p class="small">⚠️ 第⑤項評分偏低，係因公司獲利高度受制於國際鎢鈷報價波動，本身對終端售價的獨立定價權有限，此為本報告Part1.3風險1的核心依據。</p>
+
+  <div class="action-box">
+    <h5>建議動作 Action Box</h5>
+    <div class="grid2">
+      <div><b>當前建議：</b>觀望為主，暫不建議在鎢鈷價格同步走弱、籌碼面尚未穩定（處置股、現增喊卡）的階段追高建倉。</div>
+      <div><b>加碼觸發：</b>①APT/鎢價止跌回穩且公司毛利率連續2季維持50%以上；②硫酸鈷實際放量且訂單能見度明朗；③籌碼面連續穩定(法人轉買超)。</div>
+      <div><b>賣出觸發：</b>①毛利率連續2季跌破40%且無法歸因於一次性因素；②美國廢料新規導致原料取得成本或數量出現實質性衝擊；③公司治理再度出現增資/處置股等異常事件。</div>
+      <div><b>監控指標：</b>中國APT月均價月增減幅、LME/現貨鈷價、月營收YoY、法人買賣超、屏東新廠量產進度。</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ PART 2 ============ -->
+<section id="part2">
+  <div class="part-header"><span class="part-num">PART 2</span><h2 class="part-title">最新財報解析</h2></div>
+  <p class="part-sub">觸發模式：個股小狐・財報解析｜聚焦Beat/Miss、三情境估值、股價位階與投行目標價</p>
+
+  <h3 class="sec" id="p2-1">2.1 Beat/Miss表</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>項目</th><th>2026Q2實際</th><th>市場預期</th><th>結果</th></tr>
+    <tr><td>營收</td><td>≈19.28億元（H1 29.29億減Q1 10.01億，⚠️自算）</td><td>—（聯友剛上市，公開法人一致預估樣本極少，未查得可靠共識數字）</td><td><span class="badge b-grey">無法比較</span></td></tr>
+    <tr><td>EPS</td><td>14.5元（另一來源16.32元，⚠️數據落差）</td><td>—</td><td><span class="badge b-grey">無法比較</span></td></tr>
+    <tr><td>毛利率</td><td>67.73%</td><td>—</td><td><span class="badge b-grey">無法比較</span></td></tr>
+    <tr><td>營業利益率</td><td>61.5%</td><td>—</td><td><span class="badge b-grey">無法比較</span></td></tr>
+  </table>
+  </div>
+  <div class="callout warn">聯友金屬2025/9甫上市，尚未建立起穩定、可查證的法人一致預期(consensus estimate)資料庫，多數台股資訊平台亦未提供其財報預估區間。本報告如實標註「無法比較」，不虛構市場預期數字。可確認的客觀事實是：無論2026Q1或Q2，營收、EPS、毛利率、稅後淨利均創掛牌以來單季新高，且月營收自2026年初起連續多月三位數年增。</div>
+
+  <h3 class="sec" id="p2-2">2.2 全年指引變化</h3>
+  <p>公司未公開發布正式全年財測指引。法說會重點摘要（富果直送2026/8/13筆記、2026/6/24法說會筆記）顯示管理層展望聚焦於：①中國鎢出口管制紅利延續性；②轉型布局AI重電與半導體材料應用；③硫酸鈷放量時程由原訂2026Q2遞延至下半年。市場分析師個別評論多以「稀有金屬回收題材」正面解讀，但未查得具體上修/下修財測數字的可靠來源，標示「—」。</p>
+
+  <h3 class="sec" id="p2-3">2.3 股價反應</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>時間點</th><th>事件</th><th>股價反應</th></tr>
+    <tr><td>2026/7/9</td><td>股價觸及上市以來高點</td><td>收盤2,730元</td></tr>
+    <tr><td>2026/7/23</td><td>公告原200萬股現金增資發行新股案</td><td>市場解讀為高折價現增，引發「賣老股認新股」賣壓</td></tr>
+    <tr><td>7/27-8/7、7/30-8/12</td><td>因6個交易日累計跌幅達42.78%（收盤價差750元）、連3日達注意交易標準</td><td>兩度遭證交所/櫃買中心列為處置股，採每20分鐘撮合一次的分盤交易</td></tr>
+    <tr><td>2026年7月底</td><td>公司決議向金管會申請撤銷現金增資案；市場另傳出屏東枋寮一名從事鎢鈷貴金屬買賣的負責人遭殺害（公司澄清與聯友無關）</td><td>股價再吞跌停，市場情緒受衝擊</td></tr>
+    <tr><td>2026/8-9月</td><td>中國APT均價8月月減3.5%、鈷現貨價9月重挫約29.6%，原物料超級循環出現轉弱訊號</td><td>股價自高點2,730元回落逾25-35%，三大法人近期由買轉賣（9/18前5日合計賣超908張，20日合計賣超769張，其中外資賣超921張）</td></tr>
+    <tr><td>2026/9/26</td><td>—</td><td>單日大跌9.78%，收2,030元</td></tr>
+  </table>
+  </div>
+  <p><b>技術面／籌碼面觀察：</b>近月股價自高點呈現明顯獲利了結賣壓，三大法人轉為淨賣超（外資為主），加上兩度處置股與現增喊卡事件，顯示籌碼穩定度不足；⚠️月線/季線精確價位因股價數據平台落差較大未能精確核實，標示「—」，僅能定性判斷近期股價已顯著跌破7月高點所在的短期上升軌道。</p>
+
+  <h3 class="sec" id="p2-4">2.4 三情境DCF估值</h3>
+  <div class="callout warn">⚠️ 由於公司未揭露完整的資產負債表細項（如計息負債、利息費用、D&A）與逐季OCF/CapEx數據，無法建構精確的自由現金流折現模型。以下三情境改採「情境式獲利/估值框架」，明確標示所有假設均為本報告基於已查證事實的合理推算，非精確DCF模型產出，其中熊市情境已依規定納入鎢鈷價格回落至近期低點的假設。</div>
+
+  <div class="scenario-grid">
+    <div class="scenario-card bear">
+      <h5>🐻 熊市情境</h5>
+      <ul>
+        <li>假設：鎢/APT價格回落至近期低點（8月均價水準或更低），鈷價維持9月低點附近</li>
+        <li>營收假設：2026H2營收成長大幅減速，全年營收YoY大幅收斂</li>
+        <li>毛利率：向2025Q3常態水準28.61%附近回歸</li>
+        <li>FCF conversion：因存貨跌價風險侵蝕，⚠️估算轉差</li>
+        <li>WACC：⚠️估算10-12%（創新板流動性/波動溢酬較高）</li>
+        <li>terminal growth：⚠️估算2%</li>
+      </ul>
+      <div class="tp">情境性EPS區間：⚠️估算個位數~10元附近</div>
+    </div>
+    <div class="scenario-card base">
+      <h5>⚖️ 基準情境</h5>
+      <ul>
+        <li>假設：鎢鈷價格較高檔溫和回落但維持在歷史相對高位，非中系稀缺性溢價部分延續</li>
+        <li>營收假設：H2營收較H1成長放緩但仍維持顯著YoY增幅</li>
+        <li>毛利率：介於2026H1高點與2025Q3常態值之間，⚠️估算45-55%</li>
+        <li>FCF conversion：⚠️估算中等</li>
+        <li>WACC：⚠️估算9-11%</li>
+        <li>terminal growth：⚠️估算2-3%</li>
+      </ul>
+      <div class="tp">情境性EPS區間：⚠️估算20-30元附近</div>
+    </div>
+    <div class="scenario-card bull">
+      <h5>🐂 牛市情境</h5>
+      <ul>
+        <li>假設：中國對非中系市場管制持續強化，鎢鈷超級循環延續，硫酸鈷2026H2順利放量</li>
+        <li>營收假設：全年營收延續當前三位數YoY動能</li>
+        <li>毛利率：維持2026H1的60-70%+高檔</li>
+        <li>FCF conversion：⚠️估算轉佳</li>
+        <li>WACC：⚠️估算8-10%</li>
+        <li>terminal growth：⚠️估算3%</li>
+      </ul>
+      <div class="tp">情境性EPS區間：⚠️估算45-55元以上</div>
+    </div>
+  </div>
+
+  <h4 class="subsec">敏感度分析（鎢/鈷價格對估值的影響權重）</h4>
+  <p>由於聯友的毛利率在單一年度內即可從28.61%飆升至74.0%再可能回落，其估值對<b>鎢（APT）與鈷價格</b>的敏感度遠高於一般傳產/化工股對終端需求量的敏感度。⚠️定性判斷：在本報告三情境框架中，鎢鈷價格假設對情境性EPS結果的解釋力估計顯著高於營收量成長假設本身——換言之，投資人為這檔股票付出的估值溢價，本質上更接近「原物料價格押注」而非「產能利用率/訂單能見度押注」，這也是Part1.5成長象限判斷「景氣循環成長股」而非「穩定快速成長股」的核心理由。因無法取得逐項成本結構拆分數據，未能提供精確的彈性係數(elasticity)，僅能提供此定性結論。</p>
+
+  <h3 class="sec" id="p2-5">2.5 股價位階評估</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>指標</th><th>數值</th><th>備註</th></tr>
+    <tr><td>TTM PE（近四季）</td><td>介於46x～102x（各平台快照不一）</td><td>⚠️「近四季EPS」在不同平台為16.46、26.56、32.14元不等，落差極大，已如實並陳</td></tr>
+    <tr><td>Forward PE</td><td>—</td><td>❌查無可靠分析師一致預估EPS，不臆測</td></tr>
+    <tr><td>PB（股價淨值比）</td><td>約23.9x～27.4x（依股價快照不同）</td><td>⚠️估算，BVPS約64.14元</td></tr>
+    <tr><td>PEG</td><td>—</td><td>❌缺乏可靠的多年期成長率預估，無法計算</td></tr>
+    <tr><td>EPS成長趨勢</td><td>2024A 1.71元 → 2025A 5.45元 → 2026Q1單季10.87元 → 2026Q2單季14.5元</td><td>已有數據期間呈現逐季加速成長，惟主因原物料價格上漲而非純粹產能/訂單成長，需搭配1.5節Lynch框架判讀</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sec" id="p2-6">2.6 Comps分析</h3>
+  <div class="callout warn">如1.4節所述，經多方查證台灣及國際市場，並未發現業務範疇、規模與聯友金屬高度相近的直接上市可比同業。搜尋結果中曾出現「同業平均本益比45.84」與「目標價2,800元」等數字，經查證後前者疑為資料平台自動歸類的產業別（如「其他」或籠統電子材料分類）平均值而非精選可比同業，後者則<b>實際上是針對另一檔完全不同產業的個股「創鉅材料(7918)」，與聯友金屬無關</b>，本報告特此更正避免誤導。</div>
+  <p><b>改採角度：產業稀缺性溢價分析。</b>聯友金屬的估值溢價來源，應理解為「中國以外極少數具規模、具RMI認證的鎢鈷循環回收冶煉產能」所享有的稀缺性溢價，而非可用同業本益比區間直接類比。這也意味著其估值缺乏「錨點」，波動風險顯著高於有明確同業可比的個股，此點應納入投資人的風險考量。</p>
+
+  <h3 class="sec" id="p2-7">2.7 額外優勢/風險</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>項目</th><th>資訊</th></tr>
+    <tr><td>庫藏股</td><td>—（未查得公開庫藏股計畫資訊）</td></tr>
+    <tr><td>法人持股</td><td>近期三大法人轉為淨賣超（9/18前5日合計賣超908張，外資賣超921張、投信買超11張、自營商買超3張）</td></tr>
+    <tr><td>股利政策</td><td>2026年第1次除權息發放現金股利0.5元，現金殖利率約0.02%（⚠️因股價基期已大幅墊高，殖利率參考意義有限）</td></tr>
+    <tr><td>董監持股</td><td>全體董監持股（2026/5資料）13,440張，持股比例27.7%</td></tr>
+    <tr><td>內部人交易</td><td>—（未查得具體申報轉讓紀錄）</td></tr>
+    <tr><td>閉鎖期/解禁股風險</td><td>2025/9/9掛牌未滿一年，⚠️創新板普遍存在初次上市股東閉鎖期規範，惟聯友具體閉鎖到期日與解禁股數未查得公開明確資訊，標示「—」；提醒投資人上市周年前後留意潛在解禁賣壓</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sec" id="p2-8">2.8 投行目標價與操作建議</h3>
+  <div class="callout crit"><b>重要澄清：</b>多次搜尋均未能找到具名券商（如元大、凱基、群益、富邦投顧等）對聯友金屬(7610)公開發布的正式目標價與評等報告。網路上流傳「目標價上看2,800元」的說法經逐一查證來源後，確認該數字出自理財周刊報導中對<b>創鉅材料(7918)</b>（另一檔不同產業個股）的評論，與聯友金屬無關；另有YouTube影片標題出現「目標價上看320元」字樣，惟因未能取得該影片的完整計算依據與發布日期基準股價，且與當前市場股價量級明顯不符（可能為較早期、股價基期极低時的舊目標價，或與拆分/計算方式有關），本報告不採用此數字作為法人共識依據。</div>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>來源</th><th>目標價</th><th>計算依據/公式</th><th>可信度判定</th></tr>
+    <tr><td>市場傳聞（多篇網路文章引用）</td><td>2,800元</td><td>"以同業本益比與先進製程獨佔地位計算"</td><td><span class="badge b-red">❌實為創鉅材料(7918)之目標價，非聯友金屬，不予採用</span></td></tr>
+    <tr><td>YouTube個人分析影片</td><td>320元</td><td>未查得完整公式與基準股價日期</td><td><span class="badge b-grey">—無法驗證，不採用</span></td></tr>
+    <tr><td>具名券商研究報告</td><td>—</td><td>—</td><td><span class="badge b-grey">❌查無公開可得之券商評等/目標價報告</span></td></tr>
+  </table>
+  </div>
+  <div class="action-box">
+    <h5>操作建議 Action Box</h5>
+    <div class="grid2">
+      <div><b>結論：</b>由於缺乏可靠的法人目標價共識，投資人應以本報告Part2.4情境式估值框架（熊市⚠️估算個位數~10元EPS、基準⚠️估算20-30元EPS、牛市⚠️估算45-55元EPS，搭配投資人自訂的合理本益比倍數）自行推算合理價位區間，而非依賴網路流傳、可能誤植或來源不明的目標價數字。</div>
+      <div><b>具體數值門檻：</b>①若月營收年增率跌破三位數且連續2個月；②若毛利率單季跌破50%；③若中國APT月均價或LME鈷價連續2個月下跌超過10%；符合任一項即應重新檢視持股部位。</div>
+    </div>
+  </div>
+
+  <h3 class="sec" id="p2-9">2.9 估值歷史錨點</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>指標</th><th>數值</th></tr>
+    <tr><td>5年平均PE(TTM)</td><td class="na">—（聯友2025/9上市，無此歷史區間資料）</td></tr>
+    <tr><td>2022年最低PE</td><td class="na">—（聯友2025/9上市，無此歷史區間資料）</td></tr>
+    <tr><td>2018年最低PE（成立年）</td><td class="na">—（未上市，無公開市場本益比資料）</td></tr>
+    <tr><td>上市以來本益比區間（替代呈現）</td><td>⚠️概略46x～102x（2026年9月間多次快照，因各平台採用的近四季EPS基期不同而區間極寬，僅供參考，非精確全樣本統計）</td></tr>
+  </table>
+  </div>
+
+  <h4 class="subsec">反推試算：若鎢酸鈉/硫酸鈷回到近期低點價格，對應EPS及合理股價</h4>
+  <div class="card">
+    <p><b>試算邏輯：</b>取2025Q3（超級循環發動前）毛利率28.61%、淨利率14.97%作為「原物料正常化」的參考基期，並假設屆時全年營收因屏東新廠與客戶結構仍能維持在顯著高於2024-2025年基期的水準（例如營收較2025全年7.66億元成長數倍，⚠️此為假設性估算非精確預測），則正常化後的EPS估計將顯著低於當前2026Q1/Q2單季10.87-14.5元的水準，可能回落至個位數至十餘元區間（⚠️粗略估算，區間寬泛因無法取得精確成本結構）。</p>
+    <p><b>核心結論（使用者要求之必寫結論）：</b>綜合Part1.5成長象限判斷、Part1.3 Thesis檢視與本節反推試算，本報告判斷<b>聯友金屬目前的股價與估值，主要是由鎢鈷原物料超級循環行情（中國出口管制紅利+全球廢鎢/廢鈷供給緊張）所撐起，而非單純由公司自身產能擴張與客戶結構帶來的結構性成長所支撐</b>。RMI認證、台積電/蘋果供應鏈與濕式冶金專利技術確實提供了「非中系稀缺產能」的結構性利基，但2024-2025年僅個位數EPS的財務史顯示，公司在原物料價格正常化情境下的「地板獲利能力」仍待更多期數驗證。8月以來APT價格轉弱、鈷價重挫29.6%的最新事實，進一步提醒投資人：現階段的高估值很大程度上是在為「超級循環能否延續」下注，而非為一家已證明可穿越商品週期的結構性成長企業定價。這對於一檔剛上市、題材性強、籌碼面尚不穩定（已兩度處置股、現增喊卡）的個股而言，是特別需要留意的估值風險。</p>
+  </div>
+
+</section>
+
+<!-- ============ PART 3 ============ -->
+<section id="part3">
+  <div class="part-header"><span class="part-num">PART 3</span><h2 class="part-title">財務風險健檢</h2></div>
+  <p class="part-sub">觸發模式：個股小狐・財務健檢｜聚焦六大比率、債務到期時程與同業對比</p>
+
+  <h3 class="sec" id="p3-1">3.1 財務數據填表</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>財務項目</th><th>最新可得數值</th><th>狀態</th></tr>
+    <tr><td colspan="3" style="background:#f3f5f8; font-weight:700;">損益表</td></tr>
+    <tr><td>EBIT</td><td>—</td><td><span class="badge b-red">❌未揭露</span></td></tr>
+    <tr><td>利息支出</td><td>—</td><td><span class="badge b-red">❌未揭露</span></td></tr>
+    <tr><td>EBITDA</td><td>—</td><td><span class="badge b-red">❌未揭露</span></td></tr>
+    <tr><td>D&A（折舊攤提）</td><td>—</td><td><span class="badge b-red">❌未揭露</span></td></tr>
+    <tr><td>營業利益率（可得替代指標）</td><td>2026Q2 61.5%</td><td><span class="badge b-green">✅已驗證</span></td></tr>
+    <tr><td colspan="3" style="background:#f3f5f8; font-weight:700;">資產負債表</td></tr>
+    <tr><td>總資產</td><td>6,578,665千元（約65.79億元，2026Q2）</td><td><span class="badge b-green">✅已驗證</span></td></tr>
+    <tr><td>股東權益（估算）</td><td>≈37.39億元（BVPS 64.14元×58,305,456股，⚠️自算）</td><td><span class="badge b-amber">⚠️估算</span></td></tr>
+    <tr><td>總負債（估算）</td><td>≈28.4億元（總資產減估算股東權益，⚠️自算）</td><td><span class="badge b-amber">⚠️估算</span></td></tr>
+    <tr><td>計息債務</td><td>—</td><td><span class="badge b-red">❌未揭露細項</span></td></tr>
+    <tr><td>現金及約當現金</td><td>—</td><td><span class="badge b-red">❌未揭露</span></td></tr>
+    <tr><td>一年內到期短期債務</td><td>—</td><td><span class="badge b-red">❌未揭露</span></td></tr>
+    <tr><td colspan="3" style="background:#f3f5f8; font-weight:700;">現金流量表</td></tr>
+    <tr><td>OCF（營業活動現金流）</td><td>—</td><td><span class="badge b-red">❌未揭露</span></td></tr>
+    <tr><td>CapEx（資本支出）</td><td>屏東新廠規劃投資6.5億元（多年期總額，非單年度數字）</td><td><span class="badge b-amber">⚠️部分可得</span></td></tr>
+    <tr><td>FCF（自由現金流）</td><td>—</td><td><span class="badge b-red">❌未揭露</span></td></tr>
+  </table>
+  </div>
+  <div class="callout warn">聯友金屬公開資訊平台（鉅亨網、財報狗等）截至查證時點，對其資產負債表與現金流量表的細項揭露非常有限，多次嘗試抓取均僅取得股價/市值等行情面資訊，損益表以下的細項僅能透過MOPS公開資訊觀測站的完整財報原文取得（本次未能於此次查證中成功調閱完整電子檔）。股東權益與總負債為本報告以BVPS×股數反推估算，非直接查證數字，已明確標示⚠️。</div>
+
+  <h3 class="sec" id="p3-2">3.2 六大比率診斷</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>比率</th><th>公式</th><th>結果</th><th>狀態</th><th>警戒標準</th></tr>
+    <tr><td>利息覆蓋率</td><td>EBIT ÷ 利息支出</td><td class="na">—</td><td><span class="badge b-grey">無法計算</span></td><td>一般 &lt;3x 需留意</td></tr>
+    <tr><td>負債比率</td><td>總負債 ÷ 總資產</td><td>⚠️估算約43.2%（28.4億／65.79億）</td><td><span class="badge b-amber">中性偏高，惟屬估算值</span></td><td>一般製造業 &gt;60%需留意</td></tr>
+    <tr><td>淨負債/EBITDA</td><td>(計息負債-現金) ÷ EBITDA</td><td class="na">—</td><td><span class="badge b-grey">無法計算</span></td><td>一般 &gt;3x需留意</td></tr>
+    <tr><td>OCF/總債務</td><td>營業現金流 ÷ 總債務</td><td class="na">—</td><td><span class="badge b-grey">無法計算</span></td><td>一般 &lt;20%需留意</td></tr>
+    <tr><td>現金流覆蓋比率</td><td>OCF ÷ 流動負債</td><td class="na">—</td><td><span class="badge b-grey">無法計算</span></td><td>一般 &lt;1x需留意</td></tr>
+    <tr><td>兩年內到期牆覆蓋倍數</td><td>現金+可動用額度 ÷ 兩年內到期債務</td><td class="na">—</td><td><span class="badge b-grey">無法計算</span></td><td>一般 &lt;1.5x需留意</td></tr>
+  </table>
+  </div>
+  <p class="small">⚠️ 因聯友金屬公開資訊平台未揭露利息費用、EBITDA、計息負債、現金餘額與到期債務結構，六項比率中五項無法計算，如實標示「—」。惟需注意：作為一家2018年成立、2025年甫上市、聚焦化學冶金加工（非重資產採礦）的公司，其負債結構理論上應相對單純，這點與傳統重資產礦業公司不同，但仍需以公司實際財報為準，本報告不代為臆測其財務體質良窳。</p>
+
+  <h3 class="sec" id="p3-3">3.3 債務到期時程</h3>
+  <p class="na">— 未查得逐年到期金額細項。公司股本規模583百萬元、掛牌僅約1年，⚠️定性判斷其計息負債規模與到期結構相對於重資產傳產公司可能較為單純，惟仍建議查閱公司最新年報/季報附註中的「借款一覽表」以取得精確數字。</p>
+
+  <h3 class="sec" id="p3-4">3.4 CapEx分析</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>指標</th><th>數值</th><th>備註</th></tr>
+    <tr><td>CapEx/營收</td><td class="na">—</td><td>因逐年CapEx未拆分公開，無法計算精確比率</td></tr>
+    <tr><td>CapEx/OCF</td><td class="na">—</td><td>OCF未揭露，無法計算</td></tr>
+    <tr><td>已知重大資本支出</td><td>屏東科學園區新廠，規劃投資6.5億元，預計2027/9投產鎢粉與碳化鎢</td><td>相對於估算股東權益37.39億元，此筆投資佔比約17%，屬有感規模的擴產承諾</td></tr>
+    <tr><td>業務模式輕重資產判讀</td><td>濕式冶金化學製程屬中度資產密集，相較上游採礦業（重資產）為輕，但相較單純代工組裝（輕資產）仍需持續資本投入以擴充產能承接硫酸鈷放量與屏東新廠量產</td><td>⚠️定性判斷，非精確資產週轉率計算</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sec" id="p3-5">3.5 同業對比</h3>
+  <div class="callout warn">如Part1.4與Part2.6所述，聯友金屬缺乏業務範疇與規模高度相近的直接上市可比同業，六大比率之同業比較因此同步受限——即便部分比率可得，也難以找到有意義的可比對象進行橫向比較。本節如實說明此限制，不勉強套用不具代表性的「同業平均」數字。</div>
+
+  <h3 class="sec" id="p3-6">3.6 綜合診斷</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>診斷維度</th><th>判定</th></tr>
+    <tr><td>整體財務體質定性分類</td><td><span class="badge b-amber">⚠️資料不足以完整分類，初步判斷為「獲利爆發但資訊揭露有限、體質待驗證」</span></td></tr>
+  </table>
+  </div>
+
+  <div class="risk-card">
+    <h5>最大風險點：存貨跌價風險（高價收購廢鎢庫存 vs 售價下修的價差擠壓）</h5>
+    <p>聯友的營運模式本質上是「原料端收購成本」與「產成品端市場售價」之間的價差生意。2026上半年毛利率飆升至67.73-74.0%，反映的是在鎢價急漲期間，公司或已鎖定相對低價的庫存、或轉嫁能力極強。<b>但風險方向正在反轉</b>：中國APT均價8月已月減3.5%，若此走弱趨勢延續，而公司帳上仍有先前在鎢價高檔階段收購、尚未出貨的廢鎢/廢鈷庫存，一旦這批庫存在較低的市場售價下出貨，將直接侵蝕毛利率。</p>
+    <p><b>觸發數字具體化（⚠️定性判斷，非精確存貨週轉天數推算）：</b>假設公司存貨週轉天數落在一般化工加工業常見的60-90天區間（公司未揭露實際天數），則8月以來APT價格的走弱可能已反映在未來1-2季的出貨批次中；若中國APT月均價或LME鈷現貨價自目前水準<b>再進一步下跌10-15%且持續2個月以上</b>，本報告判斷公司單季毛利率有可能自目前67-74%的高檔顯著回落，可能落回30-50%區間甚至更低，觸及本報告Part2.4基準情境下緣的假設。建議投資人密切追蹤月營收公告與後續季報毛利率變化，作為驗證此風險是否兌現的觀察窗口。</p>
+  </div>
+
+  <div class="watch-card">
+    <h5>安全邊際計算：EBIT需下滑多少%才觸及警戒線</h5>
+    <p>⚠️因公司未揭露EBIT絕對金額、利息費用與計息負債規模，無法計算精確的「EBIT需下滑X%觸及利息覆蓋率警戒線」數字，如實標示「—」。改以毛利率敏感度替代：若2026H1營業利益率61.5%（近似EBIT margin的替代指標）回落至2025Q3淨利率所隱含的較低營運槓桿水準（2025Q3淨利率僅14.97%，較2026Q2的49.1%大幅收斂），意味著營運利潤率有可能出現超過三分之二的相對降幅。由於固定費用（人力、折舊、管理費）在營收下滑或毛利率壓縮時具有一定剛性，獲利對毛利率變動的敏感度預期高於營收對毛利率的敏感度（即存在正向營運槓桿，下跌時亦然），此為聯友這類「原物料價格驅動型」公司在景氣循環轉向時最需要留意的財務體質脆弱點。</p>
+  </div>
+
+</section>
+
+<!-- ============ FINAL SUMMARY ============ -->
+<section id="final">
+  <div class="part-header"><span class="part-num">總結</span><h2 class="part-title">綜合總結</h2></div>
+
+  <div class="summary-cards">
+    <div class="summary-card"><div class="lbl">Thesis成立度</div><div class="big">3 / 5</div></div>
+    <div class="summary-card"><div class="lbl">護城河強度</div><div class="big">★★★☆☆</div></div>
+    <div class="summary-card"><div class="lbl">成長象限</div><div class="big">景氣循環成長股</div></div>
+    <div class="summary-card"><div class="lbl">財務體質分類</div><div class="big">⚠️資訊不足/待驗證</div></div>
+    <div class="summary-card"><div class="lbl">目標價區間</div><div class="big">⚠️無可靠法人共識</div></div>
+  </div>
+
+  <div class="action-box">
+    <h5>最終操作建議</h5>
+    <div class="grid2">
+      <div>
+        <b>已持有者：</b>建議正視近期鎢鈷價格走弱（中國APT均價8月月減3.5%、鈷現貨價9月重挫約29.6%）已對公司短期營運構成實質壓力——這不是單純的股價情緒性回檔，而是連動到公司核心獲利模式（收購成本vs售價價差）的基本面訊號。建議密切追蹤未來1-2個月營收公告與下一季毛利率變化，若毛利率未能維持在50%以上，應考慮逐步降低部位，而非僅依賴股價技術面判斷。
+      </div>
+      <div>
+        <b>未持有者：</b>在鎢鈷價格同步轉弱、籌碼面尚未穩定（近期處置股、現增喊卡、法人轉賣超）的當下，不建議追高介入；建議等待①原物料價格止穩訊號、②公司完整財報細項（資產負債表/現金流量表）可查證、③籌碼面連續穩定，三者至少滿足兩項後再評估進場時點。
+      </div>
+      <div>
+        <b>長期3-5年觀點：</b>若RMI認證+非中系稀缺產能的結構性利基能夠持續轉化為2024-2025年基期以上數倍的「地板獲利能力」（而非僅在原物料超級循環期間曇花一現），則長期具備從「題材循環股」晉升為「結構性成長股」的潛力；但截至目前查證的資料尚不足以確認這一轉化已經發生。
+      </div>
+      <div>
+        <b>核心催化劑：</b>①屏東新廠2027/9投產；②中國對非中系市場出口管制政策是否進一步強化或鬆綁；③硫酸鈷2026下半年實際放量規模與定價；④美國廢料出口新規對原料取得的實際影響是否顯現。
+      </div>
+    </div>
+  </div>
+
+  <div class="callout crit">
+    <b>近期鎢鈷價格走弱對短期營運的具體提醒（務必納入）：</b>截至查證時點，兩項核心原物料同步出現轉弱訊號——中國APT(88.5%)均價8月月減3.5%（YoY增速較7月收斂42.92個百分點）、鈷現貨價9月17日較月初重挫約28.7-29.6%（18.20美元/磅 vs 25.53美元/磅）。疊加硫酸鈷原訂2026Q2放量已延後至下半年、美國自8/27起限制廢鎢與電池廢棄物出口可能衝擊聯友的海外原料取得管道，三項因素同時發生的時間窗口高度重疊。投資人應將此視為短期（未來1-2季）營運與毛利率的實質下行風險，而非僅是股價情緒性修正，並密切追蹤月營收公告與季報毛利率變化作為驗證指標。
+  </div>
+</section>
+
+<div class="foot">
+  <p><b>主要資料來源：</b></p>
+  <p>
+  <a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7610" target="_blank">Goodinfo!台灣股市資訊網</a>｜
+  <a href="https://www.cnyes.com/twstock/7610" target="_blank">鉅亨網台股</a>｜
+  <a href="https://tw.stock.yahoo.com/quote/7610.TW" target="_blank">Yahoo奇摩股市</a>｜
+  <a href="https://statementdog.com/analysis/7610" target="_blank">財報狗statementdog</a>｜
+  <a href="https://money.udn.com/money/story/5612/9667856" target="_blank">經濟日報－聯友金屬股價腰斬四大原因</a>｜
+  <a href="https://www.ctee.com.tw/news/20260808700080-439901" target="_blank">工商時報－美國禁關鍵礦物廢料出口</a>｜
+  <a href="https://www.cmmedia.com.tw/home/articles/62210" target="_blank">信傳媒－仲鎢酸銨價格與美國鎢廢料禁令</a>｜
+  <a href="https://ec.ltn.com.tw/article/breakingnews/5535524" target="_blank">自由財經－中國鎢斷流</a>｜
+  <a href="https://vocus.cc/article/6a202997fd8978000149d6ca" target="_blank">領趨投資觀點－聯友金屬深度分析報告</a>｜
+  <a href="https://blog.fugle.tw/post/earnings-call-7610-2026-08-13" target="_blank">富果直送法說會筆記2026/8/13</a>｜
+  <a href="https://www.cna.com.tw/business/chinese/410287" target="_blank">中央社－聯友金屬IPO競拍資訊</a>
+  </p>
+  <p><b>完整資料缺口清單（標示「—」欄位）：</b>Forward PE、PEG、5年平均PE(TTM)、2022年最低PE、2018年最低PE、2026E-2028E法人一致預估EPS、市場對2026Q2財報的具體預期數字（Beat/Miss比較基準）、EBIT、利息支出、EBITDA、D&A、計息債務、現金及約當現金、一年內到期短期債務、逐年OCF/CapEx/FCF、逐年債務到期時程、內部人具體申報轉讓紀錄、閉鎖期到期日與解禁股數、具名券商目標價與評等、可比同業之六大財務比率。以上欄位均因公開資訊平台未揭露或聯友金屬2025/9上市後歷史資料期數過短而查無可靠數字，本報告一律標示「—」，未進行任何臆測填補。</p>
+  <p style="margin-top:16px;"><b>免責聲明：</b>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</div>
+
+</div>
+</body>
+</html>

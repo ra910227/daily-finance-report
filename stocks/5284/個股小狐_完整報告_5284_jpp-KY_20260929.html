@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜經寶精密控股(jpp-KY, 5284) 完整報告</title>
+<style>
+:root {
+  --bg: #ffffff; --bg2: #f7f8fc; --bg3: #eef0f7; --border: #e1e4ee;
+  --text: #1e2233; --text2: #6b7280; --accent: #4f46e5; --accent2: #4338ca;
+  --red: #dc2626; --green: #15803d; --gold: #b45309; --orange: #c2410c;
+  --blue: #2563eb; --purple: #7c3aed; --teal: #0d9488;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  line-height: 1.65; font-size: 15px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px 60px; }
+.hero {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #fff; padding: 36px 24px 30px; margin-bottom: 24px;
+}
+.hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+.hero .tag { display:inline-block; background: rgba(255,255,255,.18); padding: 3px 12px; border-radius: 20px; font-size: 12.5px; margin-bottom: 12px; }
+.hero h1 { margin: 0 0 6px; font-size: 25px; }
+.hero .sub { opacity: .9; font-size: 14px; margin-bottom: 18px; }
+.hero-stats { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-stat { background: rgba(255,255,255,.12); border-radius: 10px; padding: 10px 16px; min-width: 110px; }
+.hero-stat .l { font-size: 12px; opacity: .85; }
+.hero-stat .v { font-size: 18px; font-weight: 700; margin-top: 2px; }
+nav.toc {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px 20px; margin-bottom: 28px; font-size: 13.5px;
+}
+nav.toc .grp-title { font-weight: 700; color: var(--accent2); margin: 10px 0 6px; font-size: 13px; }
+nav.toc .grp-title:first-child { margin-top: 0; }
+nav.toc a { color: var(--text); text-decoration: none; display: inline-block; margin: 2px 14px 2px 0; }
+nav.toc a:hover { color: var(--accent); text-decoration: underline; }
+section { margin-bottom: 40px; scroll-margin-top: 16px; }
+h2.sec-title {
+  font-size: 20px; border-left: 5px solid var(--accent); padding-left: 12px;
+  margin: 0 0 4px;
+}
+.sec-mode { font-size: 12px; color: var(--text2); padding-left: 17px; margin-bottom: 16px; }
+h3 { font-size: 16.5px; margin: 22px 0 10px; color: var(--accent2); }
+p { color: var(--text); }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; font-size: 13.5px; }
+th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+th { background: var(--bg3); font-weight: 700; }
+tr:nth-child(even) td { background: #fbfbfd; }
+.badge { display:inline-block; padding: 2px 9px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.b-ok { background:#dcfce7; color:var(--green); }
+.b-warn { background:#fef3c7; color:var(--gold); }
+.b-bad { background:#fee2e2; color:var(--red); }
+.b-info { background:#e0e7ff; color:var(--accent2); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px; margin: 14px 0; }
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.card h4 { margin: 0 0 6px; font-size: 14px; color: var(--accent2); }
+.card .big { font-size: 22px; font-weight: 700; }
+.scenario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 14px; margin: 14px 0; }
+.scenario-card { border-radius: 12px; padding: 16px; border: 1px solid var(--border); }
+.scenario-card.bear { background: #fef2f2; }
+.scenario-card.base { background: #eef2ff; }
+.scenario-card.bull { background: #f0fdf4; }
+.scenario-card h4 { margin: 0 0 8px; }
+.scenario-card ul { margin: 6px 0; padding-left: 18px; font-size: 13px; }
+.scenario-card .target { font-size: 20px; font-weight: 800; margin-top: 8px; }
+.risk-card { border-left: 4px solid var(--red); background: #fff5f5; padding: 12px 16px; border-radius: 8px; margin: 10px 0; }
+.risk-card.mid { border-left-color: var(--gold); background: #fffbeb; }
+.action-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 16px 0; }
+.action-box h4 { margin-top: 0; color: var(--accent2); }
+.note { font-size: 12.5px; color: var(--text2); margin-top: 6px; }
+.moat-row { display:flex; align-items:center; gap:10px; margin:6px 0; font-size:13.5px; }
+.moat-row .label { width: 130px; flex-shrink:0; }
+.stars { color: var(--gold); letter-spacing: 2px; }
+.divider { border:none; border-top:1px solid var(--border); margin: 30px 0; }
+footer { font-size: 12px; color: var(--text2); border-top: 1px solid var(--border); padding-top: 16px; margin-top: 40px; }
+.src-status { font-size:11.5px; }
+code { background: var(--bg3); padding: 1px 6px; border-radius: 4px; font-size: 12.5px; }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="tag">個股小狐｜三合一完整報告</span>
+    <h1>經寶精密控股(jpp-KY, 5284.TW) JPP Holding Company Limited</h1>
+    <div class="sub">分析日期：2026/09/29（盤中）　｜　產業：金屬精密機構件／AI伺服器機構件＋航太結構件雙引擎</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="l">股價(09/29 11:00盤中)</div><div class="v">299.5 元</div></div>
+      <div class="hero-stat"><div class="l">市值</div><div class="v">約165.15億</div></div>
+      <div class="hero-stat"><div class="l">PE(TTM)</div><div class="v">18.71 倍</div></div>
+      <div class="hero-stat"><div class="l">PB</div><div class="v">4.18 倍</div></div>
+      <div class="hero-stat"><div class="l">成長象限</div><div class="v">高速成長股</div></div>
+      <div class="hero-stat"><div class="l">Thesis成立度</div><div class="v">4 / 5</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<nav class="toc">
+  <div class="grp-title">摘要</div>
+  <a href="#summary">綜合總結卡片</a>
+  <div class="grp-title">① 公司深度研究</div>
+  <a href="#s1-basic">基本介紹</a>
+  <a href="#s1-engine">業務引擎分析</a>
+  <a href="#s1-thesis">核心Thesis與未來性</a>
+  <a href="#s1-comp">競爭格局</a>
+  <a href="#s1-quad">成長象限與護城河</a>
+  <div class="grp-title">② 最新財報解析</div>
+  <a href="#s2-beatmiss">財報表現與指引</a>
+  <a href="#s2-dcf">三情境估值</a>
+  <a href="#s2-valuation">股價位階評估(含PE歷史錨點)</a>
+  <a href="#s2-comps">可比公司分析</a>
+  <a href="#s2-target">法人動向與操作建議</a>
+  <div class="grp-title">③ 財務風險健檢</div>
+  <a href="#s3-data">財務數據</a>
+  <a href="#s3-ratio">六大比率診斷</a>
+  <a href="#s3-debt">債務到期與CapEx</a>
+  <a href="#s3-final">同業對比與綜合診斷</a>
+  <div class="grp-title">總結</div>
+  <a href="#final-action">最終操作建議</a>
+</nav>
+
+<section id="summary">
+<h2 class="sec-title">綜合總結：五維度快照</h2>
+<div class="card-grid">
+  <div class="card"><h4>Thesis成立度</h4><div class="big">4 / 5</div><div class="note">AI伺服器機櫃與航太雙引擎皆已反映在實際財報，非僅題材</div></div>
+  <div class="card"><h4>護城河強度</h4><div class="big stars">★★★★☆</div><div class="note">航太認證+AWS焊接製程門檻構成中高轉換成本</div></div>
+  <div class="card"><h4>成長象限</h4><div class="big">高速成長股</div><div class="note">EPS 2024→2026E成長逾15倍，兼具Airbus/AI雙循環風險</div></div>
+  <div class="card"><h4>估值位階</h4><div class="big">合理偏低</div><div class="note">現價PE 18.71倍僅略高於自算5年常態均值約17倍</div></div>
+  <div class="card"><h4>財務體質</h4><div class="big">擴張期健康</div><div class="note">現金增資+可轉債支應擴產，負債比隨擴產階段性上升</div></div>
+</div>
+<p class="note">本報告整合「公司深度研究」「最新財報解析」「財務風險健檢」三模式內容，為jpp-KY首次建立之個股小狐報告。因環境無Futu OpenD工具，全數改以WebSearch／WebFetch／瀏覽器實查Yahoo股市、玩股網(WantGoo)、財報狗(statementdog)、鉅亨網、公開資訊觀測站(MOPS)相關公告與媒體報導取得。Goodinfo因反機器人驗證機制本次全程無法存取，財報狗完整20年歷史圖表為付費功能亦無法取得，凡標示⚠️為自行推算/估算值（已揭露計算方法），❌為查無資料，全文未臆測填入任何未經查證之精確數字。</p>
+</section>
+
+<hr class="divider">
+<h1 style="font-size:18px;color:var(--accent2);">① 公司深度研究</h1>
+
+<section id="s1-basic">
+<h2 class="sec-title">基本介紹</h2>
+<table>
+<tr><th>項目</th><th>數據</th><th>來源狀態</th></tr>
+<tr><td>市值</td><td>約165.15億元（2026/09/29盤中，股價299.5元）</td><td class="src-status"><span class="badge b-ok">✅已驗證</span>玩股網</td></tr>
+<tr><td>2025年全年營收</td><td>37.56億元（年增約57.3%，較2024年23.88億元）</td><td class="src-status"><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>2026年1-8月累計營收</td><td>31.68億元（年增38.29%）；4月單月3.95億元創十年單月同期新高(年增54.65%)</td><td class="src-status"><span class="badge b-ok">✅已驗證</span>MOPS重大訊息公告</td></tr>
+<tr><td>2026Q2單季毛利率</td><td>42.1%（單季新高，2026Q1為37.5%，2025Q4為42.1%）</td><td class="src-status"><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>2026Q2單季營業利益率</td><td>26.9%</td><td class="src-status"><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>2026Q2自由現金流(OCF+投資CF估)</td><td>約1.89億元（營業現金流4.73億＋投資現金流-2.85億）</td><td class="src-status"><span class="badge b-warn">⚠️估算</span>Yahoo「自由現金流」為OCF+投資CF，非嚴格OCF-CapEx</td></tr>
+<tr><td>所屬產業與市場地位</td><td>泰國前三大特殊金屬鈑金加工廠（1998年設廠），2024年產品組合：通訊/伺服器類約56%、航空類約34%、電子類約6%；為Airbus一階(Tier-1)供應商，同時為AWS AI伺服器機櫃主要機構件供應商之一</td><td class="src-status"><span class="badge b-ok">✅已驗證</span></td></tr>
+</table>
+<p>經寶精密控股股份有限公司(jpp-KY)之控股公司JPP Holding Company Limited於2012年5月在英屬開曼群島設立，2013年10月起於台灣證券櫃檯買賣中心上櫃，2017年3月9日轉上市於台灣證券交易所。營運主體經寶精密工業自1998年起深耕泰國，以「利基市場、從設計到成品」的一站式精密金屬機構件製造模式，跨足通訊網通、AI伺服器機構件、航太結構件、電子等領域。董事長鍾國松、總經理藺以權、發言人鍾國圳。2024年銷售地區：台灣57%、歐洲27%、亞洲13%、美洲2%。</p>
+<p class="note">⚠️ 重要提醒：使用者提供之參考股價442元與本次查證之即時股價299.5元存在明顯落差（約-32%）。經交叉比對財報狗快取頁面標題「最新股價442.0元」與玩股網歷史新聞「05/16 jpp-KY獲利衝高股價首破400元」，判斷442元應為2026年5-7月間搜尋引擎快取的歷史高點附近股價，而非現時股價；本報告一律採2026/09/29盤中即時verified數據(299.5元)為準，並在②財報解析章節之「股價反應」詳細說明此波回檔的背景（現金增資稀釋疑慮與獲利了結）。</p>
+</section>
+
+<section id="s1-engine">
+<h2 class="sec-title">業務引擎分析</h2>
+<h3>核心業務線</h3>
+<table>
+<tr><th>業務線</th><th>概況</th><th>客戶結構</th><th>護城河來源</th></tr>
+<tr><td>AI伺服器機構件(通訊類大宗)</td><td>2024年通訊類產品(含伺服器)佔營收約56%；主力產品為42U/46U AI伺服器機櫃，AWS為最大AI客戶約佔營收30%，日出貨量320-340櫃，訂單能見度達次年Q2；2026下半年日產能規劃提升至約400櫃</td><td>AWS(機櫃大宗)、Google/Microsoft(液冷CDU/分歧管/水冷板等認證供應商)、經泰國子公司與泰國指標電源管理大廠策略合作</td><td>AWS機櫃因散熱功率提升要求新焊接製程，多數同業無法通過認證，jpp藉航太業務焊接技術優勢成為少數合格供應商之一；已切入NVIDIA GB200液冷供應鏈</td></tr>
+<tr><td>航太結構件</td><td>2024年航空類產品佔營收約34%；為Airbus一階(Tier-1)供應商，航太營收中約80%直接來自Airbus；產品含航太飛行控制電腦機殼、A350航電整機機構件、監視器控制箱體等；亦拓展客機改貨機(P2F)業務與MRO認證</td><td>Airbus(核心大宗)、法國Thales；透過收購整合垂直供應鏈(2018年Agiliteam/2020年Spem Aero/2025年Segnere SAS)</td><td>民航零組件適航認證(AS9100等)週期長、轉換成本高，Airbus在手訂單約8,700架、訂單消化週期7-10年，提供長期能見度；透過併購取得精密車削(ADB)、銑削(LUTEC)、表面處理(Spem Aero)、鈑金與結構組裝(Segnere,達梭關係企業)完整能力</td></tr>
+<tr><td>電子/其他(通訊網通、UPS等)</td><td>2024年電子類產品佔營收約6%；產品含光纖通訊系統櫃、UPS系列等</td><td>日本TABUCHI、泰國電信商AIS/DTAC、法國FOSS等</td><td>⚠️ 佔比相對小，護城河與前兩大引擎相比較不顯著，屬基礎利基型代工業務</td></tr>
+</table>
+
+<h3>近4期歷史財務摘要（單季，合併，單位：百萬元）</h3>
+<table>
+<tr><th>季度</th><th>營收</th><th>YoY</th><th>毛利率</th><th>營業利益率</th><th>EPS(元)</th><th>單季FCF(OCF+投資CF)</th></tr>
+<tr><td>2025Q3</td><td>950.1</td><td>+64.5%(估)</td><td>35.5%</td><td>14.4%</td><td>4.56</td><td>411.6</td></tr>
+<tr><td>2025Q4</td><td>1,130.8</td><td>+61.7%(估)</td><td>42.1%</td><td>23.5%</td><td>2.94</td><td>-100.4</td></tr>
+<tr><td>2026Q1</td><td>1,166.2</td><td>+64.5%</td><td>37.5%</td><td>21.0%</td><td>4.13</td><td>217.8</td></tr>
+<tr><td>2026Q2</td><td>1,203.6</td><td>+32.1%(估)</td><td>42.1%</td><td>26.9%</td><td>4.41</td><td>188.7</td></tr>
+</table>
+<p class="note">✅ 營收/毛利率/營業利益率/EPS取自Yahoo股市財務報表(損益表、每股盈餘頁)，與公司法說會公告數字(如Q2合併營收12.04億、毛利率42.1%)交叉一致。⚠️ 部分季度YoY為依前一年同季營收反推估算（原始頁面未逐季提供YoY欄位）；「單季FCF」採Yahoo定義(營業現金流+投資現金流)，非嚴格自由現金流(未扣除實際CapEx細項)，且2025Q3/2026Q1之高FCF與2025Q4之負FCF波動反映併購(Segnere)與資本支出時點不均。缺EBITDA(因D&A未單獨揭露)，以營業利益率作為保守替代指標，實際EBITDA margin應略高於表列營業利益率。</p>
+</section>
+
+<section id="s1-thesis">
+<h2 class="sec-title">核心Thesis與未來性</h2>
+<h3>投資論點支柱</h3>
+<table>
+<tr><th>論點</th><th>狀態</th><th>證據</th></tr>
+<tr><td>AI伺服器機櫃/液冷機構件成為第二成長引擎，非僅題材炒作</td><td><span class="badge b-ok">✅成立</span></td><td>AWS機櫃日出貨320-340櫃、佔營收約30%，2026下半年產能規劃提升至日產約400櫃；已切入NVIDIA GB200液冷供應鏈並取得Google/Microsoft/AWS三大CSP認證；財報毛利率隨此業務放量由2024年約30%提升至2026Q2的42.1%，效益已反映在實際數字而非僅法說會展望</td></tr>
+<tr><td>航太結構件透過M&A垂直整合，Airbus訂單能見度提供長期現金流基礎</td><td><span class="badge b-ok">✅成立</span></td><td>2018-2025年完成Agiliteam、Spem Aero、Segnere SAS三次併購，取得車削/銑削/表面處理/鈑金結構組裝完整能力；Airbus在手訂單約8,700架、A320月產能規劃2027年前自60架提升至75架，為訂單能見度提供7-10年基礎</td></tr>
+<tr><td>焊接技術門檻構成AI機櫃業務的差異化護城河</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>市場報導稱AWS機櫃因散熱功率升級要求新焊接製程「多數供應商無法通過認證」，jpp藉航太經驗優勢成為少數合格供應商；惟此說法主要來自單一社群/分析文章轉述，未見公司或AWS官方明確證實供應商家數與市佔具體數字，需持續觀察是否有新進者於後續季度打入供應鏈</td></tr>
+<tr><td>獲利與股價可望維持「戴維斯雙擊」式重估</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>EPS由2024年1.02元暴增至2025年約12.05元、2026E法人預估16.5-18元，成長力道確立；但現金增資(9/17完成，發行價僅250元，約當時市價6-7折)與兩檔可轉債(CB4/CB5合計5.51億元)已對股價造成稀釋疑慮，股價自高點約480元回落至現價299.5元，顯示「雙擊」尚未完全兌現在股價上，反而出現階段性「估值收斂」</td></tr>
+</table>
+
+<h3>核心成長驅動力</h3>
+<ul>
+<li>AI資料中心資本支出循環：全球伺服器市場2025年規模達3,660億美元(年增45%)，AI伺服器占比達72%；AWS、Google、Microsoft三大CSP同步驗證通過，為未來1-2年最大成長變數</li>
+<li>民航機生產速率回升：Airbus A320系列月產能規劃自60架逐步提升至2027年前75架，配合Segnere SAS(達梭系供應商)併購整合綜效，為3-5年期較穩定的現金流引擎</li>
+</ul>
+
+<h3>需監控風險（含觸發條件）</h3>
+<div class="risk-card mid"><b>現金增資與可轉債稀釋壓力</b>：2026年現金增資發行225萬股(發行價250元，較當時市價折價逾6成)，加計CB4(2.01億元)、CB5(3.5億元，2029/5/11到期)之潛在轉換股數，若股本持續膨脹而獲利成長未能同步跟上，每股獲利成長性將被稀釋，需觀察後續每季EPS是否仍維持YoY 30%以上成長</div>
+<div class="risk-card mid"><b>客戶集中度風險</b>：航太營收中約80%來自單一客戶Airbus(約佔總營收27%)，AI機櫃業務中AWS約佔總營收30%；兩大引擎合計逾50%營收集中在兩家終端客戶，若任一方訂單政策或資本支出計畫轉向，對營收影響顯著</div>
+<div class="risk-card"><b>擴產執行風險與短期獲利波動</b>：公司公開表示「擴產初期的折舊、良率與人員配置，也可能使短期獲利率出現波動」；第二座自動化噴烤漆廠、800噸沖壓設備、2.2萬坪新廠等擴產計畫若執行進度不如預期或產能利用率不足，將侵蝕當前42%的歷史高毛利率</div>
+</section>
+
+<section id="s1-comp">
+<h2 class="sec-title">競爭格局</h2>
+<h3>戰場一：AI伺服器機櫃／機構件</h3>
+<table>
+<tr><th>公司</th><th>概況</th><th>對jpp-KY威脅度</th></tr>
+<tr><td>鴻海(2317)／廣達(2382)／緯創(3231)</td><td>機櫃系統整合(L10/L11)規模遠大於jpp，屬產業鏈更上游的系統整合商而非直接的鈑金機構件競爭者，但長期有垂直整合自製機構件的可能</td><td><span class="badge b-warn">🟡中</span></td></tr>
+<tr><td>勤誠(8210)</td><td>伺服器機殼專業廠，PE約23-25倍，市值逾千億，產品線與jpp的AI機櫃業務高度重疊</td><td><span class="badge b-bad">🔴高</span></td></tr>
+<tr><td>晟銘電(3013)</td><td>伺服器機殼廠，PE約15.71倍，市值約182億，毛利率21.15%明顯低於jpp的42.1%，反映jpp目前在AI機櫃領域的產品組合(含液冷CDU/BBU等高值零組件)較單純機殼更具附加價值</td><td><span class="badge b-warn">🟡中</span></td></tr>
+<tr><td>可成(2474)</td><td>金屬機構件大廠，跨足伺服器機構件領域，本益比13.74倍(財報狗同業排名)</td><td><span class="badge b-warn">🟡中</span></td></tr>
+</table>
+
+<h3>戰場二：航太結構件</h3>
+<table>
+<tr><th>公司</th><th>概況</th><th>對jpp-KY威脅度</th></tr>
+<tr><td>漢翔(2634)</td><td>台灣航太龍頭(AIDC)，PE約30.5倍、市值約594億，同步受惠國防航太與民航供應鏈移轉(如新拿下龐巴迪20年大單)，規模遠大於jpp</td><td><span class="badge b-warn">🟡中</span></td></tr>
+<tr><td>長榮航太(2645)</td><td>MRO與飛機改裝(含P2F)為主，PE約21.94倍、市值約644億，毛利率27.54%，業務範疇與jpp的P2F拓展方向有一定重疊</td><td><span class="badge b-warn">🟡中</span></td></tr>
+<tr><td>國際航太一階供應商(Safran/Meggitt等)</td><td>❌ 本次未取得具體財務數字，僅作為Airbus供應鏈中潛在替代供應商之定性提示</td><td>—</td></tr>
+</table>
+<p class="note">jpp-KY在兩大戰場中均屬相對中小型的利基型供應商：AI機櫃領域受惠於「航太焊接技術跨界應用」形成的短期技術門檻，但長期需持續透過良率與產能規模鞏固地位；航太領域則透過併購取得從精密加工到結構組裝的完整能力，在Airbus供應鏈中的地位相對穩固，但規模仍遠小於漢翔、長榮航太等台灣航太大廠。</p>
+</section>
+
+<section id="s1-quad">
+<h2 class="sec-title">成長象限判斷與護城河評估</h2>
+<h3>Peter Lynch 成長象限判斷</h3>
+<table>
+<tr><th>判斷依據</th><th>觀察</th></tr>
+<tr><td>獲利成長速度</td><td>EPS由2024年1.02元→2025年約12.05元→2026年法人預估16.5-18元，兩年成長逾15倍，2026E YoY成長率約37-43%，遠高於一般「穩定成長股」門檻</td></tr>
+<tr><td>成長來源結構性</td><td>成長主要來自AI資料中心資本支出循環＋Airbus窄體客機產能爬升兩大結構性趨勢，而非單一庫存回補或匯率等一次性因素</td></tr>
+<tr><td>週期性成分</td><td>航太(Airbus資本支出/生產排程)與AI資料中心資本支出皆存在景氣循環屬性，若總體經濟顯著轉弱，兩引擎恐同步降溫，帶有「景氣循環股」的風險特徵</td></tr>
+</table>
+<p><b>結論：主要歸類為「高速成長股」（Fast Grower），但需疊加「景氣循環股」的風險視角管理部位。</b>公司獲利成長速度與結構性驅動力皆符合高速成長股定義，但雙引擎(AI資本支出循環＋民航機生產循環)本質上仍是資本支出循環的下游供應商，非防禦型穩定成長業務，波動風險高於傳統定義的「穩定成長股」。</p>
+
+<h3>護城河五維度評分</h3>
+<div class="moat-row"><span class="label">不可替代性</span><span class="stars">★★★★☆</span><span>(4/5) AWS機櫃因散熱功率升級要求新焊接製程，市場報導稱多數供應商無法通過認證，jpp藉航太背景取得先發優勢，但此說法待更多季度驗證</span></div>
+<div class="moat-row"><span class="label">網路效應</span><span class="stars">★☆☆☆☆</span><span>(1/5) B2B精密製造代工模式，無網路效應</span></div>
+<div class="moat-row"><span class="label">客戶黏著度</span><span class="stars">★★★★☆</span><span>(4/5) 民航零組件適航認證週期長、轉換成本高；CSP資料中心供應鏈驗證流程繁複，一旦通過認證即具備一定黏著度</span></div>
+<div class="moat-row"><span class="label">成本優勢</span><span class="stars">★★★☆☆</span><span>(3/5) 泰國生產基地具人力與土地成本優勢，惟原物料(不鏽鋼/銅/鋁)價格波動仍會影響毛利率</span></div>
+<div class="moat-row"><span class="label">規模效應</span><span class="stars">★★★☆☆</span><span>(3/5) 在利基型精密金屬機構件領域具一定規模地位，但相較鴻海/廣達(AI機櫃)或漢翔(航太)等巨頭仍屬中小型企業</span></div>
+<p style="margin-top:10px;"><b>護城河總評：★★★★☆（中上）</b>，護城河主要來自「雙重技術認證門檻」（民航適航認證＋CSP資料中心焊接製程認證）疊加效應，屬於相對少見、需要長時間累積的技術與信任資產，但規模效應與成本優勢仍有進一步提升空間。</p>
+
+<div class="action-box">
+<h4>建議動作</h4>
+<p><b>目前建議：</b>現價(299.5元)對應的PE(18.71倍)僅略高於自算5年常態均值(約17倍)，估值尚屬合理，可分批布局或續抱，不需追高。</p>
+<p><b>加碼觸發：</b>① 股價因增資稀釋疑慮進一步回落至250-270元附近(接近現金增資發行價250元、且對應2026E保守EPS的PE降至15-16倍)；② AI機櫃日產能如期提升至400櫃且毛利率維持40%以上；③ Airbus A320月產能如期於2027年前提升至75架</p>
+<p><b>賣出觸發：</b>① 連續兩季毛利率跌破35%(顯示擴產稀釋效果超出預期)；② AWS或Airbus任一大客戶訂單明確轉單或砍單；③ 股本因增資/可轉債轉換大幅膨脹但獲利未同步成長，PE不降反升</p>
+<p><b>每季監控指標：</b>月營收YoY增速、單季毛利率、AI機櫃/航太營收占比、現金增資後流通股數變化、可轉債轉換進度</p>
+</div>
+</section>
+
+<hr class="divider">
+<h1 style="font-size:18px;color:var(--accent2);">② 最新財報解析</h1>
+
+<section id="s2-beatmiss">
+<h2 class="sec-title">財報表現與指引變化</h2>
+<h3>2026H1(2026Q1+Q2)實際表現 vs 歷史趨勢</h3>
+<table>
+<tr><th>指標</th><th>2026H1實際</th><th>YoY</th><th>市場預期對照</th><th>判定</th></tr>
+<tr><td>累計EPS</td><td>8.54元(創同期新高)</td><td>+90.6%(對2025H1約4.61元)</td><td>❌ 無法取得財報公布前的市場一致預期單期EPS</td><td><span class="badge b-ok">創同期新高</span></td></tr>
+<tr><td>Q2單季獲利</td><td>2.33億元，EPS 4.41元</td><td>季增6.8%</td><td>❌ 無公認共識數字可比對</td><td><span class="badge b-ok">優於歷史趨勢</span></td></tr>
+<tr><td>Q2毛利率</td><td>42.1%(單季新高)</td><td>—</td><td>—</td><td><span class="badge b-ok">創高</span></td></tr>
+<tr><td>Q2營業利益率</td><td>26.9%</td><td>—</td><td>—</td><td><span class="badge b-ok">同創相對高檔</span></td></tr>
+</table>
+<p class="note">⚠️ 本次查證未能取得財報公布前券商對jpp-KY單季EPS/營收的「共識預期(consensus)」逐項數字（多數台股中小型股無完整consensus資料庫覆蓋），故本節僅能以YoY/QoQ與歷史趨勢佐證「創高/優於趨勢」之判定，無法嚴格定義為Beat/Miss。</p>
+
+<h3>全年展望/指引變化</h3>
+<table>
+<tr><th>時間點</th><th>指引內容</th><th>方向</th></tr>
+<tr><td>2025年11月(法說會)</td><td>迎AWS、泰達電AI大單，2026年執行大幅度擴產，機櫃與沖壓產能規劃增加20-30%，並規劃2.2萬坪新廠</td><td>—</td></tr>
+<tr><td>2026年8月(H1財報說明)</td><td>下半年持續擴大布局AI伺服器機構件，重點轉向高階大型量產門檻機構件；同步推進A350航電整機機構件等高階航太專案認證；全年展望持續看佳</td><td><span class="badge b-ok">維持/上調(展望具體化)</span></td></tr>
+<tr><td>2025年11月(產業分析預估)</td><td>通訊業務年增率預估可能超過35%，航太業務年增率預估超過25%</td><td>—</td></tr>
+</table>
+
+<h3>股價反應</h3>
+<p>2026年上半年財報陸續公布期間，股價隨AI伺服器與航太雙題材同步走強：5月中旬股價首度衝破400元，此後一路推升至約480元的52週高點（來源為媒體轉述，非本次逐日核對之官方數字，標示⚠️）。然而進入9月後，公司啟動115年度現金增資（發行價僅250元，較當時市價折價逾6成）並完成收足股款（基準日9/17），加上第四、五次無擔保轉換公司債(合計5.51億元)陸續調整轉換價格，市場對股本稀釋的疑慮升溫，加上前期漲幅已大，股價自高點回落至9月29日盤中的299.5元，較52週高點回檔約38%。整體而言，8月20日公布的H1財報本身創下獲利與毛利率歷史新高，並未出現財報不如預期的訊號；本波回檔更可能反映「增資稀釋疑慮＋前期漲幅過大後的獲利了結」，而非基本面轉弱。</p>
+</section>
+
+<section id="s2-dcf">
+<h2 class="sec-title">三情境估值</h2>
+<p class="note">⚠️ 以下為根據現有公開財測與產業假設之簡化情境估值（非逐年現金流折現的完整DCF模型），因jpp-KY為雙引擎(AI資料中心+航太)中小型製造商、缺乏公開的WACC/資本結構細項，估值結果僅供參考區間，非精確目標價。</p>
+<div class="scenario-grid">
+<div class="scenario-card bear">
+<h4>🐻 熊市情境</h4>
+<ul>
+<li>AWS/CSP資本支出成長放緩，AI機櫃訂單能見度不如預期，Airbus生產排程亦出現延遲</li>
+<li>毛利率因擴產折舊上升但稼動率不足，回落至30-33%</li>
+<li>2027E EPS：約14-15元(較2026E持平或小幅衰退)</li>
+<li>合理PE：12-14倍(回歸金屬機構件代工業歷史保守估值，並反映增資稀釋)</li>
+</ul>
+<div class="target">目標價 約170-210元</div>
+</div>
+<div class="scenario-card base">
+<h4>⚖️ 基準情境</h4>
+<ul>
+<li>2026年營收約49.92億元(採元富證券投顧預估)，年增約33%；2027年延續AI機櫃與Airbus產能爬升，營收年增約20-25%</li>
+<li>毛利率隨規模效應與高值產品組合(液冷/BBU)維持35-38%</li>
+<li>2026E EPS：16.5-17元(法人預估中樞)；2027E EPS：約20-22元</li>
+<li>合理PE：18-20倍(接近現價PE，反映高速成長股溢價但未過度樂觀)</li>
+</ul>
+<div class="target">目標價 約300-350元(以2026E)／360-440元(以2027E前瞻)</div>
+</div>
+<div class="scenario-card bull">
+<h4>🐂 牛市情境</h4>
+<ul>
+<li>AWS機櫃日產能如期或超前達400櫃以上，NVIDIA GB200液冷訂單放量，Airbus A320月產能提前達75架，Segnere整合綜效顯現</li>
+<li>毛利率突破42%並維持在40%以上</li>
+<li>2027E EPS：約25-28元</li>
+<li>合理PE：22-25倍(比照漢翔30倍、AI供應鏈高成長股估值溢價，但保守給予折價)</li>
+</ul>
+<div class="target">目標價 約550-700元</div>
+</div>
+</div>
+<p class="note"><b>敏感度說明：</b>對估值影響最大的變數為「毛利率能否在擴產期間維持在35%以上」與「現金增資/可轉債稀釋後的實際流通股數」，兩者互為因果——若擴產折舊侵蝕毛利率同時股本快速膨脹，EPS成長動能將被雙重稀釋，是本次估值最大的不確定性來源。</p>
+</section>
+
+<section id="s2-valuation">
+<h2 class="sec-title">股價位階評估</h2>
+
+<h3>多年期EPS實際值 vs 預估值</h3>
+<table>
+<tr><th>年度</th><th>EPS</th><th>類型</th><th>YoY</th><th>備註</th></tr>
+<tr><td>2024</td><td>1.02元</td><td>A實際</td><td>-64.5%(對2023年約8.34元)</td><td>2024Q1單季曾虧損(EPS -1.26元)，全年基期極低</td></tr>
+<tr><td>2025</td><td>約12.05-12.11元</td><td>A實際</td><td>+1,081%(低基期反彈)</td><td>不同來源微幅差異(12.05 vs 逐季加總12.11)，屬四捨五入/財報重編差異，非數據錯誤</td></tr>
+<tr><td>2026</td><td>16.47-18元(區間)，元富證券投顧預估16.58元、另有預估17.22元</td><td>E預估</td><td>+37%~+49%(視採用數字)</td><td>H1已實現8.54元(占全年中樞估計約半數)，H2需維持YoY高速成長方能達標</td></tr>
+<tr><td>2027</td><td>❌ 無法取得具體法人預估數字</td><td>—</td><td>—</td><td>本次查證未find到公開揭露的2027年EPS預估，僅本報告DCF情境自行推算20-28元區間供參考(⚠️非法人共識)</td></tr>
+<tr><td>2028</td><td>❌ 無法取得</td><td>—</td><td>—</td><td>台股中小型股鮮少有機構提供3年以上前瞻EPS預估</td></tr>
+</table>
+<p class="note">✅ 2024/2025實際值交叉比對Yahoo股市逐季EPS加總與統計媒體引用數字一致。⚠️ 2026年EPS預估存在明顯分歧：元富證券投顧預估16.58元(對應目標價435元)，另有市場預估16.47-18元區間(法人機構平均預估稅後純益約9.14億元)；由於分歧不算極端(區間約9%)，本報告採16.5-17元作為基準情境中樞，18元作為樂觀上緣。</p>
+
+<h3>歷史本益比錨點（自行推算，2022Q3-2026Q2）</h3>
+<p class="note">⚠️ 方法揭露：Goodinfo本益比河流圖遭反機器人驗證機制阻擋、財報狗完整20年歷史圖表為付費會員功能，本次均無法取得官方逐日本益比數列。改以Yahoo股市公開之「季均價」除以「當季點的近4季EPS加總」自行推算各季本益比，方法一致透明，惟屬近似值而非官方逐日數字。</p>
+<table>
+<tr><th>季度</th><th>季均價</th><th>近4季EPS</th><th>推算PE</th><th>備註</th></tr>
+<tr><td>2022Q3</td><td>46.00</td><td>4.16</td><td>11.06倍</td><td>—</td></tr>
+<tr><td>2022Q4</td><td>48.79</td><td>5.51</td><td><b>8.85倍</b></td><td><b>可得資料中2022年最低點</b></td></tr>
+<tr><td>2023Q4</td><td>123.50</td><td>8.34</td><td>14.81倍</td><td>—</td></tr>
+<tr><td>2024Q1</td><td>162.54</td><td>4.56</td><td>35.65倍</td><td>⚠️近4季EPS因2023Q4~2024Q1獲利急速下滑而基期極低，PE失真偏高</td></tr>
+<tr><td>2024Q2</td><td>153.51</td><td>2.03</td><td>75.62倍</td><td>⚠️同上，獲利谷底期間PE公式失真，非代表真實估值行情</td></tr>
+<tr><td>2024Q4</td><td>144.44</td><td>1.02</td><td>141.61倍</td><td>⚠️近4季EPS趨近於零導致PE公式數學上失真，應排除於「正常估值」判讀之外</td></tr>
+<tr><td>2025Q4</td><td>212.73</td><td>12.11</td><td>17.57倍</td><td>—</td></tr>
+<tr><td>2026Q1</td><td>270.09</td><td>13.73</td><td>19.67倍</td><td>—</td></tr>
+<tr><td>2026Q2</td><td>321.01</td><td>16.04</td><td>20.01倍</td><td>—</td></tr>
+</table>
+<p><b>5年平均本益比：</b>⚠️自算約17.1倍（排除2024Q1/Q2/Q4三個因獲利谷底導致公式數學失真的季度後，其餘12個可得季度之簡單平均；若不排除失真季度，全樣本15季平均將被扭曲拉高至約30.6倍，此數字不具備估值參考意義，特此說明避免誤導）。<br>
+<b>2022年最低本益比：</b>⚠️自算約8.85倍（2022Q4，對應當時全球股市修正、公司獲利基期仍偏低的階段）。<br>
+<b>2018年最低本益比：</b><span class="badge b-bad">❌無法取得</span>——Yahoo股市/財報狗免費頁面資料最早僅回溯至2021Q3，Goodinfo與財報狗完整歷史圖表因反機器人驗證/付費牆本次均無法存取，未能取得2018年(上次主要市場修正期)的逐季股價與EPS數據，建議日後改用付費資料庫或人工查閱2018年報/公開資訊觀測站歷史股價逐筆核對。</p>
+
+<h3>反推試算：目前股價由EPS成長還是本益比擴張撐起？</h3>
+<table>
+<tr><th>試算基礎</th><th>計算</th><th>反推股價</th><th>與現價(299.5元)比較</th></tr>
+<tr><td>2022年最低PE × 2026E保守EPS(16.47元)</td><td>8.85 × 16.47</td><td>約145.8元</td><td>現價溢價達105%</td></tr>
+<tr><td>5年常態均PE(17.1倍) × 2026E保守EPS(16.47元)</td><td>17.1 × 16.47</td><td>約281.6元</td><td>現價溢價僅約6%</td></tr>
+<tr><td>5年常態均PE(17.1倍) × 2026E樂觀EPS(18元)</td><td>17.1 × 18</td><td>約307.8元</td><td>現價折價約3%</td></tr>
+<tr><td>當前PE(18.71倍) × 2026E保守EPS(16.47元)</td><td>18.71 × 16.47</td><td>約308.1元</td><td>與現價高度接近(內部一致性檢查通過)</td></tr>
+</table>
+<p><b>結論：</b>用「2022年熊市/獲利基期偏低階段的最低本益比(8.85倍)」反推，僅值約145.8元，顯示若市場對雙引擎成長故事失去信心、估值向2022年水準回歸，現價存在逾50%的下檔風險；但用「排除獲利谷底失真季度後的5年常態平均本益比(17.1倍)」反推約281.6元，現價僅溫和高出約6%，兩者高度貼近。<b>換言之，目前股價(299.5元)主要是由「2024→2026年EPS暴增逾15倍」的真實獲利成長在支撐，而非本益比倍數的無限擴張</b>——現價對應的PE(18.71倍)其實僅略高於公司「正常獲利年份」的歷史平均本益比，遠低於52週高點(約480元，隱含PE估計約27-28倍)時的估值水準。換句話說，9月以來的股價回檔，某種程度上正是市場將本益比從「偏樂觀的27-28倍」修正回「合理的18-19倍」的過程，而非基本面惡化；後續若EPS成長不如預期(尤其現金增資稀釋效果)，仍有向2022年式保守本益比進一步回落的風險。</p>
+</section>
+
+<section id="s2-comps">
+<h2 class="sec-title">可比公司(Comps)分析</h2>
+<table>
+<tr><th>公司</th><th>市值(億)</th><th>PE(TTM)</th><th>毛利率</th><th>成長類型</th><th>營運亮點</th></tr>
+<tr><td><b>jpp-KY(5284)</b></td><td>165.15</td><td>18.71倍</td><td>42.1%(2026Q2)</td><td>高速成長股(AI機櫃+航太雙引擎)</td><td>EPS 2024→2026E成長逾15倍，H1創同期新高</td></tr>
+<tr><td>勤誠(8210)</td><td>約1,100-1,700(波動大)</td><td>約23-25倍</td><td>❌待查</td><td>伺服器機殼成長股</td><td>AI伺服器機殼放量，估值波動大反映市場對其成長性分歧</td></tr>
+<tr><td>晟銘電(3013)</td><td>約182</td><td>15.71倍</td><td>21.15%</td><td>伺服器機殼成長股</td><td>2026Q2 EPS年增101%，惟毛利率明顯低於jpp</td></tr>
+<tr><td>漢翔(2634)</td><td>約594</td><td>約30.5倍</td><td>❌待查(近4季毛利年增率-15.43%)</td><td>航太成熟成長股</td><td>國防航太+民航供應鏈移轉雙引擎，市場給予同業最高估值溢價</td></tr>
+<tr><td>長榮航太(2645)</td><td>約644</td><td>21.94倍</td><td>27.54%</td><td>航太MRO成熟成長股</td><td>營益率23.83%、淨利率20.37%，獲利品質穩定</td></tr>
+</table>
+<p class="note">jpp-KY目前PE(18.71倍)低於漢翔(約30.5倍)、長榮航太(21.94倍)、勤誠(23-25倍)等同業，但毛利率(42.1%)明顯高於晟銘電(21.15%)及多數伺服器機殼同業，顯示市場尚未完全給予其「高毛利率+雙引擎成長」應有的估值溢價，可能反映(1)公司規模較小、市場關注度與流動性不及大型同業，(2)近期現金增資稀釋疑慮壓抑評價，(3)雙引擎業務模式較難簡單歸類於單一同業族群，導致估值錨定產生落差。</p>
+</section>
+
+<section id="s2-target">
+<h2 class="sec-title">法人動向與操作建議</h2>
+<table>
+<tr><th>來源/機構</th><th>目標價</th><th>評等</th><th>計算依據(若原文有公式)</th><th>來源狀態</th></tr>
+<tr><td>元富證券投顧</td><td>435元</td><td>看多</td><td>2026年EPS預估16.58元(未明確揭露倍數，僅標示對應2026年營收49.92億元預估)</td><td class="src-status"><span class="badge b-ok">✅已驗證</span>CMoney轉述</td></tr>
+<tr><td>市場報導(未具名兩家券商)</td><td>330-350元</td><td>看多</td><td>❌原文未提供明確計算公式</td><td class="src-status"><span class="badge b-warn">⚠️來源不完整</span>僅知方向與區間，機構名稱未逐一揭露</td></tr>
+<tr><td>較早期分析文章(日期未標註，推估為2025年中前後)</td><td>256-296元</td><td>—</td><td>Forward PE 15-18倍 × 2025E EPS 13-14元(該文估算，非官方)</td><td class="src-status"><span class="badge b-warn">⚠️estimate已過時</span>此為財報公布前的舊估值，2025年實際EPS(約12.05元)已知，僅供對照歷史預期落差</td></tr>
+</table>
+<p class="note">⚠️ 法人目標價分歧明顯（256-296元 vs 330-350元 vs 435元），區間跨度逾70%，反映市場對雙引擎(尤其AI機櫃)成長持續性與增資稀釋效果的看法差異極大，不宜僅採單一數字作為共識，請讀者交叉參考本報告DCF情境(170-700元，中樞300-350元)綜合判斷。</p>
+
+<table>
+<tr><th>指標</th><th>數據</th><th>來源狀態</th></tr>
+<tr><td>董監持股</td><td>約30.60%(2026/04/10)</td><td class="src-status"><span class="badge b-warn">⚠️資料日期較舊</span>早於9月現金增資，實際比例可能因增資而變動</td></tr>
+<tr><td>外資持股</td><td>約55.52%(2026/04/10)</td><td class="src-status"><span class="badge b-warn">⚠️資料日期較舊</span></td></tr>
+<tr><td>庫藏股</td><td>❌ 本次未查得任何庫藏股買回公告；公司近期資本行動以「現金增資(2.25M股@250元)」與「發行第四/五次無擔保轉換公司債(合計5.51億元)」籌資擴產為主，而非買回股份</td><td class="src-status"><span class="badge b-info">ℹ️定性判讀</span></td></tr>
+<tr><td>股利政策</td><td>2024年配息1.48元；2025年配息合計約6.48元(Q2 1.48元+Q4 5.00元)；董事會已決議115年(2026年)上半年度不分派股利，聚焦保留資金支應擴產</td><td class="src-status"><span class="badge b-ok">✅已驗證</span></td></tr>
+<tr><td>現金殖利率</td><td>最新約1.69%(統計來源不同略有差異，統計狗頁面顯示殖利率1.69%)，近5年平均約3.25%</td><td class="src-status"><span class="badge b-ok">✅已驗證</span></td></tr>
+</table>
+
+<h3>上行空間彙總</h3>
+<table>
+<tr><th>參考基準</th><th>對應價位</th><th>距現價(299.5元)空間</th></tr>
+<tr><td>元富證券投顧目標價</td><td>435元</td><td>+45.2%</td></tr>
+<tr><td>市場報導兩家券商區間</td><td>330-350元</td><td>+10.2%至+16.9%</td></tr>
+<tr><td>5年常態均PE×2026E EPS(反推)</td><td>約281.6-307.8元</td><td>-6.0%至+2.8%</td></tr>
+<tr><td>DCF基準情境(2026E)</td><td>300-350元</td><td>+0.2%至+16.9%</td></tr>
+<tr><td>DCF基準情境(2027E前瞻)</td><td>360-440元</td><td>+20.2%至+46.9%</td></tr>
+<tr><td>DCF熊市情境</td><td>170-210元</td><td>-43.2%至-29.9%</td></tr>
+</table>
+
+<div class="action-box">
+<h4>操作建議</h4>
+<p><b>已持有者：</b>可續抱，現價對應估值尚屬合理(PE貼近自算5年常態均值)，惟需留意現金增資後續流通股數變化對EPS的稀釋效果，不建議在增資塵埃落定前大幅加碼。</p>
+<p><b>考慮建倉者：</b>可考慮分批布局，若股價進一步回落至250-270元附近(接近增資發行價、對應2026E保守EPS的PE降至15-16倍)，安全邊際更佳。</p>
+<p><b>加碼觸發：</b>股價回落至250-270元區間，且月營收YoY增速維持30%以上、毛利率未跌破35%</p>
+<p><b>停損警示：</b>若AWS或Airbus任一大客戶訂單明確轉向，或連續兩季毛利率跌破35%，應重新檢視雙引擎論點是否成立</p>
+</div>
+</section>
+
+<hr class="divider">
+<h1 style="font-size:18px;color:var(--accent2);">③ 財務風險健檢</h1>
+
+<section id="s3-data">
+<h2 class="sec-title">財務數據（近3期，合併，單位：仟元）</h2>
+<table>
+<tr><th>項目</th><th>2025Q4</th><th>2026Q1</th><th>2026Q2</th></tr>
+<tr><td>營業收入</td><td>1,130,794</td><td>1,166,233</td><td>1,203,580</td></tr>
+<tr><td>營業毛利</td><td>475,560</td><td>437,463</td><td>506,660</td></tr>
+<tr><td>營業利益(EBIT估)</td><td>265,797</td><td>245,107</td><td>323,943</td></tr>
+<tr><td>稅後淨利</td><td>148,932</td><td>214,684</td><td>232,402</td></tr>
+<tr><td>總資產</td><td>7,423,031</td><td>7,382,964</td><td>8,241,290</td></tr>
+<tr><td>總負債</td><td>3,709,067</td><td>3,544,727</td><td>4,493,977</td></tr>
+<tr><td>股東權益</td><td>3,713,964</td><td>3,838,237</td><td>3,747,313</td></tr>
+<tr><td>流動資產</td><td>4,199,257</td><td>4,126,738</td><td>4,922,946</td></tr>
+<tr><td>流動負債</td><td>3,214,746</td><td>3,009,996</td><td>3,874,761</td></tr>
+<tr><td>長期負債(估，含可轉債等)</td><td>494,321</td><td>534,731</td><td>619,216</td></tr>
+<tr><td>營業活動現金流(OCF)</td><td>-29,128</td><td>292,929</td><td>473,248</td></tr>
+<tr><td>投資活動現金流</td><td>-71,250</td><td>-75,117</td><td>-284,535</td></tr>
+<tr><td>融資活動現金流</td><td>-121,368</td><td>-19,539</td><td>783,693</td></tr>
+<tr><td>自由現金流(FCF估，OCF+投資CF)</td><td>-100,378</td><td>217,812</td><td>188,713</td></tr>
+</table>
+<p class="note">✅ 資產負債表、損益表、現金流量表數據皆取自Yahoo股市財務報表頁(單位仟元)，與公司自結公告數字(如Q2合併營收12.04億、毛利率42.1%)交叉比對一致。<b>短期借款/長期借款/現金及約當現金等細項未單獨揭露</b>——Yahoo免費頁面僅提供流動負債/長期負債總額，未進一步拆分計息負債(短期借款、一年內到期長期負債)與營運性負債(應付帳款等)；已知計息負債主要組成為第四次(2.01億元)、第五次(3.5億元，2029/5/11到期)無擔保轉換公司債，合計約5.51億元。<span class="badge b-bad">❌現金及約當現金絕對金額、利息費用</span> 無法取得，需查MOPS季報財務報表附註原文，本次因Goodinfo反機器人驗證與部分頁面存取限制未能取得精確數字。2026Q2融資現金流大幅轉正(+7.84億元)，主要反映現金增資收足股款(9/17)與CB4/CB5發行所得款項入帳。</p>
+</section>
+
+<section id="s3-ratio">
+<h2 class="sec-title">六大比率診斷</h2>
+<table>
+<tr><th>比率</th><th>公式</th><th>2026Q2結果</th><th>狀態</th><th>警戒標準</th></tr>
+<tr><td>利息覆蓋率</td><td>EBIT/利息支出</td><td>❌無法取得(利息費用未單獨揭露)</td><td><span class="badge b-bad">❌無法取得</span></td><td>&lt;3倍為警戒</td></tr>
+<tr><td>負債比率</td><td>總負債/總資產</td><td>54.5%(4,493,977/8,241,290)</td><td><span class="badge b-ok">✅穩健</span></td><td>&gt;70%需留意；製造業因應付帳款/預收款項偏高，54.5%屬相對穩健水位</td></tr>
+<tr><td>淨負債/EBITDA</td><td>(有息負債-現金)/EBITDA</td><td>❌無法取得(缺現金絕對金額與EBITDA拆分)</td><td><span class="badge b-bad">❌無法取得</span></td><td>&gt;3倍為警戒</td></tr>
+<tr><td>OCF/總負債</td><td>近4季OCF加總/總負債</td><td>約21.3%(近4季OCF約959.1百萬÷總負債4,494.0百萬)</td><td><span class="badge b-ok">✅尚可</span></td><td>&lt;10%需留意</td></tr>
+<tr><td>流動比率(現金流覆蓋概念替代)</td><td>流動資產/流動負債</td><td>127.1%(4,922,946/3,874,761)</td><td><span class="badge b-ok">✅穩健</span></td><td>&lt;100%需留意</td></tr>
+<tr><td>兩年內到期牆覆蓋倍數</td><td>現金/2年內到期債務</td><td>❌無法取得(缺現金絕對金額與到期時程細項)</td><td><span class="badge b-bad">❌無法取得</span></td><td>—</td></tr>
+</table>
+<p class="note">整體而言，jpp-KY的資產負債結構在擴產期間呈現「總負債比率階段性上升」(自2026Q1的48.0%升至2026Q2的54.5%)，主因為現金增資與可轉債資金到位後，部分尚未轉為長期資本支出前，以及應付帳款隨營收放大而同步增加所致；OCF/總負債比率約21.3%，顯示營運本業現金流量尚能支應既有負債水準，惟因利息費用與現金絕對金額未能取得，無法完整驗證利息覆蓋能力與到期牆覆蓋倍數，建議後續查閱2026年第三季季報或年報財務報表附註取得精確數字。</p>
+</section>
+
+<section id="s3-debt">
+<h2 class="sec-title">債務到期時程與CapEx分析</h2>
+<p><span class="badge b-warn">⚠️ 逐年到期金額表僅能取得部分資訊</span>——已知計息負債主要為兩檔無擔保轉換公司債：第四次(發行金額2.01億元，發行時程105/5/4收足股款，到期日❌未查得)、第五次(發行金額3.5億元，2026/5/11發行，2029/5/11到期)。其餘計息負債(如泰國子公司銀行借款)細項未於公開頁面揭露，逐年到期金額表建議查閱公開資訊觀測站(MOPS)年報附註之「借款到期日」章節取得精確數字。</p>
+
+<h3>CapEx分析</h3>
+<table>
+<tr><th>指標</th><th>數據</th><th>判讀</th></tr>
+<tr><td>2026Q2投資活動現金流</td><td>-284,535仟元(單季最大投資支出季度)</td><td>反映Segnere SAS併購整合、第二座自動化噴烤漆廠、產能擴建同步進行</td></tr>
+<tr><td>2026年擴產計畫</td><td>機櫃與沖壓產能規劃增加20-30%，規劃導入800噸沖壓設備，並規劃2.2萬坪新廠</td><td>屬於明確且具體的資本支出承諾，非僅口頭展望</td></tr>
+<tr><td>CapEx/OCF(近4季估算)</td><td>⚠️估算：因OCF近期波動大(2025Q4曾轉負)，比率意義有限，建議待OCF連續穩定後重新評估</td><td>—</td></tr>
+<tr><td>業務模式判讀</td><td>精密金屬機構件製造業本質上屬於中重資產產業(需自建沖壓、焊接、表面處理、噴烤漆等產線與模具)，與部分投資人直覺聯想的「輕資產代工」不同；本次擴產階段的資本支出壓力主要來自模具與專用設備投資，而非單純廠房閒置產能</td><td><span class="badge b-warn">⚠️中重資產，非輕資產模式</span></td></tr>
+</table>
+</section>
+
+<section id="s3-final">
+<h2 class="sec-title">同業對比與綜合診斷</h2>
+<table>
+<tr><th>比較項目</th><th>jpp-KY(5284)</th><th>漢翔(2634)</th><th>長榮航太(2645)</th><th>晟銘電(3013)</th></tr>
+<tr><td>負債比率</td><td>54.5%</td><td>❌待查</td><td>❌待查</td><td>❌待查</td></tr>
+<tr><td>2026Q2/最新毛利率</td><td>42.1%</td><td>❌待查(近4季毛利年增率-15.43%)</td><td>27.54%</td><td>21.15%</td></tr>
+<tr><td>PE(TTM)</td><td>18.71倍</td><td>約30.5倍</td><td>21.94倍</td><td>15.71倍</td></tr>
+<tr><td>營益率</td><td>26.9%(2026Q2單季)</td><td>❌待查</td><td>23.83%</td><td>13.33%</td></tr>
+</table>
+<p class="note">因時間與資料源限制(多數同業之負債比率、利息覆蓋率等安全性指標本次未逐一查證)，僅列出已交叉驗證之毛利率、PE、營益率供参考，避免以片面搜尋結果臆測填入。可觀察到jpp-KY在毛利率與營益率上優於伺服器機殼同業晟銘電，但PE評價低於漢翔與長榮航太等航太同業，顯示市場對其估值定位仍在「伺服器機殼股」與「航太股」之間，尚未形成明確共識錨點。</p>
+
+<h3>綜合診斷</h3>
+<div class="action-box">
+<h4>定性分類：擴張期健康型（非槓桿警戒型）</h4>
+<p><b>最大風險點：</b>並非傳統的違約/流動性風險（負債比率54.5%屬相對穩健水位，流動比率127.1%亦顯示短期償債無虞），而是「雙重稀釋風險」——現金增資(225萬股@250元)與兩檔可轉債(合計5.51億元)若後續大量轉換為普通股，將使流通股數持續增加，若獲利成長速度未能同步跟上(尤其2026H2需維持H1的高速成長)，每股獲利的成長性將被稀釋，進而影響「EPS暴增撐起股價」的核心投資邏輯。</p>
+<p><b>安全邊際計算：</b>以2026Q2單季營業利益(EBIT估)3.24億元、營業利益率26.9%估算，若營業利益率(EBIT margin)由目前26.9%下滑至約15%(即下滑約44%)，將接近多數中小型製造業「警戒」水位(一般認為個位數至10%出頭的營業利益率對利息保障能力構成壓力)；由於利息費用細項未能取得，無法精確反推「EBIT需下滑多少%才觸及利息覆蓋率警戒線」，僅能以營業利益率本身的相對下滑幅度作為粗略安全邊際指標，建議後續查得利息費用數字後重新精算。</p>
+</div>
+</section>
+
+<section id="final-action">
+<h2 class="sec-title">最終操作建議</h2>
+<div class="action-box">
+<h4>總結：AI機櫃＋航太雙引擎已兌現在財報上的高速成長股，現增資稀釋疑慮壓抑估值，尚非泡沫化</h4>
+<p>jpp-KY是一家透過「航太焊接技術跨界應用」切入AI伺服器機櫃/液冷高值零組件供應鏈、同時持續深化Airbus航太結構件垂直整合的雙引擎成長型企業。截至2026Q2，毛利率(42.1%)、營業利益率(26.9%)、EPS成長(2024年1.02元→2026E約16.5-18元)皆已在實際財報中兌現，非僅法說會展望；護城河評分達★★★★☆，主因來自民航適航認證與CSP資料中心焊接製程雙重技術門檻。反推試算顯示現價(299.5元)對應PE(18.71倍)僅略高於自算5年常態均值(約17.1倍)，現價主要仍由EPS真實成長支撐，而非本益比無限擴張；9月以來自52週高點(約480元)的回檔，較可能反映現金增資(發行價250元，折價逾6成)與兩檔可轉債(合計5.51億元)的稀釋疑慮，而非基本面轉弱。</p>
+<p><b>已持有：</b>可續抱，現階段估值尚屬合理，惟需密切觀察現金增資後流通股數變化與H2營收/毛利率是否維持高速成長。</p>
+<p><b>未持有：</b>可考慮分批布局，若股價回落至250-270元附近(貼近增資發行價、對應更佳安全邊際)可提高信心分批進場。</p>
+<p><b>長期(3-5年)角度：</b>若AI資料中心資本支出循環與Airbus A320產能爬升(2027年前達75架/月)皆如期兌現，jpp-KY有機會維持高速成長股的估值溢價；反之若AWS或Airbus任一大客戶訂單政策轉向，或稀釋效果超出獲利成長速度，估值恐向2022年式保守本益比(8-10倍區間)回歸，下檔風險可達50%左右，投資人應以「高成長、高波動」的部位管理方式配置。</p>
+<p><b>核心催化劑：</b>①AI機櫃日產能能否如期於下半年提升至400櫃且毛利率維持40%以上 ②現金增資與可轉債轉換後的實際流通股數變化 ③Airbus A320月產能爬升進度與Segnere SAS整合綜效 ④NVIDIA GB200液冷供應鏈訂單放量情況</p>
+</div>
+</section>
+
+<footer>
+<p><b>資料來源：</b>Yahoo股市台灣(股價/財務報表/每股盈餘)、玩股網(WantGoo，市值/PE/PB/資產負債表)、財報狗(statementdog，本益比/殖利率/近4季指標)、鉅亨網(cnyes)、公開資訊觀測站(MOPS)重大訊息公告、CMoney/優分析(uanalyze)/vocus等媒體轉述之券商(元富證券投顧等)分析與目標價、公司法說會公開報導。本次工作階段因未啟用Futu OpenD，且Goodinfo全程遭反機器人驗證機制阻擋、財報狗完整20年歷史圖表為付費功能，故本益比河流圖、2018年歷史本益比、利息費用、現金及約當現金絕對金額、逐年債務到期時程等細項數字未能取得，已於內文逐一標示❌或⚠️並建議後續查證管道(MOPS年報附註、付費資料庫)。使用者提供之參考股價442元經查證應為2026年5-7月間高點附近之搜尋引擎快取數字，非2026/09/29現時股價(299.5元)，已於①基本介紹章節說明。</p>
+<p style="margin-top:10px;"><b>免責聲明：</b>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</footer>
+
+</div>
+</body>
+</html>
