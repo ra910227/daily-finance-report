@@ -13,7 +13,8 @@
   var COLOR_LABEL = { yellow: "黃", red: "紅", blue: "藍" };
 
   function isGsfoxDataKey(k){
-    return k.indexOf("gsfox_hl:") === 0 || k.indexOf("gsfox_star:") === 0 || k.indexOf(LS_READ_PREFIX) === 0;
+    return k.indexOf("gsfox_hl:") === 0 || k.indexOf("gsfox_star:") === 0 || k.indexOf(LS_READ_PREFIX) === 0
+      || k === "gsfox_notebook_order";
   }
 
   /* ============ 雲端同步（Cloudflare Worker + KV） ============ */
@@ -657,14 +658,342 @@
     render();
   }
 
+  /* ============ 首頁：筆記本（跨文章彙整所有畫重點／筆記，可分類/標籤/撰寫/重新整理） ============ */
+  var LS_NB_ORDER = "gsfox_notebook_order";
+  var titleCache = loadJSON("gsfox_title_cache", {});
+  var notebookOverlay, notebookBody, notebookFilterCat, notebookFilterTag;
+  var nbDragState = null;
+
+  function loadHlFor(pathname){ return loadJSON("gsfox_hl:" + pathname, []); }
+  function saveHlFor(pathname, list){ saveJSON("gsfox_hl:" + pathname, list); }
+
+  function collectAllNotes(){
+    var out = [];
+    for (var i=0; i<localStorage.length; i++){
+      var key = localStorage.key(i);
+      if (!key || key.indexOf("gsfox_hl:") !== 0) continue;
+      var pathname = key.slice("gsfox_hl:".length);
+      loadJSON(key, []).forEach(function(r){
+        out.push({
+          pathname: pathname, id: r.id, color: r.color, text: r.text || "",
+          note: r.note || "", ts: r.ts || "",
+          category: r.category || "", tags: Array.isArray(r.tags) ? r.tags : []
+        });
+      });
+    }
+    return out;
+  }
+
+  function updateNoteFieldFor(pathname, id, patch){
+    var list = loadHlFor(pathname);
+    list.forEach(function(r){ if (r.id === id){ Object.keys(patch).forEach(function(k){ r[k] = patch[k]; }); } });
+    saveHlFor(pathname, list);
+    scheduleCloudPush();
+  }
+
+  function removeNoteFor(pathname, id){
+    saveHlFor(pathname, loadHlFor(pathname).filter(function(r){ return r.id !== id; }));
+    scheduleCloudPush();
+  }
+
+  function nbKey(r){ return r.pathname + "::" + r.id; }
+
+  function articleFallbackLabel(pathname){
+    var seg = pathname.split("/").filter(Boolean).pop() || pathname;
+    try{ seg = decodeURIComponent(seg); }catch(e){}
+    return seg.replace(/\.html$/i, "");
+  }
+
+  function getArticleTitle(pathname, cb){
+    if (titleCache[pathname]){ cb(titleCache[pathname]); return; }
+    // 注意：404頁面也會resolve(不會reject)，一定要檢查r.ok，
+    // 否則伺服器404頁的<title>(例如Python http.server的"Error response")會被誤當成文章標題
+    fetch(pathname).then(function(r){
+      if (!r.ok) throw new Error("not ok");
+      return r.text();
+    }).then(function(html){
+      var m = html.match(/<title[^>]*>([^<]*)<\/title>/i);
+      var title = m ? m[1].trim() : articleFallbackLabel(pathname);
+      titleCache[pathname] = title;
+      saveJSON("gsfox_title_cache", titleCache);
+      cb(title);
+    }).catch(function(){ cb(articleFallbackLabel(pathname)); });
+  }
+
+  function getNotebookOrder(){ return loadJSON(LS_NB_ORDER, []); }
+  function setNotebookOrder(keys){ saveJSON(LS_NB_ORDER, keys); scheduleCloudPush(); }
+
+  function applyNotebookOrder(list){
+    var order = getNotebookOrder();
+    var pos = {};
+    order.forEach(function(k,i){ pos[k] = i; });
+    var withIdx = list.map(function(r){
+      var p = pos[nbKey(r)];
+      return { r:r, idx: (p != null ? p : (1e9 + (new Date(r.ts||0).getTime()||0))) };
+    });
+    withIdx.sort(function(a,b){ return a.idx - b.idx; });
+    return withIdx.map(function(w){ return w.r; });
+  }
+
+  function distinctSorted(arr){
+    var seen = {}, out = [];
+    arr.forEach(function(v){ v = (v||"").trim(); if (v && !seen[v]){ seen[v]=1; out.push(v); } });
+    out.sort(function(a,b){ return a.localeCompare(b, "zh-Hant"); });
+    return out;
+  }
+
+  function notebookTagChipsHtml(r){
+    return (r.tags||[]).map(function(t){
+      return '<span class="gsfox-nb-tag">'+escapeHtml(t)+'<button type="button" data-act="nb-tag-del" data-tag="'+escapeHtml(t)+'">×</button></span>';
+    }).join("");
+  }
+
+  function notebookCardHtml(r){
+    var dateStr = fmtTime(r.ts);
+    return '<div class="gsfox-nb-card" data-color="'+(r.color||"")+'" data-pathname="'+escapeHtml(r.pathname)+'" data-id="'+r.id+'">'
+      + '<span class="gsfox-drag-handle gsfox-nb-drag" title="按住拖曳可調整順序(僅在未篩選時可用)">⠿</span>'
+      + '<div class="gsfox-nb-row1">'
+      +   '<input class="gsfox-nb-cat" list="gsfox-nb-catlist" placeholder="未分類">'
+      +   '<a class="gsfox-nb-source" href="'+escapeHtml(r.pathname)+'" target="_blank" rel="noopener">🔗 <span data-role="source-title">'+escapeHtml(articleFallbackLabel(r.pathname))+'</span></a>'
+      + '</div>'
+      + '<div class="gsfox-quote">「'+escapeHtml(r.text)+'」</div>'
+      + '<div class="gsfox-nb-time">'+(dateStr ? "摘取於 "+dateStr : "")+'</div>'
+      + '<textarea class="gsfox-nb-note" placeholder="撰寫這則筆記的想法...">'+escapeHtml(r.note||"")+'</textarea>'
+      + '<div class="gsfox-nb-tags">'+notebookTagChipsHtml(r)+'<input class="gsfox-nb-tag-input" placeholder="+ 標籤(Enter新增)"></div>'
+      + '<div class="gsfox-nb-footer"><button class="gsfox-del" data-act="nb-del">移除這則筆記</button></div>'
+      + '</div>';
+  }
+
+  function renderNotebookFilters(all){
+    var curCat = notebookFilterCat.value, curTag = notebookFilterTag.value;
+    var cats = distinctSorted(all.map(function(r){ return r.category; }));
+    var tags = distinctSorted([].concat.apply([], all.map(function(r){ return r.tags; })));
+    notebookFilterCat.innerHTML = '<option value="">全部分類</option><option value="__none__">未分類</option>'
+      + cats.map(function(c){ return '<option value="'+escapeHtml(c)+'">'+escapeHtml(c)+'</option>'; }).join("");
+    notebookFilterTag.innerHTML = '<option value="">全部標籤</option>'
+      + tags.map(function(t){ return '<option value="'+escapeHtml(t)+'">'+escapeHtml(t)+'</option>'; }).join("");
+    notebookFilterCat.value = curCat;
+    notebookFilterTag.value = curTag;
+    var dl = document.getElementById("gsfox-nb-catlist");
+    if (dl) dl.innerHTML = cats.map(function(c){ return '<option value="'+escapeHtml(c)+'">'; }).join("");
+  }
+
+  function renderNotebook(){
+    var all = collectAllNotes();
+    renderNotebookFilters(all);
+    var fc = notebookFilterCat.value, ft = notebookFilterTag.value;
+    var filtering = !!(fc || ft);
+    var list = all.filter(function(r){
+      if (fc === "__none__" && r.category) return false;
+      if (fc && fc !== "__none__" && r.category !== fc) return false;
+      if (ft && (r.tags||[]).indexOf(ft) === -1) return false;
+      return true;
+    });
+    list = filtering
+      ? list.sort(function(a,b){ return (new Date(b.ts||0)) - (new Date(a.ts||0)); })
+      : applyNotebookOrder(list);
+    notebookBody.classList.toggle("gsfox-nb-nodrag", filtering);
+    if (!list.length){
+      notebookBody.innerHTML = '<div class="gsfox-notes-empty">目前沒有符合條件的筆記<br>先到文章裡選取文字、點顏色畫重點，就會自動收進這裡</div>';
+      return;
+    }
+    notebookBody.innerHTML = list.map(notebookCardHtml).join("");
+    list.forEach(function(r){
+      var card = notebookBody.querySelector('.gsfox-nb-card[data-pathname="'+r.pathname+'"][data-id="'+r.id+'"]');
+      if (!card) return;
+      var catInput = card.querySelector(".gsfox-nb-cat");
+      if (catInput) catInput.value = r.category || "";
+      getArticleTitle(r.pathname, function(title){
+        var t = card.querySelector('[data-role="source-title"]');
+        if (t) t.textContent = title;
+      });
+    });
+  }
+
+  function nbGetDragAfterElement(container, y){
+    var els = Array.prototype.slice.call(container.querySelectorAll(".gsfox-nb-card:not(.gsfox-dragging)"));
+    var closest = { offset: -Infinity, element: null };
+    els.forEach(function(child){
+      var box = child.getBoundingClientRect();
+      var offset = y - box.top - box.height/2;
+      if (offset < 0 && offset > closest.offset) closest = { offset: offset, element: child };
+    });
+    return closest.element;
+  }
+
+  function persistNotebookOrder(){
+    if (notebookBody.classList.contains("gsfox-nb-nodrag")) return;
+    var cards = Array.prototype.slice.call(notebookBody.querySelectorAll(".gsfox-nb-card"));
+    setNotebookOrder(cards.map(function(c){ return c.dataset.pathname + "::" + c.dataset.id; }));
+  }
+
+  function initNotebookDrag(){
+    notebookBody.addEventListener("pointerdown", function(e){
+      if (notebookBody.classList.contains("gsfox-nb-nodrag")) return;
+      var handle = closestSafe(e.target, ".gsfox-nb-drag");
+      if (!handle) return;
+      var card = closestSafe(e.target, ".gsfox-nb-card");
+      if (!card) return;
+      e.preventDefault();
+      nbDragState = { card: card };
+      card.classList.add("gsfox-dragging");
+      try{ handle.setPointerCapture(e.pointerId); }catch(err){}
+    });
+    notebookBody.addEventListener("pointermove", function(e){
+      if (!nbDragState) return;
+      var after = nbGetDragAfterElement(notebookBody, e.clientY);
+      if (after == null) notebookBody.appendChild(nbDragState.card);
+      else notebookBody.insertBefore(nbDragState.card, after);
+    });
+    function endDrag(){
+      if (!nbDragState) return;
+      nbDragState.card.classList.remove("gsfox-dragging");
+      nbDragState = null;
+      persistNotebookOrder();
+    }
+    notebookBody.addEventListener("pointerup", endDrag);
+    notebookBody.addEventListener("pointercancel", endDrag);
+  }
+
+  function initNotebookEvents(){
+    notebookBody.addEventListener("change", function(e){
+      var card = closestSafe(e.target, ".gsfox-nb-card");
+      if (!card) return;
+      if (e.target.classList.contains("gsfox-nb-cat")){
+        updateNoteFieldFor(card.dataset.pathname, card.dataset.id, { category: e.target.value.trim() });
+        renderNotebook();
+      }
+    });
+
+    notebookBody.addEventListener("blur", function(e){
+      if (!e.target.classList || !e.target.classList.contains("gsfox-nb-note")) return;
+      var card = closestSafe(e.target, ".gsfox-nb-card");
+      if (!card) return;
+      updateNoteFieldFor(card.dataset.pathname, card.dataset.id, { note: e.target.value.trim() });
+    }, true);
+
+    notebookBody.addEventListener("keydown", function(e){
+      if (e.key !== "Enter") return;
+      if (!e.target.classList || !e.target.classList.contains("gsfox-nb-tag-input")) return;
+      e.preventDefault();
+      var card = closestSafe(e.target, ".gsfox-nb-card");
+      if (!card) return;
+      var val = e.target.value.trim();
+      if (!val) return;
+      var pathname = card.dataset.pathname, id = card.dataset.id;
+      var rec = loadHlFor(pathname).filter(function(r){ return r.id === id; })[0];
+      var tags = (rec && Array.isArray(rec.tags)) ? rec.tags.slice() : [];
+      if (tags.indexOf(val) === -1) tags.push(val);
+      updateNoteFieldFor(pathname, id, { tags: tags });
+      e.target.value = "";
+      renderNotebook();
+    });
+
+    notebookBody.addEventListener("click", function(e){
+      var tagDel = closestSafe(e.target, '[data-act="nb-tag-del"]');
+      if (tagDel){
+        var card = closestSafe(e.target, ".gsfox-nb-card");
+        var pathname = card.dataset.pathname, id = card.dataset.id;
+        var rec = loadHlFor(pathname).filter(function(r){ return r.id === id; })[0];
+        var tags = ((rec && rec.tags) || []).filter(function(t){ return t !== tagDel.dataset.tag; });
+        updateNoteFieldFor(pathname, id, { tags: tags });
+        renderNotebook();
+        return;
+      }
+      var delBtn = closestSafe(e.target, '[data-act="nb-del"]');
+      if (delBtn){
+        var card2 = closestSafe(e.target, ".gsfox-nb-card");
+        if (confirm("確定要移除這則筆記？來源文章裡的畫重點標記也會一併移除。")){
+          removeNoteFor(card2.dataset.pathname, card2.dataset.id);
+          renderNotebook();
+        }
+        return;
+      }
+    });
+
+    [notebookFilterCat, notebookFilterTag].forEach(function(sel){
+      sel.addEventListener("change", renderNotebook);
+    });
+  }
+
+  function downloadNotebook(){
+    var all = applyNotebookOrder(collectAllNotes());
+    if (!all.length){ alert("筆記本目前還是空的。"); return; }
+    var lines = ["# 筆記本彙整匯出", "", "匯出時間：" + fmtTime(new Date().toISOString()), "", "---", ""];
+    all.forEach(function(r){
+      lines.push("## [" + (r.category || "未分類") + "] " + (r.tags.length ? r.tags.map(function(t){ return "#"+t; }).join(" ") : ""));
+      lines.push("");
+      lines.push("來源：" + location.origin + r.pathname);
+      lines.push("摘取時間：" + fmtTime(r.ts));
+      lines.push("");
+      lines.push("*「" + r.text + "」*");
+      lines.push("");
+      if (r.note) lines.push(r.note);
+      lines.push("", "---", "");
+    });
+    var blob = new Blob([lines.join("\n")], { type: "text/markdown;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "筆記本彙整_" + new Date().toISOString().slice(0,10) + ".md";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  }
+
+  function buildNotebookUI(){
+    var btn = document.getElementById("gsfox-notebook-btn");
+    if (!btn) return;
+
+    notebookOverlay = document.createElement("div");
+    notebookOverlay.className = "gsfox-nb-overlay";
+    notebookOverlay.hidden = true;
+    notebookOverlay.innerHTML =
+      '<div class="gsfox-nb-modal">'
+      + '<div class="gsfox-nb-head">'
+      +   '<b>📓 我的筆記本</b>'
+      +   '<span class="gsfox-nb-head-sub">跨所有文章彙整的畫重點與筆記，可分類/標籤後重新整理</span>'
+      +   '<span class="gsfox-nb-head-btns">'
+      +     '<button data-act="nb-download" title="下載全部筆記">⬇︎ 下載</button>'
+      +     '<button data-act="nb-close">✕</button>'
+      +   '</span>'
+      + '</div>'
+      + '<div class="gsfox-nb-filterbar">'
+      +   '<select data-role="nb-filter-cat"></select>'
+      +   '<select data-role="nb-filter-tag"></select>'
+      + '</div>'
+      + '<datalist id="gsfox-nb-catlist"></datalist>'
+      + '<div class="gsfox-nb-body"></div>'
+      + '</div>';
+    document.body.appendChild(notebookOverlay);
+
+    notebookBody = notebookOverlay.querySelector(".gsfox-nb-body");
+    notebookFilterCat = notebookOverlay.querySelector('[data-role="nb-filter-cat"]');
+    notebookFilterTag = notebookOverlay.querySelector('[data-role="nb-filter-tag"]');
+
+    btn.addEventListener("click", function(){ notebookOverlay.hidden = false; renderNotebook(); });
+    notebookOverlay.addEventListener("click", function(e){
+      if (e.target === notebookOverlay){ notebookOverlay.hidden = true; return; }
+      var closeBtn = closestSafe(e.target, '[data-act="nb-close"]');
+      if (closeBtn){ notebookOverlay.hidden = true; return; }
+      var dlBtn = closestSafe(e.target, '[data-act="nb-download"]');
+      if (dlBtn){ downloadNotebook(); return; }
+    });
+
+    initNotebookEvents();
+    initNotebookDrag();
+  }
+
   function boot(){
     if (document.body.classList.contains("gsfox-index")){
       var code = getSyncCode();
       if (code){
-        pullFromCloud(code).then(function(){ initStarWidgets(); initReadNoteBadges(); });
+        pullFromCloud(code).then(function(){ initStarWidgets(); initReadNoteBadges(); buildNotebookUI(); });
       } else {
         initStarWidgets();
         initReadNoteBadges();
+        buildNotebookUI();
       }
       initSyncWidget();
     } else {
