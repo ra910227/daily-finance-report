@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 三合一完整報告｜GOOGL Alphabet Inc. 2026-10-02</title>
+<style>
+  :root {
+    --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6;
+    --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca;
+    --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c;
+    --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; position: relative; overflow: hidden; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-change { font-size: 16px; color: var(--red); margin-top: 4px; }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .toc-inner a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); padding: 0 0 4px 0; }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(79,70,229,0.03); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+
+  .ok { color: var(--green); }
+  .warn { color: var(--gold); }
+  .bad { color: var(--red); }
+  .muted { color: var(--text2); }
+  .est { color: var(--gold); font-size: 11px; }
+
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); }
+  .scenario.base { border-top: 3px solid var(--blue); }
+  .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); }
+  .scenario.base h4 { color: var(--blue); }
+  .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .scenario .row:last-child { border-bottom: none; }
+
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .risk-card { background: #fef2f2; border: 1px solid rgba(220,38,38,0.20); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+  .risk-card h4 { color: var(--red); font-size: 13px; margin-bottom: 4px; }
+
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+
+  .comp-now { background: rgba(79,70,229,0.05); }
+  .comp-now td { font-weight: 700; }
+
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); }
+  .bar-yellow { background: var(--gold); }
+  .bar-red { background: var(--red); }
+
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; text-transform: uppercase; letter-spacing:0.5px; }
+  .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .summary-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 720px) {
+    .scenario-row { grid-template-columns: 1fr; }
+    .moat-grid { grid-template-columns: repeat(2,1fr); }
+    .hero-price-block { text-align:left; }
+  }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">GOOGL</div>
+      <div class="hero-name">Alphabet Inc.（Google母公司）｜搜尋廣告龍頭＋雲端成長最快者＋自研TPU晶片＋SpaceX/Anthropic雙重策略股東，2026年同時啟動史上最大規模外部融資（$85B股權＋$25B公司債）支應AI資本支出</div>
+      <div class="hero-date">個股小狐三合一完整報告｜分析日期：2026-10-02　資料基準：2026-10-01收盤　上次分析：2026-09-16（本次為重新查證非複製）</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$338.24</div>
+      <div class="hero-change">2026-10-01 收盤，-1.70%</div>
+      <div class="hero-mktcap">市值 ≈$4.14T（GOOGL+GOOG+GOOGL.B合計）</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-red">Q2'26 FCF轉負-$5.9B，為2004年以來首次單季自由現金流為負</span>
+    <span class="badge badge-orange">2026上半年罕見發行$85B股權(含Berkshire $10B私募)＋$25B公司債，長債半年翻倍至$98.2B</span>
+    <span class="badge badge-purple">Google Cloud Q2'26 +82%、backlog達$514B，三雲成長最快</span>
+    <span class="badge badge-blue">Search廣告+17%、Gemini 4 Argon剛於10/1發布，市場反應分歧</span>
+    <span class="badge badge-yellow">Trailing PE官方17.0倍是GAAP股權利得扭曲的統計假象，核心本益比實際約31倍</span>
+    <span class="badge badge-teal">Strong Buy共識，61位分析師均價$429，區間$340-$515</span>
+    <span class="badge badge-red">反壟斷DOJ與Google雙方皆已上訴，預期延續至2027-2028年</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價 (GOOGL)</label><div class="val">$338.24</div><div class="sub">✅ 52週 $235.84–$408.61</div></div>
+    <div class="meta-item"><label>FY25 營收／EPS</label><div class="val">$402.8B／$10.81</div><div class="sub">GAAP ✅ 已完結年度</div></div>
+    <div class="meta-item"><label>Trailing PE（官方）</label><div class="val">17.0倍⚠️</div><div class="sub">受Q2股權利得扭曲，核心PE約31倍</div></div>
+    <div class="meta-item"><label>Forward PE</label><div class="val">21.9-25.2倍⚠️</div><div class="sub">不同來源落差，見估值錨點節</div></div>
+    <div class="meta-item"><label>Thesis 成立度</label><div class="val">3.5 / 5</div><div class="sub">本次下修：FCF轉負+鉅額外部融資為新增警訊</div></div>
+    <div class="meta-item"><label>財務體質評等</label><div class="val">A（自AA下修）</div><div class="sub">槓桿與資本市場依賴度顯著上升</div></div>
+  </div>
+</div>
+
+<!-- ── TOC ── -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#goog-vs-googl">GOOG vs GOOGL</a>
+    <span class="toc-sep">·</span>
+    <a href="#part1">Part1 深度研究</a>
+    <span class="toc-sep">·</span>
+    <a href="#biz">業務引擎</a>
+    <a href="#thesis">核心Thesis</a>
+    <a href="#competition">競爭格局</a>
+    <a href="#moat">成長象限</a>
+    <span class="toc-sep">·</span>
+    <a href="#part2">Part2 財報解析</a>
+    <span class="toc-sep">·</span>
+    <a href="#earnings">Q2 2026財報</a>
+    <a href="#eps">EPS與估值錨點</a>
+    <a href="#dcf">三情境估值</a>
+    <a href="#targets">投行目標</a>
+    <span class="toc-sep">·</span>
+    <a href="#part3">Part3 財務健檢</a>
+    <span class="toc-sep">·</span>
+    <a href="#ratios">六大比率</a>
+    <a href="#capex">CapEx與融資</a>
+    <a href="#comps">同業對比</a>
+    <a href="#health">綜合診斷</a>
+    <span class="toc-sep">·</span>
+    <a href="#final">綜合總結</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- GOOG vs GOOGL 說明 -->
+<div id="goog-vs-googl" class="section">
+  <div class="section-header">
+    <div class="section-num">0</div>
+    <div class="section-title">股票代號說明：GOOGL vs GOOG</div>
+  </div>
+  <div class="card" style="border-left:3px solid var(--accent)">
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">
+    Alphabet Inc. 同時在那斯達克掛牌兩種普通股：<strong>GOOGL（Class A，A類股）</strong>每股享有1票投票權；<strong>GOOG（Class C，C類股）</strong>無投票權。兩者代表的是<strong>同一家公司、共用同一套財務報表</strong>，差異僅在股東投票權，不影響獲利、股息或資產分配權利。此外還有未公開交易的<strong>Class B（創辦人與高階主管持有，每股10票）</strong>。由於投票權差異極小的實質影響（Alphabet本身已是雙層控股結構，公眾股東投票權本就有限），GOOGL與GOOG股價長期緊密連動，惟因市場供需與套利效率不完全，兩者價差通常在0.5%-1.5%之間波動，並非完全相等。<br><br>
+    <strong>最新股價對照（2026-10-01）✅</strong>：GOOGL $338.24-350.14（盤中波動大，受Gemini 4 Argon發布影響） vs GOOG約$340-347，價差約$3-10。本報告以<strong>GOOGL為主要分析代號</strong>，所有財務數據（營收/獲利/CapEx等）為Alphabet集團合併數字，兩種股票適用完全相同的基本面分析結論，僅股價與逐股指標（EPS、PE、目標價）需留意代號差異。市值計算涵蓋A+B+C三類股總和。
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     Part 1：深度研究
+══════════════════════════════════════ -->
+<div id="part1" class="mode-divider">
+  <h2>◈ Part 1：公司深度研究</h2>
+  <p>業務引擎 · 核心Thesis · 競爭格局 · Peter Lynch成長象限 · 護城河五維評分</p>
+</div>
+
+<!-- 1. 公司基本介紹 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">公司基本介紹</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">Alphabet（NASDAQ: GOOGL/GOOG）為Google母公司，市值≈$4.14兆，業務涵蓋<strong>搜尋廣告、YouTube、Google Cloud、自研TPU晶片與Other Bets（Waymo等）</strong>。2026年是Alphabet近20年來資本結構轉變最劇烈的一年：為支應AI資料中心CapEx，公司在6月完成<strong>史上首次大規模股權募資（$84.75B，含向Berkshire Hathaway私募$10B）</strong>，8月再發行$25B公司債，長期負債半年內由$46.5B翻倍至$98.2B，同時Q2單季自由現金流轉為<strong>-$5.9B，是2004年以來首次單季FCF為負</strong>。與此同時，核心業務數字仍全面加速：Google Cloud Q2'26營收+82%、backlog達$514B，Search廣告+17%，均優於市場預期。✅</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽（FY2025，最近完整財年）✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$402.8B</div><div class="big-label">FY25 營收</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">+15.1% YoY</div><div class="big-label">（FY24：$350.0B）</div></div>
+        <div><div class="big-num" style="font-size:22px;">營益率 32.0%</div><div class="big-label">營業利益$129.0B／營收$402.8B（自算）</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">$73.3B</div><div class="big-label">FY25 FCF ✅（FY2026進行中已轉負，見Part3）</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent)">
+    <h3 style="color:var(--accent)">🏭 所屬產業與市場地位</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">所屬產業：<strong>搜尋廣告／公有雲基礎設施（IaaS+PaaS）／數位媒體／自研AI晶片</strong>。Google Cloud市佔約15%（次於AWS、Azure），Q2'26營收成長82%為三大雲端巨頭中最快，營益率由去年同期約11.3%大幅躍升至35.5%。TPU v7「Ironwood」已全面上市，定價約$12/晶片小時（美國Iowa）、$13.20（倫敦），市佔約6-8%（以部署算力計），仍遠低於Nvidia（73-81%），但已取得重大外部客戶驗證——<strong>Meta於2026年簽署數十億美元級合約租用Google TPU訓練下一代AI模型</strong>，計畫2027年進一步直接採購，是Google晶片自研策略首次獲競爭對手背書的指標性事件。Gemini系列最新一代「Gemini 4 Argon」已於2026-10-01發布，惟市場初期反應分歧（見後續業務引擎分析）。✅（來源：Google Cloud定價文件、The Decoder、Tom's Hardware、SemiAnalysis）</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財務摘要</th>
+          <th class="num">FY2022</th>
+          <th class="num">FY2023</th>
+          <th class="num">FY2024</th>
+          <th class="num">FY2025</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$282.8B ✅</td><td class="num">$307.4B ✅</td><td class="num">$350.0B ✅</td><td class="num">$402.8B ✅</td></tr>
+        <tr><td>YoY 成長</td><td class="num">— ⚠️</td><td class="num ok">+8.7% ✅</td><td class="num ok">+13.9% ✅</td><td class="num ok">+15.1% ✅</td></tr>
+        <tr><td>營業利益</td><td class="num">$74.8B ✅</td><td class="num">$84.3B ✅</td><td class="num ok">$112.4B ✅</td><td class="num ok">$129.0B ✅</td></tr>
+        <tr><td>淨利</td><td class="num">— ⚠️</td><td class="num">$73.8B ✅</td><td class="num ok">$100.1B ✅</td><td class="num ok">$132.2B ✅</td></tr>
+        <tr><td>EPS（GAAP 稀釋）</td><td class="num">— ⚠️</td><td class="num">$5.80 ✅</td><td class="num ok">$8.04 ✅</td><td class="num ok">$10.81 ✅</td></tr>
+        <tr><td>FCF（年度）</td><td class="num">— ⚠️</td><td class="num">~$69.4B ⚠️（推估）</td><td class="num ok">$72.76B ✅</td><td class="num ok">$73.27B ✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅ 已驗證（來源：Alphabet 10-K/8-K、SEC EDGAR、stockanalysis.com）｜⚠️ 重要提醒：FY2025是最近一次「完整且未受鉅額股權利得扭曲」的年度基準，FY2026進行中數字（尤其FCF與EPS）已出現結構性變化，詳見Part2/3。</p>
+</div>
+
+<!-- 2. 業務引擎分析 -->
+<div id="biz" class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">業務引擎分析</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🔍 Search & Other廣告 — Q2'26營收$63.3B（單季，YoY +17%）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">集團現金流主體，AI Overviews與AI Mode全面導入後成長不減反增。Gemini App月活躍用戶已突破7.5億。✅（來源：Alphabet Q2'26 8-K、Digital Applied）</p>
+    </div>
+    <div class="card">
+      <h3>☁️ Google Cloud — Q2'26營收$24.8B（單季，YoY +82%，三雲成長最快）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">營業利益由去年同期$2.8B大增至$8.8B，營益率躍升至35.5%。Q2單季新增backlog超過$500億，累計backlog達<strong>$514B</strong>，顯示未來多年營收能見度大幅提升，是本季財報中除CapEx爭議外最重要的正面數字。✅</p>
+    </div>
+    <div class="card">
+      <h3>📺 YouTube廣告 — Q2'26營收$11.1B（單季，YoY +13%）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">受惠大型體育賽事內容與直播電商廣告成長，持續是集團廣告組合中穩健成長的板塊。✅</p>
+    </div>
+    <div class="card">
+      <h3>🤖 Gemini 4 Argon（2026-10-01發布）＋ TPU Ironwood 外部驗證</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">Gemini 4 Argon主打程式開發與資安能力，發布後股價一度上漲逾2%，惟Bloomberg報導Google內部對其程式碼生成能力（恰為本次發布主打賣點）存在疑慮，當日漲幅收斂至約0.5%後甚至一度翻黑至-2%，JPMorgan評論「Google需要重新確立其在AI領域的領先地位」。另一方面，TPU策略迎來指標性驗證——<strong>Meta簽署數十億美元合約租用Google TPU</strong>（2026年起租、2027年起買斷），顯示TPU已從「小眾替代方案」躍升為「前沿模型訓練的可行選項」。✅⚠️（來源：Yahoo Finance、247wallst、The Decoder）</p>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>核心業務線</th><th>Q2'26 YoY成長</th><th>護城河來源</th><th>2026-2027關鍵催化劑</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Search & Other廣告</strong></td><td class="num ok">+17%</td><td>全球搜尋市佔壟斷級地位、AI Overviews強化黏著度</td><td>反壟斷remedies（數據分享義務）是否侵蝕長期護城河</td></tr>
+        <tr><td><strong>Google Cloud</strong></td><td class="num ok">+82%（backlog $514B）</td><td>TPU自研晶片成本優勢、企業AI解決方案需求爆發</td><td>backlog能否順利轉化為實際認列營收，市佔能否持續收斂</td></tr>
+        <tr><td><strong>YouTube廣告</strong></td><td class="num">+13%</td><td>全球最大影音平台、直播電商廣告新引擎</td><td>大型體育/文化事件內容週期性貢獻</td></tr>
+        <tr><td><strong>Gemini / TPU（AI基礎設施）</strong></td><td class="num">Meta簽約租用TPU，Gemini 4 Argon剛發布</td><td>自研晶片成本優勢＋外部客戶驗證（Meta）</td><td>Gemini 4能否扭轉「落後前沿」疑慮；TPU對外營收能否放量</td></tr>
+        <tr><td><strong>SpaceX＋Anthropic股權</strong></td><td class="num">合計帳面價值約$218B+（6/30揭露）</td><td>雙押注AI模型與太空基礎設施頭部公司</td><td>SpaceX市值已自IPO高點$1.77兆回落至約$1.5兆，下次季度重估可能走弱</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 3. 核心Thesis -->
+<div id="thesis" class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">核心 Thesis 與未來成長驅動</div>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 1｜「AI取代搜尋」疑慮暫未兌現，Search廣告持續加速</div>
+      <div class="content">Q2'26 Search廣告+17%，較過去幾年的個位數-低雙位數成長區間明顯加速，Gemini App用戶突破7.5億。惟反壟斷remedies要求Google向「合格競爭者」開放搜尋索引與使用者互動數據，長期可能稀釋部分護城河，需持續觀察。✅ 大致成立。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status ok">✅ 成立</div>
+      <div class="label">Thesis 2｜Google Cloud是三大雲端巨頭中成長最快、獲利改善最猛的一朵</div>
+      <div class="content">Q2'26 GCP營收+82%、營益率躍升至35.5%、backlog達$514B，三項指標均顯示規模經濟正加速兌現，且backlog大幅成長代表未來營收能見度提高，非單純當期數字亮眼。✅ 成立。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--red)">❌ 本次下修為不成立</div>
+      <div class="label">Thesis 3（原）｜CapEx紀律相對較佳，FCF仍維持正成長 → 本次查證推翻</div>
+      <div class="content"><strong>重大變化：</strong>Q2 2026單季自由現金流轉為<strong>-$5.9B，是2004年以來首次單季FCF為負</strong>（營運現金流$39.1B不敵CapEx $44.9B）。公司同步在上半年完成罕見的$84.75B股權募資＋$25B公司債發行，長期負債半年內自$46.5B翻倍至$98.2B，股票回購全面暫停（$70B額度中$69.5B未動用）。雖然TTM FCF仍約+$53B、現金部位達$242.5B仍算雄厚，但「三巨頭中CapEx紀律最佳、FCF獨家維持正成長」此一核心差異化優勢，<strong>截至本次查證已不再成立</strong>，GOOGL現正與MSFT/AMZN同樣進入「燒錢換AI算力」階段。❌ 原有利多因子已轉為中性或風險因子。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 4｜SpaceX+Anthropic雙重股權是穩健的策略資產，非財報雜訊</div>
+      <div class="content">合計帳面股權價值超過$218B（SpaceX $94B＋Anthropic投資累計），採「雙押注」分散單一AI模型商策略風險。惟SpaceX市值已自IPO高點$1.77兆回落至約$1.5兆（約-15%），下次季度公允價值重估可能轉為減損而非利得；Anthropic在Google完成投資後已於5月完成新一輪融資估值達$965B，對Google持股的帳面價值可能續有調整空間（正負皆有可能）。⚠️ 策略邏輯仍成立，惟公允價值波動性顯著，不宜視為穩定資產。</div>
+    </div>
+    <div class="thesis-card">
+      <div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div>
+      <div class="label">Thesis 5｜反壟斷法律風險已大幅降低，惟仍有未竟之事</div>
+      <div class="content">聯邦法官已駁回將Chrome/Android強制拆分的訴求（重大利多），改採「開放數據共享＋禁止獨家預設協議」等較溫和remedies。惟DOJ與多州已於2026年4月13日提出新上訴，Google亦同步上訴，雙方均在DC巡迴上訴法院纏訟，預期言詞辯論落在2026年底至2027年初，終局裁決（甚至可能上訴至最高法院）可能要到2028年才會明朗。⚠️ 最壞情境已避免，但法律不確定性將是未來2年的常態背景雜訊。</div>
+    </div>
+  </div>
+
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🚀 核心成長驅動力</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>Google Cloud backlog $514B逐步轉化為營收</strong>：提供未來2-3年營收能見度</li>
+        <li><strong>TPU對外授權/租賃擴大（Meta已簽約）</strong>：驗證自研晶片商業模式可複製，可能吸引更多外部客戶</li>
+        <li><strong>Gemini 4 Argon若後續更新能扭轉「落後前沿」疑慮</strong>：有助於Search/Cloud雙線的AI差異化定位</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>⚠️ 核心監控風險</h3>
+      <ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)">
+        <li><strong>FY2026全年FCF能否由負轉正</strong>：觸發條件——Q3/Q4若CapEx持續超越OCF，將是比MSFT/AMZN更劇烈的現金流惡化</li>
+        <li><strong>鉅額股權+債務融資對每股盈餘的稀釋效果</strong>：觸發條件——流通股數持續增加（已由12,116M增至12,230M）疊加利息支出暴增（Q2年增390%）侵蝕EPS成長</li>
+        <li><strong>反壟斷上訴出現不利GOOGL的中間裁決</strong>：觸發條件——上訴法院推翻原判、重新考慮結構性拆分</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 競爭格局 -->
+<div id="competition" class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">競爭格局：依三大戰場列示</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>戰場</th><th>公司</th><th>現況</th><th>對GOOGL威脅度</th></tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="3"><strong>公有雲</strong></td><td>AWS（Amazon）</td><td>市佔第一，2026 CapEx guidance上修至$220B</td><td>🟡 中｜規模仍遠大於GCP</td></tr>
+        <tr><td>Azure（Microsoft）</td><td>市佔第二，2026 CapEx約$175B（含融資租賃調整）</td><td>🟡 中｜成長速度落後GCP</td></tr>
+        <tr class="comp-now"><td><strong>Google Cloud（本案，市佔第三）</strong></td><td>Q2'26成長82%，backlog $514B，三雲最快</td><td>—</td></tr>
+        <tr><td rowspan="2"><strong>AI模型/搜尋</strong></td><td>OpenAI（微軟主要夥伴）／ChatGPT</td><td>持續挑戰傳統搜尋使用習慣，產品迭代速度快</td><td>🟡 中｜Gemini 4 Argon發布後市場對Google「是否仍落後前沿」疑慮再起（JPMorgan評語）</td></tr>
+        <tr><td>Meta／TikTok（廣告）</td><td>社群媒體廣告主要競爭者；惟Meta同時成為Google TPU客戶</td><td>🟢 低（廣告）／🔵 轉為雲端客戶關係｜Google搜尋廣告高意圖轉換優勢短期難以取代</td></tr>
+        <tr><td><strong>AI晶片</strong></td><td>Nvidia</td><td>GPU市場絕對龍頭（市佔73-81%），惟Google TPU已達6-8%並獲Meta採用</td><td>🟢 低（對Google而言是降低依賴而非被動承受威脅）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution-box" style="margin-top:16px;">
+    <h3>⚠️ 競爭關鍵監控：Gemini 4 Argon「叫好不叫座」的初期反應，是本次查證最新出現的不確定因子</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">GCP以backlog $514B與82%成長速度持續證明雲端業務動能強勁，是本報告中最明確的正面訊號。惟在前沿模型層面，Gemini 4 Argon發布後的股價「先漲後跌」走勢（+2%→-2%）與JPMorgan「Google需要重新確立AI領先地位」的評論，顯示市場對Google能否在最尖端模型能力上持續保持競爭力仍有疑慮，這與Google Cloud/TPU基礎設施層面的強勢形成對比——Google目前更像是「AI基礎設施的贏家」而非「毫無疑義的前沿模型贏家」，兩者需分開評估。</p>
+  </div>
+</div>
+
+<!-- 5. 成長象限 & 護城河評分 -->
+<div id="moat" class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Peter Lynch 成長象限 & 護城河評分</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border:2px solid var(--purple);">
+      <h3 style="color:var(--purple)">📊 Lynch 象限判斷</h3>
+      <div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">穩定成長股，局部（Cloud）快速成長特徵明顯，惟獲利品質與現金流紀律本次查證出現惡化</div>
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <thead><tr><th>判斷標準</th><th>Alphabet 現況</th><th>判定</th></tr></thead>
+          <tbody>
+            <tr><td>整體營收成長率</td><td>FY25 +15.1%；2026E共識+23.8%（Cloud加速貢獻）</td><td class="ok">✅ 明顯優於典型穩定成長股</td></tr>
+            <tr><td>高成長板塊（Cloud）速度</td><td>Q2'26 GCP +82%，backlog $514B</td><td class="ok">✅ 具快速成長股特徵</td></tr>
+            <tr><td>獲利品質（FCF）是否同步成長</td><td>Q2'26單季FCF轉負-$5.9B，2004年來首見</td><td class="bad">❌ 本次查證明顯轉差，需列為風險</td></tr>
+            <tr><td>每股盈餘(EPS)成長是否跟上營收</td><td>FY25 EPS YoY+34.5% → 2026E核心EPS預估僅+9.25%（稀釋+利息費用侵蝕）</td><td class="bad">❌ EPS成長明顯減速，與營收加速背離</td></tr>
+            <tr><td>估值是否已充分反映成長</td><td>官方Trailing PE 17倍看似便宜，惟核心/經常性基礎PE約31倍，高於自身5年均值24.2倍</td><td class="warn">⚠️ 官方數字具誤導性，核心估值其實不低</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 判斷依據：GOOGL的營收與Cloud業務成長動能仍是三巨頭中最紮實的一檔，惟本次查證發現的「FCF轉負＋鉅額股權債務融資＋EPS成長減速」三項新變化，顯示其正從「成長與獲利品質雙強」的理想狀態，過渡到與MSFT/AMZN相近的「用資產負債表換算力」階段。這使GOOGL的象限定位從上次報告的「獲利品質最佳的穩定成長股」，調整為「成長動能仍強，但現金流紀律與獲利品質需重新建立信任」的穩定成長股。</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item">
+      <div class="moat-label">不可替代性</div>
+      <div class="moat-stars">★★★★★</div>
+      <div class="moat-score">5.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">全球搜尋引擎市佔壟斷級地位，反壟斷官司本身即是最佳佐證</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">客戶黏著度</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">搜尋使用習慣根深蒂固，惟反壟斷remedies要求開放數據，長期黏著度存在不確定性</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">網路效應</div>
+      <div class="moat-stars">★★★★★</div>
+      <div class="moat-score">5.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">搜尋演算法+廣告主雙邊網路效應+YouTube內容生態</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">成本優勢</div>
+      <div class="moat-stars">★★★★☆</div>
+      <div class="moat-score">4.5 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">自研TPU獲Meta外部驗證，惟鉅額融資成本（利息費用年增390%）已開始侵蝕部分優勢</div>
+    </div>
+    <div class="moat-item">
+      <div class="moat-label">規模效應</div>
+      <div class="moat-stars">★★★★★</div>
+      <div class="moat-score">5.0 / 5</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:4px;">全球最大搜尋+影音平台，規模效應顯著</div>
+    </div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：4.7 / 5 ⭐⭐⭐⭐⭐（較上次4.8/5微幅下修，主因成本優勢面向新增融資成本雜訊）</div>
+
+  <div class="caution-box" style="margin-top:24px;">
+    <h3>⚠️ 建議動作（深度研究視角）</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+      <div>
+        <strong>當前建議：</strong>護城河強度與營收成長動能仍是三巨頭中數一數二，惟本次查證發現的FCF轉負與鉅額外部融資是重大新增變數，建議由「核心池主力持倉」調整為<strong>核心池持倉但降低加碼力度，待FY2026全年現金流數字明朗後再決定是否加碼</strong>。<br><br>
+        <strong>加碼觸發（需同時滿足多項）：</strong>
+        <ul style="padding-left:16px;">
+          <li>Q3/Q4 2026 FCF確認回正，顯示Q2僅是短期高峰而非趨勢</li>
+          <li>Google Cloud backlog持續轉化為實際認列營收</li>
+          <li>Gemini 4後續更新扭轉「落後前沿」疑慮</li>
+        </ul>
+      </div>
+      <div>
+        <strong>賣出/迴避觸發：</strong>
+        <ul style="padding-left:16px;">
+          <li>FY2026全年FCF確認轉負（非僅單季）</li>
+          <li>反壟斷上訴出現重新考慮結構性拆分的不利裁決</li>
+          <li>SpaceX/Anthropic股權公允價值連續兩季下修，顯示非核心資產正侵蝕淨值</li>
+        </ul>
+        <br>
+        <strong>每季監控指標：</strong>Search/Cloud YoY成長率、季度FCF與CapEx缺口、流通股數變化（稀釋程度）、反壟斷上訴進度
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     Part 2：財報解析
+══════════════════════════════════════ -->
+<div id="part2" class="mode-divider">
+  <h2>◈ Part 2：最新財報解析</h2>
+  <p>Q2 2026 財報（最近一次已發布財報；Q3 2026預計2026-10-27~28發布，本報告撰寫時尚未公布）· EPS多年期估值錨點 · 三情境估值 · 投行目標價 · 操作建議</p>
+</div>
+
+<!-- 6. Q2 2026 財報 Beat/Miss -->
+<div id="earnings" class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">Q2 2026 財報（2026-07-22發布，最近一次已發布財報）</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--gold); margin-bottom:20px;">
+    <h3 style="color:var(--gold)">⚠️ 營收與核心業務全面優於預期，惟CapEx超越營運現金流導致FCF史上首見單季轉負</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">Q2 2026營收$119.8B，年增24%，優於共識$116.93B；營業利益年增30%至$40.8B。GAAP稀釋EPS達$9.11（年增294%），主因認列<strong>$99.0B的SpaceX+Anthropic股權公允價值利得</strong>。Google Cloud+82%、Search+17%、YouTube+13%全面優於預期，Cloud backlog新增逾$500億、累計達$514B。惟CapEx guidance由$180-190B上修至$195-205B，Q2單季CapEx年增100%達$44.9B，超過當季營運現金流$39.1B，導致<strong>自由現金流轉為-$5.9B，為2004年以來首次單季FCF為負</strong>。✅</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>指標</th><th class="num">實際值 ✅</th><th class="num">市場預期 ⚠️</th><th class="num">YoY 變化</th><th>判定</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>營收</td><td class="num ok">$119.8B</td><td class="num">$116.93B</td><td class="num ok">+24%</td><td><span class="badge badge-green">Beat ✅</span></td></tr>
+        <tr><td>營業利益</td><td class="num ok">$40.8B</td><td class="num">— ❌</td><td class="num ok">+30%</td><td><span class="badge badge-green">Beat ✅</span></td></tr>
+        <tr><td>GAAP稀釋EPS</td><td class="num ok">$9.11</td><td class="num">— ❌</td><td class="num ok">+294%（含$99B股權利得）</td><td><span class="badge badge-yellow">數字驚人但品質存疑 ⚠️</span></td></tr>
+        <tr><td>Google Cloud營收</td><td class="num ok">$24.8B（+82%）</td><td class="num">~63% ⚠️（財報前預估成長率）</td><td class="num ok">大幅優於預期</td><td><span class="badge badge-green">大幅Beat ✅</span></td></tr>
+        <tr><td>Cloud backlog(RPO)</td><td class="num ok">$514B</td><td class="num">— ❌</td><td class="num ok">單季新增逾$500億</td><td><span class="badge badge-green">營收能見度大幅提升 ✅</span></td></tr>
+        <tr><td>Search & Other廣告</td><td class="num ok">$63.3B</td><td class="num">— ❌</td><td class="num ok">+17%</td><td><span class="badge badge-green">加速成長 ✅</span></td></tr>
+        <tr><td>營運現金流(OCF)</td><td class="num">$39.1B</td><td class="num">— ❌</td><td class="num">— ⚠️</td><td><span class="badge badge-blue">仍正，惟不敵CapEx</span></td></tr>
+        <tr><td>自由現金流(FCF)</td><td class="num bad">-$5.9B</td><td class="num">— ❌</td><td class="num bad">由正轉負</td><td><span class="badge badge-red">2004年來首見單季為負 ❌</span></td></tr>
+        <tr><td>2026 CapEx guidance</td><td class="num bad">上修至$195-205B</td><td class="num">原guidance $180-190B</td><td class="num">— ⚠️</td><td><span class="badge badge-yellow">上修，股價當日承壓 ⚠️</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>股價反應（財報前後 ～ 最新查證日）</h3>
+    <div style="font-size:13px; line-height:1.9; color:var(--text)">
+      <strong>財報發布（2026-07-22盤後）</strong>：儘管營收與各業務線大幅優於預期，CapEx guidance上修與FCF轉負仍導致股價承壓，反映市場對CapEx強度與現金流品質的敏感度已超越單純的營收/獲利數字 ⚠️<br>
+      <strong>上次報告基準日（9/15）</strong>：收$344.53，距52週高點$408.61約-15.7%<br>
+      <strong>本次查證（2026-10-01）</strong>：收$338.24（-1.70%），盤中一度因<strong>Gemini 4 Argon發布</strong>（10/1上午）上漲逾2%，惟Bloomberg報導Google內部對其程式碼能力的疑慮曝光後，漲幅收斂並一度翻黑至-2%，顯示近期股價對AI模型層面的新聞較CapEx/財務面更敏感 ✅。整體而言，股價自上次報告以來小幅回落約1.8%，距52週高點回落約17.2%，距52週低點則高出約43.4%，仍處於區間中段。
+    </div>
+  </div>
+</div>
+
+<!-- 7. EPS多年期表 & 歷史本益比 -->
+<div id="eps" class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">估值歷史錨點：多年期EPS ＋ 歷史本益比（★必附）</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>財年</th>
+          <th class="num">EPS（A實際/E預估）</th>
+          <th class="num">來源／機構</th>
+          <th class="num">YoY成長</th>
+          <th>狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>FY2024 A</strong></td>
+          <td class="num ok">$8.04 ✅</td>
+          <td class="num">Alphabet 10-K</td>
+          <td class="num ok">+38.6%</td>
+          <td><span class="badge badge-green">實際值</span></td>
+        </tr>
+        <tr style="background:rgba(21,128,61,0.03)">
+          <td><strong>FY2025 A</strong></td>
+          <td class="num ok">$10.81 ✅</td>
+          <td class="num">Alphabet 10-K</td>
+          <td class="num ok">+34.5%</td>
+          <td><span class="badge badge-green">實際值（最近完整年度）</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2026 E（核心/Non-GAAP調整後）</strong></td>
+          <td class="num warn">$11.81 ⚠️</td>
+          <td class="num">stockanalysis.com共識（未標示分析師人數）</td>
+          <td class="num warn">+9.25%（明顯減速）</td>
+          <td><span class="badge badge-yellow">成長明顯減速 ⚠️</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2026 E（GAAP，含股權利得效應）</strong></td>
+          <td class="num">$20.64 ⚠️</td>
+          <td class="num">Yahoo Finance，53位分析師，區間$19.89-$21.92</td>
+          <td class="num">— ⚠️（受一次性利得扭曲，不可比）</td>
+          <td><span class="badge badge-red">不建議直接引用做估值 ❌</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2027 E</strong></td>
+          <td class="num">$14.95（Yahoo，53位分析師，區間$13.67-$17.21）／$15.07（stockanalysis） ⚠️</td>
+          <td class="num">兩來源落差約1%，相對收斂</td>
+          <td class="num ok">+26.6%~27.6%（核心基礎）</td>
+          <td><span class="badge badge-yellow">兩來源較一致</span></td>
+        </tr>
+        <tr>
+          <td><strong>FY2028 E</strong></td>
+          <td class="num">約$17.2 ⚠️（僅36位分析師覆蓋，低於前兩年）</td>
+          <td class="num">綜合彙整來源，覆蓋率低</td>
+          <td class="num">— ⚠️</td>
+          <td><span class="badge badge-red">分析師覆蓋率低，參考價值有限</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">⚠️ 2026E出現「核心EPS $11.81」與「GAAP EPS $20.64」兩種落差近一倍的數字，差異來自分析師是否將SpaceX/Anthropic股權公允價值變動（非經常性）計入預估。本報告以核心/Non-GAAP基礎$11.81作為2026E的保守估算基準，GAAP數字僅供參考不建議直接用於反推估值。另需注意：FY25實際EPS年增34.5%，但2026E核心EPS預估成長率驟降至僅+9.25%，主因稀釋股數增加（股權募資）＋利息支出暴增（Q2年增390%）共同侵蝕每股獲利，是本次查證發現的重要減速訊號。</p>
+
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead>
+        <tr><th colspan="4" style="color:var(--accent); font-size:13px;">★ 歷史本益比錨點表（年度PE，來源：wisesheets.io，2026-10查證）</th></tr>
+        <tr><th>年度</th><th class="num">年度平均PE</th><th>狀態</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2018</td><td class="num">23.43倍</td><td><span class="badge badge-yellow">年度均值；12月修正期間盤中低點約20倍⚠️</span></td><td>2018年底科技股修正（Benzinga/Yahoo交叉查證）</td></tr>
+        <tr><td>2019</td><td class="num">26.96倍</td><td>—</td><td>—</td></tr>
+        <tr><td>2020</td><td class="num">29.59倍</td><td>—</td><td>疫情後流動性行情推升</td></tr>
+        <tr><td>2021</td><td class="num">25.43倍</td><td>—</td><td>—</td></tr>
+        <tr><td style="font-weight:700">2022</td><td class="num" style="font-weight:700">19.33倍</td><td><span class="badge badge-red">年度最低；12月盤中低點17.1倍⚠️</span></td><td><strong>熊市谷底估值，升息循環衝擊高本益比成長股</strong></td></tr>
+        <tr><td>2023</td><td class="num">24.13倍</td><td>—</td><td>AI敘事帶動估值回升</td></tr>
+        <tr><td>2024</td><td class="num">23.42倍</td><td>—</td><td>—</td></tr>
+        <tr><td>2025</td><td class="num">28.76倍</td><td>—</td><td>—</td></tr>
+        <tr style="background:rgba(79,70,229,0.05)"><td style="font-weight:700">5年平均（2021-2025）</td><td class="num" style="font-weight:700">24.22倍 ✅</td><td><span class="badge badge-blue">本報告反推試算基準</span></td><td>10年中位數27.43倍（gurufocus，供參考）</td></tr>
+        <tr><td>官方Trailing PE（現在）</td><td class="num">16.97-17.22倍 ⚠️</td><td><span class="badge badge-yellow">受股權利得嚴重扭曲</span></td><td>不建議直接引用做歷史比較</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="risk-card" style="margin-top:12px;">
+    <h4>📌 反推試算結論：官方17倍Trailing PE是統計假象；用核心獲利基礎回推，目前股價主要反映「明年(2027E)獲利成長」而非「已兌現獲利」，存在適度（非過度）的本益比領先透支</h4>
+    <p style="font-size:13px; line-height:1.9; color:var(--text)">
+    <strong>第一步，拆穿「便宜」假象：</strong>若以FY2025實際EPS $10.81（未受本次股權利得干擾的乾淨基準）回推，現價$338.24 ÷ $10.81 = <strong>約31.3倍</strong>的核心Trailing PE——這已高於Alphabet自身10年中位數（27.43倍）與5年均值（24.22倍），顯示市場對GOOGL的核心業務本益比評價其實並不便宜，官方揭露的17倍純粹是GAAP分母（TTM EPS）被Q2單季$99.0B股權利得異常放大所致的統計假象。<br><br>
+    <strong>第二步，用歷史低檔／均值本益比反推合理股價：</strong>
+    </p>
+    <div class="tbl-wrap" style="margin-top:10px; margin-bottom:10px;">
+      <table>
+        <thead><tr><th>本益比基準</th><th class="num">× EPS基準</th><th class="num">反推股價</th><th class="num">vs現價$338.24</th></tr></thead>
+        <tbody>
+          <tr><td>2022年12月盤中低點 17.1倍</td><td class="num">FY25A $10.81</td><td class="num">$184.86</td><td class="num bad">現價溢價+83.0%</td></tr>
+          <tr><td>2022年12月盤中低點 17.1倍</td><td class="num">2026E核心 $11.81</td><td class="num">$201.95</td><td class="num bad">現價溢價+67.5%</td></tr>
+          <tr><td>5年平均 24.22倍</td><td class="num">FY25A $10.81</td><td class="num">$261.82</td><td class="num bad">現價溢價+29.2%</td></tr>
+          <tr><td>5年平均 24.22倍</td><td class="num">2026E核心 $11.81</td><td class="num">$286.07</td><td class="num warn">現價溢價+18.2%</td></tr>
+          <tr style="background:rgba(21,128,61,0.05)"><td><strong>5年平均 24.22倍</strong></td><td class="num"><strong>2027E核心 $15.07</strong></td><td class="num"><strong>$365.00</strong></td><td class="num ok"><strong>現價折價-7.3%（現價略低於此推算值）</strong></td></tr>
+          <tr><td>10年中位數 27.43倍</td><td class="num">2026E核心 $11.81</td><td class="num">$323.95</td><td class="num warn">現價溢價+4.4%</td></tr>
+          <tr style="background:rgba(21,128,61,0.05)"><td><strong>10年中位數 27.43倍</strong></td><td class="num"><strong>2027E核心 $15.07</strong></td><td class="num"><strong>$413.37</strong></td><td class="num ok"><strong>現價折價-18.2%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px; line-height:1.9; color:var(--text)">
+    <strong>結論：</strong>用歷史熊市谷底本益比（17.1倍）衡量，無論套用今年或明年EPS，現價都有67-83%的「溢價」，顯示現價絕非處於恐慧性低估；但若用GOOGL自身5年平均本益比（24.22倍）與10年中位數（27.43倍）衡量，以<strong>今年(2026E)</strong>核心EPS計算現價仍有4-18%溢價，但以<strong>明年(2027E)</strong>核心EPS計算則現價反而有7-18%的折價空間。這代表：<strong>目前股價既非單純靠「過去已兌現的獲利」撐起（今年基礎尚不足以支撐現價於歷史平均倍數），也非極端的本益比泡沫化（尚未脫離歷史均值太遠）——而是市場已提前反映約一年的獲利成長預期，用「適度的本益比領先透支」方式為2027年的獲利加速定價。</strong>這種判斷結果本身即隱含風險：若2027年EPS成長不如預期兌現（例如CapEx持續侵蝕獲利、稀釋效應加劇），現價將缺乏「今年獲利」的安全邊際支撐。
+    </p>
+  </div>
+</div>
+
+<!-- 8. 三情境估值 -->
+<div id="dcf" class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">三情境估值（採外部分析師共識區間法呈現）</div>
+  </div>
+
+  <div class="caution-box">
+    <h3>⚠️ Alphabet估值方法論說明</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">由於GOOGL的GAAP EPS持續受SpaceX/Anthropic股權重估大幅扭曲，且FY2026 CapEx/FCF走勢仍在演變中，難以支撐精確的自製DCF模型（WACC/terminal growth等假設的可靠度不足），本報告沿用上次報告的方法論，採<strong>61位分析師共識彙整的目標價區間</strong>作為三情境呈現基礎，並補充核心業務假設與最新個股/機構目標價更新。<strong>以下情境數字為⚠️外部分析師共識彙整，非本報告獨立建模的現金流折現結果</strong>。</p>
+  </div>
+
+  <div class="scenario-row">
+    <div class="scenario bear">
+      <h4>🐻 熊市情境（25% 機率，較上次上修機率權重）</h4>
+      <div class="scenario-price" style="color:var(--red)">$340</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $338.24　+0.5%（現價已貼近此情境）</div>
+      <div class="row"><span>核心假設</span><span>FY2026全年FCF確認轉負、Cloud backlog轉化不如預期</span></div>
+      <div class="row"><span>反壟斷假設</span><span>上訴出現不利裁決，法律不確定性升溫</span></div>
+      <div class="row"><span>對應方法</span><span>貼近UBS中性目標$348、分析師共識區間低值$340</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：Q3/Q4 FCF未見改善、Gemini 4後續接受度持續低迷</div>
+    </div>
+    <div class="scenario base">
+      <h4>📊 基準情境（50% 機率）</h4>
+      <div class="scenario-price" style="color:var(--blue)">$400-435</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $338.24　+18.3% ~ +28.6%</div>
+      <div class="row"><span>核心假設</span><span>Cloud維持50%+成長、backlog逐步兌現，FCF於Q3/Q4回穩</span></div>
+      <div class="row"><span>反壟斷假設</span><span>上訴持續但無重大不利裁決</span></div>
+      <div class="row"><span>對應方法</span><span>貼近61位分析師共識均值$429.46、KeyBanc $435</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：guidance如期兌現、CapEx增速隨backlog兌現趨緩</div>
+    </div>
+    <div class="scenario bull">
+      <h4>🐂 牛市情境（25% 機率）</h4>
+      <div class="scenario-price" style="color:var(--green)">$515</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs 現價 $338.24　+52.3%</div>
+      <div class="row"><span>核心假設</span><span>Cloud市佔加速收斂、TPU對外授權放量（Meta僅為起點）</span></div>
+      <div class="row"><span>反壟斷假設</span><span>上訴確認維持原判（無拆分），法律風險完全解除</span></div>
+      <div class="row"><span>對應方法</span><span>貼近分析師目標價高值、Jefferies $445進一步上調情境</span></div>
+      <div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：Cloud市佔顯著提升、FY2026 FCF超預期回正、反壟斷案件完全落幕</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent);">
+    <h3>敏感度分析：哪個變數對估值影響最大？</h3>
+    <p style="font-size:13px; color:var(--text); line-height:1.7">三情境價差（$340至$515）主要由<strong>「FY2026全年FCF能否回正」與「Cloud backlog轉化速度」</strong>兩項變數共同決定，較上次報告新增「FCF回正與否」作為核心敏感變數——這反映本次查證發現的FCF轉負是市場近期最關注的焦點。現價（$338.24）已幾乎貼齊熊市情境下緣（$340），較9月報告時（現價僅較熊市情境低1.3%）風險報酬特徵相近，但本次下檔情境觸發機率已從20%上修至25%，顯示整體不確定性有所提升。基準情境（$400-435）距現價仍有18-29%空間，是三巨頭比較中少數仍維持「雙位數以上」共識上行空間的一檔。</p>
+  </div>
+</div>
+
+<!-- 9. 股價位階評估 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">股價位階評估</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>估值倍數現況 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:20px;">17.0x⚠️</div><div class="big-label">Trailing PE（官方，受扭曲）</div></div>
+        <div><div class="big-num" style="font-size:20px;">~31.3x⚠️</div><div class="big-label">以FY25A EPS估算的核心PE（自算）</div></div>
+        <div><div class="big-num" style="font-size:20px;">21.9-25.2x⚠️</div><div class="big-label">Forward PE（來源間有落差）</div></div>
+        <div><div class="big-num" style="font-size:20px;">6.65x</div><div class="big-label">股價淨值比 (P/B)</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>與雲端三巨頭比較 ✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:20px; color:var(--green)">82%</div><div class="big-label">GCP成長，三雲最快</div></div>
+        <div><div class="big-num" style="font-size:20px;">~32%</div><div class="big-label">AWS成長（Q3'26E共識）</div></div>
+        <div><div class="big-num" style="font-size:20px;">~27%</div><div class="big-label">Azure智慧雲成長（Q估）</div></div>
+        <div><div class="big-num" style="font-size:20px; color:var(--red)">FCF轉負</div><div class="big-label">Q2'26單季，三巨頭中FCF惡化幅度最劇烈（由正轉負 vs MSFT仍正/AMZN轉負已久）</div></div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px; color:var(--text2)">GOOGL的官方trailing PE數字看似三巨頭中最低，但如前節分析這是股權利得造成的統計假象；以核心業務基礎衡量（~31.3x），GOOGL實際上可能是三巨頭中估值最高者，需搭配Cloud成長動能與backlog兌現進度綜合判斷是否合理，不宜僅憑表面數字判斷「便宜」。</p>
+</div>
+
+<!-- Comps -->
+<div id="comps" class="section" style="margin-top:0;">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">Comps 同業對照（vs Microsoft / Meta / Amazon）</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th class="num">股價(10/1)</th><th class="num">市值</th><th class="num">Trailing PE</th><th class="num">2026 CapEx guidance</th><th>核心定位</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Alphabet（GOOGL）</strong></td><td class="num">$338.24</td><td class="num">$4.14T</td><td class="num">17.0x⚠️（扭曲，核心約31.3x）</td><td class="num">$195-205B（上修）</td><td>搜尋廣告龍頭+雲端成長最快+TPU自研+SpaceX/Anthropic雙股東，惟2026年首度大舉外部融資</td></tr>
+        <tr><td>Microsoft（MSFT）</td><td class="num">$515.47</td><td class="num">$3.83T</td><td class="num">28.45-28.58x</td><td class="num">約$175B（含租賃調整）</td><td>企業軟體+雲端+OpenAI主要股東，CapEx以融資租賃方式部分表外化</td></tr>
+        <tr><td>Meta（META）</td><td class="num">$728.92</td><td class="num">$1.86T</td><td class="num">26.48-27.32x</td><td class="num">估高達$135B（自$72B大增）</td><td>社群廣告龍頭，2026年起同時成為Google TPU租戶，AI capex強度提升最猛的一家</td></tr>
+        <tr><td>Amazon（AMZN）</td><td class="num">$248.23</td><td class="num">$2.68T</td><td class="num">19.97x</td><td class="num">$220B（自$200B上修，主因記憶體漲價）</td><td>電商+雲端龍頭(AWS市佔第一)+Anthropic股東</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">四大科技巨頭（含Meta）2026年CapEx guidance合計已達$720-745B，年增約77%，是本輪AI資本支出競賽最鮮明的佐證。值得注意：Meta同時身兼「Google Cloud TPU租戶」與「廣告業務競爭者」雙重身分，是近期雲端/晶片產業最值得關注的競合關係轉變之一。GOOGL官方PE看似三巨頭/四強中最低，但核心業務基礎估值（~31.3x）實際上高於MSFT（28.5x）、Meta（27x）、Amazon（20x），顯示市場願意給GOOGL最高的核心業務估值溢價。</p>
+</div>
+
+<!-- 11. 額外優勢/風險 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">額外優勢/風險</div>
+  </div>
+  <div class="card-grid">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>分析師評等與市場地位</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">61-70位分析師覆蓋，Strong Buy共識（約83%買進比例），目標價區間$340-515，均值約$429.46-429.88。市值$4.14T，是四大科技巨頭中市值最大者（略高於MSFT的$3.83T）。✅</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <h3>自研TPU獲外部競爭對手背書（Meta租用案）</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">Meta簽署數十億美元合約租用Google TPU訓練下一代AI模型（2026年租用，2027年起計畫直接採購），是Google晶片自研策略首次獲主要競爭對手商業驗證的里程碑事件，顯示TPU的技術與成本優勢已具備對外輸出的商業可行性，可能開闢新營收來源並強化Cloud業務的差異化定位。✅</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>❌ 新增重大風險：罕見大規模股權＋債務融資，資本結構顯著轉變</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.7">2026年6月完成$84.75B股權募資（含向Berkshire Hathaway私募$10B現金），8月再發行$25B公司債；長期負債由年初$46.5B半年內翻倍至$98.2B；流通股數由12,116M增至12,230M（+0.94%，尚未計入強制可轉換特別股未來轉換的進一步稀釋）；利息支出Q2年增390%至$12.78億。股票回購全面暫停（$70B額度中$69.5B未動用）。這是Alphabet近20年來首次需要透過資本市場大規模籌資支應營運資本支出，與公司過往「現金牛、幾乎零外部融資依賴」的形象出現結構性轉變。❌</p>
+    </div>
+  </div>
+</div>
+
+<!-- 12. 投行目標價 -->
+<div id="targets" class="section">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">投行目標價與操作建議</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>機構/來源</th><th>評等</th><th class="num">目標價</th><th>日期</th></tr></thead>
+      <tbody>
+        <tr><td>stockanalysis.com（61位分析師）</td><td><span class="badge badge-green">Strong Buy</span></td><td class="num">均值$429.46 ✅，區間$340-$515 ✅</td><td>2026年10月</td></tr>
+        <tr><td>綜合70位分析師彙整</td><td><span class="badge badge-green">Strong Buy（約83%買進）</span></td><td class="num">均值$429.36-429.88 ✅</td><td>2026年10月</td></tr>
+        <tr><td>KeyBanc</td><td><span class="badge badge-green">Overweight（維持）</span></td><td class="num">$435 ✅</td><td>2026-10-01</td></tr>
+        <tr><td>Jefferies</td><td><span class="badge badge-green">Buy（維持）</span></td><td class="num">$445 ✅</td><td>2026-10-01</td></tr>
+        <tr><td>Scotiabank</td><td><span class="badge badge-green">上調</span></td><td class="num">$400（自$375上調）✅</td><td>2026年9月</td></tr>
+        <tr><td>UBS</td><td><span class="badge badge-yellow">Neutral</span></td><td class="num">$348 ✅</td><td>2026年9月</td></tr>
+        <tr><td>JPMorgan</td><td><span class="badge badge-yellow">評語保留目標價未明確揭露⚠️</span></td><td class="num">— ⚠️（評論「需重新確立AI領導地位」）</td><td>2026-10-01</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--gold); margin-top:16px;">
+    <h3 style="color:var(--gold)">分歧點</h3>
+    <p style="font-size:13px; line-height:1.7; color:var(--text)">分析師目標價區間（$340-$515）跨度約1.5倍，與上次報告相近，顯示市場對GOOGL基本面的分歧程度未明顯擴大。多數分歧仍集中在「Cloud backlog能否順利兌現」與「CapEx/融資強度是否合理」，但本次查證新增了「Gemini 4能否扭轉前沿AI落後疑慮」此一新分歧點——JPMorgan對此持謹慎態度，KeyBanc/Jefferies則仍維持正面評等與較高目標價，顯示機構間在「基礎設施優勢」與「前沿模型能力」兩個面向的權重分配上出現分歧。UBS的中性評等（$348）與現價（$338.24）仍相近，代表最保守看法僅是「持平略有上行」而非「看空」。</p>
+  </div>
+
+  <div class="action-box" style="margin-top:16px;">
+    <h3>✅ 最終操作建議（財報解析視角）</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">現價$338.24相對投行共識目標價（$429-435）存在約27-29%潛在上行空間，仍是四大科技巨頭中上行空間數一數二的一檔。惟本次查證發現的FCF轉負與鉅額外部融資是重大新增變數，<strong>對於已持有者：建議續抱但降低加碼意願，待Q3/Q4 2026財報確認現金流是否回穩後再評估加碼；對於未持有者：若欲介入建議採分批小額方式，現階段風險報酬比仍具吸引力但確定性較9月報告時下降，核心需觀察FY2026全年FCF走勢與反壟斷上訴進展。</strong></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     Part 3：財務健檢
+══════════════════════════════════════ -->
+<div id="part3" class="mode-divider">
+  <h2>◈ Part 3：財務風險健檢</h2>
+  <p>六大比率診斷 · 債務到期時程 · CapEx與2026年鉅額融資分析 · 同業對比 · 綜合診斷</p>
+</div>
+
+<!-- 13. 財務數據填表 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">財務數據填表（近3期）</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>項目</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">2026 Q2(最新單季/期末)</th></tr></thead>
+      <tbody>
+        <tr><td>總營收</td><td class="num">$350.0B ✅</td><td class="num">$402.8B ✅</td><td class="num">單季$119.8B ✅</td></tr>
+        <tr><td>營業利益</td><td class="num">$112.4B ✅</td><td class="num">$129.0B ✅</td><td class="num">單季$40.8B ✅</td></tr>
+        <tr><td>淨利</td><td class="num">$100.1B ✅</td><td class="num">$132.2B ✅</td><td class="num">單季淨利含$99B股權利得 ⚠️</td></tr>
+        <tr><td>營運現金流(OCF)</td><td class="num">— ⚠️</td><td class="num">— ⚠️</td><td class="num">單季$39.1B ✅</td></tr>
+        <tr><td>資本支出(CapEx)</td><td class="num">— ⚠️</td><td class="num">— ⚠️</td><td class="num">單季$44.9B ✅（YoY+100%）</td></tr>
+        <tr><td>自由現金流(FCF)</td><td class="num">$72.76B ✅</td><td class="num">$73.27B ✅</td><td class="num bad">單季-$5.9B ❌（TTM仍約+$53B⚠️）</td></tr>
+        <tr><td>現金及約當現金+有價證券</td><td class="num">— ⚠️</td><td class="num">— ⚠️</td><td class="num">$242.5B ✅（6/30）</td></tr>
+        <tr><td>長期負債(Long-term Debt)</td><td class="num">— ⚠️</td><td class="num">$46.5B ✅（年初）</td><td class="num bad">$98.2B ✅（6/30，半年翻倍）</td></tr>
+        <tr><td>利息支出(Interest Expense)</td><td class="num">— ⚠️</td><td class="num">— ⚠️</td><td class="num bad">單季$12.78億 ✅（YoY+390%，去年同期$2.61億）</td></tr>
+        <tr><td>流通股數(合計A+B+C)</td><td class="num">— ⚠️</td><td class="num">— ⚠️</td><td class="num">12,230M ✅（7/15，3月底為12,116M）</td></tr>
+        <tr><td>2026 CapEx guidance</td><td class="num">— ❌</td><td class="num">原$180-190B</td><td class="num bad">上修至$195-205B ✅</td></tr>
+        <tr><td>SpaceX+Anthropic股權帳面值</td><td class="num">— ❌</td><td class="num">— ❌</td><td class="num">合計$218B+ ✅（SpaceX $94B，6/30）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅ 已驗證（來源：Alphabet 10-Q/8-K Q2 2026、SEC EDGAR、TipRanks、Bloomberg、beancount.io財報分析）｜⚠️ 股東權益總額、資產總額未能於本次查證中心取得6/30最新精確數字，標記為資料缺口，惟現金部位（$242.5B）與長債規模（$98.2B）兩項關鍵數字已確認，足以支撐六大比率中的槓桿類計算。</p>
+</div>
+
+<!-- 14. 六大比率 -->
+<div id="ratios" class="section">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">六大比率診斷</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>1. 淨現金部位（現金-長債）</h3>
+      <div class="big-num" style="color:var(--green)">約+$144.3B ✅</div>
+      <div class="big-label">公式：現金及有價證券$242.5B − 長期負債$98.2B（6/30）</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:75%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">✅ 狀態：仍為淨現金部位，財務體質尚屬穩健，惟較過去「幾乎零槓桿」的狀態已明顯向外部融資傾斜，且此比率較半年前已顯著收斂（長債翻倍）。</p>
+    </div>
+    <div class="card">
+      <h3>2. FCF趨勢（關鍵警訊）</h3>
+      <div class="big-num" style="color:var(--red)">Q2'26單季轉負 ❌</div>
+      <div class="big-label">FY23 $69.4B→FY24 $72.76B→FY25 $73.27B→Q2'26單季-$5.9B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:35%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">❌ 狀態：三年連續正成長紀錄於FY2026進行中已被打破，TTM FCF雖仍約+$53B，但下滑速度與CapEx guidance持續上修的組合，是本次查證中最需要密切追蹤的風險點。</p>
+    </div>
+    <div class="card">
+      <h3>3. 營業利益率</h3>
+      <div class="big-num" style="color:var(--green)">34.1% ✅</div>
+      <div class="big-label">公式：Q2'26營業利益$40.8B ÷ 營收$119.8B（較FY25全年32.0%續升）</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:78%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">✅ 狀態：損益表層面的獲利能力仍在改善，與現金流層面的惡化形成對比——顯示問題出在「CapEx強度」而非「核心業務獲利能力」。</p>
+    </div>
+    <div class="card">
+      <h3>4. 利息支出成長率（新增監控項）</h3>
+      <div class="big-num" style="color:var(--red)">YoY +390% ❌</div>
+      <div class="big-label">Q2'26單季$12.78億 vs Q2'25單季$2.61億</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:85%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">❌ 狀態：直接反映長債半年翻倍的影響，絕對金額（約$12.8億/季）相對於營業利益（$40.8B/季）仍小，暫不構成利息覆蓋率危機，但成長速度是六項指標中最劇烈者，需持續追蹤。</p>
+    </div>
+    <div class="card">
+      <h3>5. CapEx/OCF比率</h3>
+      <div class="big-num" style="color:var(--red)">114.8% ❌</div>
+      <div class="big-label">公式：Q2'26 CapEx $44.9B ÷ OCF $39.1B</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-red" style="width:90%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">❌ 狀態：CapEx已超過當季營運現金流，是FCF轉負的直接數學原因。若此比率於Q3/Q4持續高於100%，代表公司將持續依賴現金部位消耗或外部融資支應資本支出。</p>
+    </div>
+    <div class="card">
+      <h3>6. 反壟斷法律風險狀態</h3>
+      <div class="big-num" style="color:var(--gold)">部分解除，雙方均上訴中⚠️</div>
+      <div class="big-label">強制拆分已被駁回，DOJ與Google雙方均已上訴至DC巡迴法院</div>
+      <div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:50%"></div></div>
+      <p style="font-size:12px; margin-top:8px; color:var(--text2)">⚠️ 狀態：最壞情境（Chrome/Android強制拆分）已避免，惟雙方上訴程序預期延續至2027-2028年，期間可能持續造成股價波動雜訊。</p>
+    </div>
+  </div>
+</div>
+
+<!-- CapEx與融資 -->
+<div id="capex" class="section">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-title">CapEx分析與2026年鉅額融資事件（本次查證新增重點）</div>
+  </div>
+
+  <div class="risk-card">
+    <h4>❌ 2026年H1三項罕見資本市場動作，標誌Alphabet資本結構的結構性轉變</h4>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">
+    <strong>① 股權募資 $84.75B（2026年6月）</strong>：含$18B普通股發行（Class A+C各半）、$16.75B強制可轉換特別股（存託股形式，股息率6.25%）、$40B ATM市場發行計畫、以及向<strong>Berkshire Hathaway私募$10B現金</strong>。這是Alphabet上市以來首次進行如此大規模的股權融資，過去公司向來以「現金牛、不需外部股權融資」著稱。✅<br><br>
+    <strong>② 公司債發行 $25B（2026年8月）</strong>：多年期、多檔次（2028-2066年到期），包含浮動與固定利率券種，吸引約$1,150億的認購需求（僅次於Oracle與Amazon同期發行的紀錄）。✅<br><br>
+    <strong>③ 股票回購全面暫停</strong>：2025年4月核准的$70B回購額度中，截至2026年6月30日仍有$69.5B未動用，H1 2026零回購，資金優先用於AI資本支出。✅<br><br>
+    <strong>綜合影響：</strong>上述三項動作合計為公司在2026年上半年新增外部資金來源超過$100B（股權+債務），搭配長期負債半年翻倍（$46.5B→$98.2B）與流通股數增加（+114M股），顯示即便是現金部位高達$242.5B的Alphabet，也無法完全以自有現金流支應當前AI資本支出強度，須仰賴資本市場融資——這與MSFT（主要透過融資租賃表外化部分CapEx）、AMZN（槓桿半年+96.5%）的資金壓力性質相近，顯示「AI資本支出超級循環」已使四大科技巨頭的資產負債表體質全面趨同承壓，GOOGL不再是例外。
+    </p>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:16px;">
+    <table>
+      <thead><tr><th>項目</th><th class="num">2026年之前</th><th class="num">2026 H1變化後</th><th>評估</th></tr></thead>
+      <tbody>
+        <tr><td>長期負債</td><td class="num">$46.5B（年初）</td><td class="num bad">$98.2B（6/30）</td><td>半年翻倍，8月再增發$25B債券</td></tr>
+        <tr><td>股票回購</td><td class="num">持續進行</td><td class="num bad">全面暫停</td><td>資金優先投入CapEx</td></tr>
+        <tr><td>股權募資需求</td><td class="num">幾乎從未需要</td><td class="num bad">$84.75B（含特別股）</td><td>結構性轉變，近20年首見</td></tr>
+        <tr><td>流通股數</td><td class="num">12,116M（3月底）</td><td class="num warn">12,230M（7/15）</td><td>+0.94%，特別股轉換後將進一步稀釋</td></tr>
+        <tr><td>利息支出(單季)</td><td class="num">$2.61億（去年同期）</td><td class="num bad">$12.78億</td><td>YoY+390%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px; border-left:3px solid var(--blue);">
+    <h3>債務到期時程（估算，建議查原文10-K/10-Q Debt Maturities章節取得逐年精確數字）</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">根據8月公司債發行條款，本次$25B多檔次債券到期時程分布於<strong>2028年至2066年</strong>，公司刻意將到期結構拉長以匹配AI基礎設施資產的折舊年限，其中約$100億不早於20年後到期，最長一檔$25億（利率6.5%）要到2066年8月才到期。整體債務到期結構目前以長天期為主，<strong>2026年內到期金額僅約$20億</strong>，短期內無集中到期的再融資壓力。⚠️ 惟由於未能取得完整逐年到期金額明細表，此處為根據公開揭露條款的估算整理，建議查閱Alphabet最新10-Q原文「Debt」附註章節確認精確數字。</p>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>CapEx/業務模式判讀</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">Alphabet的CapEx/營收比率已從傳統網路服務業的「輕資產」特徵，加速轉向「重資產」的AI基礎設施業者特徵——2026 CapEx guidance中值（約$200B）已接近FY2025全年營收（$402.8B）的50%，遠高於FY2025之前的歷史常態比例。此一轉變與MSFT、AMZN、Meta等同業一致，顯示整個雲端/AI產業正集體進入資本密集度大幅提升的新階段，不再是單一公司的特例，惟GOOGL此次新增的大規模股權稀釋（特別股+普通股）在四大巨頭中屬於較特殊的融資選擇（MSFT/AMZN/Meta主要仍以債務與自有現金流為主，未見同等規模的股權募資）。⚠️</p>
+  </div>
+</div>
+
+<!-- Comps健檢 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">16</div>
+    <div class="section-title">同業財務體質對比</div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>公司</th><th class="num">FCF趨勢</th><th class="num">2026槓桿/融資動作</th><th class="num">CapEx guidance</th><th>財務體質定性</th></tr>
+      </thead>
+      <tbody>
+        <tr class="comp-now"><td><strong>Alphabet（GOOGL）</strong></td><td class="num bad">Q2單季轉負（2004年來首見）</td><td class="num bad">長債半年翻倍+$84.75B股權募資(含特別股)</td><td class="num">$195-205B</td><td>現金部位仍雄厚($242.5B)，惟2026年首度大規模依賴資本市場</td></tr>
+        <tr><td>Microsoft（MSFT）</td><td class="num warn">仍正但年減</td><td class="num">主要透過融資租賃表外化部分CapEx</td><td class="num">~$175B</td><td>核心體質健康，CapEx會計處理方式與GOOGL/AMZN不同需留意可比性</td></tr>
+        <tr><td>Meta（META）</td><td class="num warn">受CapEx擠壓</td><td class="num">2026 CapEx較2025大增近90%（$72B→$135B估）</td><td class="num">~$135B（估）</td><td>CapEx增速四強中最猛，同時成為Google TPU租戶分散供應</td></tr>
+        <tr><td>Amazon（AMZN）</td><td class="num bad">持續承壓</td><td class="num">槓桿上升，CapEx guidance因記憶體漲價上修</td><td class="num">$220B（自$200B上修）</td><td>四強中CapEx絕對金額最高</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">本次查證最重要的發現：GOOGL過去被視為「三巨頭中財務體質最健康」的差異化優勢，在2026年AI資本支出超級循環下已明顯收斂——FCF轉負幅度與融資動作的「突然性」（罕見股權募資）甚至是四強中最引人注目的轉變，惟其現金部位絕對規模（$242.5B）與淨現金部位仍為四強之首，體質尚未惡化到警戒等級，僅是「優勢收斂」而非「體質轉差」。</p>
+</div>
+
+<!-- 綜合診斷 -->
+<div id="health" class="section">
+  <div class="section-header">
+    <div class="section-num">17</div>
+    <div class="section-title">財務體質綜合診斷</div>
+  </div>
+  <div class="card" style="display:flex; align-items:center; gap:24px;">
+    <div class="health-badge health-a">A</div>
+    <div>
+      <p style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px;">財務體質評等：A（較上次報告AA下修一級，主因FCF轉負與罕見大規模股權債務融資）</p>
+      <p style="font-size:13px; color:var(--text2); line-height:1.7">定性分類：<strong>「現金雄厚但轉向積極外部融資型」</strong>——現金部位（$242.5B）與淨現金部位（約+$144.3B）在四大科技巨頭中仍居首位，核心業務獲利能力（營業利益率34.1%）持續改善，尚未進入「槓桿警戒型」等級；惟Q2 2026單季FCF轉負（2004年來首見）、長債半年翻倍、以及近20年來首次進行大規模股權募資（含向Berkshire Hathaway私募）等三項變化，顯示公司財務體質正從「現金牛、零外部依賴」快速過渡至「高資本密度、仰賴資本市場」的新階段。<strong>最大風險點：</strong>若FY2026全年FCF未能如預期於Q3/Q4回正，且backlog（$514B）兌現速度不如CapEx投入速度，可能需要進一步融資或動用現金儲備，稀釋效應將持續侵蝕每股指標。<strong>安全邊際：</strong>以目前$242.5B現金部位與34.1%營業利益率的緩衝能力，即便CapEx guidance維持在$195-205B高位，預期尚可支撐1-2年的過渡期而不致出現流動性危機，惟營業利益需大幅下滑（估算超過40-50%）才會觸及真正的財務壓力警戒線。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     綜合總結
+══════════════════════════════════════ -->
+<div id="final" class="section">
+  <div class="section-header">
+    <div class="section-num">18</div>
+    <div class="section-title">綜合總結</div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis 成立度</div><div class="s-val">3.5 / 5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-val">⭐⭐⭐⭐⭐(4.7)</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-val" style="font-size:13px;">穩定成長股＋Cloud快速成長</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-val">A（自AA下修）</div></div>
+    <div class="summary-card"><div class="s-label">現價/共識目標價</div><div class="s-val" style="font-size:13px;">$338.24 / $429-435</div></div>
+  </div>
+
+  <div class="action-box">
+    <h3>✅ 最終操作建議</h3>
+    <p style="font-size:13px; line-height:1.8; color:var(--text)">
+      <strong>已持有者：</strong>續抱，惟建議從「核心池主力加碼」調整為「核心池持有觀察」。GOOGL的營收與Cloud成長動能（backlog $514B、+82%成長）、護城河強度（4.7/5）在四大科技巨頭中仍數一數二，惟本次查證發現的<strong>Q2'26 FCF轉負（2004年來首見）＋史無前例的$84.75B股權募資（含Berkshire私募）＋長債半年翻倍</strong>三項重大新變化，代表「GOOGL財務體質三巨頭最健康」的核心差異化優勢已明顯收斂，不宜再以9月報告的樂觀程度續抱加碼。<br><br>
+      <strong>未持有者：</strong>若考慮建倉建議採分批小額方式，而非一次性大額布局。現價（$338.24）已貼近分析師共識熊市情境下緣（$340），下檔相對有限；共識目標價（$429-435）隱含27-29%上行空間，風險報酬比仍具吸引力，惟確定性較9月報告時下降，核心本益比反推試算顯示目前股價已提前反映約一年的獲利成長預期（2027E），而非單純靠已兌現獲利或本益比折價支撐，安全邊際較薄。<br><br>
+      <strong>核心催化劑（本次更新）：</strong>①FY2026 Q3/Q4 FCF能否確認回正（2026-10-27前後公布） ②Google Cloud backlog $514B兌現進度 ③Gemini 4 Argon後續更新能否扭轉「落後前沿AI」疑慮 ④反壟斷DC巡迴上訴進展（預期2026年底至2027年初言詞辯論） ⑤強制可轉換特別股未來轉換對EPS的稀釋時程。
+    </p>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <p>
+    資料來源：Alphabet Investor Relations（Q2 2026 8-K/10-Q）、SEC EDGAR（424B5/FWP/10-Q）、stockanalysis.com、Yahoo Finance、gurufocus.com、wisesheets.io、macrotrends.net、S&P Global／多方分析師目標價彙整、Bloomberg、The Motley Fool、CNBC、TipRanks、The Decoder、Tom's Hardware、SemiAnalysis、其他公開財經媒體報導（詳見各段落標註）<br>
+    ✅ 已驗證　⚠️ 估算/近似值或資料源分歧（已逐一列出各來源數字）　❌ 無法取得或已被本次查證推翻的舊結論，禁止臆測填入<br>
+    本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。
+  </p>
+</footer>
+
+</body>
+</html>

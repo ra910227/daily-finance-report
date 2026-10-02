@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐 完整報告｜JPM JPMorgan Chase 2026-10-02</title>
+<style>
+  :root { --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef0f7; --border:#e1e4ee; --border2:#d3d7e6; --text:#1e2233; --text2:#6b7280; --text3:#9598a6; --accent:#4f46e5; --accent2:#4338ca; --red:#dc2626; --green:#15803d; --gold:#b45309; --orange:#c2410c; --blue:#2563eb; --purple:#7c3aed; --teal:#0d9488; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  .hero { background: linear-gradient(135deg, #eef2ff 0%, #e8ecfb 40%, #f7f8fc 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  .hero-ticker { font-size: 56px; font-weight: 800; color: var(--accent); letter-spacing: -2px; }
+  .hero-name { font-size: 18px; color: var(--text2); margin-top: 2px; }
+  .hero-date { font-size: 13px; color: var(--text3); margin-top: 4px; }
+  .hero-price-block { text-align: right; }
+  .hero-price { font-size: 44px; font-weight: 700; color: var(--text); }
+  .hero-mktcap { font-size: 14px; color: var(--text2); margin-top: 2px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display:inline-block; }
+  .badge-blue { background: rgba(37,99,235,0.10); color: var(--blue); border: 1px solid rgba(37,99,235,0.25); }
+  .badge-green { background: rgba(21,128,61,0.10); color: var(--green); border: 1px solid rgba(21,128,61,0.25); }
+  .badge-yellow { background: rgba(180,83,9,0.10); color: var(--gold); border: 1px solid rgba(180,83,9,0.25); }
+  .badge-red { background: rgba(220,38,38,0.10); color: var(--red); border: 1px solid rgba(220,38,38,0.25); }
+  .badge-purple { background: rgba(124,58,237,0.10); color: var(--purple); border: 1px solid rgba(124,58,237,0.25); }
+  .badge-orange { background: rgba(194,65,12,0.10); color: var(--orange); border: 1px solid rgba(194,65,12,0.25); }
+  .badge-teal { background: rgba(13,148,136,0.10); color: var(--teal); border: 1px solid rgba(13,148,136,0.25); }
+  .hero-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .meta-item label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+  .meta-item .val { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-item .sub { font-size: 12px; color: var(--text2); }
+  .toc { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .toc-inner { display: flex; gap: 0; white-space: nowrap; }
+  .toc-inner a { display: block; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 2px solid transparent; }
+  .toc-sep { display: block; padding: 14px 4px; color: var(--border2); font-size: 16px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); }
+  .mode-divider { background: linear-gradient(90deg, var(--bg2), transparent); border-top: 2px solid var(--accent); margin: 64px 0 48px; padding: 20px 0 0; }
+  .mode-divider h2 { font-size: 24px; font-weight: 700; color: var(--accent); }
+  .mode-divider p { font-size: 13px; color: var(--text2); }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .big-num { font-size: 32px; font-weight: 700; color: var(--text); }
+  .card .big-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; overflow-x:auto; }
+  .ok { color: var(--green); } .warn { color: var(--gold); } .bad { color: var(--red); }
+  .thesis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .thesis-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .thesis-card .label { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+  .thesis-card .content { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .thesis-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; font-weight: 700; }
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .scenario.bear { border-top: 3px solid var(--red); } .scenario.base { border-top: 3px solid var(--blue); } .scenario.bull { border-top: 3px solid var(--green); }
+  .scenario h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .scenario.bear h4 { color: var(--red); } .scenario.base h4 { color: var(--blue); } .scenario.bull h4 { color: var(--green); }
+  .scenario-price { font-size: 28px; font-weight: 700; margin: 8px 0; }
+  .scenario .row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .moat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+  .moat-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .moat-item .moat-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .moat-stars { font-size: 16px; color: var(--gold); }
+  .moat-score { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+  .action-box { background: #f0fdf4; border: 1px solid rgba(21,128,61,0.25); border-left: 4px solid var(--green); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .action-box h3 { color: var(--green); font-size: 15px; margin-bottom: 10px; }
+  .caution-box { background: #fffbea; border: 1px solid rgba(180,83,9,0.25); border-left: 4px solid var(--gold); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .caution-box h3 { color: var(--gold); font-size: 15px; margin-bottom: 10px; }
+  .risk-card { background:#fef2f2; border:1px solid rgba(220,38,38,0.2); border-radius:8px; padding:14px 16px; margin-bottom:12px; }
+  .risk-card h4 { color: var(--red); font-size:13px; margin-bottom:6px; }
+  .health-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 20px; font-weight: 700; flex-shrink:0; }
+  .health-aa { background: rgba(21,128,61,0.10); border: 3px solid var(--green); color: var(--green); }
+  .health-a { background: rgba(21,128,61,0.08); border: 3px solid rgba(21,128,61,0.6); color: var(--green); }
+  .health-b { background: rgba(180,83,9,0.10); border: 3px solid var(--gold); color: var(--gold); }
+  .health-c { background: rgba(220,38,38,0.10); border: 3px solid var(--red); color: var(--red); }
+  .comp-now { background: rgba(79,70,229,0.05); } .comp-now td { font-weight: 700; }
+  .ratio-bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; margin-top: 6px; }
+  .ratio-bar { height: 6px; border-radius: 4px; }
+  .bar-green { background: var(--green); } .bar-yellow { background: var(--gold); } .bar-red { background: var(--red); }
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; margin-top: 64px; text-align: center; }
+  footer p { font-size: 12px; color: var(--text3); line-height: 1.8; }
+  .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-card .s-label { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--accent); }
+  .delta-box { background: #eef2ff; border: 1px solid rgba(79,70,229,0.25); border-left: 4px solid var(--accent); border-radius: 10px; padding: 18px 22px; margin-bottom: 16px; }
+  .delta-box h3 { color: var(--accent); font-size: 14px; margin-bottom: 8px; }
+  @media (max-width: 900px) { .summary-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 720px) { .scenario-row { grid-template-columns: 1fr; } .moat-grid { grid-template-columns: repeat(2,1fr); } .hero-price-block { text-align:left; } }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-ticker">JPM</div>
+      <div class="hero-name">JPMorgan Chase & Co.（全球最大全能銀行，市值$885.65億美元，2026年9月下旬股價自高點回落約9%，CET1資本比率連三季小幅下滑反映資本積極部署，Q3'26財報將於10/13發布）</div>
+      <div class="hero-date">個股小狐完整報告｜分析日期：2026-10-02　資料基準：2026-10-01收盤</div>
+    </div>
+    <div class="hero-price-block">
+      <div class="hero-price">$333.18</div>
+      <div class="hero-mktcap">市值 ≈$885.65億美元（距$1兆市值尚差約13%）</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge badge-red">股價自9/19高點$366.50回落至$333.18，約-9.1%</span>
+    <span class="badge badge-purple">最新驗證：Q2'26核心淨利$169億(+13%)，ROTCE 23%（Q3'26將於10/13公布）</span>
+    <span class="badge badge-orange">CET1比率連三季下滑：FY25末14.5%→Q1'26 14.4%→Q2'26 14.2%</span>
+    <span class="badge badge-teal">NPA $98億，YoY-6%；LDR約57%，流動性體質穩健</span>
+    <span class="badge badge-yellow">季度股利$1.65，年化殖利率1.98%</span>
+    <span class="badge badge-blue">法人目標價區間$305–$436，三大彙整來源均值$363–$381</span>
+    <span class="badge badge-green">PE(TTM)14.3倍，高於10年中位數12.42倍約15-20%</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>股價</label><div class="val">$333.18</div><div class="sub">✅ 52週$279.10–$366.50</div></div>
+    <div class="meta-item"><label>FY25 EPS（實際）</label><div class="val">$20.02</div><div class="sub">YoY+1.4% ✅</div></div>
+    <div class="meta-item"><label>TTM EPS</label><div class="val">$23.30</div><div class="sub">截至Q2'26 ✅</div></div>
+    <div class="meta-item"><label>PE(TTM) / Fwd PE</label><div class="val">14.30x / 13.77x</div><div class="sub">✅ stockanalysis.com</div></div>
+    <div class="meta-item"><label>Thesis 成立度</label><div class="val">4.1/5</div><div class="sub">核心獲利趨勢仍強，惟股價已反映多，估值溢價收斂中</div></div>
+    <div class="meta-item"><label>護城河強度</label><div class="val">⭐⭐⭐⭐⭐</div><div class="sub">全能銀行規模+多元業務組合，業界龍頭地位穩固</div></div>
+  </div>
+</div>
+
+<nav class="toc"><div class="toc-inner">
+  <a href="#mode1">模式一深度研究</a><span class="toc-sep">·</span><a href="#biz">業務引擎</a><a href="#thesis">核心Thesis</a><a href="#competition">競爭格局</a><a href="#moat">成長象限</a>
+  <span class="toc-sep">·</span><a href="#mode2">模式二財報解析</a><span class="toc-sep">·</span><a href="#earnings">Q2財報</a><a href="#eps">EPS與PE錨點</a><a href="#dcf">三情境估值</a><a href="#comps">Comps分析</a><a href="#targets">投行目標</a>
+  <span class="toc-sep">·</span><a href="#mode3">模式三財務健檢</a><span class="toc-sep">·</span><a href="#ratios">六大比率(銀行版)</a><a href="#debt">資金結構</a><a href="#health">綜合診斷</a>
+  <span class="toc-sep">·</span><a href="#final">綜合總結</a>
+</div></nav>
+
+<div class="container">
+
+<div class="delta-box">
+  <h3>📌 與2026-09-16舊報告相比的重大變化（快速比對）</h3>
+  <p style="font-size:13px; line-height:1.8; color:var(--text)">
+  ①<strong>股價回落約9.1%</strong>：自舊報告基準日$349.10（9/19收盤）回落至本次$333.18（10/1收盤），52週高點$366.50未變，股價已從高點拉回約9.1%，市值自逼近$1兆回落至$885.65億。
+  ②<strong>CET1資本比率續降</strong>：FY25年底14.5%→Q1'26 14.4%→Q2'26 14.2%（Standardized/Advanced均為14.2%，季減20bp），顯示公司持續以買回庫藏股/資產負債表成長的方式部署資本，資本比率絕對水位仍遠高於監理最低要求，惟下滑趨勢需列入追蹤。
+  ③<strong>法人目標價出現分歧擴大</strong>：不同彙整來源出現$363.29（MarketBeat，9/30）至$381.33（TipRanks，16位分析師，近3個月）的落差，個別分析師最高看$436（高盛）、最低看$305（Baird，Hold），分歧程度較舊報告擴大。
+  ④<strong>新增信用與流動性數據</strong>：本次查得Q2'26信用卡淨呆帳率3.34%（FY26展望下修至約3.2%）、不良資產總額$98億(YoY-6%)、平均放款/平均存款比約57%，均顯示資產品質與流動性體質健康，為舊報告未揭露的新增細節。
+  ⑤<strong>Q3'26財報尚未發布</strong>：公司已公告將於2026-10-13召開Q3'26法說會，本報告財報解析部分（Part 2）仍以最新已發布的Q2'26（2026-07-22發布）財報為基礎，下次財報發布後數字將有實質更新。
+  </p>
+</div>
+
+<div id="mode1" class="mode-divider"><h2>◈ 模式一：公司深度研究</h2><p>業務引擎 · 核心Thesis · 競爭格局 · 成長象限 · 護城河評分</p></div>
+
+<div class="section">
+  <div class="section-header"><div class="section-num">1</div><div class="section-title">公司基本介紹</div></div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>公司定位</h3>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">JPMorgan Chase（NYSE: JPM）市值約$885.65億美元，是全球最大全能銀行之一，業務涵蓋消費金融（CCB）、企業與投資銀行（CIB）、商業銀行（CB）、資產與財富管理（AWM）四大板塊。最新已驗證財報為Q2'26（2026-07-22發布）：交易與投行業務強勁反彈（股票交易營收+86%、投行手續費+30%），核心獲利(排除一次性項目)達$169億(+13%YoY)，ROTCE高達23%。同時受惠Visa股權交換要約產生的$46億利得與其他權益投資利得$10億，GAAP淨利達$212億(+41%YoY)創紀錄。Q3'26財報將於2026-10-13公布，屆時核心成長動能是否延續是下一個關鍵觀察點。✅</p>
+    </div>
+    <div class="card">
+      <h3>關鍵財務概覽（Q2 2026，最新已發布單季）✅</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
+        <div><div class="big-num" style="font-size:22px;">$573億</div><div class="big-label">Q2'26總淨營收，YoY+28%(GAAP)</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--green)">核心淨利$169億</div><div class="big-label">EPS $6.14，ROTCE 23%</div></div>
+        <div><div class="big-num" style="font-size:22px;">CIB營收$249億</div><div class="big-label">+27%YoY，淨利$97億</div></div>
+        <div><div class="big-num" style="font-size:22px; color:var(--gold)">GAAP淨利$212億⚠️</div><div class="big-label">含$56億Visa+權益投資一次性利得</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="tbl-wrap">
+    <table><thead><tr><th>財務摘要（公司申報管理口徑）</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">TTM(至Q2'26)</th></tr></thead>
+      <tbody>
+        <tr><td>總淨營收</td><td class="num">$154.95B✅</td><td class="num ok">$169.44B✅（+9.3%）</td><td class="num ok">$181.85B✅（+7.3%）</td><td class="num">$186.33B✅（GAAP淨利息收支後口徑）</td></tr>
+        <tr><td>淨利</td><td class="num">$47.76B✅</td><td class="num ok">$56.87B✅（+19.1%）</td><td class="num warn">$55.68B✅（-2.1%）</td><td class="num ok">$63.63B✅</td></tr>
+        <tr><td>稀釋EPS</td><td class="num">$16.23✅</td><td class="num ok">$19.75✅（+21.7%）</td><td class="num ok">$20.02✅（+1.4%）</td><td class="num ok">$23.30✅</td></tr>
+        <tr><td>CET1比率</td><td class="num ok">15.0%✅</td><td class="num ok">15.7–15.8%✅</td><td class="num">14.5%✅</td><td class="num warn">14.2%✅（Q2'26，季減20bp）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px; color:var(--text3)">✅已驗證（來源：JPMorgan IR/8-K、SEC EDGAR 10-Q、stockanalysis.com）｜⚠️ 「總淨營收」欄位採公司管理口徑(含FTE調整)，與stockanalysis.com等第三方資料庫採GAAP淨利息收支後口徑（如FY25為$168.24B）存在定義差異，EPS與淨利數字兩方來源一致，無矛盾。Q2'26 GAAP淨利$21.2B中包含$56億一次性利得（Visa Class B-2股票交換要約利得$46億+其他權益投資利得$10億），排除後核心淨利為$169億(+13%YoY)，投資人應以核心EPS $6.14作為經常性獲利能力的參考基礎。</p>
+</div>
+
+<div id="biz" class="section">
+  <div class="section-header"><div class="section-num">2</div><div class="section-title">業務引擎分析</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>💹 企業與投資銀行(CIB)（最強成長引擎）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">Q2'26營收$249億(+27%)，淨利$97億。股票交易營收激增86%，投行手續費+30%，受惠強勁的併購/資本市場活動。管理層於法說會中表示Q3'26投行與交易營收展望持續樂觀。✅</p></div>
+    <div class="card"><h3>🏦 淨利息收入(NII)（穩定基礎業務）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">Q2'26 NII $255億(+10%)，FY26 guidance：總NII約$1,055億、排除Markets後NII約$965億，反映利率環境與資產負債表擴張（平均放款+10%YoY）的雙重貢獻。✅</p></div>
+    <div class="card"><h3>📊 資產管理與消費金融（多元業務基礎）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">提供集團獲利的穩定基礎，與CIB的週期性業務形成互補。J.P. Morgan Asset Management近期與卡達投資局(QIA)成立$200億策略夥伴關係（涵蓋股票與信用市場），展現資產管理業務持續擴展外部資金來源的能力。✅</p></div>
+    <div class="card"><h3>💳 消費信貸品質（Card Services）</h3><p style="font-size:13px; color:var(--text); line-height:1.7">Q2'26信用卡淨呆帳率3.34%，公司已將FY26全年信用卡淨呆帳率展望下修至約3.2%，反映消費信貸品質優於預期，是近期新增的正面細節。✅</p></div>
+  </div>
+</div>
+
+<div id="thesis" class="section">
+  <div class="section-header"><div class="section-num">3</div><div class="section-title">核心Thesis與未來成長驅動</div></div>
+  <div class="thesis-grid">
+    <div class="thesis-card"><div class="thesis-status ok">✅ 成立</div><div class="label">Thesis 1｜交易與投行業務景氣循環正處於強勁復甦期</div><div class="content">股票交易+86%、投行手續費+30%均為實質財報數字（Q2'26），管理層對Q3'26展望仍偏樂觀，是核心淨利+13%的主要貢獻來源。惟股價已自高點回落9.1%，顯示市場對這段復甦動能能否延續到Q3/Q4出現一定程度的疑慮，有待10/13財報驗證。✅ 成立，但邊際動能待確認。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div><div class="label">Thesis 2｜資本監理環境轉為順風，釋放資本運用空間</div><div class="content">2026年3月的監理鬆綁可望釋放資本，惟最新數據顯示CET1比率已連三季下滑（14.5%→14.4%→14.2%），顯示公司正積極將資本用於買回庫藏股與資產負債表擴張，而非持續累積資本緩衝。資本水位仍遠高於監理最低要求，股利已上調10%至$1.65/股，惟「資本釋放空間擴大」的敘事需要搭配CET1降幅是否失控來追蹤。⚠️ 部分成立，需留意資本比率下滑速度。</div></div>
+    <div class="thesis-card"><div class="thesis-status" style="color:var(--gold)">⚠️ 部分成立</div><div class="label">Thesis 3｜GAAP獲利數字能持續反映核心經營表現</div><div class="content">Q2 GAAP EPS $7.70大幅高於核心EPS $6.14，主因Visa股權交易的一次性利得，這類非經常性項目在解讀JPM財報時需要特別剔除。⚠️ 部分成立，需持續以核心EPS而非GAAP數字追蹤。</div></div>
+    <div class="thesis-card"><div class="thesis-status ok">✅ 成立</div><div class="label">Thesis 4｜全能銀行規模與多元業務提供防禦韌性</div><div class="content">CIB業務的週期性波動由NII與消費金融/資產管理的穩定貢獻部分抵銷。不良資產總額$98億較去年同期下降6%，平均放款/存款比約57%反映流動性體質穩健，這種多元業務組合是JPM相對純投行(如高盛)或區域銀行的結構性優勢。✅ 成立。</div></div>
+  </div>
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card" style="border-left:3px solid var(--green)"><h3>🚀核心成長驅動力</h3><ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)"><li>資本市場活動是否延續熱絡，Q3'26財報(10/13)為關鍵驗證點</li><li>資本監理鬆綁釋放的資本用於加碼回購/併購</li><li>NII隨資產負債表擴張（平均放款+10%）持續成長</li></ul></div>
+    <div class="card" style="border-left:3px solid var(--red)"><h3>⚠️核心監控風險</h3><ul style="font-size:13px; line-height:1.9; padding-left:16px; color:var(--text)"><li>CET1比率連續下滑若加速，可能壓縮股東回饋空間，觸發：CET1單季降幅超過30bp</li><li>資本市場活動降溫，觸發：Q3'26交易/投行營收成長率較Q2明顯放緩</li><li>總體經濟走弱侵蝕消費金融資產品質，觸發：信用卡淨呆帳率重新上升突破3.5%</li></ul></div>
+  </div>
+</div>
+
+<div id="competition" class="section">
+  <div class="section-header"><div class="section-num">4</div><div class="section-title">競爭格局</div></div>
+  <div class="tbl-wrap">
+    <table><thead><tr><th>公司</th><th>PE(TTM)</th><th>ROE</th><th>現況</th><th>對JPM威脅度</th></tr></thead>
+      <tbody>
+        <tr class="comp-now"><td>JPMorgan Chase（JPM）</td><td class="num">14.30–14.95x✅</td><td class="num">22.9–24%✅</td><td>全能銀行，四大業務板塊均衡</td><td>—</td></tr>
+        <tr><td>Goldman Sachs（GS）</td><td class="num">14.88–15.25x✅</td><td class="num">23.5%✅(Q2'26 annualized)</td><td>更聚焦投行/資產管理/交易，消費金融規模遠小於JPM</td><td>🟡 中｜投行/交易業務直接競爭，惟JPM業務組合更多元</td></tr>
+        <tr><td>Bank of America（BAC）</td><td class="num">13.6x✅</td><td class="num">11.6%✅</td><td>同屬全能銀行，EPS成長率+28%領先同業</td><td>🟡 中｜傳統全能銀行競爭者，估值更低但ROE也更低</td></tr>
+        <tr><td>Citigroup（C）</td><td class="num">13.6x✅</td><td class="num">8.5%✅</td><td>重組持續進行中，ROE明顯落後同業</td><td>🟢 低｜獲利能力差距大，非直接威脅</td></tr>
+        <tr><td>Wells Fargo（WFC）</td><td class="num">12.4x✅</td><td class="num">13.1%✅</td><td>消費金融為主，估值折價最深，EPS成長+18%</td><td>🟡 中｜估值吸引力(便宜22%上行空間)，惟業務多元性不如JPM</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="caution-box" style="margin-top:16px;"><h3>⚠️ 競爭關鍵監控：JPM獲利能力居首，但估值溢價也隨之最高</h3><p style="font-size:13px; line-height:1.7; color:var(--text)">JPM的ROE(22.9–24%)在五大行中居冠，略高於GS的23.5%，顯著高於WFC(13.1%)、BAC(11.6%)、C(8.5%)。惟PE倍數也同步反映這個優勢，JPM/GS兩者估值已非常接近(均約14.9-15.3倍)。相對而言，WFC估值折價最深(12.4倍)但ROE也最低，若WFC的獲利能力持續改善(EPS+18%)，其估值修復空間理論上大於JPM。JPM與GS可視為「高品質、高估值」的一組，BAC/C/WFC則是「相對便宜、獲利能力較弱」的一組，投資人需權衡品質溢價是否合理。</p></div>
+</div>
+
+<div id="moat" class="section">
+  <div class="section-header"><div class="section-num">5</div><div class="section-title">Peter Lynch成長象限&護城河評分</div></div>
+  <div class="card-grid"><div class="card" style="border:2px solid var(--purple);"><h3 style="color:var(--purple)">📊 Lynch象限判斷</h3><div style="font-size:22px; font-weight:700; color:var(--purple); margin:12px 0;">穩定成長股，具備景氣循環股（交易/投行）與防禦性業務（消費金融/資產管理）的複合特性</div><p style="font-size:12px; color:var(--text2); margin-top:8px;">📌 JPM作為全球最大銀行之一，核心定位是穩定成長股，惟CIB業務的交易/投行收入具備明顯的景氣循環特性。14.3倍的TTM PE已高於自身10年中位數12.42倍約15%，顯示市場已給予JPM相對歷史均值更高的評價，不再是舊報告時點「被低估值掩蓋」的狀態，反映核心ROTCE 23%的獲利能力已逐步被市場定價。</p></div></div>
+  <div style="margin-bottom:8px; font-size:13px; font-weight:700; color:var(--text2);">護城河五維度評分</div>
+  <div class="moat-grid">
+    <div class="moat-item"><div class="moat-label">不可替代性</div><div class="moat-stars">★★★★★</div><div class="moat-score">5.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">全球最大銀行之一的規模與客戶關係網絡</div></div>
+    <div class="moat-item"><div class="moat-label">客戶黏著度</div><div class="moat-stars">★★★★☆</div><div class="moat-score">4.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">企業/機構客戶關係深厚，轉換成本高</div></div>
+    <div class="moat-item"><div class="moat-label">網路效應</div><div class="moat-stars">★★★★☆</div><div class="moat-score">4.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">全球金融網絡與流動性提供者地位</div></div>
+    <div class="moat-item"><div class="moat-label">成本優勢</div><div class="moat-stars">★★★★★</div><div class="moat-score">5.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">規模化資產負債表與科技投資帶來成本優勢</div></div>
+    <div class="moat-item"><div class="moat-label">規模效應</div><div class="moat-stars">★★★★★</div><div class="moat-score">5.0/5</div><div style="font-size:11px; color:var(--text3); margin-top:4px;">市值$885.65億，全球金融業規模之首</div></div>
+  </div>
+  <div style="text-align:right; font-size:14px; font-weight:700; color:var(--accent); margin-top:8px;">整體護城河評分：4.6/5 ⭐⭐⭐⭐⭐（護城河深厚不變，惟估值已反映多數優勢，安全邊際較舊報告時點收斂）</div>
+  <div class="caution-box" style="margin-top:24px;"><h3>⚠️建議動作</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; line-height:1.8; color:var(--text)">
+    <div><strong>當前建議：</strong>可續作為<strong>核心池主力持倉</strong>，護城河深厚、獲利品質優異(ROTCE 23%)，惟股價已自高點回落9.1%、估值高於自身10年中位數，建議以分批布局取代一次性加碼。<br><br><strong>加碼觸發：</strong><ul style="padding-left:16px;"><li>Q3'26財報(10/13)確認核心ROTCE維持20%以上</li><li>股價回落至$300附近(接近法人目標價區間下緣$305)</li></ul></div>
+    <div><strong>賣出/迴避觸發：</strong><ul style="padding-left:16px;"><li>CET1比率單季降幅超過30bp且無明確資本配置理由</li><li>交易/投行營收成長率於Q3'26明顯轉弱</li></ul><br><strong>每季監控：</strong>核心淨利趨勢(排除一次性項目)、CET1比率降速、CIB業務營收成長、信用卡淨呆帳率</div>
+  </div></div>
+</div>
+
+<div id="mode2" class="mode-divider"><h2>◈ 模式二：最新財報解析</h2><p>基礎為最新已發布的Q2 2026財報（2026-07-22），Q3'26財報將於2026-10-13發布</p></div>
+<div id="earnings" class="section">
+  <div class="section-header"><div class="section-num">6</div><div class="section-title">Q2 2026財報（2026-07-22發布，最新已驗證季度）</div></div>
+  <div class="card" style="border-left:3px solid var(--green); margin-bottom:20px;"><h3 style="color:var(--green)">✅ 核心獲利與GAAP數字均創佳績，交易/投行業務強勁復甦</h3><p style="font-size:13px; line-height:1.7; color:var(--text)">Q2總淨營收$573億(GAAP+28%)，核心淨利(排除一次性項目)$169億(+13%)，EPS $6.14，ROTCE 23%。GAAP淨利$212億(+41%)，稀釋EPS $7.70，含Visa股權交易利得$46億+其他權益投資利得$10億。NII $255億(+10%)。CIB營收$249億(+27%)，股票交易+86%，投行手續費+30%。信用卡淨呆帳率3.34%。FY26 guidance：總NII約$1,055億、排除Markets後NII約$965億、信用卡淨呆帳率展望下修至約3.2%。✅</p></div>
+  <div class="tbl-wrap"><table><thead><tr><th>指標</th><th class="num">實際值✅</th><th class="num">YoY</th><th>判定</th></tr></thead>
+    <tbody>
+      <tr><td>核心淨利(排除一次性)</td><td class="num ok">$169億</td><td class="num ok">+13%</td><td><span class="badge badge-green">強勁✅</span></td></tr>
+      <tr><td>GAAP淨利</td><td class="num ok">$212億</td><td class="num ok">+41%</td><td><span class="badge badge-yellow">含一次性利得⚠️</span></td></tr>
+      <tr><td>CIB營收</td><td class="num ok">$249億</td><td class="num ok">+27%</td><td><span class="badge badge-green">強勁復甦✅</span></td></tr>
+      <tr><td>股票交易營收</td><td class="num ok">— ✅</td><td class="num ok">+86%</td><td><span class="badge badge-green">大幅成長✅</span></td></tr>
+      <tr><td>ROTCE</td><td class="num ok">23%</td><td class="num">— ⚠️</td><td><span class="badge badge-green">業界頂尖✅</span></td></tr>
+      <tr><td>CET1比率</td><td class="num warn">14.2%</td><td class="num warn">季減20bp</td><td><span class="badge badge-yellow">續降，仍遠高於監理下限⚠️</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="caution-box"><h3>📅 下一個驗證點</h3><p style="font-size:13px; color:var(--text)">JPMorgan已公告將於2026年10月13日(週二)上午7:00(ET)發布Q3'26財報，8:30召開法說會。本報告財報解析內容截至目前仍以Q2'26為最新基礎，Q3財報公布後需重新檢視核心淨利成長率、CIB業務動能是否延續、CET1比率降速是否穩定。</p></div>
+</div>
+
+<div id="eps" class="section">
+  <div class="section-header"><div class="section-num">7</div><div class="section-title">EPS多年期表、歷史本益比錨點與反推試算</div></div>
+  <div class="tbl-wrap">
+    <table><thead><tr><th>年度</th><th class="num">EPS</th><th>狀態</th><th>來源/備註</th></tr></thead>
+      <tbody>
+        <tr><td>FY2024</td><td class="num">$19.75</td><td><span class="badge badge-blue">A(實際)</span></td><td>✅ SEC 10-K，YoY+21.7%</td></tr>
+        <tr><td>FY2025</td><td class="num">$20.02</td><td><span class="badge badge-blue">A(實際)</span></td><td>✅ SEC 10-K，YoY+1.4%（成長明顯放緩）</td></tr>
+        <tr><td>FY2026</td><td class="num">$22.44～$24.18</td><td><span class="badge badge-yellow">E(預估)</span></td><td>⚠️ 分析師預估分歧：Zacks共識$22.44(+10.3%)；stockanalysis.com預估$24.18(+22.5%)；另一彙整來源均值$22.55(區間$21.01–$24.36)。三來源差距明顯，不可只取單一數字。</td></tr>
+        <tr><td>FY2027</td><td class="num">$23.66～$23.82</td><td><span class="badge badge-yellow">E(預估)</span></td><td>⚠️ Zacks共識$23.66(+5.4%)；另一彙整來源$23.82(區間$21.44–$26.28)</td></tr>
+        <tr><td>FY2028</td><td class="num">$26.21</td><td><span class="badge badge-yellow">E(預估)</span></td><td>⚠️ 僅單一彙整來源(區間$24.01–$29.32)，未找到第二來源交叉驗證，可信度較低</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-grid">
+    <div class="card"><h3>歷史本益比參考</h3>
+      <div style="font-size:13px; line-height:2; color:var(--text)">
+        <div>目前PE(TTM)：<strong>14.30倍</strong>✅(stockanalysis.com)／<strong>14.95倍</strong>✅(gurufocus，20%高於其採計的10年中位數)</div>
+        <div>10年中位數PE：<strong>12.42倍</strong>✅(gurufocus)</div>
+        <div>5年平均PE(TTM)：<strong>約12.0–12.9倍</strong>⚠️(FinanceCharts等多來源落在11.57～12.87倍之間，無單一精確共識，故取區間)</div>
+        <div>2022年最低PE(熊市谷底估值)：<strong>約8.2倍</strong>⚠️(2022-09-30當季低點，另有年底數字10.3～11.08倍，來源分歧已列出)</div>
+        <div>2018年最低PE(上次主要市場修正估值)：<strong>約8.9～10.8倍</strong>⚠️(不同計算基礎下，macrotrends系與另一獨立來源分別給出10.8倍與8.93倍，差異來自採用的EPS基期不同)</div>
+      </div>
+    </div>
+    <div class="risk-card">
+      <h4>📌 反推試算：目前股價靠本益比倍數擴張撐起，而非單純EPS成長撐起</h4>
+      <p style="font-size:13px; line-height:1.8; color:var(--text)">
+      採保守情境2026E EPS $22.44（Zacks共識，三來源中最低）進行反推：<br>
+      • × 5年平均PE(取區間中值12.65倍) = <strong>約$284</strong><br>
+      • × 10年中位數PE(12.42倍) = <strong>約$279</strong><br>
+      • × 2022年谷底PE(8.2倍) = <strong>約$184</strong><br>
+      • × 2018年谷底PE(約8.9～10.8倍) = <strong>約$200～$242</strong><br>
+      即使改用三來源中最樂觀的2026E EPS $24.18 × 5年均值PE 12.65倍，隱含股價也僅約<strong>$306</strong>，仍低於目前股價$333.18。<br>
+      <strong>結論：目前股價$333.18明顯高於用歷史中位數/均值本益比反推出的$279～$306區間，顯示股價主要是靠本益比倍數擴張（目前14.3倍 vs 自身10年中位數12.42倍，溢價約+15%～+20%）撐起，而非單純依賴EPS成長支撐。</strong>若核心ROTCE(23%)能持續維持高檔且資本市場活動不降溫，溢價或可延續；但若倍數回歸十年中位數，下行風險約15-20%，若進一步回歸2018/2022熊市谷底本益比，下行風險可達40%以上，安全邊際較舊報告時點（股價$349.10時）更為收斂。
+      </p>
+    </div>
+  </div>
+</div>
+
+<div id="dcf" class="section">
+  <div class="section-header"><div class="section-num">8</div><div class="section-title">三情境估值</div></div>
+  <div class="caution-box"><h3>⚠️ 方法論說明</h3><p style="font-size:13px; color:var(--text)">⚠️採用分析師目標價區間法疊加歷史本益比錨點交叉驗證，非自製精確現金流折現模型；JPM屬銀行股，傳統企業自由現金流DCF模型對銀行業適用性有限（存款/放款本身即為銀行的「營運資本」，傳統FCF定義會嚴重失真），業界慣例改用股利折現模型(DDM)或超額報酬模型(Excess Return Model)，惟兩者均需要更細緻的監理資本假設，本報告以分析師目標價法為主要估值依據，並以歷史PE區間交叉檢核（詳見上節反推試算）。</p></div>
+  <div class="scenario-row">
+    <div class="scenario bear"><h4>🐻熊市（20%）</h4><div class="scenario-price" style="color:var(--red)">$260-280</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$333.18　-16%~-22%</div><div class="row"><span>假設</span><span>信用成本上升，資本市場活動降溫，PE倍數向10年中位數12.4倍回歸</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：CET1降速加速或信用卡呆帳率突破3.5%</div></div>
+    <div class="scenario base"><h4>📊基準（50%）</h4><div class="scenario-price" style="color:var(--blue)">$363-381</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$333.18　+9.0%~+14.4%</div><div class="row"><span>假設</span><span>Q3'26 guidance如期兌現，交易/投行維持強勁，貼近法人共識區間</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：貼近MarketBeat均值$363.29~TipRanks均值$381.33</div></div>
+    <div class="scenario bull"><h4>🐂牛市（30%）</h4><div class="scenario-price" style="color:var(--green)">$420-436</div><div style="font-size:12px; color:var(--text2); margin-bottom:10px;">vs現價$333.18　+26.1%~+30.9%</div><div class="row"><span>假設</span><span>核心ROTCE維持23%以上，資本市場活動加速，貼近最高目標價(高盛$436)</span></div><div style="font-size:12px; color:var(--text2); margin-top:8px;">觸發：Q3'26核心淨利年增率維持雙位數以上</div></div>
+  </div>
+  <div class="card" style="border-left:3px solid var(--accent);"><h3>敏感度分析</h3><p style="font-size:13px; color:var(--text); line-height:1.7">三情境價差相對溫和（熊牛比約1.5-1.7倍），反映JPM作為大型全能銀行的股價波動性遠低於成長/科技股，惟相較舊報告（$279-$400，約1.4倍），本次熊市情境因CET1下滑與股價已回落而略為下修，牛市情境則對齊法人最高目標價，波動區間略為擴大。</p></div>
+</div>
+
+<div id="comps" class="section">
+  <div class="section-header"><div class="section-num">9</div><div class="section-title">Comps同業估值對比</div></div>
+  <div class="tbl-wrap">
+    <table><thead><tr><th>公司</th><th class="num">PE(TTM)</th><th class="num">Fwd PE</th><th class="num">ROE</th><th class="num">EPS成長(YoY)</th><th class="num">隱含上行空間</th></tr></thead>
+      <tbody>
+        <tr class="comp-now"><td>JPMorgan Chase（JPM）</td><td class="num">14.30–14.95x✅</td><td class="num">13.77–14.34x✅</td><td class="num">22.9–24%✅</td><td class="num">核心+13%(Q2)✅</td><td class="num">+8.1%✅(一來源)</td></tr>
+        <tr><td>Goldman Sachs（GS）</td><td class="num">14.88–15.25x✅</td><td class="num">—</td><td class="num">23.5%✅</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>Bank of America（BAC）</td><td class="num">13.6x✅</td><td class="num">12.8x✅</td><td class="num">11.6%✅</td><td class="num">+28.0%✅</td><td class="num">—</td></tr>
+        <tr><td>Citigroup（C）</td><td class="num">13.6x✅</td><td class="num">11.6x✅</td><td class="num">8.5%✅</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>Wells Fargo（WFC）</td><td class="num">12.4x✅</td><td class="num">12.0x✅</td><td class="num">13.1%✅</td><td class="num">+18.0%✅</td><td class="num">+22.1%✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px; color:var(--text2);">來源：Investing.com同業比較報導（JPM/BAC/WFC/C估值對比）、gurufocus、各公司Q2'26申報。JPM與GS的PE倍數幾乎重疊(約14.9-15.3倍)，顯著高於BAC/C(13.6倍)與WFC(12.4倍)，反映市場對兩大頭部銀行的獲利品質給予一致溢價；WFC雖ROE最低但估值折價最深，隱含上行空間(+22.1%)理論上高於JPM(+8.1%，單一來源數字，詳見下節多來源彙整)。</p>
+</div>
+
+<div id="targets" class="section">
+  <div class="section-header"><div class="section-num">10</div><div class="section-title">投行目標價彙整與操作建議</div></div>
+  <div class="tbl-wrap"><table><thead><tr><th>來源/機構</th><th>分析師</th><th>評等</th><th class="num">目標價</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>stockanalysis.com彙整</td><td>24位分析師</td><td><span class="badge badge-green">Buy共識</span></td><td class="num">均值$375.81✅</td><td>+12.8%；Strong Buy9/Buy4/Hold11/Sell0</td></tr>
+      <tr><td>TipRanks彙整</td><td>16位分析師(近3個月)</td><td><span class="badge badge-green">Moderate Buy</span></td><td class="num">均值$381.33✅</td><td>+14.5%；Buy10/Hold6/Sell0</td></tr>
+      <tr><td>MarketBeat彙整(2026-09-30)</td><td>—</td><td><span class="badge badge-green">Moderate Buy</span></td><td class="num">均值$363.29✅</td><td>+9.1%</td></tr>
+      <tr><td>Goldman Sachs</td><td>Richard Ramsden</td><td><span class="badge badge-green">Buy</span></td><td class="num">$436✅</td><td>彙整中最高目標價，+30.9%</td></tr>
+      <tr><td>Barclays</td><td>Jason Goldberg</td><td><span class="badge badge-green">Buy</span></td><td class="num">$420✅</td><td>+26.1%</td></tr>
+      <tr><td>Bank of America</td><td>Ebrahim Poonawala</td><td><span class="badge badge-green">Buy</span></td><td class="num">$420✅</td><td>+26.1%</td></tr>
+      <tr><td>UBS</td><td>Erika Najarian</td><td><span class="badge badge-green">Buy</span></td><td class="num">$400✅</td><td>近期由UBS上調，+20.1%</td></tr>
+      <tr><td>Wells Fargo</td><td>Mike Mayo</td><td><span class="badge badge-green">Buy</span></td><td class="num">$390✅</td><td>+17.1%</td></tr>
+      <tr><td>KBW</td><td>Christopher Mcgratty</td><td><span class="badge badge-green">Buy</span></td><td class="num">$384✅</td><td>+15.3%</td></tr>
+      <tr><td>Deutsche Bank</td><td>Matt O'Connor</td><td><span class="badge badge-green">Buy</span></td><td class="num">$375✅</td><td>近期由Deutsche Bank上調至Buy，+12.6%</td></tr>
+      <tr><td>HSBC</td><td>Domenico Santoro</td><td><span class="badge badge-yellow">Hold</span></td><td class="num">$377✅</td><td>+13.2%</td></tr>
+      <tr><td>Citi</td><td>Ben Gerlinger</td><td><span class="badge badge-yellow">Hold</span></td><td class="num">$360✅</td><td>+8.1%</td></tr>
+      <tr><td>Jefferies</td><td>—</td><td><span class="badge badge-yellow">Neutral</span></td><td class="num">—❌</td><td>媒體報導重申Neutral，未揭露具體目標價數字</td></tr>
+      <tr><td>Robert W. Baird</td><td>David George</td><td><span class="badge badge-yellow">Hold</span></td><td class="num">$305✅</td><td>彙整中最低目標價，-8.5%</td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:11px; color:var(--text3)">✅已驗證（來源：stockanalysis.com、TipRanks、MarketBeat，2026-09/10月彙整）｜不同彙整平台因採樣分析師數量與時間窗口不同(24位 vs 16位 vs 平台未揭露樣本數)，均值出現$363.29～$381.33的落差，依規則逐一列出不取單一數字。個別分析師目標價原文未揭露具體計算公式(如P/B×ROE或股利折現細節)，故僅列出數字與機構名稱，未虛構公式。</p>
+  <div class="action-box" style="margin-top:16px;"><h3>✅最終操作建議</h3><p style="font-size:13px; line-height:1.8; color:var(--text)">現價$333.18相對三個彙整來源均值($363.29~$381.33)有約9.1%~14.5%上行空間，較舊報告時點(現價$349.10/目標價$375.38，+7.4%)上行空間略為擴大，主因股價回落幅度大於目標價下修幅度。惟需留意歷史本益比反推試算顯示現價已高於十年中位數PE隱含價格($279)，法人目標價的樂觀假設（如高盛$436）隱含的是PE倍數進一步擴張而非僅EPS成長。<strong>已持有者：</strong>續抱作為核心池主力持倉，惟不建議於現價加碼；<strong>未持有者：</strong>可等待股價進一步回落至$300附近(貼近Baird最低目標價$305與10年中位數PE隱含價格區間)再分批建立部位，兼顧護城河品質與安全邊際。</p></div>
+</div>
+
+<div id="mode3" class="mode-divider"><h2>◈ 模式三：財務風險健檢</h2><p>銀行股六大比率需調整為資本適足率/獲利能力/信用品質/流動性四大面向，詳見下方產業特殊性說明</p></div>
+
+<div class="caution-box">
+  <h3>⚠️ 產業特殊性說明：銀行股財務健檢指標與一般企業不同</h3>
+  <p style="font-size:13px; line-height:1.8; color:var(--text)">JPM是銀行控股公司，傳統「財務風險健檢」常用的利息覆蓋率、負債比率、流動比率等指標對銀行業意義有限甚至會造成誤判——銀行的「負債」主要是客戶存款(本質是營運資金來源而非財務槓桿風險)，「利息支出」是其核心業務成本的一部分而非債務違約風險的訊號。因此本報告的六大比率改用銀行業通用的監理與獲利指標：①CET1普通股權一級資本比率(資本適足率，監理最低要求通常為4.5%+各項緩衝，JPM要求線約12%左右)②ROTCE/ROE(獲利能力)③NIM淨利差(核心放款獲利能力)④放款/存款比LDR(流動性與資金成本結構)⑤不良資產比率與淨呆帳率(信用品質)⑥長期債務總額與資金來源多元性(非到期牆模式，銀行透過持續滾動發債與龐大零售/機構存款基礎分散再融資風險)。</p>
+</div>
+
+<div id="ratios" class="section">
+  <div class="section-header"><div class="section-num">11</div><div class="section-title">六大比率診斷（銀行業調整版）</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>1. CET1資本適足率</h3><div class="big-num" style="color:var(--gold)">14.2%⚠️</div><div class="big-label">Q2'26，季減20bp，仍遠高於監理最低要求</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:78%"></div></div></div>
+    <div class="card"><h3>2. ROTCE</h3><div class="big-num" style="color:var(--green)">23%✅</div><div class="big-label">核心獲利(Q2'26)，業界頂尖水準</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:90%"></div></div></div>
+    <div class="card"><h3>3. 淨利差(NIM，Bank Only)</h3><div class="big-num" style="color:var(--text)">2.99%⚠️</div><div class="big-label">Q1'26最新已驗證數字，Q2'26未公開揭露具體%</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-yellow" style="width:60%"></div></div></div>
+    <div class="card"><h3>4. 放款/存款比(LDR)</h3><div class="big-num" style="color:var(--green)">約57%✅</div><div class="big-label">平均放款$1.5兆/平均存款$2.7兆，流動性體質穩健</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:80%"></div></div></div>
+    <div class="card"><h3>5. 不良資產與信用品質</h3><div class="big-num" style="color:var(--green)">$98億✅</div><div class="big-label">YoY-6%；信用卡淨呆帳率3.34%(FY26展望下修至~3.2%)</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:75%"></div></div></div>
+    <div class="card"><h3>6. 股利成長</h3><div class="big-num" style="color:var(--green)">+10%✅</div><div class="big-label">季度股利$1.65，年化殖利率1.98%</div><div class="ratio-bar-wrap"><div class="ratio-bar bar-green" style="width:70%"></div></div></div>
+  </div>
+</div>
+
+<div id="debt" class="section">
+  <div class="section-header"><div class="section-num">12</div><div class="section-title">資金結構與「到期時程」的銀行業替代說明</div></div>
+  <div class="card-grid">
+    <div class="card"><h3>長期債務總額</h3><div class="big-num" style="font-size:24px;">$4,605億✅</div><div class="big-label">截至2026/6/30，含資深無擔保債券、次順位債券等多元工具</div></div>
+    <div class="card"><h3>資金來源結構</h3><p style="font-size:13px; color:var(--text); line-height:1.7">JPM的主要資金來源是平均$2.7兆的客戶存款(YoY+7%)，長期債務僅作為補充性資金工具，透過持續滾動發行不同天期(如本次查得2041年到期次順位重設票據、2046年到期5.80%資深票據)分散集中到期的「到期牆」風險，與一般企業依賴少數幾次大額發債、面臨集中到期再融資風險的結構截然不同。✅</p></div>
+  </div>
+  <div class="caution-box"><h3>⚠️ 資料缺口</h3><p style="font-size:13px; color:var(--text)">本次未能取得SEC 10-Q中逐年細分的長期債務到期金額明細表(如1年內/1-5年/5年以上到期金額)，僅取得債務總額$4,605億與近期個別發債案例。如需精確到期牆分析，建議直接查閱最新10-Q附註中的"Long-term debt"到期時程表。❌</p></div>
+</div>
+
+<div id="health" class="section">
+  <div class="section-header"><div class="section-num">13</div><div class="section-title">同業對比與財務體質綜合診斷</div></div>
+  <div class="tbl-wrap">
+    <table><thead><tr><th>指標</th><th class="num">JPM</th><th class="num">GS</th><th class="num">BAC</th><th class="num">C</th><th class="num">WFC</th></tr></thead>
+      <tbody>
+        <tr><td>ROE</td><td class="num ok">22.9–24%✅</td><td class="num ok">23.5%✅</td><td class="num">11.6%✅</td><td class="num warn">8.5%✅</td><td class="num">13.1%✅</td></tr>
+        <tr><td>PE(TTM)</td><td class="num">14.30–14.95x✅</td><td class="num">14.88–15.25x✅</td><td class="num">13.6x✅</td><td class="num">13.6x✅</td><td class="num">12.4x✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="display:flex; align-items:center; gap:24px; margin-top:16px;"><div class="health-badge health-aa">AA</div><div><p style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px;">財務體質評等：AA（獲利能力、信用品質、流動性結構均為業界頂尖，資本比率下滑趨勢為唯一觀察點）</p><p style="font-size:13px; color:var(--text2); line-height:1.7">ROTCE、不良資產趨勢、放款/存款比均展現業界頂尖水準，CET1比率雖連三季下滑但絕對水位仍充足，主要觀察點是下滑速度是否持續；GAAP獲利數字中的一次性項目雜訊是解讀財報時需留意的技術性因素，核心經營表現扎實無虞。</p></div></div>
+</div>
+
+<div id="final" class="section">
+  <div class="section-header"><div class="section-num">14</div><div class="section-title">綜合總結</div></div>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="s-label">Thesis成立度</div><div class="s-val">4.1/5</div></div>
+    <div class="summary-card"><div class="s-label">護城河強度</div><div class="s-val">⭐⭐⭐⭐⭐</div></div>
+    <div class="summary-card"><div class="s-label">成長象限</div><div class="s-val" style="font-size:13px;">穩定成長股(局部循環復甦)</div></div>
+    <div class="summary-card"><div class="s-label">財務體質</div><div class="s-val">AA</div></div>
+    <div class="summary-card"><div class="s-label">現價/目標價區間</div><div class="s-val" style="font-size:13px;">$333.18/$363–$381</div></div>
+  </div>
+  <div class="action-box"><h3>✅最終操作建議</h3><p style="font-size:13px; line-height:1.8; color:var(--text)"><strong>已持有者：</strong>續抱作為核心池主力持倉，交易/投行業務核心動能與資產品質均扎實，股價自高點回落9.1%反而使風險報酬結構邊際改善。<strong>未持有者：</strong>目前股價已明顯高於歷史本益比反推隱含價格(約$279-$306)，建議等待進一步回落至$300附近再分批建立核心池部位，而非現價追價。<strong>核心催化劑：</strong>①2026-10-13 Q3'26財報核實核心淨利成長是否延續②CET1比率下滑速度是否穩定③CIB業務景氣循環延續度④信用卡淨呆帳率是否維持改善趨勢。<strong>目標價區間：</strong>綜合三大彙整來源與個別分析師極值，合理區間為$305(保守)至$436(樂觀)，核心參考區間為$363-$381。</p></div>
+</div>
+
+</div>
+<footer><p>資料來源：JPMorgan Chase IR（Q2 2026 8-K/10-Q）、SEC EDGAR、stockanalysis.com、gurufocus.com、TipRanks、MarketBeat、FinanceCharts、Investing.com、其他公開財經媒體報導（查證日期：2026-10-02）<br>✅已驗證　⚠️估算/近似值或資料源分歧　❌無法取得，禁止臆測填入<br>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p></footer>
+</body>
+</html>

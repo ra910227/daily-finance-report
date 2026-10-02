@@ -47,6 +47,8 @@ STOCK_SHORT_NAMES = {
     "AVGO": "博通",
     "BABA": "阿里巴巴",
     "GLW": "康寧",
+    "GOOGL": "Alphabet",
+    "JPM": "摩根大通",
     "NOW": "ServiceNow",
     "NVDA": "輝達",
     "OKLO": "Oklo",
