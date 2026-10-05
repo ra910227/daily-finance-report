@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜宜鼎(5289) 三合一完整報告</title>
+<style>
+:root {
+  --bg: #ffffff; --bg2: #f7f8fc; --bg3: #eef0f7; --border: #e1e4ee;
+  --text: #1e2233; --text2: #6b7280; --accent: #4f46e5; --accent2: #4338ca;
+  --red: #dc2626; --green: #15803d; --gold: #b45309; --orange: #c2410c;
+  --blue: #2563eb; --purple: #7c3aed; --teal: #0d9488;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  line-height: 1.65; font-size: 15px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px 60px; }
+.hero { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #fff; padding: 36px 24px 30px; margin-bottom: 24px; }
+.hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+.hero .tag { display:inline-block; background: rgba(255,255,255,.18); padding: 3px 12px; border-radius: 20px; font-size: 12.5px; margin-bottom: 12px; }
+.hero h1 { margin: 0 0 6px; font-size: 25px; }
+.hero .sub { opacity: .92; font-size: 14px; margin-bottom: 18px; }
+.hero-stats { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-stat { background: rgba(255,255,255,.14); border-radius: 10px; padding: 10px 16px; min-width: 120px; }
+.hero-stat .l { font-size: 12px; opacity: .88; }
+.hero-stat .v { font-size: 18px; font-weight: 700; margin-top: 2px; }
+.hero-stat .s { font-size: 11px; opacity: .8; margin-top: 2px; }
+nav.toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 28px; font-size: 13.5px; }
+nav.toc .grp-title { font-weight: 700; color: var(--accent2); margin: 10px 0 6px; font-size: 13px; }
+nav.toc .grp-title:first-child { margin-top: 0; }
+nav.toc a { color: var(--text); text-decoration: none; display: inline-block; margin: 2px 14px 2px 0; }
+nav.toc a:hover { color: var(--accent); text-decoration: underline; }
+section { margin-bottom: 40px; scroll-margin-top: 16px; }
+h1.part { font-size: 19px; color: var(--accent2); border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin: 34px 0 20px; }
+h2.sec-title { font-size: 20px; border-left: 5px solid var(--accent); padding-left: 12px; margin: 0 0 14px; }
+h3 { font-size: 16.5px; margin: 22px 0 10px; color: var(--accent2); }
+p { color: var(--text); margin: 8px 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 8px; font-size: 13.5px; }
+th, td { border: 1px solid var(--border); padding: 7px 9px; text-align: left; vertical-align: top; }
+th { background: var(--bg3); font-weight: 700; white-space: nowrap; }
+tr:nth-child(even) td { background: #fbfbfd; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+.tbl-wrap { overflow-x: auto; }
+.badge { display:inline-block; padding: 2px 9px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.b-ok { background:#dcfce7; color:var(--green); }
+.b-warn { background:#fef3c7; color:var(--gold); }
+.b-bad { background:#fee2e2; color:var(--red); }
+.b-info { background:#e0e7ff; color:var(--accent2); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 14px; margin: 14px 0; }
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.card h4 { margin: 0 0 6px; font-size: 14px; color: var(--accent2); }
+.card .big { font-size: 22px; font-weight: 700; }
+.scenario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 14px; margin: 14px 0; }
+.scenario-card { border-radius: 12px; padding: 16px; border: 1px solid var(--border); }
+.scenario-card.bear { background: #fef2f2; }
+.scenario-card.base { background: #eef2ff; }
+.scenario-card.bull { background: #f0fdf4; }
+.scenario-card h4 { margin: 0 0 8px; }
+.scenario-card ul { margin: 6px 0; padding-left: 18px; font-size: 13px; }
+.scenario-card .target { font-size: 20px; font-weight: 800; margin-top: 8px; }
+.risk-card { border-left: 4px solid var(--red); background: #fff5f5; padding: 12px 16px; border-radius: 8px; margin: 10px 0; }
+.risk-card.mid { border-left-color: var(--gold); background: #fffbeb; }
+.risk-card.ok { border-left-color: var(--green); background: #f0fdf4; }
+.action-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 16px 0; }
+.action-box h4 { margin-top: 0; color: var(--accent2); }
+.note { font-size: 12.5px; color: var(--text2); margin-top: 6px; }
+.moat-row { display:flex; align-items:center; gap:10px; margin:6px 0; font-size:13.5px; flex-wrap: wrap; }
+.moat-row .label { width: 120px; flex-shrink:0; }
+.stars { color: var(--gold); letter-spacing: 2px; }
+.divider { border:none; border-top:1px solid var(--border); margin: 30px 0; }
+footer { font-size: 12px; color: var(--text2); border-top: 1px solid var(--border); padding-top: 16px; margin-top: 40px; }
+.src-status { font-size:11.5px; }
+code { background: var(--bg3); padding: 1px 6px; border-radius: 4px; font-size: 12.5px; }
+.hl { background:#fff7d6; padding:0 3px; border-radius:3px; }
+ul.tight { margin: 6px 0; padding-left: 20px; }
+ul.tight li { margin: 3px 0; }
+@media (max-width: 640px) { .hero h1 { font-size: 20px; } body { font-size: 14.5px; } }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+<div class="hero">
+  <div class="hero-inner">
+    <span class="tag">個股小狐｜三合一完整報告（公司深度研究＋最新財報解析＋財務風險健檢）</span>
+    <h1>宜鼎國際(5289.TWO，櫃買中心上櫃) Innodisk Corporation</h1>
+    <div class="sub">分析日期：2026/10/05（盤中，Yahoo奇摩股市查證時間約11:30）　｜　產業：工業級／嵌入式DRAM模組、SSD與邊緣AI系統方案</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="l">股價(10/05盤中)</div><div class="v">1,310 元</div><div class="s">10/02收盤 1,295 元</div></div>
+      <div class="hero-stat"><div class="l">市值</div><div class="v">約1,288億</div><div class="s">1,310元×股本98.28M股 ⚠️</div></div>
+      <div class="hero-stat"><div class="l">距6/16高點2,025元</div><div class="v">-35%</div><div class="s">以10/02收盤計 -36.1%</div></div>
+      <div class="hero-stat"><div class="l">PE(TTM)</div><div class="v">7.2 倍</div><div class="s">TTM EPS 182.58元</div></div>
+      <div class="hero-stat"><div class="l">PB</div><div class="v">5.4 倍</div><div class="s">每股淨值241.67元</div></div>
+      <div class="hero-stat"><div class="l">成長象限</div><div class="v">景氣循環股</div><div class="s">疊加AI高速成長特徵</div></div>
+      <div class="hero-stat"><div class="l">Thesis成立度</div><div class="v">3.5 / 5</div><div class="s">景氣紅利已兌現、結構性待驗證</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<nav class="toc">
+  <div class="grp-title">摘要與資料說明</div>
+  <a href="#conflict">資料衝突解決摘要</a>
+  <a href="#summary">綜合總結：五維度卡片</a>
+  <div class="grp-title">① 公司深度研究</div>
+  <a href="#s1-basic">基本介紹</a>
+  <a href="#s1-engine">業務引擎分析</a>
+  <a href="#s1-thesis">核心Thesis與未來性</a>
+  <a href="#s1-comp">競爭格局</a>
+  <a href="#s1-quad">成長象限與護城河</a>
+  <div class="grp-title">② 最新財報解析</div>
+  <a href="#s2-beat">Beat/Miss與預估調整</a>
+  <a href="#s2-price">股價反應與回落原因</a>
+  <a href="#s2-dcf">三情境DCF估值</a>
+  <a href="#s2-valuation">股價位階評估</a>
+  <a href="#s2-anchor">估值歷史錨點（EPS表／歷史PE／反推試算）</a>
+  <a href="#s2-comps">Comps分析</a>
+  <a href="#s2-extra">額外優勢／風險</a>
+  <a href="#s2-target">投行目標價與操作建議</a>
+  <div class="grp-title">③ 財務風險健檢</div>
+  <a href="#s3-data">財務數據填表</a>
+  <a href="#s3-ratio">六大比率診斷</a>
+  <a href="#s3-debt">債務到期時程</a>
+  <a href="#s3-capex">CapEx分析</a>
+  <a href="#s3-peer">同業對比</a>
+  <a href="#s3-final">綜合診斷（含存貨跌價風險）</a>
+  <div class="grp-title">總結</div>
+  <a href="#final-action">最終操作建議</a>
+  <a href="#gaps">資料缺口清單</a>
+</nav>
+
+<section id="conflict">
+<h2 class="sec-title">資料衝突解決摘要</h2>
+<p>本次環境無Futu OpenD，全數改以Yahoo奇摩股市（含其內嵌財報資料）、櫃買中心(TPEx)逐日成交資訊、玩股網、HiStock、公開資訊觀測站(MOPS)重訊轉載、法說會文字紀錄與財經媒體取得。Goodinfo全程被Cloudflare驗證擋下（HTTP 403），財報狗/鉅亨網預估頁為動態載入，故未能取得。以下為查證過程中遇到的衝突與採用依據：</p>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th>各來源數字</th><th>本報告採用</th><th>落差原因／說明</th></tr>
+<tr><td>股價（查證時點）</td><td>10/02收盤1,295元（TPEx／玩股網／HiStock）；10/05盤中1,310元（Yahoo頁面11:39）、約1,315元（Yahoo chart API）；使用者提供「約1,295元」即10/02收盤</td><td>hero與市值採10/05盤中1,310元；歷史比較／回落幅度採10/02收盤1,295元</td><td>10/05為盤中即時價，收盤前會變動；兩個時點皆已標示，避免混用。</td></tr>
+<tr><td>2026年高點</td><td>盤中高2,025元（6/16，TPEx）；最高收盤1,990元（6/9，TPEx）；Yahoo「52週高」1,985元（還原權息後）</td><td>盤中高2,025元；回落幅度以10/02收盤算 -36.05%</td><td>使用者提供數字經TPEx逐日資料核實<span class="badge b-ok">✅</span>；Yahoo為還原股價，故略低。</td></tr>
+<tr><td>Q2單季EPS</td><td>108.93元（公司公告／Yahoo／工商時報／聯合報）；108.96元（部分彙整網站）</td><td>108.93元</td><td>以MOPS重訊轉載之基本EPS為準；108.96疑為網站四捨五入或加權股數差。</td></tr>
+<tr><td>2025年全年EPS</td><td>21.72元（法說會備忘錄／媒體）；逐季加總21.86元（Yahoo）；21.65元（HiStock，股票股利追溯調整後）</td><td>21.72元</td><td>逐季EPS未追溯調整股票股利，加總與全年數必然有微差；HiStock為追溯調整值（僅用於歷史PE計算）。</td></tr>
+<tr><td>2024年全年EPS</td><td>12.2元（經濟日報引述）；逐季加總12.32元（Yahoo）；11.97元（HiStock追溯調整）</td><td>12.2元</td><td>同上，屬股本變動／追溯調整差異。</td></tr>
+<tr><td>Q2稅後淨利</td><td>103.68億（歸屬母公司，工商／聯合／法說會）；104.05～104.06億（含非控制權益，FTNN／Yahoo損益表）</td><td>103.68億（歸屬母公司）</td><td>差額為非控制權益損益；EPS以歸屬母公司淨利計算。</td></tr>
+<tr><td>股本／市值</td><td>股本9.83億元（98.28M股，Yahoo資產負債表／nstock）；玩股網市值1,272.85億（@1,295元）；Q2 EPS對應加權股數約95.2M股（103.68億÷108.93元）</td><td>以98.28M股計市值：1,310元約1,288億</td><td>⚠️ 推論：差額約3M股可能為「限制員工權利新股」已發行但未計入基本EPS加權股數（公司7月、8月、9月皆有限制員工權利新股公告），資產負債表附註未取得，標⚠️。</td></tr>
+<tr><td>PE(TTM)</td><td>Yahoo／玩股網7.19倍；鉅亨網7.41倍（近四季EPS 176.84元）；本報告自算7.2倍（TTM EPS 182.58元）</td><td>7.2倍</td><td>四季加總：6.87＋9.29＋57.49＋108.93＝182.58元；鉅亨網近四季定義不明，未採用。</td></tr>
+<tr><td>台北辦公室處分金額</td><td>部分平台摘要出現「168,000萬」；MoneyDJ轉載公告原文為NT$168,000,000</td><td>1.68億元</td><td>採重訊公告原文；預估處分利益約1.082億元，交易對象睿鼎投資為本公司法人董事（關係人交易）。</td></tr>
+<tr><td>除息日</td><td>Q2財報消息稿原訂9/2；Yahoo股利頁顯示8/27</td><td>8/27（已除息），10/02發放</td><td>TPEx 8/27參考價調整與(1,500-16.83)÷1.02≈1,454相符<span class="badge b-ok">✅</span>。</td></tr>
+<tr><td>2026E EPS（法人）</td><td>283.1／284.53／339.6（市場預估）／367元（見Part 2預估調整表）</td><td>區間284.5～367元，中位約340元</td><td>預估日期從5月至8月不等，且Q2財報前後差異大；逐一列示於Part 2。</td></tr>
+<tr><td>Q3毛利率預估</td><td>54.3%（7/10法人）→ 58.8%（8/29法人）</td><td>58.8%（最新）</td><td>法人於Q2財報後上修Q3毛利率，反映Q2實際65.01%優於預期。</td></tr>
+</table></div>
+<p class="note">狀態標示：<span class="badge b-ok">✅已驗證</span>＝本次查詢成功取得並附來源；<span class="badge b-warn">⚠️估算</span>＝本報告依公開數據自行推算（附方法）；<span class="badge b-bad">❌無法取得</span>＝查無資料，欄位填「—」，不填推測值。</p>
+</section>
+
+<section id="summary">
+<h2 class="sec-title">綜合總結：五維度快照</h2>
+<div class="card-grid">
+  <div class="card"><h4>Thesis成立度</h4><div class="big">3.5 / 5</div><div class="note">記憶體漲價＋AI占比&gt;40%已兌現在財報；現金流轉換、護城河歸因與景氣持續性尚待驗證</div></div>
+  <div class="card"><h4>護城河強度</h4><div class="big stars">★★★☆☆</div><div class="note">13/25：客戶黏著度高、料源配置有優勢；網路效應與規模優勢弱，利潤暴增主要來自價格循環</div></div>
+  <div class="card"><h4>成長象限</h4><div class="big">景氣循環股</div><div class="note">Peter Lynch框架：典型Cyclical，疊加AI系統方案的結構成長；高峰期本益比不宜用成長股估值</div></div>
+  <div class="card"><h4>財務體質</h4><div class="big">帳面強、現金弱</div><div class="note">淨現金約42億、流動比2.3倍；但TTM營業現金流-6.6億、存貨171天、負債比兩季內由37%升至49%</div></div>
+  <div class="card"><h4>目標價區間（本報告）</h4><div class="big">1,000～1,700元</div><div class="note">中樞約1,300～1,470元（基準DCF 1,280／機率加權DCF 1,466）；現價1,310元落在區間中段，無明顯安全邊際</div></div>
+</div>
+<div class="risk-card mid"><b>一句話判斷：</b>現價靠「EPS暴增」而非「本益比擴張」撐起——TTM EPS相對2025年底暴增8.4倍，同期本益比從26.5倍壓縮至7.2倍（已回到2022年谷底7.3倍水準）。市場已把這份盈利視為景氣高峰、持續性存疑；股價實質是在押注EPS能守住約145～180元以上（對應9.1～7.3倍）。最大風險不是帳面槓桿，而是<b>記憶體價格轉折時的毛利率與存貨跌價</b>，以及<b>獲利與現金流嚴重脫鉤</b>（TTM稅後淨利173.5億 vs 營業現金流-6.6億）。</div>
+</section>
+
+<hr class="divider">
+<h1 class="part">① 公司深度研究</h1>
+
+<section id="s1-basic">
+<h2 class="sec-title">基本介紹</h2>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th>數據</th><th>來源狀態</th></tr>
+<tr><td>公司／上市</td><td>宜鼎國際，2005年3月成立，2013年11月上櫃；主營工業級嵌入式儲存與記憶體模組（DRAM、SSD）、邊緣AI／AI系統方案（含子公司安提Aetina）</td><td><span class="badge b-ok">✅</span> nstock、法說會紀錄</td></tr>
+<tr><td>股價／市值</td><td>1,310元（10/05盤中）；市值約1,288億（98.28M股）。10/02收盤1,295元對應1,272.85億（玩股網）</td><td><span class="badge b-ok">✅</span> Yahoo、玩股網／<span class="badge b-warn">⚠️</span>市值自算</td></tr>
+<tr><td>TTM營收</td><td>442.4億元（2025Q3 38.07＋Q4 48.07＋2026Q1 131.83＋Q2 224.43）；較前一個TTM（101.97億）年增+333.9%。2026年1～8月累計528.01億（+553.15%）</td><td><span class="badge b-warn">⚠️</span>四季加總／<span class="badge b-ok">✅</span>累計營收</td></tr>
+<tr><td>營收YoY（最新）</td><td>Q2 +641.1%、QoQ +70.3%；8月單月86.80億，月增+2.18%、年增+576.29%</td><td><span class="badge b-ok">✅</span> Yahoo、MOPS</td></tr>
+<tr><td>毛利率</td><td>Q2 65.01%；H1 62.82%；TTM約57.0%；2025全年31.1%；2024全年31.7%</td><td><span class="badge b-ok">✅</span>／TTM <span class="badge b-warn">⚠️</span></td></tr>
+<tr><td>營業利益率</td><td>Q2 58.57%；H1 56.13%；2025全年16.8%</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>自由現金流(FCF)</td><td>TTM營業現金流 -6.56億；以「營業現金流－估算CapEx(3.59億)」計，TTM FCF約 -10.2億。2025全年營業現金流 -22.74億；2026 H1 +9.29億</td><td><span class="badge b-warn">⚠️</span> CapEx為「PPE增加＋折舊」推算</td></tr>
+<tr><td>ROE／ROA</td><td>ROE 54.48%、ROA 29.43%（Q2口徑）</td><td><span class="badge b-ok">✅</span> nstock（單一來源）</td></tr>
+<tr><td>52週區間</td><td>高2,025元（2026/6/16盤中）；低334元（2025/10/07盤中，TPEx未還原）。2025年底收576元，年初至今約+125%（以1,295元計）</td><td><span class="badge b-ok">✅</span> TPEx逐日資料</td></tr>
+<tr><td>股利</td><td>2025年度：現金16.8349元＋股票0.1992元，8/27除息、10/02發放；以1,295元計現金殖利率約1.30%，配發率約77.5%（16.8349÷21.72）</td><td><span class="badge b-ok">✅</span> Yahoo股利頁／<span class="badge b-warn">⚠️</span>殖利率、配發率自算</td></tr>
+<tr><td>籌碼</td><td>外資持股17.44%（10/02）；三大法人連6日賣超合計約-659張；董監持股12.84%（2026/8）、質押0</td><td><span class="badge b-ok">✅</span> Yahoo、富聯網</td></tr>
+<tr><td>產業地位</td><td>公司自述：第一家單季賺逾十個股本的記憶體廠；工控客戶超過4,000家；與NVIDIA(Elite Partner)、Intel(Gold Partner)、Qualcomm有合作。全球／台灣市佔率：—</td><td><span class="badge b-ok">✅</span>公司自述／<span class="badge b-bad">❌</span>市佔無公開數據</td></tr>
+</table></div>
+</section>
+
+<section id="s1-engine">
+<h2 class="sec-title">業務引擎分析</h2>
+<h3>產品線與營收結構（2026Q2）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>產品線</th><th>占營收</th><th>內容與客戶</th><th>護城河來源／弱點</th></tr>
+<tr><td><b>DRAM模組</b></td><td>61%</td><td>工控／網通／車用／AI伺服器DRAM模組；DDR4約占產品組合40%、DDR5已逾30%（2026/5工商時報）；CXL記憶體模組導入客戶驗證中</td><td>強項：工控長生命週期、客製韌體與認證、料源配置；媒體稱取得南亞科、華邦電DDR4料源<span class="badge b-warn">⚠️媒體說法</span>。弱點：價格完全跟著DRAM現貨／合約價，且上游取得量決定出貨。</td></tr>
+<tr><td><b>Flash／SSD</b></td><td>34%</td><td>工控SSD＋企業級SSD；伺服器開機碟約占SSD營收10%、已推PCIe Gen5企業級SSD；超大容量SSD「現在已開始放量」（法說會）</td><td>受惠NAND漲價；企業SSD是TrendForce所述Q4唯一漲速加快品類，但此賽道直接面對NAND原廠與群聯，議價力較弱。</td></tr>
+<tr><td><b>AI系統與軟體方案</b>（含安提）</td><td>5%（絕對金額倍數成長，占比下降係DRAM／Flash漲更快）</td><td>邊緣AI GPU主機、機器人／智慧製造方案；安提2025Q4轉虧為盈、2026年預期倍數成長、IPO規劃中；與NVIDIA、Qualcomm合作</td><td>長期價值所在：專案週期普遍兩年以上、較不受價格循環影響；但目前占營收僅5%，無法解釋近期利潤。</td></tr>
+</table></div>
+<p class="note">資料來源：富果直送2026/8/27法說會備忘錄（產品占比為「財務揭露」之Q2數據）。AI基建相關營收占H1營收「逾40%」（公司自述，客戶含全球雲端服務商、資料中心、AI加速卡廠商）；2025年占比約22%（今周刊）或23～25%（3/30法說會）。AI占比為公司口徑，未經第三方驗證。</p>
+
+<h3>客戶與地區結構</h3>
+<div class="tbl-wrap"><table>
+<tr><th>維度</th><th>內容</th><th>狀態</th></tr>
+<tr><td>地區（Q2）</td><td>台灣27%、歐洲13%、美洲20%、中國16%、亞洲22%（經濟日報9/2）</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>客戶分類（法說會）</td><td>①AI基礎建設（CSP、資料中心、實體AI）②全球垂直應用領導品牌 ③高附加價值工控客戶（逾4,000家）</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>單一客戶集中度</td><td>—（本次未查得前十大客戶／單一客戶占比，年報附註未取得）</td><td><span class="badge b-bad">❌</span></td></tr>
+</table></div>
+
+<h3>近4期歷史財務摘要（單位：億元，除EPS）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>期間</th><th class="num">營收</th><th class="num">YoY</th><th class="num">毛利率</th><th class="num">營益率</th><th class="num">EBITDA margin</th><th class="num">EPS(元)</th><th class="num">營業現金流</th></tr>
+<tr><td>2023A</td><td class="num">83.14</td><td class="num">-19.3%</td><td class="num">34.2%</td><td class="num">16.6%</td><td class="num">18.7%</td><td class="num">13.12*</td><td class="num">14.58</td></tr>
+<tr><td>2024A</td><td class="num">89.16</td><td class="num">+7.2%</td><td class="num">31.7%</td><td class="num">13.2%</td><td class="num">15.3%</td><td class="num">12.2</td><td class="num">8.54</td></tr>
+<tr><td>2025A</td><td class="num">142.61</td><td class="num">+60.0%</td><td class="num">31.1%</td><td class="num">16.8%</td><td class="num">18.2%</td><td class="num">21.72</td><td class="num">-22.74</td></tr>
+<tr><td><b>2026 H1</b></td><td class="num">356.26</td><td class="num">+530.9%</td><td class="num">62.8%</td><td class="num">56.1%</td><td class="num">56.5%</td><td class="num">166.45</td><td class="num">9.29</td></tr>
+<tr><td><b>TTM(至2026Q2)</b></td><td class="num">442.40</td><td class="num">+333.9%</td><td class="num">57.0%</td><td class="num">49.0%</td><td class="num">49.5%</td><td class="num">182.58</td><td class="num">-6.56</td></tr>
+</table></div>
+<p class="note">✅ 來源：Yahoo股市逐季損益／現金流量表（本報告加總）、HiStock月營收、MOPS；EBITDA＝營業利益＋折舊＋攤銷（Yahoo現金流量表），屬⚠️自算。*2023A EPS為Yahoo逐季加總。2024／2025全年EPS採媒體／法說會公布值，與逐季加總差異見「資料衝突解決摘要」。</p>
+
+<h3>圖：近10季營收（億元）與毛利率</h3>
+<svg viewBox="0 0 900 260" width="100%" role="img" aria-label="季營收（億元）與毛利率" style="background:#fff;border:1px solid #e1e4ee;border-radius:10px"><text x="45" y="16" font-size="12.5" font-weight="700" fill="#1e2233">季營收（億元）與毛利率</text><line x1="45" x2="890" y1="212.0" y2="212.0" stroke="#e5e7eb"/><text x="40" y="216.0" font-size="10.5" text-anchor="end" fill="#6b7280">0</text><line x1="45" x2="890" y1="166.0" y2="166.0" stroke="#e5e7eb"/><text x="40" y="170.0" font-size="10.5" text-anchor="end" fill="#6b7280">65</text><line x1="45" x2="890" y1="120.0" y2="120.0" stroke="#e5e7eb"/><text x="40" y="124.0" font-size="10.5" text-anchor="end" fill="#6b7280">130</text><line x1="45" x2="890" y1="74.0" y2="74.0" stroke="#e5e7eb"/><text x="40" y="78.0" font-size="10.5" text-anchor="end" fill="#6b7280">195</text><line x1="45" x2="890" y1="28.0" y2="28.0" stroke="#e5e7eb"/><text x="40" y="32.0" font-size="10.5" text-anchor="end" fill="#6b7280">260</text><rect x="61.1" y="196.6" width="52.4" height="15.4" fill="#4f46e5" rx="3"/><text x="87.2" y="192.6" font-size="10.5" text-anchor="middle" fill="#1e2233">21.8</text><text x="87.2" y="226" font-size="10.5" text-anchor="middle" fill="#6b7280">24Q1</text><text x="87.2" y="240" font-size="10.5" text-anchor="middle" fill="#6b7280">毛利率34.9%</text><rect x="145.6" y="196.5" width="52.4" height="15.5" fill="#4f46e5" rx="3"/><text x="171.8" y="192.5" font-size="10.5" text-anchor="middle" fill="#1e2233">21.9</text><text x="171.8" y="226" font-size="10.5" text-anchor="middle" fill="#6b7280">24Q2</text><text x="171.8" y="240" font-size="10.5" text-anchor="middle" fill="#6b7280">毛利率34.7%</text><rect x="230.1" y="195.6" width="52.4" height="16.4" fill="#4f46e5" rx="3"/><text x="256.2" y="191.6" font-size="10.5" text-anchor="middle" fill="#1e2233">23.2</text><text x="256.2" y="226" font-size="10.5" text-anchor="middle" fill="#6b7280">24Q3</text><text x="256.2" y="240" font-size="10.5" text-anchor="middle" fill="#6b7280">毛利率28.4%</text><rect x="314.6" y="196.2" width="52.4" height="15.8" fill="#4f46e5" rx="3"/><text x="340.8" y="192.2" font-size="10.5" text-anchor="middle" fill="#1e2233">22.3</text><text x="340.8" y="226" font-size="10.5" text-anchor="middle" fill="#6b7280">24Q4</text><text x="340.8" y="240" font-size="10.5" text-anchor="middle" fill="#6b7280">毛利率29.1%</text><rect x="399.1" y="193.5" width="52.4" height="18.5" fill="#4f46e5" rx="3"/><text x="425.2" y="189.5" font-size="10.5" text-anchor="middle" fill="#1e2233">26.2</text><text x="425.2" y="226" font-size="10.5" text-anchor="middle" fill="#6b7280">25Q1</text><text x="425.2" y="240" font-size="10.5" text-anchor="middle" fill="#6b7280">毛利率30.6%</text><rect x="483.6" y="190.6" width="52.4" height="21.4" fill="#4f46e5" rx="3"/><text x="509.8" y="186.6" font-size="10.5" text-anchor="middle" fill="#1e2233">30.3</text><text x="509.8" y="226" font-size="10.5" text-anchor="middle" fill="#6b7280">25Q2</text><text x="509.8" y="240" font-size="10.5" text-anchor="middle" fill="#6b7280">毛利率25.9%</text><rect x="568.1" y="185.1" width="52.4" height="26.9" fill="#4f46e5" rx="3"/><text x="594.2" y="181.1" font-size="10.5" text-anchor="middle" fill="#1e2233">38.1</text><text x="594.2" y="226" font-size="10.5" text-anchor="middle" fill="#6b7280">25Q3</text><text x="594.2" y="240" font-size="10.5" text-anchor="middle" fill="#6b7280">毛利率32.8%</text><rect x="652.6" y="178.0" width="52.4" height="34.0" fill="#4f46e5" rx="3"/><text x="678.8" y="174.0" font-size="10.5" text-anchor="middle" fill="#1e2233">48.1</text><text x="678.8" y="226" font-size="10.5" text-anchor="middle" fill="#6b7280">25Q4</text><text x="678.8" y="240" font-size="10.5" text-anchor="middle" fill="#6b7280">毛利率33.2%</text><rect x="737.1" y="118.7" width="52.4" height="93.3" fill="#4f46e5" rx="3"/><text x="763.2" y="114.7" font-size="10.5" text-anchor="middle" fill="#1e2233">131.8</text><text x="763.2" y="226" font-size="10.5" text-anchor="middle" fill="#6b7280">26Q1</text><text x="763.2" y="240" font-size="10.5" text-anchor="middle" fill="#6b7280">毛利率59.1%</text><rect x="821.6" y="53.2" width="52.4" height="158.8" fill="#4f46e5" rx="3"/><text x="847.8" y="49.2" font-size="10.5" text-anchor="middle" fill="#1e2233">224.4</text><text x="847.8" y="226" font-size="10.5" text-anchor="middle" fill="#6b7280">26Q2</text><text x="847.8" y="240" font-size="10.5" text-anchor="middle" fill="#6b7280">毛利率65.0%</text></svg>
+<h3>圖：2025/1～2026/8月營收（億元）與月增率</h3>
+<svg viewBox="0 0 900 270" width="100%" role="img" aria-label="月營收（億元）與月增率(MoM)" style="background:#fff;border:1px solid #e1e4ee;border-radius:10px"><text x="45" y="16" font-size="12.5" font-weight="700" fill="#1e2233">月營收（億元）與月增率(MoM)</text><line x1="45" x2="890" y1="222.0" y2="222.0" stroke="#e5e7eb"/><text x="40" y="226.0" font-size="10.5" text-anchor="end" fill="#6b7280">0</text><line x1="45" x2="890" y1="173.5" y2="173.5" stroke="#e5e7eb"/><text x="40" y="177.5" font-size="10.5" text-anchor="end" fill="#6b7280">25</text><line x1="45" x2="890" y1="125.0" y2="125.0" stroke="#e5e7eb"/><text x="40" y="129.0" font-size="10.5" text-anchor="end" fill="#6b7280">50</text><line x1="45" x2="890" y1="76.5" y2="76.5" stroke="#e5e7eb"/><text x="40" y="80.5" font-size="10.5" text-anchor="end" fill="#6b7280">75</text><line x1="45" x2="890" y1="28.0" y2="28.0" stroke="#e5e7eb"/><text x="40" y="32.0" font-size="10.5" text-anchor="end" fill="#6b7280">100</text><rect x="53.0" y="206.1" width="26.2" height="15.9" fill="#7c3aed" rx="3"/><text x="66.1" y="202.1" font-size="10.5" text-anchor="middle" fill="#1e2233">8.2</text><text x="66.1" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/01</text><text x="66.1" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+13.5%</text><rect x="95.3" y="205.9" width="26.2" height="16.1" fill="#7c3aed" rx="3"/><text x="108.4" y="201.9" font-size="10.5" text-anchor="middle" fill="#1e2233">8.3</text><text x="108.4" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/02</text><text x="108.4" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+1.5%</text><rect x="137.5" y="203.2" width="26.2" height="18.8" fill="#7c3aed" rx="3"/><text x="150.6" y="199.2" font-size="10.5" text-anchor="middle" fill="#1e2233">9.7</text><text x="150.6" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/03</text><text x="150.6" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+16.8%</text><rect x="179.8" y="203.0" width="26.2" height="19.0" fill="#7c3aed" rx="3"/><text x="192.9" y="199.0" font-size="10.5" text-anchor="middle" fill="#1e2233">9.8</text><text x="192.9" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/04</text><text x="192.9" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+0.7%</text><rect x="222.0" y="202.2" width="26.2" height="19.8" fill="#7c3aed" rx="3"/><text x="235.1" y="198.2" font-size="10.5" text-anchor="middle" fill="#1e2233">10.2</text><text x="235.1" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/05</text><text x="235.1" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+4.6%</text><rect x="264.3" y="202.0" width="26.2" height="20.0" fill="#7c3aed" rx="3"/><text x="277.4" y="198.0" font-size="10.5" text-anchor="middle" fill="#1e2233">10.3</text><text x="277.4" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/06</text><text x="277.4" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+0.9%</text><rect x="306.5" y="199.6" width="26.2" height="22.4" fill="#7c3aed" rx="3"/><text x="319.6" y="195.6" font-size="10.5" text-anchor="middle" fill="#1e2233">11.5</text><text x="319.6" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/07</text><text x="319.6" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+11.9%</text><rect x="348.8" y="197.1" width="26.2" height="24.9" fill="#7c3aed" rx="3"/><text x="361.9" y="193.1" font-size="10.5" text-anchor="middle" fill="#1e2233">12.8</text><text x="361.9" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/08</text><text x="361.9" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+11.3%</text><rect x="391.0" y="195.4" width="26.2" height="26.6" fill="#7c3aed" rx="3"/><text x="404.1" y="191.4" font-size="10.5" text-anchor="middle" fill="#1e2233">13.7</text><text x="404.1" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/09</text><text x="404.1" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+6.8%</text><rect x="433.3" y="194.9" width="26.2" height="27.1" fill="#7c3aed" rx="3"/><text x="446.4" y="190.9" font-size="10.5" text-anchor="middle" fill="#1e2233">14.0</text><text x="446.4" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/10</text><text x="446.4" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+2.0%</text><rect x="475.5" y="191.0" width="26.2" height="31.0" fill="#7c3aed" rx="3"/><text x="488.6" y="187.0" font-size="10.5" text-anchor="middle" fill="#1e2233">16.0</text><text x="488.6" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/11</text><text x="488.6" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+14.2%</text><rect x="517.8" y="186.8" width="26.2" height="35.2" fill="#7c3aed" rx="3"/><text x="530.9" y="182.8" font-size="10.5" text-anchor="middle" fill="#1e2233">18.1</text><text x="530.9" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">25/12</text><text x="530.9" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+13.6%</text><rect x="560.0" y="157.4" width="26.2" height="64.6" fill="#7c3aed" rx="3"/><text x="573.1" y="153.4" font-size="10.5" text-anchor="middle" fill="#1e2233">33.3</text><text x="573.1" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">26/01</text><text x="573.1" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+83.7%</text><rect x="602.3" y="140.9" width="26.2" height="81.1" fill="#7c3aed" rx="3"/><text x="615.4" y="136.9" font-size="10.5" text-anchor="middle" fill="#1e2233">41.8</text><text x="615.4" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">26/02</text><text x="615.4" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+25.4%</text><rect x="644.5" y="112.0" width="26.2" height="110.0" fill="#7c3aed" rx="3"/><text x="657.6" y="108.0" font-size="10.5" text-anchor="middle" fill="#1e2233">56.7</text><text x="657.6" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">26/03</text><text x="657.6" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+35.7%</text><rect x="686.8" y="92.6" width="26.2" height="129.4" fill="#7c3aed" rx="3"/><text x="699.9" y="88.6" font-size="10.5" text-anchor="middle" fill="#1e2233">66.7</text><text x="699.9" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">26/04</text><text x="699.9" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+17.6%</text><rect x="729.0" y="75.2" width="26.2" height="146.8" fill="#7c3aed" rx="3"/><text x="742.1" y="71.2" font-size="10.5" text-anchor="middle" fill="#1e2233">75.7</text><text x="742.1" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">26/05</text><text x="742.1" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+13.4%</text><rect x="771.3" y="62.8" width="26.2" height="159.2" fill="#7c3aed" rx="3"/><text x="784.4" y="58.8" font-size="10.5" text-anchor="middle" fill="#1e2233">82.1</text><text x="784.4" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">26/06</text><text x="784.4" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+8.5%</text><rect x="813.5" y="57.2" width="26.2" height="164.8" fill="#7c3aed" rx="3"/><text x="826.6" y="53.2" font-size="10.5" text-anchor="middle" fill="#1e2233">85.0</text><text x="826.6" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">26/07</text><text x="826.6" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+3.5%</text><rect x="855.8" y="53.6" width="26.2" height="168.4" fill="#7c3aed" rx="3"/><text x="868.9" y="49.6" font-size="10.5" text-anchor="middle" fill="#1e2233">86.8</text><text x="868.9" y="236" font-size="10.5" text-anchor="middle" fill="#6b7280">26/08</text><text x="868.9" y="250" font-size="10.5" text-anchor="middle" fill="#6b7280">+2.2%</text></svg>
+<p class="note">月營收成長動能遞減：3月+35.8%、4月+17.6%、5月+13.4%、6月+8.5%、7月+3.5%、8月+2.2%。法人解讀為「記憶體價格續揚、客戶接受度降低」，部分客戶採購力道放緩（FTNN 8/29）。</p>
+</section>
+
+<section id="s1-thesis">
+<h2 class="sec-title">核心Thesis與未來性</h2>
+<h3>五根投資論點支柱</h3>
+<div class="tbl-wrap"><table>
+<tr><th>#</th><th>論點</th><th>判定</th><th>證據</th></tr>
+<tr><td>1</td><td>記憶體供不應求＋漲價，轉化為毛利率與EPS暴增</td><td><span class="badge b-ok">✅成立</span></td><td>毛利率由2025Q4 33.2%→2026Q1 59.1%→Q2 65.0%；EPS 9.29→57.49→108.93元。TrendForce(9/30)預估Q4 DRAM合約價+10～15%（含HBM整體+15～20%）、NAND+15～20%。但這是「循環」而非「結構性護城河」。</td></tr>
+<tr><td>2</td><td>AI基礎建設需求（CSP／資料中心）撐起企業SSD與伺服器模組</td><td><span class="badge b-ok">✅成立（公司口徑）</span></td><td>AI相關營收占H1逾40%（2025約22～25%）；企業SSD為Q4唯一漲速加快品類。惟占比數字為公司自述，且AI客戶多屬價格接受者而非鎖定量。</td></tr>
+<tr><td>3</td><td>工控客製與認證形成高客戶黏著度（4,000+客戶）</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>2025年毛利率僅31%（低於同業循環高峰），顯示平時議價力普通；本輪65%毛利率主要由價格上漲與低成本庫存轉嫁所致（經濟日報稱「持有大量庫存」，公司法說會則稱來自「價值創造」，兩者說法不同）。</td></tr>
+<tr><td>3b</td><td>邊緣AI／實體AI（安提、CXL、AI系統方案）打造第二曲線</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>安提2025Q4轉盈、2026預期倍增；但AI系統方案Q2僅占營收5%，CXL仍在客戶驗證階段，尚無量產出貨數字。</td></tr>
+<tr><td>4</td><td>獲利品質：盈餘能轉為現金</td><td><span class="badge b-bad">❌未兌現</span></td><td>2025全年OCF -22.74億（淨利20.4億）；TTM OCF -6.56億（淨利173.5億）。存貨由53.9億(2025Q4)升至147.9億(Q2)、應收由32.9億升至166.8億、短期借款由17.4億升至49.9億——盈餘大量沉澱於營運資金。</td></tr>
+</table></div>
+<h3>核心成長驅動力</h3>
+<ul class="tight">
+<li><b>價格＋量雙升：</b>DRAM／NAND短缺延續，公司指引「DRAM與Flash價格只漲不跌，趨勢持續到2027年底」、能見度至少到2027年底（法說會）；TrendForce Q4仍上調合約價。</li>
+<li><b>AI基建比重提升：</b>企業SSD、伺服器開機碟、CXL模組驗證中；宜蘭三廠規模大於一、二廠總和，2026年底動工、2028年完工。</li>
+<li><b>安提IPO與系統方案：</b>子公司IPO規劃中，AI系統方案營收預估2026年較2025年倍增。</li>
+</ul>
+<h3>需監控風險（含觸發條件）</h3>
+<div class="risk-card"><b>風險1｜記憶體價格轉折（影響：極高）</b><br>觸發：TrendForce合約價出現季減；或6/5分析師警告的「DRAM／NAND ASP於2026年中見頂、2027年初連續下滑」成真。影響：毛利率自65%快速下修、147.9億存貨進入跌價與去化壓力。</div>
+<div class="risk-card"><b>風險2｜需求端價格敏感度（影響：高）</b><br>觸發：月營收MoM連續兩個月為負（目前+3.5%、+2.2%，動能遞減）；Fubon估Q3銷量低於季節性。TrendForce亦指出消費端（手機、PC、電視）壓力未減。</div>
+<div class="risk-card mid"><b>風險3｜供給端擴產與中國產能（影響：中高）</b><br>觸發：Samsung／SK Hynix宣布大規模擴產、目標五年內DRAM產能倍增；兆易創新(udn 7/1報導)示警存儲晶片價格已處歷史高位、後續恐有相當幅度回落。影響：供需缺口收斂速度快於公司「2027年底」指引。</div>
+<p class="note">註：udn 7/1報導之擴產投資金額，經查證工具摘要出現韓元／台幣換算不一致，本報告僅引用「雙雄宣布大規模擴產、DRAM產能五年倍增」之定性事實，不引用金額。</p>
+</section>
+
+<section id="s1-comp">
+<h2 class="sec-title">競爭格局</h2>
+<p class="note">⚠️ 各戰場公開市佔率本次均查無（❌「—」）；威脅度為本報告依產品重疊度的主觀判斷，競爭者定位描述為公開常識，非本次逐項查證。可查證之上市同業財務數據見Part 2 Comps與Part 3同業對比。</p>
+<div class="tbl-wrap"><table>
+<tr><th>戰場</th><th>競爭者</th><th>市佔</th><th>優勢</th><th>對宜鼎威脅度</th></tr>
+<tr><td rowspan="4">工控／嵌入式DRAM與SSD</td><td>宇瞻 8271、創見 2451、威剛 3260（工控事業）</td><td>—</td><td>台廠同質化高；創見現金充裕（Q2現金181.6億、無短債）、宇瞻同為工控導向</td><td><span class="badge b-warn">🟡中</span></td></tr>
+<tr><td>Kingston（非上市）、Swissbit、ATP Electronics（非上市）</td><td>—</td><td>全球品牌／歐美工控客戶關係；數據非上市無法取得</td><td><span class="badge b-warn">🟡中</span></td></tr>
+<tr><td>Micron等DRAM／NAND原廠（嵌入式與工控產品線）</td><td>—</td><td>上游掌握供給，缺貨時優先配給大客戶，是宜鼎料源與議價力的潛在制約</td><td><span class="badge b-bad">🔴高（供給端）</span></td></tr>
+<tr><td>群聯 8299（工控／企業儲存模組）</td><td>—</td><td>自有控制器IC與韌體，Q2毛利率65.3%、EPS 118.57元，規模大宜鼎約3.6倍市值</td><td><span class="badge b-bad">🔴高</span></td></tr>
+<tr><td rowspan="2">企業級SSD／資料中心</td><td>NAND原廠（Samsung、SK Hynix、Kioxia、Micron）</td><td>—</td><td>垂直整合、成本與供給優勢</td><td><span class="badge b-bad">🔴高</span></td></tr>
+<tr><td>群聯、威剛等台灣模組廠</td><td>—</td><td>已有CSP／資料中心客戶或進入驗證</td><td><span class="badge b-warn">🟡中</span></td></tr>
+<tr><td>邊緣AI系統方案</td><td>研華、凌華等工業電腦廠；NVIDIA合作夥伴生態</td><td>—</td><td>系統整合經驗、通路；宜鼎(安提)優勢是記憶體／儲存＋GPU主機一站式</td><td><span class="badge b-ok">🟢低～中</span>（宜鼎占比僅5%）</td></tr>
+</table></div>
+</section>
+
+<section id="s1-quad">
+<h2 class="sec-title">成長象限判斷與護城河</h2>
+<h3>Peter Lynch框架：景氣循環股（Cyclical）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>判斷項目</th><th>證據</th><th>象限傾向</th></tr>
+<tr><td>獲利波動</td><td>EPS 2018～2025：10.66→12.47→11.46→18.39→21.04→12.73→11.97→21.65（HiStock追溯調整值）；2026年H1已達166.45元，波動極大</td><td>景氣循環</td></tr>
+<tr><td>獲利驅動</td><td>2026年毛利率由31%→65%主要由DRAM／NAND價格決定，非單位經濟學改善</td><td>景氣循環</td></tr>
+<tr><td>成長性</td><td>營收近四季年增+334%；AI系統方案倍增、安提IPO</td><td>高速成長特徵</td></tr>
+<tr><td>估值行為</td><td>2025年底26.5倍(576元)→現在7.2倍(1,310元)：循環股高峰期本益比壓縮，典型「高EPS、低PE」</td><td>景氣循環</td></tr>
+</table></div>
+<p><b>結論：</b>景氣循環股（疊加AI結構成長）。Lynch對循環股的提醒是「本益比最低時往往是EPS最高時」，現價PE 7.2倍恰在此區，不能用成長股「低PE＝便宜」解讀。</p>
+<h3>護城河五維度評分（⚠️ 主觀判斷）</h3>
+<div class="moat-row"><span class="label">不可替代性</span><span class="stars">★★★☆☆</span>工控客製韌體／認證、長生命週期；但模組本身可被替代（3/5）</div>
+<div class="moat-row"><span class="label">網路效應</span><span class="stars">★☆☆☆☆</span>無明顯網路效應（1/5）</div>
+<div class="moat-row"><span class="label">客戶黏著度</span><span class="stars">★★★★☆</span>逾4,000家工控客戶、AI系統專案週期2年以上（4/5）</div>
+<div class="moat-row"><span class="label">成本優勢</span><span class="stars">★★★☆☆</span>料源配置（媒體稱取得南亞科、華邦電DDR4料源⚠️）；但無自有晶圓廠，成本隨上游波動（3/5）</div>
+<div class="moat-row"><span class="label">規模效應</span><span class="stars">★★☆☆☆</span>市值約1,288億，僅群聯的27%；Q2存貨與應收規模龐大但缺乏對上游的議價規模（2/5）</div>
+<p><b>合計 13/25 → ★★★☆☆（中等）。</b></p>
+<div class="action-box">
+<h4>建議動作box（研究框架參考，非個人化投資建議）</h4>
+<p><b>當前研究結論：</b>基本面強勁但屬景氣高峰盈利，現價（約1,310元）落在本報告合理區間(1,000～1,700元)中段，缺乏安全邊際。</p>
+<p><b>加碼觀察條件：</b>①股價回落至約1,000～1,100元（接近7/29盤中低點1,090元、同業低PE推算約975～1,175元），且 ②月營收MoM維持正成長、TrendForce合約價續漲。</p>
+<p><b>風險升高訊號（減碼檢視）：</b>月營收連2個月MoM為負、單季毛利率&lt;50%、存貨天數&gt;200天、TrendForce合約價出現季減、營業現金流再度為負。</p>
+<p><b>每季監控指標：</b>月營收（每月10日前）、單季毛利率、存貨與存貨天數、營業現金流、短期借款、TrendForce合約價報告（季初）。</p>
+</div>
+</section>
+<hr class="divider">
+<h1 class="part">② 最新財報解析（2026Q2財報，8/6董事會通過）</h1>
+
+<section id="s2-beat">
+<h2 class="sec-title">Beat/Miss與預估調整</h2>
+<h3>Beat／Miss對照表（Q2 2026）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th class="num">實際值</th><th class="num">市場預期</th><th class="num">差異</th><th>YoY／QoQ</th><th>判定</th></tr>
+<tr><td>Q2 EPS</td><td class="num">108.93元</td><td class="num">105.83元（富邦，7/10～11報告）</td><td class="num">+2.9%</td><td>YoY +5,293%／QoQ +89.5%</td><td><span class="badge b-ok">✅Beat</span></td></tr>
+<tr><td>Q2 EPS（另一投顧）</td><td class="num">108.93元</td><td class="num">87.84元（本土投顧，約5月中，日期未載明⚠️）</td><td class="num">+24.0%</td><td>—</td><td><span class="badge b-ok">✅Beat</span></td></tr>
+<tr><td>Q2 營收</td><td class="num">224.43億</td><td class="num">—（無逐項共識數字）</td><td class="num">—</td><td>YoY +641.1%／QoQ +70.3%</td><td><span class="badge b-ok">✅Beat（定性）</span> FTNN、工商稱「優於預期」</td></tr>
+<tr><td>Q2 毛利率</td><td class="num">65.01%</td><td class="num">「突破60%」（ETtoday／CMoney 7月引述法人）</td><td class="num">≥+5.0pp</td><td>QoQ +5.9pp／YoY +39.1pp（2025Q2 25.9%）</td><td><span class="badge b-ok">✅Beat</span></td></tr>
+<tr><td>Q2 營業利益率</td><td class="num">58.57%</td><td class="num">—</td><td class="num">—</td><td>QoQ +6.6pp（Q1 51.96%）／YoY +46.9pp</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>（參考）Q1 EPS</td><td class="num">57.49元</td><td class="num">45.01元（本土法人，今周刊4/8）</td><td class="num">+27.7%</td><td>YoY +1,462%</td><td><span class="badge b-ok">✅Beat</span></td></tr>
+</table></div>
+<p class="note">✅ 實際值：MOPS重訊（Yahoo轉載）、Yahoo損益表、工商時報／聯合報。預期值：FTNN／TVBS／今周刊／ETtoday引述之券商預估；市場無統一共識資料庫可查，故以最近一份公開預估為基準。連續第二季Beat，且Beat幅度（+2.9%）已明顯小於Q1（+27.7%），顯示分析師預估已「追上」基本面，超預期空間收斂。</p>
+
+<h3>全年指引變化：公司不提供財務預測，改看法人預估調整</h3>
+<ul class="tight">
+<li><b>公司指引（定性）：</b>法說會(8/27)明言「不提供具體財務預測」；定性指引為「能見度至少到2027年底」「DRAM與Flash價格只漲不跌、趨勢持續到2027年底」「下半年及明年穩定成長」「AI系統營收預估2026年較2025年倍增」「宜蘭三廠2026年底動工、2028年完工，現有產能足以支撐到三廠完工前的需求」。</li>
+<li><b>管理層唱多，法人自己的模型卻已見頂：</b>富邦8/29版本——Q3 EPS 115.62元（「今年高峰」）、全年367元 ⇒ 隱含Q4約84.9元（⚠️ 367−166.45−115.62，本報告推算，QoQ -26.5%）；2027年283元 ⇒ 季均約71元。亦即法人EPS路徑已在Q3見頂後回落。</li>
+</ul>
+<div class="tbl-wrap"><table>
+<tr><th>日期</th><th>來源（機構）</th><th>評等</th><th class="num">目標價</th><th class="num">2026E EPS</th><th class="num">2027E EPS</th><th>備註</th></tr>
+<tr><td>3～4月</td><td>本土法人（FTNN）</td><td>—</td><td class="num">約1,400</td><td class="num">約199</td><td class="num">—</td><td>標題「目標價上看1,400元、全年EPS 199元」，日期未載明⚠️</td></tr>
+<tr><td>4/8</td><td>本土法人（今周刊）</td><td>買進</td><td class="num">1,399（前次1,272）</td><td class="num">199.46</td><td class="num">—</td><td>原文：PE 7倍；Q1 EPS預估45.01元；2026營收預估696.55億</td></tr>
+<tr><td>5/11</td><td>本土／日系外資（工商時報）</td><td>買進</td><td class="num">2,085／2,385</td><td class="num">約280（「28個股本」⚠️×10元面額）</td><td class="num">—</td><td>Q1 EPS 57.49元公布後；兩者機構名未點名</td></tr>
+<tr><td>5/12前後</td><td>本土投顧（Yahoo）</td><td>買進</td><td class="num">2,280</td><td class="num">284.53</td><td class="num">—</td><td>Q2 EPS預估87.84元；同一份預估之2026營收813.38億／淨利273.14億</td></tr>
+<tr><td>6/9</td><td>本土投顧（Yahoo）</td><td>由買進降為「區間操作」</td><td class="num">1,945</td><td class="num">283.1</td><td class="num">235.38</td><td>與華邦電、南亞科、威剛同列降評，理由為市場波動與情緒性賣壓，非基本面惡化</td></tr>
+<tr><td>7/10～11</td><td>富邦（TVBS點名；FTNN／工商稱「本土法人」）</td><td>買進</td><td class="num">2,205</td><td class="num">367</td><td class="num">335</td><td>Q2 EPS 105.83、Q3 EPS 113.82；Q3營收276.53億、毛利率54.3%</td></tr>
+<tr><td>8/29</td><td>本土法人（FTNN；與7月同系列報告，⚠️ 未點名，推定同一投顧）</td><td>買進</td><td class="num">2,120（自2,205下修-3.9%）</td><td class="num">367</td><td class="num">283（較7月335下修-15.5%）</td><td>Q3營收268.08億（QoQ +19.4%）、毛利率58.8%、EPS 115.62元；理由「反映全球記憶體同業評價水準」</td></tr>
+<tr><td>9/2</td><td>市場預估（經濟日報，凱基證券權證專欄）</td><td>—</td><td class="num">—</td><td class="num">339.6</td><td class="num">—</td><td>「市場預估今年EPS 339.6元」，預估家數與機構未載明⚠️</td></tr>
+</table></div>
+<p class="note">調整幅度小結：2026E EPS由4月的199元一路上修至367元（+84%）；2027E自7月335元下修至283元（-15.5%）；目標價在2,205→2,120元（-3.9%）。「本期法人上修當年、下修隔年」是景氣循環股見頂前常見的形態，宜持續追蹤2027E是否續降。</p>
+
+<h3>Q3營收追蹤：9月營收需達96.3億才能符合富邦預估</h3>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th class="num">金額(億)</th><th>說明</th></tr>
+<tr><td>7月營收</td><td class="num">84.95</td><td>MoM +3.5%、YoY +636.5% <span class="badge b-ok">✅</span></td></tr>
+<tr><td>8月營收</td><td class="num">86.80</td><td>MoM +2.2%、YoY +576.3%，單月歷史新高 <span class="badge b-ok">✅</span></td></tr>
+<tr><td>Q3累計(7～8月)</td><td class="num">171.75</td><td>⚠️ 加總</td></tr>
+<tr><td>富邦Q3營收預估</td><td class="num">268.08</td><td>需9月≈96.33億（MoM +11.0%）才能達標 ⚠️ 自算</td></tr>
+<tr><td>若9月持平於8月</td><td class="num">258.55</td><td>Q3約低於預估-3.6%，QoQ仍+15.2% ⚠️ 自算</td></tr>
+</table></div>
+<p class="note">9月營收預計10月6～10日公告（本次查證時尚未公布，❌「—」）。為接下來最近的催化劑；Q3財報預計11月中旬前公布。</p>
+</section>
+
+<section id="s2-price">
+<h2 class="sec-title">股價反應與6月高點回落原因分析</h2>
+<h3>圖：近一年收盤價（TPEx逐日，未還原權息）</h3>
+<svg viewBox="0 0 900 300" width="100%" role="img" aria-label="宜鼎近一年收盤價走勢" style="background:#fff;border:1px solid #e1e4ee;border-radius:10px"><line x1="50" x2="885" y1="265.0" y2="265.0" stroke="#e5e7eb"/><text x="44" y="269.0" font-size="11" text-anchor="end" fill="#6b7280">0</text><line x1="50" x2="885" y1="208.2" y2="208.2" stroke="#e5e7eb"/><text x="44" y="212.2" font-size="11" text-anchor="end" fill="#6b7280">500</text><line x1="50" x2="885" y1="151.4" y2="151.4" stroke="#e5e7eb"/><text x="44" y="155.4" font-size="11" text-anchor="end" fill="#6b7280">1000</text><line x1="50" x2="885" y1="94.5" y2="94.5" stroke="#e5e7eb"/><text x="44" y="98.5" font-size="11" text-anchor="end" fill="#6b7280">1500</text><line x1="50" x2="885" y1="37.7" y2="37.7" stroke="#e5e7eb"/><text x="44" y="41.7" font-size="11" text-anchor="end" fill="#6b7280">2000</text><text x="50.0" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2025/10</text><text x="109.4" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2025/11</text><text x="179.3" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2025/12</text><text x="256.1" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2026/01</text><text x="329.5" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2026/02</text><text x="374.9" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2026/03</text><text x="448.3" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2026/04</text><text x="518.2" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2026/05</text><text x="588.0" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2026/06</text><text x="661.4" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2026/07</text><text x="738.3" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2026/08</text><text x="811.6" y="288" font-size="10.5" fill="#6b7280" text-anchor="middle">2026/09</text><polyline fill="none" stroke="#4f46e5" stroke-width="2" points="50.0,226.9 53.5,223.1 57.0,219.0 60.5,219.8 64.0,221.6 67.5,219.4 71.0,216.4 74.5,218.1 77.9,218.5 81.4,217.0 84.9,217.2 88.4,216.5 91.9,214.2 95.4,217.2 98.9,217.3 102.4,216.3 105.9,216.0 109.4,215.6 112.9,216.6 116.4,214.8 119.9,213.3 123.4,213.2 126.9,212.4 130.4,210.9 133.8,205.6 137.3,201.6 140.8,205.7 144.3,203.4 147.8,204.5 151.3,206.6 154.8,205.5 158.3,208.9 161.8,211.9 165.3,208.8 168.8,210.0 172.3,209.4 175.8,208.9 179.3,210.1 182.8,213.1 186.3,213.0 189.7,213.6 193.2,211.7 196.7,209.7 200.2,210.7 203.7,212.0 207.2,211.2 210.7,208.2 214.2,208.8 217.7,210.3 221.2,207.8 224.7,209.3 228.2,209.2 231.7,207.7 235.2,208.4 238.7,206.8 242.2,207.0 245.6,206.2 249.1,205.5 252.6,199.5 256.1,197.4 259.6,197.7 263.1,193.9 266.6,190.6 270.1,191.7 273.6,194.8 277.1,193.8 280.6,191.6 284.1,191.7 287.6,191.8 291.1,187.5 294.6,179.8 298.1,177.5 301.5,179.4 305.0,179.4 308.5,180.3 312.0,178.9 315.5,178.3 319.0,176.8 322.5,177.7 326.0,174.8 329.5,180.6 333.0,175.6 336.5,176.6 340.0,175.2 343.5,184.2 347.0,176.1 350.5,179.1 354.0,182.5 357.4,178.9 360.9,172.4 364.4,175.3 367.9,176.5 371.4,167.7 374.9,172.0 378.4,180.5 381.9,176.6 385.4,173.5 388.9,171.5 392.4,162.2 395.9,151.9 399.4,148.0 402.9,149.7 406.4,144.5 409.9,132.6 413.3,119.5 416.8,113.3 420.3,128.1 423.8,141.7 427.3,153.9 430.8,149.7 434.3,160.9 437.8,155.9 441.3,158.1 444.8,168.8 448.3,159.2 451.8,156.2 455.3,153.9 458.8,142.8 462.3,139.4 465.8,133.8 469.2,136.0 472.7,130.9 476.2,135.5 479.7,141.7 483.2,150.8 486.7,149.1 490.2,137.7 493.7,132.6 497.2,139.4 500.7,141.7 504.2,129.8 507.7,116.7 511.2,115.6 514.7,123.5 518.2,117.8 521.7,103.6 525.1,97.4 528.6,86.0 532.1,83.2 535.6,65.0 539.1,61.0 542.6,64.4 546.1,53.1 549.6,65.0 553.1,53.1 556.6,68.4 560.1,74.7 563.6,70.7 567.1,69.0 570.6,73.5 574.1,73.0 577.6,71.8 581.0,71.8 584.5,59.3 588.0,48.5 591.5,51.9 595.0,50.2 598.5,48.5 602.0,65.6 605.5,59.3 609.0,38.9 612.5,61.0 616.0,70.7 619.5,59.9 623.0,46.8 626.5,42.8 630.0,54.2 633.5,45.7 636.9,41.1 640.4,50.8 643.9,61.0 647.4,67.3 650.9,82.6 654.4,83.8 657.9,81.5 661.4,86.0 664.9,70.1 668.4,79.2 671.9,78.1 675.4,84.3 678.9,92.8 682.4,91.1 685.9,92.8 689.4,100.8 692.8,98.0 696.3,106.5 699.8,120.1 703.3,126.9 706.8,117.3 710.3,110.5 713.8,109.3 717.3,109.3 720.8,113.9 724.3,128.6 727.8,133.2 731.3,130.9 734.8,117.8 738.3,107.6 741.8,104.2 745.3,98.5 748.7,82.0 752.2,94.5 755.7,98.5 759.2,98.0 762.7,92.3 766.2,90.6 769.7,97.4 773.2,91.1 776.7,99.1 780.2,92.8 783.7,95.7 787.2,87.7 790.7,86.6 794.2,93.4 797.7,94.5 801.2,95.7 804.6,98.0 808.1,100.2 811.6,100.2 815.1,103.6 818.6,112.2 822.1,110.5 825.6,105.3 829.1,109.3 832.6,111.0 836.1,118.4 839.6,117.8 843.1,118.4 846.6,120.1 850.1,117.8 853.6,121.8 857.1,115.6 860.5,117.8 864.0,117.8 867.5,116.7 871.0,116.7 874.5,119.5 878.0,118.4 881.5,118.4 885.0,117.8"/><circle cx="609.0" cy="38.9" r="4" fill="#dc2626"/><text x="603.0" y="28.9" font-size="11" fill="#dc2626" text-anchor="end">6/9收盤1,990</text><circle cx="727.8" cy="133.2" r="4" fill="#b45309"/><text x="727.8" y="153.2" font-size="11" fill="#b45309" text-anchor="middle">7/29低點1,160收(盤中1,090)</text><circle cx="748.7" cy="82.0" r="4" fill="#15803d"/><text x="748.7" y="70.0" font-size="11" fill="#15803d" text-anchor="middle">8/6 財報+9.9%</text><circle cx="885.0" cy="117.8" r="4" fill="#1e2233"/><text x="881.0" y="143.8" font-size="11" fill="#1e2233" text-anchor="end">10/2收1,295</text><circle cx="650.9" cy="82.6" r="4" fill="#dc2626"/><text x="668.9" y="76.6" font-size="11" fill="#dc2626" text-anchor="start">6/26 -7.8%</text><circle cx="252.6" cy="199.5" r="4" fill="#6b7280"/><text x="266.6" y="191.5" font-size="11" fill="#6b7280" text-anchor="start">2025年底576</text></svg>
+<h3>回落時間軸（6/16高點2,025元 → 10/02收盤1,295元，-36.05%）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>日期</th><th>股價反應</th><th>事件／原因</th><th>來源</th></tr>
+<tr><td>6/5</td><td>1,905→1,755（-7.9%）</td><td>分析師警告DRAM／NAND ASP將於2026年中見頂、明年初起下滑，比市場預期早；Micron前一日跌7.7%，南亞科、華邦電一度跌停</td><td>自由財經6/5</td></tr>
+<tr><td>6/9～6/10</td><td>6/9收1,990（+9.9%，最高收盤）→6/10收1,795（-9.8%）</td><td>6/9一家本土投顧將宜鼎等4檔由買進降為「區間操作」（目標價1,945元），理由為情緒性賣壓；隔日大跌。波動劇烈，題材資金進出明顯</td><td>Yahoo／TPEx</td></tr>
+<tr><td>6/16</td><td>盤中高2,025元（收1,955）</td><td>2026年高點</td><td>TPEx</td></tr>
+<tr><td>6/26</td><td>1,740→1,605（-7.76%）</td><td>加權指數-3.64%，記憶體族群全面重挫；Micron財報雖佳仍被賣</td><td>財報狗6/26</td></tr>
+<tr><td>7/1</td><td>1,615→1,575，量爆6,112張</td><td>兆易創新示警存儲價格已處歷史高位、Samsung／SK Hynix宣布大規模擴產（DRAM產能五年倍增），華邦電、南亞科重挫</td><td>聯合報7/1</td></tr>
+<tr><td>7/29</td><td>盤中低1,090、收1,160</td><td>財報前的波段低點（較高點-46%）；Q2財報董事會預定8/6</td><td>TPEx</td></tr>
+<tr><td>8/6～8/7</td><td>8/6收1,610（+9.9%）→8/7收1,500（-6.8%，量7,816張）</td><td>Q2 EPS 108.93元Beat；隔日利多出盡。成長動能遞減（7月MoM+3.5%）</td><td>TPEx／工商</td></tr>
+<tr><td>8/27</td><td>除息（現金16.8349元＋股票0.1992元）；法說會</td><td>董座：記憶體短缺、價格到2027年底只漲不跌；宜蘭三廠2026年底動工。股價未能續強，回到1,490元</td><td>Yahoo／法說會</td></tr>
+<tr><td>8/29</td><td>—</td><td>法人維持買進，但目標價自2,205→2,120元，Q3毛利率預估由54.3%調為58.8%仍較Q2 65.0%下滑6.2pp，月營收增速收斂</td><td>FTNN</td></tr>
+<tr><td>9/3～9/11</td><td>9/3 -5.3%（1,420→1,345），9/11盤中低1,240元</td><td>成交量萎縮（9月日均1,327張 vs 5月5,046張，-74%）；三大法人連續賣超，外資持股由高檔降至17.4%</td><td>TPEx／Yahoo</td></tr>
+<tr><td>10/02～10/05</td><td>收1,295；10/05盤中1,310</td><td>量能極低（10/02僅867張）；TrendForce 9/30仍預估Q4合約價續漲（DRAM +10～15%、NAND +15～20%）</td><td>TPEx／TrendForce</td></tr>
+</table></div>
+<p><b>歸因小結：</b>①<b>價格見頂預期</b>（6/5分析師警告、7/1兆易創新示警＋原廠擴產）是主要殺傷力；②<b>成長動能遞減</b>（月營收MoM由+35.8%降至+2.2%、法人Q3毛利率預估較Q2回落6.2pp）使「利多出盡」；③<b>籌碼面</b>：題材股高檔爆量後量縮、法人連續賣超；④<b>除息</b>約-3.1%。基本面（Q2 Beat、Q4合約價續漲）並未惡化——股價回落更接近<b>本益比壓縮</b>（對「高峰盈利」折價），而非EPS下修。</p>
+</section>
+
+<section id="s2-dcf">
+<h2 class="sec-title">三情境DCF估值（含記憶體價格循環敏感度）</h2>
+<p class="note">⚠️ 本節為本報告自行假設之情境模型（非券商模型）：估值基準日2026/10/05，納入2026Q4＋2027～2030年自由現金流，終值於2030年；稅率21%（Q2有效稅率21.3%，由Yahoo稅前132.14億／稅後104.06億推得）；2026Q4自由現金流以NOPAT×50%計（營運資金續增）；營運資金＝新增營收×30%（Q2應收＋存貨－應付≈269.1億，約占年化營收30%）；每股價值以98.28M股計；淨現金約25億（現金94.77億－計息債務53.11億－已發放現金股利約16.55億，⚠️ 推算）。WACC為本報告設定之要求報酬率（含景氣循環與中小型股溢酬），未以CAPM重算無風險利率；參考：玩股網6個月Beta 1.36。</p>
+<div class="scenario-grid">
+<div class="scenario-card bear"><h4>🐻 熊市：價格反轉＋存貨跌價</h4>
+<ul>
+<li>營收：2026E 830億 → 2027 430億(-48%) → 2028 330 → 2029 330 → 2030 350億</li>
+<li>營益率：2027 25% → 2028 14% → 2029 13% → 2030 14%（回到2023～2025年12～17%常態）</li>
+<li>2027年認列存貨跌價15億（稅前）</li>
+<li>FCF轉換：2027～2028年營收下滑釋放營運資金，FCF約為NOPAT的1.4～2.2倍；2029年後約0.8倍</li>
+<li>WACC 13%、終值成長率2%</li>
+<li>隱含每股稅後營業獲利：2027 約86元→2028 約37元</li>
+</ul>
+<div class="target" style="color:var(--red)">約 500 元</div><div class="note">終值占EV 41%</div></div>
+<div class="scenario-card base"><h4>⚖️ 基準：景氣緩降、AI占比墊高常態</h4>
+<ul>
+<li>營收：2026E 860億 → 2027 760億(-12%) → 2028 620 → 2029 570 → 2030 590億</li>
+<li>營益率：2027 42% → 2028 30% → 2029 25% → 2030 22%（高於2025年16.8%，反映AI／系統占比提升）</li>
+<li>CapEx：2027 12億、2028 20億（宜蘭三廠）、之後6～10億</li>
+<li>FCF轉換：營收下滑釋放營運資金、部分抵銷CapEx，FCF約為NOPAT的0.9～1.2倍</li>
+<li>WACC 12%、終值成長率3%</li>
+<li>隱含每股稅後營業獲利：2027 約257元（與富邦2027E 283元同量級）→2028 約150元→2030 約104元</li>
+</ul>
+<div class="target" style="color:var(--accent2)">約 1,280 元</div><div class="note">終值占EV 55%</div></div>
+<div class="scenario-card bull"><h4>🐂 牛市：缺貨延至2028、AI／三廠放量</h4>
+<ul>
+<li>營收：2026E 900億 → 2027 1,000億 → 2028 1,050 → 2029 1,000 → 2030 1,000億</li>
+<li>營益率：2027 50% → 2028 46% → 2029 40% → 2030 36%</li>
+<li>CapEx：15～25億／年（三廠＋產能）；FCF約為NOPAT的0.9～1.0倍</li>
+<li>WACC 11%、終值成長率3%</li>
+<li>隱含每股稅後營業獲利：2027 約402元→2030 約289元</li>
+</ul>
+<div class="target" style="color:var(--green)">約 3,380 元</div><div class="note">終值占EV 68%</div></div>
+</div>
+<div class="tbl-wrap"><table>
+<tr><th>情境</th><th class="num">PV(2026Q4～2030 FCF)</th><th class="num">PV(終值)</th><th class="num">EV(億)</th><th class="num">股權價值(億)</th><th class="num">每股</th><th class="num">vs 現價1,310</th><th class="num">主觀權重</th></tr>
+<tr><td>熊</td><td class="num">275.7</td><td class="num">191.4</td><td class="num">467.1</td><td class="num">492.1</td><td class="num">501</td><td class="num">-61.8%</td><td class="num">30%</td></tr>
+<tr><td>基準</td><td class="num">558.4</td><td class="num">674.8</td><td class="num">1,233.2</td><td class="num">1,258.2</td><td class="num">1,280</td><td class="num">-2.3%</td><td class="num">50%</td></tr>
+<tr><td>牛</td><td class="num">1,048.7</td><td class="num">2,245.6</td><td class="num">3,294.3</td><td class="num">3,319.3</td><td class="num">3,377</td><td class="num">+157.8%</td><td class="num">20%</td></tr>
+<tr><td><b>機率加權</b></td><td colspan="4" class="num">0.3×501＋0.5×1,280＋0.2×3,377</td><td class="num"><b>約1,466</b></td><td class="num">+11.9%</td><td class="num">⚠️權重為主觀</td></tr>
+</table></div>
+<h3>敏感度（基準情境；每股價值，元）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>WACC＼2030年營益率</th><th class="num">15%</th><th class="num">22%（基準）</th><th class="num">30%</th></tr>
+<tr><td>10%</td><td class="num">1,220</td><td class="num">1,568</td><td class="num">1,965</td></tr>
+<tr><td>12%（基準）</td><td class="num">1,025</td><td class="num"><b>1,280</b></td><td class="num">1,572</td></tr>
+<tr><td>14%</td><td class="num">898</td><td class="num">1,095</td><td class="num">1,320</td></tr>
+</table></div>
+<div class="tbl-wrap"><table>
+<tr><th>2027～2030營收水準（價格水準代理）</th><th class="num">×0.6</th><th class="num">×0.8</th><th class="num">×1.0（基準）</th><th class="num">×1.2</th></tr>
+<tr><td>每股價值（元）</td><td class="num">872</td><td class="num">1,076</td><td class="num"><b>1,280</b></td><td class="num">1,484</td></tr>
+</table></div>
+<p class="note"><b>敏感度說明：</b>對估值影響最大的是「終值年度營益率（即景氣下行後的常態獲利率）」：15%→30%，每股價值1,025→1,572元（+53%）；其次是「價格／營收水準」（±20%約±16%）與WACC（10%→14%，-30%）。換言之，現價（1,310元）所隱含的是「景氣回落後仍能維持約22%營益率」——高於宜鼎2023～2025年12～17%的歷史常態，需要AI／系統占比與議價力持續提升才說得通。另：若Q2資產負債表新增的約38.3億「其他負債」實為需返還之客戶保證金，淨現金將由+25億變為約-13億，影響約-39元／股（約3%）。</p>
+</section>
+
+<section id="s2-valuation">
+<h2 class="sec-title">股價位階評估</h2>
+<h3>絕對估值表（現價1,310元）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>指標</th><th class="num">數值</th><th>判讀</th><th>狀態</th></tr>
+<tr><td>TTM PE</td><td class="num">7.2倍</td><td>與2022年谷底7.3倍相當、遠低於5年平均20.1倍（中位18.7倍）——「低PE」來自EPS處於循環高峰，非便宜</td><td><span class="badge b-ok">✅</span> Yahoo 7.19</td></tr>
+<tr><td>Forward PE 2026E</td><td class="num">3.6倍（367）／3.9倍（339.6）／4.6倍（284.53）</td><td>已與同業模組廠TTM PE(4.1～5.0倍)同級</td><td><span class="badge b-warn">⚠️</span> 自算</td></tr>
+<tr><td>Forward PE 2027E</td><td class="num">3.9倍（335）／4.6倍（283）／5.6倍（235.38）</td><td>2027E已含回落假設；若2027E再下修，Forward PE會被動上升</td><td><span class="badge b-warn">⚠️</span> 自算</td></tr>
+<tr><td>PB</td><td class="num">5.4倍</td><td>2022年底約2.3倍（185.5÷81.02）；現值為歷史高水位，帳面值本身被循環利潤快速墊高</td><td><span class="badge b-ok">✅</span> BPS 241.67／<span class="badge b-warn">⚠️</span> 歷史比較自算</td></tr>
+<tr><td>PEG</td><td class="num">—</td><td>無意義：法人2027年EPS預估低於2026年（成長為負）</td><td><span class="badge b-bad">❌</span> 不適用</td></tr>
+<tr><td>EV/EBITDA(TTM)</td><td class="num">約5.7倍</td><td>EV≈1,288＋53.1－94.8＝1,246億；TTM EBITDA 218.9億</td><td><span class="badge b-warn">⚠️</span> 自算</td></tr>
+<tr><td>P/S(TTM)</td><td class="num">約2.9倍</td><td>1,288億÷442.4億</td><td><span class="badge b-warn">⚠️</span> 自算</td></tr>
+<tr><td>現金殖利率</td><td class="num">約1.3%</td><td>16.8349÷1,295元；配發率約77.5%，絕對股利高但殖利率低</td><td><span class="badge b-warn">⚠️</span></td></tr>
+</table></div>
+<h3>EPS成長趨勢表：戴維斯雙擊還是雙殺風險？</h3>
+<div class="tbl-wrap"><table>
+<tr><th>期間</th><th class="num">EPS(元)</th><th class="num">YoY</th><th class="num">QoQ</th><th>備註</th></tr>
+<tr><td>2025Q3</td><td class="num">6.87</td><td class="num">+230%</td><td class="num">+240%</td><td>啟動</td></tr>
+<tr><td>2025Q4</td><td class="num">9.29</td><td class="num">+210%</td><td class="num">+35%</td><td>—</td></tr>
+<tr><td>2026Q1</td><td class="num">57.49</td><td class="num">+1,462%</td><td class="num">+519%</td><td>漲價效應爆發</td></tr>
+<tr><td>2026Q2</td><td class="num">108.93</td><td class="num">+5,293%</td><td class="num">+89%</td><td>單季賺逾十個股本</td></tr>
+<tr><td>2026Q3E</td><td class="num">115.62（富邦）</td><td class="num">+1,583%</td><td class="num">+6%</td><td>「今年高峰」⚠️ 預估</td></tr>
+<tr><td>2026Q4E（隱含）</td><td class="num">約84.9</td><td class="num">+814%</td><td class="num">-26.5%</td><td>⚠️ 367−166.45−115.62，自算</td></tr>
+</table></div>
+<p><b>判讀：</b>目前不是「戴維斯雙擊」（EPS與PE同步擴張），而是<b>EPS暴增、PE壓縮</b>；更準確的風險描述是——一旦EPS見頂回落，股價將面臨「EPS下修＋PE維持低檔」的<b>戴維斯雙殺</b>。法人自己的路徑（Q3見頂、Q4／2027回落）已呈現EPS動能由加速轉為減速。</p>
+</section>
+
+<section id="s2-anchor">
+<h2 class="sec-title">估值歷史錨點（強制規則1～3）</h2>
+<h3>強制規則1：EPS多年期表（A＝Actual，E＝Estimate）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>年度</th><th>EPS</th><th>類型</th><th>YoY</th><th>備註／各來源</th></tr>
+<tr><td>2024</td><td class="num">12.2元</td><td>A實際</td><td>-7%（對2023年13.12元，Yahoo逐季加總）</td><td>經濟日報引述12.2；Yahoo逐季加總12.32；HiStock追溯調整11.97</td></tr>
+<tr><td>2025</td><td class="num">21.72元</td><td>A實際</td><td>+78%</td><td>法說會備忘錄／媒體21.72；Yahoo逐季加總21.86；HiStock追溯調整21.65</td></tr>
+<tr><td>2026</td><td class="num">283.1～367元（H1實際已166.45元）</td><td>E預估</td><td>+1,203%～+1,590%（對21.72）</td><td>283.1（6/9）、284.53（5月）、339.6（市場預估，9/2）、367（富邦7/10、8/29）。<b>區間跨度達30%、分歧大</b>；283～285為Q2財報前舊預估，已被H1實績追上，宜視為下緣過時值</td></tr>
+<tr><td>2027</td><td class="num">235.38～335元</td><td>E預估</td><td>約-9%～-36%（對2026E 367；若對339.6為-31%～-1%）</td><td>235.38（6/9本土投顧）、283（富邦8/29）、335（富邦7/10，已被該投顧自己下修）。<b>方向為年減，區間跨度達42%</b></td></tr>
+<tr><td>2028</td><td class="num">—</td><td>E</td><td>—</td><td><span class="badge b-bad">❌</span> 本次查證未見任何公開預估（FTNN僅稱「訂單看遠到2028年」）</td></tr>
+</table></div>
+
+<h3>強制規則2：歷史本益比參考</h3>
+<p class="note">⚠️ 方法：Goodinfo被擋、財報狗歷史PE為付費功能，故以TPEx逐日收盤價（未還原）÷TTM EPS自算：TTM EPS採HiStock追溯調整後逐季EPS，並依法定公告期限（Q1→5/15、Q2→8/14、Q3→11/14、Q4→次年3/31；2026Q1／Q2採實際公告日5/11、8/6）逐日更新，避免用「尚未公布」的EPS。2018年缺2017年逐季EPS，改以「年度」基礎（年度最低價÷全年EPS）。</p>
+<div class="tbl-wrap"><table>
+<tr><th>錨點</th><th class="num">數值</th><th>說明</th><th>狀態</th></tr>
+<tr><td><b>5年平均PE(TTM)</b></td><td class="num"><b>20.1倍</b>（中位18.7倍）</td><td>2021/10～2026/10逐日（n=1,213）。平均值受2026年3月EPS認列遞延（TTM EPS仍低，PE一度高達87倍）拉高，中位數較可靠</td><td><span class="badge b-warn">⚠️</span></td></tr>
+<tr><td><b>2022年最低PE</b>（熊市谷底）</td><td class="num"><b>7.3倍</b></td><td>2022/10/17盤中低147.5元÷TTM EPS 20.16元；若以2022全年EPS 21.04元計為7.0倍</td><td><span class="badge b-warn">⚠️</span></td></tr>
+<tr><td><b>2018年最低PE</b>（上次主要市場修正）</td><td class="num"><b>9.1倍</b>（年度基礎）</td><td>2018/11/13盤中低96.5元÷2018全年EPS 10.66元；TTM基礎因缺2017逐季EPS無法計算</td><td><span class="badge b-warn">⚠️</span></td></tr>
+</table></div>
+<div class="tbl-wrap"><table>
+<tr><th>年度</th><th class="num">全年EPS</th><th class="num">年內最低價</th><th class="num">年內最高價</th><th class="num">年均收盤</th><th class="num">PE低</th><th class="num">PE均</th><th class="num">PE高</th></tr>
+<tr><td>2018</td><td class="num">10.66</td><td class="num">96.5</td><td class="num">166.0</td><td class="num">126.7</td><td class="num">9.1</td><td class="num">11.9</td><td class="num">15.6</td></tr>
+<tr><td>2019</td><td class="num">12.47</td><td class="num">98.4</td><td class="num">183.5</td><td class="num">127.6</td><td class="num">7.9</td><td class="num">10.2</td><td class="num">14.7</td></tr>
+<tr><td>2020</td><td class="num">11.46</td><td class="num">128.0</td><td class="num">203.5</td><td class="num">170.9</td><td class="num">11.2</td><td class="num">14.9</td><td class="num">17.8</td></tr>
+<tr><td>2021</td><td class="num">18.39</td><td class="num">151.0</td><td class="num">250.0</td><td class="num">189.8</td><td class="num">8.2</td><td class="num">10.3</td><td class="num">13.6</td></tr>
+<tr><td>2022</td><td class="num">21.04</td><td class="num">147.5</td><td class="num">225.0</td><td class="num">185.6</td><td class="num"><b>7.0</b></td><td class="num">8.8</td><td class="num">10.7</td></tr>
+<tr><td>2023</td><td class="num">12.73</td><td class="num">181.5</td><td class="num">366.0</td><td class="num">283.7</td><td class="num">14.3</td><td class="num">22.3</td><td class="num">28.8</td></tr>
+<tr><td>2024</td><td class="num">11.97</td><td class="num">208.0</td><td class="num">353.0</td><td class="num">284.3</td><td class="num">17.4</td><td class="num">23.7</td><td class="num">29.5</td></tr>
+<tr><td>2025</td><td class="num">21.65</td><td class="num">190.5</td><td class="num">576.0</td><td class="num">304.9</td><td class="num">8.8</td><td class="num">14.1</td><td class="num">26.6</td></tr>
+<tr><td>2026 YTD</td><td class="num">H1 166.45</td><td class="num">559（1月）</td><td class="num">2,025</td><td class="num">—</td><td class="num" colspan="3">TTM基礎6.8～87倍（失真，見上）；目前7.2倍</td></tr>
+</table></div>
+<p class="note">觀察：宜鼎在2018～2022年（工控記憶體模組、獲利穩定在10～21元）的年均PE多落在9～15倍；2023～2024年因EPS下滑而PE被墊高到22～24倍；2022年全年PE約8.8倍＝EPS處於當時高點(21.04元)時的估值，與現在「高EPS、PE 7.2倍」的結構相似。</p>
+
+<h3>強制規則3：反推試算（必寫結論）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>EPS基礎＼本益比</th><th class="num">2022最低PE 7.3倍</th><th class="num">2018最低PE 9.1倍</th><th class="num">5年均PE 20.1倍</th></tr>
+<tr><td>2025A EPS 21.72元（循環前常態）</td><td class="num">159元</td><td class="num">198元</td><td class="num">437元</td></tr>
+<tr><td>TTM EPS 182.58元（含高峰）</td><td class="num">1,333元</td><td class="num">1,661元</td><td class="num">3,670元</td></tr>
+<tr><td>2027E保守 235.38元（6/9本土投顧）</td><td class="num"><b>1,718元</b></td><td class="num">2,142元</td><td class="num">4,731元</td></tr>
+<tr><td>2027E 283元（富邦8/29）</td><td class="num">2,066元</td><td class="num">2,575元</td><td class="num">5,688元</td></tr>
+<tr><td>基準DCF 2028年隱含每股稅後營業獲利 約150元</td><td class="num">1,095元</td><td class="num">1,365元</td><td class="num">3,015元</td></tr>
+</table></div>
+<p class="note">對照現價1,310元。反向：以現價1,310元回推「市場隱含之永續EPS」——若採7.3倍＝約179.5元；9.1倍＝約144元；20.1倍＝約65元（分別為2025A EPS的8.3、6.6、3.0倍）。</p>
+<div class="action-box">
+<h4>反推結論：目前股價是靠「EPS成長」撐起，不是靠「本益比倍數擴張」</h4>
+<p>股價分解：2025年底576元→現價1,310元，漲幅約2.27倍；同期TTM EPS由21.72元升至182.58元（8.41倍），而本益比由26.5倍壓縮到7.2倍（0.27倍）。換言之，<b>股價全數由EPS暴增支撐，且本益比已被壓縮到2022年谷底（7.3倍）水準</b>，沒有任何「倍數擴張」成分。</p>
+<p>但這不代表安全：低本益比反映市場<b>不相信這份盈利可持續</b>。若EPS回到2025年水準（21.72元），即使給5年平均20.1倍也僅437元；要讓1,310元站得住，需要EPS在循環下行後仍能維持約145～180元（以9.1～7.3倍計）。法人2027E（235～335元）高於此區間，因此<b>現價的容錯主要來自2027年EPS是否守得住，而不是估值倍數</b>；下檔則取決於景氣下行時EPS回落的速度與深度（基準DCF 2028年每股稅後營業獲利約150元、熊市約37元）。</p>
+</div>
+</section>
+
+<section id="s2-comps">
+<h2 class="sec-title">Comps分析：台股記憶體模組同業（2026Q2）</h2>
+<div class="tbl-wrap"><table>
+<tr><th>公司</th><th class="num">股價(10/05盤中)</th><th class="num">市值(億)</th><th class="num">TTM PE</th><th class="num">PB</th><th class="num">Q2毛利率</th><th class="num">Q2營益率</th><th class="num">Q2 EPS</th><th class="num">TTM EPS</th><th>類型</th></tr>
+<tr><td><b>宜鼎 5289</b></td><td class="num">1,310</td><td class="num">1,288</td><td class="num"><b>7.2</b></td><td class="num">5.4</td><td class="num">65.0%</td><td class="num">58.6%</td><td class="num">108.93</td><td class="num">182.58</td><td>工控／AI模組＋系統</td></tr>
+<tr><td>群聯 8299</td><td class="num">2,115</td><td class="num">4,678</td><td class="num">9.6</td><td class="num">4.6</td><td class="num">65.3%</td><td class="num">38.8%</td><td class="num">118.57</td><td class="num">220.36</td><td>NAND控制器＋模組</td></tr>
+<tr><td>威剛 3260</td><td class="num">380</td><td class="num">1,268</td><td class="num">4.7</td><td class="num">3.1</td><td class="num">42.1%</td><td class="num">33.5%</td><td class="num">32.39</td><td class="num">81.13</td><td>消費／工控模組</td></tr>
+<tr><td>創見 2451</td><td class="num">289</td><td class="num">1,246</td><td class="num">5.0</td><td class="num">3.2</td><td class="num">77.0%</td><td class="num">75.1%</td><td class="num">27.70</td><td class="num">57.75</td><td>模組／工控</td></tr>
+<tr><td>十銓 4967</td><td class="num">271</td><td class="num">262</td><td class="num">4.1</td><td class="num">2.4</td><td class="num">42.8%</td><td class="num">40.5%</td><td class="num">26.47</td><td class="num">65.41</td><td>消費／電競模組</td></tr>
+<tr><td>宇瞻 8271</td><td class="num">201</td><td class="num">260</td><td class="num">5.0</td><td class="num">2.7</td><td class="num">51.3%</td><td class="num">36.1%</td><td class="num">20.93</td><td class="num">40.43</td><td>工控模組</td></tr>
+</table></div>
+<p class="note">✅ 股價：Yahoo chart API（10/05盤中）；財務：Yahoo股市逐季損益／資產負債表。⚠️ 市值＝股價×(股本÷10元)；PB＝市值÷總權益（宜鼎採Yahoo每股淨值241.67元）；TTM EPS＝近四季逐季EPS加總。Micron、SanDisk等國際同業本次未納入（❌ 未查證其10/05資料，避免填入未經查證數字）。</p>
+<p><b>溢價／折價解讀：</b>宜鼎TTM PE（7.2倍）相對威剛／創見／十銓／宇瞻（4.1～5.0倍）溢價約44～75%，相對群聯（9.6倍）折價約25%。溢價合理性：①AI基建占比逾40%、有企業SSD／CXL／系統方案敘事；②存貨天數Q2約171天，為六家中最低（群聯約354天、創見約385天、十銓約296天、宇瞻約240天、威剛約203天）；③槓桿低於威剛。折價（對群聯）合理性：群聯規模約為宜鼎3.6倍、有自家控制器IC；但宜鼎Q2營益率58.6%反而較群聯38.8%高。PB 5.4倍為六家最高，反映宜鼎帳面權益相對於獲利膨脹較慢（權益由91億→235億，兩季內+158%），市場對淨值品質較不買單。整體：同業整體PE集中在4～5倍，顯示<b>整個族群被市場以「高峰盈利」折價</b>，宜鼎並非特例。</p>
+</section>
+
+<section id="s2-extra">
+<h2 class="sec-title">額外優勢／風險</h2>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th>內容</th><th>狀態</th></tr>
+<tr><td>庫藏股</td><td>本次查證（Yahoo個股公告、鉅亨／MoneyDJ重訊標題）未見2026年庫藏股買回公告：—</td><td><span class="badge b-bad">❌ 查無</span></td></tr>
+<tr><td>法人持股</td><td>外資持股17.44%（10/02，較9/29的17.50%、9/30的17.58%連降）；三大法人連6日賣超合計約-659張（10/02：外資-76、投信-20、自營-5張）。籌碼混合：外資、自營、投信皆偏賣</td><td><span class="badge b-ok">✅</span> Yahoo</td></tr>
+<tr><td>股利</td><td>2025年度現金16.8349元＋股票0.1992元（8/27除息、10/02發放）；近年現金股利：2024年10.20、2023年13.78、2022年11.52元；已連續18年配發，近5年平均現金殖利率4.15%（Yahoo）</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>董監持股／內部人</td><td>董監持股12.84%（2026/8，12,376張）、質押0；睿鼎投資(法人董事)持7.14%、董事李鍾亮2.14%、董事長簡川勝1,674,163股；內部人共115人</td><td><span class="badge b-ok">✅</span> 富聯網（經搜尋摘要轉述）</td></tr>
+<tr><td>關係人交易</td><td>8/21董事會決議將台北南港辦公室（東路六段465號10樓＋B4車位）以1.68億元處分予法人董事睿鼎投資，估處分利益約1.082億元；交易依帳面餘值、鄰近成交行情與鑑價報告議價。金額小（約占現金1.8%），但屬關係人交易，宜持續觀察是否擴大</td><td><span class="badge b-ok">✅</span> 重訊（MoneyDJ轉載）</td></tr>
+<tr><td>股權激勵／稀釋</td><td>7/6公告Q2因員工認股權執行新增發行股數、7/17限制員工權利新股收回、8/21註銷收回之限制員工權利新股辦理減資變更登記、9/4公告限制員工權利新股增資基準日；股本由9.60億(2025Q4)升至9.83億(2026Q2)，兩季+2.4%</td><td><span class="badge b-ok">✅</span> 重訊標題／<span class="badge b-warn">⚠️</span>稀釋比例自算</td></tr>
+<tr><td>策略合作</td><td>5月底與Qualcomm、台塑簽署AI工業安全視覺方案合作（Yahoo新聞標題）；與NVIDIA、Intel、Qualcomm合作；安提IPO規劃</td><td><span class="badge b-ok">✅</span></td></tr>
+</table></div>
+</section>
+
+<section id="s2-target">
+<h2 class="sec-title">投行目標價與操作建議</h2>
+<h3>目標價表（逐一列示來源與公式）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>日期</th><th>機構</th><th>目標價</th><th>原文公式／估值方法</th><th>隱含PE（⚠️自算）</th></tr>
+<tr><td>4/8</td><td>本土法人（今周刊）</td><td class="num">1,399（前1,272）</td><td>原文載：<b>PE 7倍 × 2026E EPS 199.46元</b>（7×199.46＝1,396.2，與原文1,399元差約3元，原文未說明，可能為取整或EPS版本差）</td><td>7.0倍</td></tr>
+<tr><td>5/11</td><td>本土／日系外資</td><td class="num">2,085／2,385</td><td>原文僅稱「2026年EPS可達28個股本」，<b>未載明PE倍數公式</b></td><td>約7.4倍／8.5倍（以280元EPS）</td></tr>
+<tr><td>5月</td><td>本土投顧（Yahoo）</td><td class="num">2,280</td><td>原文未載公式</td><td>8.0倍（2,280÷284.53）</td></tr>
+<tr><td>6/9</td><td>本土投顧（Yahoo）</td><td class="num">1,945</td><td>原文未載公式；評等由買進降為區間操作</td><td>6.9倍（÷283.1）／8.3倍（÷235.38）</td></tr>
+<tr><td>7/10～11</td><td>富邦</td><td class="num">2,205</td><td>原文未載公式</td><td>6.0倍（÷367）／6.6倍（÷335）</td></tr>
+<tr><td>8/29</td><td>本土法人（FTNN）</td><td class="num">2,120</td><td>原文僅稱「小幅下修以反映同業評價水準」，<b>未載公式</b></td><td>5.8倍（÷367）／7.5倍（÷283）</td></tr>
+<tr><td colspan="5" class="note">除4/8一筆外，其餘目標價之計算公式（EPS×PE）原文均未揭露；「隱含PE」為本報告自行以目標價÷當時EPS預估推算，不是券商原文倍數，請勿當作引用。FTNN 8/29報導原文並未使用「隱含PE 5.8倍」說法。</td></tr>
+</table></div>
+
+<h3>主要分歧點</h3>
+<div class="tbl-wrap"><table>
+<tr><th>樂觀派</th><th>謹慎派</th></tr>
+<tr><td>能見度至少到2027年底；DRAM／Flash價格只漲不跌（公司）；TrendForce Q4合約價續漲；AI占比逾40%；企業SSD／CXL／安提；Forward PE僅3.6～5.6倍</td><td>6/5分析師警示ASP於2026年中見頂、2027年初轉跌；Samsung／SK Hynix擴產、中國產能；法人自己模型Q3見頂、2027年EPS年減；月營收MoM遞減；毛利率Q3預估回落；OCF長期為負、存貨與應收暴增</td></tr>
+</table></div>
+
+<h3>上行／下行空間彙總（現價1,310元）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>參考點</th><th class="num">價格</th><th class="num">距現價</th><th>性質</th></tr>
+<tr><td>熊市DCF</td><td class="num">501</td><td class="num">-61.8%</td><td>本報告</td></tr>
+<tr><td>同業最低PE 4.14倍 × 2027E保守EPS 235.38</td><td class="num">975</td><td class="num">-25.6%</td><td>本報告（⚠️）</td></tr>
+<tr><td>基準DCF</td><td class="num">1,280</td><td class="num">-2.3%</td><td>本報告</td></tr>
+<tr><td>機率加權DCF</td><td class="num">1,466</td><td class="num">+11.9%</td><td>本報告</td></tr>
+<tr><td>2022最低PE 7.3倍 × 2027E保守EPS 235.38</td><td class="num">1,718</td><td class="num">+31.1%</td><td>本報告（⚠️）</td></tr>
+<tr><td>6/9本土投顧目標價</td><td class="num">1,945</td><td class="num">+48.5%</td><td>外部</td></tr>
+<tr><td>富邦（8/29）目標價</td><td class="num">2,120</td><td class="num">+61.8%</td><td>外部</td></tr>
+<tr><td>日系外資（5/11）目標價</td><td class="num">2,385</td><td class="num">+82.1%</td><td>外部（較舊）</td></tr>
+<tr><td>牛市DCF</td><td class="num">3,377</td><td class="num">+157.8%</td><td>本報告</td></tr>
+</table></div>
+<p><b>本報告目標價區間：1,000～1,700元</b>（下緣＝同業低PE × 保守2027E EPS約975元，取整；上緣＝2022谷底PE × 保守2027E EPS約1,718元，取整；中樞約1,300～1,470元，對應基準DCF至機率加權DCF）。外部目標價（1,945～2,385元）高於本區間上緣，主要原因為其EPS預估基準較高、且多數撰寫時間早於Q3毛利率回落與月營收動能放緩的資訊。</p>
+<div class="action-box">
+<h4>操作建議框架（研究框架參考，非個人化投資建議）</h4>
+<p><b>已持有：</b>基本面仍在上行（Q4合約價續漲、Q3預估EPS仍為年內高點），但估值倍數已反映高峰盈利，現價缺乏安全邊際。續抱的前提是密切監控下列警示；若以價值投資的安全邊際標準，現價並非「便宜」。</p>
+<p><b>考慮建倉：</b>以價值投資重視安全邊際的角度，較合理的觀察區為1,000～1,100元（近7/29低點與同業低PE推算區），並建議分批；現價追入需接受「景氣見頂前最後一段」的風險。</p>
+<p><b>加碼觸發（皆需同時具備數據確認）：</b>①9月與Q3財報營收／毛利率不低於富邦預估（9月營收≥約96億、Q3毛利率≥58.8%）；②存貨天數未超過200天且OCF轉正；③TrendForce Q1 2027合約價報告仍維持上漲。</p>
+<p><b>停損／風險警示：</b>股價收盤跌破1,090元（7/29盤中低點）且伴隨月營收MoM連2負；單季毛利率&lt;50%；TrendForce出現合約價季減；營業現金流連續兩季為負。</p>
+</div>
+</section>
+<hr class="divider">
+<h1 class="part">③ 財務風險健檢</h1>
+
+<section id="s3-data">
+<h2 class="sec-title">財務數據填表（近3期，單位：億元）</h2>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th class="num">2024A</th><th class="num">2025A</th><th class="num">2026H1（累計）</th><th class="num">2026Q2（單季）</th><th>狀態／備註</th></tr>
+<tr><td colspan="6"><b>損益表</b></td></tr>
+<tr><td>EBIT（營業利益）</td><td class="num">11.78</td><td class="num">23.89</td><td class="num">199.96</td><td class="num">131.46</td><td><span class="badge b-ok">✅</span> Yahoo逐季加總；H1為MOPS公告值</td></tr>
+<tr><td>利息支出</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="badge b-bad">❌</span> 財報附註財務成本明細未取得（Yahoo僅有定義不明之每股「債務成本」欄，未採用）</td></tr>
+<tr><td>D&amp;A（折舊＋攤銷）</td><td class="num">1.83</td><td class="num">2.13</td><td class="num">1.17</td><td class="num">0.60</td><td><span class="badge b-ok">✅</span> Yahoo現金流量表（折舊＋攤銷，逐季加總）</td></tr>
+<tr><td>EBITDA</td><td class="num">13.61</td><td class="num">26.02</td><td class="num">201.13</td><td class="num">132.06</td><td><span class="badge b-warn">⚠️</span> EBIT＋D&amp;A</td></tr>
+<tr><td colspan="6"><b>資產負債表（期末）</b></td></tr>
+<tr><td>總資產</td><td class="num">97.56</td><td class="num">145.49</td><td class="num">460.97</td><td class="num">460.97</td><td><span class="badge b-ok">✅</span> Yahoo／MOPS</td></tr>
+<tr><td>總負債</td><td class="num">20.83</td><td class="num">54.35</td><td class="num">225.84</td><td class="num">225.84</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>計息債務（短期借款＋一年內到期＋長期負債）</td><td class="num">3.62</td><td class="num">20.81</td><td class="num">53.11</td><td class="num">53.11</td><td><span class="badge b-warn">⚠️</span> 其中短期借款：0／17.36／49.85億。「長期負債」與「一年內到期」合計2024年底3.62億、2026Q2 3.26億，歷年穩定且公司2024年無銀行借款，性質疑為租賃負債，非銀行借款；保守起見仍全數計入</td></tr>
+<tr><td>現金及約當現金</td><td class="num">30.00</td><td class="num">16.45</td><td class="num">94.77</td><td class="num">94.77</td><td><span class="badge b-ok">✅</span> Yahoo；與搜尋所見「期末現金94.8億」一致</td></tr>
+<tr><td>短期到期債務（短借＋一年內到期）</td><td class="num">0.18</td><td class="num">17.73</td><td class="num">50.22</td><td class="num">50.22</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>存貨</td><td class="num">16.44</td><td class="num">53.85</td><td class="num">147.94</td><td class="num">147.94</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>應收帳款</td><td class="num">11.84</td><td class="num">32.92</td><td class="num">166.78</td><td class="num">166.78</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td colspan="6"><b>現金流量表</b></td></tr>
+<tr><td>營業現金流 OCF</td><td class="num">8.54</td><td class="num">-22.74</td><td class="num">9.29</td><td class="num">10.53</td><td><span class="badge b-ok">✅</span> Yahoo逐季加總；H1與公告+9.3億一致</td></tr>
+<tr><td>CapEx</td><td class="num">3.45</td><td class="num">3.32</td><td class="num">2.65</td><td class="num">1.23</td><td><span class="badge b-warn">⚠️</span> ＝期末PPE－期初PPE＋當期折舊（未含使用權資產與處分，僅供量級參考）；原始CapEx明細未取得</td></tr>
+<tr><td>FCF（OCF－CapEx）</td><td class="num">5.09</td><td class="num">-26.06</td><td class="num">6.64</td><td class="num">9.30</td><td><span class="badge b-warn">⚠️</span></td></tr>
+<tr><td>參考：稅後淨利（歸屬母公司）</td><td class="num">11.06</td><td class="num">20.36</td><td class="num">158.34</td><td class="num">103.68</td><td><span class="badge b-ok">✅</span> OCF／淨利：2025年-112%、H1 5.9%</td></tr>
+</table></div>
+<p class="note">另：Q2融資現金流入+56.26億，其中短期借款僅增18.95億；資產負債表「其他負債」由Q1的0.54億升至38.29億、非流動負債由6.26億升至45.61億，兩者合計與融資流入的差額約37億。⚠️ 依科目結構推論該差額疑為「存入保證金」類項目（常見於客戶為確保供貨而預付之款項，列融資活動），但財報附註未取得，<b>性質未經驗證</b>，已在DCF敏感度中考慮其作為債務性質之情境。</p>
+</section>
+
+<section id="s3-ratio">
+<h2 class="sec-title">六大比率診斷</h2>
+<p class="note">警戒標準為本報告採用之一般性門檻（非法定標準）。計息債務以53.11億（保守全數計入）、期末現金94.77億計。</p>
+<div class="tbl-wrap"><table>
+<tr><th>比率</th><th>公式</th><th class="num">結果</th><th>警戒標準</th><th>狀態</th></tr>
+<tr><td>① 利息覆蓋率</td><td>EBIT÷利息支出</td><td class="num">—</td><td>&lt;5倍警戒</td><td><span class="badge b-bad">❌ 無法計算</span>（利息支出未取得）。假設情境⚠️：若53.11億全以5%計息，年利息約2.66億，對年化EBIT約400億≈150倍，不構成壓力</td></tr>
+<tr><td>② 負債比率</td><td>總負債÷總資產</td><td class="num">49.0%</td><td>&gt;60%警戒</td><td><span class="badge b-ok">✅ 水位</span> <span class="badge b-warn">⚠️ 趨勢</span>：2024年底21.4%→2025年底37.4%→2026Q2 49.0%，兩季內+11.6pp</td></tr>
+<tr><td>③ 淨負債／EBITDA</td><td>(計息債務－現金)÷TTM EBITDA(218.9億)</td><td class="num">-0.19倍</td><td>&gt;3倍警戒</td><td><span class="badge b-ok">✅</span> 淨現金約41.7億</td></tr>
+<tr><td>④ OCF／總債務</td><td>TTM OCF(-6.56億)÷計息債務(53.11億)</td><td class="num">-12.4%</td><td>&lt;20%偏弱</td><td><span class="badge b-bad">❌</span> TTM為負；H1 OCF +9.29億為17.5%（未年化）</td></tr>
+<tr><td>⑤ 現金流覆蓋比率</td><td>(TTM OCF＋期末現金)÷短期到期債務(50.22億)</td><td class="num">1.76倍</td><td>&lt;1倍警戒</td><td><span class="badge b-ok">✅</span> 依賴期末現金，非營運現金流；現金／短債1.89倍</td></tr>
+<tr><td>⑥ 兩年內到期牆覆蓋倍數</td><td>現金÷兩年內到期債務（保守＝全部計息債務53.11億）</td><td class="num">1.78倍</td><td>&lt;1倍警戒；1～1.5倍偏弱</td><td><span class="badge b-ok">✅</span> 惟短期借款半年內增加約19億，依賴持續續約</td></tr>
+<tr><td>流動比率／速動比率</td><td>流動資產÷流動負債；(流動資產－存貨)÷流動負債</td><td class="num">2.33倍／1.51倍</td><td>&lt;1.2倍／&lt;1倍警戒</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>現金轉換天數（CCC）</td><td>存貨天數＋應收天數－應付天數</td><td class="num">約186天（2025Q4約164天、2024Q4約102天）</td><td>—</td><td><span class="badge b-warn">⚠️ 持續拉長</span>：存貨171天、應收68天、應付約53天（Q2）</td></tr>
+</table></div>
+</section>
+
+<section id="s3-debt">
+<h2 class="sec-title">債務到期時程</h2>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th class="num">金額(億)</th><th>到期</th><th>狀態</th></tr>
+<tr><td>短期借款</td><td class="num">49.85</td><td>1年內（歷程：2025Q1 0→Q2 2.34→Q3 4.26→Q4 17.36→2026Q1 30.90→Q2 49.85）</td><td><span class="badge b-ok">✅</span> Yahoo資產負債表</td></tr>
+<tr><td>一年內到期長期負債</td><td class="num">0.37</td><td>1年內</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>長期負債</td><td class="num">2.89</td><td>逐年到期金額—</td><td><span class="badge b-bad">❌</span> 年報／財報附註之到期級距未取得；⚠️疑為租賃負債</td></tr>
+<tr><td>應付公司債／可轉債</td><td class="num">0.00</td><td>—</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>其他負債（Q2新增）</td><td class="num">38.29</td><td>性質未明、多為非流動</td><td><span class="badge b-warn">⚠️</span> 疑似存入保證金，待查原文</td></tr>
+<tr><td>租賃負債</td><td class="num">—</td><td>—</td><td><span class="badge b-bad">❌</span> 單獨金額未取得（使用權資產2.01億）</td></tr>
+<tr><td>計劃：商業本票</td><td class="num">—</td><td>3/30法說會：規劃發行商業本票以充實營運資金（備料、供應鏈支持、三廠資本支出）</td><td><span class="badge b-ok">✅</span> 富果法說會紀錄；實際發行金額—</td></tr>
+</table></div>
+<p class="note">到期牆解讀：1年內到期計息債務約50.2億，全數集中在短期借款，且為「營運資金型」借款（支應備貨與應收），而非資本支出型；期末現金94.77億足以一次還清，但Q2現金增加很大一部分來自借款與不明來源之融資流入（融資+56.3億），而營業現金流僅+10.5億——現金「看起來多」不等於「自產現金多」。</p>
+</section>
+
+<section id="s3-capex">
+<h2 class="sec-title">CapEx分析</h2>
+<div class="tbl-wrap"><table>
+<tr><th>指標</th><th class="num">2024A</th><th class="num">2025A</th><th class="num">2026H1</th><th>判讀</th></tr>
+<tr><td>CapEx（估）(億)</td><td class="num">3.45</td><td class="num">3.32</td><td class="num">2.65</td><td><span class="badge b-warn">⚠️</span> PPE變動＋折舊</td></tr>
+<tr><td>CapEx／營收</td><td class="num">3.9%</td><td class="num">2.3%</td><td class="num">0.7%</td><td>輕資產：以模組組裝、測試與系統整合為主</td></tr>
+<tr><td>CapEx／OCF</td><td class="num">40%</td><td class="num">n/m（OCF為負）</td><td class="num">28.5%</td><td>CapEx遠小於獲利，現金壓力主要來自營運資金，非CapEx</td></tr>
+<tr><td>折舊／CapEx</td><td class="num">45%</td><td class="num">57%</td><td class="num">39%</td><td>固定資產約31.7億，擴充幅度小</td></tr>
+</table></div>
+<ul class="tight">
+<li><b>前瞻：</b>宜蘭三廠規劃規模大於一、二廠總和，2026年底動工、2028年完工；富邦推算土建成本應超過20億元、未來兩年落實（⚠️ 法人推算，非公司公告金額）。汐止總部研發中心擴增1,000坪，預計2026年5月完工。設備交期過長（可能達1年半以上）為擴產限制（3/30法說會）。</li>
+<li><b>業務模式判讀：</b>輕資產模式為主；2027～2028年CapEx占營收比預期由約1%升至約3%（基準DCF：2028年20億÷620億營收），仍屬可由營業現金流支應的水位。真正需要警惕的是「資本支出加碼的同時，若價格轉折造成營收收縮」——屆時折舊與固定成本將壓縮營益率。</li>
+</ul>
+</section>
+
+<section id="s3-peer">
+<h2 class="sec-title">同業對比（2026Q2）</h2>
+<div class="tbl-wrap"><table>
+<tr><th>公司</th><th class="num">負債比率</th><th class="num">存貨／總資產</th><th class="num">存貨天數</th><th class="num">現金－短期借款(億)</th><th class="num">現金／短期借款</th><th class="num">Q2 OCF(億)</th><th>備註</th></tr>
+<tr><td><b>宜鼎</b></td><td class="num">49.0%</td><td class="num">32.1%</td><td class="num"><b>171</b></td><td class="num">+44.9</td><td class="num">1.90倍</td><td class="num">+10.53</td><td>存貨天數最低；負債比近兩季快速上升</td></tr>
+<tr><td>群聯</td><td class="num">47.3%</td><td class="num">47.4%</td><td class="num">354</td><td class="num">+277.3</td><td class="num">8.27倍</td><td class="num">-10.24</td><td>存貨917.9億，絕對額最大</td></tr>
+<tr><td>威剛</td><td class="num">62.9%</td><td class="num">44.6%</td><td class="num">203</td><td class="num">-131.9</td><td class="num">0.33倍</td><td class="num">-1.16</td><td>槓桿最高、短債195.5億＞現金63.6億</td></tr>
+<tr><td>創見</td><td class="num">28.7%</td><td class="num">34.0%</td><td class="num">385</td><td class="num">+181.6</td><td class="num">—（無短債）</td><td class="num">+74.79</td><td>財務最穩健、獲利轉現金最佳</td></tr>
+<tr><td>十銓</td><td class="num">50.7%</td><td class="num">62.5%</td><td class="num">296</td><td class="num">-45.5</td><td class="num">0.18倍</td><td class="num">-6.00</td><td>存貨占資產62.5%，最高</td></tr>
+<tr><td>宇瞻</td><td class="num">55.8%</td><td class="num">56.7%</td><td class="num">240</td><td class="num">+0.3</td><td class="num">1.01倍</td><td class="num">+4.12</td><td>—</td></tr>
+</table></div>
+<p class="note">✅ 資料：Yahoo股市各公司2026Q2資產負債表／損益表／現金流量表；⚠️ 存貨天數＝期末存貨÷當季營業成本×91天；現金－短借未計長期借款。結論：<b>記憶體模組族群普遍在Q2大量囤貨（存貨天數200～385天）且營業現金流薄弱（六家中群聯、威剛、十銓三家Q2 OCF為負，宇瞻與宜鼎僅微幅為正，創見為例外）</b>，宜鼎在存貨天數、現金短債比上相對佳，但同樣屬於「盈餘高、現金少」的族群特徵。</p>
+</section>
+
+<section id="s3-final">
+<h2 class="sec-title">綜合診斷</h2>
+<div class="action-box">
+<h4>定性分類：景氣高峰期「帳面強健、現金轉換差」型（非槓桿警戒型）</h4>
+<p>流動比2.33倍、淨現金約42億、負債比49%，傳統償債風險低；但<b>盈餘品質</b>與<b>營運資金沉澱</b>是主要問題：H1稅後淨利158.3億、營業現金流僅9.3億（5.9%）；存貨、應收合計由86.8億（2025Q4）暴增至314.7億（Q2），占總資產68%。</p>
+</div>
+<h3>最大風險點：存貨跌價與價格轉折（具體化觸發數字）</h3>
+<p>記憶體模組廠在價格轉折時最典型的風險是「高價買進的庫存，在價格下滑時面臨跌價損失，且同時毛利率快速崩落」。宜鼎Q2存貨147.94億（較2025Q4的53.85億增2.7倍）、存貨天數171天（2024年約95天），Q2毛利率65%中亦有「低成本庫存轉嫁」成分（經濟日報報導；公司稱主要來自價值創造——兩種說法並存）。</p>
+<div class="tbl-wrap"><table>
+<tr><th>季度</th><th class="num">存貨(億)</th><th class="num">存貨天數</th><th class="num">存貨／總資產</th><th class="num">存貨／權益</th><th class="num">毛利率</th></tr>
+<tr><td>2024Q4</td><td class="num">16.44</td><td class="num">96</td><td class="num">16.9%</td><td class="num">21.4%</td><td class="num">29.1%</td></tr>
+<tr><td>2025Q2</td><td class="num">26.92</td><td class="num">109</td><td class="num">24.8%</td><td class="num">36.6%</td><td class="num">25.9%</td></tr>
+<tr><td>2025Q3</td><td class="num">28.74</td><td class="num">103</td><td class="num">23.9%</td><td class="num">35.5%</td><td class="num">32.8%</td></tr>
+<tr><td>2025Q4</td><td class="num">53.85</td><td class="num">154</td><td class="num">37.0%</td><td class="num">59.1%</td><td class="num">33.2%</td></tr>
+<tr><td>2026Q1</td><td class="num">83.71</td><td class="num">140</td><td class="num">34.0%</td><td class="num">57.0%</td><td class="num">59.1%</td></tr>
+<tr><td><b>2026Q2</b></td><td class="num"><b>147.94</b></td><td class="num"><b>171</b></td><td class="num"><b>32.1%</b></td><td class="num"><b>62.9%</b></td><td class="num"><b>65.0%</b></td></tr>
+</table></div>
+<svg viewBox="0 0 900 240" width="100%" role="img" aria-label="存貨（億元）與存貨天數" style="background:#fff;border:1px solid #e1e4ee;border-radius:10px"><text x="45" y="16" font-size="12.5" font-weight="700" fill="#1e2233">存貨（億元）與存貨天數</text><line x1="45" x2="890" y1="192.0" y2="192.0" stroke="#e5e7eb"/><text x="40" y="196.0" font-size="10.5" text-anchor="end" fill="#6b7280">0</text><line x1="45" x2="890" y1="151.0" y2="151.0" stroke="#e5e7eb"/><text x="40" y="155.0" font-size="10.5" text-anchor="end" fill="#6b7280">42</text><line x1="45" x2="890" y1="110.0" y2="110.0" stroke="#e5e7eb"/><text x="40" y="114.0" font-size="10.5" text-anchor="end" fill="#6b7280">85</text><line x1="45" x2="890" y1="69.0" y2="69.0" stroke="#e5e7eb"/><text x="40" y="73.0" font-size="10.5" text-anchor="end" fill="#6b7280">128</text><line x1="45" x2="890" y1="28.0" y2="28.0" stroke="#e5e7eb"/><text x="40" y="32.0" font-size="10.5" text-anchor="end" fill="#6b7280">170</text><rect x="71.8" y="176.1" width="87.3" height="15.9" fill="#c2410c" rx="3"/><text x="115.4" y="172.1" font-size="10.5" text-anchor="middle" fill="#1e2233">16.4</text><text x="115.4" y="206" font-size="10.5" text-anchor="middle" fill="#6b7280">24Q4</text><text x="115.4" y="220" font-size="10.5" text-anchor="middle" fill="#6b7280">96天</text><rect x="212.6" y="166.0" width="87.3" height="26.0" fill="#c2410c" rx="3"/><text x="256.2" y="162.0" font-size="10.5" text-anchor="middle" fill="#1e2233">26.9</text><text x="256.2" y="206" font-size="10.5" text-anchor="middle" fill="#6b7280">25Q2</text><text x="256.2" y="220" font-size="10.5" text-anchor="middle" fill="#6b7280">109天</text><rect x="353.4" y="164.3" width="87.3" height="27.7" fill="#c2410c" rx="3"/><text x="397.1" y="160.3" font-size="10.5" text-anchor="middle" fill="#1e2233">28.7</text><text x="397.1" y="206" font-size="10.5" text-anchor="middle" fill="#6b7280">25Q3</text><text x="397.1" y="220" font-size="10.5" text-anchor="middle" fill="#6b7280">103天</text><rect x="494.3" y="140.1" width="87.3" height="51.9" fill="#c2410c" rx="3"/><text x="537.9" y="136.1" font-size="10.5" text-anchor="middle" fill="#1e2233">53.9</text><text x="537.9" y="206" font-size="10.5" text-anchor="middle" fill="#6b7280">25Q4</text><text x="537.9" y="220" font-size="10.5" text-anchor="middle" fill="#6b7280">154天</text><rect x="635.1" y="111.2" width="87.3" height="80.8" fill="#c2410c" rx="3"/><text x="678.8" y="107.2" font-size="10.5" text-anchor="middle" fill="#1e2233">83.7</text><text x="678.8" y="206" font-size="10.5" text-anchor="middle" fill="#6b7280">26Q1</text><text x="678.8" y="220" font-size="10.5" text-anchor="middle" fill="#6b7280">140天</text><rect x="775.9" y="49.3" width="87.3" height="142.7" fill="#c2410c" rx="3"/><text x="819.6" y="45.3" font-size="10.5" text-anchor="middle" fill="#1e2233">147.9</text><text x="819.6" y="206" font-size="10.5" text-anchor="middle" fill="#6b7280">26Q2</text><text x="819.6" y="220" font-size="10.5" text-anchor="middle" fill="#6b7280">171天</text></svg>
+<h3>存貨跌價損失敏感度（Q2存貨147.94億）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>可變現淨值低於成本幅度</th><th class="num">稅前損失(億)</th><th class="num">稅後(億)</th><th class="num">每股影響(元)</th><th class="num">占Q2 EPS</th><th class="num">占現價</th></tr>
+<tr><td>5%</td><td class="num">7.4</td><td class="num">5.8</td><td class="num">5.9</td><td class="num">5.5%</td><td class="num">0.45%</td></tr>
+<tr><td>10%</td><td class="num">14.8</td><td class="num">11.7</td><td class="num">11.9</td><td class="num">10.9%</td><td class="num">0.91%</td></tr>
+<tr><td>20%</td><td class="num">29.6</td><td class="num">23.4</td><td class="num">23.8</td><td class="num">21.8%</td><td class="num">1.82%</td></tr>
+<tr><td>30%</td><td class="num">44.4</td><td class="num">35.1</td><td class="num">35.7</td><td class="num">32.7%</td><td class="num">2.72%</td></tr>
+</table></div>
+<p class="note">⚠️ 自算：稅率21%、股數98.28M。重點洞察：<b>單純帳面跌價損失相對於目前獲利規模並不大</b>（即使跌價30%，每股約35.7元，不到現價3%）；真正殺傷力在於<b>毛利率與營收規模同步下修</b>——Q3預估營收268億，毛利率每掉10個百分點，單季營業利益少約26.8億、約21.5元EPS（約Q3E EPS的18.6%）；而股價是以「高峰盈利」折價後的7倍PE定價，EPS下修會直接放大為股價跌幅。</p>
+<h3>風險觸發數字儀表板</h3>
+<div class="tbl-wrap"><table>
+<tr><th>指標</th><th class="num">目前值</th><th class="num">警戒觸發</th><th>說明</th></tr>
+<tr><td>存貨天數</td><td class="num">171天</td><td class="num">≥200天</td><td>2024年約95天、同業上緣385天</td></tr>
+<tr><td>存貨／總資產</td><td class="num">32.1%</td><td class="num">≥40%</td><td>2025Q4曾達37.0%</td></tr>
+<tr><td>單季毛利率</td><td class="num">65.0%（Q3E 58.8%）</td><td class="num">&lt;50%</td><td>2025全年僅31.1%；&lt;50%代表高峰紅利明顯消退</td></tr>
+<tr><td>月營收MoM</td><td class="num">+2.2%（8月）</td><td class="num">連2個月&lt;0</td><td>動能已由+35.8%（3月）遞減至+2.2%</td></tr>
+<tr><td>合約價趨勢（TrendForce）</td><td class="num">Q4 DRAM +10～15%、NAND +15～20%</td><td class="num">出現季減</td><td>6/5分析師預警「2027年初連續兩季下滑」</td></tr>
+<tr><td>應收天數</td><td class="num">68天</td><td class="num">&gt;80天</td><td>應收帳款166.8億，占流動資產40%</td></tr>
+<tr><td>營業現金流</td><td class="num">TTM -6.56億</td><td class="num">再連續2季為負</td><td>2025年Q2、Q3、Q4及2026Q1皆為負</td></tr>
+<tr><td>短期借款／現金</td><td class="num">52.6%</td><td class="num">&gt;80%</td><td>短借半年內由30.9→49.9億</td></tr>
+</table></div>
+<h3>安全邊際計算</h3>
+<p>年化EBIT（H1×2）約399.9億元。<b>償債面：</b>因利息支出未取得，無法反推精確覆蓋率；假設全數計息債務53.11億以5%計息（⚠️ 假設），年利息約2.66億，利息覆蓋率若以5倍為警戒，EBIT只需維持約13.3億／年——可下滑約96.7%才觸及警戒，償債面安全邊際極大。<b>獲利面：</b>若營益率由Q2的58.6%回到2025年水準16.8%，以Q2營收計EBIT仍約37.7億／季（-71%），但EPS將由約109元降至約31元量級（⚠️ 粗估：37.7億×(1-21%)＋非營業收益約0.7億，÷98.28M股），與現價7.2倍PE所隱含的「永續EPS約180元」差距巨大——這才是本檔的真實安全邊際問題：<b>財務體質不是弱點，估值對盈利持續性的依賴才是。</b></p>
+</section>
+
+<hr class="divider">
+<section id="final-action">
+<h2 class="sec-title">最終操作建議（研究框架參考，非個人化投資建議）</h2>
+<div class="action-box">
+<h4>總結：基本面爆發已兌現、景氣高峰折價定價，現價缺乏安全邊際；「EPS守得住多久」決定一切</h4>
+<p>宜鼎2026年上半年毛利率由31%躍升至63%、EPS 166.45元（≈過去20年累積），主因為DRAM／NAND價格上漲與AI基建需求；公司指引價格到2027年底只漲不跌，TrendForce亦預估Q4合約價續漲，近期基本面並未惡化。然而：①法人自己的EPS路徑已在Q3見頂（Q3E 115.62元、Q4隱含約85元、2027E 283元）；②月營收動能遞減；③獲利與現金流嚴重脫鉤（TTM稅後淨利173.5億 vs OCF -6.6億）；④股價回落（-36%）本質是對「高峰盈利」的本益比壓縮（26.5倍→7.2倍）。<b>目標價區間1,000～1,700元，現價1,310元約處中段</b>，上檔取決於2027年EPS是否守住235～335元，下檔取決於價格反轉速度。</p>
+<p><b>已持有：</b>基本面仍在上行軌道，可依下列風險觸發儀表板持續監控；估值已反映高峰盈利，對價值型投資人而言並非安全邊際充足的價位，部位大小宜與可承受之循環回檔幅度匹配（熊市DCF約500元代表-62%的極端情境）。</p>
+<p><b>未持有：</b>以安全邊際角度，較理想的觀察區為約1,000～1,100元，並採分批；若追價，需明確接受景氣循環股「高EPS低PE」陷阱。</p>
+<p><b>長期（3～5年）角度：</b>關鍵不在今年EPS，而在「景氣回落後的常態獲利率」——若AI系統／企業SSD／安提能把常態營益率墊到20%以上（基準情境假設22%），價值仍有支撐；若回到2023～2025年12～17%，則熊市DCF（約500元）更貼近長期價值。</p>
+<p><b>核心催化劑（近期）：</b>①9月營收（約10/6～10/10公布；需約96.3億才符合富邦Q3預估）②Q3財報（約11月中旬前）：毛利率是否守在58%以上、存貨與OCF③TrendForce對2027年Q1合約價的預測④宜蘭三廠動工與CapEx節奏⑤安提IPO進度⑥Samsung／SK Hynix與中國產能擴張進度。</p>
+</div>
+</section>
+
+<section id="gaps">
+<h2 class="sec-title">資料缺口清單（標示「—」／❌之欄位）</h2>
+<ul class="tight">
+<li>2028年EPS預估：—（無公開預估）</li>
+<li>利息支出／利息覆蓋率：—（財報附註未取得）</li>
+<li>長期負債逐年到期級距、租賃負債單獨金額：—</li>
+<li>Q2新增「其他負債」38.29億之性質（疑存入保證金）：—，未經驗證</li>
+<li>原始CapEx明細：—（以PPE變動＋折舊估算）</li>
+<li>單一客戶／前十大客戶集中度：—</li>
+<li>全球／台灣市佔率、競爭者各戰場市佔：—</li>
+<li>庫藏股買回：—（未見公告）</li>
+<li>Goodinfo歷史PE／PB河流圖、2017年逐季EPS、官方逐日PE：—（Goodinfo被擋；2018年PE改用年度基礎，TTM基礎無法計算）</li>
+<li>各券商目標價之EPS×PE完整公式：僅4/8一筆有原文公式；其餘「—」（隱含PE為本報告自算）</li>
+<li>多數券商報告之機構名稱與確切日期（部分稿件僅稱「本土法人／投顧」）：部分「—」</li>
+<li>Micron、SanDisk等國際同業財務／估值：—（本次未查證）</li>
+<li>2026/9月營收：—（尚未公布）</li>
+</ul>
+</section>
+
+<footer>
+<p><b>資料來源：</b>Yahoo奇摩股市（股價、財報、現金流、股利、法人買賣超；內嵌財報資料）、櫃買中心TPEx逐日成交資訊（歷史股價）、玩股網WantGoo（市值／PE／PB）、HiStock（月營收、歷年EPS、損益／資產／現金流）、公開資訊觀測站(MOPS)重訊（經Yahoo／MoneyDJ轉載：財報公告、處分不動產、股本變動）、富果直送法說會備忘錄（2026/3/30、2026/8/27）、nstock、富聯網（董監持股）、工商時報、經濟日報、聯合報、自由財經、ETtoday、TVBS、FTNN、今周刊、財報狗新聞、旺得富／Yahoo財經引述之券商報告（富邦及未點名之本土投顧／日系外資）、TrendForce（經聯合報／科技新報轉載，2026/9/30）。本次環境無Futu OpenD；Goodinfo全程被反機器人驗證阻擋，財報狗／鉅亨網預估頁無法讀取，相關欄位已標示❌或⚠️。歷史PE、DCF、反推試算、存貨敏感度皆為本報告依公開數據自行推算，方法與假設已於內文揭露。</p>
+<p style="margin-top:10px;"><b>免責聲明：</b>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</footer>
+
+</div>
+</body>
+</html>

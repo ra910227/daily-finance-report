@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜南亞科(2408) 三合一完整報告</title>
+<style>
+:root {
+  --bg: #ffffff; --bg2: #f7f8fc; --bg3: #eef0f7; --border: #e1e4ee;
+  --text: #1e2233; --text2: #6b7280; --accent: #4f46e5; --accent2: #4338ca;
+  --red: #dc2626; --green: #15803d; --gold: #b45309; --orange: #c2410c;
+  --blue: #2563eb; --purple: #7c3aed; --teal: #0d9488;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  line-height: 1.65; font-size: 15px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px 60px; }
+.hero { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #fff; padding: 36px 24px 30px; margin-bottom: 24px; }
+.hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+.hero .tag { display:inline-block; background: rgba(255,255,255,.18); padding: 3px 12px; border-radius: 20px; font-size: 12.5px; margin-bottom: 12px; }
+.hero h1 { margin: 0 0 6px; font-size: 25px; }
+.hero .sub { opacity: .92; font-size: 14px; margin-bottom: 18px; }
+.hero-stats { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-stat { background: rgba(255,255,255,.14); border-radius: 10px; padding: 10px 16px; min-width: 120px; }
+.hero-stat .l { font-size: 12px; opacity: .88; }
+.hero-stat .v { font-size: 18px; font-weight: 700; margin-top: 2px; }
+.hero-stat .s { font-size: 11px; opacity: .8; margin-top: 2px; }
+nav.toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 28px; font-size: 13.5px; }
+nav.toc .grp-title { font-weight: 700; color: var(--accent2); margin: 10px 0 6px; font-size: 13px; }
+nav.toc .grp-title:first-child { margin-top: 0; }
+nav.toc a { color: var(--text); text-decoration: none; display: inline-block; margin: 2px 14px 2px 0; }
+nav.toc a:hover { color: var(--accent); text-decoration: underline; }
+section { margin-bottom: 40px; scroll-margin-top: 16px; }
+h1.part { font-size: 19px; color: var(--accent2); border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin: 34px 0 20px; }
+h2.sec-title { font-size: 20px; border-left: 5px solid var(--accent); padding-left: 12px; margin: 0 0 14px; }
+h3 { font-size: 16.5px; margin: 22px 0 10px; color: var(--accent2); }
+p { color: var(--text); margin: 8px 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 8px; font-size: 13.5px; }
+th, td { border: 1px solid var(--border); padding: 7px 9px; text-align: left; vertical-align: top; }
+th { background: var(--bg3); font-weight: 700; white-space: nowrap; }
+tr:nth-child(even) td { background: #fbfbfd; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+.tbl-wrap { overflow-x: auto; }
+.badge { display:inline-block; padding: 2px 9px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.b-ok { background:#dcfce7; color:var(--green); }
+.b-warn { background:#fef3c7; color:var(--gold); }
+.b-bad { background:#fee2e2; color:var(--red); }
+.b-info { background:#e0e7ff; color:var(--accent2); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 14px; margin: 14px 0; }
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.card h4 { margin: 0 0 6px; font-size: 14px; color: var(--accent2); }
+.card .big { font-size: 22px; font-weight: 700; }
+.scenario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 14px; margin: 14px 0; }
+.scenario-card { border-radius: 12px; padding: 16px; border: 1px solid var(--border); }
+.scenario-card.bear { background: #fef2f2; }
+.scenario-card.base { background: #eef2ff; }
+.scenario-card.bull { background: #f0fdf4; }
+.scenario-card h4 { margin: 0 0 8px; }
+.scenario-card ul { margin: 6px 0; padding-left: 18px; font-size: 13px; }
+.scenario-card .target { font-size: 20px; font-weight: 800; margin-top: 8px; }
+.risk-card { border-left: 4px solid var(--red); background: #fff5f5; padding: 12px 16px; border-radius: 8px; margin: 10px 0; }
+.risk-card.mid { border-left-color: var(--gold); background: #fffbeb; }
+.risk-card.ok { border-left-color: var(--green); background: #f0fdf4; }
+.action-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 16px 0; }
+.action-box h4 { margin-top: 0; color: var(--accent2); }
+.note { font-size: 12.5px; color: var(--text2); margin-top: 6px; }
+.moat-row { display:flex; align-items:center; gap:10px; margin:6px 0; font-size:13.5px; flex-wrap: wrap; }
+.moat-row .label { width: 120px; flex-shrink:0; }
+.stars { color: var(--gold); letter-spacing: 2px; }
+.divider { border:none; border-top:1px solid var(--border); margin: 30px 0; }
+footer { font-size: 12px; color: var(--text2); border-top: 1px solid var(--border); padding-top: 16px; margin-top: 40px; }
+.src-status { font-size:11.5px; }
+code { background: var(--bg3); padding: 1px 6px; border-radius: 4px; font-size: 12.5px; }
+.hl { background:#fff7d6; padding:0 3px; border-radius:3px; }
+ul.tight { margin: 6px 0; padding-left: 20px; }
+ul.tight li { margin: 3px 0; }
+.bars { display:flex; align-items:flex-end; gap:10px; height:170px; margin:14px 0 4px; padding:0 4px; border-bottom:1px solid var(--border); }
+.bar { flex:1; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; min-width:34px; }
+.bar .fill { width:100%; max-width:52px; background:linear-gradient(180deg,#6366f1,#4338ca); border-radius:5px 5px 0 0; }
+.bar .fill.est { background:repeating-linear-gradient(45deg,#c7d2fe,#c7d2fe 6px,#e0e7ff 6px,#e0e7ff 12px); border:1px dashed var(--accent); }
+.bar .val { font-size:11.5px; font-weight:700; margin-bottom:3px; }
+.barlab { display:flex; gap:10px; padding:0 4px; font-size:11.5px; color:var(--text2); }
+.barlab span { flex:1; text-align:center; min-width:34px; }
+@media (max-width: 640px) { .hero h1 { font-size: 20px; } body { font-size: 14.5px; } }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+<div class="hero">
+  <div class="hero-inner">
+    <span class="tag">個股小狐｜三合一完整報告（公司深度研究＋最新財報解析＋財務風險健檢）</span>
+    <h1>南亞科技(2408.TW，台灣證券交易所上市) Nanya Technology Corporation</h1>
+    <div class="sub">分析日期：2026/10/05（盤中，Yahoo Finance行情查證時間約12:03）　｜　產業：DRAM記憶體原廠（利基型／標準型DRAM，台塑集團，自有晶圓廠）</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="l">股價(10/05盤中)</div><div class="v">529 元</div><div class="s">+0.57%；10/02收盤526元</div></div>
+      <div class="hero-stat"><div class="l">市值</div><div class="v">約1.83兆元</div><div class="s">529元×3,450.2M股 ≈ US$575億</div></div>
+      <div class="hero-stat"><div class="l">52週區間（盤中）</div><div class="v">85 ～ 569 元</div><div class="s">高點8/28；現價距高點-7.0%</div></div>
+      <div class="hero-stat"><div class="l">PE(TTM)</div><div class="v">19.5 倍</div><div class="s">TTM EPS 27.15元（四季加總）</div></div>
+      <div class="hero-stat"><div class="l">PB</div><div class="v">5.66 倍</div><div class="s">每股淨值93.49元（2026Q2）</div></div>
+      <div class="hero-stat"><div class="l">TTM營收／毛利率</div><div class="v">1,805億／64.9%</div><div class="s">Q2單季毛利率79.5%</div></div>
+      <div class="hero-stat"><div class="l">成長象限</div><div class="v">景氣循環股</div><div class="s">高峰盈利區，價格斜率遞減</div></div>
+      <div class="hero-stat"><div class="l">Thesis成立度</div><div class="v">3.5 / 5</div><div class="s">景氣紅利已兌現、安全邊際不足</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<nav class="toc">
+  <div class="grp-title">摘要與資料說明</div>
+  <a href="#conflict">資料衝突解決摘要</a>
+  <a href="#summary">綜合總結：五維度卡片</a>
+  <div class="grp-title">① 公司深度研究</div>
+  <a href="#s1-basic">基本介紹</a>
+  <a href="#s1-engine">業務引擎分析</a>
+  <a href="#s1-thesis">核心Thesis與未來性</a>
+  <a href="#s1-comp">競爭格局</a>
+  <a href="#s1-quad">成長象限與護城河</a>
+  <div class="grp-title">② 最新財報解析</div>
+  <a href="#s2-beat">Beat/Miss與預估調整</a>
+  <a href="#s2-price">股價反應</a>
+  <a href="#s2-dcf">三情境DCF估值</a>
+  <a href="#s2-valuation">股價位階（PE／PB雙軌）</a>
+  <a href="#s2-anchor">估值歷史錨點（EPS表／歷史PE／反推試算）</a>
+  <a href="#s2-comps">Comps分析</a>
+  <a href="#s2-extra">額外優勢／風險</a>
+  <a href="#s2-target">投行目標價與操作建議</a>
+  <div class="grp-title">③ 財務風險健檢</div>
+  <a href="#s3-data">財務數據填表</a>
+  <a href="#s3-ratio">六大比率診斷</a>
+  <a href="#s3-debt">債務到期時程</a>
+  <a href="#s3-capex">CapEx分析</a>
+  <a href="#s3-peer">同業對比</a>
+  <a href="#s3-final">綜合診斷（最大風險點）</a>
+  <div class="grp-title">總結</div>
+  <a href="#final-action">最終操作建議</a>
+  <a href="#gaps">資料缺口清單</a>
+</nav>
+
+<section id="conflict">
+<h2 class="sec-title">資料衝突解決摘要</h2>
+<p>本次環境無Futu OpenD，數據改以：證交所開放資料API（OpenAPI，公司財報／資產負債表／月營收／股利／董監持股／股本）、Yahoo Finance行情與Yahoo股市內嵌財報、TWSE個股本益比／股價淨值比逐日資料（2017～2026）、TrendForce新聞稿與財經媒體取得。Goodinfo回應HTTP 403（Cloudflare擋下）、財報狗為動態載入，皆未能取得，不填推測值。以下為查證中遇到的衝突與採用依據：</p>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th>各來源數字</th><th>本報告採用</th><th>落差原因／說明</th></tr>
+<tr><td>股價（查證時點）</td><td>Yahoo Finance行情API 10/05 12:03：529元（+0.57%，前收526元）；Yahoo股市網頁快照同時點：527元（+1.0元、+0.19%）；10/02收盤526元（TWSE逐日資料、Yahoo行情一致）；任務起點資訊「約523元」</td><td>529元（10/05盤中12:03）；歷史比較／回落幅度另以10/02收盤526元標註</td><td>網頁快照與API抓取時間相差數十秒；起點資訊「523元、+0.57%」與前收526元不吻合（526×1.0057=529），故採API的529元。盤中價收盤前會變動。<span class="badge b-ok">✅</span></td></tr>
+<tr><td>已發行股數／市值</td><td>證交所公司基本資料：3,450,205,894股（含2026年4月私募351,578,000股）；證交所外資持股表分母仍為3,098,627,894股；Q2 EPS 14.66元對應加權股數約3,424M股（501.92億÷14.66）</td><td>市值=529元×3,450.2M股＝約1.825兆元（US$約575億，匯率31.76）</td><td>私募股4/8才生效，故Q1加權股數約3,099M、Q2約3,424M，造成EPS與PE口徑差異；外資持股比例分母未更新，詳見Part 2「額外優勢／風險」。<span class="badge b-ok">✅</span></td></tr>
+<tr><td>Q2單季EPS</td><td>14.66元（公司法說／各媒體）；14.55元（中信投顧，加計私募後股本口徑）</td><td>14.66元</td><td>口徑差異（私募股加權），非數據錯誤。<span class="badge b-ok">✅</span></td></tr>
+<tr><td>PE(TTM)</td><td>證交所／Yahoo：20.41倍（10/02，收盤526元，隱含TTM EPS≈25.8元＝近四季淨利889億÷現有股本3,450M股）；本報告：529÷27.15＝19.5倍（四季EPS逐季加總：0.50＋3.58＋8.41＋14.66）</td><td>19.5倍（並揭露官方20.41倍）</td><td>官方以現有股本回算，逐季EPS加總以當時加權股數計；差約5%。<span class="badge b-ok">✅</span></td></tr>
+<tr><td>2026年EPS預估</td><td>FactSet共識中位數62.92元（9/14，14位分析師，區間40.62～77.5元）；瑞銀76.97元（9/22報導）；凱基75.1元（7/10）；福邦66.55元、富邦59.16元、中信56.91元、統一61.61元（7/13）</td><td>以區間呈現；本報告基準自估76.1元⚠️</td><td>FactSet共識較落後（7～9月多家上修，且7～8月實際營收已知）；各家預估日期不同。逐一列示於Part 2目標價表。</td></tr>
+<tr><td>現金部位</td><td>公司法說：現金1,984億元（198.4B）；Yahoo資產負債表現金及約當現金2,176億元</td><td>計算淨現金用2,176億（減計息負債184億＝1,992億）</td><td>⚠️ 推論：差額約192億可能為三個月以上定期存款或限制性資金分類不同，附註未取得。</td></tr>
+<tr><td>資本支出</td><td>董事會上限由520億上調至697億元（8月）；上半年實際約69億元（法說）；Yahoo「投資活動現金流」H1合計-70.6億元</td><td>CapEx歷史值以「投資現金流」為代理（⚠️），預算以公司公告為準</td><td>財報「購置不動產廠房設備」明細未取得，投資現金流含其他投資項目；Q2公司自報FCF 509.67億 vs Yahoo 516.2億，差異可能來自此。</td></tr>
+<tr><td>媒體數字單位</td><td>部分AI摘要／轉載把「億」寫成billion或兆（如「NT$825.49 billion」「4,800億元」被誤譯）</td><td>一律以證交所OpenAPI原始數字為準（仟元換算）</td><td>例：Q2淨利501.92億（=50,191,769仟元）；Q2營收825.49億（=82,549,073仟元）<span class="badge b-ok">✅</span></td></tr>
+<tr><td>CXMT市佔</td><td>TrendForce 2Q26新聞稿摘要未列CXMT；二手轉述稱9.5%；CXMT招股書稱2025年市佔7.67%、2027年約12%</td><td>9.5%僅作參考並標⚠️；以招股書數字為主</td><td>二手轉述數字未能回溯至原報告。</td></tr>
+</table></div>
+<p class="note">狀態標示：<span class="badge b-ok">✅已驗證</span>＝本次查詢成功取得並附來源；<span class="badge b-warn">⚠️估算</span>＝本報告依公開數據自行推算（附方法）；<span class="badge b-bad">❌無法取得</span>＝查無資料，欄位填「—」，不填推測值。</p>
+</section>
+
+<section id="summary">
+<h2 class="sec-title">綜合總結：五維度快照</h2>
+<div class="card-grid">
+  <div class="card"><h4>Thesis成立度</h4><div class="big">3.5 / 5</div><div class="note">DRAM供給吃緊→毛利率79.5%、Q2 EPS 14.66元已兌現；LTA使週期底部上移、新廠擴產仍待驗證；現價缺乏安全邊際</div></div>
+  <div class="card"><h4>護城河強度</h4><div class="big stars">★★☆☆☆</div><div class="note">11/25：全球DRAM市佔僅1.7%、規模與成本劣於三大原廠與CXMT；自有晶圓廠、台塑集團與淨現金是底氣，但非定價者</div></div>
+  <div class="card"><h4>成長象限</h4><div class="big">景氣循環股</div><div class="note">Peter Lynch框架：典型Cyclical，目前處於「價格仍漲、斜率遞減」的高峰盈利區（TrendForce合約價漲幅Q2約+58～63%→Q3+13～18%→Q4+10～15%）</div></div>
+  <div class="card"><h4>財務體質</h4><div class="big">極強（高峰）</div><div class="note">淨現金約1,992億（約58元／股）、流動比6.9倍、負債比16.8%、TTM OCF 1,087億；真正風險在CapEx（2027年規劃約2,000億以上）與折舊波</div></div>
+  <div class="card"><h4>目標價區間</h4><div class="big">380～600 元</div><div class="note">中樞約480元（≈5倍×2027E基準EPS 95.8元）；DCF基準339／牛598；現價529元位於區間上半段，風險報酬不對稱</div></div>
+</div>
+<div class="action-box">
+<h4>一句話結論</h4>
+<p><b>基本面是循環史上最強的一輪（Q2毛利率79.5%、營益率73.7%、淨現金1,992億），但股價已用「2027年EPS仍近100元」定價：以基準2027E EPS 95.8元計僅5.5倍，等於歷史谷底PE（2022年5.2倍）；PB 5.66倍則是2017～2026年歷史第97.6百分位。</b>這不是「便宜的低PE」，而是循環股「高EPS、低PE」的典型高峰定價。已持有者可續抱並設風控；未持有者不宜在529元追價，較合理的分批觀察區約380～420元。</p>
+</div>
+</section>
+<h1 class="part">① 公司深度研究</h1>
+
+<section id="s1-basic">
+<h2 class="sec-title">基本介紹</h2>
+<div class="card-grid">
+  <div class="card"><h4>市值</h4><div class="big">約1.83兆</div><div class="note">529元×3,450.2M股 ✅；US$約575億（USD/TWD 31.76）</div></div>
+  <div class="card"><h4>TTM營收／YoY</h4><div class="big">1,805億</div><div class="note">近四季（Q3'25～Q2'26）加總 ✅；前一個TTM約324億，約+456%⚠️</div></div>
+  <div class="card"><h4>TTM毛利率／營益率</h4><div class="big">64.9%／57.5%</div><div class="note">Q2單季79.5%／73.7%；上半年累計75.2%／69.1% ✅</div></div>
+  <div class="card"><h4>TTM自由現金流</h4><div class="big">977億</div><div class="note">OCF 1,087億－投資現金流110億（代理）⚠️；Q2公司自報FCF 509.67億</div></div>
+  <div class="card"><h4>全球DRAM市佔</h4><div class="big">1.7%</div><div class="note">TrendForce 2Q26：營收US$26.12億，全球第5（Samsung 39.4%、SK hynix 24.9%、Micron 23.3%）✅</div></div>
+  <div class="card"><h4>股東結構</h4><div class="big">南亞塑膠26.3%</div><div class="note">907.3M股，設質0 ✅；私募引進Sandisk 4%、Kioxia 2%、Solidigm 2%、Cisco 2%</div></div>
+</div>
+<p><b>公司定位：</b>台塑集團旗下DRAM製造商（1995年成立、2000年上市），新北泰山自有晶圓廠，專注利基型／標準型DRAM（DDR4／LPDDR4為主、DDR5與DDR3各約10%）；董事長鄒明仁、總經理李培瑛 ✅（證交所公司基本資料）。與宜鼎(5289)等模組廠不同，南亞科是上游原廠，直接承擔DRAM合約價／現貨價循環與折舊／固定成本槓桿，損益波動幅度更大；2026年Q2毛利率79.5%，與Micron最新一季GAAP毛利率86.8%、SK hynix Q2營業利益率76%同處歷史高位。</p>
+<h3>近4期歷史財務摘要（單位：億元新台幣）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th class="num">2025Q3</th><th class="num">2025Q4</th><th class="num">2026Q1</th><th class="num">2026Q2</th><th class="num">TTM</th></tr>
+<tr><td>營收</td><td class="num">187.8</td><td class="num">300.9</td><td class="num">490.9</td><td class="num">825.5</td><td class="num">1,805.1</td></tr>
+<tr><td>營收YoY</td><td class="num">+131%</td><td class="num">+357%</td><td class="num">+582.9%</td><td class="num">+684.2%</td><td class="num">—</td></tr>
+<tr><td>毛利率</td><td class="num">18.4%</td><td class="num">49.0%</td><td class="num">67.9%</td><td class="num">79.5%</td><td class="num">64.9%</td></tr>
+<tr><td>營業利益（營益率）</td><td class="num">11.2（6.0%）</td><td class="num">117.8（39.1%）</td><td class="num">301.1（61.3%）</td><td class="num">608.3（73.7%）</td><td class="num">1,038.4（57.5%）</td></tr>
+<tr><td>稅後淨利</td><td class="num">15.6</td><td class="num">110.9</td><td class="num">260.6</td><td class="num">501.9</td><td class="num">889.1</td></tr>
+<tr><td>EPS（元）</td><td class="num">0.50</td><td class="num">3.58</td><td class="num">8.41</td><td class="num">14.66</td><td class="num">27.15</td></tr>
+<tr><td>營業現金流</td><td class="num">57.6</td><td class="num">155.0</td><td class="num">315.5</td><td class="num">558.6</td><td class="num">1,086.7</td></tr>
+<tr><td>存貨（存貨天數）</td><td class="num">320.6（191天）</td><td class="num">272.9（162天）</td><td class="num">243.3（140天）</td><td class="num">215.3（116天）</td><td class="num">—</td></tr>
+</table></div>
+<p class="note">來源：Yahoo股市內嵌季報（來源為公司合併財報，仟元換算）、證交所OpenAPI（H1與Q2資產負債表核對無誤）✅；存貨天數=期末存貨÷當季營業成本×91，⚠️本報告自算。YoY中2025Q3／Q4為本報告以Yahoo逐季數字自算⚠️。</p>
+
+<h3>2026年月營收（億元）</h3>
+<div class="bars">
+  <div class="bar"><div class="val">153.1</div><div class="fill" style="height:34%"></div></div>
+  <div class="bar"><div class="val">156.1</div><div class="fill" style="height:35%"></div></div>
+  <div class="bar"><div class="val">181.7</div><div class="fill" style="height:41%"></div></div>
+  <div class="bar"><div class="val">254.9</div><div class="fill" style="height:57%"></div></div>
+  <div class="bar"><div class="val">276.7</div><div class="fill" style="height:62%"></div></div>
+  <div class="bar"><div class="val">293.9</div><div class="fill" style="height:66%"></div></div>
+  <div class="bar"><div class="val">438.7</div><div class="fill" style="height:98%"></div></div>
+  <div class="bar"><div class="val">446.9</div><div class="fill" style="height:100%"></div></div>
+  <div class="bar"><div class="val">—</div><div class="fill est" style="height:100%"></div></div>
+</div>
+<div class="barlab"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月(未公布)</span></div>
+<p class="note">1月153.1億、3月181.7億為由「2月156.07億較1月+1.9%」「4月254.91億較3月+40.3%」及Q1合計490.9億回推⚠️；2、4、5、6月來自technews引述公司公告，7月438.68億、8月446.90億（證交所OpenAPI 8月44,690,268仟元✅）。8月MoM僅+1.9%，7月MoM為+49.3%——月增動能明顯放緩。9月營收尚未公布（❌）。</p>
+</section>
+
+<section id="s1-engine">
+<h2 class="sec-title">業務引擎分析</h2>
+<h3>產品線拆解（2026Q2法說會）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>產品線</th><th>營收占比</th><th>觀察</th></tr>
+<tr><td>DDR4＋LPDDR4</td><td>&gt;70%（Q1法說會為&gt;75%）</td><td>三大原廠DDR4陸續EOL、產能轉向HBM／DDR5，利基型DDR4缺貨是本輪最大紅利來源；統一投顧警示DDR4長期仍有萎縮趨勢。</td></tr>
+<tr><td>DDR5</td><td>約10%</td><td>占比低主因產能受限（vocus轉述法說會），公司短期無大幅提高DDR5比重的規劃（統一投顧）。</td></tr>
+<tr><td>DDR3（含LPDDR3）</td><td>約10%</td><td>消費端DDR3／DDR2「回頭用舊世代換取供貨量」造成新一波舊世代需求（TrendForce：DDR2合約價2Q26+55～60%、3Q26再+35～40%）。</td></tr>
+<tr><td>客製化AI（UWIO／WoW）</td><td>初期貢獻</td><td>董事長稱客製化高頻寬記憶體2027上半年貢獻增加；富邦投顧「推測」已入列高通HBC記憶體協力廠、負責LPDDR5 TSV堆疊（⚠️法人推測，非公司公告）。</td></tr>
+</table></div>
+<h3>終端應用與客戶結構</h3>
+<ul class="tight">
+<li><b>AI基礎設施／伺服器產品：</b>2026上半年營收占比已超過20%；客戶含輝達、Google、高通、英特爾（經濟日報報導）✅。</li>
+<li><b>廣泛消費性（含車用、工控）：</b>占比逾60%（vocus法說會筆記）✅。更細的PC／伺服器／車用／工控／網通切割：❌（各媒體說法不一致，不填）。</li>
+<li><b>客戶廣度：</b>Q1法說會稱客戶逾800家、非中國營收逾80%（StockFeel筆記，⚠️單一轉述）；單一客戶集中度：❌（未取得）。</li>
+<li><b>定價模式：</b>由季度議價轉向年度長約（LTA）；LTA型態含固定價量與依市況按季浮動兩類（法說會）。TrendForce指出部分供應商因LTA定價機制，漲幅落後市場平均。</li>
+</ul>
+<h3>製程進展與產能</h3>
+<ul class="tight">
+<li><b>製程：</b>1B奈米（10奈米級）已逐季量產；1C／1D／1E開發中；EUV預計2028年新廠量產時導入 ✅（法說會、uanalyze）。</li>
+<li><b>新廠（5A／泰林新廠）：</b>總投資約US$160億（約4,800億元）；2027年初裝機、2027年下半年開始投片；2028年月投片3萬片、2029年約3.59萬片、最終約4.5萬片 ✅（公司重訊與法說）。2026～2029年資本支出上限3,466億元。</li>
+<li><b>出貨量：</b>Q2位元出貨與上季持平（ASP季增約60%），2026全年位元成長目標為「高十位數百分比」（約高個位數至十幾%，⚠️翻譯模糊）。現有廠月產能（wpm）：❌（未取得）。</li>
+</ul>
+<h3>資本支出與新廠（摘要，詳見Part 3）</h3>
+<p>2026年預算由520億（含遞延約60億）上調至不超過697億元（主要為5A新廠設備預付款）；上半年實際約69億；2027年內部初步規劃上看2,000多億元。折舊壓力將在2028年新廠投產後顯著升高。</p>
+</section>
+
+<section id="s1-thesis">
+<h2 class="sec-title">核心Thesis與未來性</h2>
+<h3>投資論點支柱</h3>
+<div class="tbl-wrap"><table>
+<tr><th>#</th><th>論點</th><th>判定</th><th>證據</th></tr>
+<tr><td>1</td><td>DRAM供不應求＋漲價，轉化為毛利率與EPS暴增</td><td><span class="badge b-ok">✅成立</span></td><td>毛利率由2023年-15.0%、2024年-1.2%、2025年22.5%，升至2026Q1 67.9%、Q2 79.5%；EPS逐季0.50→3.58→8.41→14.66元。TrendForce(9/30)預估4Q26一般型DRAM合約價+10～15%、NAND+15～20%。惟漲幅斜率已由Q2的約+58～63%收斂（Q3+13～18%、Q4+10～15%）。</td></tr>
+<tr><td>2</td><td>DDR4／舊製程缺貨紅利：三大原廠產能轉向HBM／DDR5</td><td><span class="badge b-ok">✅成立（時效有限）</span></td><td>媒體稱HBM到2027年將占全球DRAM晶圓產能近30%；SK hynix執行長(7/11)稱2027年將面臨史上最嚴重供應短缺、大和／摩根士丹利預期DDR4持續嚴重短缺。但統一投顧指出DDR4占比近7成、長期市場萎縮難避免。</td></tr>
+<tr><td>3</td><td>長約（LTA）使週期底部上移、獲利更平穩</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>富邦投顧稱LTA／SCA使週期底部「遠高於歷史區間」；但本輪從景氣谷底（2025Q2毛損）到高峰僅5季，尚無一個完整下行週期驗證；LTA亦限制漲幅（價格鎖定是雙面刃）。</td></tr>
+<tr><td>4</td><td>AI基礎設施與客製化AI記憶體打造第二曲線</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>AI基礎設施／伺服器占H1營收逾20%（公司口徑）；客製化HBM／WoW預計2027上半年貢獻增加，但目前營收規模小、法人說法部分為推測。</td></tr>
+<tr><td>5</td><td>新製程與新廠擴產帶來中長期成長</td><td><span class="badge b-warn">⚠️待驗證</span></td><td>5A新廠2028年月投片3萬片、導入EUV，總投資約US$160億（約等於現有PP&amp;E 898億的5倍）；執行風險、折舊與供給回補風險並存。</td></tr>
+<tr><td>6</td><td>獲利轉為現金、財務體質穩健</td><td><span class="badge b-ok">✅成立</span></td><td>TTM OCF 1,087億（淨利889億的122%）；Q2淨現金1,992億、短期借款0。與宜鼎「獲利與現金流脫鉤」形成對比（原廠沒有庫存沉澱問題）。</td></tr>
+</table></div>
+<h3>DRAM供需與價格循環位置（本報告判斷）</h3>
+<p>供給端：三大原廠（Samsung／SK hynix／Micron）合計占約87.6%（TrendForce 2Q26）；HBM排擠一般DRAM晶圓；Samsung與SK hynix宣示合計約400兆韓元投資、五年內倍增韓國記憶體產能（技術新聞7/11轉述），但擴產落地需數年；CXMT（長鑫）IPO募資約666億人民幣擴產、2027年月產能目標420K片。需求端：AI伺服器仍強，消費端（PC、手機、電視）對漲價的承受度已到極限（TrendForce）。<b>結論：價格仍在上行但二階導數轉負（Q2約+60%→Q3+15%→Q4+12%），位置偏向「高峰盈利區前段」；真正的轉折訊號是TrendForce合約價季減或南亞科月營收連續MoM下滑。</b></p>
+<h3>需監控風險（含觸發條件）</h3>
+<div class="risk-card"><b>風險1｜價格轉折（影響：極高）</b><br>觸發：TrendForce合約價QoQ轉負（目前4Q26預估+10～15%）；南亞科月營收連2個月MoM為負（8月已放緩至+1.9%）。影響：以2027E基準，ASP每-10%≈EPS-12.4元（-13%）。</div>
+<div class="risk-card"><b>風險2｜供給回補與中國產能（影響：高）</b><br>觸發：CXMT擴產／IPO後攻擊中低階DDR4／DDR5；7/28 CXMT掛牌首日飆漲逾500%、南亞科同日跌停（392.5元）即是情緒敏感度證明。</div>
+<div class="risk-card mid"><b>風險3｜自身擴產與折舊（影響：中高，時點2028起）</b><br>觸發：5A新廠2027H2開始投片、2028年3萬片；D&amp;A由目前約118億元／年升至⚠️2029年約400億元（本報告推算）。</div>
+</section>
+
+<section id="s1-comp">
+<h2 class="sec-title">競爭格局</h2>
+<div class="tbl-wrap"><table>
+<tr><th>競爭者</th><th>2Q26 DRAM營收／市佔（TrendForce）</th><th>最新營運／估值線索</th><th>對南亞科威脅度</th></tr>
+<tr><td>Samsung</td><td>US$609.8億／39.4%</td><td>首家HBM4量產；與SK hynix共同宣示倍增韓國記憶體產能</td><td><span class="badge b-warn">🟡 中</span>（主戰場為HBM／高階，利基DDR4已逐步退出）</td></tr>
+<tr><td>SK hynix</td><td>US$385.9億／24.9%</td><td>Q2營收79.32兆韓元、營業利益60.54兆韓元、營益率76%；執行長警示2027供給短缺</td><td><span class="badge b-warn">🟡 中</span></td></tr>
+<tr><td>Micron</td><td>US$360.0億／23.3%</td><td>FQ4（截至9/3）營收US$542.3億、GAAP毛利率86.8%、EPS US$32.87；FQ1'27財測營收US$615億</td><td><span class="badge b-warn">🟡 中</span>（同為高峰獲利，供給紀律相對一致）</td></tr>
+<tr><td>CXMT（長鑫）</td><td>⚠️約9.5%（二手轉述；招股書稱2025年市佔7.67%）</td><td>H1'26預估營收1,100～1,200億人民幣、歸母淨利500～570億；IPO募資約666億人民幣；2027年月產能目標420K片</td><td><span class="badge b-bad">🔴 高</span>（直接進入DDR4／DDR5利基與消費市場，並具政策資金）</td></tr>
+<tr><td>華邦電(2344)</td><td>US$9.98億（Q2 +75.8% QoQ）</td><td>H1'26毛利率61.2%、營益率42.3%、EPS 7.65元；PE 19.74倍／PB 4.88倍（10/02）</td><td><span class="badge b-warn">🟡 中</span>（利基型DRAM直接競爭、規模更小）</td></tr>
+<tr><td>力積電(6770)</td><td>DRAM僅US$1.15億</td><td>以晶圓代工為主；H1'26毛利率20.3%；PE 25.5倍／PB 2.8倍</td><td><span class="badge b-ok">🟢 低</span></td></tr>
+</table></div>
+<p class="note">威脅度為⚠️本報告主觀判斷。TrendForce數據：Nanya 2Q26 DRAM營收US$26.12億（+68.3% QoQ）、Winbond US$9.98億、PSMC US$1.15億（原文頁摘要）；CXMT比重未見於TrendForce新聞稿摘要，僅供參考。</p>
+</section>
+
+<section id="s1-quad">
+<h2 class="sec-title">成長象限判斷與護城河</h2>
+<h3>Peter Lynch框架：景氣循環股（Cyclical）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>判斷項目</th><th>證據</th><th>象限傾向</th></tr>
+<tr><td>獲利波動</td><td>年度EPS：2022年4.71元→2023年-2.40元→2024年-1.64元→2025年2.13元→2026年E約76元（逐季加總自證交所／Yahoo季報✅；2026E為⚠️本報告估算）</td><td>典型景氣循環</td></tr>
+<tr><td>獲利驅動</td><td>毛利率由-15%→79.5%幾乎完全由DRAM ASP決定（Q2 ASP季增約60%、位元出貨持平）</td><td>景氣循環</td></tr>
+<tr><td>估值行為</td><td>2025年底PE約90倍（193元÷2.13元）→今19.5倍：EPS先暴增、PE被壓縮；歷史上最低PE出現在EPS最高時（2018年10月2.89倍、2022年9月5.2倍）</td><td>循環股「高EPS、低PE」</td></tr>
+<tr><td>成長性</td><td>TTM營收約+456%⚠️，但屬價格驅動；位元成長僅約高十位數%</td><td>非穩定成長股</td></tr>
+</table></div>
+<p><b>結論：景氣循環股，循環位置＝高峰盈利區前段。</b>Lynch對循環股的提醒是「本益比最低時往往是EPS最高時」，不能把現價PE 19.5倍（TTM）或2027E的5.5倍解讀為便宜；關鍵是「EPS見頂的時點」。</p>
+<h3>護城河五維度評分（⚠️ 主觀判斷，1～5星）</h3>
+<div class="moat-row"><span class="label">規模效應</span><span class="stars">★☆☆☆☆</span>全球DRAM市佔1.7%，約Samsung的1/23；缺乏議價與成本規模（1/5）</div>
+<div class="moat-row"><span class="label">成本優勢</span><span class="stars">★★☆☆☆</span>自有晶圓廠、自主1B製程；但製程世代落後三大原廠、Q2營業成本率約20.5%雖低，來自價格而非單位成本領先（2/5）</div>
+<div class="moat-row"><span class="label">技術／製程</span><span class="stars">★★☆☆☆</span>1B量產、1C／1D／1E開發、2028導入EUV；仍屬追隨者（2/5）</div>
+<div class="moat-row"><span class="label">客戶黏著度</span><span class="stars">★★★☆☆</span>逾800家客戶、年度LTA、車用／工控認證長週期；但主體仍是通用規格、轉換成本有限（3/5）</div>
+<div class="moat-row"><span class="label">資本與集團支援</span><span class="stars">★★★☆☆</span>淨現金1,992億、台塑集團最大股東、Sandisk／Kioxia／Solidigm／Cisco策略性參股（3/5）</div>
+<p><b>合計 11/25 → ★★☆☆☆（弱）。</b>與一般商品型原廠相同：獲利的來源是供需循環，不是結構性護城河；2022Q4～2025Q2連續11季虧損（直到2025Q3才轉盈，uanalyze法說報導）是這個事實的註腳。</p>
+<div class="action-box">
+<h4>建議動作box（研究框架參考，非個人化投資建議）</h4>
+<p><b>當前研究結論：</b>基本面強勁但屬高峰盈利，現價529元落在本報告目標價區間（380～600元）上半段，缺乏安全邊際；風險報酬約「上檔+13%（600元）／下檔-28%（380元）」。</p>
+<p><b>加碼觀察條件：</b>①股價回落至約380～420元（≈4.0～4.4倍2027E基準EPS；≈2026年底每股淨值145元的2.6～2.9倍⚠️），且 ②TrendForce合約價續漲、南亞科月營收MoM不為負。</p>
+<p><b>風險升高訊號（減碼檢視）：</b>TrendForce合約價季減；月營收連2月MoM為負；單季毛利率&lt;75%（Q2為79.5%）；存貨天數&gt;200天；CXMT擴產／DDR4價格鬆動；5A新廠CapEx超過預算上限。</p>
+<p><b>每季監控指標：</b>月營收（每月10日前）、單季毛利率、存貨與存貨天數、OCF／FCF、CapEx與D&amp;A、TrendForce季度合約價預測、Samsung／SK hynix／CXMT擴產進度。</p>
+</div>
+</section>
+<h1 class="part">② 最新財報解析（2026年第2季）</h1>
+
+<section id="s2-beat">
+<h2 class="sec-title">Beat/Miss與預估調整</h2>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th class="num">2026Q2實際</th><th>預期／對照</th><th>判定</th></tr>
+<tr><td>單季EPS</td><td class="num">14.66元</td><td>市場共識12.44元、中信投顧自估13.25元（中信7/13報告）；大摩稱高於共識約15%</td><td><span class="badge b-ok">Beat 約+18%（對共識）</span> ⚠️自算</td></tr>
+<tr><td>營收</td><td class="num">825.49億</td><td>共識：❌（未查得）；QoQ +68.2%、YoY +684.2%</td><td><span class="badge b-info">—</span></td></tr>
+<tr><td>毛利率</td><td class="num">79.5%</td><td>共識：❌；Q1 67.9%（+11.6個百分點）；ASP季增約60%、位元出貨持平</td><td><span class="badge b-ok">創歷史新高</span></td></tr>
+<tr><td>營業利益率</td><td class="num">73.7%</td><td>Q1 61.3%（+12.4個百分點）；營業費用48億（占營收5.8%）</td><td><span class="badge b-ok">創新高</span></td></tr>
+<tr><td>稅後淨利</td><td class="num">501.92億</td><td>QoQ +92.6%；所得稅121.38億（稅率約19.5%）</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>上半年EPS</td><td class="num">23.38元</td><td>2025全年EPS 2.13元（約11倍）；上半年淨利762.5億</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>現金流</td><td class="num">OCF 558.6億</td><td>公司自報Q2 FCF 509.67億；現金1,984億（公司口徑）</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>Q3追蹤（7+8月）</td><td class="num">883.6億</td><td>券商Q3營收預估約1,407億（由1,010億上修；9/3報導，1,407億為由62.8%達成率反算⚠️）；7+8月達成率62.8%；若9月≈450億則Q3≈1,334億（約預估之95%）</td><td><span class="badge b-warn">略低於預期</span> ⚠️</td></tr>
+</table></div>
+<h3>全年指引與法人預估調整</h3>
+<ul class="tight">
+<li><b>公司指引：</b>無量化財測。法說會（7/10）：Q3營運與毛利率將較Q2進一步提升、「目前尚未看到Q4反轉向下跡象」；供給短缺預期持續數季；2026全年位元成長目標「高十位數百分比」；資本支出上限由520億上調至697億元（8月）。</li>
+<li><b>法人預估（FactSet，14位分析師）：</b>2026E EPS中位數由58.67元（7/11）→ 62.47元 → <b>62.92元（9/14）</b>（高77.5、低40.62、平均64.86）；2027E中位數105.9元（高145.96、低50.86、平均101.64）；2028E中位數106.54元（高203.64、低65.11、平均116.48）；FactSet預估目標價中位數617.5元（9/14）✅。</li>
+<li><b>外資上修：</b>瑞銀2026E／2027E EPS由62.35／103.66元（+18%／+17%，7/13）→ 76.97／116.41元（2028E 125.68元，工商時報9/22）；Q3 ASP假設由+32%上調至約+50%、Q3毛利率預估86.1%；目標價由495元→555元；大摩目標價550→580元；凱基520→720元。</li>
+</ul>
+<p class="note">9/22報導中的「外資」未於摘錄段落明確指出券商名稱，因與瑞銀7/13數字（62.35／103.66）同為上修脈絡，本報告歸入瑞銀系列但標⚠️（機構歸屬需以原文為準）。</p>
+</section>
+
+<section id="s2-price">
+<h2 class="sec-title">股價反應</h2>
+<div class="tbl-wrap"><table>
+<tr><th>日期</th><th>事件</th><th>股價反應</th></tr>
+<tr><td>3/25～3/26</td><td>私募公告：Kioxia、Sandisk、Solidigm、Cisco認購351,578千股，每股223.9元，募資787.18億元（4/8生效）</td><td>爆量漲停至249元（businesstoday）</td></tr>
+<tr><td>7/9～7/10</td><td>法說會前夕與法說（Q2 EPS 14.66元、毛利率79.5%）</td><td>7/9漲停435.5元；7/13開盤466.5元，惟韓股記憶體雙雄走弱，收-3.21%、421.5元</td></tr>
+<tr><td>7/15 → 7/28</td><td>高點489.5元（7/15）；7/28 CXMT（長鑫）A股掛牌首日飆漲逾500%、全球晶片股修正</td><td>7/28跌停392.5元（成交5.9萬張）；7/30盤中低點322元（距7/15高點-34%）</td></tr>
+<tr><td>8/3～8/4</td><td>7月營收438.68億（+719.6% YoY、MoM +49.3%）</td><td>連續兩日漲停，8/3收396.5元、8/4收436元（technews）</td></tr>
+<tr><td>8/28</td><td>盤中創高569元（收盤最高543元，8/31）</td><td>距今回落約7%</td></tr>
+<tr><td>9/15～10/02</td><td>9/15低點465.5元；TrendForce 9/30預估4Q26 +10～15%；Micron FQ4財報（9/30）超預期</td><td>10/02收526元；近4個交易日外資連續買超（+22.2M股）；Micron 10/02-2%、HDD股重挫（東芝擴產，影響有限）</td></tr>
+</table></div>
+<p><b>解讀：</b>2026年以來股價漲幅約+174%（193元→529元），但路徑是「-39%（1月高點326.5元→3月底198.5元）→+187%（至8/28）→-7%」，2026年以來單日漲跌幅達±9.5%以上共34次（上漲22次、下跌12次，⚠️自算自Yahoo日K），波動極大。TTM EPS由2.13元升至27.15元（12.7倍）、股價僅2.74倍，故<b>股價上漲主要由EPS推動，TTM PE由約90倍壓縮至19.5倍</b>（詳見Part 2估值錨點）。</p>
+</section>
+
+<section id="s2-dcf">
+<h2 class="sec-title">三情境DCF估值</h2>
+<p><b>方法：</b>以2026Q2資產負債表為起點（淨現金1,992億），預測2026H2～2030年自由現金流（FCF＝稅後營業利益＋折舊－CapEx－營運資金增加），終值採「循環中位（mid-cycle）正常化」營收與營益率而非高峰值，折現率11%（無風險利率＋beta約1.6的股票風險溢酬，並加循環股風險溢酬）、永續成長2%、稅率19%（2026H1實際約18.9%）、股數3,450.2M。DRAM合約價／現貨價循環以「ASP與毛利率路徑」直接表達：營業成本短期幾乎固定，ASP變動≈全額落入毛利。所有預測為⚠️本報告自行假設，非公司或法人數字。</p>
+<div class="scenario-grid">
+  <div class="scenario-card bear"><h4>熊市：2026Q4價格見頂、2027起ASP下滑</h4>
+  <ul><li>2027E營收3,600億、毛利率62%、EPS 48.6元（≈FactSet 2027E最低50.86元）</li><li>2028E毛利率35%、EPS 13.4元；2029E毛利率20%、EPS 3.5元（回到2025Q2～Q3水準）</li><li>2027 CapEx 2,000億＋新廠折舊→FCF 2027～2029合計轉負</li><li>終值：營收2,000億、營益率15%</li></ul>
+  <div class="target">約128元／股（-76%）</div></div>
+  <div class="scenario-card base"><h4>基準：2027維持高檔、2028起供給回補</h4>
+  <ul><li>2026E營收4,051億、毛利率81.8%、EPS 76.1元（Q3約25.7、Q4約27.0元）</li><li>2027E營收5,300億、毛利率80%、EPS 95.8元（低於共識中位105.9元）</li><li>2028E EPS 66.4元、2029E 37.9元、2030E 24.7元</li><li>終值：營收2,600億、營益率32%</li></ul>
+  <div class="target">約339元／股（-36%）</div></div>
+  <div class="scenario-card bull"><h4>牛市：緊俏延續至2028、LTA鎖價</h4>
+  <ul><li>2027E營收6,400億、毛利率85%、EPS 123.7元（對應凱基130.6元、玉山173.6元的低端）</li><li>2028E EPS 125.5元；2029E 96.0元；2030E 63.7元</li><li>終值：營收3,500億、營益率45%</li></ul>
+  <div class="target">約598元／股（+13%）</div></div>
+</div>
+<div class="tbl-wrap"><table>
+<tr><th>情境</th><th class="num">2026H2 FCF</th><th class="num">2027 FCF</th><th class="num">2028 FCF</th><th class="num">2029 FCF</th><th class="num">2030 FCF</th><th class="num">PV(FCF)</th><th class="num">PV(終值)</th><th class="num">股權價值*</th><th class="num">每股</th></tr>
+<tr><td>熊市</td><td class="num">956</td><td class="num">-44</td><td class="num">-55</td><td class="num">-199</td><td class="num">19</td><td class="num">713</td><td class="num">1,584</td><td class="num">4,407</td><td class="num"><b>128元</b></td></tr>
+<tr><td>基準</td><td class="num">1,095</td><td class="num">1,410</td><td class="num">1,711</td><td class="num">1,047</td><td class="num">788</td><td class="num">5,011</td><td class="num">4,393</td><td class="num">11,710</td><td class="num"><b>339元</b></td></tr>
+<tr><td>牛市</td><td class="num">1,184</td><td class="num">2,262</td><td class="num">3,600</td><td class="num">3,036</td><td class="num">2,180</td><td class="num">9,769</td><td class="num">8,317</td><td class="num">20,630</td><td class="num"><b>598元</b></td></tr>
+</table></div>
+<p class="note">單位：億元新台幣。*股權價值=PV(FCF)＋PV(終值)＋2026Q2淨現金1,992億，再以11%滾動至2026/10/05（×1.029）。預測CapEx：2026H2 628億（上限697億減H1實際約69億）、2027年2,000億（公司初步規劃「2,000多億」）、2028年900億、2029年700億、2030年500億；D&amp;A：62／150／280／400／450億；營運資金＝營收變動×12%。</p>
+<h3>機率加權與市場隱含情境</h3>
+<ul class="tight">
+<li><b>機率加權（熊25%／基準50%／牛25%）：</b>0.25×128＋0.5×339＋0.25×598＝<b>約351元</b>（-34%）。</li>
+<li><b>市場隱含：</b>現價529元要求「基準339元與牛市598元之間，約73%偏向牛市」才能成立 ⚠️（(529-339)÷(598-339)）。亦即市場已把「2028年之後仍維持高獲利」當成高機率事件。</li>
+<li><b>DCF的保守之處：</b>終值使用循環中位（營益率32%）而非高峰（73.7%）；若LTA與AI產品結構使中位營益率長期提高到45%，基準DCF升至約393元（見下表右欄，WACC 11%）。</li>
+</ul>
+<h3>敏感度：折現率 × 終值營益率（基準情境，每股元）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>WACC＼終值營益率</th><th class="num">20%</th><th class="num">26%</th><th class="num">32%</th><th class="num">38%</th><th class="num">45%</th></tr>
+<tr><td>10%</td><td class="num">306</td><td class="num">335</td><td class="num">363</td><td class="num">392</td><td class="num">426</td></tr>
+<tr><td>11%</td><td class="num">290</td><td class="num">315</td><td class="num"><b>339</b></td><td class="num">364</td><td class="num">393</td></tr>
+<tr><td>12%</td><td class="num">278</td><td class="num">299</td><td class="num">320</td><td class="num">341</td><td class="num">366</td></tr>
+<tr><td>13%</td><td class="num">267</td><td class="num">286</td><td class="num">304</td><td class="num">323</td><td class="num">345</td></tr>
+</table></div>
+<h3>DRAM價格循環敏感度（2027E基準，假設營業成本不變）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>2027年平均ASP變動</th><th class="num">-30%</th><th class="num">-20%</th><th class="num">-10%</th><th class="num">基準</th><th class="num">+10%</th></tr>
+<tr><td>EPS（元）</td><td class="num">58.6</td><td class="num">71.0</td><td class="num">83.4</td><td class="num">95.8</td><td class="num">108.2</td></tr>
+<tr><td>5倍PE對應股價（元）</td><td class="num">293</td><td class="num">355</td><td class="num">417</td><td class="num">479</td><td class="num">541</td></tr>
+</table></div>
+<p class="note">每±1% ASP≈±1.24元EPS（5,300億×1%×(1-19%)÷3,450M股）⚠️。表中EPS未考慮價格下跌時折舊與銷量的連動，僅供量級參考。</p>
+</section>
+
+<section id="s2-valuation">
+<h2 class="sec-title">股價位階評估（PE與PB雙軌）</h2>
+<div class="tbl-wrap"><table>
+<tr><th>指標</th><th>目前</th><th>歷史參照</th><th>位階判斷</th></tr>
+<tr><td>PE(TTM)</td><td>19.5倍（官方20.41倍）</td><td>2017～2022正EPS期間日均12.7倍、中位7.75倍；2021年均25.4倍、2022年均8.1倍；2018年低點2.89倍</td><td><span class="badge b-warn">⚠️偏高</span>：TTM EPS含2H25低盈利季度，被「分母尚未追上」墊高</td></tr>
+<tr><td>PE（以Q2年化EPS 58.6元）</td><td>9.0倍</td><td>Micron以FQ4年化EPS 131.5美元計約8.2倍⚠️</td><td><span class="badge b-warn">中</span></td></tr>
+<tr><td>PE（2027E基準EPS 95.8元）</td><td>5.5倍</td><td>2022年谷底PE 5.2倍；2018年2.89倍</td><td><span class="badge b-warn">已等同歷史谷底PE</span>（即EPS已被當高峰盈利折價）</td></tr>
+<tr><td>PB（每股淨值93.49元）</td><td>5.66倍（官方5.63倍）</td><td>2017～2025：低0.48倍（2025/01）、中位1.26倍、高2.56倍（2017）；2022年低0.79倍；2018年低0.97倍</td><td><span class="badge b-bad">🔴 歷史第97.6百分位</span>（2017～2026日資料）</td></tr>
+<tr><td>PB（2026年底每股淨值約145元⚠️）</td><td>3.65倍</td><td>同上</td><td><span class="badge b-warn">仍為歷史高點1.4倍</span></td></tr>
+<tr><td>PB（2027年底每股淨值約235元⚠️）</td><td>2.25倍</td><td>2017年高點2.56倍</td><td><span class="badge b-ok">回到歷史高峰PB帶內</span>（前提：EPS如預期累積）</td></tr>
+<tr><td>股價／營收(TTM)</td><td>10.1倍</td><td>—</td><td>—</td></tr>
+<tr><td>年化ROE（Q2）／TTM ROE</td><td>77.9%／37.2%</td><td>—</td><td>高ROE解釋了PB高；若ROE回到2022年約10～15%，PB 5.66倍站不住</td></tr>
+</table></div>
+<p class="note">PB歷史：證交所BWIBBU逐日資料（2017/01～2026/10/02）✅；歷史PE為證交所口徑（TTM EPS，EPS為負時無法計算）。2027年底BVPS＝93.49－1.35（8月股利）＋2026Q3～Q4 EPS 52.7＋2027E EPS 95.8－約5元股利≈235元，⚠️本報告推算。</p>
+<p><b>PE／PB雙軌結論：</b>PE軸顯示「若EPS守得住（2027E 95.8元），現價僅5.5倍」；PB軸顯示「以今天帳面淨值衡量是歷史高點的2.2倍」。兩軸矛盾的調解方式：<b>股價是用「未來兩年的盈餘累積」在換算PB與PE</b>——一旦EPS路徑被下修，PE維持低檔（5倍左右）、PB又沒有帳面支撐，二者皆無法提供緩衝。</p>
+</section>
+
+<section id="s2-anchor">
+<h2 class="sec-title">估值歷史錨點（強制規則1～3）</h2>
+<h3>1. EPS多年期表</h3>
+<div class="tbl-wrap"><table>
+<tr><th>年度</th><th class="num">EPS（元）</th><th>性質</th><th>來源／說明</th></tr>
+<tr><td>2023</td><td class="num">-2.40</td><td><span class="badge b-ok">A</span></td><td>逐季加總（-0.54、-0.25、-0.81、-0.80）</td></tr>
+<tr><td><b>2024A</b></td><td class="num"><b>-1.64</b></td><td><span class="badge b-ok">A（Actual）</span></td><td>逐季加總（-0.39、-0.26、-0.48、-0.51）；稅後淨損50.8億</td></tr>
+<tr><td><b>2025A</b></td><td class="num"><b>2.13</b></td><td><span class="badge b-ok">A（Actual）</span></td><td>公司法說／證交所：稅後純益66.1億（Q4 EPS 3.58元）</td></tr>
+<tr><td><b>2026E</b></td><td class="num"><b>62.92（共識中位）</b></td><td><span class="badge b-info">E（Estimate）</span></td><td>FactSet 9/14，14位；最新個別：瑞銀76.97、凱基75.1；本報告基準76.1⚠️；H1實際23.38元</td></tr>
+<tr><td><b>2027E</b></td><td class="num"><b>105.9（共識中位）</b></td><td><span class="badge b-info">E</span></td><td>FactSet區間50.86～145.96；瑞銀116.41、凱基130.6、玉山173.61；本報告基準95.8⚠️</td></tr>
+<tr><td><b>2028E</b></td><td class="num"><b>106.54（共識中位）</b></td><td><span class="badge b-info">E</span></td><td>FactSet區間65.11～203.64；瑞銀125.68、凱基203.6；本報告基準66.4⚠️</td></tr>
+</table></div>
+<h3>2. 歷史本益比參考</h3>
+<div class="tbl-wrap"><table>
+<tr><th>參考點</th><th class="num">PE</th><th class="num">對應PB</th><th>說明</th></tr>
+<tr><td>5年平均PE(TTM)（2021/10～2026/10）</td><td class="num">22.6倍（日均）；中位數13.4倍</td><td class="num">—</td><td><span class="badge b-warn">⚠️失真</span>：1,213個交易日中僅589日（49%）EPS為正可計算（2023年下半～2025年全為虧損，<b>無法計算</b>）；2026年Q1 TTM EPS極低造成PE一度達93～130倍，拉高平均。排除PE&gt;60後均值16.1倍。</td></tr>
+<tr><td>2022年最低PE（熊市谷底前後）</td><td class="num"><b>5.20倍</b></td><td class="num">0.79倍</td><td>2022/09/28，股價45.5元；注意此時TTM EPS仍是高峰EPS（約8.76元），是「高EPS低PE」</td></tr>
+<tr><td>2018年最低PE（上次主要市場修正）</td><td class="num"><b>2.89倍</b></td><td class="num">0.97倍</td><td>2018/10/25，股價45.75元（當年高點99元，3/21）；同樣為高峰EPS（約15.8元）</td></tr>
+<tr><td>2023年（虧損年度）</td><td class="num">無法計算（239日中104日為負EPS）</td><td class="num">0.89～1.44倍</td><td>虧損年度PE失效，改用PB</td></tr>
+<tr><td>2024～2025年</td><td class="num">無法計算（全年虧損／低盈利）</td><td class="num">0.48～3.83倍（2025/01最低0.48倍）</td><td>2024／2025上半年以PB評價；2025下半年PB由0.97倍衝至3.8倍</td></tr>
+</table></div>
+<p class="note">以上由證交所BWIBBU逐日資料（2017/01～2026/10/02，共2,375個交易日）自算 ✅；股價取Yahoo Finance日K。2017～2022正EPS期間日均PE 12.7倍、中位7.75倍；PB 2017～2025中位1.26倍、第10百分位0.87倍、第90百分位1.97倍。</p>
+<h3>3. 反推試算（必寫結論）</h3>
+<p>保守情境EPS採「FactSet 2027E最低估50.86元」（✅9/14），與本報告熊市2027E EPS 48.6元（⚠️）相互對照；基準EPS採95.8元（⚠️）；實際TTM EPS 27.15元作為已實現下限。</p>
+<div class="tbl-wrap"><table>
+<tr><th>本益比錨點＼EPS基礎</th><th class="num">TTM實際 27.15元</th><th class="num">保守 50.86元</th><th class="num">基準 95.8元</th></tr>
+<tr><td>2018年最低 2.89倍</td><td class="num">79</td><td class="num">147</td><td class="num">277</td></tr>
+<tr><td>2022年最低 5.20倍</td><td class="num">141</td><td class="num"><b>265</b></td><td class="num"><b>498</b></td></tr>
+<tr><td>2017～2022中位 7.75倍</td><td class="num">210</td><td class="num">394</td><td class="num">742</td></tr>
+<tr><td>2017～2022平均 12.7倍</td><td class="num">345</td><td class="num">646</td><td class="num">1,217</td></tr>
+<tr><td>5年平均 22.6倍（失真，不採用）</td><td class="num">614</td><td class="num">1,149</td><td class="num">N/M</td></tr>
+<tr><td><b>現價529元隱含PE</b></td><td class="num"><b>19.5倍</b></td><td class="num"><b>10.4倍</b></td><td class="num"><b>5.5倍</b></td></tr>
+</table></div>
+<div class="tbl-wrap"><table>
+<tr><th>PB錨點＼每股淨值基礎</th><th class="num">2026Q2實際 93.49元</th><th class="num">2026年底E 145元⚠️</th><th class="num">2027年底E（基準）235元⚠️</th><th class="num">2027年底E（熊市）187元⚠️</th></tr>
+<tr><td>2022年最低 0.79倍</td><td class="num">74</td><td class="num">115</td><td class="num">186</td><td class="num">148</td></tr>
+<tr><td>2018年最低 0.97倍</td><td class="num">91</td><td class="num">141</td><td class="num">228</td><td class="num">181</td></tr>
+<tr><td>2017～2025中位 1.26倍</td><td class="num">118</td><td class="num">183</td><td class="num">296</td><td class="num">236</td></tr>
+<tr><td>2018年平均 1.63倍</td><td class="num">152</td><td class="num">236</td><td class="num">383</td><td class="num">305</td></tr>
+<tr><td>2017年高點 2.56倍（2026年前歷史最高）</td><td class="num">239</td><td class="num">371</td><td class="num">602</td><td class="num">479</td></tr>
+<tr><td><b>現價529元隱含PB</b></td><td class="num"><b>5.66倍</b></td><td class="num"><b>3.65倍</b></td><td class="num"><b>2.25倍</b></td><td class="num"><b>2.83倍</b></td></tr>
+</table></div>
+<div class="action-box">
+<h4>反推結論：目前股價「靠EPS成長撐起」，而非靠本益比倍數擴張——但也沒有倍數緩衝</h4>
+<ul class="tight">
+<li><b>EPS軸：</b>2025年底→今，TTM EPS 2.13→27.15元（×12.7），股價193→529元（×2.74），TTM PE由約90倍<b>壓縮</b>至19.5倍。股價沒有靠「更高的PE」，而是靠EPS暴增與尚未實現的2027E EPS。</li>
+<li><b>預支程度：</b>用歷史谷底PE（2022年5.2倍）× 保守EPS 50.86元＝265元；用谷底PE × 基準EPS 95.8元＝498元。現價529元高於這兩者，等於「市場假設2027年EPS不只守住95.8元，且PE不低於谷底」。若採保守EPS，現價隱含PE 10.4倍＝2022年谷底的2倍、2018年谷底的3.6倍。</li>
+<li><b>PB軸：</b>帳面淨值法在保守與基準都比現價低（2027年底BVPS基準235元×歷史高點2.56倍＝602元才勉強持平現價之上）；PB從2025年初0.48倍升至5.66倍，才是真正的「倍數擴張」，其合理性完全建立在年化ROE近78%能否延續。</li>
+<li><b>判斷：</b>EPS成長支撐了股價，但EPS預期一旦下修，PE（已在歷史谷底區）與PB（遠高於歷史）都沒有緩衝——下檔是「EPS下修＋PB均值回歸」，而非單一因子。</li>
+</ul>
+</div>
+</section>
+
+<section id="s2-comps">
+<h2 class="sec-title">Comps分析</h2>
+<div class="tbl-wrap"><table>
+<tr><th>公司</th><th>股價（日期）</th><th>PE</th><th>PB</th><th>最新毛利率／營益率</th><th>淨現金／負債</th><th>備註</th></tr>
+<tr><td><b>南亞科 2408</b></td><td>529元（10/05）</td><td>19.5倍（TTM）；年化Q2 9.0倍</td><td>5.66倍</td><td>Q2 79.5%／73.7%</td><td>淨現金1,992億</td><td>DRAM原廠，Q2營收US$26億</td></tr>
+<tr><td>華邦電 2344</td><td>179.5元（10/05）</td><td>19.74倍（10/02 TWSE）</td><td>4.88倍</td><td>H1 61.2%／42.3%</td><td>負債比40.8%（資產2,930億、負債1,195億）</td><td>利基型DRAM／NOR，H1 EPS 7.65元</td></tr>
+<tr><td>力積電 6770</td><td>76.1元（10/05）</td><td>25.50倍</td><td>2.80倍</td><td>H1 毛利率20.3%</td><td>負債比34.6%</td><td>晶圓代工為主，DRAM占比低；營業利益含非典型項目，營益率不具可比性（—）</td></tr>
+<tr><td>Micron MU</td><td>US$1,074.89（10/02收盤）</td><td>14.5倍（FY26 GAAP EPS 74.33）；年化FQ4 8.2倍</td><td>⚠️約8.9倍（權益US$1,384億÷稀釋股數1,147M）</td><td>FQ4 86.8%／80.7%（US$437.5億÷542.3億）</td><td>現金US$734.8億、債務US$51.8億</td><td>FQ1'27財測：營收US$615億、EPS US$38.15</td></tr>
+<tr><td>SK hynix 000660</td><td>1,841,000韓元（10/02）</td><td>—（❌ EPS資料可信度不足，不填）</td><td>—</td><td>Q2營益率76%</td><td>—</td><td>Q2營收79.32兆韓元、營業利益60.54兆韓元</td></tr>
+<tr><td>（參考）宜鼎 5289</td><td>1,305元（10/05）</td><td>約7.2倍（同日完成之5289報告）</td><td>約5.4倍</td><td>2026Q2 65.0%（5289報告）</td><td>—</td><td>模組廠，無晶圓廠，存貨／應收壓力大，不宜直接套用</td></tr>
+</table></div>
+<p class="note">華邦電、力積電PE／PB來自證交所BWIBBU_ALL（10/02）✅；H1財報來自證交所OpenAPI✅；Micron數字來自SEC 8-K新聞稿✅，PB為⚠️自算（股數用稀釋股數）；宜鼎數字引自同一資料夾5289報告。</p>
+<p><b>Comps結論：</b>(1)以「年化最新季EPS」衡量，南亞科9.0倍vs Micron 8.2倍，估值相近；(2)以「Q3預估EPS年化（約103元）」計，南亞科約5.1倍，低於Micron依FQ1'27財測年化EPS 152.6美元算出的約7.0倍⚠️——台股DRAM原廠相對美股存在折價，但折價對應的是「規模小、製程落後、成長性受CapEx擴張稀釋、DDR4依賴度高」；(3)與華邦電相比，南亞科獲利率明顯更高（H1毛利率75.2% vs 61.2%）但PE接近，顯示市場為南亞科的價格槓桿與DDR4紅利付出了更高的預期。</p>
+</section>
+
+<section id="s2-extra">
+<h2 class="sec-title">額外優勢／風險</h2>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th>內容</th><th>狀態</th></tr>
+<tr><td>庫藏股</td><td>無買回公告；資產負債表「庫藏股票」欄位空白、母公司及子公司持有母公司庫藏股股數0（2026Q2）</td><td><span class="badge b-ok">✅無</span></td></tr>
+<tr><td>股利</td><td>2025年度每股現金股利：董事會原議1.50元（總額46.48億，約70%盈餘分配率），因私募增加股數，實際發放約1.35元（8月6日發放，除息已完成）；證交所殖利率0.26%</td><td><span class="badge b-ok">✅</span>（配發率：⚠️自算）</td></tr>
+<tr><td>法人持股</td><td>外資及陸資持有524.62M股，證交所表列持股比率16.93%（分母仍為3,098.6M股，若以現有3,450.2M股計約15.2%⚠️）；9/29～10/2外資每日買超：2,282張、11,753張、1,001張、7,171張（合計約22,206張，約NT$117億⚠️），投信10/02買超1,137張</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>董監／大股東持股</td><td>南亞塑膠907,303,775股（約26.3%），設質0；總經理李培瑛965,098股；其餘董事／經理人持股均為極小數（0.0～48萬股）；2026/3/11南亞塑膠公告將於3/12～12/31處分南亞科30,986張（約3,099萬股，當時價254元，預估處分利益63.6億），處分後持股比例將降至28.28%（以舊股本計）；實際處分進度：❌</td><td><span class="badge b-warn">⚠️大股東減持中</span></td></tr>
+<tr><td>策略性私募股東</td><td>Sandisk 4%、Kioxia 2%、Solidigm（SK hynix旗下）2%、Cisco 2%，每股223.9元；通常有3年轉讓限制（⚠️一般規定，非本報告查證公告）</td><td><span class="badge b-ok">✅優勢</span></td></tr>
+<tr><td>內部人交易（近期）</td><td>董監事個別買賣明細：❌（未取得）；台塑集團旗下3公司（台塑、台化、台塑化）曾於2025年底起分多波處分南亞科（第3波合計約5.69萬張、套現約96.5億元）</td><td><span class="badge b-warn">⚠️</span></td></tr>
+<tr><td>其他</td><td>3/31向Murata Machinery取得機器設備11.47億元；7月起AI基礎設施／伺服器占營收逾20%</td><td><span class="badge b-info">資訊</span></td></tr>
+</table></div>
+</section>
+
+<section id="s2-target">
+<h2 class="sec-title">投行目標價與操作建議</h2>
+<div class="tbl-wrap"><table>
+<tr><th>機構</th><th>日期</th><th>評等</th><th class="num">目標價(元)</th><th>EPS預估(2026／2027／2028)</th><th>公式／隱含倍數</th></tr>
+<tr><td>福邦投顧</td><td>7/13</td><td>強力買進</td><td class="num">601</td><td>66.55／105.13／—</td><td><b>7倍PE×85.84元（2026、2027年平均EPS）＝601元</b>（原文公式）✅</td></tr>
+<tr><td>中信投顧</td><td>7/13（9/3維持521）</td><td>增加持股</td><td class="num">521</td><td>56.91（調整後）／74.42／—</td><td><b>7倍PE×74.42元（2027E）＝521元</b>（原文公式）✅</td></tr>
+<tr><td>統一投顧</td><td>7/13</td><td>中立</td><td class="num">—（未揭露）</td><td>61.61／92.9／—</td><td>原文：明年PE僅5倍、上行空間受限；5×92.9＝464.5元⚠️推算（非原文目標價）</td></tr>
+<tr><td>富邦投顧</td><td>7/13</td><td>買進</td><td class="num">548</td><td>59.16／73.53／—</td><td>公式未揭露❌；548÷73.53＝7.5倍⚠️</td></tr>
+<tr><td>凱基投顧</td><td>7/10（9/3維持）</td><td>增加持股</td><td class="num">720（原520）</td><td>75.1／130.6／203.6</td><td>公式未揭露❌；720÷130.6＝5.5倍（2027E）⚠️</td></tr>
+<tr><td>群益投顧</td><td>9/3報導</td><td>買進</td><td class="num">635</td><td>—</td><td>未揭露❌</td></tr>
+<tr><td>玉山投顧</td><td>9/3報導</td><td>買進</td><td class="num">620</td><td>2027E 173.61</td><td>公式未揭露❌；620÷173.61＝3.6倍⚠️</td></tr>
+<tr><td>瑞銀</td><td>7/13</td><td>買進</td><td class="num">555（原495）</td><td>62.35／103.66／—（9/22報導外資數字76.97／116.41／125.68，⚠️歸屬待確認）</td><td>公式未揭露❌；555÷103.66＝5.4倍⚠️</td></tr>
+<tr><td>摩根士丹利</td><td>7/13</td><td>優於大盤</td><td class="num">580（原550）</td><td>—</td><td>未揭露❌（估2025～2028 EPS年複合成長216%）</td></tr>
+<tr><td>大和</td><td>7/13</td><td>買進</td><td class="num">650</td><td>—</td><td>未揭露❌</td></tr>
+<tr><td>美銀</td><td>7/13</td><td>買進</td><td class="num">660</td><td>—</td><td>未揭露❌</td></tr>
+<tr><td>不具名法人</td><td>8/11～8/13</td><td>強力買進</td><td class="num">1,000</td><td>2027E 140.92</td><td>公式未揭露❌；1,000÷140.92＝7.1倍⚠️（極端高標，未納入區間）</td></tr>
+<tr><td>FactSet共識</td><td>9/14</td><td>14位分析師</td><td class="num">617.5（中位）</td><td>62.92／105.9／106.54（中位）</td><td>—</td></tr>
+</table></div>
+<p class="note">統計：已揭露目標價的10家（不含統一與不具名1,000元）介於521～720元，中位約611元（601與620之平均）；多數目標價為7月法說會後、股價約420～470元時所設，現價529元已高於中信521元、富邦548元的目標。7倍PE屬法人常用的「高峰盈利」倍數；統一投顧僅給5倍。7/13 FactSet共識目標價中位555元→9/14 617.5元（+11%）。</p>
+<h3>本報告目標價區間與操作建議</h3>
+<div class="tbl-wrap"><table>
+<tr><th>方法</th><th class="num">低</th><th class="num">中</th><th class="num">高</th><th>說明</th></tr>
+<tr><td>PE法：5倍×2027E EPS</td><td class="num">293（ASP-30%）</td><td class="num">479（基準95.8）</td><td class="num">618（牛123.7）</td><td>5倍為歷史谷底PE帶（2022年5.2倍）與統一投顧倍數</td></tr>
+<tr><td>PE法：7倍×2027E基準EPS</td><td class="num">—</td><td class="num">671</td><td class="num">—</td><td>法人常用倍數；本報告視為上緣</td></tr>
+<tr><td>PB法：2.56倍×2026年底BVPS 145元</td><td class="num">—</td><td class="num">371</td><td class="num">—</td><td>2017年高點PB套用在今年底淨值</td></tr>
+<tr><td>DCF（熊／基準／牛）</td><td class="num">128</td><td class="num">339</td><td class="num">598</td><td>機率加權351元</td></tr>
+<tr><td>法人目標價（10家）</td><td class="num">521</td><td class="num">611</td><td class="num">720</td><td>多為7倍PE框架</td></tr>
+</table></div>
+<div class="action-box">
+<h4>目標價區間：380～600元（中樞約480元）</h4>
+<p>低檔380元≈PB 2.56倍×2026年底BVPS（371元）≈5.2倍×2026E EPS 76元（395元）；中樞480元≈5倍×2027E基準EPS 95.8元；高檔600元≈DCF牛市598元≈6.3倍×95.8元。現價529元位於區間上半段（高於中樞10%），上檔空間約+13%、下檔約-28%，風險報酬不對稱。</p>
+<p><b>操作建議（研究框架參考，非個人化投資建議）：</b>已持有者可續抱，不建議加碼；未持有者不宜在529元追價，觀察區約380～420元分批；若股價續漲逾600元（≥6.3倍2027E基準EPS），應考慮分批減碼。</p>
+</div>
+</section>
+<h1 class="part">③ 財務風險健檢</h1>
+
+<section id="s3-data">
+<h2 class="sec-title">財務數據填表（單位：億元新台幣）</h2>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th class="num">2024A</th><th class="num">2025A</th><th class="num">TTM（至2026Q2）</th><th>狀態／說明</th></tr>
+<tr><td>營收</td><td class="num">341.3</td><td class="num">665.9</td><td class="num">1,805.1</td><td><span class="badge b-ok">✅</span> 逐季加總</td></tr>
+<tr><td>稅後淨利</td><td class="num">-50.8</td><td class="num">66.1</td><td class="num">889.1</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>EBIT（營業利益）</td><td class="num">-105.5</td><td class="num">52.4</td><td class="num">1,038.4</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>利息支出</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="badge b-bad">❌</span> 財報附註未取得（Yahoo欄位定義不明，不採用）</td></tr>
+<tr><td>D&amp;A（折舊＋攤銷）</td><td class="num">161.4</td><td class="num">142.8</td><td class="num">124.3</td><td><span class="badge b-ok">✅</span> 現金流量表</td></tr>
+<tr><td>EBITDA</td><td class="num">55.9</td><td class="num">195.2</td><td class="num">1,162.6</td><td><span class="badge b-warn">⚠️</span> EBIT＋D&amp;A自算</td></tr>
+<tr><td>總資產（期末）</td><td class="num">2,067.1</td><td class="num">2,084.5</td><td class="num">3,877.6</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>總負債（期末）</td><td class="num">416.5</td><td class="num">379.1</td><td class="num">650.6</td><td><span class="badge b-ok">✅</span> 證交所OpenAPI核對</td></tr>
+<tr><td>股東權益（期末）</td><td class="num">1,650.5</td><td class="num">1,705.4</td><td class="num">3,227.0</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>計息債務</td><td class="num">252.6</td><td class="num">192.6</td><td class="num">184.0</td><td><span class="badge b-warn">⚠️</span> 短期借款＋應付商業本票＋長期負債（含公司債約40億）</td></tr>
+<tr><td>現金及約當現金</td><td class="num">619.0</td><td class="num">580.7</td><td class="num">2,176.0</td><td><span class="badge b-ok">✅</span> 公司口徑1,984億（見衝突表）</td></tr>
+<tr><td>營業現金流 OCF</td><td class="num">19.5</td><td class="num">185.7</td><td class="num">1,086.7</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>CapEx</td><td class="num">161.9</td><td class="num">141.1</td><td class="num">109.6</td><td><span class="badge b-warn">⚠️</span> 以投資活動現金流代理；H1'26公司自報約69億</td></tr>
+<tr><td>自由現金流 FCF</td><td class="num">-142.4</td><td class="num">44.6</td><td class="num">977.2</td><td><span class="badge b-warn">⚠️</span> OCF－CapEx代理</td></tr>
+</table></div>
+</section>
+
+<section id="s3-ratio">
+<h2 class="sec-title">六大比率診斷</h2>
+<div class="tbl-wrap"><table>
+<tr><th>比率</th><th class="num">2024A</th><th class="num">2025A</th><th class="num">2026Q2／TTM</th><th>診斷</th></tr>
+<tr><td>1. 淨負債／EBITDA</td><td class="num">淨現金（EBITDA極小，不具意義）</td><td class="num">-2.0倍</td><td class="num"><b>-1.7倍（淨現金）</b></td><td><span class="badge b-ok">🟢 無槓桿</span></td></tr>
+<tr><td>2. 利息覆蓋倍數（EBIT／利息）</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="badge b-bad">❌</span> 利息支出未取得。⚠️假設平均利率2%、計息債務184億＝年利息約3.7億，則覆蓋倍數約280倍（僅量級示意）</td></tr>
+<tr><td>3. 流動比率</td><td class="num">3.29倍</td><td class="num">5.71倍</td><td class="num"><b>6.91倍</b></td><td><span class="badge b-ok">🟢</span> 流動資產2,845億對流動負債412億</td></tr>
+<tr><td>4. 速動比率（扣存貨）</td><td class="num">2.22倍</td><td class="num">4.27倍</td><td class="num"><b>6.39倍</b></td><td><span class="badge b-ok">🟢</span></td></tr>
+<tr><td>5. 負債比（總負債／總資產）；計息債務／權益</td><td class="num">20.1%；15.3%</td><td class="num">18.2%；11.3%</td><td class="num"><b>16.8%；5.7%</b></td><td><span class="badge b-ok">🟢</span> 私募787億與盈餘使權益大增</td></tr>
+<tr><td>6. OCF／計息債務</td><td class="num">0.08倍</td><td class="num">0.96倍</td><td class="num"><b>5.91倍</b></td><td><span class="badge b-ok">🟢</span> 高峰期現金流可於2個月內還清全部計息債務</td></tr>
+</table></div>
+<div class="risk-card ok"><b>診斷：財務體質在景氣高峰屬「極強」。</b>流動性與償債能力並非問題；真正需要警惕的是這份體質是否依賴「高峰期現金流」，以及後續CapEx（2027年約2,000億以上）會不會在2028～2029年供給回補時變成低報酬資產。參考對照：2023年EBITDA僅8.7億、FCF-188.8億，2024年FCF -142.4億，當時靠短期借款（最高152億）與商業本票支撐。</div>
+</section>
+
+<section id="s3-debt">
+<h2 class="sec-title">債務到期時程</h2>
+<div class="tbl-wrap"><table>
+<tr><th>期末</th><th class="num">短期借款</th><th class="num">應付商業本票</th><th class="num">長期負債（含公司債）</th><th class="num">其中：應付公司債</th><th class="num">計息債務合計</th><th class="num">現金</th></tr>
+<tr><td>2024Q4</td><td class="num">145.4</td><td class="num">67.3</td><td class="num">39.9</td><td class="num">39.9</td><td class="num">252.6</td><td class="num">619.0</td></tr>
+<tr><td>2025Q2</td><td class="num">96.8</td><td class="num">37.9</td><td class="num">200.0</td><td class="num">40.0</td><td class="num">334.7</td><td class="num">525.7</td></tr>
+<tr><td>2025Q4</td><td class="num">50.6</td><td class="num">0</td><td class="num">142.0</td><td class="num">40.0</td><td class="num">192.6</td><td class="num">580.7</td></tr>
+<tr><td>2026Q1</td><td class="num">0</td><td class="num">0</td><td class="num">178.0</td><td class="num">40.0</td><td class="num">178.0</td><td class="num">862.8</td></tr>
+<tr><td>2026Q2</td><td class="num">0</td><td class="num">0</td><td class="num">184.0</td><td class="num">40.0</td><td class="num">184.0</td><td class="num">2,176.0</td></tr>
+</table></div>
+<p><b>解讀：</b>2026Q2短期借款與商業本票已歸零，計息債務全為長期（約184億，含公司債40億），現金為計息債務的11.8倍，近期無再融資壓力。⚠️長期銀行借款約144億（＝長期負債184億－公司債40億，本報告推算）。公司債到期日、長期借款逐年到期級距、租賃負債單獨金額：<span class="badge b-bad">❌</span>（財報附註未取得，不填推測值）。</p>
+</section>
+
+<section id="s3-capex">
+<h2 class="sec-title">CapEx分析（DRAM原廠核心指標）</h2>
+<div class="tbl-wrap"><table>
+<tr><th>期間</th><th class="num">營收</th><th class="num">CapEx*</th><th class="num">CapEx／營收</th><th class="num">OCF</th><th class="num">CapEx／OCF</th><th class="num">D&amp;A</th><th class="num">D&amp;A／營收</th></tr>
+<tr><td>2023A</td><td class="num">298.9</td><td class="num">127.9</td><td class="num">42.8%</td><td class="num">-61.0</td><td class="num">不適用</td><td class="num">153.3</td><td class="num">51.3%</td></tr>
+<tr><td>2024A</td><td class="num">341.3</td><td class="num">161.9</td><td class="num">47.4%</td><td class="num">19.5</td><td class="num">8.3倍</td><td class="num">161.4</td><td class="num">47.3%</td></tr>
+<tr><td>2025A</td><td class="num">665.9</td><td class="num">141.1</td><td class="num">21.2%</td><td class="num">185.7</td><td class="num">0.76倍</td><td class="num">142.8</td><td class="num">21.4%</td></tr>
+<tr><td>TTM</td><td class="num">1,805.1</td><td class="num">109.6</td><td class="num">6.1%</td><td class="num">1,086.7</td><td class="num">0.10倍</td><td class="num">124.3</td><td class="num">6.9%</td></tr>
+<tr><td>2026E（公司上限697億／基準營收4,051億）</td><td class="num">4,051⚠️</td><td class="num">≤697</td><td class="num">≤17.2%</td><td class="num">—</td><td class="num">—</td><td class="num">約120⚠️</td><td class="num">約3%</td></tr>
+<tr><td>2027E（初步規劃「2,000多億」／基準營收5,300億）</td><td class="num">5,300⚠️</td><td class="num">約2,000</td><td class="num">約38%</td><td class="num">約3,430⚠️</td><td class="num">約0.58倍</td><td class="num">150⚠️</td><td class="num">約3%</td></tr>
+</table></div>
+<p class="note">*CapEx歷史值以現金流量表「投資活動現金流」代理（⚠️，含非PP&amp;E項目）。2023年D&amp;A／營收51%反映固定成本負擔——這正是2023～2024年毛損的來源。2026E／2027E CapEx為公司公告上限與初步規劃，OCF／D&amp;A為本報告基準預測。</p>
+<ul class="tight">
+<li><b>計畫規模：</b>2026～2029年CapEx上限3,466億元（約為現有淨PP&amp;E 898億的3.9倍、約為Q2現金2,176億的1.6倍）；新廠總投資約US$160億（約4,800億元），2027年下半年投片、2028年月投片3萬片、2029年約3.59萬片、最終約4.5萬片；2028年導入EUV。</li>
+<li><b>融資能力：</b>基準情境下，2026H2稅後營業現金約1,700億、2027年約3,400億，足以自籌；熊市情境下2027年OCF仍約1,960億（CapEx 2,000億）、2028年OCF約845億（CapEx 900億），帳上現金2,176億不需動用大量舉債。<b>CapEx風險不在流動性，而在報酬率與供給回補。</b></li>
+<li><b>折舊壓力：</b>目前D&amp;A約118億／年（Q2 29.6億）。若新廠投資約4,800億元分8～10年（建築較長）折舊，滿載後新增約350～500億元／年（⚠️本報告推算），約為現在的3～4倍；本報告基準假設D&amp;A 2028年280億、2029年400億。</li>
+<li><b>資本密集度對照：</b>Micron FY26 CapEx US$273.7億，占營收20.5%（US$1,331.9億）✅（SEC 8-K）；南亞科2027年計畫占比約38%（高於Micron），單位營收所需的投資更重，代表供給成長與折舊壓力的「放大器」。</li>
+</ul>
+</section>
+
+<section id="s3-peer">
+<h2 class="sec-title">同業對比</h2>
+<div class="tbl-wrap"><table>
+<tr><th>指標</th><th>南亞科 2408</th><th>華邦電 2344</th><th>力積電 6770</th><th>Micron</th><th>SK hynix</th></tr>
+<tr><td>最新毛利率</td><td>Q2 79.5%（H1 75.2%）</td><td>H1 61.2%</td><td>H1 20.3%</td><td>FQ4 86.8%</td><td>—</td></tr>
+<tr><td>最新營益率</td><td>Q2 73.7%（H1 69.1%）</td><td>H1 42.3%</td><td>—（不具可比性）</td><td>FQ4 80.7%</td><td>Q2 76%</td></tr>
+<tr><td>負債比（總負債／總資產）</td><td>16.8%</td><td>40.8%</td><td>34.6%</td><td>—（債務US$51.8億，現金US$734.8億）</td><td>—</td></tr>
+<tr><td>淨現金</td><td>1,992億元</td><td>—</td><td>—</td><td>約US$683億</td><td>—</td></tr>
+<tr><td>CapEx／營收</td><td>H1'26 5.4%；2027規劃約38%</td><td>—</td><td>—</td><td>FY26 20.5%</td><td>—</td></tr>
+<tr><td>PE／PB</td><td>19.5倍／5.66倍</td><td>19.74倍／4.88倍</td><td>25.5倍／2.80倍</td><td>14.5倍／⚠️8.9倍</td><td>—</td></tr>
+</table></div>
+<p class="note">華邦電、力積電、南亞科財務為證交所OpenAPI（H1'26／Q2'26）✅；Micron為SEC 8-K✅；SK hynix僅取得營運面數字，資產負債表與CapEx：❌；華邦電、力積電CapEx、現金：❌（本次未查）。</p>
+<p><b>同業對比結論：</b>南亞科是三家台灣DRAM／記憶體廠中財務最保守者（負債比最低、淨現金最大），但同時是2027年起CapEx強度最高、新廠世代最落後的一家；高獲利率來自ASP而非成本領先（Micron毛利率86.8%仍高於南亞科）。</p>
+</section>
+
+<section id="s3-final">
+<h2 class="sec-title">綜合診斷（最大風險點評估）</h2>
+<h3>最大風險點：景氣反轉時的「EPS壓縮」與2028年起的折舊／供給雙重壓力</h3>
+<div class="risk-card"><b>風險A｜固定成本槓桿與損益兩平（影響：短期低、中期高）</b><br>Q2營業成本169.3億（含D&amp;A約29.6億，占17%）＋營業費用47.9億＝<b>成本基礎約217億／季</b>；營業損益兩平營收約217億，較Q2營收低73.7%、較Q3預估約1,335億低83.7%，故<b>短期（2027年內）出現虧損的機率極低</b>。但這個槓桿是雙向的：毛利率每下降10個百分點，2027E EPS約-12.4元（-13%）；若2029年營收回到約3,300億、毛利率55%，基準EPS僅約38元（較2027E的95.8元下降60%）。新廠投產後成本基礎增加約80億／季（⚠️2029年D&amp;A增約330億／年÷4），兩平營收升至約300億／季＝2025Q4的營收水準，距Q3預估約-78%。</div>
+<div class="risk-card"><b>風險B｜存貨與跌價（影響：目前低，但去化速度是領先指標）</b><br>現況：存貨215.3億元、存貨天數116天（為2025Q2的255天、2025Q3的191天、2024Q4的442天以來最低，公司稱「極低水位」）。營業成本占營收僅約20.5%，意味存貨跌價（成本&gt;淨變現價值）需ASP下跌逾約75～80%才會觸發（⚠️本報告推理，未含製程成本差異）；目前存貨跌價風險低。<b>觸發數字：</b>存貨天數&gt;200天、存貨金額&gt;350億（2025Q1為375.9億）、應收帳款天數（目前44天）&gt;60天。</div>
+<div class="risk-card"><b>風險C｜資本支出擴張後供過於求（影響：高，時點2028～2029）</b><br>三條供給線同時展開：Samsung＋SK hynix約400兆韓元五年倍增韓國記憶體產能、CXMT月產能由約32萬片擴至2027年約42萬片並已IPO、南亞科自身5A新廠2028年3萬片、2029年約3.59萬片。<b>觸發數字：</b>TrendForce合約價QoQ轉負（目前預估4Q26 +10～15%）；DDR4／DDR3合約價漲幅連兩季低於5%；南亞科月營收MoM連2個月為負。</div>
+<div class="risk-card mid"><b>風險D｜LTA雙面刃與客戶價格容忍度（影響：中）</b><br>LTA使部分供應商漲幅落後市場；消費端（PC、手機、電視）已到價格承受極限，TrendForce指出消費端壓力未減；Micron 10/02回檔2%、HDD產業重挫顯示市場對AI資本支出高原敏感。</div>
+<div class="risk-card mid"><b>風險E｜估值與大股東減持（影響：中）</b><br>PB 5.66倍為2017～2026年第97.6百分位；南亞塑膠公告2026/3/12～12/31處分約3,099萬股；私募股東（Sandisk等）鎖定期屆滿後的賣壓：❌（未查證鎖定期）。</div>
+<h3>風險儀表板（目前讀數 vs 觸發值）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>指標</th><th>目前讀數</th><th>觸發值</th><th>狀態</th></tr>
+<tr><td>TrendForce一般型DRAM合約價（QoQ）</td><td>3Q26 +13～18%；4Q26預估 +10～15%</td><td>QoQ&lt;0%</td><td><span class="badge b-warn">斜率遞減</span></td></tr>
+<tr><td>南亞科月營收MoM</td><td>7月+49.3%、8月+1.9%、9月未公布</td><td>連2月MoM&lt;0</td><td><span class="badge b-warn">放緩</span></td></tr>
+<tr><td>單季毛利率</td><td>Q2 79.5%（券商Q3預估約86%）</td><td>&lt;75%</td><td><span class="badge b-ok">安全</span></td></tr>
+<tr><td>存貨天數</td><td>116天</td><td>&gt;200天</td><td><span class="badge b-ok">安全</span></td></tr>
+<tr><td>CapEx／OCF</td><td>TTM 0.10倍；2027E規劃約0.58倍</td><td>&gt;1倍</td><td><span class="badge b-ok">安全</span></td></tr>
+<tr><td>淨現金</td><td>1,992億元（約58元／股）</td><td>&lt;500億元</td><td><span class="badge b-ok">安全</span></td></tr>
+<tr><td>PB（TWSE）</td><td>5.63倍</td><td>—（對照：2017年高點2.56倍）</td><td><span class="badge b-bad">歷史高位</span></td></tr>
+</table></div>
+<div class="action-box">
+<h4>Part 3結論</h4>
+<p><b>財務體質：極強（景氣高峰）。</b>流動性、償債與淨現金都不構成風險；最大風險是「獲利品質的循環性」——EPS可能在2027～2028年由約96元壓縮至約38～66元（基準），並疊加新廠折舊與供給回補。對長期投資人而言，南亞科不是「財務脆弱」的標的，而是「價格錯估風險」的標的：下跌來自EPS下修與PB均值回歸，而非破產或再融資風險。</p>
+</div>
+</section>
+
+<h1 class="part">綜合總結</h1>
+<section id="final-action">
+<h2 class="sec-title">最終操作建議（研究框架參考，非個人化投資建議）</h2>
+<div class="card-grid">
+  <div class="card"><h4>Thesis成立度</h4><div class="big">3.5 / 5</div></div>
+  <div class="card"><h4>護城河強度</h4><div class="big stars">★★☆☆☆</div></div>
+  <div class="card"><h4>成長象限</h4><div class="big">景氣循環股</div></div>
+  <div class="card"><h4>財務體質</h4><div class="big">極強（高峰）</div></div>
+  <div class="card"><h4>目標價區間</h4><div class="big">380～600 元</div><div class="note">中樞約480元；現價529元</div></div>
+</div>
+<div class="action-box">
+<h4>總結：循環史上最強的一輪盈利已兌現，股價用「2027年EPS仍近100元」定價——好公司、好財報，但缺乏安全邊際</h4>
+<p>南亞科2026Q2毛利率79.5%、營益率73.7%、EPS 14.66元（Beat共識約18%），淨現金1,992億元，TrendForce 4Q26仍預估合約價+10～15%、SK hynix與券商均指2027年仍緊俏，基本面並未惡化。然而：①價格斜率已由Q2約+60%降至Q3+15%、Q4+12%；②7月營收+49.3% MoM、8月僅+1.9%，7+8月僅達券商Q3預估62.8%；③PB 5.66倍為歷史第97.6百分位，PE以2027E基準EPS計為5.5倍＝歷史谷底PE；④市場隱含約73%機率落在「牛市DCF」情境；⑤2027年起CapEx約2,000億元以上、折舊與供給回補在2028年起顯現。<b>目標價區間380～600元（中樞約480元），現價529元約處區間上半段；機率加權DCF約351元。</b></p>
+<p><b>已持有：</b>基本面仍在上行軌道，可續抱並依風險儀表板（TrendForce合約價、月營收MoM、毛利率、存貨天數）監控；股價已反映高峰盈利，建議部位大小與「熊市DCF約128元（-76%）」的極端循環回檔承受度相匹配；若股價續漲逾600元，可考慮分批減碼。</p>
+<p><b>未持有：</b>不宜在529元追價；較合理的觀察區約380～420元（≈4.0～4.4倍2027E基準EPS、≈2.6～2.9倍2026年底淨值），採分批。</p>
+<p><b>長期（3～5年）角度：</b>關鍵不在今年或明年的EPS，而在「景氣回落後的常態獲利率」——若LTA與AI／客製化產品把中位營益率長期墊在45%（敏感度表右欄，DCF約393元），價值仍可高於基準；若回到2022年約10～15%，則熊市DCF（約128元）更貼近長期價值。5A新廠（US$160億）的報酬率將決定2028年後是否仍值得長期持有。</p>
+<p><b>核心催化劑（近期）：</b>①9月營收（約10月上旬公布；需約523億才符合券商Q3預估；若維持約450億，則Q3營收約1,334億）②Q3法說會／財報（日期：❌；2025年約10月中旬）③TrendForce對2027年1Q合約價預測④CXMT擴產與DDR4／DDR5價格走向⑤Micron FQ1'27（財測營收US$615億）⑥5A新廠投片進度與CapEx實支⑦南亞塑膠處分進度。</p>
+</div>
+</section>
+
+<section id="gaps">
+<h2 class="sec-title">資料缺口清單（標示「—」／❌之欄位）</h2>
+<ul class="tight">
+<li>2026年9月營收：—（尚未公布）；2026年Q3法說會日期：—</li>
+<li>利息支出／利息覆蓋倍數：—（財報附註未取得；僅有示意估計）</li>
+<li>公司債到期日、長期借款逐年到期級距、租賃負債單獨金額：—</li>
+<li>「購置不動產廠房設備」明細（CapEx）：—（以投資現金流代理）；D&amp;A未來預測：本報告自估</li>
+<li>現有廠月產能（wpm）、各產品別位元出貨與ASP、單一客戶／前十大客戶集中度、應用別完整拆分（PC／伺服器／車用／工控／網通）：—</li>
+<li>Q2營收、毛利率之市場共識（Beat/Miss僅EPS有共識對照）：—</li>
+<li>目標價完整EPS×PE或PB×BVPS公式：僅福邦（7×85.84）、中信（7×74.42）有原文；凱基、玉山、群益、富邦、瑞銀、大摩、大和、美銀、不具名1,000元：—（隱含倍數為本報告自算）</li>
+<li>9/22報導中「外資」EPS預估（76.97／116.41／125.68）之機構歸屬：—（暫列瑞銀系列，標⚠️）；大和EPS預估：—</li>
+<li>董監事個別近期買賣明細、南亞塑膠處分進度、私募股東鎖定期屆滿日：—</li>
+<li>2017～2020年逐季EPS及2021年全年EPS（Yahoo季報僅回溯2021Q3）：—；歷史PE改以證交所BWIBBU逐日資料</li>
+<li>SK hynix、Samsung估值（PE／PB）與資產負債表、CapEx；華邦電、力積電CapEx與現金：—</li>
+<li>CXMT實際營收與市佔：—（僅二手轉述與招股書預估）</li>
+<li>歷史股利（2025年度以外各年）：—；存貨明細（原料／在製／製成品）：—</li>
+<li>Goodinfo、財報狗歷史PE河流圖與預估頁：—（403／動態載入）</li>
+</ul>
+</section>
+
+<footer>
+<p><b>資料來源：</b>證交所OpenAPI（t187ap03_L公司基本資料、t187ap05_L月營收、t187ap06_L_ci綜合損益、t187ap07_L_ci資產負債、t187ap11_L董監持股、t187ap45_L股利、BWIBBU／BWIBBU_ALL個股PE／PB／殖利率、MI_QFIIS外資持股、T86三大法人）；Yahoo Finance行情API與Yahoo股市（tw.stock.yahoo.com）內嵌季報（損益／資產負債／現金流）；TrendForce新聞稿（2026/07/03、2026/09/07、2026/09/30）；Micron FY26 Q4 8-K（SEC）；公司法說會報導（businesstoday、udn、vocus、StockFeel、cnyes、technews、uanalyze）；法人報告轉述（經濟日報／工商時報／旺得富／鉅亨網／Yahoo股市，2026/07～09）；FactSet調查（鉅亨網，2026/09/14）；南亞科重大訊息（私募、資本支出、股利，轉載自technews／uanalyze／money.udn）；同日完成之宜鼎(5289)報告。數據查證時間：2026/10/05。</p>
+<p><b>免責聲明：本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</b></p>
+</footer>
+
+</div>
+</body>
+</html>
