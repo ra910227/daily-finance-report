@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>財經小狐｜全面財經日報 2026/10/23</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#ffffff; --text:#1a1d23; --sub:#5b6270; --border:#e2e5ea;
+  --accent:#1a56db; --tag-risk-bg:#fde8e8; --tag-risk-text:#9b1c1c;
+  --tag-ind-bg:#e1effe; --tag-ind-text:#1e429f; --tag-cat-bg:#edebfe; --tag-cat-text:#5521b5;
+  --badge-global:#1a56db; --badge-us:#0e9f6e; --badge-asia:#c27803; --badge-eu:#7e3af2;
+  --src:#8b93a1; --up:#c0392b; --down:#1a7a3c; --table-head:#eef1f6;
+}
+body{background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif; margin:0; padding:24px 16px; line-height:1.65;}
+.wrap{max-width:960px; margin:0 auto;}
+header{margin-bottom:20px;}
+h1{font-size:1.5rem; margin:0 0 4px;}
+.meta{color:var(--sub); font-size:0.9rem;}
+h2{font-size:1.15rem; margin:36px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--accent); color:var(--accent);}
+h3{font-size:1rem; margin:24px 0 10px; color:var(--text);}
+.recap{background:var(--card); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:8px; padding:14px 18px; font-size:0.95rem; margin-top:16px;}
+.card{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px;}
+.idx{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:var(--accent); color:#fff; font-size:0.8rem; font-weight:700; margin-right:8px; flex-shrink:0;}
+.card-head{display:flex; align-items:flex-start; gap:6px; margin-bottom:6px;}
+.title{font-weight:700; font-size:1.02rem;}
+.rowmeta{color:var(--sub); font-size:0.82rem; margin:4px 0 8px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;}
+.badge{display:inline-block; padding:1px 8px; border-radius:10px; font-size:0.72rem; font-weight:600; color:#fff;}
+.b-global{background:var(--badge-global);} .b-us{background:var(--badge-us);} .b-asia{background:var(--badge-asia);} .b-eu{background:var(--badge-eu);}
+.tags{margin:8px 0;}
+.tag{display:inline-block; padding:2px 9px; border-radius:12px; font-size:0.75rem; margin:2px 4px 2px 0;}
+.tag-risk{background:var(--tag-risk-bg); color:var(--tag-risk-text);}
+.tag-ind{background:var(--tag-ind-bg); color:var(--tag-ind-text);}
+.tag-cat{background:var(--tag-cat-bg); color:var(--tag-cat-text);}
+.tier{display:inline-block; padding:2px 10px; border-radius:12px; font-size:0.78rem; font-weight:700; margin-right:6px;}
+.tier-must{background:var(--tag-risk-bg); color:var(--tag-risk-text);}
+.tier-monthly{background:var(--tag-cat-bg); color:var(--tag-cat-text);}
+.tier-risk{background:#fff3cd; color:#7a5b00;}
+.summary{font-size:0.92rem; margin-top:8px;}
+.src{font-size:0.8rem; color:var(--src); margin-top:10px;}
+.src a{color:var(--accent); text-decoration:none;}
+.src a:hover{text-decoration:underline;}
+.site{display:inline-block; padding:1px 9px; border-radius:10px; font-size:0.72rem; font-weight:600; background:var(--tag-cat-bg); color:var(--tag-cat-text);}
+.cat{display:inline-block; padding:1px 9px; border-radius:10px; font-size:0.72rem; font-weight:600; border:1px solid var(--accent); color:var(--accent);}
+.site-block{margin:28px 0 8px;}
+.footer-note{color:var(--sub); font-size:0.82rem; margin-top:40px; padding-top:16px; border-top:1px solid var(--border);}
+.toc{display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 0;}
+.toc a{font-size:0.82rem; color:var(--accent); text-decoration:none; border:1px solid var(--border); padding:4px 10px; border-radius:14px;}
+table{width:100%; border-collapse:collapse; font-size:0.88rem; margin:10px 0;}
+th,td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--border);}
+th{background:var(--table-head); font-weight:700; color:var(--sub); font-size:0.78rem; text-transform:uppercase;}
+.up{color:var(--up); font-weight:600;}
+.down{color:var(--down); font-weight:600;}
+.sent-grid{display:grid; grid-template-columns:1fr; gap:14px;}
+@media(min-width:700px){ .sent-grid{grid-template-columns:1fr 1fr;} }
+.sent-card{border-radius:10px; padding:14px 16px; border:1px solid var(--border);}
+.sent-bull{background:var(--tag-ind-bg);}
+.sent-bear{background:var(--tag-risk-bg);}
+.sent-focus{background:var(--tag-cat-bg); grid-column:1/-1;}
+.sent-verdict{background:var(--card); border:2px solid var(--accent); border-radius:10px; padding:14px 16px; margin-top:14px; font-weight:600;}
+.lwp-card{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 18px; margin-bottom:12px;}
+.lwp-head{font-weight:700; margin-bottom:6px;}
+.quote-line{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:0.85rem; margin:2px 0;}
+.strategy{font-size:0.88rem; margin-top:8px; padding-top:8px; border-top:1px dashed var(--border);}
+.interpret-box{font-size:0.87rem; margin-top:10px; padding:10px 12px; border-left:3px solid var(--accent); background:var(--tag-ind-bg); border-radius:0 8px 8px 0;}
+.interpret-box b{display:block; margin-bottom:6px;}
+.interpret-box ul{margin:6px 0 0; padding-left:20px;}
+.interpret-box li{margin-bottom:4px;}
+.cal-item{display:flex; gap:12px; padding:10px 0; border-bottom:1px solid var(--border);}
+.cal-date{flex-shrink:0; width:92px; font-weight:700; color:var(--accent); font-size:0.85rem;}
+.cal-body{font-size:0.9rem;}
+.cal-body b{display:block; margin-bottom:2px;}
+.kw-section{margin-bottom:18px;}
+.kw-list{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+.note{font-size:0.85rem; color:var(--sub); font-style:italic; margin-top:6px;}
+.b-tw{background:#0891b2;} .b-cn{background:#c81e1e;}
+</style>
+<link rel="stylesheet" href="../assets/gsfox-annotate.css">
+<script src="../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>財經小狐｜全面財經日報</h1>
+<div class="meta">2026/10/23（週五）　擷取時間 約10:00（Asia/Taipei，對應美股10/22收盤）｜台股今日因薔琵颱風休市</div>
+<div class="recap"><b>📋 前情提要：</b>10/21 SpaceX、Super Micro財報帶動Nasdaq+1.05%、10年期美債5.12%、Brent約110美元；10/22 AI融資疑慮爆發，Nasdaq-2.60%、費半近-7%，10年期跌破5%、金價跌破4,000美元，Brent衝上112–114美元。</div>
+<div class="toc"><a href="#s1">一、國際財經重點</a><a href="#s2">二、補充國際新聞</a><a href="#s3">三、台灣新聞</a><a href="#s4">四、產業報告</a><a href="#s5">五、今日焦點解讀</a><a href="#s6">六、市場情緒</a><a href="#s7">七、全球指數&amp;總經</a><a href="#s8">八、S&amp;P500板塊排行</a><a href="#s9">九、LWP組合觀察</a><a href="#s10">十、市場日曆</a><a href="#kw">關鍵字分類</a></div>
+</header>
+<div class="note">⚠️ 本期資料限制：Bloomberg／Reuters／CNBC多數文章為訂閱內容，僅取得頁面標題與部分導言；華爾街見聞、富途牛牛、investing.com以標題與頁面摘要為主。凡標「❌」者為未取得或未核實。今日（10/23）台股休市，台灣資料為10/22收盤；板塊流動報告與資金流雙軌週報本機最新分別停在08/27與09/10，已過期，不納入交叉驗證。</div>
+<h2 id="s1">一｜國際財經重點</h2>
+<div class="card">
+<div class="card-head"><span class="idx">1</span><span class="title">AI融資疑慮引爆科技股重挫：Nasdaq-2.60%、S&amp;P 500-1.21%，費半近-7%，道瓊持平</span></div>
+<div class="rowmeta"><span class="tier tier-monthly">📌月度關鍵字 AI資本支出/融資</span><span class="badge b-us">美國</span><span>2026/10/22</span></div>
+<div class="tags"><span class="tag tag-risk">AI交易</span><span class="tag tag-risk">費半</span><span class="tag tag-risk">融資疑慮</span></div>
+<div class="summary">Reuters「S&amp;P 500, Nasdaq end sharply lower as revived AI doubts ignite tech selloff」與「Steep bill for AI buildout punishes Meta, other tech favorites」、華爾街見聞、中央社證券一致：焦點從「AI需求夠不夠」轉向「龐大資本支出如何融資、報酬是否平均」。S&amp;P 500收7,663.43（Bloomberg），Nasdaq收26,008.86，Nasdaq 100盤中一度跌3%；SanDisk、Intel、AMD單日跌逾8%（富途），道瓊僅+0.02%，顯示是科技專屬賣壓而非全面股災。</div>
+<div class="src">來源：<a href="https://www.reuters.com/markets/" target="_blank">Reuters</a>／<a href="https://www.bloomberg.com/markets" target="_blank">Bloomberg</a>／<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a>／<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a>／<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">中央社證券</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">2</span><span class="title">Meta財報後股價續挫近7%：自由現金流轉負、擬發行無投票權新股，信用違約保險創紀錄</span></div>
+<div class="rowmeta"><span class="tier tier-monthly">📌月度關鍵字 財報季/AI融資</span><span class="badge b-us">美國</span><span>2026/10/22</span></div>
+<div class="tags"><span class="tag tag-risk">Meta</span><span class="tag tag-risk">CDS</span><span class="tag tag-risk">無投票權股</span></div>
+<div class="summary">CNBC「Meta stock sinks nearly 7% as AI spend pushes free cash flow negative」、Reuters「Meta shares slide, default insurance hits record as AI spending alarms investors」交叉：營收與財測雖優於預期（CNBC），但資本支出下限上調、自由現金流轉負、擬以無投票權新股融資（華爾街見聞），債市以創紀錄的違約保險成本反映對融資結構的擔憂。鉅亨網引艾克曼說法，Meta握有824億美元資產，「想融多少就融多少」，與CDS創高形成兩種相反解讀。</div>
+<div class="src">來源：<a href="https://www.cnbc.com/technology/" target="_blank">CNBC</a>／<a href="https://www.reuters.com/business/" target="_blank">Reuters</a>／<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a>／<a href="https://news.cnyes.com/news/cat/headline" target="_blank">鉅亨網</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">3</span><span class="title">SpaceX單日重挫9%、13億股解禁；Tesla財報後續跌，資本支出削減引發AI與機器人敘事疑慮</span></div>
+<div class="rowmeta"><span class="tier tier-monthly">📌月度關鍵字 SpaceX/Tesla</span><span class="badge b-us">美國</span><span>2026/10/22</span></div>
+<div class="tags"><span class="tag tag-risk">SpaceX</span><span class="tag tag-risk">Tesla</span><span class="tag tag-risk">解禁</span><span class="tag tag-risk">Optimus</span></div>
+<div class="summary">富途成交額榜：SpaceX迎13億股解禁潮，股價重挫9%，鉅亨網稱「一日反轉」，成為AI資本支出焦慮的犧牲品；前一日（10/21）還因財報大漲約8–10%。Reuters「Tesla shares slip after capex cut raises doubts over Musk's AI and robotics push」；華爾街見聞電話會整理：2030年目標年產約500萬輛、Optimus明年底商業化、2027年Megapack幾乎售罄。SpaceX另被Bloomberg報導洽談接入8萬座美國蜂窩基站。</div>
+<div class="src">來源：<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a>／<a href="https://news.cnyes.com/news/cat/headline" target="_blank">鉅亨網</a>／<a href="https://www.reuters.com/business/" target="_blank">Reuters</a>／<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">4</span><span class="title">胡塞武裝襲擊沙烏地：沙烏地阿美下令撤離達蘭，Brent衝上112–114美元五個月新高</span></div>
+<div class="rowmeta"><span class="tier tier-must">🔴必追 中東戰事/油價</span><span class="badge b-global">國際</span><span>2026/10/22-23</span></div>
+<div class="tags"><span class="tag tag-risk">中東戰事</span><span class="tag tag-risk">Aramco</span><span class="tag tag-risk">油價</span></div>
+<div class="summary">Reuters「Saudi Aramco tells staff to evacuate Dhahran」、中央社「葉門叛軍襲沙烏地加劇中東供應疑慮 油價大漲」、華爾街見聞（胡塞稱對國防部與阿美設施發動多輪襲擊，布油一度逾112美元）交叉印證供給風險；富途引述報導稱胡塞導彈命中阿美「決策中樞」，屬單一來源說法，細節未獨立核實。Reuters另指埃及國會下週表決是否授權軍隊支援沙烏地；富途轉述美以軍方已擬定美國期中選舉後打擊伊朗的計畫，為媒體報導，未證實。Reuters評論提醒別把油價反彈當成「恢復正常」。</div>
+<div class="src">來源：<a href="https://www.reuters.com/world/" target="_blank">Reuters</a>／<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a>／<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a>／<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a>／<a href="https://cn.investing.com/news/headlines" target="_blank">investing.com</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">5</span><span class="title">避險資金湧入美債：10年期殖利率一個月來首度跌破5%，升息押注降溫</span></div>
+<div class="rowmeta"><span class="tier tier-must">🔴必追 Fed政策/美債殖利率</span><span class="badge b-us">美國</span><span>2026/10/22-23</span></div>
+<div class="tags"><span class="tag tag-risk">美債殖利率</span><span class="tag tag-risk">Fed政策</span><span class="tag tag-risk">避險</span></div>
+<div class="summary">Reuters 10年期美債收4.953%，Bloomberg頁面為4.97%；CNBC 2年期殖利率前收4.635%，較前一日4.804%下降約17bp。Reuters「Asian shares wobble as tech rout boosts bonds, dents rate hike bets」指出科技股重挫使債市受惠、升息押注降溫；華爾街見聞則把「AI資本開支退潮」稱為債市的「另類量化寬鬆」。這是10/27–28 FOMC前一週的重要轉折，但油價仍在高檔，通膨壓力並未消失。</div>
+<div class="src">來源：<a href="https://www.reuters.com/markets/" target="_blank">Reuters</a>／<a href="https://www.bloomberg.com/markets" target="_blank">Bloomberg</a>／<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a>／<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">6</span><span class="title">黃金避險失靈：金價單日重挫，一度跌破4,000美元、逼近三個月低點</span></div>
+<div class="rowmeta"><span class="tier tier-risk">⚡風險關鍵字 黃金流動性賣壓</span><span class="badge b-global">國際</span><span>2026/10/22</span></div>
+<div class="tags"><span class="tag tag-risk">黃金</span><span class="tag tag-risk">流動性</span><span class="tag tag-risk">美元</span></div>
+<div class="summary">Bloomberg「Gold Drops Below $4,000 as Deepening Stock Rout Fuels Volatility」，富途轉述「避險時刻黃金又成提款機，單日跌近3%、逼近三個月低點，3,900美元關口將受考驗」，investing.com稱黃金跌至三個月低點、本週料收跌。GLD收369.00（-2.63%）。當股市與黃金同跌，通常反映投資人為補保證金或調整部位而賣出流動性高的資產，而非對金價長期邏輯改變；但油價推升通膨與利率下跌本應利多黃金，這次反向行為值得持續追蹤。</div>
+<div class="src">來源：<a href="https://www.bloomberg.com/markets" target="_blank">Bloomberg</a>／<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a>／<a href="https://cn.investing.com/news/headlines" target="_blank">investing.com</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">7</span><span class="title">記憶體與半導體鏈承壓：西部數據財報強仍遭殺，SK海力士擱置Solidigm美國IPO</span></div>
+<div class="rowmeta"><span class="tier tier-monthly">📌月度關鍵字 AI硬體/記憶體週期</span><span class="badge b-asia">亞太</span><span>2026/10/22-23</span></div>
+<div class="tags"><span class="tag tag-risk">記憶體</span><span class="tag tag-risk">西部數據</span><span class="tag tag-risk">Solidigm</span></div>
+<div class="summary">華爾街見聞與智通：西部數據FY27 Q1營收43.8億美元（+55%）、調整後EPS 4.64美元（+161%）、季度股息上調17%，財報後仍大跌，市場關注業績背後的融資來源。Reuters／CNBC：SK海力士稱Solidigm因市場波動暫停美國IPO審查，海力士股價下滑；富途稱此為「美國最大芯片IPO告吹」，並提及股東反對與監管疑慮。同日黃仁勳說「看不到2029年記憶體過剩」、neocloud需求「off the charts」（CNBC），與股價走勢形成反差。</div>
+<div class="src">來源：<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a>／<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a>／<a href="https://www.reuters.com/business/" target="_blank">Reuters</a>／<a href="https://www.cnbc.com/technology/" target="_blank">CNBC</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">8</span><span class="title">neocloud融資壓力升高：CoreWeave市值蒸發約440億美元；OpenAI洽談以1.25萬億美元估值募資</span></div>
+<div class="rowmeta"><span class="tier tier-risk">⚡風險關鍵字 AI融資/neocloud</span><span class="badge b-us">美國</span><span>2026/10/22</span></div>
+<div class="tags"><span class="tag tag-risk">CoreWeave</span><span class="tag tag-risk">OpenAI</span><span class="tag tag-risk">估值</span></div>
+<div class="summary">鉅亨網「CoreWeave債務壓力升溫 市值蒸發440億美元」，CNBC前幾日亦有HSBC對neocloud「結構性疑慮」的報導。CNBC／華爾街見聞：OpenAI接近完成由阿聯酋投資者領投、最高300億美元的募資，估值1.25萬億美元；華爾街見聞稱此為「下調估值目標」，兩者的前後比較基準未交代，不宜直接視為利多或利空。Bloomberg另有SK集團資料中心部門洽談為3,500億美元AI建置募資的標題（內文未取得）。</div>
+<div class="src">來源：<a href="https://news.cnyes.com/news/cat/headline" target="_blank">鉅亨網</a>／<a href="https://www.cnbc.com/technology/" target="_blank">CNBC</a>／<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a>／<a href="https://www.bloomberg.com/economics" target="_blank">Bloomberg</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">9</span><span class="title">中國與亞股AI交易同步崩落：創業板-4%、恒生科技-5%，Bloomberg稱中國股市深陷熊市</span></div>
+<div class="rowmeta"><span class="tier tier-monthly">📌月度關鍵字 亞股/中國科技</span><span class="badge b-cn">中國</span><span>2026/10/22</span></div>
+<div class="tags"><span class="tag tag-risk">恒生科技</span><span class="tag tag-risk">創業板</span><span class="tag tag-risk">熊市</span></div>
+<div class="summary">華爾街見聞10/22盤中：創業板跌超4%失守2,600點、恒科指跌超5%、算力硬件齊跌，工行、建行卻再創新高；Bloomberg「China Stocks Sink Deeper Into Bear Market Despite State Buying」與「China AI Model Stocks' $150 Billion Drop」顯示國家隊買盤擋不住AI模型股市值蒸發約1,500億美元。10/23港股開市恒科指小漲0.51%（富途快訊），Bloomberg稱南韓股市因晶片股下挫。數值為盤中，收盤❌未取得。</div>
+<div class="src">來源：<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a>／<a href="https://www.bloomberg.com/markets" target="_blank">Bloomberg</a>／<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">10</span><span class="title">防禦股逆勢大漲：必需消費+3.13%居S&amp;P 500各板塊之首，寶潔績後漲近6%，沃爾瑪創1999年來最佳單月</span></div>
+<div class="rowmeta"><span class="tier tier-risk">⚡風險關鍵字 防禦輪動</span><span class="badge b-us">美國</span><span>2026/10/22</span></div>
+<div class="tags"><span class="tag tag-risk">必需消費</span><span class="tag tag-risk">寶潔</span><span class="tag tag-risk">沃爾瑪</span></div>
+<div class="summary">Finviz顯示必需消費板塊單日+3.13%，公用事業+1.70%、房地產+1.30%；華爾街見聞：寶潔績後漲近6%；鉅亨網引美股雷達「沃爾瑪創1999年來最佳單月，必需消費股創紀錄大漲是警訊嗎」。RSP（等權重）+0.73%對QQQ-2.86%，相對差約359bp，反映資金從AI集中度高的科技股撤出、流向防禦與利率敏感族群，與10年期殖利率回落同步。</div>
+<div class="src">來源：<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a>／<a href="https://news.cnyes.com/news/cat/headline" target="_blank">鉅亨網</a>／<a href="https://www.cnbc.com/business/" target="_blank">CNBC</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">11</span><span class="title">AI發現的PHP嚴重漏洞引爆全球資安警報：歐洲多國政府網站下線，駭客嘗試攻擊激增</span></div>
+<div class="rowmeta"><span class="tier tier-risk">⚡風險關鍵字 AI資安</span><span class="badge b-global">國際</span><span>2026/10/22-23</span></div>
+<div class="tags"><span class="tag tag-risk">PHP</span><span class="tag tag-risk">AI資安</span><span class="tag tag-risk">政府網站</span></div>
+<div class="summary">Reuters「Hacking attempts surge as companies, governments rush to patch PHP flaws」，雲端業者稱漏洞披露後出現數百萬次攻擊嘗試；華爾街見聞：全球75%網站面臨威脅，歐洲多國政府網站緊急下線。Bloomberg解釋「AI如何挖出PHP漏洞」，CNBC稱網路安全股因此獲得又一波支撐。台灣金管會已掃描金融機構並啟動三項因應措施（中央社）。這是「AI既是生產力也是攻擊工具」的風險，短期利多資安股、長期推升企業防禦成本。</div>
+<div class="src">來源：<a href="https://www.reuters.com/world/" target="_blank">Reuters</a>／<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a>／<a href="https://www.bloomberg.com/economics" target="_blank">Bloomberg</a>／<a href="https://www.cnbc.com/investing/" target="_blank">CNBC</a>／<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">12</span><span class="title">日本核心CPI超過央行目標，日圓與日債成避險標的，日銀近期升息機率上升</span></div>
+<div class="rowmeta"><span class="tier tier-must">🔴必追 日銀/日圓</span><span class="badge b-asia">日本</span><span>2026/10/23</span></div>
+<div class="tags"><span class="tag tag-risk">日本央行</span><span class="tag tag-risk">日圓</span><span class="tag tag-risk">日債</span></div>
+<div class="summary">Reuters「Japan's core inflation exceeds BOJ target, cements near-term rate hike chance」：9月核心CPI九個月來首次高於2%目標；investing.com：日本10月製造業活動放緩、服務業改善（PMI）。Reuters「Yen shines as AI jitters spur safe-haven rush」、Bloomberg「Yen Hits One-Month High」顯示日圓一個月高點，日債殖利率下滑（Reuters 10年期2.80%，-8.5bp）。日圓走強壓縮日經指數，Reuters頁面日經225為61,729.50（-1.87%）。</div>
+<div class="src">來源：<a href="https://www.reuters.com/business/" target="_blank">Reuters</a>／<a href="https://cn.investing.com/news/headlines" target="_blank">investing.com</a>／<a href="https://www.bloomberg.com/markets" target="_blank">Bloomberg</a>／<a href="https://www.reuters.com/markets/" target="_blank">Reuters</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="idx">13</span><span class="title">薔琵颱風來襲，台北股市今日休市；台股昨日大跌846點、法人賣超逾千億元</span></div>
+<div class="rowmeta"><span class="tier tier-monthly">📌月度關鍵字 台股/颱風</span><span class="badge b-tw">台灣</span><span>2026/10/22-23</span></div>
+<div class="tags"><span class="tag tag-risk">台股</span><span class="tag tag-risk">颱風</span><span class="tag tag-risk">外資</span></div>
+<div class="summary">中央社：台股10/22震盪逾千點收跌846.34點，台積電跌35元、險守46,000點關卡；三大法人賣超1,001.59億元，另有「外資轉賣超816億元」標題（提款ETF居多，期間標題未註明，同日18:58發布，推定為10/22單日但未核實）。薔琵颱風使台北股市10/23休市一天，金管會表示持續蒐集「颱風假與股市脫鉤」意見。今日美股重挫的衝擊將延到下週一（10/26）開盤才反映。</div>
+<div class="src">來源：<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">中央社證券</a>／<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a>／<a href="https://news.cnyes.com/news/cat/headline" target="_blank">鉅亨網</a></div>
+</div>
+<h2 id="s2">二｜補充國際新聞</h2>
+<div class="note">每站挑3篇不在上方要聞內的新聞；Bloomberg／Reuters／CNBC多為訂閱內容，僅取得標題與導言，簡述已標明「標題層級」。</div>
+<div class="site-block"><span class="site">Bloomberg</span></div>
+<div class="card">
+<div class="card-head"><span class="title">UK Consumer Confidence in Slump as Big as Brexit Shock, GfK Says</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-eu">歐洲</span><span>2026/10/22-23</span></div>
+<div class="summary">標題層級：GfK調查顯示英國消費者信心的下滑幅度與脫歐衝擊時相當。英國10年期公債殖利率5.334%（Reuters）仍在高位，家庭負擔與財政壓力並存。內文未取得，成因不予臆測。</div>
+<div class="src">來源：<a href="https://www.bloomberg.com/economics" target="_blank">Bloomberg</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">New Zealand Likely Facing Pre-Election Rate Hike, Economists Say</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-asia">亞太</span><span>2026/10/22-23</span></div>
+<div class="summary">標題層級：經濟學家認為紐西蘭在選舉前可能升息。與日本核心CPI超標、澳洲聯儲升息預期等同屬「亞太央行偏鷹」的訊號，和美國殖利率回落形成對照。細節❌未取得。</div>
+<div class="src">來源：<a href="https://www.bloomberg.com/economics" target="_blank">Bloomberg</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">Summer Heat's Toll on Europe: 50,000 Deaths and a €17 Billion GDP Hit</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-eu">歐洲</span><span>2026/10/22</span></div>
+<div class="summary">標題層級：夏季熱浪在歐洲造成約5萬人死亡與170億歐元GDP損失。氣候事件的經濟成本正被量化，對保險、公用事業與歐洲財政是長期變數，與當日市場主線關聯有限。</div>
+<div class="src">來源：<a href="https://www.bloomberg.com/economics" target="_blank">Bloomberg</a></div>
+</div>
+<div class="site-block"><span class="site">Reuters</span></div>
+<div class="card">
+<div class="card-head"><span class="title">GM cancels deal with new US rare-earth magnet plant, documents say</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-us">美國</span><span>2026/10/23</span></div>
+<div class="summary">Reuters獨家：通用汽車取消與美國新稀土磁鐵工廠的長期供貨合約，雙方進入仲裁。GM原為該廠最大客戶，顯示美國本土關鍵礦物供應鏈在客戶端的承諾並不穩固，對稀土與關鍵金屬題材是負面訊號。</div>
+<div class="src">來源：<a href="https://www.reuters.com/business/" target="_blank">Reuters</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">Lockheed lands Pentagon deal for 850 F-35 jets, lifts annual forecast</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-us">美國</span><span>2026/10/22</span></div>
+<div class="summary">Lockheed Martin宣布十年內向五角大廈至少出售850架F-35，價值至少780億美元，並上調全年預期。在中東升溫、地緣風險上升的背景下，國防類訂單的可見度提高，屬科技股賣壓中的少數防禦性利多。</div>
+<div class="src">來源：<a href="https://www.reuters.com/business/" target="_blank">Reuters</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">Putin says talks must focus on security for Russia, Ukraine and Europe overall</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-eu">歐洲</span><span>2026/10/22</span></div>
+<div class="summary">普丁表示未來談判應聚焦俄烏雙方安全保證及歐洲整體安全架構；同日Reuters報導俄軍轟炸基輔、烏克蘭無人機飛向莫斯科，Trump稱馬斯克已恢復烏克蘭的星鏈使用。和談重啟的口頭表態與戰場行動並行，實質進展仍待觀察。</div>
+<div class="src">來源：<a href="https://www.reuters.com/world/" target="_blank">Reuters</a></div>
+</div>
+<div class="site-block"><span class="site">CNBC</span></div>
+<div class="card">
+<div class="card-head"><span class="title">Moderna shares plunge after cancer vaccine data leaks — despite positive results</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-us">美國</span><span>2026/10/23</span></div>
+<div class="summary">Merck／Moderna黑色素瘤疫苗使死亡或復發風險降低42%（Reuters），但數據提前外洩、市場預期過高，Moderna一度跌26%創單日紀錄（華爾街見聞），Reuters稱市值蒸發約240億美元，屬典型「利多出盡」。</div>
+<div class="src">來源：<a href="https://www.cnbc.com/business/" target="_blank">CNBC</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">American Airlines expects deeper 2026 loss on pricier fuel</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-us">美國</span><span>2026/10/22</span></div>
+<div class="summary">美國航空預期2026年虧損擴大，西南航空下調全年獲利預測，聯合航空前一日亦下調展望，共同原因是燃油成本上升。這是Brent站上110美元以上後，能源成本從報價傳導到企業財測的具體證據。</div>
+<div class="src">來源：<a href="https://www.cnbc.com/business/" target="_blank">CNBC</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">Wealthy Chinese move offshore money to U.S. banks as Beijing's tax net widens</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-cn">中國</span><span>2026/10/23</span></div>
+<div class="summary">CNBC熱門榜第1名：中國高資產人士因北京擴大稅網，將境外資金轉往美國銀行。標題層級，金額與資料來源內文❌未取得；若屬實，對人民幣資本流出與美元存款有象徵意義。</div>
+<div class="src">來源：<a href="https://www.cnbc.com/business/" target="_blank">CNBC</a></div>
+</div>
+<div class="site-block"><span class="site">華爾街見聞</span></div>
+<div class="card">
+<div class="card-head"><span class="title">乙肝，第一次把「治癒」寫進終點</span></div>
+<div class="rowmeta"><span class="cat">INVESTING</span><span class="badge b-global">國際</span><span>2026/10/21</span></div>
+<div class="summary">華爾街見聞醫曜專欄：乙肝治療研究首度把「治癒」設為終點，代表藥物開發方向由長期抑制病毒轉向功能性治癒。內文為標題層級摘要，個別公司與臨床數據❌未取得，與當日市場主線關聯有限。</div>
+<div class="src">來源：<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">特斯拉、英偉達聯手鎖定產能，三星電機擴產高端封裝基板</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-asia">亞太</span><span>2026/10/22</span></div>
+<div class="summary">報導指特斯拉與輝達共同鎖定產能，三星電機擴產高端封裝基板（ABF／玻璃基板方向未載明）。封裝與基板是AI晶片供不應求的瓶頸環節，與「需求強、融資弱」的市場矛盾相互呼應。內文細節❌未取得。</div>
+<div class="src">來源：<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a>／<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">投資者不買賬？OpenAI下調估值目標至1.25萬億，擬在IPO前完成300億美元融資</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-us">美國</span><span>2026/10/22</span></div>
+<div class="summary">華爾街見聞稱OpenAI估值目標下調至1.25萬億美元，並計畫IPO前完成最高300億美元募資，資金由阿聯酋投資者領投，亦洽談取得阿聯酋更多算力（CNBC）。AI龍頭的估值敘事開始受到融資市場檢驗。</div>
+<div class="src">來源：<a href="https://wallstreetcn.com/news/most-read" target="_blank">華爾街見聞</a></div>
+</div>
+<div class="site-block"><span class="site">investing.com</span></div>
+<div class="card">
+<div class="card-head"><span class="title">特朗普援引《國防生產法》推動能源增產，油價從五個月高位回落</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-us">美國</span><span>2026/10/23</span></div>
+<div class="summary">投資有趣中文版標題：美國總統援引《國防生產法》推動能源生產，油價一度從五個月高點回落。政策工具與前日取暖油儲備出借並列，期中選舉前壓油價的力道正加大，但Reuters指Brent仍在114美元上下。</div>
+<div class="src">來源：<a href="https://cn.investing.com/news/headlines" target="_blank">investing.com</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">意大利能源巨頭Eni三季報前瞻：瑞銀預計回購提速，並派發10億歐元特別股息</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-eu">歐洲</span><span>2026/10/23</span></div>
+<div class="summary">瑞銀預期Eni將加快股票回購並派發10億歐元特別股息。高油價環境下能源公司現金流改善，能源巨頭傾向把額外現金回饋股東而非擴大資本支出。標題層級，數字為瑞銀預估。</div>
+<div class="src">來源：<a href="https://cn.investing.com/news/headlines" target="_blank">investing.com</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">日本10月製造業活動放緩，服務業改善——PMI數據揭示</span></div>
+<div class="rowmeta"><span class="cat">ECONOMY &amp; POLITICS</span><span class="badge b-asia">日本</span><span>2026/10/23</span></div>
+<div class="summary">日本製造業PMI降至七個月低點（Reuters），服務業改善。製造業走弱與核心CPI超標並存，日銀升息面臨「成長偏弱、通膨偏強」的取捨；日圓強勢又會對出口與日經造成壓力。</div>
+<div class="src">來源：<a href="https://cn.investing.com/news/headlines" target="_blank">investing.com</a>／<a href="https://www.reuters.com/business/" target="_blank">Reuters</a></div>
+</div>
+<div class="site-block"><span class="site">富途牛牛</span></div>
+<div class="card">
+<div class="card-head"><span class="title">SpaceX洽談接入8萬座蜂窩基站，搭建自有無線網絡</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-us">美國</span><span>2026/10/22</span></div>
+<div class="summary">Bloomberg報導（Reuters轉述）：SpaceX正與基礎設施業者洽談至少8萬個美國基站的接入權，富途稱馬斯克欲打造「全美第四大運營商」，通信塔公司迎新機遇。亦有「AT&amp;T受SpaceX威脅」的前日報導，電信股估值面臨新變數。</div>
+<div class="src">來源：<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a>／<a href="https://www.reuters.com/business/" target="_blank">Reuters</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">Bloom Energy 2026年Q3營收12.36億美元，同比增長138%；上調全年營收展望</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-us">美國</span><span>2026/10/22</span></div>
+<div class="summary">富途資訊：Bloom Energy Q3營收12.36億美元（+138%）、調整後EPS 0.94美元，並上調全年營收展望；Bloomberg將其列為盤後焦點股。資料中心自備電力需求是增長主因（業務描述為原有定位，非本報導內文），但財報後股價反應❌未取得。</div>
+<div class="src">來源：<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a>／<a href="https://www.bloomberg.com/markets" target="_blank">Bloomberg</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">蘋果逆市再創新高，iPhone Duo今日開售，市值逼近英偉達</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-us">美國</span><span>2026/10/22-23</span></div>
+<div class="summary">富途成交額榜：蘋果逆勢創新高、市值逼近輝達；Reuters指蘋果推出折疊手機iPhone Duo，今日開賣。台灣因薔琵颱風部分門市停業、訂單保留（中央社）。蘋果在科技賣壓中走強，與「AI資本支出參與度較低」的市場定價一致。</div>
+<div class="src">來源：<a href="https://news.futunn.com/hk/main" target="_blank">富途牛牛</a>／<a href="https://www.reuters.com/business/" target="_blank">Reuters</a>／<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a></div>
+</div>
+<h2 id="s3">三｜台灣新聞</h2>
+<div class="note">中央社（產經＋證券）× 鉅亨網交叉比對；時間以頁面標示為準，市場數據為10/22收盤。</div>
+<div class="card">
+<div class="card-head"><span class="title">台股10/22震盪逾千點收跌846點，台積電跌35元險守46,000點</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-tw">台灣</span><span>2026/10/22</span></div>
+<div class="summary">中央社證券「台積電跌35元 台股下挫846點險守46000點關卡」、「台股震盪逾千點收跌846點 金融股撐盤」交叉：電子權值下挫，金融股撐盤；11月台股期指跌741點，電子期跌、金融期漲。日經當日重挫1,713點（盤中），亞股多下挫，AI交易風向球（鉅亨網：南韓KOSPI領跌）傳導至台灣。今日休市，美股夜盤的重挫將延到10/26一併反映。</div>
+<div class="src">來源：<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">中央社證券</a>／<a href="https://news.cnyes.com/news/cat/headline" target="_blank">鉅亨網</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">三大法人賣超1,001.59億元；外資轉賣超816億元，提款ETF居多</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-tw">台灣</span><span>2026/10/22</span></div>
+<div class="summary">中央社證券：10/22三大法人合計賣超台股1,001.59億元。另一則「外資轉賣超816億元 提款ETF居多」在18:58發布，內文❌未取得，標題未註明統計期間，推定為10/22單日但未核實。前一日（10/21）外資曾買超約9.6億、終止連10賣（前期日報），兩日方向快速翻轉。</div>
+<div class="src">來源：<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">中央社證券</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">薔琵颱風來襲，台北股市23日休市；金管會：持續蒐集「颱風假與股市脫鉤」意見</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-tw">台灣</span><span>2026/10/22</span></div>
+<div class="summary">中央社：台北股市10/23休市1天；金管會表示持續蒐集颱風假與股市脫鉤的意見，並促保險業加強服務、依約儘速理賠。台積電10/24運動會取消，iPhone Duo開賣遇颱風假，電信業稱門市停業、訂單可保留。國際市場收盤與台股休市錯開，開盤跳空風險上升。</div>
+<div class="src">來源：<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">中央社證券</a>／<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">美光與台中工會協商成功：八成人員調薪近2.7倍，經部盼桃園廠跟進</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-tw">台灣</span><span>2026/10/22</span></div>
+<div class="summary">鉅亨網與中央社：美光台中工會達成協議，約八成人員調薪近2.7倍；中央社另報導產線人員總薪酬估將逾200萬元。經濟部樂見協議、盼桃園廠續協商。記憶體景氣高點帶動人才成本大幅調升，但同日國際記憶體股遭殺，顯示薪資成本與股價評價出現時間差。</div>
+<div class="src">來源：<a href="https://news.cnyes.com/news/cat/headline" target="_blank">鉅亨網</a>／<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">PHP資安漏洞：金管會掃描金融機構、啟動3項因應措施；資安業者提醒慎防假更新詐騙</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-tw">台灣</span><span>2026/10/22</span></div>
+<div class="summary">中央社產經兩則報導：金管會對金融機構進行漏洞掃描並啟動三項因應措施；資安業者提醒民眾慎防假更新詐騙。與國際PHP漏洞事件同步，另有91APP公布遭自動化攻擊階段調查、承諾補償消費者財損，顯示本地電商與金融業者已受到實際影響。</div>
+<div class="src">來源：<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">91APP公布遭自動化攻擊階段調查，承諾補償消費者財損</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-tw">台灣</span><span>2026/10/22</span></div>
+<div class="summary">中央社產經：91APP公布遭自動化攻擊的階段性調查，承諾補償消費者財損。細節（攻擊手法、受影響商家數量、金額）❌未取得；與PHP漏洞事件是否相關報導中未載明，不可推斷。</div>
+<div class="src">來源：<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">金管會核准永豐金證券合併京城證，市占率維持第4；券商9月獲利187億元、月減3成</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-tw">台灣</span><span>2026/10/22</span></div>
+<div class="summary">中央社：金管會核准永豐金證券合併京城證券，合併後市占率維持第4名；另報導全體券商9月獲利187億元、月減3成，台股9月高檔震盪使經紀與自營收益縮水。券商獲利下滑發生在台股高檔，與10/22 1,000億元級的法人賣超互相對照。</div>
+<div class="src">來源：<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a>／<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">中央社證券</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">TISA租稅優惠跨大步；股東會委託書申報改電子化，2027年7月上路</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-tw">台灣</span><span>2026/10/22</span></div>
+<div class="summary">中央社證券：金管會推TISA租稅優惠，拚年底前預告修法、2028年報稅適用；投信公會稱有助完善退休保障第3支柱。另股東會委託書申報改電子化，2027年7月上路。制度面利多偏長線，對短期行情影響有限。</div>
+<div class="src">來源：<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">中央社證券</a>／<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">國發會通過572億商港計畫；漢翔電力島啟用、漢測擬砸64億建新竹研發中心</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-tw">台灣</span><span>2026/10/22</span></div>
+<div class="summary">中央社產經：國發會通過572億元商港計畫，強化港埠智慧應用與營運韌性；漢翔電力島啟用，估年省4成能源成本；漢測擬砸64億元建置新竹研發與中南部製造中心。均屬公共與企業資本支出訊息，與當日美股AI資本支出疑慮形成對照。</div>
+<div class="src">來源：<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a></div>
+</div>
+<div class="card">
+<div class="card-head"><span class="title">戰略性高科技貨品出口管制清單新增343個實體；神盾攜手法國SiPearl攻AI CPU</span></div>
+<div class="rowmeta"><span class="cat">MARKETS &amp; FINANCE</span><span class="badge b-tw">台灣</span><span>2026/10/22</span></div>
+<div class="summary">中央社產經：戰略性高科技貨品出口管制清單新增343個實體（名單細節❌未取得）；神盾與法國SiPearl合作CPU，攻高效能運算與AI市場。另有宇田控制10/23起興櫃（每股42.5元）、攻AI液冷與半導體設備商機（中央社證券）。管制擴大與AI供應鏈合作並行。</div>
+<div class="src">來源：<a href="https://www.cna.com.tw/list/aie.aspx" target="_blank">中央社產經</a>／<a href="https://www.cna.com.tw/list/asc.aspx" target="_blank">中央社證券</a></div>
+</div>
+<h2 id="s4">📊 四｜產業報告</h2>
+<div class="note">今日尚無板塊流動報告可對照（本機最新停在2026/08/27，已過期）；本節依10/22收盤與新聞交叉撰寫，沒有明確關聯的公司不列入。</div>
+<h3>🏢 七大巨頭（Mag7）動態</h3>
+<div class="card"><div class="summary">Meta是10/22最直接的個股事件：Q3營收與財測雖優於預期（CNBC），但資本支出下限上調、自由現金流轉負、擬發行無投票權新股，股價跌近7%，Reuters並指其違約保險成本創紀錄。這解釋了通訊服務板塊-2.50%（Meta為板塊權值股）。Tesla則是「財報後仍續跌」：Reuters稱削減資本支出反而引發對馬斯克AI與機器人敘事的疑慮，與SpaceX單日-9%（13億股解禁）同步。相對地，蘋果逆勢創新高、市值逼近輝達（富途），顯示資金在大型科技內部也從高資本支出者流向低資本支出者；輝達與其他巨頭今日無明確個股新聞，不勉強寫入。</div></div>
+<h3>🎯 焦點個股</h3>
+<div class="card"><div class="summary">半導體與儲存鏈是當日最大跌幅來源：SanDisk、Intel、AMD單日跌逾8%（富途），費半近-7%；西部數據財報營收+55%、EPS+161%、股息+17%仍被殺，智通財經把問題指向「業績背後的融資來源」，SK海力士同日擱置Solidigm美國IPO。這三則新聞互相印證：記憶體基本面強勁，但市場開始質疑需求是否由外部融資支撐，而不是終端現金流。CoreWeave市值蒸發約440億美元是同一條融資鏈的信用端症狀。逆勢者有寶潔（績後漲近6%）、沃爾瑪（1999年來最佳單月）、Lockheed（850架F-35大單）。Moderna一度跌26%，是醫藥股『利多出盡』的單一事件，與AI主線無關。</div></div>
+<h3>🔄 重要領域變革</h3>
+<div class="card"><div class="summary">本日主軸是AI交易的定價錨從『需求』轉向『資本成本與融資』：Meta CDS創高、CoreWeave債務壓力、OpenAI以1.25萬億美元估值募資、Bloomberg談『AI借貸狂潮』如何震動市場，都指向同一個議題。第二條線是能源與地緣：胡塞襲擊沙烏地使Brent站上112–114美元，航空股（美國航空、西南、聯合）陸續下調財測，說明油價已從報價傳導到企業獲利。第三條線是AI資安：PHP漏洞由AI發現，卻可能被AI工具利用，歐洲政府網站下線，資安股受惠。這三條線尚無證據顯示彼此有因果，但共同壓低了風險偏好。</div></div>
+<h2 id="s5">🎯 五｜今日焦點解讀</h2>
+<div class="card"><h3 style="margin-top:0;">💰 資金面</h3><div class="summary">⚠️ 數據時點：美股、板塊與ETF為10/22收盤，台股為10/22收盤（今日休市）。「新聞×數據」交叉：Reuters「Steep bill for AI buildout punishes Meta」與Finviz科技-3.24%、通訊服務-2.50%直接對應；富途『費半近-7%』與QQQ-2.86%、RSP+0.73%則顯示賣壓集中在高集中度的AI權值。相反，必需消費+3.13%、公用事業+1.70%、房地產+1.30%與10年期殖利率回落約17bp同步，較像『避險＋利率受惠』輪動；能源板塊反而-0.75%，儘管Brent上漲，找不到對應新聞，較可能是被動資金與科技賣壓的連動，而非能源基本面轉弱。另，本機板塊流動報告停在08/27、資金流雙軌週報停在09/10，ETF資金流與FINRA融資餘額❌本期無可用數據，不做推論。</div></div>
+<div class="card"><h3 style="margin-top:0;">🧠 心理面</h3><div class="summary">VIX 10/22收19.03（+14.09%，CNBC），前收16.68；5日+15.61%、1個月+33.92%，仍遠低於52週高點35.30，屬『升溫但未恐慌』。CNN Fear &amp; Greed❌本期未取得。Reuters Trading Day用『Maximum pAIn』形容這一天，華爾街見聞則說『Meta成最後一根稻草』，兩者都把事件歸因於累積的疑慮而非單一消息。富途亦提到前日『恐慌指數飆升11%、納指期貨重挫500點』，與收盤VIX+14%互相呼應。Meta違約保險創紀錄是這次心理面最特別的訊號：恐懼不只在股價，也在信用市場。黃金同日-2.63%，說明避險情緒下現金與流動性比黃金更受歡迎。</div></div>
+<div class="card"><h3 style="margin-top:0;">📉 籌碼面</h3><div class="summary">⚠️ 數據時點：以下台股法人數字均為10/22單日，非今日。中央社：10/22三大法人賣超台股1,001.59億元；『外資轉賣超816億元，提款ETF居多』標題未註明期間，推定為同日但未核實。10/21外資買超約9.6億（前期日報）、10/22轉為大額賣超，單日翻轉幅度大；『提款ETF居多』顯示賣壓部分來自ETF贖回而非主動賣股。券商9月獲利187億元、月減3成（中央社），是9月份數據，不可當作當日籌碼。美國端槓桿／融資數據（FINRA）本期❌未取得，不與台灣外資買賣超混用。</div></div>
+<div class="card"><h3 style="margin-top:0;">🏭 產業面</h3><div class="summary">新聞與新聞的交叉點在『AI硬體基本面強、融資端被質疑』：西部數據營收+55%卻大跌（華爾街見聞）、Meta營收beat卻跌近7%、SK海力士擱置Solidigm IPO、CoreWeave市值-440億美元、黃仁勳稱neocloud需求『off the charts』（CNBC），股價反應與基本面脫鉤，說明賣壓不是需求消失，而是資本成本重估。另一條產業線是能源：胡塞襲擊與阿美撤離使Brent達112–114美元，航空業下調財測，Eni預期回購加碼，能源公司與用油企業的現金流出現方向相反的變化。AI資安（PHP漏洞）與稀土供應（GM取消磁鐵供貨）則是供應鏈與安全的兩個獨立風險點，尚無證據顯示會改變當日價格走勢。</div></div>
+<h3>📌 對投資產品的具體影響</h3>
+<div class="card"><b>AI硬體／半導體與大盤（QQQ、SPY、RSP）</b><div class="summary">QQQ收704.47（-2.86%）、SPY 763.96（-1.18%）、RSP 218.22（+0.73%），QQQ與RSP相對差約359bp；10/21則是QQQ領先RSP約69bp，短期集中度與廣度快速反轉。賣壓直接來源是Meta（通訊服務）、半導體與儲存股，而非整體基本面轉壞。對LWP而言，這強化『M7集中度』風險關鍵字，也說明等權重與防禦板塊在科技回檔時的緩衝作用。</div></div>
+<div class="card"><b>能源與油價（Brent）</b><div class="summary">Reuters Brent 114.20美元（+0.91%，10/23亞洲盤），較前期日報的110.13美元高；胡塞襲擊沙烏地、阿美撤離達蘭是直接原因，美國同時援引《國防生產法》增產、出借取暖油儲備（前期）以壓價。航空股財測下調（美國航空、西南、聯合）是油價成本傳導的證據；Finviz能源板塊-0.75%、COPX-6.27%則顯示商品股今日被風險賣壓拖累，未必反映油價本身。</div></div>
+<div class="card"><b>美債／利率（10年期、2年期、TIPS）</b><div class="summary">10年期美債約4.95–4.97%、2年期前收4.635%，兩者較前日同降約17bp。Reuters稱科技股重挫使債券受惠、升息押注降溫；SCHP（TIPS）+0.71%同向。但Brent高檔與日本核心CPI超標仍保留通膨風險，FOMC 10/27–28前，市場是在『避險』與『通膨再加速』之間擺盪。LTCMA的『期限溢價上升、股債相關性上升』風險在今日表現為股債翻轉（股跌債漲），暫時有利於債券作為分散工具。</div></div>
+<div class="card"><b>黃金（GLD）</b><div class="summary">GLD收369.00（-2.63%），一度跌破現貨4,000美元（Bloomberg），富途說金價單日跌近3%、逼近三個月低點。同日油價上升、美債殖利率下降本應支撐黃金，卻出現股債黃金齊跌的『流動性賣壓』形態，可能是保證金或部位調整所致，原因無單一新聞確認，不作定論。若3,900美元（富途提及的關鍵關口）失守，才可視為技術面轉弱。</div></div>
+<div class="card"><b>關鍵金屬／礦業（COPX）</b><div class="summary">COPX收73.13（-6.27%），比銅期貨-1.90%（Reuters）跌得更深，Finviz原物料板塊-2.57%。Bloomberg稱中國股市深陷熊市、AI模型股市值蒸發約1,500億美元，且GM取消美國稀土磁鐵廠合約，對礦業與關鍵金屬情緒不利。COPX除了銅價之外，還包含礦業股的市場beta與中國風險，今日跌幅主要是股權風險而非商品本身。</div></div>
+<h2 id="s6">💭 六｜市場情緒</h2>
+<div class="sent-grid">
+<div class="sent-card sent-bull"><b>🟢 多頭訊號</b><ul style="margin:8px 0 0; padding-left:20px; font-size:0.9rem;"><li>道瓊+0.02%、RSP+0.73%，賣壓集中在科技而非全面崩跌</li><li>10年期美債跌破5%（Reuters 4.953%），利率壓力暫緩</li><li>必需消費+3.13%、寶潔績後近+6%，防禦輪動有承接</li><li>蘋果逆勢創新高、iPhone Duo開賣</li><li>Lockheed 850架F-35、780億美元大單；Bloom Energy Q3營收+138%</li><li>VIX 19.03仍遠低於52週高點35.30</li></ul></div>
+<div class="sent-card sent-bear"><b>🔴 空頭訊號</b><ul style="margin:8px 0 0; padding-left:20px; font-size:0.9rem;"><li>Nasdaq-2.60%、費半近-7%、SanDisk／Intel／AMD跌逾8%</li><li>Meta股價-近7%，違約保險成本創紀錄；CoreWeave市值-440億美元</li><li>VIX+14.09%，5日+15.61%、1個月+33.92%</li><li>Brent 112–114美元，沙烏地遇襲、阿美撤離；美以傳選後打擊伊朗</li><li>黃金跌破4,000美元，避險資產同步被賣</li><li>中國創業板-4%、恒科-5%，Bloomberg稱中國股市陷入熊市</li><li>SpaceX-9%、Moderna一度-26%；PHP漏洞引發政府網站下線</li><li>HY OAS 327bps（10/21）較10/9的311bps擴大16bps</li></ul></div>
+<div class="sent-card sent-focus"><b>🎯 今日焦點監控</b><div style="font-size:0.9rem; margin-top:6px;">①10/26台股復市對美股重挫的補跌幅度；②10/28前後Microsoft、Alphabet財報（日期未官方確認）與資本支出表態；③Meta CDS與CoreWeave債券是否進一步走闊，並傳導至整體HY OAS；④沙烏地／葉門情勢與埃及國會下週表決；⑤10/27–28 FOMC在10年期跌破5%後的措辭。</div></div>
+</div>
+<div class="sent-verdict">💭 氛圍總評：10/22是『AI融資疑慮＋油價高檔』的風險趨避日，賣壓集中在高集中度的AI權值與記憶體鏈，債市與防禦股承接，但黃金與礦業同跌顯示流動性賣壓；VIX升到19仍屬可控，關鍵是信用端（Meta、CoreWeave）是否擴散。</div>
+<h2 id="s7">📈 七｜全球指數＆總體數據（10/22美股收盤／10/23亞股早盤）</h2>
+<table><thead><tr><th>項目</th><th>數值</th><th>漲跌</th></tr></thead><tbody>
+<tr><td>S&amp;P 500</td><td>7,663.43</td><td class="down">▼ -1.21%（Reuters／Bloomberg）</td></tr>
+<tr><td>Nasdaq</td><td>26,008.86</td><td class="down">▼ -2.60%（Bloomberg）；Nasdaq 100盤中一度-3%</td></tr>
+<tr><td>道瓊／費城半導體</td><td>❌未取得收盤值</td><td>道瓊+0.02%、費半近-7%（富途／華爾街見聞）</td></tr>
+<tr><td>日經225（Reuters頁面）</td><td>61,729.50</td><td class="down">▼ -1.87%（時點為10/23亞洲盤，未核實）；10/22盤中曾重挫1,713點（中央社）</td></tr>
+<tr><td>台股加權（10/22收盤）</td><td>約46,041（由前期約46,887扣846.34點推算；中央社稱險守46,000點）</td><td class="down">▼ -846.34點；10/23休市</td></tr>
+<tr><td>港股恒指／恒科、上證、KOSPI</td><td>❌未取得收盤數值</td><td>恒科指10/22盤中-5%、創業板-4%（華爾街見聞）；Bloomberg稱南韓股市因晶片股下挫</td></tr>
+<tr><td>Euro STOXX 50</td><td>6,087.01</td><td class="down">▼ -1.94%（Reuters）</td></tr>
+<tr><td>FTSE 100</td><td>10,725.03</td><td class="down">▼ -0.26%（Reuters）</td></tr>
+<tr><td>美債10年期</td><td>4.953%（Reuters）／4.97%（Bloomberg）</td><td class="down">約-17bp（對照前期日報5.119%）；一個月來首度跌破5%</td></tr>
+<tr><td>美債2年期（CNBC／Tradeweb）</td><td>前收4.635%（10/22）；10/22 22:33 EDT為4.663%</td><td class="down">對照前期日報4.804%約-17bp；10Y-2Y約32bps（兩源時點不同，屬推算）</td></tr>
+<tr><td>德債／英債／日債 10年期</td><td>3.331%／5.334%／2.800%</td><td>-0.5bp／+0.4bp／-8.5bp（Reuters）</td></tr>
+<tr><td>Brent原油（期貨，10/23亞洲盤）</td><td>114.20美元</td><td class="up">▲ +0.91%（Reuters）；Bloomberg WTI類原油100.35美元，+0.88%</td></tr>
+<tr><td>黃金（期貨）</td><td>4,031.70美元（Bloomberg）／4,042.80（Reuters）</td><td class="down">▼ -0.71%（Bloomberg頁面，時點為亞洲盤）；富途稱10/22單日跌近3%、跌破4,000</td></tr>
+<tr><td>銅（期貨）</td><td>1,364.00</td><td class="down">▼ -1.90%（Reuters）</td></tr>
+<tr><td>VIX（CNBC，10/22收）</td><td>19.03</td><td class="up">▲ +2.35（+14.09%）；前收16.68</td></tr>
+<tr><td>CNN Fear &amp; Greed</td><td>❌未取得（CNN頁面動態載入）</td><td>—</td></tr>
+<tr><td>EUR/USD；GBP/USD</td><td>1.1209；1.3394</td><td class="down">-0.06%；-0.05%（Reuters）</td></tr>
+<tr><td>美元指數DXY；USD/JPY</td><td>❌未取得</td><td>日圓一個月高點（Bloomberg）；CNY/USD 0.1499，+0.03%</td></tr>
+<tr><td>新台幣</td><td>❌未取得</td><td>—</td></tr>
+<tr><td>比特幣</td><td>❌未取得</td><td>—</td></tr>
+</tbody></table>
+<div class="note">資料來源：Reuters／Bloomberg市場頁面（延遲報價）、CNBC報價、中央社、Finviz。亞股與期貨為盤中值，非收盤。</div>
+<h2 id="s8">📊 八｜S&amp;P 500 板塊排行（Finviz，10/22收盤日漲跌）</h2>
+<h3>▲ 漲幅前三大板塊</h3>
+<table><thead><tr><th>排名</th><th>板塊</th><th>當日漲跌幅</th><th>主要貢獻股</th><th>個股漲跌幅</th></tr></thead><tbody>
+<tr><td>🥇</td><td>Consumer Defensive 必需消費</td><td class="up">+3.13%</td><td>寶潔、沃爾瑪（新聞點名）</td><td class="up">寶潔績後近+6%（華爾街見聞）；沃爾瑪個股漲幅❌未取得，僅稱1999年來最佳單月</td></tr>
+<tr><td>🥈</td><td>Utilities 公用事業</td><td class="up">+1.70%</td><td>❌未見明確個股新聞</td><td>—</td></tr>
+<tr><td>🥉</td><td>Real Estate 房地產</td><td class="up">+1.30%</td><td>❌未見明確個股新聞</td><td>—</td></tr>
+</tbody></table>
+<h3>▼ 跌幅前三大板塊</h3>
+<table><thead><tr><th>排名</th><th>板塊</th><th>當日漲跌幅</th><th>主要拖累股</th><th>個股漲跌幅</th></tr></thead><tbody>
+<tr><td>💀 1</td><td>Technology 科技</td><td class="down">-3.24%</td><td>SanDisk、Intel、AMD（富途點名）</td><td class="down">三檔皆跌逾8%（富途）；費半近-7%</td></tr>
+<tr><td>💀 2</td><td>Basic Materials 原物料</td><td class="down">-2.57%</td><td>❌未見個股新聞；銅期貨-1.90%（Reuters）</td><td>COPX-6.27%（ETF，非板塊成分股）</td></tr>
+<tr><td>💀 3</td><td>Communication Services 通訊服務</td><td class="down">-2.50%</td><td>Meta（Finviz分類為通訊服務）</td><td class="down">Meta跌近7%（CNBC）</td></tr>
+</tbody></table>
+<div class="card"><b>資金流向解讀：</b><div class="summary">本日是『高集中度成長股被賣、防禦與利率敏感族群被買』的輪動：科技-3.24%與通訊服務-2.50%有Meta、半導體、儲存股新聞對應；必需消費+3.13%有寶潔財報與沃爾瑪的新聞，公用事業與房地產則較可能是殖利率下跌17bp的被動受惠，沒有找到個股新聞。其他值得注意的是工業-2.32%、能源-0.75%：若SpaceX歸類為工業（未核實），-9%可解釋部分；能源板塊在Brent上漲下仍收跌，沒有對應新聞，較可能是大盤賣壓下的連動。金融+0.44%、醫療+1.15%相對抗跌，與Moderna個股大跌並不矛盾（板塊權重不同）。</div></div>
+<h2 id="s9">💼 九｜LWP 組合觀察（10/22美股收盤）</h2>
+<div class="lwp-card"><div class="lwp-head">① 大盤／科技（SPY／QQQ／RSP）</div><div class="quote-line">SPY $763.96（-1.18%）</div><div class="quote-line">QQQ $704.47（-2.86%）</div><div class="quote-line">RSP $218.22（+0.73%）</div><div class="strategy">QQQ-2.86%對RSP+0.73%，相對差約359bp，與10/21的QQQ領先RSP約69bp相反，短短兩個交易日內集中度與廣度連兩次反轉，印證LTCMA『M7集中度』風險的實際發生樣貌：不是整體股市轉弱，而是權重股融資邏輯被重新定價。LWP以等權重與分散配置為核心，今日RSP逆勢上漲可視為組合緩衝有效。後續觀察重點是Microsoft、Alphabet財報時資本支出指引是否延續Meta模式，以及Meta CDS能否降溫。</div></div>
+<div class="lwp-card"><div class="lwp-head">② 黃金（GLD）</div><div class="quote-line">GLD $369.00（-2.63%）</div><div class="strategy">GLD跌2.63%，一度跌破現貨4,000美元（Bloomberg），富途稱逼近三個月低點。通常在股市下跌、油價高企、殖利率下降時黃金會受惠，今日相反，較合理的解釋是流動性賣壓或部位調整，但無單一新聞證實。對LWP而言，黃金作為通膨與去美元化的對沖角色未被推翻，但今天證明它在急殺時並非『永遠的避險』；若3,900美元失守，才需重新檢視戰術性部位。</div></div>
+<div class="lwp-card"><div class="lwp-head">③ 關鍵金屬／礦業（COPX）</div><div class="quote-line">COPX $73.13（-6.27%）</div><div class="strategy">COPX跌6.27%，銅期貨-1.90%（Reuters），ETF比商品多跌約4.4個百分點，顯示礦業股承受了中國股市熊市與全球風險資產賣壓的額外beta。GM取消美國稀土磁鐵廠合約（Reuters）對關鍵礦物『供應鏈自主』題材屬負面。LWP的長期關鍵金屬配置邏輯（能源轉型與AI電力需求）未被新聞推翻，但短期波動需預期更大，建議以分批與部位上限控管，而不是追跌。</div></div>
+<div class="lwp-card"><div class="lwp-head">④ 公司債信用利差（IG／HY OAS）</div><div class="quote-line">IG OAS：88bps（2026/10/21，FRED最新；10/19為87bps，10/16為85bps，10/9為83bps）</div><div class="quote-line">HY OAS：327bps（2026/10/21；10/20為333bps，10/19為329bps，10/16為331bps，10/9為311bps）</div><div class="quote-line">10/22 OAS：❌FRED尚未更新（最新資料點為10/21）；LQD／HYG當日報酬❌未取得</div><div class="strategy">FRED資料只到10/21，因此10/22科技重挫與Meta違約保險創紀錄對整體利差的影響，今天看不到。10/9至10/21 HY擴大16bps、IG擴大5bps，屬緩步走闊；10/21 HY較前日收斂6bps。Meta CDS創高是個別發行人事件，不等於整個HY市場同步轉差，需待10/22 OAS出爐再判斷是否外溢。</div><div class="interpret-box"><b>🔍 解讀與訊號轉折點</b>判讀結論：缺少10/22 OAS與LQD／HYG報酬，無法用「IG／HY當日報酬差異」直接判定。以現有證據：10年期與2年期約-17bp、TIPS與防禦股上漲，說明10/22賣壓主要在股票估值與利率重定價；唯獨Meta違約保險創紀錄與CoreWeave債務壓力是『發行人層級的信用重新定價』，暫判偏「估值／融資成本衝擊，個別信用事件」，尚非整體信用驅動，待10/22利差數據確認。<ul><li>HY利差是否獨立於利率走闊：<b>待確認</b>——10/21 HY 327bps，尚無10/22數據；若10年期續跌而HY OAS仍擴大，則轉為信用驅動訊號。</li><li>10Y–2Y利差：約32bps（Reuters 10Y 4.953% 減CNBC 2Y前收4.635%，時點略異），距翻負還有約32bps；兩端同降約17bp，屬近乎平行下移的牛市，非牛平收斂，暫無衰退前兆意涵。</li><li>歷史檔位：IG OAS 88bps，高於極緊縮門檻(80)8bps，距正常區下緣(100)12bps；HY OAS 327bps，低於350bps極緊縮門檻，距正常區350bps尚有23bps。</li></ul><div style="margin-top:8px; padding-top:8px; border-top:1px dashed var(--border);"><b style="display:inline;">⚠️ 板塊性利差異常事件監控：</b>①觸發事件：Reuters「Meta shares slide, default insurance hits record」（Meta CDS創紀錄）與鉅亨網／CNBC的CoreWeave債務壓力、市值蒸發約440億美元。②性質：Meta Q3營收beat、現金流負但仍握有824億美元資產（鉅亨網引艾克曼），較像市場對融資結構重新定價，而非違約風險上升；CoreWeave屬高槓桿neocloud，基本面疑慮較實質（HSBC『structural concerns』）。③建議：Meta相關債券與CDS暫列『潛在錯價／觀察』，CoreWeave與neocloud列入風險關鍵字追蹤；兩者均屬單一發行人層級，非系統性訊號。</div></div></div>
+<div class="lwp-card"><div class="lwp-head">⑤ 10年期－2年期公債期限利差（殖利率曲線）</div><div class="quote-line">2Y：前收4.635%（10/22，CNBC／Tradeweb；對照前期4.804%，約-17bp）</div><div class="quote-line">10Y：4.953%（Reuters；對照前期5.119%，約-17bp）</div><div class="quote-line">10Y-2Y：約32bps（推算；前期約31bps）</div><div class="strategy">利差基本不變，約31→32bps，是兩端同降的平行下移，而非曲線形狀改變。Reuters說科技股重挫使債市受惠、升息押注降溫，主要解釋2年期下行；長端則反映避險買盤與華爾街見聞所稱AI資本支出退潮的『另類QE』。與LTCMA『期限溢價上升』並不衝突：10年期仍在接近5%的高位，只是由5.12%回落。</div><div class="interpret-box"><b>🔍 解讀與訊號轉折點</b>判讀結論：10/22屬牛市近乎平行下移（短端下行略多於長端），意涵是『升息押注降溫＋避險買盤』。短端：Fed政策路徑預期由偏鷹轉向（Reuters稱dent rate hike bets）；長端：期限溢價因避險需求暫時回落，但油價高檔與日本通膨仍保有上行風險，並非趨勢反轉。<ul><li>HY利差是否獨立於利率走闊：見④，10/22 OAS❌未取得，暫無新證據。</li><li>10Y–2Y利差：約32bps，距翻負還有約32bps；若利差收斂是因2年期不跌而10年期續下，屬牛平，才有衰退前兆意涵；若2年期因升息預期上升，則為熊平。今日不屬於這兩者。</li><li>歷史檔位：同④（IG 88bps／HY 327bps），距IG正常區下緣12bps、HY正常區下緣23bps。</li></ul></div></div>
+<h2 id="s10">📅 十｜市場日曆（未來1-2週）</h2>
+<div class="card">
+<div class="cal-item"><div class="cal-date">10/23（今日）</div><div class="cal-body"><b>台股休市（薔琵颱風）</b>Reuters、中央社：台北股市休市一天，美股重挫的反應延到10/26；日本核心CPI已公布，日銀升息預期升溫。</div></div>
+<div class="cal-item"><div class="cal-date">10/25（週日）</div><div class="cal-body"><b>巴西總統決選</b>Reuters：Flavio Bolsonaro與Lula民調幾乎持平（Datafolha）。</div></div>
+<div class="cal-item"><div class="cal-date">10/26（週一）</div><div class="cal-body"><b>台股復市</b>需消化10/22–23美股與亞股的回檔；同週為七大巨頭財報週。</div></div>
+<div class="cal-item"><div class="cal-date">10/27–28</div><div class="cal-body"><b>FOMC會議</b>沿用前期日報資料：利率決議為10/28美東14:00；本期未重新核實，建議以Fed官網為準。10年期跌破5%後的措辭是焦點。</div></div>
+<div class="cal-item"><div class="cal-date">10/28（預估）</div><div class="cal-body"><b>Microsoft、Alphabet財報</b>多個日曆整理指出可能為10/28盤後，但非公司官方確認；Amazon、Apple、輝達日期❌未取得，請勿以去年日期為準。</div></div>
+<div class="cal-item"><div class="cal-date">10/29</div><div class="cal-body"><b>美國Q3 GDP初值與9月PCE</b>沿用前期資料（PCE日期僅單一來源，建議以bea.gov核實）；美東08:30。</div></div>
+<div class="cal-item"><div class="cal-date">下週（日期未定）</div><div class="cal-body"><b>埃及國會表決是否授權軍隊支援沙烏地</b>Reuters 10/22：表決將於下週舉行，具體日期❌未取得。</div></div>
+<div class="cal-item"><div class="cal-date">11/3</div><div class="cal-body"><b>美國期中選舉</b>Trump援引《國防生產法》增產、出借取暖油儲備等工具壓油價；美以傳於選後打擊伊朗（富途轉述，未證實）。</div></div>
+<div class="cal-item"><div class="cal-date">11/5</div><div class="cal-body"><b>台灣大收購精誠公開收購截止</b>沿用前期中央社資料：11/5前拚取得最高58%股權。</div></div>
+<div class="cal-item"><div class="cal-date">11/6</div><div class="cal-body"><b>美國10月非農就業報告</b>日曆整理，美東08:30。</div></div>
+<div class="cal-item"><div class="cal-date">11/10</div><div class="cal-body"><b>美國10月CPI</b>BLS公布日，美東08:30（沿用前期）。</div></div>
+<div class="cal-item"><div class="cal-date">12月</div><div class="cal-body"><b>日本央行</b>本期Reuters稱核心CPI超標、近期升息機率上升；前期Reuters調查預期升息至1.50%，具體會議日期❌未取得。</div></div>
+<div class="cal-item"><div class="cal-date">不定期</div><div class="cal-body"><b>中東情勢、OpenAI募資與IPO、SpaceX–Tesla合併、PHP漏洞後續</b>均無確定日期；Bloomberg有『若印尼被剔除MSCI全球指數』的explainer，具體時間未取得。</div></div>
+</div>
+<h2 id="kw">🔑 關鍵字分類</h2>
+<div class="kw-section"><b>📌 月度關鍵字</b><div class="kw-list"><span class="tag tag-cat">AI資本支出融資疑慮</span><span class="tag tag-cat">Meta違約保險／無投票權股</span><span class="tag tag-cat">SpaceX解禁／Tesla合併</span><span class="tag tag-cat">neocloud融資（CoreWeave）</span><span class="tag tag-cat">OpenAI 1.25萬億募資／Anthropic IPO</span><span class="tag tag-cat">AI硬體／記憶體週期（SanDisk、WDC、SK海力士）</span><span class="tag tag-cat">中國科技熊市</span><span class="tag tag-cat">財報季</span><span class="tag tag-cat">防禦股輪動</span></div></div>
+<div class="kw-section"><b>🔴 必追</b><div class="kw-list"><span class="tag tag-risk">Fed政策路徑（10/28 FOMC）</span><span class="tag tag-risk">通膨與能源價格（Brent 114）</span><span class="tag tag-risk">中東戰事／胡塞襲擊沙烏地／美伊</span><span class="tag tag-risk">俄烏和談／星鏈</span><span class="tag tag-risk">美債殖利率跌破5%</span><span class="tag tag-risk">日銀升息預期</span><span class="tag tag-risk">美國期中選舉（11/3）</span><span class="tag tag-risk">台股颱風休市／外資賣超</span></div></div>
+<div class="kw-section"><b>⚡ 風險關鍵字（合併LTCMA_LWP長期風險＋投資機構研究摘要10/21期）</b><div class="kw-list"><span class="tag tag-risk">期限溢價上升</span><span class="tag tag-risk">去美元化</span><span class="tag tag-risk">AT1歸零風險</span><span class="tag tag-risk">M7集中度</span><span class="tag tag-risk">股債相關性上升</span><span class="tag tag-risk">AI ROI不達標</span><span class="tag tag-risk">通膨再加速（CPI 3.7%／PPI 6.3%）</span><span class="tag tag-risk">市場廣度轉弱</span><span class="tag tag-risk">neocloud融資風險</span><span class="tag tag-risk">hyperscaler ROIC下滑（Apollo）</span><span class="tag tag-risk">存續期避險力下降</span><span class="tag tag-risk">CCC級利差擴大</span><span class="tag tag-risk">AI發現漏洞／資安事件（PHP）</span><span class="tag tag-risk">資本支出增資稀釋</span><span class="tag tag-risk">法國財政／法債</span><span class="tag tag-risk">油價成本壓力（航空）</span><span class="tag tag-risk">黃金流動性賣壓</span><span class="tag tag-risk">稀土供應鏈（GM取消合約）</span></div><div class="note">風險關鍵字前段取自LTCMA／LWP報告長期結構性風險；中段取自2026/10/21投資機構研究摘要（JPM／UBS／BlackRock等）；後段為本期新聞新增項目。本期未重新抽取docx全文，沿用前期日報之關鍵字庫。</div></div>
+<div class="footer-note">本報告由財經小狐自動彙整，僅供個人研究參考，不構成投資建議。本期Bloomberg／Reuters／CNBC多為訂閱內容，簡述以標題與導言為主；❌表示未取得或未核實，推算值已註明。</div>
+</div></body></html>
