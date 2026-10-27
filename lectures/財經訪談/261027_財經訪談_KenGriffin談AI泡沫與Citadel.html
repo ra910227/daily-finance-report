@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ken Griffin 演講筆記</title>
+<style>
+:root{
+  --bg:#faf8f4; --surface:#ffffff; --text:#222; --muted:#6b6b6b; --line:#e6e1d8;
+  --accent:#b4531a; --accent-soft:#f6e6da; --quote:#f1ede4; --host:#2f6f8f; --host-soft:#e3eff5;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#17150f; --surface:#1f1c15; --text:#ece7dc; --muted:#a39d8f; --line:#3a362b; --accent:#e58b4f; --accent-soft:#3a2a1c; --quote:#26231a; --host:#7fbfdc; --host-soft:#1b2a33; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.8 -apple-system,"Segoe UI","Microsoft JhengHei","PingFang TC",sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:32px 16px 80px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
+nav{position:sticky;top:24px;align-self:start;font-size:14px}
+nav h2{font-size:12px;letter-spacing:.1em;color:var(--muted);margin:0 0 8px;text-transform:uppercase}
+nav a{display:block;color:var(--muted);text-decoration:none;padding:4px 0 4px 12px;border-left:2px solid var(--line)}
+nav a:hover{color:var(--accent);border-left-color:var(--accent)}
+header{margin-bottom:32px}
+.tag{display:inline-block;font-size:12px;color:var(--accent);background:var(--accent-soft);padding:2px 10px;border-radius:99px}
+h1{font-size:30px;line-height:1.35;margin:12px 0 8px}
+.meta{color:var(--muted);font-size:14px}
+.meta a{color:var(--accent)}
+.tldr{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:16px 20px;margin:24px 0}
+.tldr b{color:var(--accent)}
+section{margin-top:44px}
+h2.sec{font-size:22px;margin:0 0 4px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+.range{font-size:13px;color:var(--muted);margin:0 0 14px}
+h3{font-size:17px;margin:24px 0 6px}
+ul{padding-left:1.3em;margin:8px 0}
+li{margin:4px 0}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:15px}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+th{background:var(--accent-soft);color:var(--accent)}
+td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600;width:1%}
+td:first-child a{color:var(--accent);text-decoration:none}
+tr:last-child td{border-bottom:0}
+blockquote{margin:10px 0;padding:10px 16px;background:var(--quote);border-left:3px solid var(--accent);border-radius:4px}
+.note{font-size:14px;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:12px 16px}
+.chips span{display:inline-block;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:2px 10px;margin:3px 4px 3px 0;font-size:14px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+.card h4{margin:0 0 4px;color:var(--accent)}
+
+/* 逐段詳述 */
+.seg{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.seg:last-of-type{border-bottom:0}
+.seg .t{font-variant-numeric:tabular-nums;font-weight:600;font-size:14px;padding-top:2px}
+.seg .t a{color:var(--accent);text-decoration:none}
+.seg .t a:hover{text-decoration:underline}
+.who{display:inline-block;font-size:12px;font-weight:600;padding:0 8px;border-radius:99px;margin-right:6px;vertical-align:1px}
+.who.h{color:var(--host);background:var(--host-soft)}
+.who.k{color:var(--accent);background:var(--accent-soft)}
+.seg p{margin:0 0 6px}
+.seg .en{font-size:14px;color:var(--muted);border-left:2px solid var(--line);padding-left:10px;margin:6px 0}
+.takeaway{background:var(--accent-soft);border-radius:8px;padding:10px 16px;margin:14px 0 0;font-size:15px}
+.takeaway b{color:var(--accent)}
+@media (max-width:820px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  nav{position:static;margin-bottom:24px}
+  .cols{grid-template-columns:1fr}
+  .seg{grid-template-columns:1fr;gap:2px}
+  h1{font-size:24px}
+}
+@media print{ nav{display:none} .wrap{display:block} body{background:#fff;color:#000} }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <h2>目錄</h2>
+  <a href="#outline">章節大綱</a>
+  <a href="#ai-work">1. AI 與工作</a>
+  <a href="#citadel">2. AI 對 Citadel 的影響</a>
+  <a href="#market">3. 市場修正與資本支出</a>
+  <a href="#bubble">4. 泡沫論</a>
+  <a href="#delever">5. 去槓桿藉口</a>
+  <a href="#sa">6. Situational Awareness</a>
+  <a href="#politics">7. 政治與期中選舉</a>
+  <a href="#blueprint">8. 成長優先藍圖</a>
+  <a href="#other">9. 其他</a>
+  <a href="#quotes">金句</a>
+  <a href="#refs">人物與機構</a>
+  <a href="#verify">待查證</a>
+</nav>
+
+<main>
+<header>
+  <span class="tag">財經 · 訪談筆記</span>
+  <h1>Citadel CEO Ken Griffin:AI「幾乎確定」有泡沫,對川普的評分「好壞參半」</h1>
+  <div class="meta">來源:Bloomberg Podcasts ·
+    <a href="https://www.youtube.com/watch?v=QWzQo74cA7U" target="_blank" rel="noopener">YouTube 影片</a> ·
+    Citadel Securities 年度大會(2026)· 約 49 分鐘
+  </div>
+  <div class="tldr">
+    <b>一句話摘要</b><br>
+    Griffin 對 AI 的態度從「週五回家很沮喪」轉為樂觀:白領工作受衝擊、企業護城河被填平,但這也是創業者的黃金時代;市場「幾乎確定」有 AI 泡沫,但泡沫之後留下的是改變世界的贏家;政治上他預期共和黨在期中選舉失利,批評川普的關稅、移民與伊朗戰爭溝通,主張以「成長與生產力」解決赤字。
+  </div>
+  <p class="note">資料依據為影片英文轉錄稿(自動斷句)。第 1–6 節為<b>逐段詳述的中文意譯</b>,依影片順序排列,每段時間戳可點擊直接跳到影片該處對照原聲;非逐字翻譯,人名與專有名詞若有疑義以影片為準。<span class="who h" style="margin-left:6px">主持人</span><span class="who k">Griffin</span>標示發言者。</p>
+</header>
+
+<section id="outline">
+  <h2 class="sec">章節大綱</h2>
+  <table>
+    <tr><th>時間</th><th>主題</th></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=0" target="_blank" rel="noopener">0:00</a></td><td>開場:一年來 AI 進展巨大</td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=32" target="_blank" rel="noopener">0:32</a></td><td><a href="#ai-work">1. AI 與未來的工作</a></td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=292" target="_blank" rel="noopener">4:52</a></td><td><a href="#citadel">2. AI 對 Citadel 投資業務(alpha)的影響</a></td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=409" target="_blank" rel="noopener">6:49</a></td><td><a href="#market">3. 半導體股連跌、IPO 延後:市場是否重置</a></td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=782" target="_blank" rel="noopener">13:02</a></td><td><a href="#bubble">4. AI 泡沫論</a></td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=912" target="_blank" rel="noopener">15:12</a></td><td><a href="#delever">5. 「對沖基金去槓桿」只是藉口?</a></td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=1031" target="_blank" rel="noopener">17:11</a></td><td><a href="#sa">6. Situational Awareness 交易始末</a></td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=1384" target="_blank" rel="noopener">23:04</a></td><td><a href="#politics">7. 期中選舉與政治獻金</a></td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=1584" target="_blank" rel="noopener">26:24</a></td><td>對川普政策的評價(伊朗、移民、關稅)</td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=1763" target="_blank" rel="noopener">29:23</a></td><td>民主社會主義、法國與芝加哥</td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=1931" target="_blank" rel="noopener">32:11</a></td><td>與 Pritzker 的過節、財政與赤字</td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=2196" target="_blank" rel="noopener">36:36</a></td><td><a href="#blueprint">8. 成長優先的四點藍圖、債券市場</a></td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=2504" target="_blank" rel="noopener">41:44</a></td><td>與紐約市長 Mamdani 的關係</td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=2586" target="_blank" rel="noopener">43:06</a></td><td>Citadel 的重心、邁阿密的發展</td></tr>
+    <tr><td><a href="https://youtu.be/QWzQo74cA7U?t=2830" target="_blank" rel="noopener">47:10</a></td><td>團隊凝聚力與實體辦公</td></tr>
+  </table>
+</section>
+
+<!-- ============ 1 ============ -->
+<section id="ai-work">
+  <h2 class="sec">1. AI 與工作</h2>
+  <p class="range">影片 0:00 – 4:52</p>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=0" target="_blank" rel="noopener">0:00</a></div>
+    <div><p><span class="who h">主持人</span><span class="who k">Griffin</span>雙方寒暄。Griffin 點出這是 Citadel Securities 的年度大會,並說「和去年相比,變化實在太大」。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=14" target="_blank" rel="noopener">0:14</a></div>
+    <div><p><span class="who h">主持人</span>回顧去年:當時全世界還在摸索這項技術,AI 還停在「實驗」階段;現在它已經在解決存在八十年、過去無解的數學問題。她引用 Griffin 近期一場訪談中的說法:有個週五他回家覺得很沮喪,因為 AI 幾小時就能做完博士等級的工作。她知道這個問題他常被問,但情勢變化很快,想從「工作的未來」談起。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=39" target="_blank" rel="noopener">0:39</a></div>
+    <div><p><span class="who k">Griffin</span>過去一年 AI 模型的進展「非常驚人」,在不少領域是「改變遊戲規則」的等級。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=65" target="_blank" rel="noopener">1:05</a></div>
+    <div><p><span class="who k">Griffin</span>他在史丹佛的一場演講中舉例:高階白領的工作,過去要博士、碩士花 <b>4 到 6 週</b>才能完成,現在按一下鍵盤、等幾個小時,就得到完全一樣的答案。</p>
+    <p>他看完示範後回家,那天剛好是週五,心情非常低落。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=92" target="_blank" rel="noopener">1:32</a></div>
+    <div><p><span class="who k">Griffin</span>他說當時同時湧現<b>三種情緒</b>:</p>
+    <ul>
+      <li><b>威脅</b>:看到白領工作正在被取代。</li>
+      <li><b>身為企業主的焦慮</b>:競爭護城河被「推土機填平」。</li>
+      <li><b>期待</b>:同時又覺得這會是創業者的黃金時代,年輕人成立新公司的絕佳機會。</li>
+    </ul>
+    <p>這三種情緒都對經濟有實際含義。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=134" target="_blank" rel="noopener">2:14</a></div>
+    <div><p><span class="who k">Griffin</span><b>對從事 AI 擅長領域的人</b>:國家必須擁抱「再培訓」。例如專長是英德翻譯的人,大概已經失業,而且很難找到性質相近的替代工作。這是國家需要「深度」再培訓的地方。</p>
+    <p>但他批評:「大家在談,卻沒有任何行動。」</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=168" target="_blank" rel="noopener">2:48</a></div>
+    <div><p><span class="who k">Griffin</span><b>對美國企業</b>:護城河被填平意味著要「腳步更快」:更快創新、更快為客戶創造價值、更快把成本壓下來。</p>
+    <p>但這對消費者是好事:這股力量逼企業拿出更好的表現,「消費者會因此受益」。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=199" target="_blank" rel="noopener">3:19</a></div>
+    <div><p><span class="who k">Griffin</span><b>對創業的黃金期</b>:創辦小型企業對就業很有幫助,尤其是「履歷有瑕疵」的人也有機會拿到好工作。新創願意雇用肯拚、但出身背景不完美的人,等於為他們打開一條全新的職涯路線。</p>
+    <p>他認為美國「沒有足夠地談論新創的重要性」,尤其是它們如何替背景較弱的人啟動職涯。這些新創還會推出你我都沒想過的大量新產品。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=249" target="_blank" rel="noopener">4:09</a></div>
+    <div><p><span class="who h">主持人</span>打趣說:你的沮喪好像已經變成樂觀了?</p>
+    <p><span class="who k">Griffin</span>同意。理由是歷史:自由市場本來就是經歷一次次這樣的轉型。轉型的確會讓既有業者面對真實挑戰,對個人也辛苦,但最終「我們的生活會更好」。他說,你我都寧願活在 2026 年而不是 1926 年,兩者根本無從比較;未來人們回顧 2126 年時,會把這個 AI 時刻當成故事的一部分。</p></div></div>
+
+  <h3>補充資料:他在 Stanford 的說法,以及早期的保留態度</h3>
+  <div class="note">下列整理自另外查到的公開影片字幕與報導,不屬於這支 Bloomberg 影片。Stanford 字幕是以快轉方式擷取,有缺漏,細節請以影片為準。</div>
+  <div class="seg"><div class="t"><a href="https://youtu.be/Csjy_A3Kj9s?t=1290" target="_blank" rel="noopener">21:30</a></div>
+    <div><p><b>Stanford Leadership Forum 2026(與 Amit Seru 對談)</b>:他提到朋友「人類就是那些馬」的比喻,覺得令人沮喪;接著說最近幾個月 AI 工具的生產力出現階梯式跳升,Citadel 因此能把 AI 用在更廣的場景。</p>
+    <p>他舉例:過去由金融碩博士團隊花<b>數週</b>完成的高階研究工作,現在由 agentic AI 處理,時間縮短為數天到數週(字幕不完整)。他強調這不是「中階白領工作」,並說在自家公司親眼看到,自己「相當沮喪」。對照軟體工程只有約 15%–25% 的提升。</p>
+    <p>要注意:Bloomberg 這支影片(1:05)說的是「等幾個小時」,兩場的時間尺度說法不完全一致。</p></div></div>
+  <div class="seg"><div class="t">早期</div>
+    <div><p><b>先前的保留態度</b>(約 3 分鐘影片):他說 Citadel 在投資上只用了一點生成式 AI,是節省時間的生產力工具,不認為會革新金融業;理由是模型靠歷史資料訓練,而投資是預測未來。</p></div></div>
+  <div class="takeaway"><b>本節重點</b>:Griffin 把 AI 衝擊拆成「勞工要再培訓、企業要加速、新創迎來機會」三條線,整體結論是長期樂觀,但批評政策層面對再培訓「只有口號」。</div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="citadel">
+  <h2 class="sec">2. AI 對 Citadel 的影響</h2>
+  <p class="range">影片 4:52 – 6:49</p>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=292" target="_blank" rel="noopener">4:52</a></div>
+    <div><p><span class="who h">主持人</span>轉到他作為經營者如何因應。她提到,約一年半前他曾說 AI 無法產出(或交付)alpha,想問他的想法是否改變。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=307" target="_blank" rel="noopener">5:07</a></div>
+    <div><p><span class="who k">Griffin</span>他先界定業務:Citadel 大部分是<b>基本面投資</b>,他甚至認為核心就是「研究」,有點像新聞業,關鍵是「能不能把故事說對、把敘事抓對」。交易則是「把研究變現的方式」。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=330" target="_blank" rel="noopener">5:30</a></div>
+    <div><p><span class="who k">Griffin</span>研究要回答的問題包括:我們懂這門生意的商業模式嗎?懂潛在市場規模(TAM)嗎?懂經濟模型嗎?懂管理層的誘因嗎?其中一些環節 AI 可以幫忙「照亮」,但最後那條敘事仍由人來組裝。</p>
+    <p>接著還要決定:未來現金流或盈餘要給幾倍的本益比?和手上其他可用資本的機會相比如何?</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=358" target="_blank" rel="noopener">5:58</a></div>
+    <div><p><span class="who k">Griffin</span>他仍「堅定相信」,公司絕大部分的 alpha,來自團隊成員在基本面研究上的<b>創意、巧思與分析</b>,交易只是把這些成果變現。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=381" target="_blank" rel="noopener">6:21</a></div>
+    <div><p><span class="who k">Griffin</span>反過來說,<b>交易這一塊其實已經是最自動化、最仰賴技術的部分</b>。因為只要你能把研究成果有效變現,就能放更大的部位、從點子中榨出更多 alpha。對基金經理人而言,「如何有效率地交易以極大化研究報酬」是工作中很重要的一環。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=409" target="_blank" rel="noopener">6:37</a></div>
+    <div><p><span class="who h">主持人</span>補充:Citadel Securities 的交易數據正在創下一個又一個紀錄,部分原因是市場波動。接著引出下一個話題:近期市場的重置。</p></div></div>
+
+  <div class="takeaway"><b>本節重點</b>:AI 不會取代「講好故事、做出判斷」的人;AI 最直接的槓桿在交易執行端,因為執行效率越高,研究產出的 alpha 能放大得越多。</div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="market">
+  <h2 class="sec">3. 市場修正與 AI 資本支出疑慮</h2>
+  <p class="range">影片 6:49 – 13:02</p>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=409" target="_blank" rel="noopener">6:49</a></div>
+    <div><p><span class="who h">主持人</span>過去一週,半導體股出現金融海嘯以來「最大、最長」的連續下跌;IPO 延後或推遲;問這個市場是否正經歷「重置」,而且重置是否必要。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=429" target="_blank" rel="noopener">7:09</a></div>
+    <div><p><span class="who k">Griffin</span>他的看法是:市場其實是在「做功課」。</p>
+    <p>過去兩、三年的主流劇本是:要花數千億甚至一兆美元蓋資料中心、建構前所未見的算力。於是大家問的是:這個故事裡誰是瓶頸、供應鏈上誰能享有異常高的毛利、誰是最大贏家、誰是基礎模型的守門人、誰能賺到經濟租金?但在某種意義上,策略其實是「我全部都買」:超大規模雲端業者、晶片公司、甚至五年前連聽都沒聽過、位於韓國、台灣、日本的相關公司。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=492" target="_blank" rel="noopener">8:12</a></div>
+    <div><p><span class="who k">Griffin</span>現在到了人們開始「更挑剔」的階段。他承認,DRAM 與 MLC 等有真實供給限制的領域,確實出現極高毛利;但投資人開始把眼光放到兩年、三年之後:「這能持續多久?」</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=515" target="_blank" rel="noopener">8:35</a></div>
+    <div><p><span class="who k">Griffin</span><b>疑慮一:GPU 像航空座位。</b>他說自己不想唱衰,但 GPU 和航空公司一樣,「多賣一個座位」的邊際成本極低:空位只要賣 20 美元也比空著賺。這正是航空業難做的原因:一旦出現產能過剩,價格就自由落體。</p>
+    <p>他用 2000 年的電信建設類比:當年鋪設了大量光纖,實際需求遠低於供給(甚至根本沒點亮),通訊價格一路暴跌。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=566" target="_blank" rel="noopener">9:26</a></div>
+    <div><p><span class="who h">主持人</span>問:我們現在是不是正朝這個方向走?</p>
+    <p><span class="who k">Griffin</span>那正是「問號」所在:若 GPU 的供給超過需求,邊際定價就會崩落,這會「推翻」大家目前所有的投資假設。這是第一個問題。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=588" target="_blank" rel="noopener">9:48</a></div>
+    <div><p><span class="who k">Griffin</span><b>疑慮二:GPU 的實際使用壽命。</b>目前有人靠 5、6 年前的舊 GPU 賺到非常高的價格,但這大概撐不到未來的 5、6 年。因此市場愈來愈擔心:不能再給「十二個月前使用的那顆晶片」在第 7、8、9 年同樣的資本化率或營收模型。</p>
+    <p>整體而言,我們都在摸索「這波需求能把我們帶多遠」。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=631" target="_blank" rel="noopener">10:31</a></div>
+    <div><p><span class="who k">Griffin</span><b>另一條敘事:企業端吸收 AI 的能力很不平均。</b>美國最成熟的企業正變得極有條理:哪些業務值得為 OpenAI、Anthropic 的最先進模型付「極高價格」,哪些業務用開源模型就能以一小部分成本完成?</p>
+    <p>那些在內部把 AI 用得很出色的公司,正快速變得精打細算,思考怎麼把支出的報酬最大化。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=678" target="_blank" rel="noopener">11:18</a></div>
+    <div><p><span class="who k">Griffin</span>整個美國企業界都在檢視 Anthropic 與 OpenAI 的帳單,想確保付出的錢換得了生產力。很多領域會成功,但也有些領域「浪費很多」,屆時需要調整。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=698" target="_blank" rel="noopener">11:38</a></div>
+    <div><p><span class="who h">主持人</span>提到《華爾街日報》報導:Anthropic 在 S-1 中談到未來 <b>7,500 億美元</b>的支出,且持續增加;與此同時美國企業卻想縮減成本。這兩者是否存在必然的張力?</p>
+    <p><span class="who k">Griffin</span>「有。你自己已經回答了這個問題。」(他半開玩笑說像在「引導證人」。)</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=723" target="_blank" rel="noopener">12:03</a></div>
+    <div><p><span class="who k">Griffin</span>關鍵會變成:<b>Anthropic 能讓自己的模型變得多「必備」</b>?他舉生命科學為例:模型能否真正幫忙找出癌症或其他致命疾病的療法?能否成為全球每家製藥公司的「必需品」,使大家願意為它的專業與工具付「任何價格」,因為它解鎖了下個世紀的醫療?</p>
+    <p>「我們不知道的是,當這些模型愈來愈聰明,它們能要求多高的價格,因為它們幫忙解決人類幾世紀以來的難題。」他強調,沒有人知道答案。</p></div></div>
+
+  <div class="takeaway"><b>本節重點</b>:Griffin 把市場修正解讀為「從全買轉為挑剔」,並點出兩個需要重新估價的風險:GPU 供給過剩的定價崩落風險,以及舊晶片壽命與殘值的不確定性;同時企業端正在比較「貴的前沿模型」與「便宜的開源模型」的投資報酬。</div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="bubble">
+  <h2 class="sec">4. 泡沫論</h2>
+  <p class="range">影片 13:02 – 15:12</p>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=782" target="_blank" rel="noopener">13:02</a></div>
+    <div><p><span class="who h">主持人</span>對話常常走向「是不是泡沫」:她列舉 Ray Dalio 認為是、Howard Marks 說自己在「泡沫觀察」、國際清算銀行(BIS)說有網路泡沫的影子。她問:這是否能事先知道?如果是泡沫,在不同 AI 層(layers)是否可能有些部分破裂?</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=807" target="_blank" rel="noopener">13:27</a></div>
+    <div><p><span class="who k">Griffin</span>大圖像是:<b>這個時刻內部「幾乎確定」存在泡沫</b>。任何對經濟的根本性改造,通常都與泡沫交織在一起。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=820" target="_blank" rel="noopener">13:40</a></div>
+    <div><p><span class="who k">Griffin</span>他回憶 1999、2000 年:當時用來評價網路公司的指標,有些公司的商業模式的確「相當天馬行空」。但他說「真希望我當時留著亞馬遜的股票」,而網路(那場最大的泡沫)如今比任何時候都更融入日常生活。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=855" target="_blank" rel="noopener">14:15</a></div>
+    <div><p><span class="who k">Griffin</span>一則家庭小故事:幾年前他給 13 歲的兒子換 Xbox,兒子看著他說:「爸,你竟然活在網路出現以前?」他笑說「我生在恐龍滅絕之後,但對,真的有過沒有網路的生活」,對 20 歲的人而言這是「無法理解」的事。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=884" target="_blank" rel="noopener">14:44</a></div>
+    <div><p><span class="who k">Griffin</span>這類泡沫(如果要用這個詞),往往與巨大的科技轉型同時發生,鐵路就是例子。<b>泡沫退去後留下來的,常常是改變世界的東西</b>,而站在泡沫另一端的公司,會是未來幾十年的市場龍頭。</p></div></div>
+
+  <div class="takeaway"><b>本節重點</b>:Griffin 不否認泡沫,但把它視為重大科技轉型的常態副產品;重點不在「有沒有泡沫」,而在「泡沫之後誰活下來」。</div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="delever">
+  <h2 class="sec">5. 「對沖基金去槓桿」是藏拙的答案</h2>
+  <p class="range">影片 15:12 – 17:11</p>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=912" target="_blank" rel="noopener">15:12</a></div>
+    <div><p><span class="who h">主持人</span>很多人看到近期的賣壓就說「這只是對沖基金在去槓桿」,而這個題目他應該略懂。她問他如何區分「基本面重置」和「只是有人必須平倉,比如某處發生追繳保證金」。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=942" target="_blank" rel="noopener">15:42</a></div>
+    <div><p><span class="who k">Griffin</span>「這是大家賠錢時最愛的標準答案。」他說,過去十年他看過整個產業被「去槓桿到零」至少一萬次;每天都有人打電話來說「一定是對沖基金在去槓桿」。他反問:那對沖基金後來不是又漲回來了嗎?</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=969" target="_blank" rel="noopener">16:01</a></div>
+    <div><p><span class="who k">Griffin</span>大家愛這個答案,是因為它能讓你「洗清責任」。他的態度是:退一步,問「<b>哪些價格在變?為什麼?我們有什麼沒搞懂?</b>」因為一旦開始用藉口,就停止學習。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=998" target="_blank" rel="noopener">16:26</a></div>
+    <div><p><span class="who k">Griffin</span>他希望「對沖基金去槓桿」只是清單上的<b>第十個</b>答案,前九個都要先排除:我們不懂什麼?別人懂什麼?像 Capital Group、Fidelity、Wellington 這些機構,把哪些點連起來了,而我們沒看到?「一定有別人知道這個故事而我們不知道,去把它找出來。」</p>
+    <p>若窮盡所有路徑仍找不到,才把「有人在去槓桿」當作選項十,而不是選項一。</p></div></div>
+
+  <div class="takeaway"><b>本節重點</b>:這是一個決策紀律:遇到無法解釋的價格波動,把「別人被迫賣出」當最後的解釋,先假設自己漏看了資訊。</div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="sa">
+  <h2 class="sec">6. Situational Awareness 交易</h2>
+  <p class="range">影片 17:11 – 23:04</p>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=1031" target="_blank" rel="noopener">17:11</a></div>
+    <div><p><span class="who h">主持人</span>把這個視角套用到今年夏天的 Situational Awareness 事件:報導說你們的時機正確,是在市場上漲時賣出。她請他說明在明顯的去槓桿時刻,如何思考風險、並有信心接手。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=1063" target="_blank" rel="noopener">17:43</a></div>
+    <div><p><span class="who k">Griffin</span>過去 20 年,Citadel 參與過多次大型投資組合的「抽離」與重組,例如 2006 年前後 Amaranth 的能源部位,以及其他較少被注意的交易。</p>
+    <p>Situational Awareness 當時處在一個位置:作為資產管理人與受託人,他們需要<b>審慎地募集現金</b>。Citadel 提供了一套整體解決方案,幫他們變現,並保住年初至今的可觀獲利,這對他們的投資人是重要的勝利。他補充,對方今年仍大幅上漲,雖然過程有些波折,但投資人應該滿意,因為即使經歷動盪,今年仍是正報酬。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=1125" target="_blank" rel="noopener">18:45</a></div>
+    <div><p><span class="who k">Griffin</span>面對這類情況,他們會先弄清楚「什麼力量造成事件發展」。</p>
+    <p>當 Situational Awareness 陷入較艱難的處境,不少快錢帳戶會開始「搶跑」(front-run),預期對方或同類會做的動作,這是金融界的經典手法:你認為有人有麻煩,就預判他必須採取的行動,不管那是防守或進攻,你就「把一種可能性變成結晶化的現實」。</p>
+    <p>即使你只知道「那邊的人好像有麻煩,應該會降低風險」,你也會選擇不買那些股票或減碼,於是就把可能性變成現實。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=1190" target="_blank" rel="noopener">19:50</a></div>
+    <div><p><span class="who k">Griffin</span>在這種時刻,出於極度謹慎,對方需要募集現金。他們的經驗是:<b>在那種市場環境下接手一個投資組合,往往會看到價格迅速反轉</b>,因為信心恢復,而對於投資組合被突然拋售的焦慮也隨之消散。Citadel 的資本就是基於這個理論部署的,「我們做得還不錯」。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=1223" target="_blank" rel="noopener">20:23</a></div>
+    <div><p><span class="who k">Griffin</span>但那是一個<b>複雜的投資組合,要在一夜之間買下</b>。交易在不到 24 小時內完成,管理它的風險輪廓則在市場上花了數天。這正是他們擅長的:分析投資組合,並以低成本降低關鍵風險。</p>
+    <p>一旦能以划算的方式「釘住」主要風險,就可以開始逐一減掉個別部位。公司內部有系統、專業知識與人才,能像下棋一般把這些動作做出來。</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=1265" target="_blank" rel="noopener">21:05</a></div>
+    <div><p><span class="who h">主持人</span>市場有些泡沫特徵,是否預期還會有類似事件?</p>
+    <p><span class="who k">Griffin</span>「再發生一次反而會讓我意外。」他分析 Situational Awareness 遇到的是:CME 的公告、市場上關於基礎模型公司成長速度的傳聞、以及若干大型退休基金同時在重整部位。不是「完美風暴」,而是同時撞上「三個中型風暴」,加上高點時槓桿偏高,被市場狠狠推擠後陷入混亂。「我不會把自己的業務設計成預期這種事在可見的未來再度發生。」</p></div></div>
+
+  <div class="seg"><div class="t"><a href="https://youtu.be/QWzQo74cA7U?t=1334" target="_blank" rel="noopener">22:14</a></div>
+    <div><p><span class="who k">Griffin</span>金融機構總會有人陷入困境。他以 2008 年的 Citadel 為例:當時摩根士丹利還沒拿到日本資金而失敗,「我今天大概不會站在這裡」。他的結論:<b>任何金融機構,只要活得夠久,歷史裡都會有一段絕望、背靠牆的時刻</b>。</p></div></div>
+
+  <h3>補充資料:事件時間線(整理自新聞報導)</h3>
+  <div class="note">以下不屬於影片內容,整理自公開報導。規模、槓桿、折價等數字各家不一,標示「據報導」者未經獨立證實。</div>
+  <table style="margin-top:12px">
+    <tr><th>時間</th><th>發生什麼</th></tr>
+    <tr><td>2024 底</td><td>Situational Awareness 由前 OpenAI 研究員 Leopold Aschenbrenner 成立,種子資金據報導約 2.25 億美元,主打 AI 基礎建設投資。</td></tr>
+    <tr><td>至 2026 年 6 月</td><td>據報導規模衝高(有報導說約 200 億美元,也有說高點約 450 億美元),2026 上半年淨報酬據報導約 +439%。持股集中在 Bloom Energy、SanDisk、CoreWeave、IREN、Core Scientific 等 AI 基礎建設股(依第一季 13F);據報導槓桿最高約 4 倍。</td></tr>
+    <tr><td>2026 年 7 月</td><td>AI 基礎建設股重挫(核心持股單月跌幅約 27%–54%,各家不一),費城半導體指數單月跌約 21%。據報導的觸發因素包括 SK 海力士美國上市引發的韓股槓桿平倉,以及市場對 AI 基礎建設融資的信用疑慮。放空的軟體股同時上漲,雪上加霜。</td></tr>
+    <tr><td>7 月中下旬</td><td>三家主經紀商(高盛、摩根大通、美國銀行)據報導發出追繳保證金通知。基金曾嘗試募資與出售部分資產,但不夠。據報導 7 月當月基金下跌約 67%。</td></tr>
+    <tr><td>7 月 29 日</td><td>依 Griffin 8 月信件,Citadel 與 Situational Awareness 開始洽談承接部分持股。</td></tr>
+    <tr><td>7 月 30 日</td><td>開盤前,基金把公開股票部位(多空)一次賣給 Citadel(路透、華爾街日報等報導)。有報導說規模約 160 億美元、折價約 10%,其他報導未揭露價格。當天被轉手的持股盤中據報導上漲約 20%–27%,被解讀為「被迫賣家消失」,但這是詮釋,不是證實的因果。</td></tr>
+    <tr><td>7 月底</td><td>基金保留約 50 億美元的 Anthropic 私募持股,轉為私人投資工具,員工約 20 人。Jane Street 據報導在 7 月因相關曝險損失約 150 億美元。</td></tr>
+    <tr><td>8 月 21 日</td><td>Griffin 致客戶信:Citadel 已用 100 多筆、總額超過 40 億美元的大宗交易,卸除承接部位 80% 以上的風險,其中 10 檔股票創下今年單日成交紀錄(據轉述)。旗艦基金 Wellington 7 月上漲 5.94%,年初至今約 +12%。信中感謝兩邊銀行的交易與主經紀商團隊。</td></tr>
+  </table>
+  <p class="note" style="margin-top:12px"><b>尚未公開的資訊</b>:Citadel 實際成交價與這筆交易單獨的損益、大宗交易的證券名單與買家、還剩多少部位,都沒有公開。影片中提到的「CME 公告」,我查不到對應報導。<br>
+  <b>主要來源</b>:
+  <a href="https://www.cnbc.com/2026/08/21/citadel-situational-awareness-ken-griffin.html" target="_blank" rel="noopener">CNBC(Griffin 信件)</a> ·
+  <a href="https://finance.yahoo.com/markets/stocks/articles/citadel-buys-most-situationals-stock-180422112.html" target="_blank" rel="noopener">Yahoo/路透(Citadel 買入)</a> ·
+  <a href="https://finance.yahoo.com/markets/stocks/articles/citadel-unwinds-80-situational-awareness-172716909.html" target="_blank" rel="noopener">Yahoo(卸除 80%)</a> ·
+  <a href="https://www.techtimes.com/articles/322285/20260730/citadel-buys-situational-awareness-portfolio-4x-leverage-ends-ai-funds-1000-run.htm" target="_blank" rel="noopener">Tech Times</a> ·
+  <a href="https://spotgamma.com/situational-awareness-unwind-margin-call-ai/" target="_blank" rel="noopener">SpotGamma(評論)</a> ·
+  <a href="https://www.cnbc.com/2026/08/14/jane-street-took-15-billion-hit-in-july-tied-to-situational-awareness-ai-selloff-sources-say-reuters.html" target="_blank" rel="noopener">CNBC/路透(Jane Street)</a></p>
+  <div class="takeaway"><b>本節重點</b>:這筆交易的邏輯是「為急需現金的對手提供整體解決方案」,賺的是恐慌下的價差與反轉,而不是押方向;Citadel 的優勢在於能在一夜之間吸收複雜組合,再花幾天以系統化方式拆解風險。</div>
+</section>
+
+<!-- ============ 7+ (原簡版) ============ -->
+<section id="politics">
+  <h2 class="sec">7. 政治與期中選舉</h2>
+  <p class="range">影片 23:04 – 36:36</p>
+  <ul>
+    <li>預期共和黨「幾乎確定」會丟掉眾議院、參議院其一或兩者,這是正常的權力制衡。</li>
+    <li>他兩黨都捐款(曾支持 Rahm Emanuel 與早期的歐巴馬),公司內約過半員工是民主黨人,他鼓勵健康辯論。</li>
+  </ul>
+  <h3>對川普:「好壞參半」</h3>
+  <div class="cols">
+    <div class="card"><h4>負面</h4>
+      <ul>
+        <li>伊朗戰爭不得人心且解釋不力(他認為伊朗不能擁有核武是存亡議題,但川普沒講清楚)</li>
+        <li>對無證移民的處理「可恥」,應有「不是公民權、但能成為貢獻社會一員」的留下路徑</li>
+        <li>對加拿大、歐洲盟友的關稅是「災難」,推升通膨、切斷供應鏈</li>
+      </ul></div>
+    <div class="card"><h4>正面</h4>
+      <ul><li>邊境管控「一夜之間」做到,是大贏</li></ul></div>
+  </div>
+  <ul>
+    <li><b>工業政策</b>:多數人不想進工廠做 Nike 和 T 恤,應擁抱機器人(他捐 30 億美元給卡內基美隆大學,看重其機器人實力)。</li>
+    <li><b>民主社會主義</b>:不太擔心,認為是紐約、伊利諾、密西根、加州的「泡泡」;以法國為反面教材(政府支出佔 GDP 60% 仍街頭動盪)。</li>
+    <li>點名伊利諾州長 JB Pritzker 是令他擔憂的候選人類型,並講述兩人在退休金改革與累進稅上的衝突。</li>
+    <li>希望川普若在期中受挫,不要加倍強硬,而是反思民意。</li>
+    <li><b>財政</b>:共和黨在減稅與支出上也「手不乾淨」;疫情花掉相當於二戰規模的 GDP 占比,所以前年續減稅時沒有財政空間。聯邦赤字約 40 兆美元,排擠效應重新浮現(房貸利率、30 年期殖利率偏高)。</li>
+  </ul>
+</section>
+
+<section id="blueprint">
+  <h2 class="sec">8. 他的「成長優先」四點藍圖</h2>
+  <div class="cols">
+    <div class="card"><h4>① 成長經濟</h4>推動生產力(AI、資料中心、核融合與核分裂、電池、機器人);並推動歐洲盟友也做改革成長,別打關稅戰。</div>
+    <div class="card"><h4>② 修好教育</h4>舉例伊利諾 53 所學校沒有任何學生達年級水準;肯定紐約的 Success Academies 模式。</div>
+    <div class="card"><h4>③ 財政與社安改革</h4>重現 Simpson-Bowles 式的跨黨派方案,履行對退休者的承諾,但討論延後退休、鼓勵多工作 1–2 年。</div>
+    <div class="card"><h4>④ 移民</h4>吸引全球頂尖人才,「給學位就給綠卡」。</div>
+  </div>
+  <p>債券市場正在大聲發言;若政府不聽,後果是<b>通膨更高、美元走弱、生活水準下降</b>。解方是靠成長走出赤字,「這是唯一的方向」。</p>
+</section>
+
+<section id="other">
+  <h2 class="sec">9. 其他</h2>
+  <ul>
+    <li><b>Mamdani</b>:兩人沒有關係,他住在邁阿密,不想介入紐約政治,但鼓勵公司在紐約的 2,500 名員工參與。</li>
+    <li><b>重心</b>:Citadel 的重心「在大西洋中間」(倫敦、邁阿密、紐約之間)。</li>
+    <li><b>邁阿密</b>:親商環境、治安與學校好,但房價高、交通擁擠;古巴移民塑造了反社會主義、重視美國夢的文化;卡內基美隆將在邁阿密設校區,他預期會加速當地創業與機器人產業。</li>
+    <li><b>團隊凝聚</b>:同一垂直團隊盡量放在同一地點,「沒有什麼比白板和好的辯論更好」;對年輕人而言,與主管、同儕的實體近距離是培養人才的關鍵。</li>
+  </ul>
+</section>
+
+<section id="quotes">
+  <h2 class="sec">值得記下的金句(意譯)</h2>
+  <blockquote>如果我用了藉口,我就停止學習了。</blockquote>
+  <blockquote>泡沫另一端的公司,往往是未來數十年的市場領導者。</blockquote>
+  <blockquote>GPU 就像航空座位:供給一過剩,定價就自由落體。</blockquote>
+  <blockquote>要解決赤字,關鍵是把餅做大,而不是互相折磨。</blockquote>
+</section>
+
+<section id="refs">
+  <h2 class="sec">提到的人、機構與事件</h2>
+  <div class="chips">
+    <span>Citadel / Citadel Securities</span><span>Situational Awareness</span><span>Amaranth(2006)</span><span>CME</span>
+    <span>OpenAI</span><span>Anthropic</span><span>Ray Dalio</span><span>Howard Marks</span><span>BIS</span>
+    <span>Capital Group</span><span>Fidelity</span><span>Wellington</span>
+    <span>JB Pritzker</span><span>Rahm Emanuel</span><span>Mamdani</span><span>卡內基美隆大學(30 億美元捐贈)</span>
+    <span>Success Academies</span><span>Simpson-Bowles</span>
+  </div>
+</section>
+
+<section id="verify">
+  <h2 class="sec">待查證</h2>
+  <ul>
+    <li>「Anthropic S-1 約 7,500 億美元支出」為主持人引述媒體報導,非 Griffin 本人所說。</li>
+    <li>影片中提到的「CME」公告:我查不到 2026 年 7 月與此事件相關的 CME 公告(只找到當年初對金屬的保證金調整),可能是轉錄稿辨識錯誤,需對照影片原聲確認。</li>
+    <li>Situational Awareness 事件的規模、槓桿與折價數字,各家報導不一致;Griffin 8 月 21 日客戶信中確認的是 100 多筆、超過 40 億美元的大宗交易,卸除 80% 以上風險,但未公布證券名單與損益。</li>
+    <li>轉錄稿有少量自動辨識錯誤(部分人名、專有名詞,如「MLC」「Roger Ailes」等明顯斷詞錯誤),已依上下文修正或略過,引用前請點時間戳對照影片。</li>
+  </ul>
+</section>
+</main>
+</div>
+</body>
+</html>
