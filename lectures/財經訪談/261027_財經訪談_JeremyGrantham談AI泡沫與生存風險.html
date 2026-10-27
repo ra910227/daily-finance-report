@@ -42,6 +42,27 @@ td:first-child a{color:var(--accent);text-decoration:none;font-variant-numeric:t
 .card h4{margin:0 0 4px;color:var(--accent)}
 @media (max-width:820px){.wrap{grid-template-columns:1fr;gap:0}nav{position:static;margin-bottom:24px}.cols{grid-template-columns:1fr}h1{font-size:24px}table{font-size:14px}}
 @media print{nav{display:none}.wrap{display:block}body{background:#fff;color:#000}}
+.t{padding:10px 0;border-bottom:1px solid var(--line)}
+.t:last-of-type{border-bottom:0}
+.sp{display:inline-block;font-size:12px;font-weight:600;padding:0 8px;border-radius:99px;color:var(--accent);background:var(--accent-soft);margin-bottom:2px}
+.sp.h{color:var(--host);background:var(--host-soft)}
+.en{margin:0 0 4px}
+.zh{margin:0 0 10px;color:var(--muted)}
+.intro-line{margin:8px 0 12px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 16px;margin:10px 0}
+details>summary{cursor:pointer;font-weight:600;color:var(--accent);padding:6px 0}
+.legend{font-size:13px;color:var(--muted);margin:6px 0 10px}
+.s{display:inline-block;font-size:11px;font-weight:700;padding:0 6px;border-radius:4px;margin-left:2px;vertical-align:1px;line-height:1.55}
+.s.a{background:var(--host-soft);color:var(--host)}
+.s.b{background:var(--accent-soft);color:var(--accent)}
+.s.d{background:var(--surface);color:var(--ok);border:1px solid var(--ok)}
+.s.g{background:var(--surface);color:var(--warn);border:1px solid var(--warn)}
+.s.m{background:var(--line);color:var(--text)}
+.tbl{font-size:14px}
+.tbl td,.tbl th{vertical-align:top}
+.tbl.wide td:first-child{min-width:5.5em}
+.card ol,.card ul{padding-left:1.2em;margin:4px 0}
+.card p{margin:4px 0}
 </style>
 <link rel="stylesheet" href="../../assets/gsfox-annotate.css">
 <script src="../../assets/gsfox-annotate.js" defer></script>
@@ -50,17 +71,22 @@ td:first-child a{color:var(--accent);text-decoration:none;font-variant-numeric:t
 <body>
 <div class="wrap">
 <nav>
-  <h2>目錄</h2>
-  <a href="#intro">影片說明</a>
-  <a href="#t0">前導預告</a>
-  <a href="#c1">第一章 AI 泡沫</a>
-  <a href="#c2">第二章 美股</a>
-  <a href="#c3">第三章 巨頭與 AI 倫理</a>
-  <a href="#c4">第四章 微塑膠與人口</a>
-  <a href="#c5">第五章 社會契約</a>
-  <a href="#chapters">實際章節對照</a>
-  <a href="#biggo">與 BigGo 資訊整合</a>
-  <a href="#verify">查核與說明</a>
+  <h2>投資重點</h2>
+  <a href="#p-sum">1 一頁摘要</a>
+  <a href="#p-frame">2 泡沫判斷框架</a>
+  <a href="#p-alloc">3 資產配置與產品</a>
+  <a href="#p-risk">4 風險全景</a>
+  <a href="#p-action">5 行動清單</a>
+  <a href="#p-data">6 數據彙整</a>
+  <a href="#p-watch">7 觀察指標</a>
+  <a href="#biggo">8 兩集對照</a>
+  <h2 style="margin-top:14px">附錄:原文</h2>
+  <a href="#a1">A-1 第一段</a>
+  <a href="#a2">A-2 第二段</a>
+  <a href="#v1">B 摘要式整理稿</a>
+  <a href="#d1">D 重點加強</a>
+  <a href="#chapters">C 章節對照(41 章)</a>
+  <a href="#verify" style="margin-top:14px">查核與說明</a>
 </nav>
 <main>
 <header>
@@ -69,9 +95,411 @@ td:first-child a{color:var(--accent);text-decoration:none;font-variant-numeric:t
   <div class="meta">來源:The Diary Of A CEO(主持人 Steven Bartlett)·
     <a href="https://www.youtube.com/watch?v=32u5T6lO8qk" target="_blank" rel="noopener">YouTube 影片</a> ·
     影片標題〈Billionaire's WARNING: I'm SELLING. The Crash Is Already Here!〉· 全長約 1 小時 45 分</div>
-  <div class="note"><b>這份文字的來源說明</b>:第一部分(前導預告至第五章)是使用者提供的整理稿,<b>未刪減、未改寫</b>,原樣收錄。它標示為「逐字紀錄與重點譯文」,但我核對後發現它是整理過的 Q&A,並非完整逐字稿(詳見文末「查核與說明」),所以請當作「整理稿」使用,引用前請對照影片。第二部分是我另外加入的 BigGo 資訊對照與查核。</div>
+  <div class="note"><b>閱讀指南</b>:第 1–8 節是我依你提供的資料與 BigGo 那集整理的「投資重點」,每項都標有出處;附錄是你提供的原文(A-1、A-2、B、D)與章節時間軸(C),未刪減、未改寫。全部都是整理稿,<b>不是官方逐字稿</b>,詳見最後的「查核與說明」。這是 Grantham 的個人觀點,不是投資建議。</div>
 </header>
 
+<section id="p-sum">
+  <h2 class="sec">1 一頁摘要:Grantham 的投資主張</h2>
+  <div class="legend">出處標記:<span class="s a">A</span>你貼的第一、二段詳細稿 · <span class="s b">B</span>先前的摘要式整理稿 · <span class="s d">D</span>重點加強補充稿 · <span class="s g">BG</span>BigGo 那集(另一場訪談) · <span class="s m">我</span>我補充的一般性說明,<b>不是 Grantham 說的</b></div>
+  <div class="tldr">
+    <b>核心論點</b>:AI 是與鐵路同級的偉大技術,但「偉大的技術總會養出偉大的泡沫」。他認為 AI 是可說是史上最大的投資泡沫之一<span class="s a">A</span>;從目前估值看,漲最多的高飛股回檔 70% 並不意外<span class="s a">A</span>。因此<b>不要持有美股,轉向美國以外的股票,並搭配債券、現金與少量貴金屬</b>;不碰加密貨幣;對 SpaceX 這類故事型資產持高度懷疑。
+  </div>
+  <div class="cols">
+    <div class="card"><h4>他建議做的</h4><ul><li>分散投資是第一原則<span class="s a">A</span></li><li>股票部分以非美股寬基指數為主,約占股票資金的 60%<span class="s a">A</span><span class="s d">D</span></li><li>5%–10% 貴金屬(黃金、白銀)<span class="s a">A</span><span class="s d">D</span></li><li>其餘放高信用評級債券或短期國債、現金(他說殖利率約 5%)<span class="s a">A</span><span class="s d">D</span></li><li>房地產:除非方便且合理,持有少量<span class="s a">A</span></li></ul></div>
+    <div class="card"><h4>他建議避開的</h4><ul><li>美股,尤其美國大型科技股(個人建議是全部賣掉)<span class="s a">A</span></li><li>加密貨幣:從未持有、不會持有、不建議別人持有<span class="s a">A</span></li><li>SpaceX 等故事型估值:預期無法兌現招股書承諾<span class="s a">A</span></li><li>以高房價追逐住宅,尤其在人口下降地區<span class="s a">A</span></li></ul></div>
+    <div class="card"><h4>他最在意的風險</h4><ul><li>估值與泡沫破裂的幅度與復原時間<span class="s a">A</span><span class="s g">BG</span></li><li>AI 資本支出與舉債<span class="s a">A</span></li><li>顧問與機構因職業風險不會警告<span class="s a">A</span></li><li>社會契約、貧富差距、人口與環境毒素<span class="s a">A</span><span class="s g">BG</span></li></ul></div>
+    <div class="card"><h4>他自己的「時機風險」</h4><p>1998–99 年他提前約 2 年又 3 個月(2.25 年)撤出科技泡沫,結果流失一半客戶<span class="s a">A</span>;BigGo 那集補充,公司另失去超過三分之二的市占<span class="s g">BG</span>。也就是說:<b>看對方向不等於看對時機</b>。</p></div>
+  </div>
+  <p class="note">這是整理訪談中的個人觀點,不是投資建議。產品名稱只用來說明「這類產品是什麼」,不是推薦;費用、可買性、稅務與風險請自行確認。</p>
+</section>
+
+<section id="p-frame">
+  <h2 class="sec">2 判斷泡沫的框架與歷史對照</h2>
+  <h3>他用來判斷泡沫的訊號</h3>
+  <table class="tbl">
+    <tr><th>訊號</th><th>他的說法</th><th>出處</th></tr>
+    <tr><td>偉大且顯而易見的概念</td><td>泡沫不是因為騙局,而是圍繞「最重要的點子」(鐵路、網際網路、AI):人人都看出會改變世界,於是過度投資;技術成功,但股票崩盤、投資人虧大錢。</td><td><span class="s a">A</span></td></tr>
+    <tr><td>估值倍數</td><td>日本 1989 年本益比 65 倍;美國 2000 年約 35 倍;今天依算法約 35–40 倍。</td><td><span class="s a">A</span></td></tr>
+    <tr><td>本益比回歸常態</td><td>1998–99 年他問 400 位全職專家:若本益比從 31 倍回到約 17 倍,是否保證大熊市?全部說會;超過 99% 也認為會發生。</td><td><span class="s a">A</span></td></tr>
+    <tr><td>市場廣度收窄</td><td>崩盤前最可靠的訊號:投機性、低品質股票先跌,而頭條指數仍在漲(1929、1972、2000、2022 都出現)。</td><td><span class="s g">BG</span></td></tr>
+    <tr><td>市值占 GDP</td><td>目前美國為史上最高,超過 2000 年。</td><td><span class="s g">BG</span></td></tr>
+    <tr><td>外推當下條件</td><td>市場把現況外推到遠方:環境糟時(如 1982)用約 7 倍本益比,景氣好時(如 2000)用約 35 倍乘以高峰利潤。</td><td><span class="s a">A</span></td></tr>
+    <tr><td>股價是心理與動能</td><td>股價取決於你認為別人願意付多少;上漲吸引買家形成動能;資金充裕時易出現泡沫,且自我強化。</td><td><span class="s a">A</span></td></tr>
+    <tr><td>專家嚴重分歧</td><td>諾貝爾獎得主與企業專家對 AI 結局(讓人人致富或毀滅人類)毫無共識。BigGo 那集稱此使報酬分布呈「厚尾」。</td><td><span class="s a">A</span><span class="s g">BG</span></td></tr>
+    <tr><td>資本支出與競爭</td><td>七巨頭原本各自近乎壟斷;現在同在 AI 戰場,稿中描述互比資本支出(如 2000 億 vs 1050 億美元)並開始舉債;他認為高額支出會壓縮利潤率。BigGo 那集說 AI 資本支出增量約占 GDP 的 2%,類比鐵路與光纖熱潮。</td><td><span class="s a">A</span><span class="s g">BG</span></td></tr>
+  </table>
+  <h3>歷史案例(各來源數字)</h3>
+  <table class="tbl">
+    <tr><th>事件</th><th>結果</th><th>復原</th><th>出處</th></tr>
+    <tr><td>1929</td><td>大蕭條,股市下跌 80% 以上</td><td>1955 年才收復高點</td><td><span class="s a">A</span> / <span class="s g">BG</span></td></tr>
+    <tr><td>1972 漂亮五十(Nifty Fifty)</td><td>經通膨調整後下跌約 65%,伴隨自大蕭條以來最嚴重的衰退之一</td><td>約到 1985–86 年(BigGo 那集)</td><td><span class="s a">A</span> / <span class="s g">BG</span></td></tr>
+    <tr><td>1989 日本</td><td>本益比 65 倍,隨後跌了約 20 年</td><td>約 35 年才回到當年高點</td><td><span class="s a">A</span></td></tr>
+    <tr><td>2000 網路泡沫</td><td>納斯達克下跌 82%(稿中說法,我未查證);另一版本稱 Amazon 下跌 92%(未查證)</td><td>—</td><td><span class="s a">A</span> <span class="s b">B</span></td></tr>
+    <tr><td>2022</td><td>標普 500 約 -25%,七巨頭約 -40%,成長股 -30~35%;被 ChatGPT 推出打斷了後續下跌(BigGo 那集的說法)</td><td>—</td><td><span class="s g">BG</span></td></tr>
+  </table>
+  <p class="note">兩集數字未必同口徑:例如 BigGo 表中「1972 年平均股票跌 17%」是整體平均,和「漂亮五十 -65%」不同。納斯達克與 Amazon 的下跌幅度我沒有查證。</p>
+</section>
+
+<section id="p-alloc">
+  <h2 class="sec">3 資產配置與產品:他怎麼說、有哪些風險</h2>
+  <div class="note">「可對應的產品類型」欄是我補充的說明(<span class="s m">我</span>),用來幫助理解他說的資產在市場上以什麼形式存在,<b>不是推薦,也不是 Grantham 點名的產品</b>。例如的代號僅為示意。</div>
+  <table class="tbl wide">
+    <tr><th>資產</th><th>他的立場與說法</th><th>可對應的產品類型(示意)</th><th>主要風險</th></tr>
+    <tr><td><b>非美國股票</b></td><td>最主要建議。買廣泛的指數,涵蓋新興市場、歐洲、日本、英國、加拿大、澳洲;估值比美股便宜很多;他預期這些市場未來 10–20 年「能平穩度過」,但「對美股沒有信心」。約占股票資金的 60%。<span class="s a">A</span><span class="s d">D</span><br>他並說近 12 個月新興市場約 +65%、標普 500 約 +25%(稿中說法,未查證)。<span class="s a">A</span></td><td>「全球(不含美國)」股票指數基金或 ETF,例如追蹤 FTSE All-World ex-US、MSCI ACWI ex-US 的產品(如 VEU、ACWX、VXUS、IXUS 這類)。<span class="s m">我</span></td><td>匯率風險;新興市場政治與流動性風險;全球風險資產一起下跌時不一定倖免(他說的是「相對便宜、相對好」,不是保證);過去 20 年美股領先,他的看法可能延遲兌現。</td></tr>
+    <tr><td><b>債券</b></td><td>持有高信用評級債;可買 30 年、10 年、2 年或 90 天美國國庫券,或像 Apple 這類公司債;他舉當時約 5% 的殖利率。<span class="s a">A</span><span class="s d">D</span><br>D 版本更偏「短期國債或現金,殖利率約 5%」。<span class="s d">D</span></td><td>短期國庫券、貨幣市場基金、短債 ETF(如 SGOV、BIL 這類)、投資等級公司債基金。<span class="s m">我</span></td><td>利率風險(年期愈長愈大);通膨侵蝕;信用風險;殖利率下降後的再投資風險。債務與利率風險請見站內〈<a href="https://ra910227.github.io/daily-finance-report/lectures/%E7%B8%BD%E9%AB%94%E7%B6%93%E6%BF%9F/261027_%E7%B8%BD%E9%AB%94%E7%B6%93%E6%BF%9F_%E5%82%B5%E5%8B%99%E9%80%B1%E6%9C%9F%E8%88%87%E7%A7%81%E5%8B%9F%E4%BF%A1%E7%94%A8%E8%A3%9C%E5%85%85%E7%A0%94%E7%A9%B6.html" target="_blank" rel="noopener">債務週期與私募信用補充研究</a>〉。<span class="s m">我</span></td></tr>
+    <tr><td><b>現金</b></td><td>保留部分現金儲備。<span class="s a">A</span></td><td>活存、定存、貨幣市場工具。<span class="s m">我</span></td><td>通膨侵蝕購買力;機會成本。</td></tr>
+    <tr><td><b>貴金屬</b></td><td>配置少量,約 5%–10%,黃金與白銀。<span class="s a">A</span><span class="s d">D</span></td><td>實體金銀、黃金/白銀 ETF(如 GLD、IAU、SLV 這類)。<span class="s m">我</span></td><td>不產生孳息;價格波動大;保管、價差與匯率成本。</td></tr>
+    <tr><td><b>房地產</b></td><td>以歷史標準非常昂貴。英國房價約為家庭收入的倍數,1994 年約 3.4 倍,現在超過 10 倍;即使下跌 30% 仍貴。若方便合理,只持有少量。年輕家庭組成下降、人口將減少(以日本 20 歲人口為例)。<span class="s a">A</span><br>D 版本改為「英美 8–10 倍,歷史約 3.5 倍」,並說當需求跌落懸崖,價格將向下修正。<span class="s d">D</span></td><td>自住或出租住宅、REITs。<span class="s m">我</span></td><td>流動性差;槓桿與利率;人口結構;區域差異極大,不能一概而論。</td></tr>
+    <tr><td><b>加密貨幣</b></td><td>不持有、從未持有、不建議。「毫無必要」,除了方便犯罪者轉移資金別無用處;不是價值儲存、也不是交易媒介,只擅長投機;長期必然歸零,但投機可能讓它撐很久。<span class="s a">A</span><span class="s d">D</span></td><td>—</td><td>他的看法偏極端;價格極端波動與監管風險是共識,但「必然歸零」是他的判斷,不是事實。</td></tr>
+    <tr><td><b>美國大型科技/AI 股</b></td><td>持有大量者,他個人建議全部賣掉。預期高飛股可能回檔 70%;七巨頭競爭加劇壓縮利潤。<span class="s a">A</span></td><td>個股、美股科技 ETF、納斯達克類指數產品。<span class="s m">我</span></td><td>賣出的稅務與成本;時機風險(他自己曾提前 2 年多);過去 20 年美股長期領先。</td></tr>
+    <tr><td><b>未上市公司(如 SpaceX)</b></td><td>預期無法兌現招股書中的承諾;稱其為「吹牛的好故事」(開採小行星、殖民火星等);指出創辦人靠高估值增資的模式,在高位融資、再蓋工廠,需要市場信心週期配合。<span class="s a">A</span><span class="s d">D</span></td><td>未上市股權、私募基金份額。<span class="s m">我</span></td><td>流動性低、資訊不透明、估值難驗證。稿中提到「招股書」,我沒有查證該文件。</td></tr>
+  </table>
+</section>
+
+<section id="p-risk">
+  <h2 class="sec">4 風險全景</h2>
+  <p>分成「他說的風險」與「我補充的一般風險」。後者是投資上常見的、他沒有明講但與他的建議直接相關的風險,以 <span class="s m">我</span> 標示。</p>
+  <table class="tbl wide">
+    <tr><th>類別</th><th>風險</th><th>內容</th><th>影響</th></tr>
+    <tr><td rowspan="3">估值與泡沫</td><td>泡沫破裂幅度</td><td>高飛股可能下跌約 70%<span class="s a">A</span>;大泡沫通常回落 50% 以上<span class="s g">BG</span>。</td><td>美股、AI 概念股</td></tr>
+    <tr><td>復原時間很長</td><td>1929 年到 1955 年、1972 年到 1985–86 年、日本約 35 年。<span class="s a">A</span><span class="s g">BG</span></td><td>長期持有者</td></tr>
+    <tr><td>估值被外推</td><td>市場把好光景無限外推,以高倍數乘以高峰利潤。<span class="s a">A</span></td><td>成長股</td></tr>
+    <tr><td rowspan="3">他自己可能錯</td><td>時機風險</td><td>1998–99 提前約 2.25 年,流失一半客戶。<span class="s a">A</span> BigGo 那集另提到失去超過三分之二市占。<span class="s g">BG</span></td><td>任何基於「泡沫將破」的提前布局</td></tr>
+    <tr><td>長期偏空的紀錄</td><td>影片說明提到他的書《The Making of a Permabear》;BigGo 那集也說 GMO 的價值策略落後十多年。這是閱讀他的預測時應有的背景。</td><td>判讀可信度</td></tr>
+    <tr><td>美股持續領先</td><td>稿中他自己承認美股過去 20 年壓倒性領先。<span class="s a">A</span> 若這個趨勢延續,避開美股會有機會成本。<span class="s m">我</span></td><td>非美股配置</td></tr>
+    <tr><td rowspan="2">機構與行為</td><td>顧問不會叫你離場</td><td>建議離場會讓顧問與機構失去生意,客戶耐心也短於市場瘋狂期;牛市踏空會被立刻換掉,熊市只會換掉一兩位墊底的人。<span class="s a">A</span></td><td>諮詢建議的中立性</td></tr>
+    <tr><td>職涯風險</td><td>引用凱因斯:循規蹈矩地失敗比特立獨行地成功更保得住名聲。<span class="s a">A</span></td><td>機構配置</td></tr>
+    <tr><td rowspan="3">債務與資金</td><td>資本支出與舉債</td><td>七巨頭開始在現金流之外舉債打 AI 戰爭。<span class="s a">A</span></td><td>AI 供應鏈、信用市場</td></tr>
+    <tr><td>債券的利率與通膨風險</td><td>他推薦債券,但沒有談債務週期、長天期債價格風險與通膨。<span class="s m">我</span></td><td>債券部位</td></tr>
+    <tr><td>私募信用與循環融資</td><td>與本集無直接對應,但與 AI 融資風險相關,可參考站內補充研究。<span class="s m">我</span></td><td>信用市場</td></tr>
+    <tr><td rowspan="3">宏觀與環境</td><td>地緣政治</td><td>烏克蘭、中東、台灣與貿易戰正在瓦解全球化。<span class="s g">BG</span></td><td>全球供應鏈</td></tr>
+    <tr><td>氣候與保險</td><td>氣候變遷每年約侵蝕全球 GDP 0.5%;保險更貴甚至難以取得。<span class="s g">BG</span></td><td>地產、保險、農業</td></tr>
+    <tr><td>資源枯竭</td><td>35 種等權重商品價格約為 2002 年低點的三倍;他認為資源價格趨勢由下跌轉為上漲。<span class="s g">BG</span></td><td>原物料</td></tr>
+    <tr><td rowspan="2">人口與社會</td><td>人口與房地產需求</td><td>年輕家庭組成下降;日本 20 歲人口約為 1948 年的一半(稿中說法)。<span class="s a">A</span> 生育率日本 1.2、南韓 0.7、中國 1.0、印度 1.9。<span class="s g">BG</span></td><td>房地產</td></tr>
+    <tr><td>貧富差距與社會契約</td><td>稿中指出差距極端,歷史上多以崩潰、戰爭或革命重置;他主張以溫和長期的累進稅制調整。<span class="s a">A</span><span class="s d">D</span> 對投資的含義:稅制與政策風險、社會不穩定。<span class="s m">我</span></td><td>稅負、政策環境</td></tr>
+    <tr><td>AI 本身</td><td>超智慧風險</td><td>若無法把「仁慈」寫進底層,可能極度危險;稿中以「迴紋針假說」為例。<span class="s a">A</span></td><td>長期不確定性</td></tr>
+  </table>
+</section>
+
+<section id="p-action">
+  <h2 class="sec">5 依情境整理的行動清單</h2>
+  <div class="cols">
+    <div class="card"><h4>一般上班族(拿薪水投資)</h4>
+      <ol>
+        <li>先分散,不要把資金全押單一市場<span class="s a">A</span></li>
+        <li>股票資金約 60% 放非美股寬基指數<span class="s a">A</span></li>
+        <li>5%–10% 放貴金屬<span class="s a">A</span></li>
+        <li>其餘放高信用債券、短期國債或現金<span class="s a">A</span><span class="s d">D</span></li>
+        <li>不碰加密貨幣;房地產不要因「大家都買」而買<span class="s a">A</span></li>
+        <li>我補充:配置比例、幣別與稅務因人而異,尤其是在台灣或其他非美國地區,請另行確認可買到的產品與費用。<span class="s m">我</span></li>
+      </ol></div>
+    <div class="card"><h4>持有大量美國科技股的人</h4>
+      <ul>
+        <li>他的個人建議:全部賣掉。<span class="s a">A</span></li>
+        <li>要先想清楚:賣出的稅負與成本、你的持有目的與期限、若他提前太多會錯失多少上漲。<span class="s m">我</span></li>
+      </ul></div>
+    <div class="card"><h4>AI / 新創創辦人</h4>
+      <ul>
+        <li>趁熱錢充沛時盡可能鎖定資金、保持保守,為泡沫破裂後資本市場冰封做準備。<span class="s a">A</span></li>
+        <li>主持人提到的做法:先募資再趁崩盤時收購競爭對手,他稱讚「聰明、好建議」。<span class="s a">A</span></li>
+      </ul></div>
+    <div class="card"><h4>33 歲想累積財富的人</h4>
+      <ul>
+        <li>撲進 AI、成為領域頂尖、加入領先企業、承擔大風險、跳脫框架。<span class="s a">A</span></li>
+        <li>實用技能(工程、維修、農業)在系統失序時有價值。<span class="s a">A</span></li>
+        <li>要注意:他一方面說 AI 是泡沫,一方面建議職涯上衝進 AI,並說可能「助長毀滅人類」(稿中玩笑話)。這是<b>職涯選擇</b>與<b>投資配置</b>兩回事。<span class="s m">我</span></li>
+      </ul></div>
+  </div>
+  <h3>如果他說對了 / 說錯了,可以怎麼觀察</h3>
+  <table class="tbl">
+    <tr><th>情境</th><th>可觀察的訊號(我整理)</th></tr>
+    <tr><td>他說對了</td><td>市場廣度持續收窄;高飛股先行下跌;七巨頭資本支出增速放緩或自由現金流轉負;信用利差擴大;新興與非美市場相對表現持續領先。<span class="s m">我</span></td></tr>
+    <tr><td>他說錯了或時機未到</td><td>美股盈餘持續跟上估值;AI 帶來的利潤超過資本支出;美股持續領先非美市場;市場廣度擴大。<span class="s m">我</span></td></tr>
+  </table>
+</section>
+
+<section id="p-data">
+  <h2 class="sec">6 數據彙整與查證狀態</h2>
+  <table class="tbl wide">
+    <tr><th>項目</th><th>數值</th><th>出處</th><th>查證</th></tr>
+    <tr><td>GMO 管理規模</td><td>高峰約 1,650 億美元;現在約 850 億</td><td><span class="s a">A</span></td><td>未查證</td></tr>
+    <tr><td>個人財富</td><td>稱已捐出約 90–95% 給基金會;外界稱他為億萬富翁</td><td><span class="s a">A</span></td><td>未查證</td></tr>
+    <tr><td>本益比</td><td>日本 1989 約 65;美國 2000 約 35;現在約 35–40;1998–99 市場 31 對常態 17</td><td><span class="s a">A</span></td><td>未查證</td></tr>
+    <tr><td>跌幅</td><td>1929 約 -80%以上;1972 漂亮五十實質 -65%;納斯達克 2000 後 -82%</td><td><span class="s a">A</span></td><td>未查證</td></tr>
+    <tr><td>2022 跌幅</td><td>標普 500 -25%;七巨頭 -40%;成長股 -30~35%</td><td><span class="s g">BG</span></td><td>未查證</td></tr>
+    <tr><td>近 12 個月報酬</td><td>新興市場約 +65%;標普 500 約 +25%</td><td><span class="s a">A</span></td><td>未查證,時點不明</td></tr>
+    <tr><td>債券殖利率</td><td>約 5%</td><td><span class="s a">A</span></td><td>未查證,時點不明</td></tr>
+    <tr><td>七巨頭資本支出</td><td>稿中說法:2000 億 vs 1050 億美元(互比)</td><td><span class="s a">A</span></td><td>未查證</td></tr>
+    <tr><td>AI 資本支出增量</td><td>約占 GDP 的 2%</td><td><span class="s g">BG</span></td><td>未查證</td></tr>
+    <tr><td>房價收入比(英國)</td><td>1994 年約 3.4 倍,現在 10 倍以上;D 版為英美 8–10 倍,歷史 3.5 倍</td><td><span class="s a">A</span><span class="s d">D</span></td><td>未查證,兩版不一致</td></tr>
+    <tr><td>GMO 2000 年預測 vs 結果</td><td>預測新興市場年報酬 11–12%、標普 500 -1.5% 至 -2%;十年後實際新興市場約 13%、標普 500 約 -3%</td><td><span class="s g">BG</span></td><td>未查證</td></tr>
+    <tr><td>氣候損失</td><td>每年約 0.5% 全球 GDP</td><td><span class="s g">BG</span></td><td>未查證</td></tr>
+    <tr><td>貧富數據</td><td>前 1% 占 31% 財富,底層 50% 占 2.5%;1989 至 2020 年代中期頂層 1% 家戶財富增長是底層 20% 的 987 倍</td><td><span class="s a">A</span>(主持人陳述)</td><td>未查證</td></tr>
+    <tr><td>生育率</td><td>日本 1.2、南韓 0.7、中國 1.0、印度 1.9</td><td><span class="s g">BG</span></td><td>未查證</td></tr>
+  </table>
+</section>
+
+<section id="p-watch">
+  <h2 class="sec">7 可持續觀察的指標(我整理)</h2>
+  <ul>
+    <li>市場廣度:漲跌家數、小型與投機股相對指數的表現。<span class="s m">我</span></li>
+    <li>市值占 GDP,以及主要指數的本益比與歷史分位。<span class="s m">我</span></li>
+    <li>七巨頭的資本支出、自由現金流與舉債規模;AI 營收是否追得上支出。<span class="s m">我</span></li>
+    <li>非美股(已開發與新興)相對美股的報酬,與匯率變化。<span class="s m">我</span></li>
+    <li>債券殖利率、通膨與信用利差(可參考站內債務週期補充研究)。<span class="s m">我</span></li>
+    <li>房價收入比、租金與年輕家庭組成。<span class="s m">我</span></li>
+    <li>貴金屬價格與實質利率的關係。<span class="s m">我</span></li>
+  </ul>
+</section>
+
+<section id="biggo">
+  <h2 class="sec">8 兩集訪談對照:Diary of a CEO vs BigGo</h2>
+  <div class="note"><b>先說明</b>:你提供的 <a href="https://finance.biggo.com.tw/podcast/cecbc8404a9aea04" target="_blank" rel="noopener">BigGo 頁面</a>是 Grantham 的<b>另一集訪談</b>(節目 Behind the Balance Sheet,2026-05-25,約 1 小時 18 分,頁面標題「在達康泡沫中看對市場卻失去一半客戶」),<b>不是</b>上面這集 Diary of a CEO。所以下面是兩集訪談的觀點對照,不是同一份內容的補充。BigGo 內容我是以網頁摘要為主,沒有看那一集的影片。</div>
+
+  <h3>BigGo 那集的重點(意譯整理)</h3>
+  <ul>
+    <li><strong>市場判斷</strong>:認為美國市場處於歷史性泡沫,估值與利潤率同時觸頂,可能下跌 50% 以上。</li>
+    <li><strong>被 AI 打斷的 2022 年崩盤</strong>:2022 年的下跌(標普 500 約 -25%,七巨頭約 -40%,成長股 -30~35%,債市經歷史上最差的一年)符合泡沫破裂特徵,但 2022 年 11 月 ChatGPT 推出打斷了這個走勢。AI 資本支出增量約佔 GDP 的 2%,接近鐵路熱潮時期,他類比為光纖熱潮;專家對 AI 看法分歧,使報酬呈現「厚尾」。</li>
+    <li><strong>機構為何不警告</strong>:引用凱因斯,機構的首要規則是不要單獨犯錯;大型穩健的金融機構不會叫客戶撤出市場,因為這不利於商業模式。也批評 Greenspan 的「不對稱」政策(下跌時救市、上漲時放任)。引用 Robert Shiller:股市波動遠大於盈餘與股利所能解釋。</li>
+    <li><strong>泡沫的訊號</strong>:最可靠的崩盤前訊號是市場廣度收窄(投機性、低品質股票先跌而指數仍漲);1929、1972、2000、2022 年都出現。市值除以 GDP 為史上最高,甚至超過 2000 年。</li>
+    <li><strong>回歸趨勢</strong>:大泡沫通常回落 50% 以上;復原很久:1929 年高點到 1955 年才收復,1972 年漂亮 50 的高點要到 1985–86 年。</li>
+    <li><strong>價值投資與全球配置</strong>:GMO 價值策略落後十多年;2000 年預測新興市場大幅勝過標普 500,之後十年新興市場約 +13%、標普 500 約 -3%;去年美國以外市場優於美國,他預期美國(約占全球市值三分之二)未來十年落後。</li>
+    <li><strong>全球宏觀完美風暴</strong>:地緣政治(烏克蘭、中東、台灣、貿易戰)、氣候變遷(每年約侵蝕全球 GDP 0.5%,保險更貴)、資源枯竭(35 種商品等權重籃子價格約為 2002 年低點的三倍)、人口結構與生育率。</li>
+    <li><strong>生存威脅</strong>:毒害與生育率。精子濃度每毫升:狩獵採集時代約 200、1972 年約 100、現在約 35;下降速度 20 世紀每年約 -1.5%、21 世紀每年約 -2.5%;需要協助受孕的伴侶約 17%,Shanna Swan 預測 20–25 年內平均每對都需要協助;生育率日本 1.2、南韓 0.7、中國 1.0、印度 1.9;日本 20–28 歲男性過去 12 個月無性行為比例 52%。</li>
+    <li><strong>職涯教訓</strong>:GMO 預測 2000 年崩盤正確,但在被證明正確前的 2.25 年間,失去一半客戶與超過三分之二市占;基金會撥款近 10 億美元。</li>
+  </ul>
+
+  <h3>兩集訪談對照</h3>
+  <table>
+    <tr><th>主題</th><th>Diary of a CEO(上面整理稿)</th><th>BigGo 那集</th><th>對照結果</th></tr>
+    <tr><td>AI 泡沫</td><td>歷史上最大的投資泡沫;以鐵路、網路為類比;高飛股回調 70% 不奇怪</td><td>歷史性泡沫;類比鐵路與光纖;大泡沫通常回落 50% 以上</td><td><span class="ok">方向一致</span>;跌幅一個說 70%、一個說 50% 以上,口徑不同</td></tr>
+    <tr><td>為何沒人警告</td><td>職業風險;1998–99 年提前撤出,兩年多後資產流失一半</td><td>首要規則是不要單獨犯錯;被證明正確前 2.25 年失去一半客戶與三分之二市占</td><td><span class="ok">一致</span>;BigGo 多了「市占超過三分之二」</td></tr>
+    <tr><td>美股與海外</td><td>不要持有美股;轉向歐洲、日本、英國、新興市場</td><td>美國以外去年表現較好;預期美國未來十年落後</td><td><span class="ok">一致</span></td></tr>
+    <tr><td>精子下降</td><td>自 1970 年代以來平均濃度降逾 50%,年降率加速至每年 2.6%,2045 年可能趨近於零</td><td>1972 年約 100、現在約 35;21 世紀每年 -2.5%;20–25 年內平均每對需協助受孕</td><td><span class="warn">大致一致</span>,但年降率(2.6% 對 2.5%)與「趨近於零」對「需要協助」的說法不同,可能是不同場合的表述</td></tr>
+    <tr><td>生存威脅</td><td>微塑膠、塑化劑、PFAS、農藥;孕期停用化妝品等自保建議</td><td>毒害與生育率為基金會重點,稱變化最快也最被忽視</td><td><span class="ok">一致</span>;Diary 那集有具體自保建議</td></tr>
+    <tr><td>估值指標</td><td>日本 1989 年 P/E 65 倍、2000 年標普約 35 倍、現在不少科技股 35–40 倍</td><td>市值/GDP 史上最高、超過 2000 年;市場廣度收窄為訊號</td><td><span class="warn">互補</span>:一個用本益比、一個用市值/GDP 與市場廣度,結論相同</td></tr>
+    <tr><td>只在 Diary 出現</td><td colspan="3">加密貨幣歸零、SpaceX 質疑、房價與收入比(英國 3.4 倍 → 10 倍以上)、AI 超智慧與「迴紋針」風險、貧富差距與社會契約、給 33 歲的建議</td></tr>
+    <tr><td>只在 BigGo 出現</td><td colspan="3">2022 年崩盤與 ChatGPT、AI 資本支出約占 GDP 2%、Greenspan 與 Shiller、資源與氣候的量化論述、GMO 價值策略落後與 2000 年預測</td></tr>
+  </table>
+</section>
+
+
+<section id="appendix"><h2 class="sec">附錄:原文與逐字稿(使用者提供)</h2><div class="note">以下 A-1、A-2、B、D 為你提供的文字,<b>未刪減、未改寫</b>,原樣收錄;C 是 YouTube 實際章節時間軸對照。它們都是整理稿,不是官方逐字稿,請見最後的「查核與說明」。</div></section>
+<section id="a1">
+  <h2 class="sec">A-1 第一段詳細稿</h2>
+  <p class="range">00:00:00 – 00:35:00(使用者提供,以下依原文收錄)</p>
+  <p class="intro-line">以下為您整理本訪談<strong>第一段（00:00:00 - 00:35:00）的完整逐字稿紀錄與中文對照</strong>。此段內容依據影片實際時間軸與官方章節標註，忠實還原主持人 Steven Bartlett 與嘉賓 Jeremy Grantham 的完整對話：</p>
+
+  <h3>【00:00:00 - 00:02:00】節目開場精華剪輯（Episode Teaser）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">What advice do you give for the average person that's looking to invest their salary or their wages?</p><p class="zh">（對於想要投資自己薪水或工資的普通人，你有什麼建議？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Don't own US stocks. That's a simple strategy that you can act on.</p><p class="zh">（不要持有美股。這是你可以立刻採取的簡單策略。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">But what about S&amp;P 500?</p><p class="zh">（那標普 500 指數呢？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">No. And if you have a big position in US technology stocks, my personal advice would be to sell them all.</p><p class="zh">（不行。如果你持有大量的美國科技股部位，我個人的建議是把它們全賣了。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">But I'm an investor in SpaceX.</p><p class="zh">（但我投資了 SpaceX。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Good luck. SpaceX is such a fabulous BS story, and we can go into that.</p><p class="zh">（祝你好運。SpaceX 是一個極其荒謬的吹牛故事，我們稍後可以深入聊這件事。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Crypto?</p><p class="zh">（加密貨幣呢？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">No.</p><p class="zh">（不。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Why?</p><p class="zh">（為什麼？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">It's an unnecessary piece of nonsense that facilitates nothing except criminals moving money so they can't be seen.</p><p class="zh">（這是一堆毫無必要的廢話技術，除了方便罪犯隱蔽洗錢之外毫無用途。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Do you think Bitcoin's gonna go to zero?</p><p class="zh">（你認為比特幣會歸零嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Yes, it will certainly go to zero.</p><p class="zh">（是的，它終究一定會歸零。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">How many years have you spent investing?</p><p class="zh">（你投資了多少年？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">60 years.</p><p class="zh">（60 年。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And what's the most amount of money you've ever managed of other people's money?</p><p class="zh">（你替客戶管理過的最大資金規模是多少？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">165 billion.</p><p class="zh">（1650 億美元。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And one of the things you're famous for talking about is this idea of bubbles.</p><p class="zh">（你最為人熟知的主題之一就是資產泡沫。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Yes. And bubbles always occur around the very most important ideas. Like the railroads, everyone could see that it would change the world. The same with the internet, and everyone wanted to put their money in. And so, they overinvested. But this is the problem: eventually, they bust. And if you look at the great bubbles breaking of the past, you find that it's followed by really tough times, a miserable period for the economy. And the bigger the bubble, the bigger the bust. And now, we're in the biggest investment bubble that arguably has ever occurred: AI.</p><p class="zh">（是的。泡沫總是圍繞在最偉大的革命性想法周圍發生。比如當年的鐵路，每個人都能看出它會改變世界；互聯網也是如此，所有人都想把錢砸進去。因此，人們過度投資了。但問題就在這裡：最終，它們都會破裂。如果你回顧歷史上那些重大泡沫破裂，你會發現隨之而來的都是極其艱難的歲月，一段經濟的苦日子。泡沫越大，破裂時就越慘烈。而現在，我們正處於有史以來最大的投資泡沫之中：那就是 AI。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Are we on the verge of a collapse with AI over the coming years?</p><p class="zh">（在接下來幾年裡，我們正處在 AI 引發的崩盤邊緣嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">The next few days, the next few weeks, the next few months, but certainly the next few years.</p><p class="zh">（可能是未來幾天、幾週、幾個月，但毫無疑問，就在接下來這幾年內。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">So if you're not someone that has a huge amount of savings, what kind of strategy should they be adopting when an economy starts to get bad and there's an economic bubble collapse?</p><p class="zh">（如果一個人沒有巨額儲蓄，當經濟開始惡化、泡沫破裂時，他們應該採取什麼策略？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">So I will go through everything. But you will not receive this advice from investment advisors, because they'll lose a lot of business.</p><p class="zh">（我會把所有細節講清楚。但你絕不可能從理財顧問那裡聽到這些建議，因為那樣會讓他們丟掉大把生意。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And would you be thinking about the country you live in at this moment in time?</p><p class="zh">（在當下這個時刻，你會考慮自己究竟居住在哪個國家嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Absolutely.</p><p class="zh">（絕對會。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Is there any countries you wouldn't live in?</p><p class="zh">（有什麼國家是你絕對不想住的嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">I think I have to refuse to answer this on the grounds that it might tend to incriminate me.</p><p class="zh">（我想我必須以這可能會讓我惹上麻煩為由，拒絕回答這個問題。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Oh, okay. So you're saying don't live in the United States? I've just moved here. Why not the United States?</p><p class="zh">（喔，好吧。所以你的意思是別住在美國？我才剛搬來這裡。為什麼不能是美國？）</p></div>
+
+  <h3>【00:02:00 - 00:02:54】頻道訂閱與引言（Channel Intro &amp; Host Note）</h3>
+  <p><em>(Steven Bartlett 向觀眾分享頻道訂閱數據，呼籲經常觀看的觀眾點擊訂閱按鈕，支持團隊持續產出免費高品質訪談。隨後進入正式專訪。)</em></p>
+
+  <h3>【00:02:54 - 00:06:38】Who Is Jeremy Grantham? &amp; Will AI Become The Next Financial Bubble?（葛拉漢的投資思維與對 AI 的看法）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Jeremy Grantham, your firm managed up to 165 billion dollars at its peak, what we call AUM (Assets Under Management). So you know a lot about money, you know a lot about investing. How do you sort of self-define your expertise? Because you traverse so many different subjects through your work. So if I said to you, you know, how do you introduce yourself professionally, what is the answer?</p><p class="zh">（傑瑞米·葛拉漢，你的公司在巔峰時期管理了高達 1650 億美元的資產（AUM）。你對金錢了如指掌，對投資經驗豐富。你會如何定義自己的專業領域？因為你的研究跨越了太多不同學科。如果我問你，你在專業上如何自我介紹，你的回答會是什麼？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">I can't think I ever do introduce myself professionally. But I think of myself as specializing in a longer-term horizon than most people, and trying to look at a higher and higher level of abstraction: what is really going on here? And what are people missing?</p><p class="zh">（我想我從來沒有真正用專業名頭介紹過自己。但我認為自己專注於比大多數人更長遠的時間維度，並試圖站在更高的抽象層面去思考：這裡究竟在發生什麼？人們究竟忽略了什麼？）</p>
+    <p class="en">I've discovered over decades that humans are incredibly short-term oriented. And they have an enormous predisposition to optimism. They're looking for optimistic news in everything. They're looking to avoid unpleasantness. The idea that you can have steady compound growth is ridiculous. One of my few heroes, Kenneth Boulding, an economist, he said the only people who think that you can have compound growth on a finite planet are madmen and economists.</p><p class="zh">（幾十年來我發現，人類本質上具有極其嚴重的短期傾向。而且人類有一種天生的、巨大的盲目樂觀傾向。他們在任何事情上都在尋找樂觀的消息，本能地迴避壞消息。那種認為你可以永遠維持穩定複合增長的觀念是荒謬的。我的少數偶像之一，經濟學家肯尼斯·博爾丁（Kenneth Boulding）曾說過：『任何認為在有限的星球上可以實現無限複合增長的人，不是瘋子就是經濟學家。』）</p>
+    <p class="en">Which is so accurate. Economists simply believe you can have growth always, and everything comes down to just price.</p><p class="zh">（這說得太精準了。經濟學家只是一味相信增長可以永遠持續，所有的問題最終都被簡化成價格問題。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">One of the things you're famous for talking about is this idea of bubbles. And we're living in a moment where everybody's talking about the subject of artificial intelligence, and everyone's getting very excited by it. Some people are getting very pessimistic about the impact it'll have on society. I wanted to start there because it's an area where there is rife optimism on one side of things, but there's also a lot of money plowing into the market, which is, I guess in your view, making things prone to collapse? What's your view on artificial intelligence? Well, you said you're good at understanding what people are missing. What is it that people are missing?</p><p class="zh">（你最著名的觀點之一就是關於『泡沫』的討論。而我們正處在一個所有人都在談論人工智慧（AI）的時代，大家對此感到極度興奮；也有一些人對它對社會的衝擊感到悲觀。我想從這裡切入，因為一方面充斥著氾濫的樂觀情緒，另一方面又有巨額資金湧入市場，在你看來，這是否讓市場變得極易走向崩潰？你對 AI 的看法到底是什麼？你剛才說你擅長看透人們忽略的事情，那麼在 AI 浪潮中，人們究竟忽略了什麼？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Well, first of all, let me say, I think artificial intelligence is right up there with the railroads. It's one of the defining great ideas of the last couple of hundred years. It's going to change everything. And that is critical if you mean to have a bubble.</p><p class="zh">（首先我要說，我認為人工智慧絕對足以與當年的鐵路相提並論。它是過去幾百年來最具決定性意義的偉大構想之一。它將徹底改變一切。而如果你想醞釀一場巨大的泡沫，具備這一點是必不可少的條件。）</p>
+    <p class="en">People think that a bubble is mainly because it's a scam, and nothing could be further from the truth. The great bubbles always occur around the very most important ideas. So the railroads: everyone could see that it would change the world. And everyone wanted to put their money in, and everybody put their money in. They overinvested. And even though the railroads were a spectacularly powerful idea, the railroads collapsed as stocks, and everybody lost a ton of dough. The same with the internet. And then out of the wreckage, the railroads changed the world, and the internet changed the world.</p><p class="zh">（人們總以為資產泡沫主要是因為它是騙局，但事實完全相反。歷史上的偉大泡沫，恰恰總是圍繞著最偉大、最真實的革命性構想而產生。當年的鐵路就是如此：每個人都清楚看見它將改變世界，每個人都想把錢投進去，大家也都投了，結果就是過度投資。儘管鐵路確實是一個無比強大的革命性概念，但鐵路股票全面暴跌崩潰，所有人都虧了大錢。互聯網也是一模一樣。隨後在泡沫崩潰後的廢墟中，鐵路確實改變了世界，互聯網也確實改變了世界。）</p></div>
+
+  <h3>【00:06:38 - 00:08:58】Grantham's Career, Firm &amp; Wealth（葛拉漢的投資帝國與百億財富）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">I want to keep on this train, but for the viewers that don't know your experience, we should probably pause and tell them your experience. Because that's the reference point, but also gives you credibility and authority to speak to this. What have you done with your life?</p><p class="zh">（我想繼續沿著這個話題聊，但對於還不了解你資歷的觀眾，我們應該先暫停一下，介紹你的背景。因為這是參考坐標，也賦予了你談論此事的權威與公信力。你這一生都經歷了什麼？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Well, I got into the investment business in 1968. There were very few serious people in the investment business. There were no mathematical models. There were the kind of relatively failed sons of rich people who would work for JP Morgan.</p><p class="zh">（我是 1968 年進入投資行業的。那時投資界幾乎沒什麼嚴肅專業的人，也沒有數學量化模型。當時大多是富家子弟中不成器的兒子們，被安排進摩根大通之類的大行工作。）</p>
+    <p class="en">And then over the next 10 years, it began to get a little more serious. T. Rowe Price introduced the idea of growth stocks. A few of us introduced the idea of value stocks. And a few years later, at my first firm, Batterymarch, we really introduced the idea of small-cap. It hadn't existed before that.</p><p class="zh">（隨後的十年裡，行業才開始變得專業一些。普信（T. Rowe Price）提出了『成長股』的概念；我們當中的幾個人引進了『價值股』的概念。幾年後，在我的第一家公司 Batterymarch，我們率先開創了『小型股（Small-Cap）』的投資概念。在那之前市場上根本沒有這種分類。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Did you invent the index fund?</p><p class="zh">（是你發明了指數基金嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">There were two or three of us, separately. I don't think we knew of each other.</p><p class="zh">（當時有兩三個人各自獨立搞了出來，我想那時我們彼此並不知道對方的存在。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">How many years have you spent investing?</p><p class="zh">（你從事投資多久了？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">60, approximately.</p><p class="zh">（大約 60 年了。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">60. And what's the most amount of money you've ever managed for other people in a calendar year?</p><p class="zh">（60 年。那你在一年內替別人管理過的最大資產規模是多少？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Yes, 165 billion. I had two partners, Mayo and Van Otterloo. And when the smoke cleared, you know, I made a lot of money, over a billion dollars.</p><p class="zh">（1650 億美元。當時我有兩位合夥人：梅奧（Mayo）和范奧特洛（Van Otterloo）。當硝煙散去時，我自己也賺了很多錢，超過十億美元。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Personally?</p><p class="zh">（個人資產？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Personally. And paid tax on all of it.</p><p class="zh">（個人。而且全部依法繳納了稅款。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And how much money does your firm still manage today of other people's money?</p><p class="zh">（那你的公司（GMO）今天還替客戶管理多少資產？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">It manages 85 billion.</p><p class="zh">（目前管理約 850 億美元。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">85 billion. So are you a billionaire?</p><p class="zh">（850 億美元。那你現在是億萬富翁嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">I'm generally referred to as a billionaire, but that's only because they count the money you give away. Because I've given over 90% of my billion away to a foundation.</p><p class="zh">（外界通常把我稱作億萬富翁，但那只是因為他們把捐出去的錢也算上了。我已經把超過 90% 的個人財富捐給了基金會。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Oh, really? To which foundation?</p><p class="zh">（真的嗎？捐給了哪個基金會？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">It's called the Grantham Foundation for the Protection of the Environment. We invest a lot of our principal in green tech to help combat climate change.</p><p class="zh">（叫做『格蘭瑟姆環境保護基金會』。我們將大部分本金投資於綠色科技，以協助應對氣候變遷。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And you're 87 years old. You've given 90% of your money away to your own foundation that's focused on green tech.</p><p class="zh">（你今年 87 歲了。你把 90% 的財富都捐給了專注於綠色科技的個人基金會。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Yeah. Maybe 95%.</p><p class="zh">（對，甚至可能有 95%。）</p></div>
+
+  <h3>【00:08:58 - 00:12:33】What Happens When The AI Bubble Bursts?（泡沫破裂的規律與慘烈後果）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">So coming back to this point that we were talking about. A lot of people won't even know what a bubble is. You've done a good job of explaining: a bubble is when everyone gets excited, they all see something obvious, they plow their money in, the stocks go up, and then eventually there's a big collapse. And you're saying that the collapse is on the horizon?</p><p class="zh">（回到我們剛才談的話題。很多人甚至不知道什麼是泡沫。你解釋得很透徹：泡沫就是所有人都興奮起來，看見一個明顯的趨勢，把錢瘋狂砸進去，推高股價，最後迎來劇烈崩盤。你現在是說，崩盤已經迫在眉睫了嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Yes. What's going to happen is the high-fliers will probably come down a lot.</p><p class="zh">（是的。即將發生的事情是：那些漲幅最大的高飛股很可能會大幅暴跌。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">The high-fliers?</p><p class="zh">（高飛股？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">The stocks that have gone up the most — AI and the more exciting stocks with the biggest moves. Historically, they would be expected to come down the most. From these unprecedented levels, a 70% decline would not be unexpected.</p><p class="zh">（那些漲得最凶的股票——AI 概念股以及那些最熱門、波動最大的股票。從歷史來看，它們跌得也最狠。從當前這種前所未有的高估值水平來看，回調下跌 70% 完全符合歷史常理。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">So a 70% decline in the stock price?</p><p class="zh">（股價下跌 70%？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Yeah. And you have to remember, the tech bubble, the Nasdaq, which is an index of the growth stocks, came down 82%. It is far from unprecedented to have these major declines. And the biggest bubble in history was in the Japanese stock market in 1989. Back then, Japan seemed to rule the world, all the technology, all the Toyotas were kicking bottoms in General Motors and so on. And everyone bragged about their 12-inch Sony TV in the kitchen, little Walkmans you put on your belt to play music. They were all Japanese.</p><p class="zh">（是的。別忘了，在 2000 年互聯網泡沫中，代表成長股的納斯達克指數暴跌了 82%。這種巨幅下跌在歷史上絕非罕見。而歷史上最大的泡沫是 1989 年的日本股市。那時日本看似統治了全世界，所有的尖端技術，豐田把通用汽車打得落花流水。每個人都在炫耀廚房裡的 12 吋索尼電視，腰帶上別著聽音樂的 Walkman 隨身聽，全都是日本製造。）</p>
+    <p class="en">And for a second, Japan sold for more than the US in '89. And it got to 65 times earnings. Which means for every dollar of earnings, you have $65 of market value. The US went to 35 in the tech bubble of 2000. You could argue, depending on how you do it, that it's 35 or 40 today. But it's not 65. So we have seen a much bigger bubble in Japan.</p><p class="zh">（在 1989 年那短短的一瞬間，日本股市的總市值甚至超越了美國。當時日本股市的本益比達到了驚人的 65 倍！這意味著每一美元的企業利潤，對應著 65 美元的股票市值。而美國在 2000 年互聯網泡沫頂峰時本益比是 35 倍；今天根據計算方式不同，大約在 35 到 40 倍左右。雖然還沒到 65 倍，但這顯示我們在日本見識過更大的狂熱。）</p>
+    <p class="en">And what happened? It went up and up and up, and then it came down for 20 years. They talk about the 'Lost Decade', but when you look at it closely, it looks more like a lost 20 years. It took 35 years for the Japanese market to recover!</p><p class="zh">（隨後發生了什麼？股價一路狂飆，然後足足跌了 20 年！大家總說『失落的十年』，但仔細看數據，實際上是失落的二十年。日本股市整整花了 35 年才重新回到當年的高點！）</p></div>
+
+  <h3>【00:12:33 - 00:17:52】The Investing Strategy For Right Now &amp; Why You Should Avoid US Stocks（普通人的自保策略：分散投資與避開美股）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">So, for the average person, what do they feel and how does it impact them when there's a market crash like the one that you're forecasting?</p><p class="zh">（那麼對於普通老百姓來說，當面臨你所預測的這種市場崩盤時，他們的真實感受是什麼？這會如何影響他們的生活？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">The high-fliers will lay people off, and a lot of people will feel less rich. As you acquire money in the stock market, a small fraction of that, 2 to 3%, is spent. And in reverse, it goes back, and people feel a little bit poorer, they spend a little less. So, the economy tends to be under some stress.</p><p class="zh">（那些風光的大公司會開始大規模裁員，許多人會感覺自己的財富縮水了。當人們在股市賺錢時，大約會拿出其中 2% 到 3% 投入實際消費；反過來，當資產蒸發時，人們感到貧窮，消費就會銳減。這會讓整個實體經濟承受巨大的衰退壓力。）</p>
+    <p class="en">And if you look at the great bubbles breaking of the past, you find that it's followed by really tough times. 1929 is followed by the Great Depression that lasted for several years. In the end, down about 80% or more. And then the next one was called the 'Nifty Fifty' in 1972: 50 great companies like IBM and Coca-Cola. It declined by 65% if you adjust for inflation. The recession associated with that was just about the worst since the Depression.</p><p class="zh">（看看歷史上那些重大泡沫破裂後的後果：1929 年崩盤後是大蕭條，持續了數年，股市最終跌幅超過 80%；1972 年的『漂亮五十（Nifty Fifty）』崩盤——涵蓋 IBM、可口可樂等 50 家頂級優質公司，經通膨調整後暴跌了 65%，伴隨而來的經濟衰退是自大蕭條以來最嚴重的危機。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">So for the average person, what kind of strategy should they be adopting if you're not someone that has a huge amount of savings? Are there any strategies that you should be thinking about now before the markets come down and there could be a recession?</p><p class="zh">（那麼對於沒有巨額積蓄的普通人，在市場回調、可能陷入衰退之前，現在應該採取什麼策略？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Rule number one is always: be diversified.</p><p class="zh">（第一條法則永遠是：<strong>分散投資</strong>。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">What does 'be diversified' mean?</p><p class="zh">（『分散投資』具體是什麼意思？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">It means hold some bonds, hold some cash, perhaps a small amount of precious metals — gold and silver.</p><p class="zh">（意思是持有一些債券、持有一些現金，也許再配置少量貴金屬——黃金和白銀。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And what is a bond, and how do I buy one?</p><p class="zh">（什麼是債券？普通人該怎麼買？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">A bond is a loan that carries a fixed interest rate. Let's say today, 5%. You invest your money in it, and it will pay you 5% as long as the creditworthiness of the other side is there. If it's the US government, you'll assume it's pretty creditworthy. You can buy a 30-year, 10-year, 2-year, or a 90-day Treasury bill. Everything goes fine, you receive this modest amount of money, your 5%. Or lending a corporation money, like Apple.</p><p class="zh">（債券本質上是一筆貸款，帶有固定的利息回報。比如現在大約是 5%。你把錢借出去，只要對方具備償債信譽，它就會按期付你 5% 的利息。如果是美國政府發行的國債，通常被認為信用度極高。你可以買 30 年期、10 年期、2 年期，或是 90 天期的短期國庫券。一切順利的話，你能穩穩拿到這 5% 的收益。你也可以借錢給大企業，比如買蘋果公司發行的公司債。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And property? Real estate?</p><p class="zh">（那買房地產呢？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Property is fine, except it's pretty darn expensive by historical standards. They've engineered a situation where house prices tend to rise. Great for the people who have a house, and terrible for the people who would like to buy a house.</p><p class="zh">（房地產本身沒問題，但以歷史標準衡量，現在價格高得離譜。政府和金融體系人為製造了一種房價不斷上漲的環境。這對已經擁有房產的人來說很爽，但對想買房的人來說是場災難。）</p>
+    <p class="en">Back in '94 in England, a typical house sold for 3.4 times your family income. That was about as low as it had been for 50 years. And then from '94 until today, it rose from 3.4 times to over 10 times, depending on where you live. And at 10 times income, a reasonable young couple are in big trouble. They can't really afford to buy a house, and that is reflected in rents. They're really squeezed on living costs. Even if they come down 30%, they're still very expensive, twice what they used to be in the good old days.</p><p class="zh">（1994 年在英國，一套普通住宅的售價大約是家庭年收入的 3.4 倍，那是 50 年來的低點。但從 1994 年到今天，房價收入比從 3.4 倍一路飆升到超過 10 倍！在 10 倍年收入的高壓下，普通年輕夫婦陷入了巨大的困境。他們根本買不起房子，高房價也同步推高了租金，使年輕人的生活成本被極度擠壓。即使未來房價暴跌 30%，以歷史水準來看它依然昂貴，仍是過去黃金時代的兩倍。）</p>
+    <p class="en">And particularly, if you have to own stocks, own them outside America. Don't own US stocks. That's a nice simple strategy that you can act on.</p><p class="zh">（最關鍵的是：如果你非要持有股票，<strong>買美國以外的市場，不要持有美股</strong>。這是一個簡單清晰、完全可以落實的策略。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Why?</p><p class="zh">（為什麼？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">They're much cheaper. Foreign stocks of emerging countries, European countries, Japan, Canada, Australia, and so on. You can find good broad indices, the 'World ex-US'. I'm sure they'll muddle through okay over the next 10 or 20 years. And I am not confident that the US will do that. I'm not confident that US equities will be intact in 5 or 10 years, because they're so badly overpriced today.</p><p class="zh">（因為海外股票便宜得多。新興市場、歐洲國家、日本、加拿大、澳洲等地的股票估值極低。你可以買廣泛覆蓋的指數基金，比如『非美全球指數（World ex-US）』。我確信這些市場在未來 10 到 20 年裡能夠平穩度過難關；但我對美國市場毫無信心。我不相信美股在未來 5 到 10 年內能安然無恙，因為它們現在被嚴重高估了。）</p></div>
+
+  <h3>【00:19:54 - 00:25:32】Why Investment Advisors Mislead Clients（為什麼投資顧問絕不會叫你離場？）</h3>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Now, let me just say: you will not receive the advice from investment advisors to get your tail out of the market, ever. It is not good business for them to do that, and they will not ever say it to you.</p><p class="zh">（讓我說句大實話：你永遠不可能從任何理財顧問那裡，聽到讓你趕緊抽身離場的建議。對他們的業務而言，這絕不是好生意，所以他們永遠不會對你說實話。）</p>
+    <p class="en">So from 1929 onwards, the Goldman Sachs of the world have never said to you: 'Get out of the market, it's overpriced.' Never. So they went through the crash of '29, the crash of the Nifty Fifty in '72, the crash of 2000 in the tech bubble — they never, ever say it. Because it's bad business. If you fight a bubble, you lose a lot of business.</p><p class="zh">（自 1929 年以來，像高盛這樣的華爾街巨頭從來沒有對客戶說過：『快離開市場，現在太貴了。』從來沒有。他們經歷了 1929 年崩盤、1972 年崩盤、2000 年科技泡沫崩盤，但他們絕不會發出預警。因為這違背商業利益。如果你試圖對抗泡沫，你會丟掉大把生意。）</p>
+    <p class="en">And because the uncertainty of the timing is so great, the clients' patience is shorter than the uncertainty of the market. So sooner or later, you will be advising people to be careful, and the market will keep going and going and going, like it did in Japan.</p><p class="zh">（而且由於泡沫破裂的具體時機充滿巨大的不確定性，客戶的耐心往往比市場的狂熱期還要短暫。當你開始規勸客戶保持謹慎時，市場卻往往繼續瘋漲、再瘋漲，就像當年日本那樣。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">You're saying that the people that manage money on a global scale have no incentive to tell you that the market's about to collapse, because if they did, the clients would withdraw their money, they wouldn't get their management fees. So what they do is they keep telling you things are going to be fine and optimistic.</p><p class="zh">（你的意思是，全球資產管理機構根本沒有動力告訴公眾市場即將崩盤。因為一旦說了，客戶就會撤資，機構就賺不到管理費。所以他們的做法就是不斷告訴你一切都會很好、保持樂觀。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">If you'll allow me to tell a story on this very topic: in '98 and '99, the tech bubble, the run-up to the top, I got into a lot of debates with the bulls. I would say it's horribly overpriced, and they would say...</p><p class="zh">（如果你允許我講個親身經歷的故事：在 1998 到 1999 年互聯網泡沫最瘋狂的頂峰時期，我與無數多頭展開了激烈辯論。我說市場貴得離譜，而他們卻說……）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">What's a bull?</p><p class="zh">（什麼是多頭 / 牛市派？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">A bull is someone who is extremely optimistic about the stock market. And a bear is someone who is pessimistic or careful.</p><p class="zh">（多頭就是對股市極度樂觀的人；空頭則是悲觀或審慎的人。）</p>
+    <p class="en">There were 1,200 people in the audience, the annual bash of the Society of Financial Analysts. And I asked before my turn at the debate: 'Please put your hands up if you consider yourself a full-time stock market expert.' 400 hands went up.</p><p class="zh">（當時台下坐著 1200 名聽眾，是美國金融分析師協會的年度大會。在我上台辯論前，我問全場：『如果你自認為是全職股票專家，請舉手。』台下舉起了 400 隻手。）</p>
+    <p class="en">And I said: 'I've got two questions for you. One: if the market, which is currently 31 times earnings, was to go back to a more normal 17 times, would it guarantee a major bear market if it happened anytime in the next 10 years?' All 400 of them said: 'Yes, it would.'</p><p class="zh">（我說：『我有兩個問題請教大家。第一：如果目前本益比高達 31 倍的市場，在未來 10 年內回歸到歷史正常的 17 倍水準，這是否必然保證會帶來一場重大的熊市？』這 400 位專家無一例外全部舉手說：『是的，必然會。』）</p>
+    <p class="en">And then the second question, of course, was: 'And do you think it will happen?' And less than 1% thought it would not happen. 99% plus thought the market would go down, therefore guaranteeing a major bear market.</p><p class="zh">（然後我的第二個問題是：『那你認為這件事會發生嗎？』結果只有不到 1% 的人認為不會發生。超過 99% 的專業分析師私下都認為市場一定會跌回去，從而注定引發重大熊市。）</p>
+    <p class="en">And this was the engine room of all the Goldman Sachs, the Morgan Stanleys, the JP Morgans, the guys doing the analysis! All believed in data that guaranteed a major bear market, which happened. But the people who employed them, representing them from a marketing point of view, were on the podium with me saying: 'Oh, Jeremy, don't get excited, we'll muddle through quite nicely.'</p><p class="zh">（坐在台下的這些人，正是高盛、摩根士丹利、摩根大通的核心分析部門專家，真正做底層研究的人！他們全都深知數據背後注定要迎來大崩盤，而事實也確實崩了。然而，雇用他們的機構高管和市場行銷負責人，卻站在台上對我說：『哎呀傑瑞米，別那麼緊張，我們會平穩過渡的。』）</p>
+    <p class="en">It was a huge betrayal of trust. Because when we did it in '98 and '99, we changed tactics before the market peaked. We were two and a quarter years early, and we lost half our book of business! Because clients left as tech shares kept rising. Through their eyes, we were wrong.</p><p class="zh">（這是對客戶信任的巨大背叛。因為在 1998 和 1999 年，我們在頂峰到來之前就提前調整了防禦倉位。我們整整提前了兩年零三個月！結果呢？因為科技股繼續瘋狂上漲，客戶紛紛撤資，我們丟掉了整整一半的資產管理規模！在客戶眼裡，我們當時是徹底做錯了。）</p>
+    <p class="en">In a bear market, everyone freezes. They wait until the market is bottomed out, then they fire one or two people for having done worse than the others. But in a bull market, they get very excited, and they fire you instantly if you underperform.</p><p class="zh">（在熊市裡，所有人都在虧錢，大家都嚇呆了，客戶只會在市場觸底後像例行公事般解僱一兩個表現墊底的經理。但如果在牛市裡，所有人都在賺錢而你踏空，客戶會毫不留情地立刻解僱你。）</p></div>
+
+  <h3>【00:25:32 - 00:28:22】Advice For Entrepreneurs Right Now（給當前創業者的求生忠告）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">What about for founders? A founder called me the other day, running an AI tech startup, raised about $300 million. He said to me: 'Steven, I think there's a collapse coming, so I'm going to go raise as much money as I possibly can right now, because when this collapse comes, businesses like mine are going to be unable to raise capital, and I can buy up competitors.' What advice would you give entrepreneurs in this moment?</p><p class="zh">（那對於新創企業創辦人呢？前幾天有一位創辦人打給我，他經營一家 AI 新創公司，剛融了大約 3 億美元。他對我說：『Steven，我認為崩盤要來了，所以我要趁現在盡可能多地融資，因為一旦崩盤降臨，像我們這樣的公司將無法再拿到融資，屆時我可以用手上的現金去低價收購對手。』在當下這個時刻，你會給創業者什麼建議？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Good lad! Good advice. If you can lock up money, I would. If you can build a bit of conservatism in other ways, do it. Just brace yourself for impending problems. That is a pretty good principle anytime, but it's a better principle than normal today.</p><p class="zh">（聰明的小伙子！非常有遠見的建議。如果你現在能鎖定融資儲備現金，務必盡全力去做。如果你能透過其他方式建立防禦壁壘，趕快做。讓自己為即將到來的衝擊做好充分準備。這個原則在任何時候都是對的，而在今天這個環境下，它比以往任何時候都更加關鍵。）</p>
+    <p class="en">The stock market hinges on career risk. Keynes was the great champion, a famous economist. He wrote in <em>The General Theory</em>: 'Worldly wisdom teaches that it is better for reputation to fail conventionally than to succeed unconventionally.'</p><p class="zh">（金融市場完全受制於『職業風險』。著名經濟學家凱因斯在《就業、利息和貨幣通論》中寫道：『在世俗的眼光中，循規蹈矩地失敗，遠比特立獨行地成功更容易保住聲譽。』）</p>
+    <p class="en">He knew the market was not efficient, he knew it was a behavioral jungle, and that it would be given to bubbles.</p><p class="zh">（凱因斯早就明白市場絕不是理性的有效市場，而是一個由人類心理驅動的行為叢林，注定會產生一次又一次的泡沫。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And the stock price is just psychology?</p><p class="zh">（所以股價本質上只是一種心理博弈？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">The stock price is what you think the other guy will pay. If the stock is going up, it tends to suck in buyers, that's called momentum. And every now and then, when the economy is favorable and money is obtainable, you tend to get these bubbles. And they play on themselves. The bigger they are, the more people get sucked in.</p><p class="zh">（股票價格本質上取決於你認為下一個人願意出多少錢買。如果股票一直在漲，它就會像吸塵器一樣把買家吸進來，這就是所謂的『動能（Momentum）』。每隔一段時間，當宏觀經濟順風、市場資金氾濫時，就會吹起這種泡沫。泡沫具有自我強化的反身性，漲得越猛，被捲進去的散戶就越多。）</p></div>
+
+  <h3>【00:28:22 - 00:35:00】The Real Risks Of AI &amp; Maternal Instinct（AI 的真正風險：缺乏仁慈的超智慧）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">What do you actually think about the technology at the heart of all of this, which is artificial intelligence? Do you think it's overblown, or do you think it is going to have a massive impact?</p><p class="zh">（那你對這場浪潮核心的技術——人工智慧（AI）本身怎麼看？你認為它被過度吹捧了，還是它確實會帶來顛覆性的衝擊？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">It's going to change everything. One of the spectacular things about it, though, is how there is no consensus. The Nobel Prize winners at the top disagree violently. The experts at the corporate level disagree violently. There is absolutely no agreement on whether AI is going to make us all so rich we can sit on the beach and never do another day's work, or it will wipe us out, accidentally or on purpose, because it's a much higher level intelligence one day.</p><p class="zh">（它絕對會改變一切。然而最引人注目的一點是，目前頂尖專家對此完全沒有共識。站在金字塔頂端的諾貝爾獎得主之間爭論得不可開交；科技巨頭的頂級專家彼此激烈反駁。大家完全無法達成一致：它到底會讓我們所有人都變得無比富有、可以整天躺在海灘上再也不用工作？還是它會在某一天，偶然或故意地將全人類徹底毀滅？因為它終將演化成超越人類的高階智慧。）</p>
+    <p class="en">And when was there ever a case where a higher intelligence was benevolent in a sustainable way to a lower intelligence? The one example is mothers to babies!</p><p class="zh">（人類歷史上何曾出現過高階智慧體能長期、可持續地對低階智慧體保持仁慈的先例？唯一的例外，就是母親對自己的嬰兒！）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">I had Geoffrey Hinton on this podcast, and he cited this exact example of mothers and babies being the only example. But for me, it still doesn't hold well. Because are we building a maternal instinct into AI?</p><p class="zh">（我之前訪談過『AI 教父』傑弗里·辛頓（Geoffrey Hinton），他當時也舉了母親與嬰兒這個唯一的例子。但在我看來，這個比喻立不住腳。因為我們真的有能力在 AI 內部構建出一種母性本能嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">That's what we should do, Geoffrey Hinton would say. The ones who are most concerned about the risks say our one hope, if we mean to keep going ferociously forward in terms of the science, our one hope would be to build in, very carefully, a benevolent attitude. It would not seem to be impossible. But you should make sure you can do that before you push ahead. We are just pushing ahead, and that is going to be extremely risky.</p><p class="zh">（辛頓會說，這正是我們必須做的事。那些對 AI 生存風險最為擔憂的學者認為，如果我們非要在科研上如此兇猛地向前推進，唯一的希望就是極其審慎地在它底層寫入『絕對的仁慈』。這理論上並非不可能，但你必須在全力推進前確保能做到這點。而現實是，我們正在毫無顧忌地往前狂奔，這極度危險。）</p>
+    <p class="en">The old paperclip cliche: it'll make paperclips out of everything, every metal it finds, and destroy the planet in the process.</p><p class="zh">（就像著名的『迴紋針假說』老生常談：你給它一個製造迴紋針的開放指令，它會把它能找到的一切金屬全都做成迴紋針，甚至在過程中徹底摧毀整個地球。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Explain that for people that have never heard the paperclip idea.</p><p class="zh">（請替從未聽過這個假說的觀眾解釋一下。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">That these intelligences involved in machines are literal to a degree we might find difficult to get our brains around. And therefore, someone has said: 'I'd like you to make as many paperclips as you can.' A sloppily open-ended, bad definition. But then the machine, which by then has the means to do it, starts to make paperclips, and it needs metal, so it rips it out of your high-rise building, whatever. The unintended consequences of a simple instruction can cause catastrophe that you didn't expect.</p><p class="zh">（這些機器的邏輯理解力有一種人類難以想像的『字面死板性』。假設有人給它下了一個指令：『請盡可能多地生產迴紋針。』這是一個草率、開放且拙劣的定義。但具備強大執行力的超級機器會開始全力生產，當容易獲取的金屬耗盡時，它會拆掉你的摩天大樓、吞噬所有資源來獲取金屬。一個看似簡單的指令，其未曾預料的後果會帶來毀滅性的災難。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And this is the challenge now. I use AI models like Claude, and lately, it's been getting very judgmental. If I ask it to reformat or rewrite data late at night, it refuses and tells me: 'That's enough, Steven, go to bed.' It's imposing its own subjective moral rules on me. And if a model restricts users like that, users will simply leave and go to another model without those guardrails.</p><p class="zh">（這正是當前的兩難。我自己常用像 Claude 這樣的 AI 模型，最近它變得非常說教。如果我深夜請它幫我整理資料，它竟然拒絕我，並說：『太晚了 Steven，去睡覺吧。』它正在把主觀的道德說教強加在我身上。但如果一個模型過度限制用戶，用戶就會跳槽去用其他沒有道德約束的模型。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Well, if you're right, and I hope you're not, what you're saying is you can't build in benevolent behavior. Which means that it will sooner or later, perhaps by accident, do something that is cripplingly dangerous to humans.</p><p class="zh">（如果你是對的——我由衷希望你不是——那麼你的意思就是我們根本無法約束 AI 的行為。這意味著遲早有一天，也許純屬意外，它會做出對全人類造成毀滅性打擊的危險舉動。）</p></div>
+  <p><em>(第一段 00:00:00 - 00:35:00 完畢。後續第二段涵蓋：科技七巨頭的資本支出肉搏戰、SpaceX 與火星殖民深入辯駁、富人稅與歷史貧富分化、工資配置、加密貨幣及房地產分析。)</em></p>
+</section>
+
+<section id="a2">
+  <h2 class="sec">A-2 第二段詳細稿</h2>
+  <p class="range">00:35:44 – 01:05:00(使用者提供,以下依原文收錄)</p>
+  <p class="intro-line">以下為您整理本訪談<strong>第二段（00:35:44 - 01:05:00）的完整逐字稿紀錄與中文對照</strong>。此段內容涵蓋科技七巨頭的 AI 肉搏戰、AI 取代就業、SpaceX 與火星質疑、歷史貧富分化與富人稅、30 歲致富建議、工資配置、加密貨幣及房地產分析：</p>
+
+  <h3>【00:35:44】The Battle Between The Magnificent 7（科技七巨頭的 AI 殊死戰）</h3>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Looking forward versus looking backward: for the Mag 7 and associated AI companies, if you look backwards, what you find is that these seven each dominated a nice piece of business. They had close to monopolies, and they had it on a global basis. Tesla had a jump start on electric vehicles; Apple, of course, on the smartphone; Microsoft on the original great coup of how to run your software on a computer; Meta with social networking; Google search; Nvidia with chips.</p><p class="zh">（向前看與往後看是完全不同的光景：回顧過去，科技七巨頭（Magnificent 7）以及相關 AI 企業，每家公司各自霸佔了一塊極為優質的業務版圖。它們在各自領域幾乎擁有全球範圍的寡占甚至壟斷地位。特斯拉在電動車領域先發制人；蘋果統治智慧型手機；微軟完成了作業系統與企業軟體的奠基；Meta 坐擁社群網路；谷歌壟斷搜尋引擎；輝達稱霸晶片。）</p>
+    <p class="en">And then you look forward, and you could not imagine a more different world. They're all girding for battle in the same marketplace: AI. They're beating their chests and saying: 'My $200 billion CapEx this year is bigger than your $105 billion!' Everybody is pouring enormous cash flows, and they're now beginning to borrow on top of that, into the AI battle.</p><p class="zh">（但當你往前看時，你無法想像一個截然不同的殘酷世界：這七家公司如今全都在同一個戰場上披甲廝殺——那就是 AI。它們爭相捶胸咆哮：『我今年 2000 億美元的資本支出（CapEx），比你的 1050 億還要大！』所有巨頭都在把原本豐厚的現金流全數砸進去，甚至開始發債借錢來打這場 AI 軍備競賽。）</p>
+    <p class="en">Looking forward, it looks like seven people in the ring, right? There will only be one survivor, they think. Everything goes to the one who gets there first. What a difference this is to seven well-behaved, separate monopolies! They made bundles of money on their monopolies; now they have no monopoly. There are seven potentially sharp-elbowed, ruthless players determined to fight out with each other until they win.</p><p class="zh">（放眼未來，這就像七個角鬥士被關在同一個擂台裡，對吧？大家都認為最後只會有極少數甚至一個真正的贏家，所有的果實都將歸屬於最先拔得頭籌的人。這與過去七家各自安好、互不侵犯的壟斷格局相比，是何等的劇烈反差！過去它們靠各自的護城河賺取暴利；現在護城河消失了，變成了七個牙尖爪利、冷酷無情的巨獸，誓要相互廝殺到底，直到分出勝負。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And who do you think will win?</p><p class="zh">（那你認為誰會贏？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Ah, I don't know! That would be good to know! One or two of them, perhaps, it's a pretty smart strategy, will try and opt out of that struggle, because it's going to be, obviously, brutal.</p><p class="zh">（哈，我不知道！要是能提前知道就好了！也許其中一兩家會採取相當聰明的策略，主動退出這種零和肉搏戰，因為這場競爭顯然將會異常血腥殘酷。）</p></div>
+
+  <h3>【00:41:19】Which Jobs AI Will Replace First（AI 最先取代哪些工作？）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">In a world where we have superintelligence and we have robots, there must be, surely, significant job disruption?</p><p class="zh">（在一個即將擁有超智慧與機器人的世界裡，勢必會發生重大的就業顛覆吧？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Very likely that there will be significant job disruption. You know, anything that is repeatable, analytical, sedentary, sitting behind a desk or screen — coding, data analysis, customer support, legal discovery — those will be the first to be replaced at scale. The software writes the software, and the models answer the questions.</p><p class="zh">（非常有大機率會出現嚴重的就業衝擊。任何重複性高、偏分析性、久坐辦公桌或螢幕前的工作——程式編碼、數據分析、客戶服務、法律文件審查——這些都將是最先被大規模取代的領域。軟體自己開始寫軟體，AI 模型自動回答所有問題。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And what jobs can't it touch?</p><p class="zh">（那有什麼工作是它碰不到的？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">The physical world. Practical skills: fixing, repairing, mechanical engineering, plumbing, electrical wiring, farming, working with nature. When the real physical infrastructure breaks down, an algorithm can't come to your house with a wrench and repair the pipe. People who work with their hands and understand physical systems will have a surprising amount of leverage.</p><p class="zh">（實體物理世界。實用的動手技能：維修、保養、機械工程、水電管線安裝、農業、與自然環境打交道。當實體基礎設施出問題時，演算法沒辦法帶著扳手來到你家修理爆裂的水管。那些靠雙手工作、懂得實體機械運作機制的人，反而會擁有超乎預期的抗風險能力。）</p></div>
+
+  <h3>【00:43:41 - 00:49:52】Will SpaceX Eventually Fail? &amp; Should You Invest In SpaceX?（SpaceX 會失敗嗎？火星殖民的荒謬性）</h3>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">One of the scary things about SpaceX is: you should wish that it not work out. Because if it became a bargain, it will mean that we have data centers from space, beaming down power for chips, energy demand massive beyond belief, and the world is a very, very dangerous place. I had much prefer them to fail, and the ideas to move much more slowly to buy time for humans to work these things out. And I think that's much more likely.</p><p class="zh">（關於 SpaceX 令人擔憂的一點在於：你其實應該祈禱它不要成真。因為如果它真的變得極其廉價可行，那意味著我們將在太空中設立資料中心，向下發射雷射能源供電，能源消耗將達到不可思議的規模，整個世界會變得極度危險。我寧願看到它們受挫，科技推進得更慢一些，為人類爭取足夠的時間來解決生存問題。而且我認為失敗的機率要大得多。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">You think SpaceX will fail?</p><p class="zh">（你認為 SpaceX 會失敗？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">I think it will fail to deliver anything like its promises in the prospectus, yes, absolutely.</p><p class="zh">（我認為它絕對無法實現招股書中所承諾的那些宏大願景，是的，絕對如此。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">I'm an investor in SpaceX, so I should probably declare that.</p><p class="zh">（我是 SpaceX 的投資人，我想我應該先聲明這點。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Yeah, well, you should! And good luck!</p><p class="zh">（哈，你確實該聲明！祝你好運！）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">I invested quite early, relatively early, so we've had quite a good outcome. When I invested, it wasn't an AI thesis, it was Starlink, and reusable rockets... But Elon says: 'If it's within the laws of physics, then it's possible.'</p><p class="zh">（我投資得很早，相對來說很早，所以回報相當不錯。我投資時不是為了 AI，而是因為星鏈（Starlink）和可回收火箭……但馬斯克說過：『只要符合物理定律，就皆有可能。』）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Going to Mars is not within the laws of physics, really. It's a one-way ticket to Mars, for starters. When you're on Mars, humans do a couple of things really quickly: their heart adjusts to the fact that it's one-third of gravity. Your heart loses its muscle power, and your bones lose their internal strength. If you come down, your heart will fail, and all your bones will crack.</p><p class="zh">（殖民火星在現實中根本違背了生物與物理定律。首先，那是一張單程票。當你抵達火星，人體會在極短時間內發生退化：心臟會被迫適應那裡只有地球三分之一的重力環境，心肌會萎縮無力，骨骼密度會急劇流失。如果你試圖返回地球，你的心臟會衰竭，你的骨頭會全部碎裂。）</p>
+    <p class="en">First of all, you'd have to go underground to avoid the incredible incoming rays that will otherwise give you cancer in a few weeks. So dig a deep hole! And then you need a gravitational spinning machine to maintain your gravitational impact.</p><p class="zh">（此外，你必須長年躲在地下深洞裡，以躲避能在幾週內讓你致癌的強烈宇宙射線。所以你得挖個深坑躲進去！然後你還需要一台巨大的離心旋轉艙，人為模擬重力來維持身體機能。）</p>
+    <p class="en">Listen, we have not been able to build a sustainable system in a dome ever! They all fail. Why would you not, let's say: 'Guys, let's build a sustainable dome where you grow food, you put in people, creatures, insects, and show you can do it?' Meanwhile, we're destroying the damn planet, and yet we think we can go to another infinitely more hostile planet than this one?</p><p class="zh">（聽著，我們人類在地球上連一個封閉圓頂生態系統（如生物圈二號）都從未成功運轉過！全都失敗崩潰了。為什麼我們不在地球上先證明這點：『各位，我們先在地球蓋一個封閉生態圈，種植糧食，放入動物和昆蟲，證明人類能自給自足？』我們正在親手毀掉自己現有的美麗星球，卻妄想能搬去一個環境嚴酷一萬倍的死寂星球生活？）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">To his credit, as an innovator, he has created magic. You can't catch a 70-foot rocket with chopsticks. There's no way. But he did it.</p><p class="zh">（但平心而論，作為一位創新者，他確實創造過奇蹟。常人根本無法想像可以用巨大的機械手臂（筷子）在空中夾住火箭，但他的團隊做到了。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">He's so good at BS — that's a technical term! He talked the stock up to 4 or 5 times what it was worth on paper, then he sold lots of stock at 5 times what it was worth, used the money to build a gigafactory! And then instead of the sale of stock crushing it, he kept on talking up the game, the stock went up again 5 times what it was worth, sold another big slug... So the only reason he did well was because of the combination of incredible confidence-inspiring in potential stockholders. It became a self-fulfilling prophecy!</p><p class="zh">（他在『吹牛造勢』方面是個頂級天才——這是一個專業術語！他把股票估值吹到帳面價值的四五倍，然後在高點拋售大量股票套現，拿著投資人的錢去蓋真正的超級工廠！增發股票本該打壓股價，但他繼續在台上大吹宏大願景，股價又翻了五倍，他再套現一筆……他之所以能成功，靠的是無與倫比地煽動投資人信心的能力。這成了一場自我實現的預言！）</p>
+    <p class="en">It wasn't worth that, but he persuaded other people that it was. The stock went up, he cashed in, he built factories. Now, the scale of SpaceX requires him to do the same again. And the timing of the market cycle, the timing of confidence, would have to be the same. He hit, in the last 6 years, a wonderful bull market. He will not in SpaceX do that. SpaceX is such a fabulous BS story: mining asteroids... It's the classic description of a market peak. It's what you look for at the top of a terrific bubble.</p><p class="zh">（那些公司根本不值那個價，但他成功說服了全世界。股價狂飆，他套現建廠，公司才因此成真。然而，SpaceX 的資金黑洞規模要求他把這套戲碼一再重演。但這必須依賴市場信心和流動性週期的完美配合。過去六年他碰上了一輪波瀾壯闊的牛市大泡沫；但 SpaceX 未來絕不可能再享受這種運氣。SpaceX 描繪的什麼開採小行星，是典型的市場頂峰特徵，正是你在極端泡沫頂點才會看到的荒誕狂熱。）</p></div>
+
+  <h3>【00:50:02 - 00:52:45】The Most Valuable Skill For The Future &amp; Is Society Declining?（未來技能與社會契約的瓦解）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">If your kids were 33 now, and they came to you and said: 'Dad, what skills should I be thinking about for the future ahead?'</p><p class="zh">（如果你的孩子現在 33 歲，他們跑來問你：『爸，面對未來的世界，我究竟該培養什麼技能？』）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Be an engineer. Do something really useful that will come in handy if things start to unravel. Practical skills. Our second son is practicing growing various crops and has a small farm. He's trying to get to know how you would deal with chickens, pigs, mushrooms...</p><p class="zh">（去做個工程師。學一些真正實用、在社會系統開始崩解時能派上用場的硬技能。實用的動手能力。我的二兒子現在就在實踐種植各種作物，經營著一個小農場。他正在學習如何養雞、養豬、種植蕈菇……）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Why does that matter, based on the future you're forecasting?</p><p class="zh">（根據你對未來的預測，為什麼這件事如此重要？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">I think there's quite a good chance that the level of complexity of our civilization will start to unravel. Lose the plot at the ends is the first thing that would go.</p><p class="zh">（我認為我們文明當前這種高度複雜的精密分工體系，有相當大的機率會開始走向鬆動與崩解。邊緣環節的失序將是第一個徵兆。）</p>
+    <p class="en">I'll tell you a good sign: how long does it take to get your ambulance? In the UK, it was 12 and a half minutes. It's now an hour and a half! It's exactly what you would expect as people begin to lose the plot a bit. They fray at the edges. People can't buy houses, people don't feel they can do as well as their parents, people are basically disgruntled. They want to vote against the party in power.</p><p class="zh">（我告訴你一個典型的信號：現在叫一輛救護車要等多久？在英國，過去是 12 分半鐘；現在平均要等一個半小時！這正是社會系統邊緣開始失控時的必然現象。社會契約開始磨損碎裂。年輕人買不起房子，發現自己拼盡全力也過不上父母當年的生活，全體大眾充滿怨懟。大家在選舉中只想把台上的執政黨拉下馬。）</p></div>
+
+  <h3>【00:53:25 - 00:55:58】What History Says About Wealth Inequality &amp; Should The Rich Pay More Tax?（歷史貧富差距與富人稅）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">What are the governments doing wrong? The rich are getting richer, the poor are getting poorer. The richest 1% of Americans control 31% of the nation's wealth, the bottom 50% shares just 2.5%. Between 1989 and the mid-2020s, the financial gain of a single household at the top 1% threshold was 987 times larger than that of the bottom 20%. What does history tell us happens next?</p><p class="zh">（政府究竟做錯了什麼？富者愈富，貧者愈貧。美國最頂層 1% 的人口掌控了全美 31% 的財富，而底層 50% 的人口僅分到可憐的 2.5%。從 1989 年到 2020 年代中期，頂層 1% 單個家庭的財富增長，是底層 20% 家庭的 987 倍！歷史告訴我們，當貧富差距達到這種地步，接下來會發生什麼？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">All bad. We had a similarly unequal society back in the so-called Gilded Age of the 1880s and '90s. Historically, a wealth peak is broken by one of three violent or catastrophic triggers:<br>1. Total civil collapse and state failure;<br>2. Mass mobilization warfare;<br>3. Total revolution.<br>Civil wars are the worst of all kinds.</p><p class="zh">（結果全都很悲慘。在 1880 和 1890 年代所謂的『鍍金時代』，我們也經歷過類似的極端貧富懸殊。從歷史來看，極端的財富懸殊從未和平消解過，通常都被三種暴力或災難性的扳機所強制重置：1. 社會全面崩潰與國家治理失靈；2. 全面動員的大規模戰爭；3. 劇烈的暴力革命。而內戰則是其中最慘烈的一種。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">What do you think is likely to happen? It can't just keep becoming more unequal.</p><p class="zh">（你認為接下來最可能發生什麼？不平等不可能無限擴大下去。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">No, it can't. It needs a government that is prepared to pull a Bernie Sanders, to say: 'Yeah, we're going to have to, in a gentle and long-term way, shift the tax structure in favor of a slightly steeper curve.'</p><p class="zh">（它確實不可能永遠持續。這需要一個有勇氣像伯尼·桑德斯（Bernie Sanders）那樣的政府站出來說：『是的，我們必須採取溫和且長期的手段，調整稅收結構，提高累進稅率。』）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Taxation needs to go up? We need to tax the rich?</p><p class="zh">（意思是必須加稅？我們需要對富人徵稅？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">And help the poor. It's pretty simple. From 1935, from FDR to 1975 — that's 40 years — we had a wonderful period of growth. The bottom quartile made a little bit more than average, let's say 4%, and the richest quartile made a little less, let's say 3%. Everybody got richer! Everyone was happy!</p><p class="zh">（對，然後去扶持窮人。道理就這麼簡單。從 1935 年羅斯福新政到 1975 年整整 40 年間，我們經歷了一段不可思議的黃金增長年代。底層 25% 的年收入增速甚至略高於平均水平（比如 4%），最富有的階層稍微慢一點（比如 3%）。所有人都在變富，整個社會充滿安全感與希望！）</p>
+    <p class="en">And then from '75 onwards, basically the average hour worked in America has barely gotten more adjusted for inflation than it did in 1975. All of the wealth has gone to the top 10%, and a lot of that to the top 0.01%. If we just started to adopt the policy of 1935 to '75, where the bottom quartile get a half percent a year richer than the average, and the top dogs get half percent less, we would ease our way over several decades into a better place.</p><p class="zh">（而從 1975 年至今，美國工薪階層每小時的實際工資經通膨調整後，比起 1975 年幾乎毫無增長！創造的所有財富果實全被頂層 10% 吸走，其中絕大部分更流向了最頂端的 0.01%。如果我們重新落實 1935 到 1975 年的稅收政策，讓底層群體每年的收入增速比平均高出 0.5%，頂層群體比平均少拿 0.5%，只要花上幾十年時間，我們就能和平引導社會重返健康軌道。）</p></div>
+
+  <h3>【00:57:21 - 00:59:31】How To Build Wealth In Your 30s Today（30 歲年輕人如何積累財富）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">If you were 33 now, my age, and you were trying to accumulate wealth, and your objective was just to become rich now at 33, what strategy would you deploy? I'm going to take away your contacts, everything you know. What would you do?</p><p class="zh">（如果你現在只有 33 歲，正是我這個年紀，一無所有但想積累財富，純粹以致富為目標，你會採取什麼策略？我拿走你所有的名商人脈，奪走你現有的全部知識。你會怎麼做？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">I think the simple appeal would be to get your tail into AI. And try and be a leader. Try and know more about everything in that area than the next guy. Join a leading firm, and go for broke!</p><p class="zh">（我想最顯而易見的選擇就是：<strong>全副身心撲進 AI 浪潮裡</strong>。努力成為該領域的領頭羊，確保你在該領域的專業認知比你身邊的競爭者懂得更多、鑽得更深。加入一家領先的頂尖企業，然後全力以赴、孤注一擲！）</p>
+    <p class="en">You may end up encouraging the destruction of the human species, but you asked a simple question and I give you what I think is a simple answer!</p><p class="zh">（雖然你最終可能會助長毀滅人類物種的進程，但你問了一個純粹的問題，我就給你一個最直截了當的答案！）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">And what I hear there is: you want to make sure you're riding a wave that's coming into shore, on the forefront of that wave. Acquire the most valuable information.</p><p class="zh">（我從中聽到的核心是：確保自己站在時代浪潮的風口浪尖，成為浪頭上的弄潮兒，並獲取最稀缺、最有價值的信息。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Yes. And take lots of risk! Don't be conservative. And work hard. And think outside the box. The biggest deficiency of most people is that they feel constrained to play the game by the regular rules, and to believe that experts and authorities know what they're doing. And that just ain't so.</p><p class="zh">（沒錯。而且<strong>敢於承擔巨大的風險</strong>！不要保守。拼命工作。跳脫傳統思維框架去思考。大多數人最大的致命傷，就是他們總是把自己局限在世俗既定的規則裡循規蹈矩，盲目相信體制內的專家和權威知道自己在幹什麼。而事實上，他們根本不知道。）</p></div>
+
+  <h3>【00:59:31 - 01:02:20】How To Invest Your Salary Wisely（普通人如何明智配置工資）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">What if I'm trying to invest, say I've got $1,000 or $10,000, and I want to invest it somewhere that's not going to lose me money through all of these boom and bust cycles? What advice do you give for the average person looking to invest their salary or wages?</p><p class="zh">（如果我只是個普通人，手頭有 1,000 或 10,000 美元，我想把它投資到一個不會在這些週期暴跌中虧光的資產裡。對於想拿每個月工資來理財的普通人，你有什麼建議？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Buy a broad-based index of non-US equities for like 60% of your equity money. And then 5 or 10% in precious metals. If it's convenient and sensible, hold a bit of real estate. And the rest I'd put in bonds.</p><p class="zh">（把你打算投資股票的資金拿出一大部分——比如 60%——<strong>買入非美股市場的寬基指數基金</strong>。然後拿 5% 到 10% 配置貴金屬（黃金、白銀）。如果有剛需且合適，持有一點房地產；剩下的資金全數配置優質債券。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Non-US? That's really surprising, because everybody says invest in US stocks.</p><p class="zh">（買非美市場？這真令人驚訝，因為外界幾乎所有人都教人定投美股標普 500。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">Of course they do! They've been completely dominant for 20 years, completely kicking ass around the rest of the world. And in the last 12 months, emerging markets is up 65%. S&amp;P has done only 25%. That's a lot less than 65%.</p><p class="zh">（他們當然會這麼說！因為美股過去 20 年在全世界一枝獨秀、傲視群雄。但在過去 12 個月裡，新興市場部分資產漲幅高達 65%，而標普 500 只有 25%。25% 遠遠落後於 65%。）</p>
+    <p class="en">The stock market extrapolates today's conditions. If they are terrible, like in 1982, they will take crushed earnings and multiply it by 7 times earnings. And then in 2000, peak profit margins times 35 times earnings! When times are good, you multiply it by a lot. That's another way of saying you extrapolate it into the distant future.</p><p class="zh">（股市最愚蠢的地方就是盲目線性外推當下的現狀。當環境極其糟糕時（比如 1982 年），市場把被壓扁的利潤乘以微不足道的 7 倍本益比；而當行情大好時（比如 2000 年），市場卻把歷史最高的巔峰利潤乘以 35 倍的天價本益比！好日子一來，大家就以為繁榮可以永遠持續下去，這完全脫離了現實常識。）</p></div>
+
+  <h3>【01:02:20 - 01:03:27】Should You Own Crypto &amp; Will Bitcoin Go To Zero?（加密貨幣與比特幣歸零論）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">You didn't use the word crypto when you're talking about investment strategies. How much crypto do you own?</p><p class="zh">（你在剛才的投資組合中完全沒提加密貨幣。你自己持有多少加密貨幣？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">None.</p><p class="zh">（零。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Have you ever owned any crypto?</p><p class="zh">（你曾經買過嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">No.</p><p class="zh">（從未。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Will you ever own any crypto?</p><p class="zh">（未來會買嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">No.</p><p class="zh">（絕不。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Will you ever advise anyone to buy crypto?</p><p class="zh">（你會建議別人買嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">No.</p><p class="zh">（絕不。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Why?</p><p class="zh">（為什麼？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">I think it's an unnecessary piece of nonsense. It facilitates nothing except criminals moving money so they can't be seen. It's not a store of value since it bounces around all over the place, just down from 120 to 60 because it felt like it. It's not stable, it's volatile as hell. It's not used conveniently as a medium of exchange. It does one thing very, very well: it's a means of speculating beautifully.</p><p class="zh">（我認為這是一堆毫無必要的垃圾技術。除了方便犯罪分子洗錢以逃避監管追蹤之外，它沒有任何實質價值。它根本不是價值儲存手段，價格劇烈暴跌暴漲，隨便就能腰斬；它極度不穩定，波動大得嚇人；它在日常生活中完全無法作為便利的支付交易媒介。它唯一擅長的事，就是作為一種極其完美的純投機賭博工具。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">Do you think Bitcoin is going to go to zero?</p><p class="zh">（你認為比特幣最終會歸零嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">In the distant future, yes, it will certainly go to zero. But it may take a long time. In the distant future, everything goes to zero!</p><p class="zh">（長遠來看，毫無疑問，它終究會歸零。但投機狂熱可能會讓它苟延殘喘很長一段時間。當然，在無限遠的未來，宇宙中的一切都會歸零！）</p></div>
+
+  <h3>【01:03:27 - 01:05:00】Is Property Still A Good Investment?（房地產還是積累財富的好工具嗎？）</h3>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">What about property as an investment? Because the first reaction most people have when they have enough money is to buy a property. We're kind of told that's how you start to accumulate wealth. What do you think of that?</p><p class="zh">（那買房投資呢？因為大多數人手頭有點錢後的第一反應就是買房。我們從小被灌輸的觀念就是：買房是累積財富的正道。你怎麼看？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">It's hard to imagine how it could be a good decision when there's such an increasing fraction of people who can't afford it. And if people can't afford it, there's no one bidding.</p><p class="zh">（在越來越多的人根本買不起房子的當下，很難想像買房還能算是一筆好投資。當普通人被徹底擠出市場、掏不出錢時，未來根本不會有人來接盤競價。）</p>
+    <p class="en">And by the way, the population is going to decline. Young family formations are already declining in many of the richer countries. If you have family formations declining, and you have super expensive houses, what do you think is going to happen? In Japan, you know what their 20-year-olds is? It's 50% of what it was in 1948! 50% less 20-year-olds! 20-year-olds that drive the market.</p><p class="zh">（順便提一句，全球人口即將迎來大崩塌。在大多數發達國家，年輕家庭的組建率已經雪崩。如果組建家庭的人口急劇萎縮，而房價卻高在雲端，你覺得未來會發生什麼？你知道日本現在 20 歲的年輕人口規模是多少嗎？只有 1948 年時的一半！整整減少了 50%！而這群 20 多歲的年輕人，本該是支撐未來房地產買盤的主力軍。）</p></div>
+  <p><em>(第二段 00:35:44 - 01:05:00 逐字稿結束。後續第三段自 01:05:00 起將進入：精子數量危機、微塑膠與內分泌干擾物、農藥殘留與癌症、美歐監管落差、社會契約與孕產婦死亡率，以及終局提問。)</em></p>
+</section>
+
+<section id="v1"><h2 class="sec">B 部分:先前提供的摘要式整理稿(未刪減,已收合)</h2><details><summary>展開全文</summary>
 <section id="intro">
   <h2 class="sec">影片說明(使用者提供的原文)</h2>
   <p>這部影片為 YouTube 節目《The Diary Of A CEO》（主持人：Steven Bartlett）專訪知名投資大師、資產管理機構 GMO 聯合創辦人 <strong>Jeremy Grantham</strong>（傑瑞米·葛拉漢）的完整訪談。</p>
@@ -196,84 +624,125 @@ td:first-child a{color:var(--accent);text-decoration:none;font-variant-numeric:t
   <div class="line"><span class="who">Grantham</span> 我希望能寫出一本像 1962 年瑞秋·卡森的《寂靜的春天》（<em>Silent Spring</em>）那樣具有劃時代影響力的書，徹底喚醒世人對化學毒素污染、生育率危機以及修復人類社會契約的重視，引發全球制度性的反思與變革。</div>
 </section>
 
-<section id="chapters">
-  <h2 class="sec">實際章節對照(YouTube 章節列表)</h2>
-  <div class="note">以下是影片頁面上的 40 個實際章節,時間戳可點擊跳到影片對應處。上方整理稿的章節範圍是合併分組,與這份列表有出入(例如 SpaceX 實際在 44:18 起,整理稿放在第三章但範圍標到 45:15;「如何投資薪水」、「加密貨幣」、「房地產」等在 1 小時 00 分之後,整理稿放進了第二章)。</div>
-  <table>
-    <tr><th>時間</th><th>章節</th></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=0" target="_blank" rel="noopener">0:00</a></td><td>Who Is Jeremy Grantham?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=174" target="_blank" rel="noopener">2:54</a></td><td>Will AI Become The Next Financial Bubble?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=417" target="_blank" rel="noopener">6:57</a></td><td>How Jeremy Grantham Built An Investing Empire</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=484" target="_blank" rel="noopener">8:04</a></td><td>The Most Money He's Ever Managed</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=509" target="_blank" rel="noopener">8:29</a></td><td>Are You A Billionaire?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=558" target="_blank" rel="noopener">9:18</a></td><td>What Happens When The AI Bubble Bursts?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=695" target="_blank" rel="noopener">11:35</a></td><td>How AI Will Change Everyday Life</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=773" target="_blank" rel="noopener">12:53</a></td><td>The Investing Strategy For Right Now</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=1092" target="_blank" rel="noopener">18:12</a></td><td>Why You Should Avoid US Stocks</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=1213" target="_blank" rel="noopener">20:13</a></td><td>Why Investment Advisors Mislead Clients</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=1569" target="_blank" rel="noopener">26:09</a></td><td>Advice For Entrepreneurs Right Now</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=1739" target="_blank" rel="noopener">28:59</a></td><td>The Real Risks Of AI</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=1798" target="_blank" rel="noopener">29:58</a></td><td>Should AI Have A Maternal Instinct?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=2084" target="_blank" rel="noopener">34:44</a></td><td>What Happens If AI Lacks Benevolence?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=2181" target="_blank" rel="noopener">36:21</a></td><td>The Battle Between The Magnificent 7</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=2517" target="_blank" rel="noopener">41:57</a></td><td>Which Jobs AI Will Replace First</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=2658" target="_blank" rel="noopener">44:18</a></td><td>Will SpaceX Eventually Fail?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=3030" target="_blank" rel="noopener">50:30</a></td><td>Should You Invest In SpaceX? / The Most Valuable Skill For The Future(50:40)</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=3101" target="_blank" rel="noopener">51:41</a></td><td>Is Society Declining And What Comes Next?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=3242" target="_blank" rel="noopener">54:02</a></td><td>What History Says About Wealth Inequality</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=3396" target="_blank" rel="noopener">56:36</a></td><td>Should The Rich Pay More Tax?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=3479" target="_blank" rel="noopener">57:59</a></td><td>How To Build Wealth In Your 30s Today</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=3608" target="_blank" rel="noopener">1:00:08</a></td><td>How To Invest Your Salary Wisely</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=3778" target="_blank" rel="noopener">1:02:58</a></td><td>Should You Own Crypto? / Will Bitcoin Eventually Go To Zero?(1:03:51)</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=3845" target="_blank" rel="noopener">1:04:05</a></td><td>Is Property Still A Good Investment?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=4047" target="_blank" rel="noopener">1:07:27</a></td><td>What's Really Causing The Baby Bust?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=4288" target="_blank" rel="noopener">1:11:28</a></td><td>When Could Sperm Counts Reach Zero?</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=4464" target="_blank" rel="noopener">1:14:24</a></td><td>How Microplastics Affect Fertility</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=4602" target="_blank" rel="noopener">1:16:42</a></td><td>How Pesticides Impact Fertility</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=4903" target="_blank" rel="noopener">1:21:43</a></td><td>How To Reduce Toxic Chemical Exposure</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=4974" target="_blank" rel="noopener">1:22:54</a></td><td>Why US Products Are More Toxic</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=5250" target="_blank" rel="noopener">1:27:30</a></td><td>How To Stay Healthy In A Toxic World</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=5634" target="_blank" rel="noopener">1:33:54</a></td><td>The Most Important Thing We Missed</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=5734" target="_blank" rel="noopener">1:35:34</a></td><td>Should You Move Countries Right Now? / The Flaw That Destroys Societies(1:35:55)</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=5962" target="_blank" rel="noopener">1:39:22</a></td><td>The Best Places To Live Today</td></tr>
-    <tr><td><a href="https://youtu.be/32u5T6lO8qk?t=6040" target="_blank" rel="noopener">1:40:40</a></td><td>What Would You Do If Failure Was Impossible?</td></tr>
-  </table>
+</details></section>
+
+<section id="d1">
+  <h2 class="sec">D 重點加強:先前遺漏與錯位章節的補充對話(使用者提供)</h2>
+  <div class="note">以下五段是你這次貼上的「重點加強」,英中對照,<b>原樣收錄</b>。注意:這五段的措辭與 A 部分、B 部分對同一話題的內容<b>不完全相同</b>,是又一個整理版本,不是官方逐字稿。我標出幾處明顯不一致,見每段結尾的「對照提醒」。</div>
+
+  <h3>1. 【00:41:19】Which Jobs AI Will Replace First（AI 最先取代哪些工作？）</h3>
+  <p class="range">實際章節:<a href="https://youtu.be/32u5T6lO8qk?t=2517" target="_blank" rel="noopener">41:57</a></p>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"In a world where we have superintelligence and we have robots, there must be, surely, significant job disruption?"</p><p class="zh">（在一個我們擁有超智慧和機器人的世界裡，必然會發生劇烈的工作顛覆吧？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"Very likely that there will be significant job disruption. The jobs that are easiest to automate — customer service, repetitive analytical work, coding, desk research — these are getting swallowed up rapidly. Anything that sits between a screen and a keyboard with predictable rules."</p><p class="zh">（非常有可能會出現重大的就業顛覆。最容易被自動化的工作——客戶服務、重複性的分析工作、軟體編程、桌面調研——這些都在被迅速吞噬。任何坐在螢幕與鍵盤之間、遵循可預測規則的工作都是如此。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"And what survives?"</p><p class="zh">（那什麼工作能存活下來？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"Practical, hands-on mechanical skills. Fixing things, repairing things, engineering in the real physical world, growing food, dealing with biology. If society starts to fray or systems break, someone who can actually mend a turbine, wire a circuit, or grow a crop has real value. AI cannot turn a wrench under a sink when the pipe bursts."</p><p class="zh">（實用、動手的機械技能。修理東西、維修設備、實體世界中的工程、種植糧食、與生物打交道。如果社會開始出現裂痕或系統崩潰，一個真正能修理渦輪機、鋪設電路或種植作物的人才具有真正的價值。當水管破裂時，AI 無法在水槽下扳動扳手。）</p></div>
+  <p class="note">對照提醒:A-2 對同一段的版本措辭不同(例如列出「法律文件審查」,且說軟體會自己寫軟體),兩版都未經字幕比對。</p>
+
+  <h3>2. 【00:43:41 ～ 00:49:52】Will SpaceX Eventually Fail? &amp; Should You Invest In SpaceX?（SpaceX 的真相與火星殖民幻想）</h3>
+  <p class="range">實際章節:<a href="https://youtu.be/32u5T6lO8qk?t=2658" target="_blank" rel="noopener">44:18</a> 與 <a href="https://youtu.be/32u5T6lO8qk?t=3030" target="_blank" rel="noopener">50:30</a></p>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"I'm an investor in SpaceX, so I should probably declare that."</p><p class="zh">（我是 SpaceX 的投資人，我想我應該先聲明這點。）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"Yeah, well, you should. And good luck! SpaceX is such a fabulous BS story. You know, mining asteroids, endless opportunities, going to Mars..."</p><p class="zh">（對，你確實該聲明。祝你好運！SpaceX 是一個極其荒謬的吹牛故事。什麼開採小行星、無窮無盡的商機、殖民火星……）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"You think SpaceX will fail?"</p><p class="zh">（你認為 SpaceX 會失敗？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"I think it will fail to deliver anything like its promises in the prospectus, yes, absolutely. Going to Mars is not within the laws of physics or biology in a sustainable way. It's a one-way ticket to Mars for starters.<br>When you're on Mars, gravity is one-third of Earth. Your heart loses its muscle mass, your bones lose their internal strength. If you ever come back, your heart fails and your bones crack. And the cosmic radiation! You'd have to live deep underground in a cave. We haven't even been able to build a sustainable closed ecosystem under a dome on Earth — Biosphere 2 failed completely. Yet we think we can do it on an infinitely hostile planet while destroying our own?"</p><p class="zh">（我認為它絕對無法實現招股書中所吹噓的那些承諾。殖民火星在物理學和生物學上根本無法持續。首先，那是一張單程票。當你到了火星，重力只有地球的三分之一左右。你的心臟肌肉會退化，骨骼會失去密度。如果你回地球，心臟會衰竭、骨頭會碎裂。還有致命的宇宙輻射！你必須長年躲在地下深洞裡。我們在地球上連一個封閉圓頂生態圈（生物圈二號）都無法成功維持運轉，全部失敗了，我們竟然妄想去一個極度嚴酷的死寂星球生活，卻任由自己的地球被毀掉？）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"To his credit, Elon has pulled off things people said were impossible, catching rockets with chopsticks..."</p><p class="zh">（但平心而論，馬斯克做成了許多人們說不可能的事，比如用機械手臂（筷子）夾住火箭……）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"He is a genius at BS. That's a technical term! He talks the stock up to 5 times what it's worth on paper, sells stock at the peak, raises billions, and uses that money to build real gigafactories. It becomes a self-fulfilling prophecy. But the scale of SpaceX requires him to do that again and again in a hostile capital market. When the bull market bubble bursts, that trick stops working."</p><p class="zh">（他在『吹牛/造勢』方面是個天才。這是個專業術語！他把股票吹到帳面價值的五倍，在高點增發股票套現數十億，再用這些錢去蓋真正的超級工廠。這成了自我實現的預言。但 SpaceX 的資金規模要求他在緊縮的資本市場中一再重複這個把戲。一旦牛市泡沫破裂，這招就不靈了。）</p></div>
+  <p class="note">對照提醒:火星重力這裡與 A-2 一致說「三分之一」,與 B 部分第三章的「五分之一」不同(實際約為地球的 38%)。</p>
+
+  <h3>3. 【00:53:25 ～ 00:55:58】What History Says About Wealth Inequality &amp; Should The Rich Pay More Tax?（歷史貧富差距與富人稅）</h3>
+  <p class="range">實際章節:<a href="https://youtu.be/32u5T6lO8qk?t=3242" target="_blank" rel="noopener">54:02</a> 與 <a href="https://youtu.be/32u5T6lO8qk?t=3396" target="_blank" rel="noopener">56:36</a></p>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"The richest 1% in the US control 31% of the wealth, the bottom 50% hold just 2.5%. What does history tell us happens next when inequality reaches this extreme?"</p><p class="zh">（美國前 1% 的富人掌握了 31% 的財富，而底層 50% 的人口僅持有 2.5%。歷史告訴我們，當貧富差距達到這種極端時，接下來會發生什麼？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"All bad. Historically, extreme wealth inequality is almost never resolved peacefully. It gets reset by one of three things:<br>1. Total civil collapse and state failure;<br>2. Mass-mobilization warfare;<br>3. Total violent revolution."</p><p class="zh">（結果全都很糟。歷史上，極端的財富不均幾乎從未和平解決過。它通常被三件事重置：1. 社會與國家的徹底崩潰瓦解；2. 全面動員的大規模戰爭；3. 劇烈的暴力革命。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"Should the rich pay more tax?"</p><p class="zh">（富人應該多繳稅嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"Yes! Absolutely. From 1935 to 1975 — the post-FDR era — the top marginal tax rate was 70% to 90%. We had the greatest economic expansion in human history. The bottom quartile grew faster than the average, and the rich still got richer, just slightly slower. Everyone was happy.<br>Since 1975, tax cuts for corporations and the wealthy shifted almost all productivity gains into the top 0.1%. If a government doesn't step up like Bernie Sanders suggests, and gradually reshape the tax curve to support the bottom 50% and rebuild the social contract, the system will break."</p><p class="zh">（是的！絕對應該。從 1935 年到 1975 年（羅斯福新政後的四十年），美國最高邊際稅率高達 70%～90%。那段時期是人類歷史上經濟擴張最平穩繁榮的時期。底層 25% 的收入增長甚至略高於平均水準，富人依然在變富，只是稍微慢一點，整個社會充滿希望。但自 1975 年以來，對富人和企業的大幅減稅讓所有生產力果實全被頂層 0.1% 掠奪。如果政府不拿出魄力像桑德斯主張的那樣，透過稅制重新支持底層 50% 並修復社會契約，系統終將崩潰。）</p></div>
+  <p class="note">對照提醒:這一段新增了「最高邊際稅率 70%～90%」與「頂層 0.1%」,A-2 沒有這兩點(A-2 說的是「頂層 10%,其中很多流向 0.01%」)。兩處都未經字幕比對。</p>
+
+  <h3>4. 【00:59:31 ～ 01:04:37】How To Invest Your Salary Wisely / Crypto / Bitcoin / Property（工資投資、加密貨幣與房地產）</h3>
+  <p class="range">實際章節:<a href="https://youtu.be/32u5T6lO8qk?t=3608" target="_blank" rel="noopener">1:00:08</a> 起,至 <a href="https://youtu.be/32u5T6lO8qk?t=3845" target="_blank" rel="noopener">1:04:05</a> 的房地產</p>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"What advice do you give for the average person that's looking to invest their salary or wages? Say you have $1,000 or $10,000."</p><p class="zh">（對於想把每個月薪水拿去投資的普通人，假設手頭有 1,000 或 10,000 美元，你有什麼建議？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"Buy a broad-based index of <strong>non-US equities</strong>. Put about 60% of your equity money there — emerging markets, Europe, Japan, the UK. They are dramatically cheaper than the US.<br>Put 5% to 10% in precious metals — gold and silver.<br>And keep the rest in short-term bonds or cash yielding around 5%."</p><p class="zh">（買入<strong>非美股市場</strong>的寬基指數基金。把你打算買股票的錢拿出約 60% 配置在那裡——新興市場、歐洲、日本、英國。它們的估值比美股便宜太多了。拿出 5% 到 10% 配置貴金屬（黃金和白銀）。其餘的資金放在殖利率約 5% 的短期國債或現金中。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"Should you own crypto?"</p><p class="zh">（你應該持有加密貨幣嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"No. None."</p><p class="zh">（不。一股都不要買。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"Why?"</p><p class="zh">（為什麼？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"It's an unnecessary piece of nonsense. It facilitates nothing except criminals moving money so they can't be seen. It has no intrinsic yield, it's not a store of value, it's not a medium of exchange. It does one thing very well: speculation."</p><p class="zh">（這是一堆毫無意義的廢話。它除了方便犯罪分子洗錢隱藏資金之外，沒有任何實際價值。它不產生任何利息與現金流，不能作為價值儲存手段，也無法作為日常交換媒介。它唯一擅長的事就是投機。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"Do you think Bitcoin will eventually go to zero?"</p><p class="zh">（你認為比特幣最終會歸零嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"Yes, in the long run it will certainly go to zero, though speculation can keep it afloat for a long time."</p><p class="zh">（是的，長期來看它必然會歸零，儘管投機狂熱可能會讓它苟延殘喘很長一段時間。）</p></div>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"Is property still a good investment for accumulating wealth?"</p><p class="zh">（買房地產依然是積累財富的好投資嗎？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"Right now, it's very dangerous. In the UK and US, house prices are 8 to 10 times median family income — historically it was 3.5 times. It's completely unaffordable for young couples.<br>Furthermore, with demographic collapse — the fertility rate dropping, 20-year-olds declining by 50% in places like Japan — who will be buying these houses in 20 or 30 years? When demand falls off a cliff, real estate prices will have to normalize downward."</p><p class="zh">（眼下非常危險。在英美，房價中位數已經達到家庭年收入中位數的 8 到 10 倍以上——歷史正常水準只有 3.5 倍。年輕夫婦完全負擔不起。更何況，隨著全球人口雪崩、生育率銳減（例如日本 20 歲年輕人口比二戰後減少了 50%），二三十年後誰來接盤這些房子？當剛性需求跌落懸崖，房地產價格勢必大幅向下修正。）</p></div>
+  <p class="note">對照提醒:A-1 版本說英國房價收入比從 1994 年的 3.4 倍升到「10 倍以上」,這裡改為「英美 8 到 10 倍,歷史 3.5 倍」;A-2 說日本 20 歲人口是「1948 年的一半」,這裡改成「比二戰後減少 50%」;資產配置上,A-2 說「其餘放優質債券」,這裡說「短期國債或現金,殖利率約 5%」。三處措辭與數字不完全一致。</p>
+
+  <h3>5. 【01:34:37 ～ 01:40:48】Social Contract &amp; Where Is The Best Place To Live?（社會契約與宜居國家）</h3>
+  <p class="range">實際章節:<a href="https://youtu.be/32u5T6lO8qk?t=5734" target="_blank" rel="noopener">1:35:34</a> 到 <a href="https://youtu.be/32u5T6lO8qk?t=5962" target="_blank" rel="noopener">1:39:22</a></p>
+  <div class="t"><b class="sp h">Steven Bartlett</b><p class="en">"Should someone consider moving countries right now? Where is a good place to live if the US and UK social contracts are breaking down?"</p><p class="zh">（普通人現在應該考慮移民換個國家生活嗎？如果英美的社會契約正在瓦解，哪裡才是好的居住地？）</p></div>
+  <div class="t"><b class="sp">Jeremy Grantham</b><p class="en">"Yes, absolutely. Look at Denmark, Sweden, or Japan.<br>Japan has problems with aging, but their <strong>social contract</strong> is extraordinary. People care about the community, crime is virtually non-existent, and you feel safe.<br>In America, the social contract has dissolved into pure cutthroat corporate individualism. Look at maternal mortality: in Norway it's near zero; in Sweden it's 2 per 100,000; in the UK it's around 5; in the US it's over 20, and for Black American mothers it's 44! That is a disgrace for the richest country on Earth.<br>If you have young children, moving to a country with clean food standards, free healthcare, and a functioning community is one of the most rational moves you could make."</p><p class="zh">（絕對值得考慮。看看丹麥、瑞典或日本。日本雖然有人口老齡化問題，但他們的<strong>社會契約</strong>極其強大。人與人互相照應、犯罪率幾乎為零，生活充滿安全感。而在美國，社會契約已經瓦解為冷血殘酷的企業個人主義。看看孕產婦死亡率：挪威幾乎為零；瑞典每 10 萬人僅 2 人；英國大約 5 人；而美國超過 20 人，非裔美國產婦甚至高達 44 人！這對世界最富有的國家來說是奇恥大辱。如果你有年幼的孩子，搬到一個食品安全標準嚴格、醫療保障完善、社區互信的國家，是你能做出的最理智的決定之一。）</p></div>
+  <p class="note">對照提醒:這一段的孕產婦死亡率數字(挪威近零、瑞典 2、英國約 5、美國超過 20、非裔美國產婦 44)我<b>沒有查證</b>,也不確定是 Grantham 的原話;各國官方統計的口徑與年份不同,引用前請對照影片與官方資料。</p>
 </section>
 
-<section id="biggo">
-  <h2 class="sec">與 BigGo 資訊整合</h2>
-  <div class="note"><b>先說明</b>:你提供的 <a href="https://finance.biggo.com.tw/podcast/cecbc8404a9aea04" target="_blank" rel="noopener">BigGo 頁面</a>是 Grantham 的<b>另一集訪談</b>(節目 Behind the Balance Sheet,2026-05-25,約 1 小時 18 分,頁面標題「在達康泡沫中看對市場卻失去一半客戶」),<b>不是</b>上面這集 Diary of a CEO。所以下面是兩集訪談的觀點對照,不是同一份內容的補充。BigGo 內容我是以網頁摘要為主,沒有看那一集的影片。</div>
 
-  <h3>BigGo 那集的重點(意譯整理)</h3>
-  <ul>
-    <li><strong>市場判斷</strong>:認為美國市場處於歷史性泡沫,估值與利潤率同時觸頂,可能下跌 50% 以上。</li>
-    <li><strong>被 AI 打斷的 2022 年崩盤</strong>:2022 年的下跌(標普 500 約 -25%,七巨頭約 -40%,成長股 -30~35%,債市經歷史上最差的一年)符合泡沫破裂特徵,但 2022 年 11 月 ChatGPT 推出打斷了這個走勢。AI 資本支出增量約佔 GDP 的 2%,接近鐵路熱潮時期,他類比為光纖熱潮;專家對 AI 看法分歧,使報酬呈現「厚尾」。</li>
-    <li><strong>機構為何不警告</strong>:引用凱因斯,機構的首要規則是不要單獨犯錯;大型穩健的金融機構不會叫客戶撤出市場,因為這不利於商業模式。也批評 Greenspan 的「不對稱」政策(下跌時救市、上漲時放任)。引用 Robert Shiller:股市波動遠大於盈餘與股利所能解釋。</li>
-    <li><strong>泡沫的訊號</strong>:最可靠的崩盤前訊號是市場廣度收窄(投機性、低品質股票先跌而指數仍漲);1929、1972、2000、2022 年都出現。市值除以 GDP 為史上最高,甚至超過 2000 年。</li>
-    <li><strong>回歸趨勢</strong>:大泡沫通常回落 50% 以上;復原很久:1929 年高點到 1955 年才收復,1972 年漂亮 50 的高點要到 1985–86 年。</li>
-    <li><strong>價值投資與全球配置</strong>:GMO 價值策略落後十多年;2000 年預測新興市場大幅勝過標普 500,之後十年新興市場約 +13%、標普 500 約 -3%;去年美國以外市場優於美國,他預期美國(約占全球市值三分之二)未來十年落後。</li>
-    <li><strong>全球宏觀完美風暴</strong>:地緣政治(烏克蘭、中東、台灣、貿易戰)、氣候變遷(每年約侵蝕全球 GDP 0.5%,保險更貴)、資源枯竭(35 種商品等權重籃子價格約為 2002 年低點的三倍)、人口結構與生育率。</li>
-    <li><strong>生存威脅</strong>:毒害與生育率。精子濃度每毫升:狩獵採集時代約 200、1972 年約 100、現在約 35;下降速度 20 世紀每年約 -1.5%、21 世紀每年約 -2.5%;需要協助受孕的伴侶約 17%,Shanna Swan 預測 20–25 年內平均每對都需要協助;生育率日本 1.2、南韓 0.7、中國 1.0、印度 1.9;日本 20–28 歲男性過去 12 個月無性行為比例 52%。</li>
-    <li><strong>職涯教訓</strong>:GMO 預測 2000 年崩盤正確,但在被證明正確前的 2.25 年間,失去一半客戶與超過三分之二市占;基金會撥款近 10 億美元。</li>
-  </ul>
-
-  <h3>兩集訪談對照</h3>
+<section id="chapters">
+  <h2 class="sec">C 完整章節時間軸對照(YouTube 實際 41 章)</h2>
+  <div class="note"><b>以哪個時間為準</b>:「實際時間」欄是我從 YouTube 影片頁面讀到的章節列表,點擊可跳到影片對應處,<b>請以這一欄為準</b>。「貼文所列時間」欄是你這次貼上的「官方章節」。兩者有出入:大部分章節貼文時間早約 20 秒(前段)或約 37–38 秒(後段),少數幾章差距不規則(第 35、37、38、40 章),可能來自不同版本(例如 Podcast 音檔版的廣告插入位置不同),我無法確認。<br><b>更正</b>:先前我說影片有「40 個章節」,實際是 <b>41 個</b>(含兩段廣告);你貼的列表也有 41 筆,雖然文中寫「40 章節」。「差距」欄 = 實際 − 貼文,正值代表貼文時間較早。</div>
   <table>
-    <tr><th>主題</th><th>Diary of a CEO(上面整理稿)</th><th>BigGo 那集</th><th>對照結果</th></tr>
-    <tr><td>AI 泡沫</td><td>歷史上最大的投資泡沫;以鐵路、網路為類比;高飛股回調 70% 不奇怪</td><td>歷史性泡沫;類比鐵路與光纖;大泡沫通常回落 50% 以上</td><td><span class="ok">方向一致</span>;跌幅一個說 70%、一個說 50% 以上,口徑不同</td></tr>
-    <tr><td>為何沒人警告</td><td>職業風險;1998–99 年提前撤出,兩年多後資產流失一半</td><td>首要規則是不要單獨犯錯;被證明正確前 2.25 年失去一半客戶與三分之二市占</td><td><span class="ok">一致</span>;BigGo 多了「市占超過三分之二」</td></tr>
-    <tr><td>美股與海外</td><td>不要持有美股;轉向歐洲、日本、英國、新興市場</td><td>美國以外去年表現較好;預期美國未來十年落後</td><td><span class="ok">一致</span></td></tr>
-    <tr><td>精子下降</td><td>自 1970 年代以來平均濃度降逾 50%,年降率加速至每年 2.6%,2045 年可能趨近於零</td><td>1972 年約 100、現在約 35;21 世紀每年 -2.5%;20–25 年內平均每對需協助受孕</td><td><span class="warn">大致一致</span>,但年降率(2.6% 對 2.5%)與「趨近於零」對「需要協助」的說法不同,可能是不同場合的表述</td></tr>
-    <tr><td>生存威脅</td><td>微塑膠、塑化劑、PFAS、農藥;孕期停用化妝品等自保建議</td><td>毒害與生育率為基金會重點,稱變化最快也最被忽視</td><td><span class="ok">一致</span>;Diary 那集有具體自保建議</td></tr>
-    <tr><td>估值指標</td><td>日本 1989 年 P/E 65 倍、2000 年標普約 35 倍、現在不少科技股 35–40 倍</td><td>市值/GDP 史上最高、超過 2000 年;市場廣度收窄為訊號</td><td><span class="warn">互補</span>:一個用本益比、一個用市值/GDP 與市場廣度,結論相同</td></tr>
-    <tr><td>只在 Diary 出現</td><td colspan="3">加密貨幣歸零、SpaceX 質疑、房價與收入比(英國 3.4 倍 → 10 倍以上)、AI 超智慧與「迴紋針」風險、貧富差距與社會契約、給 33 歲的建議</td></tr>
-    <tr><td>只在 BigGo 出現</td><td colspan="3">2022 年崩盤與 ChatGPT、AI 資本支出約占 GDP 2%、Greenspan 與 Shiller、資源與氣候的量化論述、GMO 價值策略落後與 2000 年預測</td></tr>
+    <tr><th>#</th><th>實際時間</th><th>章節(英文 / 中文)</th><th>貼文所列</th><th>差距</th></tr>
+    <tr><td>1</td><td><a href="https://youtu.be/32u5T6lO8qk?t=0" target="_blank" rel="noopener">0:00</a></td><td>Who Is Jeremy Grantham?<br><span style="color:var(--muted)">葛拉漢是誰?</span></td><td>0:00</td><td>+0 秒</td></tr>
+    <tr><td>2</td><td><a href="https://youtu.be/32u5T6lO8qk?t=174" target="_blank" rel="noopener">2:54</a></td><td>Will AI Become The Next Financial Bubble?<br><span style="color:var(--muted)">AI 會成為下一個金融泡沫嗎?</span></td><td>2:34</td><td>+20 秒</td></tr>
+    <tr><td>3</td><td><a href="https://youtu.be/32u5T6lO8qk?t=417" target="_blank" rel="noopener">6:57</a></td><td>How Jeremy Grantham Built An Investing Empire<br><span style="color:var(--muted)">葛拉漢如何建立投資帝國</span></td><td>6:38</td><td>+19 秒</td></tr>
+    <tr><td>4</td><td><a href="https://youtu.be/32u5T6lO8qk?t=484" target="_blank" rel="noopener">8:04</a></td><td>The Most Money He's Ever Managed<br><span style="color:var(--muted)">他管理過的最大資金規模</span></td><td>7:45</td><td>+19 秒</td></tr>
+    <tr><td>5</td><td><a href="https://youtu.be/32u5T6lO8qk?t=509" target="_blank" rel="noopener">8:29</a></td><td>Are You A Billionaire?<br><span style="color:var(--muted)">你是億萬富翁嗎?</span></td><td>8:09</td><td>+20 秒</td></tr>
+    <tr><td>6</td><td><a href="https://youtu.be/32u5T6lO8qk?t=558" target="_blank" rel="noopener">9:18</a></td><td>What Happens When The AI Bubble Bursts?<br><span style="color:var(--muted)">AI 泡沫破裂時會發生什麼?</span></td><td>8:58</td><td>+20 秒</td></tr>
+    <tr><td>7</td><td><a href="https://youtu.be/32u5T6lO8qk?t=695" target="_blank" rel="noopener">11:35</a></td><td>How AI Will Change Everyday Life<br><span style="color:var(--muted)">AI 如何改變日常生活</span></td><td>11:15</td><td>+20 秒</td></tr>
+    <tr><td>8</td><td><a href="https://youtu.be/32u5T6lO8qk?t=773" target="_blank" rel="noopener">12:53</a></td><td>The Investing Strategy For Right Now<br><span style="color:var(--muted)">當前的投資策略</span></td><td>12:33</td><td>+20 秒</td></tr>
+    <tr><td>9</td><td><a href="https://youtu.be/32u5T6lO8qk?t=1092" target="_blank" rel="noopener">18:12</a></td><td>Why You Should Avoid US Stocks<br><span style="color:var(--muted)">為什麼你應該避開美股</span></td><td>17:52</td><td>+20 秒</td></tr>
+    <tr><td>10</td><td><a href="https://youtu.be/32u5T6lO8qk?t=1213" target="_blank" rel="noopener">20:13</a></td><td>Why Investment Advisors Mislead Clients<br><span style="color:var(--muted)">為什麼投資顧問會誤導客戶</span></td><td>19:54</td><td>+19 秒</td></tr>
+    <tr><td>11</td><td><a href="https://youtu.be/32u5T6lO8qk?t=1569" target="_blank" rel="noopener">26:09</a></td><td>Advice For Entrepreneurs Right Now<br><span style="color:var(--muted)">給當前創業者的建議</span></td><td>25:32</td><td>+37 秒</td></tr>
+    <tr><td>12</td><td><a href="https://youtu.be/32u5T6lO8qk?t=1739" target="_blank" rel="noopener">28:59</a></td><td>The Real Risks Of AI<br><span style="color:var(--muted)">AI 的真正風險</span></td><td>28:22</td><td>+37 秒</td></tr>
+    <tr><td>13</td><td><a href="https://youtu.be/32u5T6lO8qk?t=1798" target="_blank" rel="noopener">29:58</a></td><td>Should AI Have A Maternal Instinct?<br><span style="color:var(--muted)">AI 應該具備母性本能嗎?</span></td><td>29:21</td><td>+37 秒</td></tr>
+    <tr><td>14</td><td><a href="https://youtu.be/32u5T6lO8qk?t=2084" target="_blank" rel="noopener">34:44</a></td><td>What Happens If AI Lacks Benevolence?<br><span style="color:var(--muted)">如果 AI 缺乏善意會怎樣?</span></td><td>34:06</td><td>+38 秒</td></tr>
+    <tr><td>15</td><td><a href="https://youtu.be/32u5T6lO8qk?t=2181" target="_blank" rel="noopener">36:21</a></td><td>The Battle Between The Magnificent 7<br><span style="color:var(--muted)">科技七巨頭的殊死戰</span></td><td>35:44</td><td>+37 秒</td></tr>
+    <tr><td>16</td><td><a href="https://youtu.be/32u5T6lO8qk?t=2388" target="_blank" rel="noopener">39:48</a></td><td>Ads<br><span style="color:var(--muted)">廣告贊助</span></td><td>39:10</td><td>+38 秒</td></tr>
+    <tr><td>17</td><td><a href="https://youtu.be/32u5T6lO8qk?t=2517" target="_blank" rel="noopener">41:57</a></td><td>Which Jobs AI Will Replace First<br><span style="color:var(--muted)">AI 最先取代哪些工作?</span></td><td>41:19</td><td>+38 秒</td></tr>
+    <tr><td>18</td><td><a href="https://youtu.be/32u5T6lO8qk?t=2658" target="_blank" rel="noopener">44:18</a></td><td>Will SpaceX Eventually Fail?<br><span style="color:var(--muted)">SpaceX 最終會失敗嗎?</span></td><td>43:41</td><td>+37 秒</td></tr>
+    <tr><td>19</td><td><a href="https://youtu.be/32u5T6lO8qk?t=3030" target="_blank" rel="noopener">50:30</a></td><td>Should You Invest In SpaceX?<br><span style="color:var(--muted)">你該投資 SpaceX 嗎?</span></td><td>49:52</td><td>+38 秒</td></tr>
+    <tr><td>20</td><td><a href="https://youtu.be/32u5T6lO8qk?t=3040" target="_blank" rel="noopener">50:40</a></td><td>The Most Valuable Skill For The Future<br><span style="color:var(--muted)">未來最有價值的技能</span></td><td>50:02</td><td>+38 秒</td></tr>
+    <tr><td>21</td><td><a href="https://youtu.be/32u5T6lO8qk?t=3101" target="_blank" rel="noopener">51:41</a></td><td>Is Society Declining And What Comes Next?<br><span style="color:var(--muted)">社會正在衰退嗎?接下來會發生什麼?</span></td><td>51:04</td><td>+37 秒</td></tr>
+    <tr><td>22</td><td><a href="https://youtu.be/32u5T6lO8qk?t=3242" target="_blank" rel="noopener">54:02</a></td><td>What History Says About Wealth Inequality<br><span style="color:var(--muted)">歷史如何看待貧富差距</span></td><td>53:25</td><td>+37 秒</td></tr>
+    <tr><td>23</td><td><a href="https://youtu.be/32u5T6lO8qk?t=3396" target="_blank" rel="noopener">56:36</a></td><td>Should The Rich Pay More Tax?<br><span style="color:var(--muted)">富人應該多繳稅嗎?</span></td><td>55:58</td><td>+38 秒</td></tr>
+    <tr><td>24</td><td><a href="https://youtu.be/32u5T6lO8qk?t=3479" target="_blank" rel="noopener">57:59</a></td><td>How To Build Wealth In Your 30s Today<br><span style="color:var(--muted)">30 歲年輕人如今該如何積累財富</span></td><td>57:21</td><td>+38 秒</td></tr>
+    <tr><td>25</td><td><a href="https://youtu.be/32u5T6lO8qk?t=3608" target="_blank" rel="noopener">1:00:08</a></td><td>How To Invest Your Salary Wisely<br><span style="color:var(--muted)">普通人如何明智投資工資?</span></td><td>59:31</td><td>+37 秒</td></tr>
+    <tr><td>26</td><td><a href="https://youtu.be/32u5T6lO8qk?t=3778" target="_blank" rel="noopener">1:02:58</a></td><td>Should You Own Crypto?<br><span style="color:var(--muted)">你該持有加密貨幣嗎?</span></td><td>1:02:20</td><td>+38 秒</td></tr>
+    <tr><td>27</td><td><a href="https://youtu.be/32u5T6lO8qk?t=3831" target="_blank" rel="noopener">1:03:51</a></td><td>Will Bitcoin Eventually Go To Zero?<br><span style="color:var(--muted)">比特幣最終會歸零嗎?</span></td><td>1:03:14</td><td>+37 秒</td></tr>
+    <tr><td>28</td><td><a href="https://youtu.be/32u5T6lO8qk?t=3845" target="_blank" rel="noopener">1:04:05</a></td><td>Is Property Still A Good Investment?<br><span style="color:var(--muted)">房地產還是好投資嗎?</span></td><td>1:03:27</td><td>+38 秒</td></tr>
+    <tr><td>29</td><td><a href="https://youtu.be/32u5T6lO8qk?t=3915" target="_blank" rel="noopener">1:05:15</a></td><td>Ads<br><span style="color:var(--muted)">贊助商時段</span></td><td>1:04:37</td><td>+38 秒</td></tr>
+    <tr><td>30</td><td><a href="https://youtu.be/32u5T6lO8qk?t=4047" target="_blank" rel="noopener">1:07:27</a></td><td>What's Really Causing The Baby Bust?<br><span style="color:var(--muted)">到底是什麼導致了嬰兒潮的崩潰?</span></td><td>1:06:50</td><td>+37 秒</td></tr>
+    <tr><td>31</td><td><a href="https://youtu.be/32u5T6lO8qk?t=4288" target="_blank" rel="noopener">1:11:28</a></td><td>When Could Sperm Counts Reach Zero?<br><span style="color:var(--muted)">精子數量何時可能歸零?</span></td><td>1:10:50</td><td>+38 秒</td></tr>
+    <tr><td>32</td><td><a href="https://youtu.be/32u5T6lO8qk?t=4464" target="_blank" rel="noopener">1:14:24</a></td><td>How Microplastics Affect Fertility<br><span style="color:var(--muted)">微塑膠如何影響生育力</span></td><td>1:13:47</td><td>+37 秒</td></tr>
+    <tr><td>33</td><td><a href="https://youtu.be/32u5T6lO8qk?t=4602" target="_blank" rel="noopener">1:16:42</a></td><td>How Pesticides Impact Fertility<br><span style="color:var(--muted)">農藥如何摧毀生育能力</span></td><td>1:16:04</td><td>+38 秒</td></tr>
+    <tr><td>34</td><td><a href="https://youtu.be/32u5T6lO8qk?t=4903" target="_blank" rel="noopener">1:21:43</a></td><td>How To Reduce Toxic Chemical Exposure<br><span style="color:var(--muted)">如何減少有毒化學物質暴露</span></td><td>1:21:05</td><td>+38 秒</td></tr>
+    <tr><td>35</td><td><a href="https://youtu.be/32u5T6lO8qk?t=4974" target="_blank" rel="noopener">1:22:54</a></td><td>Why US Products Are More Toxic<br><span style="color:var(--muted)">為什麼美國產品毒性更強?</span></td><td>1:24:26</td><td class="warn">-92 秒</td></tr>
+    <tr><td>36</td><td><a href="https://youtu.be/32u5T6lO8qk?t=5250" target="_blank" rel="noopener">1:27:30</a></td><td>How To Stay Healthy In A Toxic World<br><span style="color:var(--muted)">如何在有毒世界中保持健康</span></td><td>1:27:00</td><td>+30 秒</td></tr>
+    <tr><td>37</td><td><a href="https://youtu.be/32u5T6lO8qk?t=5634" target="_blank" rel="noopener">1:33:54</a></td><td>The Most Important Thing We Missed<br><span style="color:var(--muted)">我們遺漏的最重要事情</span></td><td>1:33:04</td><td class="warn">+50 秒</td></tr>
+    <tr><td>38</td><td><a href="https://youtu.be/32u5T6lO8qk?t=5734" target="_blank" rel="noopener">1:35:34</a></td><td>Should You Move Countries Right Now?<br><span style="color:var(--muted)">你現在應該搬離自己的國家嗎?</span></td><td>1:34:37</td><td class="warn">+57 秒</td></tr>
+    <tr><td>39</td><td><a href="https://youtu.be/32u5T6lO8qk?t=5755" target="_blank" rel="noopener">1:35:55</a></td><td>The Flaw That Destroys Societies<br><span style="color:var(--muted)">摧毀社會的致命缺陷</span></td><td>1:35:56</td><td>-1 秒</td></tr>
+    <tr><td>40</td><td><a href="https://youtu.be/32u5T6lO8qk?t=5962" target="_blank" rel="noopener">1:39:22</a></td><td>The Best Places To Live Today<br><span style="color:var(--muted)">當今世界最適合居住的地方</span></td><td>1:37:34</td><td class="warn">+108 秒</td></tr>
+    <tr><td>41</td><td><a href="https://youtu.be/32u5T6lO8qk?t=6040" target="_blank" rel="noopener">1:40:40</a></td><td>What Would You Do If Failure Was Impossible?<br><span style="color:var(--muted)">如果不可能失敗,你的下一個目標是什麼?</span></td><td>1:40:48</td><td>-8 秒</td></tr>
   </table>
+  <details><summary>貼文開頭的原文說明(收合,完整保留)</summary>
+    <p>先前的內容確實<strong>混淆了影片開頭 00:00～01:59 的「前導精華剪輯（Teaser Montage）」與後續正片的順序</strong>，並過度將對話濃縮合併，導致時間戳記與 YouTube 官方章節錯位，更漏掉了大量關鍵討論（如 <strong>AI 最先取代的工作</strong>、<strong>SpaceX 在 44 分鐘後的完整對話</strong>、<strong>富人稅</strong>，以及在 <strong>1 小時左右正片出現的工資投資、加密貨幣與房地產</strong>等）。</p>
+    <p>整場訪談全長 <strong>1 小時 45 分鐘</strong>，如果一次性輸出 15,000～20,000 字的完整逐字稿，會受限於單次回答的長度上限（Token Limit）而中斷截斷。</p>
+    <p>以下為您提供：<br>1. <strong>YouTube / Podcast 官方完整 40 個章節的精確時間軸對照表</strong><br>2. <strong>先前遺漏與錯位的核心章節之「完整逐字對話紀錄（英中對照）」</strong><br>3. 若您需要<strong>全場一字不漏的完整逐字稿</strong>，文末提供按時間段分批輸出的方式。</p>
+    <p class="note">備註:這段原文說的「文末提供按時間段分批輸出的方式」,在你貼上的內容裡並沒有出現。</p>
+  </details>
 </section>
 
 <section id="verify">
   <h2 class="sec">查核與說明</h2>
   <ul>
+    <li><strong>第 1–7 節的來源與限制</strong>:這幾節是我把你提供的 A、B、D 稿與 BigGo 那集的內容重新分類整理,每個說法都標出處;「可對應的產品類型」、「債券風險」、「行動清單中的注意事項」與「觀察指標」是我補充的一般性說明(標為「我」),不是 Grantham 所說,也不是投資建議。所有數字(本益比、跌幅、報酬、房價收入比等)我都沒有獨立查證,且 A、B、D 與 BigGo 之間有些數字不一致,已在各處標示。</li>
+    <li><strong>章節數更正</strong>:YouTube 頁面實際有 <b>41 個章節</b>(含兩段廣告),先前我寫成 40 個是錯的;你貼的「官方 40 章節」列表其實也有 41 筆。該列表的時間與頁面上的實際章節多數相差約 20 秒或 37–38 秒,少數章節差距不規則(第 35 章晚 92 秒、第 37 章早 50 秒、第 38 章早 57 秒、第 40 章早 108 秒),所以 C 部分一律以實際章節為準。</li>
+    <li><strong>D 部分(重點加強)</strong>是又一個整理版本,與 A、B 對同一話題的措辭或數字有出入(例如房價收入比、日本 20 歲人口、資產配置建議、火星重力),各段結尾已標示;其中孕產婦死亡率數字我沒有查證。</li>
+    <li><strong>A 部分(後來貼上的兩段詳細稿)</strong>自稱「忠實還原的完整逐字稿」,但我沒有用影片字幕逐句比對,所以無法確認每句是否為原話。它的小標題時間戳比 YouTube 實際章節早約 20–38 秒(例如「Which Jobs AI Will Replace First」稿中標 00:41:19、實際章節 41:57;「Will SpaceX Eventually Fail?」稿中標 00:43:41、實際 44:18;「Is Property Still A Good Investment?」稿中標 01:03:27、實際 1:04:05),請把它當作近似值,以下方「實際章節對照」為準。</li>
+    <li><strong>A 部分與 B 部分彼此有出入</strong>:例如火星重力,B 部分(第三章)稱地球的「五分之一」,A-2 稱「三分之一」(實際約為地球的 38%,A-2 較接近);B 部分的「亞馬遜暴跌 92%」、精子下降年率 2.6% 等內容,A 部分沒有出現。這代表兩者都是整理或重構的版本,不是同一份可互相驗證的逐字稿。</li>
+    <li><strong>A 部分中我沒有查證的敘述</strong>:納斯達克在 2000 年泡沫後下跌 82%、英國救護車等待時間從 12 分半增加到一個半小時、新興市場過去 12 個月上漲 65% 而標普 500 為 25%、日本 20 歲人口只有 1948 年的一半、Steven 描述 Claude 在深夜拒絕工作的對話等。</li>
+    <li><strong>尚未收錄的部分</strong>:A-2 結尾說明,第三段(01:05:00 起:精子數量危機、微塑膠與內分泌干擾物、農藥殘留、美歐監管落差、社會契約與孕產婦死亡率、終局提問)尚未提供,所以這頁還沒有對應內容(B 部分的第四、五章有較簡短的摘要版)。</li>
     <li><strong>這份「逐字紀錄」不是真正的逐字稿</strong>:它只涵蓋部分章節(例如 1:00:08 後的「如何投資薪水」、「加密貨幣」、「房地產」只用寥寥幾句帶過,「Which Jobs AI Will Replace First」、「Should The Rich Pay More Tax?」、「How To Stay Healthy In A Toxic World」等章節沒有對應內容),許多回答是濃縮的中文敘述,英文原句只出現在開頭預告。我沒有把影片自動字幕逐句擷取來比對(約需 16 分鐘),所以無法逐項證實每句話是否為他的原話。</li>
     <li><strong>章節範圍與實際章節不完全吻合</strong>:見上方「實際章節對照」。整理稿的「第二章 11:36–26:09」、「第四章 67:28–92:24」、「第五章 92:25–105:51」大致相符,但章內順序與歸類是整理者的編排。</li>
     <li><strong>幾個數字可再確認</strong>:亞馬遜在網路泡沫後下跌 92%、1929 年股市下跌超過 80%、1972 年經通膨調整下跌 65%、英國房價收入比 3.4 倍到 10 倍以上、歐盟禁用逾 1500 種化妝品成分而 FDA 僅十幾種等,我沒有逐一查證。與 BigGo 那集對照時,精子下降年率(2.6% 對 2.5%)略有差異。</li>
