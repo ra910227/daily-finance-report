@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>補充研究:債務週期與私募信用</title>
+<style>
+:root{--bg:#faf8f4;--surface:#fff;--text:#222;--muted:#6b6b6b;--line:#e6e1d8;--accent:#b4531a;--accent-soft:#f6e6da;--ok:#2e7d4f;--warn:#b07a00;--bad:#b3392f}
+@media (prefers-color-scheme: dark){:root{--bg:#17150f;--surface:#1f1c15;--text:#ece7dc;--muted:#a39d8f;--line:#3a362b;--accent:#e58b4f;--accent-soft:#3a2a1c;--ok:#6cc08f;--warn:#e0b04a;--bad:#e8776d}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.8 -apple-system,"Segoe UI","Microsoft JhengHei","PingFang TC",sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:32px 16px 80px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
+nav{position:sticky;top:24px;align-self:start;font-size:14px}
+nav h2{font-size:12px;letter-spacing:.1em;color:var(--muted);margin:0 0 8px}
+nav a{display:block;color:var(--muted);text-decoration:none;padding:4px 0 4px 12px;border-left:2px solid var(--line)}
+nav a:hover{color:var(--accent);border-left-color:var(--accent)}
+.tag{display:inline-block;font-size:12px;color:var(--accent);background:var(--accent-soft);padding:2px 10px;border-radius:99px}
+h1{font-size:28px;line-height:1.35;margin:12px 0 8px}
+.meta{color:var(--muted);font-size:14px}.meta a,main a{color:var(--accent)}
+.tldr{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:16px 20px;margin:24px 0}
+.tldr b{color:var(--accent)}
+.note{font-size:14px;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:12px 16px;margin:12px 0}
+section{margin-top:40px}
+h2.sec{font-size:22px;margin:0 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:17px;margin:22px 0 6px}
+ul{padding-left:1.3em;margin:8px 0}li{margin:5px 0}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:15px;margin:10px 0}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--accent-soft);color:var(--accent)}
+tr:last-child td{border-bottom:0}
+.ok{color:var(--ok);font-weight:600}.warn{color:var(--warn);font-weight:600}.bad{color:var(--bad);font-weight:600}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+.card h4{margin:0 0 4px;color:var(--accent)}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0}
+.chain span{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 10px;font-size:14px}
+.chain i{color:var(--accent);font-style:normal}
+.src{font-size:13px;color:var(--muted)}
+@media (max-width:820px){.wrap{grid-template-columns:1fr;gap:0}nav{position:static;margin-bottom:24px}.cols{grid-template-columns:1fr}h1{font-size:24px}table{font-size:14px}}
+@media print{nav{display:none}.wrap{display:block}body{background:#fff;color:#000}}
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <h2>目錄</h2>
+  <a href="#said">1. Cuban 說了什麼</a>
+  <a href="#dalio">2. Dalio 的債務週期</a>
+  <a href="#us-uk">3. 美國與英國的數據</a>
+  <a href="#pc">4. 私募信用</a>
+  <a href="#ai">5. AI 融資與債務</a>
+  <a href="#check">6. 說法查核表</a>
+  <a href="#chain">7. 整合:傳導鏈</a>
+  <a href="#watch">8. 後續觀察</a>
+  <a href="#limits">資料限制</a>
+  <a href="#refs">來源</a>
+</nav>
+<main>
+<header>
+  <span class="tag">補充研究</span>
+  <h1>債務週期、私募信用與 AI 融資:查證 Cuban 訪談的 53:00–55:30</h1>
+  <div class="meta">對應筆記:Mark Cuban 在 <a href="https://youtu.be/6VTSAs4Rsck?t=3180" target="_blank" rel="noopener">The Diary of a CEO(53:00 起)</a> · 資料整理日:2026-10-27</div>
+  <div class="tldr">
+    <b>結論</b>:Cuban 講的三件事(AI 公司借的錢超過現金流、私募信用環境不確定、美英處於債務週期後段)在公開資料中都有部分支持,但程度不同。<b>美國利息支出約 1 兆美元</b>與<b>英國 30 年期公債殖利率創 1998 年來新高</b>有明確數據;<b>私募信用有壓力但 IMF 並未斷言它是系統性風險</b>;<b>「借得比現金流多一個倍數」只有部分支持</b>(Alphabet、Microsoft 的自由現金流仍為正)。Dalio 本人的框架把美國放在後期、英國與歐洲放在「類似問題但分析較少」。
+  </div>
+  <div class="note">這份是整理公開報導與 Dalio 本人文章的二手研究,很多數字來自新聞摘要,我沒有逐一讀 IMF 原始報告。各項標有可靠度。不是投資建議。</div>
+</header>
+
+<section id="said">
+  <h2 class="sec">1. Cuban 說了什麼(已核對原始字幕)</h2>
+  <ul>
+    <li><b>約 53:15–53:45</b>:公司若欠 400 億美元、利率一直升,「到某個點就借不到錢」;現在有很多「祈禱」成分。他說自己是 Nvidia 與 Jensen Huang 的粉絲,但 Nvidia 因為有現金,等於在補貼一大半的產業。他提到一家公司(字幕顯示他先說 Alphabet 又改口 Meta)借的錢超過現金流;他認為如果 AI 真的那麼了不起,情況應該相反。他說在那之前,我們處於<b>「私募信用的債務環境」,有很多不確定,很多事可能出錯</b>。</li>
+    <li><b>約 53:55–54:25</b>:他說如果讀 Dalio 的說法,Dalio 認為我們「已經越過那條曲線」,可能變成債台高築、貨幣最終貶值到幾乎無價值的社會。主持人追問目前處於什麼位置時,Cuban 回答<b>美國、英國與其他一些國家處於週期的後段</b>,特徵是過度負債、更過度負債與權力流失。</li>
+    <li><b>約 54:45–55:10</b>:他說美國人很難想像這一點,但他樂觀認為「我們總會想出辦法」,只是過程會痛;並批評政客擅長口號、不擅長做事。</li>
+  </ul>
+  <div class="note">這是 Cuban 轉述他對 Dalio 的理解,不是 Dalio 的原話。字幕為自動字幕,有缺漏,「Meta」那一句他自己也不確定。</div>
+</section>
+
+<section id="dalio">
+  <h2 class="sec">2. Dalio 的債務週期框架</h2>
+  <p>依據:Dalio 本人的 <a href="https://raydalio.substack.com/p/how-countries-go-broke-in-a-5-minute" target="_blank" rel="noopener">〈How Countries Go Broke〉五分鐘版</a>(2025 年),以及他的書《How Countries Go Broke》。以下為意譯。</p>
+  <h3>週期的階段(依他的文章整理)</h3>
+  <table>
+    <tr><th>階段</th><th>特徵</th></tr>
+    <tr><td>① 累積</td><td>債務與利息支出成長快於收入,新債愈來愈難以現行利率賣出。</td></tr>
+    <tr><td>② 央行介入</td><td>央行先降短期利率減壓,再印鈔買政府公債。</td></tr>
+    <tr><td>③ 央行弱化</td><td>隨利率上升,央行持有的債券虧損,淨值甚至可能轉負。</td></tr>
+    <tr><td>④ 貨幣化</td><td>政府借錢付利息、央行印鈔填缺口,債務、印鈔、通膨互相餵養。</td></tr>
+    <tr><td>⑤ 後期初段</td><td>長期利率上升、貨幣(尤其相對黃金)走弱、財政部縮短發債年期。</td></tr>
+    <tr><td>⑥ 危機</td><td>資本管制、施壓債權人繼續持有等極端措施,出現他所說的「債務引發的經濟心臟病」。</td></tr>
+  </table>
+  <h3>他要觀察的指標</h3>
+  <ul>
+    <li>政府債務利息占收入的比重。</li>
+    <li>債券供給相對需求(供給是否超過需求)。</li>
+    <li>央行是否印鈔買債來補需求缺口。</li>
+  </ul>
+  <h3>他怎麼定位各國</h3>
+  <div class="cols">
+    <div class="card"><h4>日本</h4>他認為是最清楚的例子:債務約 GDP 的 215%、央行買債、2013 年以來債券持有人損失慘重。</div>
+    <div class="card"><h4>美國</h4>「危險的轉折點」。他引用:收入約 5 兆、支出約 7 兆、赤字約 2 兆、債務約 30 兆、年利息約 1 兆、約 10 兆待償債務;若不改變,危機可能在約 3 年後,上下兩年。</div>
+    <div class="card"><h4>英國、歐盟、中國</h4>他說有類似的債務與赤字問題,但文章對它們的分析較少。<b>所以「英國在後期」是 Dalio 的方向性看法,不是他對英國的詳細論證。</b></div>
+    <div class="card"><h4>他的解方</h4>「3% 解」:把赤字降到約 GDP 的 3%,同時調整支出、稅收與利率;並建議降低債券、提高黃金配置(約 10–15%),少量比特幣。</div>
+  </div>
+  <h3>最近的說法</h3>
+  <ul>
+    <li><b>2026 年 10 月 6 日 Bloomberg 電視訪談</b>:他說預期美國在約三年內(約 2029 年秋)發生債務危機,理由是債務服務成本飆升;他也說 AI 熱潮已「大量靠債務融資」,可能收緊風險較高的信用類別(如汽車貸款)。(來源:<a href="https://uk.finance.yahoo.com/news/ray-dalio-predicts-debt-crisis-120031117.html" target="_blank" rel="noopener">Yahoo Finance 英國版</a>、<a href="https://www.bloomberg.com/news/videos/2026-10-06/ray-dalio-warns-of-us-debt-crisis-within-three-years-video" target="_blank" rel="noopener">Bloomberg</a>;我沒看完整訪談。)</li>
+    <li><b>2026 年 Independent Review 書評</b>認為 Dalio 把美國放在公共債務「泡沫破滅」第四、也就是最後階段;評論者也提醒,書中把美、歐、日、中同時放在後期,這個說法應該謹慎看待,而且不同評論對階段數量與時間點說法不一。(<a href="https://www.independent.org/tir/2026-spring/how-countries-go-broke/" target="_blank" rel="noopener">書評</a>)</li>
+  </ul>
+  <div class="note">要注意:Dalio 2025 年文章中的美國債務數字(約 30 兆)和 2026 年報導的「總債務約 40 兆、公眾持有約 GDP 100%」口徑不同,不能直接混用。</div>
+</section>
+
+<section id="us-uk">
+  <h2 class="sec">3. 美國與英國的最新數據</h2>
+  <table>
+    <tr><th>項目</th><th>數據(據報導)</th><th>可靠度</th></tr>
+    <tr><td>美國 2026 財年淨利息</td><td>約 1.05 兆美元,年增約 8%,快於實質 GDP(約 2%)與名目 GDP(約 6%);Peterson 估計占 GDP 約 3.2%,將超過 1991 年的紀錄。</td><td>中(Fortune 轉述)</td></tr>
+    <tr><td>CBO 展望</td><td>淨利息占 GDP 從今年約 3.3% 升到 2036 年約 4.6%;金額從約 1.0 兆升至約 2.1 兆。</td><td>高(CBO 官方)</td></tr>
+    <tr><td>美國 10 年期殖利率</td><td>已高於 5%,超過 CBO 對今年預測的 4.1%。</td><td>中</td></tr>
+    <tr><td>美國總債務</td><td>約 40 兆美元;公眾持有約 GDP 100%。</td><td>中</td></tr>
+    <tr><td>英國 30 年期公債殖利率</td><td>10 月 1 日升至約 6.03%,為 1998 年初以來最高;10 月 8 日約 6.05%,21 日回落到約 5.83%。</td><td>中高(多家一致)</td></tr>
+    <tr><td>英國 10 年期</td><td>高點約 5.53%,為 2007 年以來最高。</td><td>中</td></tr>
+    <tr><td>英國財政空間</td><td>2025–26 年債務利息支出預估約 985 億英鎊;德意志銀行 9 月初估計,若殖利率維持,財政空間將從 260 億降到約 138 億英鎊。</td><td>中(單一估計)</td></tr>
+  </table>
+  <ul>
+    <li>英國殖利率上升的原因,評論提到:能源推動的通膨風險、市場預期英國央行偏緊、公債供給大、以及 <b>10 月 28 日預算案</b>前的財政不確定性。這個預算案就在明天。</li>
+    <li>我沒有找到 Dalio 對英國的專門發言;「英國後期」是依他的框架推論,加上殖利率與財政空間的數據作旁證。</li>
+  </ul>
+</section>
+
+<section id="pc">
+  <h2 class="sec">4. 私募信用:壓力在哪裡</h2>
+  <h3>IMF 2026 年 10 月全球金融穩定報告</h3>
+  <ul>
+    <li>IMF 說私募信用的規模已能與其他主要信用市場相提並論;槓桿上升與「或有流動性」風險可能放大壓力。</li>
+    <li>報導說銀行對非銀行放款機構(含私募股權與私募信用)的曝險快速成長,但 IMF 判斷這些曝險本身<b>不構成系統性風險</b>,嚴重壓力下才可能造成明顯損失。</li>
+    <li>IMF 點名的三大風險:<b>AI 相關的股債修正</b>、主權公債殖利率急升、重大網路攻擊。</li>
+    <li>這份報告的特別章節談的是避險基金,不是私募信用。</li>
+  </ul>
+  <h3>零售端的壓力(非公開交易的 BDC)</h3>
+  <ul>
+    <li>多數非公開交易 BDC 的贖回申請超過每季 5% 的上限;11 檔大型基金的平均申請比例,Q2 約 13.9%、Q3 約 13.0%,仍遠高於上限。</li>
+    <li>2026 上半年散戶自非公開交易 BDC 贖回約 127 億美元(Q2 單季約 59 億);PitchBook/LCD 調查說 Q2 淨流量首次轉負。</li>
+    <li>公開交易 BDC 常以相對淨值 10%–20% 的折價交易,少數達 40%–50%;這是市場對估值的訊號,不是已公布的減損。</li>
+    <li>市場關切點:違約風險、較舊的貸款年份、軟體業曝險、BDC 的流動性;各基金多半用贖回上限(gate)限制出場。</li>
+  </ul>
+  <h3>不同觀點</h3>
+  <ul>
+    <li>Dechert 等業界法律事務所為私募信用與 BDC 辯護,認為「別被標題誤導」;LCD 調查也提到,對市場的負面觀感在 Q3 有所緩和,部分受訪者視之為暫時挫折。</li>
+    <li>也有評論認為整個產業結構有問題;這類說法偏評論,我沒有採信單一觀點。</li>
+  </ul>
+  <div class="note">我沒有找到可靠來源驗證「私募信用總規模」的最新總數,也沒有 Blue Owl 個別估值調整或軟體貸款違約率的原始資料。Yardeni 頁面提到的「Fitch 違約率創高」也無法對到一手來源,視為未證實。</div>
+</section>
+
+<section id="ai">
+  <h2 class="sec">5. AI 融資與債務:Cuban 說的「借得比現金流多」</h2>
+  <h3>超大規模雲端業者的資本支出與現金流</h3>
+  <ul>
+    <li>FactSet 預估五大業者 2026 財年資本支出超過 6,900 億美元,除 Alphabet 與 Microsoft 外,自由現金流接近零或轉負。各家對支出的估計不同:JPMorgan 約 9,000 億(全球),UBS、S&P 約 7,500–7,700 億(五家)。</li>
+    <li>發債規模:Goldman 說 2025 年發行 1,080 億美元、2026 年迄今 1,940 億;Reuters/BNP 數據約 2,200 億(至 8 月 10 日);S&P 把 Nvidia 等相關實體算進去為 2,250 億、全年約 4,000 億。口徑不同所以數字不同。</li>
+    <li>市場反應:Reuters 轉述 2026 年發行的 91 檔超大型業者債券中,有 78 檔在 7 月 28 日的殖利率高於發行時;Oracle 評等 BBB、展望負面。</li>
+    <li>Alphabet 6 月籌了約 847.5 億美元股權;其 6 月底申報顯示總債務超過 1,000 億美元,另有約 852 億美元的資料中心租賃未來付款。</li>
+    <li>Fortune 標題稱「隱藏借款」達 1.65 兆美元,但我只看到標題,不知道計算口徑。</li>
+  </ul>
+  <h3>私募信用與表外融資的連結:Meta–Blue Owl Hyperion 案例</h3>
+  <ul>
+    <li>結構:Blue Owl 旗下基金持 Hyperion 合資公司 80%、Meta 20%;一個特殊目的載體發行約 270 億美元債券,不列入 Meta 資產負債表。債券獲 S&P A+、依 144A 發行、PIMCO 為主要買家、2049 年到期;報導的殖利率約 6.58%,對投資等級而言偏高。</li>
+    <li>單一來源的報導說 2026 年 9 月該債券跌到約 94.4 美分,專案承諾金額已超過 500 億美元;另有文章稱真實規模約 800 億。這些尚待驗證。</li>
+    <li>單一來源引述 Morgan Stanley 估計:到 2028 年資料中心相關的私募信用機會超過 8,000 億美元(未查證)。</li>
+  </ul>
+  <h3>IMF 點名的「循環融資」</h3>
+  <ul>
+    <li>報導說 IMF 追蹤了 2023 年以來 14 筆公開揭露的交易:超大規模雲端業者投入約 3,000 億美元股權到財務較弱的 AI 公司,另有約 6,500 億美元債務支持,換得約 1.4 兆美元的未來營收承諾。</li>
+    <li>疑慮是:出資者與承諾付款者互相依賴,若承諾兌現不了,風險會在鏈條上傳導。這點與 Cuban 說的 Nvidia「補貼半個產業」方向相符,但 Nvidia 的具體金額我沒有查。</li>
+  </ul>
+</section>
+
+<section id="check">
+  <h2 class="sec">6. Cuban 說法查核表</h2>
+  <table>
+    <tr><th>說法</th><th>查證結果</th></tr>
+    <tr><td>超大規模雲端業者借的錢比現金流多</td><td><span class="warn">部分支持</span>:FactSet 預估多數業者 2026 自由現金流接近零或為負,債券發行大增;但 Alphabet 與 Microsoft 的自由現金流仍為正,「多一個倍數」我沒有找到依據。</td></tr>
+    <tr><td>Nvidia 在補貼大半個產業</td><td><span class="warn">方向相符</span>:IMF 描述循環融資;但 Nvidia 個別投資金額未查。</td></tr>
+    <tr><td>處於「私募信用的債務環境」且不確定性高</td><td><span class="ok">大致支持</span>:IMF、BDC 贖回與折價數據都顯示壓力;但 IMF 並未斷言它是系統性風險。</td></tr>
+    <tr><td>美國每年付約一兆美元利息</td><td><span class="ok">支持</span>:2026 財年淨利息約 1.05 兆美元(Fortune 轉述,CBO 預測的方向一致)。</td></tr>
+    <tr><td>利率若升到 6%、8%、10%,「一定有東西會讓步」</td><td><span class="warn">假設性判斷</span>:10 年期已超過 5%、英國 30 年期超過 6%;但「10%」是情境推演,不是預測。</td></tr>
+    <tr><td>Dalio 認為已越過那個點</td><td><span class="warn">方向相符</span>:Dalio 確實把美國放在週期後期並預告三年左右的危機;但他說的是「約三年,上下兩年」,「貨幣變得無價值」是 Cuban 的轉述。</td></tr>
+    <tr><td>美國、英國處於週期後段</td><td><span class="warn">部分支持</span>:美國 Dalio 有詳細論證;英國有殖利率與財政空間數據佐證,但 Dalio 本人對英國的分析較少。</td></tr>
+  </table>
+</section>
+
+<section id="chain">
+  <h2 class="sec">7. 整合:這幾件事怎麼連在一起</h2>
+  <div class="chain">
+    <span>AI 資本支出暴增</span><i>→</i><span>現金流不夠,發債、租賃、表外 SPV</span><i>→</i><span>資金來源擴及私募信用與保險、基金</span><i>→</i><span>公債與信用債供給大增、殖利率上升</span><i>→</i><span>政府利息支出上升、財政空間縮小</span><i>→</i><span>若 AI 回報不如預期:信用修正,資產估值與贖回壓力</span>
+  </div>
+  <ul>
+    <li><b>Dalio 的論點</b>(10 月)就是把這條鏈接在一起:債務服務成本飆升加上 AI 熱潮大量靠債務融資,可能先收緊風險較高的信用。</li>
+    <li><b>IMF 的三大風險</b>剛好是這條鏈的三個節點:AI 修正、公債殖利率急升、以及網路攻擊(獨立因子)。</li>
+    <li><b>Cuban 的立場</b>是:AI 本身是好東西,但「用借來的錢堆資本支出」是風險;他的行動是保留現金、少投入。</li>
+    <li>與你筆記中 Griffin 的說法也能對上:他說 AI 資本支出的疑慮包括 GPU 供給過剩與壽命,Situational Awareness 事件的報導也提到市場對 AI 基礎建設融資的信用疑慮是觸發因素之一。</li>
+  </ul>
+</section>
+
+<section id="watch">
+  <h2 class="sec">8. 後續可觀察的指標</h2>
+  <ul>
+    <li><b>英國 10 月 28 日預算案</b>與 30 年期公債殖利率反應。</li>
+    <li>美國 10 年期殖利率是否持續高於 5%、財政部發債年期是否縮短(Dalio 認為這是後期訊號之一)。</li>
+    <li>非公開交易 BDC 每季的贖回申請比例與折價幅度。</li>
+    <li>超大規模雲端業者新債的殖利率與利差、Oracle 評等是否再被調降。</li>
+    <li>Hyperion 等表外債券的交易價格與後續類似案例。</li>
+    <li>IMF 報告原文(各項規模、槓桿、保險業曝險數字)。</li>
+  </ul>
+</section>
+
+<section id="limits">
+  <h2 class="sec">資料限制</h2>
+  <ul>
+    <li>多數數字是新聞或評論轉述,我沒有逐一對照原始報告;部分來源是單一媒體,已標示「單一來源」或「待驗證」。</li>
+    <li>CNBC、Fortune、Bloomberg 等有些頁面我抓不到全文,依搜尋摘要或轉述整理。</li>
+    <li>各家對資本支出、發債金額、私募信用規模的口徑不同,數字不能直接相加或比較。</li>
+    <li>我沒有找到 Dalio 對英國或私募信用的直接發言,這兩項是依他的框架與其他資料推論。</li>
+    <li>這是資料整理,不是投資建議。</li>
+  </ul>
+</section>
+
+<section id="refs">
+  <h2 class="sec">來源</h2>
+  <ul class="src">
+    <li><a href="https://raydalio.substack.com/p/how-countries-go-broke-in-a-5-minute" target="_blank" rel="noopener">Ray Dalio:How Countries Go Broke 五分鐘版</a></li>
+    <li><a href="https://uk.finance.yahoo.com/news/ray-dalio-predicts-debt-crisis-120031117.html" target="_blank" rel="noopener">Yahoo Finance:Dalio 預測三年內債務危機</a> · <a href="https://www.bloomberg.com/news/videos/2026-10-06/ray-dalio-warns-of-us-debt-crisis-within-three-years-video" target="_blank" rel="noopener">Bloomberg 訪談</a></li>
+    <li><a href="https://www.independent.org/tir/2026-spring/how-countries-go-broke/" target="_blank" rel="noopener">The Independent Review:書評</a> · <a href="https://www.raymondjames.com/milesfamilywealthadvisory/blog/2026/01/29/the-big-cycle" target="_blank" rel="noopener">Raymond James:The Big Cycle</a></li>
+    <li><a href="https://fortune.com/2026/10/17/us-debt-interest-payments-fiscal-2026-1-trillion-federal-spending-revenue-gdp-growth-treasury-yields/" target="_blank" rel="noopener">Fortune:美國債務利息 2026 財年</a> · <a href="https://www.cbo.gov/publication/62105" target="_blank" rel="noopener">CBO:2026–2036 預算與經濟展望</a> · <a href="https://www.pgpf.org/article/any-way-you-look-at-it-interest-costs-on-the-national-debt-will-soon-be-at-an-all-time-high/" target="_blank" rel="noopener">Peterson Foundation</a></li>
+    <li><a href="https://www.roic.ai/news/uk-30-year-gilt-yield-breaches-6-for-first-time-since-1998-10-01-2026" target="_blank" rel="noopener">英國 30 年期公債殖利率突破 6%</a> · <a href="https://www.techtimes.com/articles/326996/20260908/uk-locks-priciest-30-year-gilt-yield-since-1998-tax-rises-october-budget-now-near-certain.htm" target="_blank" rel="noopener">Tech Times:英國公債與預算</a> · <a href="https://tradingeconomics.com/united-kingdom/30-year-bond-yield/news/482152" target="_blank" rel="noopener">Trading Economics</a></li>
+    <li><a href="https://www.investmenthouse.com/2026/10/14/the-imf-says-private-credit-is-big-enough-to-break-things/" target="_blank" rel="noopener">Investment House:IMF 與私募信用</a> · <a href="https://wallstreettimes.com/imf-flags-ai-circular-financing-as-a-market-correction-risk-with-950-billion-in-equity-and-debt-tied-to-1-4-trillion-in-revenue-promises/" target="_blank" rel="noopener">Wall Street Times:IMF 與循環融資</a> · <a href="https://www.imf.org/-/media/files/publications/gfsr/2026/april/english/text.pdf" target="_blank" rel="noopener">IMF GFSR 2026 年 4 月</a></li>
+    <li><a href="https://www.valuationresearch.com/insights/private-credit-trends-q3-2026/" target="_blank" rel="noopener">Valuation Research:Q3 2026 私募信用</a> · <a href="https://pitchbook.com/news/articles/global-private-credit-survey-default-risk-in-focus" target="_blank" rel="noopener">PitchBook:私募信用調查</a> · <a href="https://www.dechert.com/knowledge/the-cred/2026/6/don-t-believe-the-headlines--a-defense-of-bdcs-and-private-credi.html" target="_blank" rel="noopener">Dechert:為 BDC 辯護</a> · <a href="https://www.ecb.europa.eu/press/financial-stability-publications/fsr/special/html/ecb.fsrart202605_04~3f2135af91.en.html" target="_blank" rel="noopener">ECB:全球私募信用壓力</a></li>
+    <li><a href="https://insight.factset.com/hyperscalers-tap-external-financing-as-ai-capex-outruns-cash-flow" target="_blank" rel="noopener">FactSet:資本支出超過現金流</a> · <a href="https://www.goldmansachs.com/insights/goldman-sachs-exchanges/how-ai-debt-is-reshaping-the-credit-market" target="_blank" rel="noopener">Goldman Sachs:AI 債務</a> · <a href="https://mlq.ai/news/hyperscaler-bond-issuance-reaches-about-220-billion-as-ai-financing-costs-rise/" target="_blank" rel="noopener">MLQ:超大型業者發債</a> · <a href="https://fortune.com/2026/07/31/ai-debt-hypescalers-capex-capital-spending-hidden-borrowing-bond-issuance/" target="_blank" rel="noopener">Fortune:隱藏借款</a></li>
+    <li><a href="https://www.globaldatacenterhub.com/p/the-hyperion-financing-is-the-signal" target="_blank" rel="noopener">Hyperion 融資</a> · <a href="https://privatecreditprep.com/deals/meta-hyperion-27bn-off-balance-sheet" target="_blank" rel="noopener">Private Credit Prep:Hyperion</a> · <a href="https://www.benzinga.com/markets/tech/25/10/48291383/meta-blue-owl-strike-30-billion-private-capital-deal-for-ai-data-center" target="_blank" rel="noopener">Benzinga:Meta–Blue Owl</a></li>
+  </ul>
+</section>
+</main>
+</div>
+</body>
+</html>
