@@ -137,10 +137,18 @@ def clean_report_filename(name):
     return f"{yyyymmdd}_{title}.html"
 
 
+# 使用者明確表示不上網站的本機檔案（依來源檔名比對），本機保留、同步時略過
+SITE_EXCLUDE = {
+    "260407_總體經濟_AI對全球經濟與金融的影響學術報告.html",  # 2026-10-28 只保留完整版
+}
+
+
 def _copy_new(src_glob_dir, pattern, dst, rename=False):
     copied = []
     dst.mkdir(parents=True, exist_ok=True)
     for f in src_glob_dir.glob(pattern):
+        if f.name in SITE_EXCLUDE:
+            continue
         target_name = clean_report_filename(f.name) if rename else f.name
         target = dst / target_name
         if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
