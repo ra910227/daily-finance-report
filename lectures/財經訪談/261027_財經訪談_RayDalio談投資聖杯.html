@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ray Dalio 投資聖杯筆記</title>
+<style>
+:root{--bg:#faf8f4;--surface:#fff;--text:#222;--muted:#6b6b6b;--line:#e6e1d8;--accent:#b4531a;--accent-soft:#f6e6da;--host:#2f6f8f;--host-soft:#e3eff5;--ok:#2e7d4f;--warn:#b07a00}
+@media (prefers-color-scheme: dark){:root{--bg:#17150f;--surface:#1f1c15;--text:#ece7dc;--muted:#a39d8f;--line:#3a362b;--accent:#e58b4f;--accent-soft:#3a2a1c;--host:#7fbfdc;--host-soft:#1b2a33;--ok:#6cc08f;--warn:#e0b04a}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.85 -apple-system,"Segoe UI","Microsoft JhengHei","PingFang TC",sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:32px 16px 80px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
+nav{position:sticky;top:24px;align-self:start;font-size:14px}
+nav h2{font-size:12px;letter-spacing:.1em;color:var(--muted);margin:0 0 8px}
+nav a{display:block;color:var(--muted);text-decoration:none;padding:4px 0 4px 12px;border-left:2px solid var(--line)}
+nav a:hover{color:var(--accent);border-left-color:var(--accent)}
+.tag{display:inline-block;font-size:12px;color:var(--accent);background:var(--accent-soft);padding:2px 10px;border-radius:99px}
+h1{font-size:28px;line-height:1.35;margin:12px 0 8px}
+.meta{color:var(--muted);font-size:14px}.meta a,main a{color:var(--accent)}
+.note{font-size:14px;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:12px 16px;margin:12px 0}
+.tldr{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:16px 20px;margin:20px 0}
+.tldr b{color:var(--accent)}
+section{margin-top:40px}
+h2.sec{font-size:22px;margin:0 0 4px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+.range{font-size:13px;color:var(--muted);margin:0 0 12px}
+h3{font-size:17px;margin:20px 0 6px}
+p{margin:0 0 10px}
+ul,ol{padding-left:1.3em;margin:6px 0 10px}li{margin:5px 0}
+.line{padding:8px 0;border-bottom:1px solid var(--line)}
+.line:last-child{border-bottom:0}
+.who{display:inline-block;font-size:12px;font-weight:600;padding:0 8px;border-radius:99px;margin-right:6px;vertical-align:1px;color:var(--accent);background:var(--accent-soft)}
+.who.h{color:var(--host);background:var(--host-soft)}
+.zh{color:var(--muted);display:block;margin-top:2px}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:15px;margin:10px 0}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--accent-soft);color:var(--accent)}
+tr:last-child td{border-bottom:0}
+.ok{color:var(--ok);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td:first-child a{color:var(--accent);text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+.card h4{margin:0 0 4px;color:var(--accent)}
+@media (max-width:820px){.wrap{grid-template-columns:1fr;gap:0}nav{position:static;margin-bottom:24px}.cols{grid-template-columns:1fr}h1{font-size:24px}table{font-size:14px}}
+@media print{nav{display:none}.wrap{display:block}body{background:#fff;color:#000}}
+.t{padding:10px 0;border-bottom:1px solid var(--line)}
+.t:last-of-type{border-bottom:0}
+.sp{display:inline-block;font-size:12px;font-weight:600;padding:0 8px;border-radius:99px;color:var(--accent);background:var(--accent-soft);margin-bottom:2px}
+.sp.h{color:var(--host);background:var(--host-soft)}
+.en{margin:0 0 4px}
+.zh{margin:0 0 10px;color:var(--muted)}
+.intro-line{margin:8px 0 12px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 16px;margin:10px 0}
+details>summary{cursor:pointer;font-weight:600;color:var(--accent);padding:6px 0}
+.legend{font-size:13px;color:var(--muted);margin:6px 0 10px}
+.s{display:inline-block;font-size:11px;font-weight:700;padding:0 6px;border-radius:4px;margin-left:2px;vertical-align:1px;line-height:1.55}
+.s.a{background:var(--host-soft);color:var(--host)}
+.s.b{background:var(--accent-soft);color:var(--accent)}
+.s.d{background:var(--surface);color:var(--ok);border:1px solid var(--ok)}
+.s.g{background:var(--surface);color:var(--warn);border:1px solid var(--warn)}
+.s.m{background:var(--line);color:var(--text)}
+.tbl{font-size:14px}
+.tbl td,.tbl th{vertical-align:top}
+.tbl.wide td:first-child{min-width:5.5em}
+.card ol,.card ul{padding-left:1.2em;margin:4px 0}
+.card p{margin:4px 0}
+.mine{font-weight:700;background:var(--accent-soft);padding:0 3px;border-radius:3px}
+blockquote.n{margin:12px 0;padding:10px 14px;border-left:4px solid var(--accent);background:var(--surface);border-radius:0 6px 6px 0}
+blockquote.n .zh{display:block;margin-top:4px;color:var(--text)}
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <h2>目錄</h2>
+  <a href="#s0">0 一頁摘要</a>
+  <a href="#s1">1 谷底:從破產到 Bridgewater</a>
+  <a href="#s2">2 聖杯:15 條不相關報酬流</a>
+  <a href="#s3">3 作戰計畫:決策規則與回測</a>
+  <a href="#s4">4 自由錢與個性</a>
+  <a href="#s5">5 五大力量(總體視角)</a>
+  <a href="#s6">6 泡沫、黃金與配置</a>
+  <a href="#s7">7 紀錄、原則與人生</a>
+  <h2 style="margin-top:14px">深入專題</h2><a href="#dA">A 1982 谷底</a><a href="#dB">B 五大力量</a><a href="#dC">C 黃金配置</a><a href="#dD">D 泡沫機制</a><a href="#dE">E Bridgewater 紀錄</a><a href="#dF">F 用人順序</a><a href="#dG">G 痛苦與反思</a><h2 style="margin-top:14px">附錄</h2><a href="#s8">8 HubSpot 指南對照</a>
+  <a href="#s8b">9 章節時間軸</a>
+  <a href="#s9" style="margin-top:14px">查核與說明</a>
+</nav>
+<main>
+<header>
+  <span class="tag">財經 · 訪談整理</span>
+  <h1>Ray Dalio:投資的聖杯(15 條不相關的報酬流)</h1>
+  <div class="meta">來源:My First Million 播客 ·
+    <a href="https://www.youtube.com/watch?v=UprafhdeZVc" target="_blank" rel="noopener">YouTube 影片〈Ray Dalio: This is the Holy Grail of Investing〉</a>(約 1 小時)·
+    <a href="https://offers.hubspot.com/view/ray-dalios-rules-of-the-game" target="_blank" rel="noopener">HubSpot「Ray Dalio's Rules of the Game」指南頁</a></div>
+  <div class="note"><b>閱讀指南</b>:<span class="mine">粗體加底色</span>的文字是你自己寫的重點筆記(英文原樣,我附上中文意思),我把它們放進對應的段落裡;其餘是我依影片字幕整理的中文摘要,<b>不是逐字稿</b>。HubSpot 指南的內容整理在第 8 節「指南對照」,與影片不同之處也標在那裡。這是 Dalio 的個人觀點,不是投資建議,他自己在片中也說「不要拿去交易」。</div>
+</header>
+
+<section id="s0">
+  <h2 class="sec">0 一頁摘要</h2>
+  <div class="card">
+    <ol>
+      <li><b>核心主張</b>:不是靠預測,而是找到約 15 條良好且彼此不相關的報酬流,在不降低報酬的前提下大幅降低風險。他說這是 Bridgewater 從向父親借 4,000 美元變成全球最大避險基金的基礎。</li>
+      <li><b>兩個教訓</b>:1982 年他押注墨西哥債務危機會拖垮經濟,結果大錯,賠光客戶與自己的錢、裁掉所有員工。他學到「謙遜」要用來平衡「膽識」,並學到分散。</li>
+      <li><b>作戰計畫</b>:每個決策都回測「這規則放在過去會怎樣」,寫成決策規則、程式化,再到世界各地的市場找出現,把彼此不相關的規則組合起來。</li>
+      <li><b>自由錢</b>:先問「基本開銷付得起嗎」,算停工後能撐幾個月、幾年。目標是自由,不是頂端。</li>
+      <li><b>總體視角</b>:五大力量(債務與貨幣、財富與價值觀落差、地緣秩序、自然、科技創新)互相作用,新聞只是一分鐘,要放進脈絡看。</li>
+      <li><b>配置與泡沫</b>:現金長期最差;黃金建議占 5% 到 15% 作為分散的一條;他的「泡沫指標」當時約在 2000 年與 1929 年水準的 75%,但指標只告訴你「不會是好投資」,不告訴你時機,時機要看「刺破泡沫」的力量,例如緊縮貨幣、財富稅。</li>
+    </ol>
+  </div>
+  <p class="note">我的串連(不是 Dalio 的話):這集談的是「怎麼組合」,與本站 <a href="261027_財經訪談_Grantham與Chancellor談最後的泡沫.html">Grantham × Chancellor 那頁</a>談的「估值與均值回歸」是互補關係——一個回答「手上放什麼」,一個回答「何時、為何會回頭」。</p>
+</section>
+
+<section id="s1">
+  <h2 class="sec">1 谷底:從破產到 Bridgewater(0:49 起)</h2>
+  <p>Dalio 1975 年創辦 Bridgewater。1981–82 年他判斷新興國家債務還不起、會爆債務危機,這在當時是爭議性看法,1982 年 8 月墨西哥果然違約,國會請他去作證。但他同時認為經濟會因此崩潰,<b>這部分他說「大錯特錯」</b>:他賠了自己與客戶的錢,裁光員工,窮到要向父親借 4,000 美元。他當時的選擇是穿西裝去替人打工,或繼續走自己的路;他自知不擅長替別人做事。他說這個谷底「改變了我人生的一切」,之後一路向上,因為他學到兩件事:</p>
+  <blockquote class="n"><b class="mine">I learned humility to balance my audacity.</b><br><span class="zh"><b class="mine">我學會用謙遜來平衡我的膽大。</b></span></blockquote>
+  <p class="note">你的筆記寫成「humidity」,依影片字幕與語意應是 <i>humility</i>(謙遜),我已改正。他補充:當時他的作法是請人盡力挑戰他的想法,把他想錯的地方打出來。</p>
+  <blockquote class="n"><b class="mine">I learned how to diversify my bets and substantially reduce my risk without reducing my returns.</b><br><span class="zh"><b class="mine">我學會分散我的押注,在不降低報酬的情況下大幅降低風險。</b></span></blockquote>
+  <p>他的邏輯:他不想犧牲上行空間,所以要降低的是下行。他用「叢林」比喻:可以待在安全的叢林外面拿穩定工作,也可以走進有猛獸的叢林,他選了後者,而且要找跟他看法不同的人一起走,這樣更容易看見猛獸。(6:14 起)</p>
+</section>
+
+<section id="s2">
+  <h2 class="sec">2 聖杯:15 條不相關的報酬流(約 2:00–4:00)</h2>
+  <blockquote class="n"><b class="mine">The mantra for investing: Find 15 good uncorrelated return streams.</b><br><span class="zh"><b class="mine">投資的口訣:找出 15 條良好且彼此不相關的報酬流。</b></span></blockquote>
+  <blockquote class="n"><b class="mine">what are the marginal benefits of diversification given the different levels of correlation.</b><br><span class="zh"><b class="mine">在不同的相關程度下,分散的邊際效益是多少。</b></span></blockquote>
+  <blockquote class="n"><b class="mine">if you can get out to 15, you can get down to about reduce about 80% of your risk without reducing your return. Increasing your return to risk ratio by something like a factor of five. You can get the upside without having the downside.</b><br><span class="zh"><b class="mine">如果你能做到 15 條,就能把風險降低約 80%,而不降低報酬;報酬風險比大約提高五倍。你可以拿到上行,卻不用承受下行。</b></span></blockquote>
+  <p>他說 15 這個數字來自「看數學」:把分散的邊際效益在不同相關程度下畫成圖,圖就放在他身邊提醒他。以下是我加的驗算:</p>
+  <table class="tbl">
+    <tr><th>假設</th><th>N=15 條</th><th>說明</th></tr>
+    <tr><td>各條波動相同、報酬相同、<b>相關係數為 0</b>、等權重</td><td>波動降到 1/√15 ≈ <b>0.26</b>,即降低約 <b>74%</b>;報酬風險比約提高 <b>3.9 倍</b></td><td>接近他說的「約 80%、約五倍」,差在他是口述的概數</td></tr>
+    <tr><td>相關係數大於 0(現實中常見)</td><td>降幅會明顯小於上面</td><td>所以他強調要「不相關」,不是只有「很多條」</td></tr>
+  </table>
+  <p class="note">這是我用標準的分散公式做的簡化驗算,不是 Dalio 公布的方法;真實的「報酬流」很難做到完全不相關,也有尾端風險,所以「在不降低報酬下降低 80% 風險」是他的說法,不是保證。</p>
+</section>
+
+<section id="s3">
+  <h2 class="sec">3 作戰計畫:決策規則與回測(4:02–5:30)</h2>
+  <p>主持人問:聰明的人投資時最常犯什麼錯?他答:<b>沒有作戰計畫(game plan)</b>。</p>
+  <blockquote class="n"><b class="mine">Have a game plan and know the track record of that decision</b><br><span class="zh"><b class="mine">要有作戰計畫,並且知道這個決策的歷史紀錄。</b></span></blockquote>
+  <blockquote class="n"><b class="mine">every time I would make a decision, I would go back and study if I made that decision in these circumstances, how would it have worked in the past. And I wold have a decision rule. Then I would program it into the market into the computer. And when this thing come along, I've got criteria.</b><br><span class="zh"><b class="mine">每次做決策,我都會回頭研究:如果在這種情況下做這個決策,過去的結果會怎樣。然後我就有了一條決策規則,把它寫進電腦程式。當這種情況出現時,我就有判斷標準。</b></span></blockquote>
+  <blockquote class="n"><b class="mine">That this is the building of all principles I did, but particularly in the markets.</b><br><span class="zh"><b class="mine">這是我建立所有原則的方式,尤其是在市場上。</b></span></blockquote>
+  <blockquote class="n"><b class="mine">So rather than just the one that I would see, in the computer dubbed in all of them and where do they exist anywhere in the world. so give me one good decision rule that wherever it happen in the world that I have a track record of knowing how those work. And wherever it is in the world, you bring me that. And then make a collection of those kind of things and make them uncorrelated. So it provides your diversification. An so now you're executing a game plan.</b><br><span class="zh"><b class="mine">所以不是只看我眼前看到的那一個,而是把全部丟進電腦,看它們在世界上哪裡出現。給我一條好的決策規則,不管它在世界哪裡發生,我都有它運作情形的歷史紀錄;無論在哪裡,你都把它帶來給我。然後把這類規則做成一個集合,並讓它們彼此不相關,這就提供了分散。到這時你就是在執行作戰計畫。</b></span></blockquote>
+  <blockquote class="n"><b class="mine">So like I have rules that it should be timeless and universal.</b><br><span class="zh"><b class="mine">所以我的規則應該是跨時代且普遍適用的。</b></span></blockquote>
+  <blockquote class="n"><b class="mine">If it didn't work in a long period in time, I would need to understand why it didn't work then and would work now.</b><br><span class="zh"><b class="mine">如果它在很長一段時間裡沒有效果,我就得理解當時為什麼無效、為什麼現在會有效。</b></span></blockquote>
+  <p><b>怎麼接到第 2 節</b>:一條規則 = 一條「報酬流」。把「在全球各市場都有紀錄、長期有效」的規則收集起來,再挑出彼此不相關的 15 條左右,這就是「15 條不相關報酬流」的實作路徑。他在後段(21:51)也說:原則就是「如果發生這個,就做那個」的因果關係,他把它們寫成程式碼,「那就是我建立 Bridgewater 的方式」。</p>
+  <p class="note">我的提醒:回測有過度配適(overfitting)的風險。他的檢驗方式是要求規則「跨時代、普遍適用」,且在失效期要說得出原因。這是他的標準,不代表一般投資人用同樣方式就能得到相同結果。</p>
+</section>
+
+<section id="s4">
+  <h2 class="sec">4 自由錢與個性(7:17–13:33)</h2>
+  <p>主持人問他 30 多歲有兩個小孩時,是不是想當最好、要賺大錢。他說完全不是,只有兩層:第一層很簡單。</p>
+  <blockquote class="n"><b class="mine">Freedom money</b><br><span class="zh"><b class="mine">自由錢</b></span></blockquote>
+  <blockquote class="n"><b class="mine">Can I pay for the basics? I started to count how many months and years of living that way could I afford if it shut down.</b><br><span class="zh"><b class="mine">我付得起基本開銷嗎?我開始計算:如果事業收掉,以那樣的生活方式我還能撐幾個月、幾年。</b></span></blockquote>
+  <p>他說那個數字「容易達成」,比一百萬美元少得多,他不記得確切數字。重點是:這是「讓你敢冒險的安全墊」,不是財富目標。</p>
+  <blockquote class="n"><b class="mine">It depend on your personality.</b><br><span class="zh"><b class="mine">這取決於你的個性。</b></span></blockquote>
+  <blockquote class="n"><b class="mine">The compulsive thrill of climbing and aspiring to that is my personality type. Elon didn't need my level of needing.</b><br><span class="zh"><b class="mine">攀登並嚮往那個目標所帶來的強迫式刺激感,是我的個性類型。Elon 甚至不需要我那種程度的「需要」。</b></span></blockquote>
+  <p>背景:他設計了個性測驗並請 Elon Musk、Bill Gates、Reed Hastings 等人做過,把一類人稱為「<b>塑造者(shaper)</b>」,特點是從願景走到實現、從一萬英尺的大圖走到十公分的細節。他說 Musk 把錢看得很輕,曾把 PayPal 賺到的錢大半投入火箭與電動車,他勸 Musk 留一點保險,Musk 說不需要。主持人之一做測驗得到「探索者(explorer)」。測驗是免費的(見最後連結)。</p>
+  <p>他認為成功不是頂端:<b>「你不必爬到頂端才會快樂」</b>,他說金錢與快樂在他的觀察中沒有關聯,所以要先回答「這些錢要拿來做什麼」。他對成功的定義是「認識自己的本性,並找到最適合這個本性的路」。(24:55–26:01)</p>
+</section>
+
+<section id="s5">
+  <h2 class="sec">5 五大力量:總體視角(約 41:00–46:00)</h2>
+  <p>他自稱是「全球總體(global macro)」投資人,並說這是最好的投資方式,因為它把全世界與重大議題都納進來。他研究了過去約 500 年,因為「沒發生在我一生的事,要看看是不是發生在我之前」。他的想法是:新聞只持續一分鐘,要放到大週期裡看。五大力量:</p>
+  <table class="tbl">
+    <tr><th>#</th><th>力量</th><th>他的說法(摘要)</th></tr>
+    <tr><td>1</td><td>債務、貨幣、經濟</td><td>債務累積到還本付息擠壓支出,像血管裡的斑塊,痛到一個程度就要重整;一個人的債務是另一個人的資產;政府大赤字就要賣債,要問誰是買家。</td></tr>
+    <tr><td>2</td><td>財富與價值觀落差</td><td>落差越大,對民主的威脅越大;到了無法妥協、也不遵守規則的程度就是風險。</td></tr>
+    <tr><td>3</td><td>地緣政治秩序</td><td>戰爭的贏家訂規則;1945 年美國建立多邊體系,他認為現在多邊秩序已不復存在,於是分歧靠衝突解決,沒有法院可以去。</td></tr>
+    <tr><td>4</td><td>自然</td><td>乾旱、洪水、疫情歷史上殺死的人比戰爭多。</td></tr>
+    <tr><td>5</td><td>人類發明(尤其科技)</td><td>提高生活水準、預期壽命、人均 GDP。</td></tr>
+  </table>
+  <p>他說這五股力量「可以量測、也可以量測它們的互動」。HubSpot 那頁的第一項「The Macro Lens」就是用這個五力框架來讀新聞標題。</p>
+</section>
+
+<section id="s6">
+  <h2 class="sec">6 泡沫、黃金與配置(46:35–52:55)</h2>
+  <h3>黃金與資產配置</h3>
+  <ul>
+    <li>主持人問:聽說他的家族辦公室有 70–75% 在黃金 ETF?他答<b>「完全錯誤」</b>。</li>
+    <li>他認為投資人應該把約 <b>5% 到 15%</b> 放在黃金,作為「15 條不相關」中的一條;戰術上可以超配,尤其是債務危機且政府大量印鈔的時候。</li>
+    <li>先建立「策略性資產配置」(沒有任何看法時最好的平衡組合),再在上面做戰術性押注。<b>現金不是最安全的</b>:現金「確定性高、績效低」,長期往往表現最差。</li>
+  </ul>
+  <h3>泡沫的運作機制</h3>
+  <ul>
+    <li>泡沫不是在問「這支股票長期會不會成功」,因為泡沫中連最成功的公司都可能跌 80% 左右。</li>
+    <li>他區分「財富」與「錢」:財富可以憑空膨脹(一輪小額募資定出十億估值),但<b>你不能花財富,只能花錢</b>;當需要錢(例如借錢買資產、利率上升要還債),就得賣出財富換現金,這就是泡沫破裂的機制。</li>
+    <li>泡沫的成分包括:借錢買進、人人搶著買、買得比該有的多又不分散、「大家都在買」蓋過邏輯。常出現在重大新科技時期,人們把「科技會很偉大」誤認為「這支股票會很偉大」(他舉 Google 與 Yahoo 為例:技術是對的,但不代表買到的那家是贏家)。</li>
+    <li><b>泡沫指標</b>:他有一個回溯到約 1900 年、涵蓋多國的指標。他說當時指標大約在 2000 年與 1929 年水準的 <b>75%</b>,日本 1990 年更高。指標能告訴你「未來幾年(3 到 10 年說不準)不會是好投資」,但<b>不告訴你時機</b>。</li>
+    <li><b>時機要看「刺破泡沫」的力量</b>:最典型是貨幣緊縮(股票漲、債券跌後,股票預期報酬相對利率變低);另外如財富稅,因為要繳稅得賣資產。他強調「不要拿這個去交易」,只是說明有機制可循。</li>
+  </ul>
+  <p class="note">這段與 <a href="261027_財經訪談_Grantham與Chancellor談最後的泡沫.html">Grantham 那頁</a>的差別:Grantham 用估值與均值回歸判斷「多貴」,Dalio 另外強調「誰在被迫賣、為什麼要現金」來判斷「何時破」。兩人都說時機難抓。影片錄製日期我沒有查證,「75%」是影片當時的讀數,不是現在的數字。</p>
+</section>
+
+<section id="s7">
+  <h2 class="sec">7 紀錄、原則與人生(52:55–1:00:00,及前面的人生段落)</h2>
+  <h3>Bridgewater 的紀錄(他的說法)</h3>
+  <ul>
+    <li>它成為最大避險基金,是因為「長期穩定地以最小風險賺到優異報酬,而且與股市及其他市場不相關」。他說他經營時約 <b>31 年平均每年約 11.8%</b>,只有約三到四年虧損,且只有一年較大(字幕把年份與疫情混在一句,我無法確定是哪一年,外部報導見專題 E),另兩次約 -2%。</li>
+    <li>他強調「虧 50% 要賺 100% 才回本」,所以降低大虧比追高報酬更重要。</li>
+    <li>HubSpot 指南也寫「31 年平均 11.8%、只有三個虧損年」,與他口述一致;但指南是節目方製作的二手整理,數字沒有獨立查證。</li>
+  </ul>
+  <h3>痛苦 + 反思 = 進步(17:39–23:30)</h3>
+  <ul>
+    <li>他的公式是「<b>痛苦 + 反思 = 進步</b>」。痛苦是被動發生,但很多人跳過反思、困在痛苦裡。</li>
+    <li>他自 1969 年起做超覺靜坐(重複一個無意義的音節),說它讓意識接上潛意識,也是創意來源。</li>
+    <li>他把每次痛苦看成「現實如何運作」的謎題,解開後得到一顆「寶石」=一條原則;原則是「若發生 X 就做 Y」的因果關係,寫成程式碼。他已累積數千條。</li>
+  </ul>
+  <h3>用人(28:41)與原則(26:26)</h3>
+  <ul>
+    <li>他用人的順序是<b>價值觀 > 能力 > 技能</b>;技能最容易被時代改變(例如程式設計師未必永遠最重要)。</li>
+    <li>他鼓勵每個人寫下自己的原則,並以是否照做來檢驗;他說多數人不知道自己的原則,更少人寫下,最少的是言行一致。</li>
+    <li>他把 Bridgewater 的原則放上網路,下載約三百萬次,起因是外界把公司文化看成邪教,需要說明「想法擇優(idea meritocracy)、極度坦誠、極度透明」。</li>
+  </ul>
+  <h3>一個最重要的收穫(59:26)</h3>
+  <p>他說:要知道自己要什麼,明白那是一段「帶著自己的本性,碰上錯誤、從錯誤中學習」的旅程;並且「有意義的工作與有意義的關係」是關鍵。</p>
+</section>
+
+<section id="d0">
+  <h2 class="sec">深入專題:把影片提到的七件事展開並補外部資料</h2>
+  <div class="note"><b>怎麼讀這一區</b>:每個專題分「影片怎麼說」「外部資料補充」「我的解讀與限制」三塊。外部資料是我這次搜尋、並讀了部分原文(Fortune 兩篇、TipRanks、Bridgewater 官網頁)得到的,其餘來自搜尋摘要,多為二手報導,數字未對照原始文件。標「我的解讀」的是我的看法,不是 Dalio 說的,也不是投資建議。</div>
+</section>
+
+<section id="dA">
+  <h2 class="sec">專題 A:1982 年的谷底——「看對事件、看錯價格」</h2>
+  <h3>影片怎麼說(0:49–2:00)</h3>
+  <p>他 1975 年創辦 Bridgewater;1981–82 年判斷新興國家債務還不起,墨西哥 1982 年 8 月違約,他被請去國會作證;但他對經濟後果的判斷「大錯特錯」,賠了自己與客戶的錢,裁光員工,向父親借 4,000 美元。</p>
+  <h3>外部資料補充</h3>
+  <table class="tbl">
+    <tr><th>面向</th><th>外部報導說了什麼</th><th>可信度</th></tr>
+    <tr><td>判斷的來源</td><td><a href="https://fortune.com/2025/08/13/billionaire-ray-dalio-broke-early-career-borrowed-4000-from-dad" target="_blank" rel="noopener">Fortune(2025-08)</a>:約 1980–81 年他計算出美國銀行貸給各國的錢超出對方還得起的程度,預測會爆大型債務危機。</td><td>中(已讀原文,內容與影片一致)</td></tr>
+    <tr><td>錯在哪</td><td>同篇:墨西哥違約時他預期部位會獲利,但股市反而上漲,貨幣政策轉為寬鬆,讓他損失慘重;他自述「我大錯特錯」。另有報導轉述他說過,股市的底部與墨西哥違約幾乎同時出現。</td><td>中</td></tr>
+    <tr><td>公開曝光</td><td><a href="https://www.institutionalinvestor.com/article/b15130nxhjtqqq/the-education-of-ray-dalio" target="_blank" rel="noopener">Institutional Investor 人物報導</a>的搜尋摘要提到,他因為預測違約與蕭條而被請去作證並上《Wall Street Week》。另有電子報稱他在電視、報紙專欄與國會公開說「蕭條將至」。</td><td>中低(只讀到摘要)</td></tr>
+    <tr><td>裁員到只剩自己</td><td>有部落格說公司縮到只剩他一人;這是流傳很廣的說法,但我沒找到第一手來源。</td><td>低</td></tr>
+    <tr><td>借 4,000 美元</td><td>Fortune、Yahoo Finance 都報導;金額來自他自己的訪談,無第一手文件。</td><td>中</td></tr>
+    <tr><td>學到什麼</td><td>Fortune:他開始把每個決策的標準寫下來,後來發現可以程式化並回測,這就是「原則」的由來;並得出「分散可把風險降到最多 80%而不降報酬」的結論。</td><td>中</td></tr>
+  </table>
+  <h3>我的解讀與限制</h3>
+  <ul>
+    <li><b>兩層錯誤要分開看</b>:他對「事件」(債務危機會發生)判斷對了,錯的是「事件之後價格如何反應」——政策轉向寬鬆,讓風險資產反而上漲。這提醒:<b>因果鏈越長,環節越多,越需要分散而不是重押一個結論</b>。這是我的歸納,不是他的原話。</li>
+    <li>這個故事對應到你的筆記:「謙遜平衡膽識」=承認推論鏈可能斷;「15 條不相關報酬流」=不把成敗押在單一推論;「決策規則+回測」=把推論改成有紀錄的規則。三者其實是同一個教訓的三種做法。</li>
+    <li>敘事有「事後倒因為果」的風險:谷底故事常被講成「因為失敗所以成功」,我們看不到他當年的完整推論與當時其他選項。</li>
+  </ul>
+</section>
+
+<section id="dB">
+  <h2 class="sec">專題 B:五大力量——怎麼拿來讀新聞</h2>
+  <h3>影片怎麼說</h3>
+  <p>見第 5 節。他強調:這五股力量可以量測,也可以量測它們的互動,而新聞只是一分鐘的事。</p>
+  <h3>外部資料補充</h3>
+  <ul>
+    <li><b>標籤不統一</b>:Bridgewater 官網頁把五股力量寫成「債務、貨幣與經濟」「內部秩序(貧富與價值觀落差、政治極化)」「外部秩序(國際關係)」「自然力量(氣候等)」「人類創造力(科技,例如 AI 的生產力)」;其他報導用「政府債務、民粹、衝突、氣候、科技」等詞,指的是同一組。(<a href="https://www.bridgewater.com/research-and-insights/ray-dalio-shares-his-latest-on-the-five-big-forces-from-the-oceanxplorer" target="_blank" rel="noopener">Bridgewater</a>,我讀了該頁,但它只是訪談預告,沒有說明力量如何互動。)</li>
+    <li><b>債務週期的時間尺度</b>:有摘要把《變動中的世界秩序》(<i>The Changing World Order</i>)的長期債務週期描述為約 50 至 75 年:從低負債、硬通貨開始,歷經信用擴張與債務危機,最後走向法幣貶值(二手摘要,我沒讀書的原文)。他另有《應對重大債務危機的原則》(<i>Principles for Navigating Big Debt Crises</i>)談債務危機的處理。</li>
+    <li><b>外部衝突的類型</b>:同一批摘要把國與國的衝突分為貿易/經濟戰、科技戰、資本戰、地緣戰與軍事戰五種(二手)。</li>
+    <li>Dalio 在別處說過「天災、乾旱、洪水與疫情殺死的人比戰爭多」,與影片一致。</li>
+  </ul>
+  <h3>我的解讀:怎麼套用(我的設計,不是 Dalio 的方法)</h3>
+  <table class="tbl">
+    <tr><th>力量</th><th>可以看什麼(我建議的觀察項)</th><th>對投資組合的提問</th></tr>
+    <tr><td>債務與貨幣</td><td>政府赤字與利息支出占稅收比、10 年與 30 年期殖利率、央行態度</td><td>組合裡有沒有在「債務壓力 + 印鈔」環境下仍能抗跌的一條?(他的答案之一是黃金)</td></tr>
+    <tr><td>內部秩序</td><td>貧富差距、選舉與政策不確定性、財富稅提案</td><td>稅制或政策轉向是否可能迫使持有人賣資產?(見專題 D)</td></tr>
+    <tr><td>外部秩序</td><td>關稅、制裁、供應鏈與科技管制、軍事衝突</td><td>是否過度集中在單一國家或單一供應鏈?</td></tr>
+    <tr><td>自然</td><td>極端氣候、疫情、保險與農產品供給</td><td>哪些資產對這類衝擊沒有韌性?</td></tr>
+    <tr><td>創新</td><td>AI 帶來的生產力與資本支出</td><td>是新技術帶來價值,還是估值已超過價值?(見專題 D)</td></tr>
+  </table>
+  <p class="note">HubSpot 指南的練習是「選一則標題,歸入五力之一,判斷是單一事件或可預見的週期」。我多加了「對組合的提問」那一欄。五力之間有交互作用(例如債務壓力加劇內部撕裂),但 Dalio 的官方頁沒有說明互動方式,影片裡也只一句帶過,所以「如何量測互動」我無法補。</p>
+</section>
+
+<section id="dC">
+  <h2 class="sec">專題 C:黃金 5%–15%——他到底說了幾個數字</h2>
+  <h3>影片怎麼說(46:35–47:51)</h3>
+  <p>否認「家族辦公室 70–75% 在黃金 ETF」;建議投資人放 5%–15% 作為「15 條不相關」之一;債務危機加政府大量印鈔時是戰術上超配的好時機;現金長期表現最差。</p>
+  <h3>外部資料補充</h3>
+  <ul>
+    <li><b>數字不一致</b>:2025 年 9 月 11 日的報導(<a href="https://www.tipranks.com/news/gold-should-be-10-15-of-a-well-diversified-portfolio-says-ray-dalio" target="_blank" rel="noopener">TipRanks</a>,轉引 Reuters,我讀了該頁)寫他說分散投資組合應放「10% 到 15%」黃金,理由是黃金在危機中保值、與其他資產獨立,並連結到美國債務「擠壓其他支出」的警告。另有一個訪談彙整站寫他說過「5% 到 15%」。所以影片的「5–15%」與 2025 年「10–15%」是不同時點或不同場合的表述,不是矛盾,但也不能當成固定比例。</li>
+    <li>All Weather 組合:有二手文章說它傳統上放約 7.5% 黃金(來源品質低,我沒核對),低於他現在說的區間。</li>
+    <li><b>2025 年 11 月</b>:他在 CNBC 談 AI 泡沫時,也建議投資人分散與避險,並提到黃金(<a href="https://fortune.com/2025/11/20/nvidia-turns-negative-ray-dalio-ai-bubble-wealth-gaps/" target="_blank" rel="noopener">Fortune</a>)。</li>
+  </ul>
+  <h3>我的解讀與限制</h3>
+  <ul>
+    <li><b>範圍會隨時間與場合移動</b>,而且他自己區分「策略配置」(沒有看法時的平衡配比)與「戰術配置」(依債務與印鈔環境超配)。所以「5–15%」是策略到戰術的區間,不是建議你買多少。</li>
+    <li><b>與 Grantham 那集的觀點並列</b>:<a href="261027_財經訪談_Grantham與Chancellor談最後的泡沫.html">Chancellor 在那集說黃金近年已有類似泡沫的傾向</a>,Grantham 則說黃金近期「表現亮眼」但主張持有分散的非美股票比黃金更安全。兩種看法同時存在,代表黃金既是 Dalio 的「分散器」,也有人把它當成另一個擁擠交易。</li>
+    <li>黃金不產生現金流,且「債務危機+印鈔」是他的情境假設;若情境不成立,它的角色就不同。這也是為什麼要搭配其他不相關的報酬流。</li>
+  </ul>
+</section>
+
+<section id="dD">
+  <h2 class="sec">專題 D:泡沫機制——「財富」與「錢」的差別,以及他的泡沫指標</h2>
+  <h3>影片怎麼說(47:51–52:55)</h3>
+  <p>見第 6 節:財富可以憑空膨脹但不能花,需要錢時就得賣出財富;泡沫成分包括借貸買進、人人搶買、不分散;指標說「約在 2000 與 1929 的 75%」,但只告訴你不會是好投資,不告訴時機;刺破泡沫靠貨幣緊縮、財富稅等「逼人換現金」的力量。</p>
+  <h3>外部資料補充</h3>
+  <table class="tbl">
+    <tr><th>時點</th><th>公開說法</th><th>來源與可信度</th></tr>
+    <tr><td>2024-02-29</td><td>他在 LinkedIn 貼出:整體股市的泡沫指標讀數約 52,屬中間區間,結論是還不是泡沫。</td><td>搜尋摘要(二手)</td></tr>
+    <tr><td>2025 年某時</td><td>報導稱整體美股讀數約第 77 百分位;另有網站稱「80% 進入泡沫」,但我無法核實那個數字。</td><td>搜尋摘要;日期不明</td></tr>
+    <tr><td>2025-11-20</td><td>他在 CNBC 與 X 上說「市場確實有泡沫」,指標顯示美國正快速接近 1929 與 1999 的水準,但與兩者並非一模一樣;文中的具體數據是:融資餘額創高約 1.2 兆美元、前 10% 的美國人持有近 90% 的股票、並占約一半的消費支出。刺破泡沫的可能觸發:貨幣緊縮(他稱為「典型」),或財富稅(例如加州提議的一次性 5% 億萬富翁稅)。他沒有叫人離場,而是建議分散與避險。</td><td>已讀原文(<a href="https://fortune.com/2025/11/20/nvidia-turns-negative-ray-dalio-ai-bubble-wealth-gaps/" target="_blank" rel="noopener">Fortune</a>)</td></tr>
+    <tr><td>指標組成</td><td>有報導說他的指標結合六項衡量:估值相對傳統指標、價格是否隱含不可持續的條件、新買家進場的多寡等。完整六項與權重我沒找到一手文件。</td><td>搜尋摘要(二手)</td></tr>
+  </table>
+  <h3>我的解讀與限制</h3>
+  <ul>
+    <li><b>「75%」不等於「第 75 百分位」</b>:影片說的是「接近 2000 與 1929 水準的 75%」;2025 年的報導說的是百分位。兩者是否同一尺度,我無法確認,請不要互相換算。影片的錄製日期我也沒查,所以不知道那個 75% 對應哪一天。</li>
+    <li><b>把四個徵兆轉成可觀察的項目(我的建議)</b>:
+      <ul>
+        <li>財富成長快於支撐它的錢 → 市值對 GDP、估值倍數相對歷史分位</li>
+        <li>借貸推動買進 → 融資餘額、槓桿 ETF 規模、企業舉債擴產</li>
+        <li>人人都在買 → 散戶資金流入、募資與 IPO 熱度、新手帳戶增加</li>
+        <li>新科技的敘事 → 「這次不一樣」的說法是否取代了盈利檢驗</li>
+      </ul></li>
+    <li><b>「逼人賣的力量」才是時機</b>:他的核心是「泡沫不是因為太貴而破,而是因為有人必須賣而破」。可觀察:利率與央行立場、稅制提案、基金贖回與融資追繳(見本站 Ken Griffin 那頁談到的槓桿平倉)。</li>
+    <li>與 Grantham 並列:<a href="261027_財經訪談_Grantham與Chancellor談最後的泡沫.html">Grantham 用估值與均值回歸判斷「多貴、多久回歸」</a>,Dalio 另外問「誰被迫賣出」。兩者都承認時機難抓。</li>
+  </ul>
+</section>
+
+<section id="dE">
+  <h2 class="sec">專題 E:Bridgewater 的紀錄——「31 年 11.8%、三個虧損年」要怎麼讀</h2>
+  <h3>影片怎麼說(52:55–54:05)</h3>
+  <p>最大避險基金的原因是「長期穩定、風險小、與各市場不相關」;約 31 年平均約 11.8%;虧損約三到四年,多數不大(字幕對年份辨識混亂)。</p>
+  <h3>外部資料補充</h3>
+  <table class="tbl">
+    <tr><th>項目</th><th>報導</th><th>備註</th></tr>
+    <tr><td>統計口徑</td><td>Institutional Investor:Pure Alpha 自 1991 年 12 月成立以來,扣費後只有三個年度虧損(2020 年初的報導);CNBC 也有「平均約 12%、三個虧損年」的說法;另一則報導稱 28 年平均約 11.5%。</td><td>不同報導的區間、費用口徑、基金份額(Pure Alpha I、II、槓桿版)不同,所以 11.5–12.8% 都有人引用</td></tr>
+    <tr><td>2018</td><td>Pure Alpha 約 +14.6%(Bloomberg、CNBC)</td><td>多數對沖基金當年表現不佳</td></tr>
+    <tr><td>2019</td><td>Bloomberg 報導 Pure Alpha II 損失約 0.5%,是 2000 年以來首次虧損</td><td>當年其他同業多為豐收</td></tr>
+    <tr><td>2020</td><td>有報導稱 Pure Alpha 全年約 -7.6%,較高槓桿版約 -12.6%;Bridgewater 自家資料說 2020 年初曾回撤逾 20%,谷底後累計獲利逾 50%</td><td>後者為「回撤」不是日曆年報酬;-7.6% 只有單一來源</td></tr>
+    <tr><td>All Weather</td><td>Institutional Investor 引述:自 1996 年成立平均約 7.8%/年</td><td>這是另一個策略(風險平價),與 Pure Alpha 不同</td></tr>
+  </table>
+  <p>主要來源:<a href="https://www.bloomberg.com/news/articles/2020-01-07/ray-dalio-s-pure-alpha-ii-loses-money-for-first-time-since-2000" target="_blank" rel="noopener">Bloomberg(2020)</a> · <a href="https://www.cnbc.com/2019/01/07/bridgewaters-pure-alpha-fund-posts-nearly-15-percent-gain-in-2018.html" target="_blank" rel="noopener">CNBC(2019)</a> · <a href="https://www.institutionalinvestor.com/article/b1jsw5lw26ncfq/In-Disappointing-Year-Bridgewater-s-Flagship-Fund-Returns-0-5" target="_blank" rel="noopener">Institutional Investor</a>。以上都是搜尋摘要,我沒有開原文,也沒有基金的經審計紀錄。</p>
+  <h3>我的解讀與限制</h3>
+  <ul>
+    <li><b>「虧損年」的年份我先前猜是 2020,現在看證據不只一個可能</b>:Bloomberg 說 2019 年的虧損是 2000 年以來首次,代表 2000 年也有虧損;加上 2019、2020,與「約三個虧損年」的說法可以對得上,但我沒有逐年表可以證明,所以只能說:影片裡的「2000」與「COVID」兩個詞可能都是真的虧損年,字幕把它們混在同一句。</li>
+    <li><b>是「他經營時的」31 年,且是特定基金</b>:這個數字是 Dalio 自己的說法,對象多半是旗艦的 Pure Alpha,並不是整個 Bridgewater 的所有基金,也不包括他卸下日常管理之後的表現。我沒有查他之後的績效。</li>
+    <li><b>「與市場不相關」要和績效分開驗證</b>:這是他的賣點,我沒找到獨立研究驗證它;股票市場大跌年份與基金表現的關係也需要逐年資料。</li>
+    <li>「虧 50% 要賺 100% 才回本」是算術事實:回撤越深,復原所需報酬越大,所以他把「降低大虧」放在比「提高報酬」更前面。</li>
+  </ul>
+</section>
+
+<section id="dF">
+  <h2 class="sec">專題 F:用人順序——價值觀 > 能力 > 技能</h2>
+  <h3>影片怎麼說(28:41–30:43)</h3>
+  <p>多數人看履歷找技能,他認為順序應反過來:先看價值觀,再看能力,技能最不重要,因為能力強的人能換技能,而技能會被時代改變(例如程式設計師未必永遠是最重要的人)。他舉的例子是第一個員工是挨家挨戶賣聖經的人,不懂研究或金融,但很好奇。他還說「人才比錢更重要」,金錢追著人才跑(以 Elon Musk 為例:他沒有錢,有人投資他)。</p>
+  <h3>外部資料補充</h3>
+  <ul>
+    <li>HubSpot 指南把這一點整理成練習:在下次面談前,先用「價值觀、能力、技能」的順序替候選人或自己評分。</li>
+    <li>他設計個性測驗(<a href="https://principlesyou.com/" target="_blank" rel="noopener">PrinciplesYou</a>),影片中的用途是「理解本性、讓互補的人合作而不是互相厭煩」,與用人哲學相連。</li>
+    <li>與 Bridgewater 文化相關的「想法擇優」「極度透明」「依可信度加權決策」是《原則》一書的核心概念;這幾個詞我是依一般了解補充,本次搜尋沒有逐一核對原文。</li>
+  </ul>
+  <h3>我的解讀與限制</h3>
+  <ul>
+    <li>「價值觀」在實務上最難驗證:履歷看得到技能,看不到價值觀。Dalio 的辦法是長期觀察與測驗,小公司不一定做得到。</li>
+    <li>「倖存者偏差」:賣聖經的人成功是一則好故事,但我們沒看到同樣用人方式失敗的案例。這是我的提醒,不是影片內容。</li>
+    <li>與投資的連結(我的串連):「價值觀>能力>技能」類似他的投資邏輯:先有原則(價值觀),再有可回測的規則(能力),最後才是具體標的(技能)。</li>
+  </ul>
+</section>
+
+<section id="dG">
+  <h2 class="sec">專題 G:痛苦 + 反思 = 進步——可操作的版本</h2>
+  <h3>影片怎麼說(17:39–23:30)</h3>
+  <p>痛苦會自動來,但反思要自己做;反思的產物是一條「原則」(若發生 X 則做 Y);他用超覺靜坐(自 1969 年)讓意識連到潛意識;把原則寫成程式碼。</p>
+  <h3>外部資料補充</h3>
+  <ul>
+    <li><b>五步流程</b>:在《原則》與他 2018 年的動畫系列中,他把進步拆成:設定目標、找出擋住目標的問題、診斷根本原因、設計解法、執行(<a href="https://www.cnbc.com/2018/05/09/bridgewaters-ray-dalio-follow-these-5-steps-to-succeed.html" target="_blank" rel="noopener">CNBC</a> 的標題與摘要;我只讀到搜尋摘要,措辭需對照原書《Principles: Life and Work》)。</li>
+    <li>他在 CNBC(2019)說,他開始體會到「痛苦加反思等於進步」;書中的原則是「走向痛苦而不是躲開它」。</li>
+    <li>他也曾公開說冥想是他成功的重要因素(<a href="https://www.nbcsandiego.com/news/business/money-report/billionaire-ray-dalio-attributes-his-success-to-meditation-and-shares-his-best-advice-for-others/3781198" target="_blank" rel="noopener">NBC</a>,我沒讀全文)。</li>
+  </ul>
+  <h3>我的解讀:一個可以直接用的反思表(我的設計,把 HubSpot 的練習和五步流程合併)</h3>
+  <table class="tbl">
+    <tr><th>欄位</th><th>怎麼填</th><th>投資例子(舉例,非建議)</th></tr>
+    <tr><td>1 痛苦(不加評論)</td><td>只寫發生了什麼、損失多少</td><td>某檔重押的股票下跌 40%</td></tr>
+    <tr><td>2 現實的規律</td><td>這件事告訴我「事情實際怎麼運作」?</td><td>我把單一故事當成確定性,沒有想「如果錯了怎麼辦」</td></tr>
+    <tr><td>3 診斷</td><td>根本原因是資訊、流程、還是情緒?</td><td>沒有事先訂出場規則</td></tr>
+    <tr><td>4 新規則(若 X 則 Y)</td><td>寫成能被檢驗的句子</td><td>單一標的占比上限;若跌破某條件就重新檢視</td></tr>
+    <tr><td>5 回測 / 檢驗</td><td>這個規則放到過去、放到其他市場,結果如何?</td><td>回到第 3 節:它是否「跨時代、普遍適用」?</td></tr>
+  </table>
+  <p class="note">這張表是我把他的「作戰計畫」(第 3 節)和「痛苦+反思」(第 7 節)串起來的結果,Dalio 沒有給這個表格。</p>
+</section>
+
+<section id="s8">
+  <h2 class="sec">8 HubSpot 指南對照:「Ray Dalio's Rules of The Game」</h2>
+  <p>這是 My First Million 製作的整理指南,共五個框架加一則補充故事,每個框架後面附一個「Try This」練習。它的內容和影片高度重疊,以下是對照與差異:</p>
+  <table class="tbl">
+    <tr><th>指南的框架</th><th>重點(我的摘要)</th><th>對應本頁</th><th>與影片的差異</th></tr>
+    <tr><td>1 五大力量</td><td>用五力讀新聞:債務週期、內部秩序(貧富與價值觀落差)、地緣秩序、自然、人類創新;練習是把本週一則標題歸到其中一種力量,並判斷是單一事件還是可預見的週期。</td><td>第 5 節</td><td>指南把第 2 力稱為「internal order」,影片中他講的是財富與價值觀落差對民主的威脅,實質相同。</td></tr>
+    <tr><td>2 反向用人</td><td>價值觀 > 能力 > 技能;第一個員工是挨家挨戶賣聖經的人。練習是用這個順序替候選人或自己排序。</td><td>第 7 節</td><td>一致。</td></tr>
+    <tr><td>3 如何辨認泡沫</td><td>四個徵兆:財富成長快於支撐它的貨幣、靠大量借貸買進、「人人都在買」的 FOMO、常伴隨真正的新科技;刺破泡沫的多半是迫使持有人把財富換成現金的力量(央行緊縮、財富稅)。練習是用四個徵兆檢查一個你在看的資產。</td><td>第 6 節</td><td>指南沒有提「泡沫指標約在 2000 與 1929 的 75%」,那是影片中的口述。</td></tr>
+    <tr><td>4 投資的聖杯</td><td>找 15 條良好且不相關的押注;卡片寫「15 條、約 80% 風險降低、約 5 倍報酬風險比」。練習是列出你的各項押注,標出哪些真的獨立,並問「最大的一項歸零時還剩什麼」。</td><td>第 2 節</td><td>數字與影片口述一致(我在第 2 節的驗算是 74%、3.9 倍,見該節說明)。</td></tr>
+    <tr><td>5 金錢、自由與何時收手</td><td>「自由錢」= 收入停止後的可撐時間;收入大於支出是財務健康的地基;知道自己的本性並找到最適合的路。練習是算出自己的現金跑道,以及下一筆錢要拿來做什麼。</td><td>第 4 節</td><td>指南稱他身價約 200 億美元、穿 Banana Republic 西裝、多年不願搭私人飛機;影片中是主持人說「約 200 億」、並提到西裝的玩笑。</td></tr>
+    <tr><td>補充故事:1982</td><td>他公開判斷新興市場債務會爆(墨西哥當年 8 月違約並向國會作證),但同時押注股市會崩,結果沒崩;賠光、裁員、向父親借 4,000 美元。學到「謙遜平衡膽識」與「分散的數學」。</td><td>第 1 節</td><td>指南說他當時 34 歲(影片中主持人說 34、35 歲)。</td></tr>
+  </table>
+  <p><b>跟你筆記的關係</b>:你的筆記全部出自影片,其中「15 條報酬流」「邊際效益」「風險降 80%」「自由錢」「個性」直接對上指南的第 4、5 節;「作戰計畫 / 決策規則 / 回測 / 放諸四海」是指南<b>沒有展開</b>的部分,只有影片有,所以第 3 節是這頁的獨家內容。</p>
+  <p class="note">指南其他細節:開頭說他 12 歲用桿弟收入買第一支股票(只選了低於 5 美元的),「64 年後」成為最大避險基金創辦人;影片中他說的是「少年時當桿弟」,沒有明確說 12 歲,我沒有核對這個年齡。指南列出做過個性測驗的人是 Elon Musk、Bill Gates、Reid Hoffman,影片字幕寫的是「Reed Hastings」(Netflix 創辦人),兩者不同,我沒有查證哪個正確。</p>
+</section>
+
+<section id="s8b">
+  <h2 class="sec">9 章節時間軸(你提供的 Show Notes)</h2>
+  <table class="tbl">
+    <tr><th>時間</th><th>主題</th><th>對應本頁</th></tr>
+    <tr><td>0:00</td><td>Intro</td><td>0 摘要</td></tr>
+    <tr><td>0:49</td><td>Hitting rock bottom</td><td>1 谷底</td></tr>
+    <tr><td>8:28</td><td>Personality traits of the 1%</td><td>4 自由錢與個性</td></tr>
+    <tr><td>14:22</td><td>Partnerships that win</td><td>7(合作與差異)</td></tr>
+    <tr><td>18:25</td><td>Pain + Reflection = Progress</td><td>7</td></tr>
+    <tr><td>23:30</td><td>What's the money for anyway?</td><td>4</td></tr>
+    <tr><td>26:26</td><td>Principles</td><td>7</td></tr>
+    <tr><td>28:41</td><td>Ray's hiring philosophy</td><td>7</td></tr>
+    <tr><td>30:43</td><td>Being a caddy</td><td>少年時期:當桿弟、買第一支股票</td></tr>
+    <tr><td>35:16</td><td>Mistakes smart investors make</td><td>3(見查核說明)</td></tr>
+    <tr><td>37:01</td><td>What Ray spends his money on</td><td>節儉、對海洋探索的投入</td></tr>
+    <tr><td>39:13</td><td>Aliens</td><td>機率加權的信念</td></tr>
+    <tr><td>41:00</td><td>The 5 Big Forces</td><td>5</td></tr>
+    <tr><td>46:35</td><td>Investing in Gold and Bubble Mechanics</td><td>6</td></tr>
+    <tr><td>52:55</td><td>How Bridgewater became the biggest hedge fund</td><td>7</td></tr>
+    <tr><td>55:40</td><td>The gap between the best and everyone else</td><td>7(原則)</td></tr>
+    <tr><td>59:26</td><td>The 1 Big Takeaway</td><td>7</td></tr>
+  </table>
+  <p>連結(你提供):<a href="https://principlesyou.com/" target="_blank" rel="noopener">Ray's Personality Test</a> · <a href="https://www.bridgewater.com/" target="_blank" rel="noopener">Bridgewater Associates</a></p>
+</section>
+
+<section id="s9">
+  <h2 class="sec">查核與說明</h2>
+  <ul>
+    <li><b>HubSpot 指南</b>:我一開始用網址 <code>offers.hubspot.com/ray-dalios-rules-of-the-game</code> 只讀到要填表的登陸頁簡介;改用你給的 <code>/view/</code> 網址後,頁面直接顯示指南全文,不需要填表,我沒有送出任何表單或填入任何個人資料。第 8 節是我對指南全文的中文摘要,不是逐段翻譯。</li>
+    <li><b>影片內容的來源</b>:我讀的是 YouTube 的自動英文字幕,有辨識錯誤(例如把 Reed Hastings 寫成 "Rick Hastings"、把某年份與疫情混在一起),本頁是中文摘要,不是逐字稿;引用數字請回到影片確認。</li>
+    <li><b>你的筆記</b>:粗體的英文是你寫的,基本上是影片字幕的節錄。有兩處我順手修正:<i>humidity</i> 改為 <i>humility</i>;其餘的小拼字(如 "wold"、"An so")我原樣保留。</li>
+    <li><b>Show Notes 時間差</b>:你貼的章節表把「Mistakes smart investors make」標在 35:16,但字幕裡「聰明人最常犯的錯:沒有作戰計畫」這段在約 4:02(影片開頭的內容),35:16 附近談的是 Sam 的成功時間表與「2,000 萬美元」目標,可能是章節標記不準。我把「作戰計畫」放在第 3 節。</li>
+    <li><b>我的驗算</b>:第 2 節的 74%、3.9 倍是我用等波動、零相關、等權重假設算的,與 Dalio 口述的「約 80%、約五倍」不同,差異已標明。</li>
+    <li><b>專題 A–G 的外部資料</b>:我讀了原文的有 Fortune 2025-08-13、Fortune 2025-11-20、TipRanks(轉引 Reuters)與 Bridgewater 官網的五力頁;其餘(Institutional Investor、Bloomberg、CNBC、NBC 等)只讀到搜尋摘要,沒有開原文,數字請回到原文核對。Bridgewater 的績效沒有經審計的逐年表;影片中的年份(「2000」與「COVID」)與外部報導(2019 損失約 0.5%、2020 有回撤)兩者可能都對,我無法確定哪一年是影片所指。「泡沫指標六項衡量」只確認了其中幾項。</li>
+    <li><b>投資提醒</b>:Dalio 的「泡沫指標讀數」「黃金 5–15%」是他個人當時的看法;影片錄製日期我沒有查證。這不是投資建議。</li>
+  </ul>
+</section>
+</main>
+</div>
+</body>
+</html>
