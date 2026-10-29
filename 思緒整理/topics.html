@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>議題筆記表</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+:root{--c-think:#b4531a;--c-q:#6a4fb3;--c-react:#2e7d4f;--c-act:#2f6f8f;--grid:#e9e4da}
+@media (prefers-color-scheme: dark){:root{--c-think:#e58b4f;--c-q:#a58cf0;--c-react:#6cc08f;--c-act:#7fbfdc;--grid:#2a2720}}
+.wrap{max-width:1400px}
+.tb input#tTitle{flex:1;min-width:14em;font-weight:600}
+.tb input#tUrl{flex:1;min-width:12em}
+#hintbar{font-size:13px;color:var(--muted);margin:8px 0}
+#hintbar b{color:var(--accent)}
+#board{position:relative;height:72vh;min-height:420px;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+#canvas{position:relative;background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:24px 24px}
+#edges{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+#edges path{fill:none;stroke:var(--muted);stroke-width:2}
+#edges path.hit{stroke:transparent;stroke-width:14;pointer-events:stroke;cursor:pointer}
+.node{position:absolute;width:260px;background:var(--bg);border:1px solid var(--line);border-top:4px solid var(--tc);border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);z-index:2}
+.node.think{--tc:var(--c-think)}.node.q{--tc:var(--c-q)}.node.react{--tc:var(--c-react)}.node.act{--tc:var(--c-act)}
+.node.src{outline:2px dashed var(--tc)}
+.nh{display:flex;gap:4px;align-items:center;padding:4px 6px;cursor:grab;touch-action:none;user-select:none}
+.nh select{border:0;background:transparent;color:var(--tc);font-weight:700;font-size:13px;padding:2px;cursor:pointer;flex:1}
+.nh button{padding:0 7px;font-size:14px;line-height:1.5;background:transparent;color:var(--muted)}
+.nh button:hover{color:var(--tc)}
+.nb{padding:0 8px 8px}
+.nb input,.nb textarea{width:100%;border-color:transparent;background:transparent;padding:4px 6px}
+.nb input:focus,.nb textarea:focus{border-color:var(--line);background:var(--surface)}
+.nb input{font-weight:700}
+.nb textarea{min-height:3.4em;resize:vertical;font-size:13px;display:block}
+.nb textarea.auto{resize:none;overflow:hidden}
+.nh button.on{color:var(--tc);background:var(--accent-soft)}
+.elabel{position:absolute;transform:translate(-50%,-50%);z-index:3;font-size:12px;background:var(--surface);border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:0 8px;cursor:pointer;white-space:nowrap;max-width:200px;overflow:hidden;text-overflow:ellipsis}
+.elabel:hover{border-color:var(--accent);color:var(--accent)}
+.elabel.empty{opacity:.35}
+#pop{position:absolute;z-index:9;background:var(--surface);border:1px solid var(--accent);border-radius:8px;padding:8px;display:flex;gap:6px;align-items:center;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+#pop[hidden]{display:none}
+#pop input{width:12em}
+.node{width:280px}
+.rz{position:absolute;right:-4px;top:0;bottom:0;width:10px;cursor:ew-resize;touch-action:none}
+.rz::after{content:"";position:absolute;right:4px;top:50%;height:28px;width:3px;margin-top:-14px;border-radius:2px;background:var(--line)}
+.node:hover .rz::after,.rz:hover::after{background:var(--tc)}
+.nh select[data-act=status]{flex:none;font-size:12px;font-weight:600;color:var(--muted)}
+.node.st-ok .nh select[data-act=status]{color:var(--c-react)}
+.node.st-ok{box-shadow:0 0 0 2px var(--c-react)}
+.node.st-out{--tc:#d32f2f;background:#fdecea;border-color:#d32f2f;box-shadow:0 0 0 2px #d32f2f}
+.node.st-out .nb input:focus,.node.st-out .nb textarea:focus{background:#fff}
+@media (prefers-color-scheme: dark){.node.st-out{background:#3a1b1b;border-color:#ef6b6b;box-shadow:0 0 0 2px #ef6b6b;--tc:#ef6b6b}.node.st-out .nb input:focus,.node.st-out .nb textarea:focus{background:#2a1212}}
+.nt{padding:0 8px 8px;font-size:12px}
+.nt summary{cursor:pointer;color:var(--muted);padding:2px 0}
+.nt textarea{width:100%;min-height:2.6em;resize:vertical;font-size:12px;margin:4px 0;display:block}
+.nrow{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.nrow input,.nrow select{font-size:12px;padding:2px 4px}
+.nrow label{color:var(--muted)}
+.diff{color:var(--accent);font-weight:600;margin-top:2px}
+#track{font-size:13px;margin:6px 0}
+#alertBox{background:#fdecea;border:1px solid #d32f2f;border-left:6px solid #d32f2f;border-radius:8px;padding:8px 14px;margin:8px 0;color:#7a1f1f}
+#alertBox[hidden]{display:none}
+#alertBox .ai{cursor:pointer;padding:2px 0;font-size:14px}
+#alertBox .ai:hover{text-decoration:underline}
+@media (prefers-color-scheme: dark){#alertBox{background:#3a1b1b;border-color:#ef6b6b;color:#ffb4b4}}
+.empty-msg{position:absolute;left:24px;top:24px;color:var(--muted)}
+.ph{display:none}
+@page{size:A3 landscape;margin:10mm}
+@media print{
+  body.printmap{--bg:#fff;--surface:#fff;--text:#222;--muted:#555;--line:#ccc;--accent:#b4531a;--accent-soft:#f6e6da;--c-think:#b4531a;--c-q:#6a4fb3;--c-react:#2e7d4f;--c-act:#2f6f8f;--grid:#fff;background:#fff;color:#222;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.printmap .crumbs,body.printmap .sub,body.printmap h1,body.printmap #bar,body.printmap #savedBox,body.printmap .bar,body.printmap #adds,body.printmap #hintbar,body.printmap #parentNote,body.printmap #pop,body.printmap .rz{display:none}
+  body.printmap .wrap{max-width:none;padding:0}
+  body.printmap .ph{display:block;margin-bottom:8px}
+  body.printmap .ph h2{margin:0;font-size:18px;border:0;padding:0}
+  body.printmap .ph div{font-size:12px;color:#555}
+  body.printmap #board{overflow:hidden;border:0;height:auto}
+  body.printmap .node{box-shadow:none}
+  body.printmap .node.st-out{background:#fdecea;border-color:#d32f2f;box-shadow:0 0 0 2px #d32f2f}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs" id="nav"></div>
+  <h1>議題筆記表</h1>
+  <p class="sub">把文章重點、新聞議題傳導、專題報告整理成思維圖:每個【思維內容】寫重點與細項,拖曳調整位置、用箭頭連出因果,兩三個內容匯成【新的問題】,再導出【市場反應】與【行動方式】。</p>
+  <div class="bar" id="bar"></div>
+
+  <div class="bar">
+    <div class="row tb">
+      <label for="topic">議題</label><select id="topic"></select>
+      <button id="newTopic">+ 新增議題</button>
+      <button id="example" class="ghost">載入範例</button>
+      <button id="dup" title="複製到今天,保留原判斷日,清空檢驗狀態與最新變化">建立追蹤版</button>
+      <button id="delTopic" class="ghost">刪除議題</button>
+    </div>
+    <div class="row tb">
+      <input id="tTitle" placeholder="議題名稱(例:美債供給與殖利率)">
+      <select id="tSrc"><option>文章</option><option>新聞議題</option><option>專題報告</option><option>其他</option></select>
+      <input id="tUrl" placeholder="來源名稱或連結">
+    </div>
+  </div>
+
+  <div class="row" id="adds">
+    <button data-add="think">+ 思維內容</button><button data-add="q">+ 新的問題</button>
+    <button data-add="react">+ 市場反應</button><button data-add="act">+ 行動方式</button>
+    <span class="sp"></span><button id="tidy" class="ghost">整理排版</button><button id="printMap">列印思維圖</button>
+  </div>
+  <div id="parentNote" class="hint" hidden></div>
+  <div id="hintbar">拖曳卡片上方可移動;按卡片上的 <b>→</b> 再點另一張卡片即可連線;點箭頭上的標籤可寫關係、反轉方向或刪除。市場變化後按「建立追蹤版」,在【市場反應】與【行動方式】卡片的「追蹤」欄寫最新變化,並標成符合 / 超出計畫(思維內容與新的問題不需檢驗)。</div>
+  <div id="track"></div>
+  <div id="alertBox" hidden></div>
+  <div id="printHead" class="ph"></div>
+  <div id="board"><div id="canvas"><svg id="edges"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" style="fill:var(--muted);stroke:none"/></marker></defs><g id="paths"></g></svg><div id="nodes"></div><div id="labels"></div><div id="pop" hidden><input id="popLabel" placeholder="關係(例:導致、抵銷)"><button id="popFlip" class="ghost">反轉</button><button id="popDel" class="ghost">刪除</button><button id="popOk">完成</button></div></div></div>
+</div>
+<script src="shared.js"></script>
+<script>
+const TYPES={think:["思維內容","重點","細項"],q:["新的問題","新的問題","細項"],react:["市場反應","投資市場可能的反應","細項"],act:["行動方式","行動方式","細項"]};
+const SRC=["文章","新聞議題","專題報告","其他"];
+const uid=()=>Math.random().toString(36).slice(2,8);
+const nodesEl=$("#nodes"),labelsEl=$("#labels"),pathsEl=$("#paths"),canvas=$("#canvas"),board=$("#board"),pop=$("#pop"),svg=$("#edges");
+let curId=null,linkFrom=null,drag=null,popEdge=null,D=null;
+const T=()=>D&&D.topics.find(t=>t.id===curId);
+const N=id=>T().nodes.find(n=>n.id===id);
+const ro=new ResizeObserver(()=>drawEdges());
+const TRACK={react:1,act:1}; // 只有市場反應、行動方式需要檢驗
+const BY={me:"我的看法",inst:"機構建議",other:"其他"};
+const ST={"":"未檢驗",ok:"✓ 符合計畫",out:"✗ 超出計畫"};
+const diffDays=n=>(n.judgeDate&&n.reactDate)?Math.round((new Date(n.reactDate)-new Date(n.judgeDate))/864e5):null;
+const diffText=n=>{const k=diffDays(n);return k===null?"":k===0?"判斷日與反應日同一天":k>0?`市場晚 ${k} 天才反應`:`市場早 ${-k} 天已反應`};
+function refreshTrack(){
+  const t=T(),box=$("#alertBox"),tr=$("#track");
+  if(!t){box.hidden=true;tr.textContent="";return}
+  const ns=t.nodes.filter(n=>TRACK[n.type]);
+  nodesEl.querySelectorAll(".node").forEach(el=>{const n=N(el.dataset.id);if(!n)return;el.classList.toggle("st-out",n.status==="out");el.classList.toggle("st-ok",n.status==="ok")});
+  const out=ns.filter(n=>n.status==="out"),ok=ns.filter(n=>n.status==="ok");
+  const rate=by=>{const c=ns.filter(n=>(n.by||"me")===by&&n.status);return c.length?`${BY[by]}超出 ${c.filter(n=>n.status==="out").length}/${c.length}`:null};
+  const ds=ns.map(n=>diffDays(n)).filter(x=>x!==null);
+  tr.innerHTML=["符合 "+ok.length,"超出 "+out.length,"未檢驗 "+(ns.length-ok.length-out.length),rate("me"),rate("inst"),ds.length?`平均時差 ${(ds.reduce((a,b)=>a+b,0)/ds.length).toFixed(1)} 天(${ds.length} 筆)`:null].filter(Boolean).join(" · ");
+  box.hidden=!out.length;
+  box.innerHTML=`<b>⚠ 超出計畫(${out.length})</b>`+out.map(n=>`<div class="ai" data-go="${n.id}">【${TYPES[n.type][0]}・${BY[n.by||"me"]}】${esc(n.title||"(未填)")}${n.change?" — "+esc(n.change):""}</div>`).join("");
+}
+$("#alertBox").addEventListener("click",e=>{
+  const a=e.target.closest("[data-go]"),el=a&&nodesEl.querySelector(`[data-id="${a.dataset.go}"]`);
+  if(el)board.scrollTo({left:Math.max(0,el.offsetLeft-20),top:Math.max(0,el.offsetTop-20),behavior:"smooth"});
+});
+$("#parentNote").addEventListener("click",e=>{
+  if(!e.target.closest("button"))return;
+  const p=T().parent;
+  if(!(store[p.date]&&(store[p.date].topics||[]).some(x=>x.id===p.id)))return alert("找不到原議題(可能已刪除)");
+  $("#date").value=p.date;curId=p.id;$("#date").dispatchEvent(new Event("change"));
+});
+
+function render(d){
+  D=d;
+  if(!d.topics.find(t=>t.id===curId))curId=d.topics.length?d.topics[0].id:null;
+  $("#topic").innerHTML=d.topics.map(t=>`<option value="${t.id}"${t.id===curId?" selected":""}>${esc(t.title||"(未命名議題)")}</option>`).join("")||"<option>尚無議題</option>";
+  const t=T();
+  $("#tTitle").value=t?t.title:"";$("#tSrc").value=t?t.src:"文章";$("#tUrl").value=t?t.url:"";
+  [...document.querySelectorAll("#adds button,#tTitle,#tSrc,#tUrl,#dup,#delTopic")].forEach(b=>b.disabled=!t);
+  const pn=$("#parentNote");
+  pn.hidden=!(t&&t.parent);
+  if(t&&t.parent)pn.innerHTML=`追蹤自「${esc(t.parent.title)}」(${t.parent.date}) <button class="ghost">開啟原議題</button>`;
+  closePop();drawNodes();
+}
+function drawNodes(){
+  ro.disconnect();nodesEl.innerHTML="";
+  const t=T();
+  if(!t){canvas.style.width="800px";canvas.style.height="400px";pathsEl.innerHTML="";labelsEl.innerHTML="";nodesEl.innerHTML='<div class="empty-msg">尚無議題。按「+ 新增議題」或「載入範例」開始。</div>';refreshTrack();return}
+  t.nodes.forEach(n=>{
+    const ty=TYPES[n.type]||TYPES.think;
+    const el=document.createElement("div");
+    el.className="node "+n.type;el.dataset.id=n.id;el.style.left=n.x+"px";el.style.top=n.y+"px";el.style.width=widthOf(n)+"px";
+    const opt=(o,v)=>Object.entries(o).map(([k,x])=>`<option value="${k}"${k===v?" selected":""}>${x}</option>`).join("");
+    el.innerHTML=`<div class="nh"><select data-act="type">${Object.entries(TYPES).map(([k,v])=>`<option value="${k}"${k===n.type?" selected":""}>${v[0]}</option>`).join("")}</select>${TRACK[n.type]?`<select data-act="status" title="與計畫比較">${opt(ST,n.status||"")}</select>`:""}<button data-act="bullets" class="${n.bullets?"on":""}" title="細項條列式(開啟後內容全部顯示)">☰</button><button data-act="link" title="連線到另一張卡片">→</button><button data-act="del" title="刪除">×</button></div>
+      <div class="nb"><input data-f="title" placeholder="${ty[1]}" value="${esc(n.title)}"><textarea data-f="detail" class="${n.bullets?"auto":""}" placeholder="${ty[2]}">${esc(n.detail)}</textarea></div>
+      ${!TRACK[n.type]?"":`<details class="nt"${n.change||n.reactDate||n.status?" open":""}><summary>追蹤</summary><textarea data-f="change" placeholder="最新變化">${esc(n.change)}</textarea>
+      <div class="nrow"><select data-f="by">${opt(BY,n.by||"me")}</select><label>判斷日 <input type="date" data-f="judgeDate" value="${esc(n.judgeDate)}"></label><label>反應日 <input type="date" data-f="reactDate" value="${esc(n.reactDate)}"></label></div>
+      <div class="diff">${diffText(n)}</div></details>`}`;
+    el.insertAdjacentHTML("beforeend",'<div class="rz" title="拖曳調整卡片寬度,雙擊還原預設"></div>');
+    nodesEl.appendChild(el);ro.observe(el);
+  });
+  growAll();fit();drawEdges();refreshTrack();
+}
+// 白板不限寬度,可往右、往下延伸;每張卡片可拖曳右緣改變寬度(預設 280)
+const MINW=180;
+const defaultW=()=>280;
+const widthOf=n=>n.w||280;
+const X=c=>40+c*340;
+function fit(){
+  let w=Math.max(board.clientWidth,1600),h=Math.max(board.clientHeight,900);
+  T().nodes.forEach(n=>{const r=rectOf(n.id);w=Math.max(w,n.x+(r?r.w:280)+140);h=Math.max(h,n.y+(r?r.h:160)+200)});
+  canvas.style.width=w+"px";canvas.style.height=h+"px";svg.setAttribute("width",w);svg.setAttribute("height",h);
+}
+function layout(){
+  const t=T();if(!t)return;
+  const lv={};t.nodes.forEach(n=>lv[n.id]=0);
+  for(let i=0;i<t.nodes.length;i++)t.edges.forEach(e=>{if(lv[e.from]+1>lv[e.to]&&lv[e.from]<t.nodes.length)lv[e.to]=lv[e.from]+1});
+  const maxL=Math.max(0,...Object.values(lv));
+  const colW=[];t.nodes.forEach(n=>{const c=lv[n.id];colW[c]=Math.max(colW[c]||0,widthOf(n))});
+  const colX=[];let ax=40;for(let c=0;c<=maxL;c++){colX[c]=ax;ax+=(colW[c]||280)+60}
+  const colY={};
+  t.nodes.forEach(n=>{
+    const c=lv[n.id],r=rectOf(n.id);
+    if(colY[c]==null)colY[c]=40;
+    n.x=colX[c];n.y=colY[c];colY[c]+=(r?r.h:140)+30;
+  });
+  t.nodes.forEach(n=>{const el=nodesEl.querySelector(`[data-id="${n.id}"]`);if(el){el.style.left=n.x+"px";el.style.top=n.y+"px"}});
+  fit();drawEdges();
+}
+window.addEventListener("resize",()=>{fit();drawEdges()});
+function rectOf(id){const el=nodesEl.querySelector(`[data-id="${id}"]`);return el?{x:el.offsetLeft,y:el.offsetTop,w:el.offsetWidth,h:el.offsetHeight}:null}
+function geom(a,b){
+  const ac={x:a.x+a.w/2,y:a.y+a.h/2},bc={x:b.x+b.w/2,y:b.y+b.h/2},dx=bc.x-ac.x,dy=bc.y-ac.y;
+  let p0,p3,c1,c2;
+  if(Math.abs(dx)/(a.w+b.w)>Math.abs(dy)/(a.h+b.h)){
+    const s=dx>0?1:-1,k=Math.max(40,Math.min(100,Math.abs(dx)/2));
+    p0={x:ac.x+s*a.w/2,y:ac.y};p3={x:bc.x-s*b.w/2,y:bc.y};c1={x:p0.x+s*k,y:p0.y};c2={x:p3.x-s*k,y:p3.y};
+  }else{
+    const s=dy>0?1:-1,k=Math.max(40,Math.min(100,Math.abs(dy)/2));
+    p0={x:ac.x,y:ac.y+s*a.h/2};p3={x:bc.x,y:bc.y-s*b.h/2};c1={x:p0.x,y:p0.y+s*k};c2={x:p3.x,y:p3.y-s*k};
+  }
+  return{p0,p3,c1,c2,mid:{x:(p0.x+3*c1.x+3*c2.x+p3.x)/8,y:(p0.y+3*c1.y+3*c2.y+p3.y)/8}};
+}
+function drawEdges(){
+  const t=T();if(!t)return;
+  let p="",l="";
+  t.edges.forEach(e=>{
+    const a=rectOf(e.from),b=rectOf(e.to);if(!a||!b)return;
+    const g=geom(a,b),d=`M${g.p0.x},${g.p0.y}C${g.c1.x},${g.c1.y} ${g.c2.x},${g.c2.y} ${g.p3.x},${g.p3.y}`;
+    p+=`<path d="${d}" marker-end="url(#arr)"/><path class="hit" data-e="${e.id}" d="${d}"/>`;
+    l+=`<div class="elabel${e.label?"":" empty"}" data-e="${e.id}" style="left:${g.mid.x}px;top:${g.mid.y}px">${e.label?esc(e.label):"＋"}</div>`;
+  });
+  pathsEl.innerHTML=p;labelsEl.innerHTML=l;
+}
+function openPop(id){
+  const e=T().edges.find(x=>x.id===id);if(!e)return;
+  popEdge=id;const a=rectOf(e.from),b=rectOf(e.to),g=geom(a,b);
+  pop.hidden=false;pop.style.left=Math.max(0,g.mid.x-120)+"px";pop.style.top=(g.mid.y+14)+"px";
+  $("#popLabel").value=e.label||"";$("#popLabel").focus();
+}
+function closePop(){pop.hidden=true;popEdge=null}
+$("#popLabel").oninput=e=>{const x=T().edges.find(x=>x.id===popEdge);if(x){x.label=e.target.value;save();drawEdges()}};
+$("#popLabel").onkeydown=e=>{if(e.key==="Enter")closePop()};
+$("#popOk").onclick=closePop;
+$("#popFlip").onclick=()=>{const x=T().edges.find(x=>x.id===popEdge);if(x){[x.from,x.to]=[x.to,x.from];save();drawEdges()}};
+$("#popDel").onclick=()=>{const t=T();t.edges=t.edges.filter(x=>x.id!==popEdge);save();closePop();drawEdges()};
+board.addEventListener("click",e=>{
+  const ed=e.target.closest("[data-e]");
+  if(ed){openPop(ed.dataset.e);return}
+  if(!e.target.closest("#pop"))closePop();
+});
+
+// 節點事件:輸入、類型、連線、刪除
+nodesEl.addEventListener("input",e=>{
+  const el=e.target.closest(".node");if(!el||!e.target.dataset.f)return;
+  const n=N(el.dataset.id);n[e.target.dataset.f]=e.target.value;
+  const df=el.querySelector(".diff");if(df)df.textContent=diffText(n);
+  if(e.target.classList.contains("auto"))grow(e.target);
+  refreshTrack();save();
+});
+// 條列式:全部顯示(自動長高),Enter 自動接下一個「• 」
+const BUL=/^\s*[•\-*・]\s*/;
+function grow(ta){ta.style.height="auto";ta.style.height=ta.scrollHeight+"px"}
+function growAll(){nodesEl.querySelectorAll("textarea.auto").forEach(grow)}
+nodesEl.addEventListener("focusin",e=>{if(e.target.classList.contains("auto")&&!e.target.value){e.target.value="• ";e.target.dispatchEvent(new Event("input",{bubbles:true}))}});
+nodesEl.addEventListener("keydown",e=>{
+  const ta=e.target;if(!ta.classList||!ta.classList.contains("auto")||e.key!=="Enter"||e.shiftKey||e.isComposing)return;
+  e.preventDefault();
+  const v=ta.value,p=ta.selectionStart,ls=v.lastIndexOf("\n",p-1)+1;
+  if(/^•\s*$/.test(v.slice(ls,p))){ta.value=v.slice(0,ls)+v.slice(p);ta.selectionStart=ta.selectionEnd=ls}
+  else{ta.value=v.slice(0,p)+"\n• "+v.slice(ta.selectionEnd);ta.selectionStart=ta.selectionEnd=p+3}
+  ta.dispatchEvent(new Event("input",{bubbles:true}));
+});
+nodesEl.addEventListener("change",e=>{
+  const act=e.target.dataset.act;if(act!=="type"&&act!=="status")return;
+  const n=N(e.target.closest(".node").dataset.id);
+  if(act==="type"){n.type=e.target.value;save();drawNodes()}
+  else{n.status=e.target.value;save();refreshTrack()}
+});
+nodesEl.addEventListener("click",e=>{
+  const el=e.target.closest(".node");if(!el)return;
+  const id=el.dataset.id,act=e.target.dataset.act,t=T();
+  if(linkFrom&&linkFrom!==id){
+    if(!t.edges.some(x=>x.from===linkFrom&&x.to===id))t.edges.push({id:uid(),from:linkFrom,to:id,label:""});
+    endLink();save();drawEdges();return;
+  }
+  if(act==="bullets"){
+    const n=N(id);n.bullets=!n.bullets;
+    const ls=(n.detail||"").split("\n").map(l=>l.replace(BUL,"").trim()).filter(Boolean);
+    n.detail=n.bullets?ls.map(l=>"• "+l).join("\n"):ls.join("\n");
+    save();drawNodes();return;
+  }
+  if(act==="link"){linkFrom=linkFrom===id?null:id;el.classList.toggle("src",!!linkFrom);$("#hintbar").innerHTML=linkFrom?"<b>連線中:</b>請點選要連到的卡片(按 Esc 取消)":HINT;return}
+  if(act==="del"&&confirm("刪除這張卡片與它的連線?")){
+    t.nodes=t.nodes.filter(n=>n.id!==id);t.edges=t.edges.filter(x=>x.from!==id&&x.to!==id);save();drawNodes();
+  }
+});
+const HINT=$("#hintbar").innerHTML;
+function endLink(){linkFrom=null;nodesEl.querySelectorAll(".src").forEach(x=>x.classList.remove("src"));$("#hintbar").innerHTML=HINT}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){endLink();closePop()}});
+
+// 拖曳
+nodesEl.addEventListener("dblclick",e=>{
+  if(!e.target.classList.contains("rz"))return;
+  const el=e.target.closest(".node"),n=N(el.dataset.id);
+  n.w=defaultW();el.style.width=n.w+"px";growAll();save();fit();drawEdges();
+});
+nodesEl.addEventListener("pointerdown",e=>{
+  if(e.target.classList.contains("rz")){
+    const el=e.target.closest(".node"),n=N(el.dataset.id);
+    drag={rz:1,el,n,sx:e.clientX,ow:el.offsetWidth};e.target.setPointerCapture(e.pointerId);return;
+  }
+  const h=e.target.closest(".nh");if(!h||e.target.closest("button,select"))return;
+  const el=h.closest(".node"),n=N(el.dataset.id);
+  drag={el,n,sx:e.clientX,sy:e.clientY,ox:n.x,oy:n.y};h.setPointerCapture(e.pointerId);
+});
+document.addEventListener("pointermove",e=>{
+  if(!drag)return;
+  if(drag.rz){
+    drag.n.w=Math.max(MINW,Math.round(drag.ow+e.clientX-drag.sx));
+    drag.el.style.width=drag.n.w+"px";drag.el.querySelectorAll("textarea.auto").forEach(grow);drawEdges();return;
+  }
+  drag.n.x=Math.max(0,Math.round(drag.ox+e.clientX-drag.sx));drag.n.y=Math.max(0,Math.round(drag.oy+e.clientY-drag.sy));
+  drag.el.style.left=drag.n.x+"px";drag.el.style.top=drag.n.y+"px";drawEdges();
+});
+document.addEventListener("pointerup",()=>{if(drag){drag=null;fit();save()}});
+
+// 工具列
+function addNode(type,x,y,title,detail){
+  const t=T(),n={id:uid(),type,x:x!=null?x:board.scrollLeft+40+(t.nodes.length%6)*28,y:y!=null?y:board.scrollTop+40+(t.nodes.length%6)*28,w:defaultW(),title:title||"",detail:detail||"",status:"",change:"",by:"me",judgeDate:$("#date").value,reactDate:""};
+  t.nodes.push(n);return n;
+}
+$("#adds").addEventListener("click",e=>{
+  const b=e.target.closest("[data-add]");if(!b)return;
+  const n=addNode(b.dataset.add);save();drawNodes();
+  nodesEl.querySelector(`[data-id="${n.id}"] input`).focus();
+});
+$("#tidy").onclick=()=>{layout();save()};
+// 列印思維圖:整張圖縮放到一頁 A3 橫式,附議題名稱、日期與市場狀況
+function printMap(){
+  const t=T();if(!t)return alert("尚無議題可列印");
+  let w=0,h=0;t.nodes.forEach(n=>{const r=rectOf(n.id);if(r){w=Math.max(w,r.x+r.w);h=Math.max(h,r.y+r.h)}});
+  w+=30;h+=30;
+  const s=Math.max(0.4,Math.min(1,1500/w,900/h));
+  const m=day().market,mk=MARKET.filter(x=>m[x[0]]).map(x=>`${x[1]} ${esc(m[x[0]])}`).join("、");
+  $("#printHead").innerHTML=`<h2>${esc(t.title||"(未命名議題)")}</h2><div>${esc($("#date").value)}${t.src?" ・ "+esc(t.src)+(t.url?":"+esc(t.url):""):""}${mk?" ・ 市場:"+mk:""}${m.note?" ・ "+esc(m.note):""}${t.parent?" ・ 追蹤自 "+esc(t.parent.date):""}</div>`;
+  document.body.classList.add("printmap");
+  canvas.style.transformOrigin="0 0";canvas.style.transform=`scale(${s})`;
+  board.style.height=Math.ceil(h*s)+"px";
+  const undo=()=>{document.body.classList.remove("printmap");canvas.style.transform="";board.style.height="";window.removeEventListener("afterprint",undo)};
+  window.addEventListener("afterprint",undo);
+  window.print();
+}
+$("#printMap").onclick=printMap;
+$("#newTopic").onclick=()=>{const t={id:uid(),title:"",src:"文章",url:"",nodes:[],edges:[]};D.topics.push(t);curId=t.id;save();render(D);$("#tTitle").focus()};
+$("#topic").onchange=e=>{curId=e.target.value;render(D)};
+$("#tTitle").oninput=e=>{T().title=e.target.value;const o=$("#topic").selectedOptions[0];if(o)o.textContent=e.target.value||"(未命名議題)";save()};
+$("#tSrc").onchange=e=>{T().src=e.target.value;save()};
+$("#tUrl").oninput=e=>{T().url=e.target.value;save()};
+$("#delTopic").onclick=()=>{if(confirm("刪除整個議題?")){D.topics=D.topics.filter(t=>t.id!==curId);save();render(D)}};
+$("#dup").onclick=()=>{
+  const t=T(),map={},c=JSON.parse(JSON.stringify(t)),from=$("#date").value;
+  c.id=uid();c.parent={id:t.id,date:from,title:t.title||"(未命名議題)"};
+  c.title=(t.title||"(未命名議題)").replace(/\(追蹤 [^)]*\)$/,"")+"(追蹤 "+todayStr().slice(5)+")";
+  c.nodes.forEach(n=>{const o=n.id;n.id=uid();map[o]=n.id;n.status="";n.change="";n.reactDate="";n.judgeDate=n.judgeDate||from});
+  c.edges.forEach(e=>{e.id=uid();e.from=map[e.from];e.to=map[e.to]});
+  const today=todayStr();if($("#date").value!==today)$("#date").value=today;
+  const d=day(today);d.topics.push(c);curId=c.id;save();
+  document.getElementById("date").dispatchEvent(new Event("change"));
+};
+$("#example").onclick=()=>{
+  const t={id:uid(),title:"美債供給與殖利率(範例)",src:"專題報告",url:"",nodes:[],edges:[]};
+  D.topics.push(t);curId=t.id;
+  const A=(ty,x,y,ti,de)=>addNode(ty,x,y,ti,de).id;
+  const n1=A("think",X(0),40,"美國國家債務供給持續增加(赤字)","");
+  const n2=A("think",X(1),20,"利率上升","利息對應 GDP 比,會讓利率增幅有個上限");
+  const n3=A("think",X(1),230,"公司發債","AI 公司債務佔總債務比例增加");
+  const n4=A("think",X(2),130,"債券供給遠大於需求","殖利率不可能降");
+  const n5=A("think",X(3),130,"資金排擠效應","高殖利率使股票 ECY 急速降低");
+  const q1=A("q",X(3),330,"股市:風險報酬比怎麼看?","殖利率多少會對股票本益比產生壓制?");
+  const q2=A("q",X(2),430,"公司寧可在高殖利率位階發債的主導原因是什麼?","怕以後資金不好借?預期未來殖利率更高?搶占 AI 先機?");
+  const q3=A("q",X(1),430,"通膨持續增加又會怎樣?","如果戰爭結束會怎樣?如果能源通膨像核心通膨傳導會怎樣?");
+  const q4=A("q",X(0),430,"還有哪些投資機會不受債務 / 殖利率 / 通膨影響?","");
+  const r1=A("react",X(4),330,"","");const a1=A("act",X(4),560,"","");
+  [[n1,n2,"推升"],[n1,n4,"供給增加"],[n3,n4,"供給增加"],[n2,n5,""],[n4,n5,"高殖利率"],[n4,q1,""],[n5,q1,""],[n3,q2,""],[n4,q2,""],[n1,q3,""],[n2,q3,""],[q1,r1,""],[r1,a1,""]]
+    .forEach(([f,to,l])=>t.edges.push({id:uid(),from:f,to,label:l}));
+  save();render(D);
+};
+
+init({
+  title:"議題筆記表",key:"topics",itemName:"議題",
+  items:d=>d.topics.filter(t=>t.title||t.nodes.length).map(t=>{
+    const tn=t.nodes.filter(n=>TRACK[n.type]),out=tn.filter(n=>n.status==="out").length,ok=tn.filter(n=>n.status==="ok").length,tags=[];
+    if(out)tags.push({t:"超出計畫 "+out,red:true});
+    if(ok)tags.push({t:"符合 "+ok});
+    if(t.parent)tags.push({t:"追蹤自 "+t.parent.date});
+    return{id:t.id,label:t.title,ts:t.updated,tags};
+  }),
+  select:id=>{if(id)curId=id},
+  touch(){const t=T();if(t)t.updated=nowStr()},
+  render,
+  filled:d=>d.topics.some(t=>t.title||t.nodes.length),
+  md(d){
+    return d.topics.map(t=>{
+      const nm=id=>(t.nodes.find(n=>n.id===id)||{}).title||"(未命名)";
+      let s=`## ${t.title||"(未命名議題)"}(${t.src}${t.url?":"+t.url:""})\n`;
+      if(t.parent)s+=`\n追蹤自:${t.parent.title}(${t.parent.date})\n`;
+      Object.entries(TYPES).forEach(([k,v])=>{
+        const ns=t.nodes.filter(n=>n.type===k);if(!ns.length)return;
+        s+=`\n### ${v[0]}\n`+ns.map(n=>{
+          const ex=!TRACK[n.type]?[]:[n.status?ST[n.status]:"",n.change?"最新變化:"+n.change.replace(/\n/g," "):"",(n.by&&n.by!=="me")?BY[n.by]:"",n.judgeDate?"判斷日 "+n.judgeDate:"",n.reactDate?"反應日 "+n.reactDate:"",diffText(n)].filter(Boolean);
+          const tail=ex.length?" 〔"+ex.join("|")+"〕":"";
+          if(n.bullets&&n.detail)return `- **${n.title||"(未填)"}**${tail}\n`+n.detail.split("\n").filter(l=>l.replace(BUL,"").trim()).map(l=>"  - "+l.replace(BUL,"")).join("\n");
+          return `- **${n.title||"(未填)"}**${n.detail?":"+n.detail.replace(/\n/g," "):""}${tail}`;
+        }).join("\n")+"\n";
+      });
+      if(t.edges.length)s+=`\n### 關係\n`+t.edges.map(e=>`- ${nm(e.from)} →${e.label?"("+e.label+")":""} ${nm(e.to)}`).join("\n")+"\n";
+      return s;
+    }).join("\n");
+  }
+});
+$("#print").onclick=printMap; // 共用工具列的「列印」在本頁也印思維圖
+</script>
+</body>
+</html>

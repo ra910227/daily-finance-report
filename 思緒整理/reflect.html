@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>反思原則表</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs" id="nav"></div>
+  <h1>反思原則表</h1>
+  <p class="sub">痛苦 + 反思 = 進步。每次出現讓你不舒服的事(虧損、判斷錯誤、錯過行情)就新增一筆,五格由上到下填,第 1 格只寫事實、不加評論。</p>
+  <div class="bar" id="bar"></div>
+  <div id="pains"></div>
+  <button id="addPain">+ 新增一筆痛苦反思</button>
+</div>
+<script src="shared.js"></script>
+<script>
+const STEPS=[
+ ["1 痛苦(不加評論)","只寫發生了什麼、損失多少"],
+ ["2 現實的規律","這件事告訴我「事情實際怎麼運作」?"],
+ ["3 診斷","根本原因是資訊、流程、還是情緒?"],
+ ["4 新規則(若 X 則 Y)","寫成能被檢驗的句子"],
+ ["5 回測 / 檢驗","這個規則放到過去、放到其他市場,結果如何?"]
+];
+const blank=()=>({title:"",f:["","","","",""]});
+function render(d){
+  if(!d.pains.length)d.pains.push(blank());
+  $("#pains").innerHTML=d.pains.map((p,i)=>`<div class="entry">
+    <div class="head"><span class="n">#${i+1}</span><input data-p="${i}" data-k="title" placeholder="標的 / 事件(例:某檔重押股票下跌)" value="${esc(p.title)}"><button class="ghost" data-del="${i}">刪除</button></div>
+    <table><tbody>${STEPS.map((s,j)=>`<tr><td class="k">${s[0]}</td><td class="q">${s[1]}</td><td><textarea data-p="${i}" data-f="${j}">${esc(p.f[j]||"")}</textarea></td></tr>`).join("")}</tbody></table></div>`).join("");
+}
+$("#addPain").onclick=()=>{day().pains.push(blank());save();render(day())};
+init({
+  title:"反思原則表",key:"pains",itemName:"反思事件",
+  items:d=>d.pains.filter(p=>p.title||p.f.some(Boolean)).map(p=>({label:p.title||p.f.find(Boolean).slice(0,24)})),
+  render,
+  filled:d=>d.pains.some(p=>p.title||p.f.some(Boolean)),
+  onInput(el,d){
+    if(el.dataset.p===undefined)return false;
+    const p=d.pains[+el.dataset.p];
+    if(el.dataset.k==="title")p.title=el.value;else p.f[+el.dataset.f]=el.value;
+    return true;
+  },
+  onClick(e,d){
+    const b=e.target.closest("[data-del]");
+    if(!b||!confirm("刪除這一筆?"))return false;
+    d.pains.splice(+b.dataset.del,1);return true;
+  },
+  md(d){
+    return d.pains.map((p,i)=>`## #${i+1} ${p.title}\n`+STEPS.map((x,j)=>`- ${x[0]}:${p.f[j]||""}`).join("\n")).join("\n\n")+"\n";
+  }
+});
+</script>
+</body>
+</html>

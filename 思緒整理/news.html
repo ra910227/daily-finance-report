@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>新聞觀察表</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs" id="nav"></div>
+  <h1>新聞觀察表</h1>
+  <p class="sub">對照今天的財經日報,每一力寫下相關新聞,並判斷它是單一事件還是可預見的週期。</p>
+  <div class="bar" id="bar"></div>
+  <div class="scroll"><table>
+    <thead><tr><th>力量</th><th>可以看什麼</th><th>對投資組合的提問</th><th>今日日報相關新聞</th><th>單一事件 / 週期?</th><th>我的判斷與下一步</th></tr></thead>
+    <tbody id="forces"></tbody>
+  </table></div>
+</div>
+<script src="shared.js"></script>
+<script>
+const FORCES=[
+ ["債務與貨幣","政府赤字與利息支出占稅收比、10 年與 30 年期殖利率、央行態度","組合裡有沒有在「債務壓力 + 印鈔」環境下仍能抗跌的一條?"],
+ ["內部秩序","貧富差距、選舉與政策不確定性、財富稅提案","稅制或政策轉向是否可能迫使持有人賣資產?"],
+ ["外部秩序","關稅、制裁、供應鏈與科技管制、軍事衝突","是否過度集中在單一國家或單一供應鏈?"],
+ ["自然","極端氣候、疫情、保險與農產品供給","哪些資產對這類衝擊沒有韌性?"],
+ ["創新","AI 帶來的生產力與資本支出","是新技術帶來價值,還是估值已超過價值?"]
+];
+const JUDGE=["","單一事件","可預見的週期","還看不出來"];
+function render(d){
+  $("#forces").innerHTML=FORCES.map((f,i)=>{const v=d.forces[i]||{};return `<tr>
+    <td class="k">${f[0]}</td><td class="q">${f[1]}</td><td class="q"><mark>${f[2]}</mark></td>
+    <td><textarea data-fo="${i}" data-k="news">${esc(v.news)}</textarea></td>
+    <td><select data-fo="${i}" data-k="judge">${JUDGE.map(j=>`<option${j===v.judge?" selected":""}>${j}</option>`).join("")}</select></td>
+    <td><textarea data-fo="${i}" data-k="note">${esc(v.note)}</textarea></td></tr>`}).join("");
+}
+init({
+  title:"新聞觀察表",key:"forces",itemName:"有記錄的力量",
+  items:d=>[{label:FORCES.filter((f,i)=>{const v=d.forces[i]||{};return v.news||v.note||v.judge}).map(f=>f[0]).join("、")}],
+  render,
+  filled:d=>Object.values(d.forces).some(v=>v.news||v.note||v.judge),
+  onInput(el,d){
+    if(el.dataset.fo===undefined)return false;
+    (d.forces[el.dataset.fo]||(d.forces[el.dataset.fo]={}))[el.dataset.k]=el.value;
+    return true;
+  },
+  md(d){
+    let s=`| 力量 | 今日新聞 | 單一事件/週期 | 判斷與下一步 |\n|---|---|---|---|\n`;
+    FORCES.forEach((f,i)=>{const v=d.forces[i]||{};s+=`| ${f[0]} | ${(v.news||"").replace(/\n/g," ")} | ${v.judge||""} | ${(v.note||"").replace(/\n/g," ")} |\n`});
+    return s;
+  }
+});
+</script>
+</body>
+</html>

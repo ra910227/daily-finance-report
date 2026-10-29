@@ -220,6 +220,20 @@ def sync_files():
             dst = SITE / "lectures" / course_dir.name
             copied += _copy_new(course_dir, "*.html", dst)
 
+    # 思緒整理（2026-10-29新增：反思原則表/新聞觀察表/議題筆記表三張互動表單，資料存瀏覽器localStorage）
+    # 整個資料夾原樣複製(含shared.css/shared.js)，不注入畫重點工具(表單頁面，避免干擾輸入)
+    thoughts_src = SRC / "思緒整理"
+    if thoughts_src.is_dir():
+        dst = SITE / "思緒整理"
+        dst.mkdir(parents=True, exist_ok=True)
+        for f in thoughts_src.iterdir():
+            if f.suffix not in (".html", ".css", ".js"):
+                continue
+            target = dst / f.name
+            if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
+                shutil.copy2(f, target)
+                copied.append(str(target))
+
     return copied
 
 
@@ -345,6 +359,14 @@ def build_index():
             l_items.sort(key=lambda x: x["sort"])
             lecture_groups.append((course, l_items))
 
+    # 思緒整理：固定三張互動表單(工具頁、無日期，不進最新文章feed)
+    thoughts_items = []
+    for fname, title in [("reflect.html", "反思原則表"), ("news.html", "新聞觀察表"), ("topics.html", "議題筆記表")]:
+        f = SITE / "思緒整理" / fname
+        if f.exists():
+            thoughts_items.append({"date": "", "tag": "思緒整理", "title": title,
+                                   "href": f"思緒整理/{fname}", "excerpt": extract_excerpt(f)})
+
     # ---------- 首頁最上方「最新文章」：跨五大分類合併，依日期新到舊取前15篇 ----------
     all_dated = [it for it in (market_items + research_items + notes_items) if it["date"] != "0000-00-00"]
     for _, items in stock_groups:
@@ -381,6 +403,8 @@ def build_index():
          grouped_grid(lecture_groups), lecture_count),
         ("notes", "🗒️ 金融筆記", "自己整理的閱讀筆記、書籍重點與投資組合回測分析",
          grid(notes_items), len(notes_items)),
+        ("thoughts", "🧠 思緒整理", "讀完日報後的互動表單：痛苦反思、五力新聞觀察、議題思維圖（內容存在本機瀏覽器，可匯出/匯入JSON）",
+         grid(thoughts_items), len(thoughts_items)),
     ]
 
     nav_html = "\n".join(
@@ -388,6 +412,7 @@ def build_index():
         for href, title in [
             ("#top", "首頁"), ("#market", "市場分析"), ("#stocks", "個股小狐"),
             ("#research", "研究摘要"), ("#lectures", "專題報告"), ("#notes", "金融筆記"),
+            ("#thoughts", "思緒整理"),
         ]
     )
 
