@@ -167,6 +167,8 @@ def sync_files():
     dst = SITE / "reports"
     dst.mkdir(parents=True, exist_ok=True)
     for f in (SRC / "財經日報").glob("*.html"):
+        if "試作" in f.name:  # 新版試作檔不上網站，避免覆蓋同日正式日報
+            continue
         d = date_from_name(f.name)
         target = dst / f"{d}.html"
         if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
@@ -233,6 +235,15 @@ def sync_files():
             if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
                 shutil.copy2(f, target)
                 copied.append(str(target))
+        # 新聞觀察表的每日預填資料(由財經日報/主線追蹤/scripts/render_daily.py 產出)
+        feed_src = thoughts_src / "feed"
+        if feed_src.is_dir():
+            (dst / "feed").mkdir(exist_ok=True)
+            for f in feed_src.glob("*.json"):  # 純資料檔，不可走 _copy_new(會注入畫重點腳本)
+                target = dst / "feed" / f.name
+                if not target.exists() or target.stat().st_mtime < f.stat().st_mtime:
+                    shutil.copy2(f, target)
+                    copied.append(str(target))
 
     return copied
 
