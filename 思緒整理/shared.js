@@ -1,5 +1,6 @@
 // 三張表共用：日期 + 市場狀況 + 儲存 / 歷史 / 匯出匯入 / 複製 Markdown
 // 資料存在瀏覽器 localStorage，三個頁面共用同一份，市場狀況依日期共享
+// 首頁連接雲端同步碼後，透過 ../assets/gsfox-annotate.js 的 gsfoxSync 同步到雲端(依日期合併)
 const KEY="reflection-sheets-v1";
 const MARKET=[["twii","加權指數","如 23,450"],["us","美股","S&P / 那指"],["vix","VIX","如 16.2"],["y10","美 10 年債","如 4.25%"],["fx","美元/台幣","如 31.5"]];
 const NAV=[["index.html","思緒整理"],["reflect.html","反思原則表"],["news.html","新聞觀察表"],["topics.html","議題筆記表"],["../index.html","← 回首頁"]];
@@ -19,6 +20,7 @@ function save(){
   const d=day();d.upd=d.upd||{};d.upd[page.key]=nowStr();if(page.touch)page.touch(d);
   try{localStorage.setItem(KEY,JSON.stringify(store));$("#saved").textContent="✓ 已存檔 "+$("#date").value+" "+new Date().toTimeString().slice(0,8)}
   catch(e){$("#saved").textContent="⚠ 無法儲存(請用「匯出全部」備份)"}
+  if(window.gsfoxSync&&gsfoxSync.code()){gsfoxSync.push();$("#saved").textContent+=" ☁️"}
   histList();
 }
 function mdHeader(date){
@@ -72,4 +74,16 @@ function init(cfg){
   $("#import").onclick=()=>$("#file").click();
   $("#file").onchange=e=>{const r=new FileReader();r.onload=()=>{try{Object.assign(store,JSON.parse(r.result));save();redraw()}catch(x){alert("檔案格式不正確")}};r.readAsText(e.target.files[0])};
   redraw();
+  // 雲端同步(首頁設定同步碼後生效)：開頁時與切回分頁時，從雲端拉資料、依日期合併後重畫
+  const cloudPull=()=>{
+    if(!window.gsfoxSync||!gsfoxSync.code())return;
+    const before=localStorage.getItem(KEY);
+    gsfoxSync.pull().then(ok=>{
+      const after=localStorage.getItem(KEY);
+      if(after!==before){try{store=JSON.parse(after||"{}")}catch(e){}redraw()}
+      $("#saved").textContent=ok?"☁️ 已與雲端同步":"☁️ 雲端讀取失敗,先用本機資料";
+    });
+  };
+  cloudPull();
+  document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")cloudPull()});
 }

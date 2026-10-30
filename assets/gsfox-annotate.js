@@ -14,7 +14,36 @@
 
   function isGsfoxDataKey(k){
     return k.indexOf("gsfox_hl:") === 0 || k.indexOf("gsfox_star:") === 0 || k.indexOf(LS_READ_PREFIX) === 0
-      || k === "gsfox_notebook_entries" || k === "gsfox_notebook_seen";
+      || k === "gsfox_notebook_entries" || k === "gsfox_notebook_seen" || k === LS_THOUGHTS;
+  }
+
+  /* 思緒整理(反思原則表/新聞觀察表/議題筆記表)的資料，2026-10-29納入雲端同步。
+     不能像其他key一樣直接用雲端值覆蓋：兩台裝置各自有未上傳的紀錄時會互相蓋掉。
+     改成「依日期、依表單」合併：同一天同一張表，取更新時間(upd[表單])較新的那一邊；只有一邊有的日期直接保留。 */
+  var LS_THOUGHTS = "reflection-sheets-v1";
+  var THOUGHT_SHEETS = ["pains", "forces", "topics"];
+
+  function mergeThoughts(localStr, cloudStr){
+    var a, b;
+    try{ a = JSON.parse(localStr || "{}"); }catch(e){ a = {}; }
+    try{ b = JSON.parse(cloudStr || "{}"); }catch(e){ return localStr; }
+    var out = {};
+    Object.keys(a).concat(Object.keys(b)).forEach(function(date){
+      if (out[date]) return;
+      var x = a[date], y = b[date];
+      if (!x || !y){ out[date] = x || y; return; }
+      var ux = x.upd || {}, uy = y.upd || {}, d = { upd: {} }, maxX = "", maxY = "";
+      THOUGHT_SHEETS.forEach(function(k){
+        var useLocal = (ux[k] || "") > (uy[k] || "");
+        d[k] = useLocal ? x[k] : y[k];
+        if (useLocal ? ux[k] : uy[k]) d.upd[k] = useLocal ? ux[k] : uy[k];
+        if ((ux[k] || "") > maxX) maxX = ux[k];
+        if ((uy[k] || "") > maxY) maxY = uy[k];
+      });
+      d.market = maxX > maxY ? x.market : y.market;
+      out[date] = d;
+    });
+    return JSON.stringify(out);
   }
 
   /* ============ 雲端同步（Cloudflare Worker + KV） ============ */
@@ -29,13 +58,24 @@
   function pullFromCloud(code){
     return fetch(cloudUrl(code)).then(function(r){ return r.json(); }).then(function(json){
       var data = json && json.data && typeof json.data === "object" ? json.data : null;
+      var needPush = false;
       if (data){
         Object.keys(data).forEach(function(k){
-          if (isGsfoxDataKey(k)){
+          if (k === LS_THOUGHTS){
+            var local = localStorage.getItem(k);
+            if (local && !localStorage.getItem(k + ":backup-before-sync")){
+              try{ localStorage.setItem(k + ":backup-before-sync", local); }catch(e){}
+            }
+            var merged = mergeThoughts(local, data[k]);
+            try{ localStorage.setItem(k, merged); }catch(e){}
+            if (merged !== data[k]) needPush = true;
+          } else if (isGsfoxDataKey(k)){
             try{ localStorage.setItem(k, data[k]); }catch(e){}
           }
         });
       }
+      if (localStorage.getItem(LS_THOUGHTS) && !(data && data[LS_THOUGHTS])) needPush = true;
+      if (needPush) scheduleCloudPush();
       return true;
     }).catch(function(){ return false; });
   }
@@ -981,7 +1021,15 @@
     initNotebookDrag();
   }
 
+  // 思緒整理表單頁(body帶 class="gsfox-sync-only")只用雲端同步、不顯示畫重點介面，由頁面自己的shared.js呼叫
+  window.gsfoxSync = {
+    code: getSyncCode,
+    pull: function(){ var c = getSyncCode(); return c ? pullFromCloud(c) : Promise.resolve(false); },
+    push: scheduleCloudPush
+  };
+
   function boot(){
+    if (document.body.classList.contains("gsfox-sync-only")) return;
     if (document.body.classList.contains("gsfox-index")){
       var code = getSyncCode();
       if (code){
