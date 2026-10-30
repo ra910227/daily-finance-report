@@ -1,6 +1,6 @@
 // 三張表共用：日期 + 市場狀況 + 儲存 / 歷史 / 匯出匯入 / 複製 Markdown
 // 資料存在瀏覽器 localStorage，三個頁面共用同一份，市場狀況依日期共享
-// 首頁連接雲端同步碼後，透過 ../assets/gsfox-annotate.js 的 gsfoxSync 同步到雲端(依日期合併)
+// 首頁或表單頁連接雲端同步碼後，透過 ../assets/gsfox-annotate.js 的 gsfoxSync 同步到雲端(依日期合併)
 const KEY="reflection-sheets-v1";
 const MARKET=[["twii","加權指數","如 23,450"],["us","美股","S&P / 那指"],["vix","VIX","如 16.2"],["y10","美 10 年債","如 4.25%"],["fx","美元/台幣","如 31.5"]];
 const NAV=[["index.html","思緒整理"],["reflect.html","反思原則表"],["news.html","新聞觀察表"],["topics.html","議題筆記表"],["../index.html","← 回首頁"]];
@@ -50,6 +50,7 @@ function init(cfg){
     <label for="hist">歷史</label><select id="hist"></select><span class="sp"></span><span id="saved" title="填寫時會自動存檔,按「存檔」可手動再存一次"></span>
     <button id="save">存檔</button><button id="copy">複製 Markdown</button><button id="export" class="ghost">匯出全部</button>
     <button id="import" class="ghost">匯入</button><button id="print" class="ghost">列印</button><input type="file" id="file" accept=".json" hidden></div>
+    <div class="row" id="syncRow"></div>
     <div class="row mk"><label>市場狀況</label>${MARKET.map(x=>`<input id="m_${x[0]}" data-m="${x[0]}" placeholder="${x[1]}:${x[2]}" title="${x[1]}">`).join("")}
     <input id="m_note" data-m="note" class="wide" placeholder="盤勢一句話(例:外資大賣、AI 股拉回)"></div>`;
   $("#bar").insertAdjacentHTML("afterend",'<details id="savedBox" class="bar" open></details>');
@@ -84,6 +85,21 @@ function init(cfg){
       $("#saved").textContent=ok?"☁️ 已與雲端同步":"☁️ 雲端讀取失敗,先用本機資料";
     });
   };
+  // 表單頁也能直接連接/中斷雲端同步(與首頁共用同一組同步碼)
+  const syncRow=()=>{
+    const el=$("#syncRow");if(!el)return;
+    if(!window.gsfoxSync){el.innerHTML='<label>☁️ 雲端同步</label><span class="hint">同步元件載入失敗,目前只存本機</span>';return}
+    const c=gsfoxSync.code();
+    el.innerHTML=c?`<label>☁️ 雲端同步</label><span class="tg">已連接</span><span class="hint">換裝置時輸入同一組同步碼即可讀回</span><button id="syncOff" class="ghost">中斷連接</button>`
+      :`<label for="syncCode">☁️ 雲端同步</label><input id="syncCode" placeholder="輸入你的同步碼(與首頁相同)"><button id="syncOn">連接</button><span class="hint">未連接:目前只存在這台裝置</span>`;
+    if(c)$("#syncOff").onclick=()=>{if(confirm("中斷後只會存在本機,確定?")){gsfoxSync.clearCode();syncRow()}};
+    else $("#syncOn").onclick=()=>{const v=$("#syncCode").value.trim();if(!v){alert("請先輸入同步碼");return}
+      gsfoxSync.setCode(v);syncRow();$("#saved").textContent="☁️ 連接中…";
+      const before=localStorage.getItem(KEY);
+      gsfoxSync.pull().then(()=>{const after=localStorage.getItem(KEY);if(after!==before){try{store=JSON.parse(after||"{}")}catch(e){}redraw()}return gsfoxSync.pushNow()})
+        .then(ok=>{$("#saved").textContent=ok?"☁️ 已連接並上傳":"☁️ 上傳失敗,稍後再試"})};
+  };
+  syncRow();
   cloudPull();
   document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")cloudPull()});
 }

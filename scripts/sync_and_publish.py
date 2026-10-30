@@ -249,15 +249,15 @@ def badges_row(href):
             f'</span>')
 
 
-def card(href, tag, title, date, excerpt):
-    """卡片式條目：分類tag／標題／內文摘要／日期，右上角疊加已閱讀比例/筆記數/星號評分。"""
+def card(href, tag, title, date, excerpt, badges=True):
+    """卡片式條目：分類tag／標題／內文摘要／日期，右上角疊加已閱讀比例/筆記數/星號評分(工具頁badges=False不顯示)。"""
     return (f'<div class="card-wrap">'
             f'<a class="article-card" href="{quote(href)}">'
             f'<span class="tag">{html.escape(tag)}</span>'
             f'<span class="title">{html.escape(title)}</span>'
             f'<span class="excerpt">{html.escape(excerpt)}</span>'
             f'<span class="date">{date_pretty(date)}</span>'
-            f'</a>{badges_row(href)}</div>')
+            f'</a>{badges_row(href) if badges else ""}</div>')
 
 
 def build_index():
@@ -377,9 +377,9 @@ def build_index():
     latest_items = all_dated[:15]
     latest = all_dated[0]["date"] if all_dated else "—"
 
-    def grid(items):
+    def grid(items, badges=True):
         return '<div class="card-grid">' + "\n".join(
-            card(it["href"], it["tag"], it["title"], it["date"], it["excerpt"]) for it in items
+            card(it["href"], it["tag"], it["title"], it["date"], it["excerpt"], badges) for it in items
         ) + '</div>' if items else '<p class="empty">尚無報告</p>'
 
     def grouped_grid(groups):
@@ -403,8 +403,13 @@ def build_index():
          grouped_grid(lecture_groups), lecture_count),
         ("notes", "🗒️ 金融筆記", "自己整理的閱讀筆記、書籍重點與投資組合回測分析",
          grid(notes_items), len(notes_items)),
-        ("thoughts", "🧠 思緒整理", "讀完日報後的互動表單：痛苦反思、五力新聞觀察、議題思維圖（內容存在本機瀏覽器，可匯出/匯入JSON）",
-         grid(thoughts_items), len(thoughts_items)),
+        ("thoughts", "🧠 思緒整理", "讀完日報後的互動表單：痛苦反思、五力新聞觀察、議題思維圖（連接同步碼後自動同步雲端，跨裝置共用）"
+         '<div class="flow-note"><b>新聞觀察表（每天判斷）<br>'
+         '↓ 某條主線值得深入研究 →「開成議題筆記」，帶著主線編號<br>'
+         '議題筆記表（把因果畫成思維圖）<br>'
+         '↓ 90 天後回頭檢查判斷的結果<br>'
+         '反思原則表（判斷錯了 → 記錄痛苦和反思，寫成新原則）</b></div>',
+         grid(thoughts_items, badges=False), len(thoughts_items)),
     ]
 
     nav_html = "\n".join(
@@ -457,6 +462,7 @@ h2{{font-size:1.3rem; margin:0 0 4px; padding-bottom:10px; border-bottom:2px sol
 h2 .count{{font-size:0.78rem; color:var(--sub); font-weight:400;}}
 h3{{font-size:0.95rem; margin:22px 0 12px; color:var(--sub); font-weight:600;}}
 .desc{{color:var(--sub); font-size:0.85rem; margin:10px 0 20px;}}
+.flow-note{{margin-top:10px; padding:10px 14px; border-left:3px solid var(--accent); background:rgba(91,157,255,0.08); border-radius:4px; color:var(--text, inherit); line-height:1.9;}}
 .empty{{color:var(--sub); font-size:0.88rem; font-style:italic;}}
 
 /* ---- 卡片式文章列表 ---- */

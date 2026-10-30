@@ -1025,7 +1025,10 @@
   window.gsfoxSync = {
     code: getSyncCode,
     pull: function(){ var c = getSyncCode(); return c ? pullFromCloud(c) : Promise.resolve(false); },
-    push: scheduleCloudPush
+    push: scheduleCloudPush,
+    pushNow: function(){ var c = getSyncCode(); return c ? pushToCloudNow(c) : Promise.resolve(false); },
+    setCode: setSyncCode,
+    clearCode: clearSyncCode
   };
 
   function boot(){
