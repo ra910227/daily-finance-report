@@ -29,7 +29,7 @@
 <div class="wrap">
   <div class="crumbs" id="nav"></div>
   <h1>新聞觀察表</h1>
-  <p class="sub">每天在主線上做判斷。左邊由財經日報預填（Claude 的判斷），右邊是你的判斷，兩邊分開記錄，月底比對誰比較準。</p>
+  <p class="sub">🧪 試用版（舊版仍在原位置）。每天在主線上做判斷。左邊由財經日報預填（Claude 的判斷），右邊是你的判斷，兩邊分開記錄，月底比對誰比較準。</p>
   <div class="bar" id="bar"></div>
 
   <div class="bar">
@@ -147,6 +147,8 @@ init({
     return s;
   }
 });
+// 草稿頁在子資料夾：共用導覽列的相對連結要往上一層
+document.querySelectorAll("#nav a").forEach(a=>{const h=a.getAttribute("href");if(h&&!/^https?:/.test(h))a.setAttribute("href","../"+h)});
 </script>
 </body>
 </html>
