@@ -21,7 +21,7 @@
      不能像其他key一樣直接用雲端值覆蓋：兩台裝置各自有未上傳的紀錄時會互相蓋掉。
      改成「依日期、依表單」合併：同一天同一張表，取更新時間(upd[表單])較新的那一邊；只有一邊有的日期直接保留。 */
   var LS_THOUGHTS = "reflection-sheets-v1";
-  var THOUGHT_SHEETS = ["pains", "forces", "topics"];
+  var THOUGHT_SHEETS = ["pains", "forces", "topics", "watch"]; // watch = 新版新聞觀察表(草稿試用)
 
   function mergeThoughts(localStr, cloudStr){
     var a, b;

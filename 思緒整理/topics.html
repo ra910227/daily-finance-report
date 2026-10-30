@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>議題筆記表</title>
 <link rel="stylesheet" href="shared.css">
-<script src="../assets/gsfox-annotate.js?v=20261030b"></script>
+<script src="../assets/gsfox-annotate.js?v=20261030d"></script>
 <style>
 :root{--c-think:#b4531a;--c-q:#6a4fb3;--c-react:#2e7d4f;--c-act:#2f6f8f;--grid:#e9e4da}
 @media (prefers-color-scheme: dark){:root{--c-think:#e58b4f;--c-q:#a58cf0;--c-react:#6cc08f;--c-act:#7fbfdc;--grid:#2a2720}}
@@ -112,7 +112,7 @@
   <div id="printHead" class="ph"></div>
   <div id="board"><div id="canvas"><svg id="edges"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" style="fill:var(--muted);stroke:none"/></marker></defs><g id="paths"></g></svg><div id="nodes"></div><div id="labels"></div><div id="pop" hidden><input id="popLabel" placeholder="關係(例:導致、抵銷)"><button id="popFlip" class="ghost">反轉</button><button id="popDel" class="ghost">刪除</button><button id="popOk">完成</button></div></div></div>
 </div>
-<script src="shared.js?v=20261030b"></script>
+<script src="shared.js?v=20261030c"></script>
 <script>
 const TYPES={think:["思維內容","重點","細項"],q:["新的問題","新的問題","細項"],react:["市場反應","投資市場可能的反應","細項"],act:["行動方式","行動方式","細項"]};
 const SRC=["文章","新聞議題","專題報告","其他"];
@@ -420,6 +420,19 @@ init({
   }
 });
 $("#print").onclick=printMap; // 共用工具列的「列印」在本頁也印思維圖
+// 從新聞觀察表「開成議題筆記」帶入主線：?mainline=M-001&title=...&expect=...（同一主線已開過就直接切過去）
+(()=>{
+  const q=new URLSearchParams(location.search),ml=q.get("mainline");if(!ml)return;
+  history.replaceState(null,"",location.pathname);
+  for(const k of Object.keys(store).sort().reverse()){const hit=(store[k].topics||[]).find(t=>t.mainline===ml);
+    if(hit){$("#date").value=k;curId=hit.id;$("#date").dispatchEvent(new Event("change"));return}}
+  const d=day(todayStr());
+  const t={id:uid(),title:`[${ml}] ${q.get("title")||""}`,src:"新聞議題",url:"",mainline:ml,nodes:[],edges:[]};
+  d.topics.push(t);$("#date").value=todayStr();D=d;curId=t.id;
+  if(q.get("expect"))addNode("think",X(0),40,"如果這條主線是對的,接下來會看到",q.get("expect"));
+  if(q.get("kill"))addNode("q",X(1),40,"什麼情況代表判斷錯了",q.get("kill"));
+  save();$("#date").dispatchEvent(new Event("change"));
+})();
 </script>
 </body>
 </html>
