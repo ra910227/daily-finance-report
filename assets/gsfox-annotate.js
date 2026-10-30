@@ -707,7 +707,8 @@
   var LS_NB_ENTRIES = "gsfox_notebook_entries";
   var LS_NB_SEEN = "gsfox_notebook_seen";
   var titleCache = loadJSON("gsfox_title_cache", {});
-  var notebookOverlay, notebookBody, notebookFilterCat, notebookFilterTag;
+  var notebookOverlay, notebookBody, notebookFilterCat, notebookFilterTag, notebookSort;
+  var LS_NB_SORT = "nb_sort_pref"; // 排序偏好只存本機(不以gsfox_開頭，不會同步到雲端)
   var nbDragState = null;
 
   function loadEntries(){ return loadJSON(LS_NB_ENTRIES, []); }
@@ -787,8 +788,12 @@
     }).join("");
   }
 
-  function notebookCardHtml(e){
+  function nbTimeHtml(e){
     var dateStr = fmtTime(e.ts);
+    return (dateStr ? "摘取於 "+dateStr : "") + (e.updatedAt ? '　<b>✎ 更新於 '+fmtTime(e.updatedAt)+'</b>' : "");
+  }
+
+  function notebookCardHtml(e){
     return '<div class="gsfox-nb-card" data-color="'+(e.color||"")+'" data-id="'+e.id+'">'
       + '<span class="gsfox-drag-handle gsfox-nb-drag" title="按住拖曳可調整順序(僅在未篩選時可用)">⠿</span>'
       + '<div class="gsfox-nb-row1">'
@@ -796,7 +801,7 @@
       +   '<a class="gsfox-nb-source" href="'+escapeHtml(e.sourcePathname)+'" target="_blank" rel="noopener" title="查看原文出處">🔗 <span data-role="source-title">'+escapeHtml(articleFallbackLabel(e.sourcePathname))+'</span></a>'
       + '</div>'
       + '<div class="gsfox-quote">「'+escapeHtml(e.text)+'」</div>'
-      + '<div class="gsfox-nb-time">'+(dateStr ? "摘取於 "+dateStr : "")+'</div>'
+      + '<div class="gsfox-nb-time">'+nbTimeHtml(e)+'</div>'
       + '<textarea class="gsfox-nb-note" placeholder="撰寫這則筆記的想法...">'+escapeHtml(e.note||"")+'</textarea>'
       + '<div class="gsfox-nb-tags">'+notebookTagChipsHtml(e)+'<input class="gsfox-nb-tag-input" placeholder="+ 標籤(Enter新增)"></div>'
       + '<div class="gsfox-nb-footer"><button class="gsfox-del" data-act="nb-del" title="只從筆記本移除，原文章的畫重點不受影響">從筆記本移除</button></div>'
@@ -828,10 +833,13 @@
       if (ft && (e.tags||[]).indexOf(ft) === -1) return false;
       return true;
     });
-    list = filtering
-      ? list.sort(function(a,b){ return (new Date(b.ts||0)) - (new Date(a.ts||0)); })
-      : list; // 未篩選時維持entries陣列本身的順序(使用者拖曳排序後的結果)
-    notebookBody.classList.toggle("gsfox-nb-nodrag", filtering);
+    // 排序：自訂(拖曳後的陣列順序) / 依筆記時間(有更新想法就用更新時間，否則用摘取時間)
+    var sortMode = notebookSort.value;
+    if (sortMode === "custom" && filtering) sortMode = "time-desc"; // 篩選時無法拖曳，沿用舊行為以時間新到舊
+    var noteTime = function(e){ return new Date(e.updatedAt || e.ts || 0).getTime() || 0; };
+    if (sortMode === "time-desc") list.sort(function(a,b){ return noteTime(b) - noteTime(a); });
+    if (sortMode === "time-asc") list.sort(function(a,b){ return noteTime(a) - noteTime(b); });
+    notebookBody.classList.toggle("gsfox-nb-nodrag", sortMode !== "custom");
     if (!list.length){
       notebookBody.innerHTML = '<div class="gsfox-notes-empty">目前沒有符合條件的筆記<br>先到文章裡選取文字、點顏色畫重點，就會自動複製一份進這裡</div>';
       return;
@@ -909,7 +917,12 @@
       if (!e.target.classList || !e.target.classList.contains("gsfox-nb-note")) return;
       var card = closestSafe(e.target, ".gsfox-nb-card");
       if (!card) return;
-      updateEntryField(card.dataset.id, { note: e.target.value.trim() });
+      var newNote = e.target.value.trim();
+      var rec = loadEntries().filter(function(r){ return r.id === card.dataset.id; })[0];
+      if (!rec || (rec.note || "") === newNote) return;
+      updateEntryField(card.dataset.id, { note: newNote, updatedAt: new Date().toISOString() });
+      if (notebookSort.value !== "custom") renderNotebook();
+      else { var tEl = card.querySelector(".gsfox-nb-time"), ent = loadEntries().filter(function(r){ return r.id === card.dataset.id; })[0]; if (tEl && ent) tEl.innerHTML = nbTimeHtml(ent); }
     }, true);
 
     notebookBody.addEventListener("keydown", function(e){
@@ -950,6 +963,10 @@
     [notebookFilterCat, notebookFilterTag].forEach(function(sel){
       sel.addEventListener("change", renderNotebook);
     });
+    notebookSort.addEventListener("change", function(){
+      try{ localStorage.setItem(LS_NB_SORT, notebookSort.value); }catch(err){}
+      renderNotebook();
+    });
   }
 
   function downloadNotebook(){
@@ -961,6 +978,7 @@
       lines.push("");
       lines.push("來源：" + location.origin + e.sourcePathname);
       lines.push("摘取時間：" + fmtTime(e.ts));
+      if (e.updatedAt) lines.push("筆記更新：" + fmtTime(e.updatedAt));
       lines.push("");
       lines.push("*「" + e.text + "」*");
       lines.push("");
@@ -998,6 +1016,11 @@
       + '<div class="gsfox-nb-filterbar">'
       +   '<select data-role="nb-filter-cat"></select>'
       +   '<select data-role="nb-filter-tag"></select>'
+      +   '<select data-role="nb-sort" title="排序方式">'
+      +     '<option value="custom">自訂順序（可拖曳）</option>'
+      +     '<option value="time-desc">筆記時間：新 → 舊</option>'
+      +     '<option value="time-asc">筆記時間：舊 → 新</option>'
+      +   '</select>'
       + '</div>'
       + '<datalist id="gsfox-nb-catlist"></datalist>'
       + '<div class="gsfox-nb-body"></div>'
@@ -1007,6 +1030,8 @@
     notebookBody = notebookOverlay.querySelector(".gsfox-nb-body");
     notebookFilterCat = notebookOverlay.querySelector('[data-role="nb-filter-cat"]');
     notebookFilterTag = notebookOverlay.querySelector('[data-role="nb-filter-tag"]');
+    notebookSort = notebookOverlay.querySelector('[data-role="nb-sort"]');
+    try{ notebookSort.value = localStorage.getItem(LS_NB_SORT) || "custom"; }catch(err){}
 
     btn.addEventListener("click", function(){ notebookOverlay.hidden = false; renderNotebook(); });
     notebookOverlay.addEventListener("click", function(e){

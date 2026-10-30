@@ -4,50 +4,146 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>新聞觀察表</title>
-<link rel="stylesheet" href="shared.css">
-<script src="../assets/gsfox-annotate.js?v=20261030d"></script>
+<link rel="stylesheet" href="shared.css?v=20261030e">
+<script src="../assets/gsfox-annotate.js?v=20261030e"></script>
+<style>
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.sum label{display:block;font-size:13px;color:var(--muted);margin-bottom:2px}
+.sum select{width:100%}
+.claude{color:var(--muted);font-size:13px}
+.blind .claude-cell{filter:blur(5px);user-select:none}
+.blind .claude-cell::after{content:"";}
+.grp{font-weight:700;color:var(--accent);background:var(--accent-soft)}
+.st{font-weight:700;white-space:nowrap}
+.spark{font-size:12px;letter-spacing:1px;white-space:nowrap}
+.id{font-size:12px;font-weight:700;color:var(--accent)}
+.news{margin:2px 0 0;padding-left:1.1em;font-size:13px}
+.mine select{width:100%;margin-bottom:4px}
+.mine textarea{min-height:3em}
+.topicbtn{display:inline-block;font-size:12px;padding:3px 9px;margin-top:4px;border-radius:6px;background:var(--accent-soft);color:var(--accent);text-decoration:none;font-weight:600}
+.feedmsg{font-size:13px;color:var(--muted)}
+#nomTable td input{width:100%}
+</style>
 </head>
 <body class="gsfox-sync-only">
 <div class="wrap">
   <div class="crumbs" id="nav"></div>
   <h1>新聞觀察表</h1>
-  <p class="sub">對照今天的財經日報,每一力寫下相關新聞,並判斷它是單一事件還是可預見的週期。</p>
+  <p class="sub">每天在主線上做判斷。左邊由財經日報預填（Claude 的判斷），右邊是你的判斷，兩邊分開記錄，月底比對誰比較準。</p>
   <div class="bar" id="bar"></div>
-  <div class="scroll"><table>
-    <thead><tr><th>力量</th><th>可以看什麼</th><th>對投資組合的提問</th><th>今日日報相關新聞</th><th>單一事件 / 週期?</th><th>我的判斷與下一步</th></tr></thead>
-    <tbody id="forces"></tbody>
-  </table></div>
+
+  <div class="bar">
+    <div class="row"><b>今日總判斷</b><span class="sp"></span>
+      <label><input type="checkbox" id="blind"> 先判斷、再看 Claude 的</label>
+      <button id="reveal" class="ghost" hidden>揭曉 Claude 的判斷</button></div>
+    <div class="sum" id="sum" style="margin-top:8px"></div>
+    <p class="claude claude-cell" id="claudeSum" style="margin:8px 0 0"></p>
+  </div>
+
+  <p class="feedmsg" id="feedMsg"></p>
+  <div class="scroll" id="tableBox"></div>
+  <details id="quiet" style="margin-top:10px"><summary class="hint">今天沒有變化的主線與伏筆</summary><div class="scroll" id="quietBox"></div></details>
+
+  <h2>我提名的伏筆</h2>
+  <p class="hint">在其他地方看到、覺得值得追蹤的線索。隔天日報會把它登記進伏筆登記簿。</p>
+  <table id="nomTable"><thead><tr><th style="width:38%">線索（新聞或觀察）</th><th style="width:16%">力量</th><th>為什麼值得追蹤／如果對了會看到什麼</th><th></th></tr></thead><tbody id="nom"></tbody></table>
+  <button id="addNom" style="margin-top:8px">＋ 提名一個伏筆</button>
+
+  <div id="legacy"></div>
 </div>
-<script src="shared.js?v=20261030c"></script>
+<script src="shared.js?v=20261030e"></script>
 <script>
-const FORCES=[
- ["債務與貨幣","政府赤字與利息支出占稅收比、10 年與 30 年期殖利率、央行態度","組合裡有沒有在「債務壓力 + 印鈔」環境下仍能抗跌的一條?"],
- ["內部秩序","貧富差距、選舉與政策不確定性、財富稅提案","稅制或政策轉向是否可能迫使持有人賣資產?"],
- ["外部秩序","關稅、制裁、供應鏈與科技管制、軍事衝突","是否過度集中在單一國家或單一供應鏈?"],
- ["自然","極端氣候、疫情、保險與農產品供給","哪些資產對這類衝擊沒有韌性?"],
- ["創新","AI 帶來的生產力與資本支出","是新技術帶來價值,還是估值已超過價值?"]
-];
-const JUDGE=["","單一事件","可預見的週期","還看不出來"];
-function render(d){
-  $("#forces").innerHTML=FORCES.map((f,i)=>{const v=d.forces[i]||{};return `<tr>
-    <td class="k">${f[0]}</td><td class="q">${f[1]}</td><td class="q"><mark>${f[2]}</mark></td>
-    <td><textarea data-fo="${i}" data-k="news">${esc(v.news)}</textarea></td>
-    <td><select data-fo="${i}" data-k="judge">${JUDGE.map(j=>`<option${j===v.judge?" selected":""}>${j}</option>`).join("")}</select></td>
-    <td><textarea data-fo="${i}" data-k="note">${esc(v.note)}</textarea></td></tr>`}).join("");
+const FORCES=["債務與貨幣","內部秩序","外部秩序","自然","創新","其他"];
+const HINT={"債務與貨幣":"組合裡有沒有在「債務壓力＋印鈔」環境下仍能抗跌的一條？","內部秩序":"稅制或政策轉向是否可能迫使持有人賣資產？","外部秩序":"是否過度集中在單一國家或單一供應鏈？","自然":"哪些資產對這類衝擊沒有韌性？","創新":"是新技術帶來價值，還是估值已超過價值？"};
+const SUM=[["quadrant","錢 × 心理",["","錢寬鬆＋心理樂觀（上漲）","錢寬鬆＋心理悲觀（買點）","錢緊縮＋心理樂觀（最危險）","錢緊縮＋心理悲觀（下跌）"]],
+  ["forced","逼賣力量",["","增加","持平","減少"]],["bubble","泡沫頂端",["","更接近","持平","更遠"]],["action","組合動作",["","🟢 不用動","🟡 觀察","🔴 要檢討"]]];
+const ST=["","升溫","持平","降溫","結案"],JD=["","單一事件","可預見的週期","還看不出來"],FD=["","增加","持平","減少"],NX=["","不動作","觀察","寫進劇本","調整三池"];
+const ICON={"升溫":"🔺","持平":"➖","降溫":"🔻","結案":"✅"};
+let FEED=null,feedDate=null;
+const W=d=>{d.watch=d.watch||{};d.watch.sum=d.watch.sum||{};d.watch.items=d.watch.items||{};d.watch.nom=d.watch.nom||[];return d.watch};
+const opt=(arr,v)=>arr.map(x=>`<option${x===v?" selected":""}>${x}</option>`).join("");
+const grpOf=f=>{const g=(f||"").split("×")[0];return FORCES.includes(g)?g:"其他"};
+
+async function loadFeed(date){
+  if(feedDate===date)return FEED;
+  feedDate=date;FEED=null;
+  try{const r=await fetch(`feed/${date}.json`,{cache:"no-cache"});if(r.ok)FEED=await r.json()}catch(e){}
+  return FEED;
 }
+function rowHtml(it,w){
+  const m=w.items[it.id]||{};
+  const q=new URLSearchParams({mainline:it.id,title:it.name,expect:it.expect||"",kill:it.kill||""});
+  return `<tr><td><div class="id">${esc(it.id)}</div><b>${esc(it.name)}</b><div class="claude">${esc(it.type)}｜${esc(it.channel)}</div>
+      ${it.news.length?`<ul class="news">${it.news.map(n=>`<li>${esc(n)}</li>`).join("")}</ul>`:""}
+      ${it.heat.length?`<div class="claude">🔥 熱門：${esc(it.heat.join("；"))}</div>`:""}</td>
+    <td class="claude-cell"><div class="st">${ICON[it.status]||""} ${esc(it.status)}</div><div class="spark">${esc(it.spark)}</div><div class="claude">${esc(it.reason)}</div>
+      ${it.inst?`<div class="claude">機構：${esc(it.inst)}</div>`:""}</td>
+    <td class="mine"><select data-it="${it.id}" data-k="st" title="你的狀態判斷">${opt(ST,m.st)}</select>
+      <select data-it="${it.id}" data-k="judge" title="單一事件或週期">${opt(JD,m.judge)}</select>
+      <select data-it="${it.id}" data-k="forced" title="對逼賣力量的影響">${opt(FD,m.forced)}</select></td>
+    <td class="mine"><select data-it="${it.id}" data-k="next" title="下一步">${opt(NX,m.next)}</select>
+      <select data-it="${it.id}" data-k="conf" title="信心 1～5">${opt(["","1","2","3","4","5"],m.conf)}</select>
+      <textarea data-it="${it.id}" data-k="note" placeholder="理由／我看到 Claude 沒看到的">${esc(m.note)}</textarea>
+      <a class="topicbtn" href="topics.html?${q}" target="_blank">開成議題筆記 ↗</a></td></tr>`;
+}
+const HEAD=`<thead><tr><th style="width:30%">主線／伏筆與今日新聞</th><th style="width:22%">Claude 的判斷</th><th style="width:16%">我的判斷<div class="claude">狀態／單一或週期／逼賣</div></th><th>下一步／信心／理由</th></tr></thead>`;
+function table(items,w){
+  return `<table>${HEAD}<tbody>`+FORCES.map(g=>{const xs=items.filter(it=>grpOf(it.force)===g);if(!xs.length)return"";
+    return `<tr><td colspan="4" class="grp">${g}${HINT[g]?`<span class="claude">　${HINT[g]}</span>`:""}</td></tr>`+xs.map(it=>rowHtml(it,w)).join("")}).join("")+"</tbody></table>";
+}
+async function render(d){
+  const w=W(d),date=$("#date").value;
+  $("#sum").innerHTML=SUM.map(([k,lab,arr])=>`<div><label>${lab}</label><select data-sum="${k}">${opt(arr,w.sum[k])}</select></div>`).join("");
+  $("#nom").innerHTML=w.nom.map((n,i)=>`<tr><td><input data-nom="${i}" data-k="t" value="${esc(n.t)}"></td><td><select data-nom="${i}" data-k="f">${opt(["",...FORCES],n.f)}</select></td><td><input data-nom="${i}" data-k="why" value="${esc(n.why)}"></td><td><button class="ghost" data-delnom="${i}">刪除</button></td></tr>`).join("");
+  const f=await loadFeed(date);
+  if($("#date").value!==date)return;
+  if(!f){
+    $("#feedMsg").textContent=`${date} 沒有日報預填資料（新版日報上線前的日期，或當天日報還沒產出）。`;
+    $("#tableBox").innerHTML="";$("#quietBox").innerHTML="";$("#claudeSum").textContent="";
+  }else{
+    const s=f.summary;
+    $("#claudeSum").textContent=`Claude：${s.quadrant}｜逼賣力量 ${s.forced}｜泡沫頂端 ${s.bubble}｜動作 ${s.action}`;
+    const ch=f.items.filter(i=>i.changed),qu=f.items.filter(i=>!i.changed);
+    $("#feedMsg").textContent=`今天有變化 ${ch.length} 條，沒變化 ${qu.length} 條。`;
+    $("#tableBox").innerHTML=table(ch,w);$("#quietBox").innerHTML=qu.length?table(qu,w):"";
+  }
+  // 舊版（五力一列）紀錄只讀顯示
+  const old=Object.entries(d.forces||{}).filter(([i,v])=>v&&(v.news||v.note||v.judge));
+  $("#legacy").innerHTML=old.length?`<h2>舊版五力紀錄</h2><table><tbody>${old.map(([i,v])=>`<tr><td class="k">${["債務與貨幣","內部秩序","外部秩序","自然","創新"][i]}</td><td>${esc(v.news)}</td><td>${esc(v.judge)}</td><td>${esc(v.note)}</td></tr>`).join("")}</tbody></table>`:"";
+  applyBlind(w);
+}
+function applyBlind(w){
+  const on=$("#blind").checked,done=SUM.every(([k])=>w.sum[k]);
+  document.body.classList.toggle("blind",on&&!w.revealed);
+  $("#reveal").hidden=!(on&&!w.revealed);
+  $("#reveal").disabled=!done;$("#reveal").title=done?"":"先填完四格今日總判斷";
+}
+try{$("#blind").checked=localStorage.getItem("news-blind")==="1"}catch(e){}
+$("#blind").onchange=e=>{try{localStorage.setItem("news-blind",e.target.checked?"1":"0")}catch(x){}applyBlind(W(day()))};
+$("#reveal").onclick=()=>{const w=W(day());w.revealed=true;save();applyBlind(w)};
+$("#addNom").onclick=()=>{W(day()).nom.push({t:"",f:"",why:""});save();render(day())};
+
 init({
-  title:"新聞觀察表",key:"forces",itemName:"有記錄的力量",
-  items:d=>[{label:FORCES.filter((f,i)=>{const v=d.forces[i]||{};return v.news||v.note||v.judge}).map(f=>f[0]).join("、")}],
+  title:"新聞觀察表",key:"watch",itemName:"判斷",
+  items:d=>{const w=W(d),n=Object.entries(w.items).filter(([k,v])=>v.st||v.judge||v.note).length;
+    return [{label:`${n} 條主線有判斷${w.nom.length?`、提名 ${w.nom.length} 個伏筆`:""}`,tags:w.sum.action?[{t:w.sum.action,red:w.sum.action.includes("🔴")}]:[]}]},
   render,
-  filled:d=>Object.values(d.forces).some(v=>v.news||v.note||v.judge),
+  filled:d=>{const w=d.watch;return !!(w&&(Object.values(w.sum||{}).some(Boolean)||Object.values(w.items||{}).some(v=>v.st||v.judge||v.note)||(w.nom||[]).length))||Object.values(d.forces||{}).some(v=>v.news||v.note||v.judge)},
   onInput(el,d){
-    if(el.dataset.fo===undefined)return false;
-    (d.forces[el.dataset.fo]||(d.forces[el.dataset.fo]={}))[el.dataset.k]=el.value;
-    return true;
+    const w=W(d);
+    if(el.dataset.sum){w.sum[el.dataset.sum]=el.value;applyBlind(w);return true}
+    if(el.dataset.it){(w.items[el.dataset.it]||(w.items[el.dataset.it]={}))[el.dataset.k]=el.value;return true}
+    if(el.dataset.nom!==undefined){w.nom[el.dataset.nom][el.dataset.k]=el.value;return true}
+    return false;
   },
+  onClick(e,d){const b=e.target.closest("[data-delnom]");if(!b)return false;W(d).nom.splice(+b.dataset.delnom,1);return true},
   md(d){
-    let s=`| 力量 | 今日新聞 | 單一事件/週期 | 判斷與下一步 |\n|---|---|---|---|\n`;
-    FORCES.forEach((f,i)=>{const v=d.forces[i]||{};s+=`| ${f[0]} | ${(v.news||"").replace(/\n/g," ")} | ${v.judge||""} | ${(v.note||"").replace(/\n/g," ")} |\n`});
+    const w=W(d),S=w.sum;
+    let s=`**今日總判斷**：${SUM.map(([k,l])=>`${l} ${S[k]||"—"}`).join("｜")}\n\n| 編號 | 主線 | Claude 狀態 | 我的狀態 | 單一/週期 | 逼賣 | 下一步 | 信心 | 理由 |\n|---|---|---|---|---|---|---|---|---|\n`;
+    const items=(FEED&&FEED.date===$("#date").value)?FEED.items:[];
+    Object.entries(w.items).forEach(([id,m])=>{const it=items.find(x=>x.id===id)||{};
+      s+=`| ${id} | ${it.name||""} | ${it.status||""} | ${m.st||""} | ${m.judge||""} | ${m.forced||""} | ${m.next||""} | ${m.conf||""} | ${(m.note||"").replace(/\n/g," ")} |\n`});
+    if(w.nom.length)s+=`\n**我提名的伏筆**\n`+w.nom.map(n=>`- ${n.t}（${n.f||"未分類"}）：${n.why}`).join("\n")+"\n";
     return s;
   }
 });
