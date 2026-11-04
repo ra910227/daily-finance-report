@@ -17,6 +17,8 @@
 .wt{flex:1 1 16em;min-width:10em;font-size:21px;font-weight:800;line-height:1.4}
 .wtime{width:9em;font-size:14px;color:var(--muted)}
 .sep{color:var(--line);font-size:20px}
+.meta{display:flex;align-items:center;gap:8px;flex-wrap:nowrap}
+@media (max-width:640px){.wh .s1{display:none}.meta{width:100%}.wtime{flex:1}}
 .stars{white-space:nowrap;font-size:20px;letter-spacing:1px;user-select:none}
 .stars span{cursor:pointer;color:var(--line)}
 .stars span.on{color:#e0a100}
@@ -64,9 +66,9 @@ function render(){
   const ws=sorted();
   $("#list").innerHTML=ws.length?ws.map(w=>`<div class="warn s${w.stars||0}" data-id="${w.id}">
     <div class="wh"><input class="wt" data-k="text" placeholder="警語(例:不要跟市場爭辯)" value="${esc(w.text)}">
-      <span class="sep">/</span><input class="wtime" data-k="time" placeholder="紀律時間(例:進場前)" value="${esc(w.time)}">
+      <span class="meta"><span class="sep s1">/</span><input class="wtime" data-k="time" placeholder="紀律時間(例:進場前)" value="${esc(w.time)}">
       <span class="sep">/</span><span class="stars" title="重要性">${[1,2,3,4,5].map(i=>`<span data-star="${i}"${i<=(w.stars||0)?' class="on"':""}>★</span>`).join("")}</span>
-      <button class="ghost" data-del>刪除</button></div>
+      <button class="ghost" data-del>刪除</button></span></div>
     <textarea class="ws" data-k="story" rows="1" placeholder="心得故事:這句話是怎麼來的、哪一次讓你學到">${esc(w.story)}</textarea></div>`).join("")
     :'<p class="empty">還沒有警語,按「+ 新增警語」寫下第一則。</p>';
   document.querySelectorAll(".ws").forEach(grow);
