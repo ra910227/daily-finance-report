@@ -14,7 +14,7 @@
 
   function isGsfoxDataKey(k){
     return k.indexOf("gsfox_hl:") === 0 || k.indexOf("gsfox_star:") === 0 || k.indexOf(LS_READ_PREFIX) === 0
-      || k === "gsfox_notebook_entries" || k === "gsfox_notebook_seen" || k === LS_THOUGHTS;
+      || k === "gsfox_notebook_entries" || k === "gsfox_notebook_seen" || k === LS_THOUGHTS || k === LS_WARNINGS;
   }
 
   /* 思緒整理(反思原則表/新聞觀察表/議題筆記表)的資料，2026-10-29納入雲端同步。
@@ -46,6 +46,28 @@
     return JSON.stringify(out);
   }
 
+  /* 股海警語(2026-11-04新增)：一份不分日期的警語清單，每則有id與upd。
+     依id逐則合併、upd較新者勝；刪除用 del:true 墓碑保留，避免被另一台裝置的舊資料救回來。 */
+  var LS_WARNINGS = "gsfox_warnings";
+
+  function mergeWarnings(localStr, cloudStr){
+    var a, b;
+    try{ a = JSON.parse(localStr || "[]"); }catch(e){ a = []; }
+    try{ b = JSON.parse(cloudStr || "[]"); }catch(e){ return localStr; }
+    var byId = {}, order = [];
+    b.concat(a).forEach(function(w){
+      if (!w || !w.id) return;
+      var cur = byId[w.id];
+      if (!cur){ order.push(w.id); byId[w.id] = w; }
+      else if ((w.upd || "") > (cur.upd || "")) byId[w.id] = w;
+    });
+    return JSON.stringify(order.map(function(id){ return byId[id]; }));
+  }
+
+  var MERGERS = {};
+  MERGERS[LS_THOUGHTS] = mergeThoughts;
+  MERGERS[LS_WARNINGS] = mergeWarnings;
+
   /* ============ 雲端同步（Cloudflare Worker + KV） ============ */
   var WORKER_URL = "https://gsfox-sync.yingbangbang2026.workers.dev";
   var LS_SYNC_CODE = "gsfox_sync_code";
@@ -61,12 +83,12 @@
       var needPush = false;
       if (data){
         Object.keys(data).forEach(function(k){
-          if (k === LS_THOUGHTS){
+          if (MERGERS[k]){
             var local = localStorage.getItem(k);
             if (local && !localStorage.getItem(k + ":backup-before-sync")){
               try{ localStorage.setItem(k + ":backup-before-sync", local); }catch(e){}
             }
-            var merged = mergeThoughts(local, data[k]);
+            var merged = MERGERS[k](local, data[k]);
             try{ localStorage.setItem(k, merged); }catch(e){}
             if (merged !== data[k]) needPush = true;
           } else if (isGsfoxDataKey(k)){
@@ -74,7 +96,9 @@
           }
         });
       }
-      if (localStorage.getItem(LS_THOUGHTS) && !(data && data[LS_THOUGHTS])) needPush = true;
+      Object.keys(MERGERS).forEach(function(k){
+        if (localStorage.getItem(k) && !(data && data[k])) needPush = true;
+      });
       if (needPush) scheduleCloudPush();
       return true;
     }).catch(function(){ return false; });

@@ -372,7 +372,8 @@ def build_index():
 
     # 思緒整理：固定三張互動表單(工具頁、無日期，不進最新文章feed)
     thoughts_items = []
-    for fname, title in [("reflect.html", "反思原則表"), ("news.html", "新聞觀察表"), ("topics.html", "議題筆記表")]:
+    for fname, title in [("reflect.html", "反思原則表"), ("news.html", "新聞觀察表"), ("topics.html", "議題筆記表"),
+                         ("warnings.html", "股海警語")]:
         f = SITE / "思緒整理" / fname
         if f.exists():
             thoughts_items.append({"date": "", "tag": "思緒整理", "title": title,
@@ -414,7 +415,7 @@ def build_index():
          grouped_grid(lecture_groups), lecture_count),
         ("notes", "🗒️ 金融筆記", "自己整理的閱讀筆記、書籍重點與投資組合回測分析",
          grid(notes_items), len(notes_items)),
-        ("thoughts", "🧠 思緒整理", "讀完日報後的互動表單：痛苦反思、五力新聞觀察、議題思維圖（連接同步碼後自動同步雲端，跨裝置共用）"
+        ("thoughts", "🧠 思緒整理", "讀完日報後的互動表單：痛苦反思、主線新聞觀察、議題思維圖、股海警語（連接同步碼後自動同步雲端，跨裝置共用）"
          '<div class="flow-note"><b>新聞觀察表（每天判斷）<br>'
          '↓ 某條主線值得深入研究 →「開成議題筆記」，帶著主線編號<br>'
          '議題筆記表（把因果畫成思維圖）<br>'

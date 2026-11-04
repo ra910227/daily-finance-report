@@ -3,7 +3,7 @@
 // 首頁或表單頁連接雲端同步碼後，透過 ../assets/gsfox-annotate.js 的 gsfoxSync 同步到雲端(依日期合併)
 const KEY="reflection-sheets-v1";
 const MARKET=[["twii","加權指數","如 23,450"],["us","美股","S&P / 那指"],["vix","VIX","如 16.2"],["y10","美 10 年債","如 4.25%"],["fx","美元/台幣","如 31.5"]];
-const NAV=[["index.html","思緒整理"],["reflect.html","反思原則表"],["news.html","新聞觀察表"],["topics.html","議題筆記表"],["../index.html","← 回首頁"]];
+const NAV=[["index.html","思緒整理"],["reflect.html","反思原則表"],["news.html","新聞觀察表"],["topics.html","議題筆記表"],["warnings.html","股海警語"],["../index.html","← 回首頁"]];
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let store={};

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>股海警語</title>
+<link rel="stylesheet" href="shared.css">
+<script src="../assets/gsfox-annotate.js?v=20261104"></script>
+<style>
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tools .sp{flex:1}
+.warn{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px 10px;margin:14px 0}
+.warn.s5,.warn.s4{border-left-color:#d32f2f}
+.wh{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.wh input{border-color:transparent;background:transparent;padding:2px 6px}
+.wh input:focus,.ws:focus{border-color:var(--line);background:var(--bg)}
+.wt{flex:1 1 16em;min-width:10em;font-size:21px;font-weight:800;line-height:1.4}
+.wtime{width:9em;font-size:14px;color:var(--muted)}
+.sep{color:var(--line);font-size:20px}
+.stars{white-space:nowrap;font-size:20px;letter-spacing:1px;user-select:none}
+.stars span{cursor:pointer;color:var(--line)}
+.stars span.on{color:#e0a100}
+.wh .ghost{padding:2px 8px;font-size:13px}
+.ws{display:block;width:100%;margin-top:4px;border-color:transparent;background:transparent;padding:4px 6px;font-size:13px;line-height:1.7;color:var(--muted);resize:none;overflow:hidden;min-height:2.2em}
+.empty{color:var(--muted);font-size:14px;margin:20px 0}
+@media print{.tools,.crumbs,.wh .ghost{display:none}.ws{color:#444}}
+</style>
+</head>
+<body class="gsfox-sync-only">
+<div class="wrap">
+  <div class="crumbs" id="nav"></div>
+  <h1>股海警語</h1>
+  <p class="sub">從自己吃過的虧、讀過的書裡留下來的話。每一則寫下警語、什麼時候要想起它（紀律時間）、重要性，下面記心得或故事。</p>
+  <div class="bar tools">
+    <button id="add">+ 新增警語</button>
+    <label for="sort">排序</label>
+    <select id="sort"><option value="star">重要性</option><option value="new">最新修改</option><option value="old">新增順序</option></select>
+    <span class="sp"></span><span id="saved"></span>
+    <button id="copy">複製 Markdown</button><button id="print" class="ghost">列印</button>
+  </div>
+  <div id="list"></div>
+</div>
+<script src="shared.js?v=20261104"></script>
+<script>
+// 資料存 localStorage「gsfox_warnings」：[{id,text,time,stars,story,upd,del}]，不分日期；
+// 雲端同步由 gsfox-annotate.js 依 id 逐則合併(upd 較新者勝)，刪除留 del:true 墓碑
+const WKEY="gsfox_warnings";
+let list=[];
+const load=()=>{try{list=JSON.parse(localStorage.getItem(WKEY)||"[]")}catch(e){list=[]}};
+load();
+let fresh=null; // 剛新增的那則先固定在最上面，不被排序沉到底
+const nowTs=()=>new Date().toISOString();
+const live=()=>list.filter(w=>!w.del);
+
+function sorted(){
+  const s=$("#sort").value,ws=live();
+  if(s==="star")ws.sort((a,b)=>(b.stars||0)-(a.stars||0)||(b.upd||"").localeCompare(a.upd||""));
+  else if(s==="new")ws.sort((a,b)=>(b.upd||"").localeCompare(a.upd||""));
+  if(fresh){const i=ws.findIndex(w=>w.id===fresh);if(i>0)ws.unshift(ws.splice(i,1)[0])}
+  return ws;
+}
+function grow(el){el.style.height="auto";el.style.height=el.scrollHeight+"px"}
+function render(){
+  const ws=sorted();
+  $("#list").innerHTML=ws.length?ws.map(w=>`<div class="warn s${w.stars||0}" data-id="${w.id}">
+    <div class="wh"><input class="wt" data-k="text" placeholder="警語(例:不要跟市場爭辯)" value="${esc(w.text)}">
+      <span class="sep">/</span><input class="wtime" data-k="time" placeholder="紀律時間(例:進場前)" value="${esc(w.time)}">
+      <span class="sep">/</span><span class="stars" title="重要性">${[1,2,3,4,5].map(i=>`<span data-star="${i}"${i<=(w.stars||0)?' class="on"':""}>★</span>`).join("")}</span>
+      <button class="ghost" data-del>刪除</button></div>
+    <textarea class="ws" data-k="story" rows="1" placeholder="心得故事:這句話是怎麼來的、哪一次讓你學到">${esc(w.story)}</textarea></div>`).join("")
+    :'<p class="empty">還沒有警語,按「+ 新增警語」寫下第一則。</p>';
+  document.querySelectorAll(".ws").forEach(grow);
+}
+function persist(w){
+  if(w)w.upd=nowTs();
+  try{localStorage.setItem(WKEY,JSON.stringify(list));$("#saved").textContent="✓ 已存檔 "+new Date().toTimeString().slice(0,8)}
+  catch(e){$("#saved").textContent="⚠ 無法儲存"}
+  if(window.gsfoxSync&&gsfoxSync.code()){gsfoxSync.push();$("#saved").textContent+=" ☁️"}
+}
+const byEl=el=>{const c=el.closest("[data-id]");return c&&list.find(w=>w.id===c.dataset.id)};
+
+$("#nav").innerHTML=NAV.map(n=>`<a href="${n[0]}"${n[0]==="warnings.html"?' class="on"':""}>${n[1]}</a>`).join("");
+$("#add").onclick=()=>{
+  const w={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),text:"",time:"",stars:0,story:""};
+  list.push(w);fresh=w.id;persist(w);render();
+  document.querySelector(`[data-id="${w.id}"] .wt`).focus();
+};
+$("#sort").onchange=()=>{fresh=null;render()};
+document.addEventListener("input",e=>{
+  const w=byEl(e.target);if(!w||!e.target.dataset.k)return;
+  w[e.target.dataset.k]=e.target.value;if(e.target.classList.contains("ws"))grow(e.target);persist(w);
+});
+document.addEventListener("click",e=>{
+  const st=e.target.closest("[data-star]"),del=e.target.closest("[data-del]");
+  if(!st&&!del)return;
+  const w=byEl(e.target);if(!w)return;
+  if(st){const n=+st.dataset.star;w.stars=w.stars===n?n-1:n;persist(w);render()}
+  else if(confirm("刪除這則警語?")){w.del=true;persist(w);render()}
+});
+$("#copy").onclick=async()=>{
+  const md="# 股海警語\n\n"+sorted().filter(w=>w.text||w.story).map(w=>`**${w.text}** / ${w.time||"—"} / ${"★".repeat(w.stars||0)||"—"}\n\n${w.story||""}`).join("\n\n---\n\n")+"\n";
+  try{await navigator.clipboard.writeText(md);$("#saved").textContent="已複製"}catch(e){$("#saved").textContent="複製失敗"}
+};
+$("#print").onclick=()=>print();
+render();
+
+// 雲端同步:開頁時與切回分頁時拉一次,有變動才重畫(避免打字中被打斷)
+const cloudPull=()=>{
+  if(!window.gsfoxSync||!gsfoxSync.code())return;
+  const before=localStorage.getItem(WKEY);
+  gsfoxSync.pull().then(ok=>{
+    if(localStorage.getItem(WKEY)!==before){load();render()}
+    $("#saved").textContent=ok?"☁️ 已與雲端同步":"☁️ 雲端讀取失敗,先用本機資料";
+  });
+};
+cloudPull();
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")cloudPull()});
+</script>
+</body>
+</html>
