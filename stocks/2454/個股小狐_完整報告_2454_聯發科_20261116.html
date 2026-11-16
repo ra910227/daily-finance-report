@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個股小狐｜聯發科(2454) 三合一完整報告</title>
+<style>
+:root {
+  --bg: #ffffff; --bg2: #f7f8fc; --bg3: #eef0f7; --border: #e1e4ee;
+  --text: #1e2233; --text2: #6b7280; --accent: #4f46e5; --accent2: #4338ca;
+  --red: #dc2626; --green: #15803d; --gold: #b45309; --orange: #c2410c;
+  --blue: #2563eb; --purple: #7c3aed; --teal: #0d9488;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  line-height: 1.65; font-size: 15px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px 60px; }
+.hero { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #fff; padding: 36px 24px 30px; margin-bottom: 24px; }
+.hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+.hero .tag { display:inline-block; background: rgba(255,255,255,.18); padding: 3px 12px; border-radius: 20px; font-size: 12.5px; margin-bottom: 12px; }
+.hero h1 { margin: 0 0 6px; font-size: 25px; }
+.hero .sub { opacity: .92; font-size: 14px; margin-bottom: 18px; }
+.hero-stats { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-stat { background: rgba(255,255,255,.14); border-radius: 10px; padding: 10px 16px; min-width: 120px; }
+.hero-stat .l { font-size: 12px; opacity: .88; }
+.hero-stat .v { font-size: 18px; font-weight: 700; margin-top: 2px; }
+.hero-stat .s { font-size: 11px; opacity: .8; margin-top: 2px; }
+nav.toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 28px; font-size: 13.5px; }
+nav.toc .grp-title { font-weight: 700; color: var(--accent2); margin: 10px 0 6px; font-size: 13px; }
+nav.toc .grp-title:first-child { margin-top: 0; }
+nav.toc a { color: var(--text); text-decoration: none; display: inline-block; margin: 2px 14px 2px 0; }
+nav.toc a:hover { color: var(--accent); text-decoration: underline; }
+section { margin-bottom: 40px; scroll-margin-top: 16px; }
+h1.part { font-size: 19px; color: var(--accent2); border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin: 34px 0 20px; }
+h2.sec-title { font-size: 20px; border-left: 5px solid var(--accent); padding-left: 12px; margin: 0 0 14px; }
+h3 { font-size: 16.5px; margin: 22px 0 10px; color: var(--accent2); }
+p { color: var(--text); margin: 8px 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 8px; font-size: 13.5px; }
+th, td { border: 1px solid var(--border); padding: 7px 9px; text-align: left; vertical-align: top; }
+th { background: var(--bg3); font-weight: 700; white-space: nowrap; }
+tr:nth-child(even) td { background: #fbfbfd; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+.tbl-wrap { overflow-x: auto; }
+.badge { display:inline-block; padding: 2px 9px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.b-ok { background:#dcfce7; color:var(--green); }
+.b-warn { background:#fef3c7; color:var(--gold); }
+.b-bad { background:#fee2e2; color:var(--red); }
+.b-info { background:#e0e7ff; color:var(--accent2); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 14px; margin: 14px 0; }
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.card h4 { margin: 0 0 6px; font-size: 14px; color: var(--accent2); }
+.card .big { font-size: 22px; font-weight: 700; }
+.scenario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 14px; margin: 14px 0; }
+.scenario-card { border-radius: 12px; padding: 16px; border: 1px solid var(--border); }
+.scenario-card.bear { background: #fef2f2; }
+.scenario-card.base { background: #eef2ff; }
+.scenario-card.bull { background: #f0fdf4; }
+.scenario-card h4 { margin: 0 0 8px; }
+.scenario-card ul { margin: 6px 0; padding-left: 18px; font-size: 13px; }
+.scenario-card .target { font-size: 20px; font-weight: 800; margin-top: 8px; }
+.risk-card { border-left: 4px solid var(--red); background: #fff5f5; padding: 12px 16px; border-radius: 8px; margin: 10px 0; }
+.risk-card.mid { border-left-color: var(--gold); background: #fffbeb; }
+.risk-card.ok { border-left-color: var(--green); background: #f0fdf4; }
+.action-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 16px 0; }
+.action-box h4 { margin-top: 0; color: var(--accent2); }
+.note { font-size: 12.5px; color: var(--text2); margin-top: 6px; }
+.moat-row { display:flex; align-items:center; gap:10px; margin:6px 0; font-size:13.5px; flex-wrap: wrap; }
+.moat-row .label { width: 120px; flex-shrink:0; }
+.stars { color: var(--gold); letter-spacing: 2px; }
+.divider { border:none; border-top:1px solid var(--border); margin: 30px 0; }
+footer { font-size: 12px; color: var(--text2); border-top: 1px solid var(--border); padding-top: 16px; margin-top: 40px; }
+.src-status { font-size:11.5px; }
+code { background: var(--bg3); padding: 1px 6px; border-radius: 4px; font-size: 12.5px; }
+.hl { background:#fff7d6; padding:0 3px; border-radius:3px; }
+ul.tight { margin: 6px 0; padding-left: 20px; }
+ul.tight li { margin: 3px 0; }
+.bars { display:flex; align-items:flex-end; gap:10px; height:170px; margin:14px 0 4px; padding:0 4px; border-bottom:1px solid var(--border); }
+.bar { flex:1; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; min-width:34px; }
+.bar .fill { width:100%; max-width:52px; background:linear-gradient(180deg,#6366f1,#4338ca); border-radius:5px 5px 0 0; }
+.bar .fill.est { background:repeating-linear-gradient(45deg,#c7d2fe,#c7d2fe 6px,#e0e7ff 6px,#e0e7ff 12px); border:1px dashed var(--accent); }
+.bar .val { font-size:11.5px; font-weight:700; margin-bottom:3px; }
+.barlab { display:flex; gap:10px; padding:0 4px; font-size:11.5px; color:var(--text2); }
+.barlab span { flex:1; text-align:center; min-width:34px; }
+@media (max-width: 640px) { .hero h1 { font-size: 20px; } body { font-size: 14.5px; } }
+</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+</head>
+<body>
+<div class="hero">
+  <div class="hero-inner">
+    <span class="tag">個股小狐｜三合一完整報告（公司深度研究＋最新財報解析＋財務風險健檢）</span>
+    <h1>聯發科技(2454.TW，台灣證券交易所上市) MediaTek Inc.</h1>
+    <div class="sub">分析日期：2026/11/16（盤中，Yahoo Finance行情查證時間約12:33）　｜　產業：IC設計（手機SoC／智慧裝置平台／電源管理IC／雲端AI ASIC），全球最大手機SoC供應商之一</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="l">股價(11/16盤中)</div><div class="v">3,910 元</div><div class="s">-5.1%；11/13收盤4,120元</div></div>
+      <div class="hero-stat"><div class="l">市值</div><div class="v">約6.28兆元</div><div class="s">3,910元×1,604.95M股 ≈ US$1,980億</div></div>
+      <div class="hero-stat"><div class="l">52週區間</div><div class="v">1,130 ～ 5,480 元</div><div class="s">高點9月；現價距高點-28.6%</div></div>
+      <div class="hero-stat"><div class="l">PE(TTM)</div><div class="v">62.7 倍</div><div class="s">TTM EPS 62.33元；證交所11/13為66.27倍</div></div>
+      <div class="hero-stat"><div class="l">PB</div><div class="v">13.4 倍</div><div class="s">每股淨值291.41元（2026Q3）</div></div>
+      <div class="hero-stat"><div class="l">TTM營收／毛利率</div><div class="v">6,196億／46.2%</div><div class="s">營益率15.3%</div></div>
+      <div class="hero-stat"><div class="l">成長象限</div><div class="v">轉型高速成長股</div><div class="s">手機＝穩定/循環，ASIC＝高速成長</div></div>
+      <div class="hero-stat"><div class="l">Thesis成立度</div><div class="v">3.5 / 5</div><div class="s">ASIC已出貨，但估值已預支2028</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<nav class="toc">
+  <div class="grp-title">摘要與資料說明</div>
+  <a href="#conflict">資料衝突解決摘要</a>
+  <a href="#summary">綜合總結：五維度卡片</a>
+  <div class="grp-title">① 公司深度研究</div>
+  <a href="#s1-basic">基本介紹</a>
+  <a href="#s1-engine">業務引擎分析</a>
+  <a href="#s1-thesis">核心Thesis與未來性</a>
+  <a href="#s1-comp">競爭格局</a>
+  <a href="#s1-quad">成長象限與護城河</a>
+  <div class="grp-title">② 最新財報解析</div>
+  <a href="#s2-beat">Beat/Miss表</a>
+  <a href="#s2-guide">指引變化</a>
+  <a href="#s2-price">股價反應</a>
+  <a href="#s2-dcf">三情境DCF估值</a>
+  <a href="#s2-valuation">股價位階</a>
+  <a href="#s2-anchor">估值歷史錨點（EPS表／歷史PE／反推試算）</a>
+  <a href="#s2-comps">Comps分析</a>
+  <a href="#s2-extra">額外優勢／風險</a>
+  <a href="#s2-target">投行目標價與操作建議</a>
+  <div class="grp-title">③ 財務風險健檢</div>
+  <a href="#s3-data">財務數據填表</a>
+  <a href="#s3-ratio">六大比率診斷</a>
+  <a href="#s3-debt">債務到期時程</a>
+  <a href="#s3-capex">CapEx分析</a>
+  <a href="#s3-peer">同業對比</a>
+  <a href="#s3-final">綜合診斷</a>
+  <div class="grp-title">總結</div>
+  <a href="#final-action">最終操作建議</a>
+  <a href="#gaps">資料缺口清單</a>
+</nav>
+
+<section id="conflict">
+<h2 class="sec-title">資料衝突解決摘要</h2>
+<p>Futu OpenD 本次有連線，但不支援台股代號（回傳「format of code TW.2454 is wrong」），僅用於美股同業快照。台股數據改以：證交所OpenAPI（2026Q3綜合損益表、資產負債表、10月營收、股利、董監持股）、證交所個股本益比／淨值比逐日資料（2017/01～2026/11/13，共2,289筆）、Yahoo Finance行情、Yahoo股市單季損益表與現金流量表、公司法說會報導取得。</p>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th>各來源數字</th><th>本報告採用</th><th>說明</th></tr>
+<tr><td>股價</td><td>Yahoo行情 11/16 12:33：3,910元（日高4,100／日低3,855，前收4,120）；證交所11/13 PE 66.27倍對應收盤4,120元</td><td>3,910元（盤中）</td><td>盤中價收盤前會變動。今日下跌原因未查到專門報導，不臆測。<span class="badge b-ok">✅</span></td></tr>
+<tr><td>Q3營業利益／EPS</td><td>證交所／Yahoo：營業利益271.02億、淨利281.99億、EPS 17.50元；壹蘋新聞另一段列營業利益279.23億、淨利288.95億、「調整後EPS」17.92元</td><td>271.02億／17.50元</td><td>以證交所申報數字為準；17.92元為非IFRS口徑或誤植，原文未說明。<span class="badge b-ok">✅</span></td></tr>
+<tr><td>2026Q1／Q2 EPS</td><td>前三季累計EPS 47.94元（證交所）；Q2 15.28元、Q3 17.50元（法說報導）</td><td>Q1＝47.94−15.28−17.50＝15.16元</td><td>由累計反推。<span class="badge b-warn">⚠️推算</span></td></tr>
+<tr><td>FactSet共識</td><td>24位分析師：2026E 66.55元、2027E 125.37元、2028E 245.81元（鉅亨，日期未標示）；較早版本27位：2026E 62.06、2027E 98.83</td><td>列為共識參考</td><td>報導日期無法確認，可能落後法說會後的上修（法說後多家2027E已在147～187元）。<span class="badge b-warn">⚠️</span></td></tr>
+<tr><td>高盛最新數字</td><td>5月：2027E 132.18元、TP 5,000元；搜尋摘要稱11月中：2027E 186.75元、TP 7,100元</td><td>兩組並列</td><td>11月數字來自搜尋摘要，未能開啟原文逐字核對。<span class="badge b-warn">⚠️</span></td></tr>
+<tr><td>FCF口徑</td><td>Yahoo「自由現金流」＝營業CF＋投資CF；公司未單獨揭露資本支出</td><td>以投資現金流作為CapEx代理</td><td>投資現金流含金融資產買賣，會高估CapEx。<span class="badge b-warn">⚠️</span></td></tr>
+<tr><td>計息負債</td><td>可轉債US$39億（約1,236億元，以31.7匯率換算）；其他短期借款明細未取得</td><td>以可轉債作為主要計息負債</td><td>若另有短借，淨現金會再降低。<span class="badge b-warn">⚠️</span></td></tr>
+</table></div>
+<p class="note">狀態標示：<span class="badge b-ok">✅已驗證</span>＝本次查詢成功取得並附來源；<span class="badge b-warn">⚠️估算</span>＝依公開數據推算（附方法）；<span class="badge b-bad">❌無法取得</span>＝查無資料，欄位填「—」。</p>
+</section>
+
+<section id="summary">
+<h2 class="sec-title">綜合總結：五維度快照</h2>
+<div class="card-grid">
+  <div class="card"><h4>Thesis成立度</h4><div class="big">3.5 / 5</div><div class="note">ASIC（Google TPU）9月出貨、Q4 US$25億、2027年US$160億高標 ✅；但手機年減17%、毛利率被稀釋、營業現金流轉負</div></div>
+  <div class="card"><h4>護城河強度</h4><div class="big stars">★★★☆☆</div><div class="note">16/25：客戶黏著與規模強，但ASIC戰場面對博通，手機面對高通，非獨占</div></div>
+  <div class="card"><h4>成長象限</h4><div class="big">轉型高速成長股</div><div class="note">2024～2025 EPS持平（66.92→66.16），2027E市場預估翻倍，靠單一新業務驅動</div></div>
+  <div class="card"><h4>財務體質</h4><div class="big">良好，但轉緊</div><div class="note">淨現金約1,547億，但存貨1,535億（週轉127天）、2026前三季OCF僅24億、需發可轉債補營運資金</div></div>
+  <div class="card"><h4>本報告合理價區間</h4><div class="big">2,800～3,900 元</div><div class="note">中樞約3,300元（基準2027E EPS 130元×25倍；DCF基準3,105元）；現價3,910元位於區間上緣</div></div>
+</div>
+<div class="action-box">
+<h4>一句話結論</h4>
+<p><b>聯發科的AI ASIC故事已從「傳言」進入「出貨」（Q4單季US$25億、2027年目標約US$160億），基本面轉折是真的；但股價3,910元已等於「2027年基準EPS 130元×30倍」，或「2028年EPS約208元×5年平均本益比18.8倍」——市場已經提前替2028年付錢。</b>對「寧少賺不大賠」的風格而言，已持有者可續抱但要設風控線；未持有者不宜在此追價，分批觀察區約2,800～3,100元（≈基準2027E的22～24倍，接近DCF基準值）。</p>
+</div>
+</section>
+
+<h1 class="part">① 公司深度研究</h1>
+
+<section id="s1-basic">
+<h2 class="sec-title">基本介紹</h2>
+<div class="card-grid">
+  <div class="card"><h4>市值</h4><div class="big">約6.28兆</div><div class="note">3,910元×1,604.95M股 ✅；台股市值第二大級距</div></div>
+  <div class="card"><h4>TTM營收／YoY</h4><div class="big">6,196億</div><div class="note">2025Q4～2026Q3加總 ✅；前一TTM 5,838億，+6.1%</div></div>
+  <div class="card"><h4>TTM毛利率／營益率</h4><div class="big">46.2%／15.3%</div><div class="note">2024年49.6%／19.3% → 2025年47.5%／17.4%：獲利率連續下滑 ✅</div></div>
+  <div class="card"><h4>TTM自由現金流</h4><div class="big">約31億</div><div class="note">OCF 668.5億＋投資CF −637.4億 ⚠️（2025年全年OCF 1,628億）</div></div>
+  <div class="card"><h4>10月營收</h4><div class="big">550.3億</div><div class="note">月減0.7%、年增5.8%；1～10月累計5,244億，+5.3% ✅</div></div>
+  <div class="card"><h4>股利</h4><div class="big">49元／年</div><div class="note">2025下半年24.5＋2026上半年24.5元；殖利率約1.25% ✅</div></div>
+</div>
+<p>聯發科是全球前五大IC設計公司，產品分三大類：<b>手機SoC</b>（天璣系列，Android陣營出貨量龍頭）、<b>智慧裝置平台</b>（電視、Wi-Fi、Chromebook、車用、ASIC客製化晶片——雲端AI加速器的營收歸在此類）、<b>電源管理IC</b>（達發／立錡體系）。2026年的關鍵變化是：與Google合作的雲端AI加速器（市場普遍指TPU v8t）於9月開始出貨。</p>
+</section>
+
+<section id="s1-engine">
+<h2 class="sec-title">業務引擎分析</h2>
+<h3>2026Q3營收結構（公司法說）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>業務</th><th class="num">營收佔比</th><th class="num">季增</th><th class="num">年增</th><th>客戶結構</th><th>護城河來源</th></tr>
+<tr><td>手機</td><td class="num">37%</td><td class="num">−1%</td><td class="num">−17%</td><td>vivo、OPPO、小米、榮耀、三星中低階</td><td>Android旗艦／中階完整產品線、5G基頻、台積電先進製程（2奈米天璣9600系列）</td></tr>
+<tr><td>智慧裝置平台（含AI ASIC）</td><td class="num">58%</td><td class="num">+20%</td><td class="num">+63%</td><td>Google（AI加速器）、電視品牌、Amazon/Google裝置、Chromebook、車廠</td><td>SerDes（448G）、3.5D封裝、NVLink Fusion／UALink、客製化經驗</td></tr>
+<tr><td>電源管理IC</td><td class="num">5%</td><td class="num">+1%</td><td class="num">+18%</td><td>平板、筆電、與NVIDIA合作之GB10平台</td><td>與自家SoC搭售</td></tr>
+</table></div>
+<p class="note">來源：聯發科2026Q3法說會（10/30），經淘金脈絡、GuruFocus整理 ✅。Q4起AI ASIC約佔營收30%（Q4 US$25億 ≈ 790億元，營收財測2,101～2,218億）。</p>
+
+<h3>優勢產品表</h3>
+<div class="tbl-wrap"><table>
+<tr><th>產品</th><th>營收佔比</th><th>護城河說明</th></tr>
+<tr><td>雲端AI加速器（Google TPU第一代合作案）</td><td>Q4E約30%；2027E約45%⚠️</td><td>Google繼博通之後的第二供應商；2代預定2028Q1量產、3代2029年底；第二家非中國客戶2028年貢獻首筆營收</td></tr>
+<tr><td>天璣旗艦SoC（2奈米）</td><td>手機37%中的高階部分</td><td>Android旗艦市佔與高通分庭抗禮；Q3旗艦表現較強，有客戶在漲價前提前拉貨</td></tr>
+<tr><td>智慧電視SoC／Wi-Fi</td><td>智慧裝置平台中的傳統部分</td><td>全球電視SoC龍頭，成本優勢；但成熟、成長慢</td></tr>
+</table></div>
+<p class="note">2027年AI ASIC佔比⚠️推算：US$160億×31.7≈5,070億元，除以本報告基準2027E營收約1.07兆元。</p>
+
+<h3>近期歷史財務摘要（單季，億元）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>季度</th><th class="num">營收</th><th class="num">YoY</th><th class="num">毛利率</th><th class="num">營益率</th><th class="num">EPS(元)</th><th class="num">營業CF</th><th class="num">OCF＋投資CF</th></tr>
+<tr><td>2025Q3</td><td class="num">1,421.0</td><td class="num">+7.8%</td><td class="num">46.5%</td><td class="num">15.6%</td><td class="num">—</td><td class="num">391.8</td><td class="num">358.1</td></tr>
+<tr><td>2025Q4</td><td class="num">1,501.9</td><td class="num">+8.8%</td><td class="num">46.1%</td><td class="num">14.5%</td><td class="num">14.39</td><td class="num">645.2</td><td class="num">478.8</td></tr>
+<tr><td>2026Q1</td><td class="num">1,491.5</td><td class="num">−2.7%</td><td class="num">46.3%</td><td class="num">15.3%</td><td class="num">15.16⚠️</td><td class="num">−176.6</td><td class="num">−217.5</td></tr>
+<tr><td>2026Q2</td><td class="num">1,521.8</td><td class="num">+1.2%</td><td class="num">46.2%</td><td class="num">15.0%</td><td class="num">15.28</td><td class="num">242.5</td><td class="num">46.6</td></tr>
+<tr><td>2026Q3</td><td class="num">1,680.6</td><td class="num">+18.3%</td><td class="num">46.3%</td><td class="num">16.1%</td><td class="num">17.50</td><td class="num">−42.6</td><td class="num">−276.7</td></tr>
+</table></div>
+<p class="note">來源：Yahoo股市單季損益表／現金流量表（仟元換算）、證交所OpenAPI ✅。2025Q3單季EPS未取得，填「—」。EBITDA未揭露（折舊攤銷明細未取得），改以營益率呈現。</p>
+</section>
+
+<section id="s1-thesis">
+<h2 class="sec-title">核心Thesis與未來性</h2>
+<div class="tbl-wrap"><table>
+<tr><th>Thesis支柱</th><th>狀態</th><th>證據</th></tr>
+<tr><td>1. AI ASIC成為第二成長引擎</td><td><span class="badge b-ok">✅成立</span></td><td>9月首批出貨；Q4信心US$25億（7月說法「略高於20億」）；2027年達US$160億目標區間高標（約AI加速器ASIC市場20%）</td></tr>
+<tr><td>2. 客戶多元化，不只靠Google</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>第二家非中國客戶2028年首筆營收（外資估約US$25億），公司未證實客戶名稱；目前仍高度集中單一客戶</td></tr>
+<tr><td>3. 營益率回升至20%以上</td><td><span class="badge b-warn">⚠️待驗證</span></td><td>管理層：2027年營益率「20%或略高」，Q4是改善起點；但Q3僅16.1%，ASIC毛利率低於公司平均，Q4毛利率指引降至45%</td></tr>
+<tr><td>4. 手機旗艦市佔提升</td><td><span class="badge b-bad">❌未兌現</span></td><td>Q3手機年減17%；記憶體等BOM成本上升，7月法說預估2026年全球手機出貨衰退約15%</td></tr>
+<tr><td>5. 現金充沛、穩定高配息</td><td><span class="badge b-warn">⚠️部分成立</span></td><td>年配49元不變；但前三季OCF合計僅24億（存貨大增551億），首度發行US$39億零息可轉債</td></tr>
+</table></div>
+<p class="note">計分：✅＝1、⚠️＝0.5～0.75、❌＝0 → 約3.5/5。</p>
+
+<h3>核心成長驅動力</h3>
+<ul class="tight">
+  <li><b>Google TPU世代延續</b>：v8t 2026Q4放量；v9（2代）2028Q1量產，最大die tape-out較原計畫晚數週但量產時程不變。</li>
+  <li><b>第二家ASIC客戶</b>：2028年首筆營收；美系外資推測為美國公司，歐系外資推測可能為Tesla或SpaceX/xAI（未證實）。</li>
+  <li><b>NVIDIA合作</b>：NVIDIA認購可轉債US$35億；NVLink Fusion生態系、GB10電源與CPU合作。</li>
+</ul>
+
+<h3>需監控風險</h3>
+<div class="risk-card"><b>🔴 單一客戶集中（Google）</b>：若TPU v9 tape-out延遲超過一季、或Google把更多量轉回博通，2028年成長斜率將大幅下修。<br>觸發條件：公司下修2代量產時程至2028Q2以後／2027 ASIC指引低於US$120億。影響程度：高（估值中ASIC佔大部分）。</div>
+<div class="risk-card mid"><b>🟡 毛利率稀釋＋營運資金吃緊</b>：ASIC毛利率低於平均，Q4毛利率指引45%；存貨1,535億、週轉天數127天（去年同期68天）。<br>觸發條件：毛利率跌破43%、或存貨天數＞150天且OCF連續兩季為負。影響程度：中。</div>
+<div class="risk-card mid"><b>🟡 供應鏈瓶頸</b>：ABF載板供給受限、2028年載板供給仍在談；先進封裝（EMIB-T）分析師擔心依賴美國IDM單一供應商（公司稱不依賴單一供應商）。影響程度：中（限制上檔而非破壞Thesis）。</div>
+</section>
+
+<section id="s1-comp">
+<h2 class="sec-title">競爭格局</h2>
+<h3>戰場一：雲端AI ASIC</h3>
+<div class="tbl-wrap"><table>
+<tr><th>公司</th><th>市佔</th><th>優勢</th><th>威脅度</th></tr>
+<tr><td>博通 Broadcom</td><td>龍頭（精確市佔—）</td><td>Google TPU主要供應商多年、Meta/OpenAI等多客戶、SerDes與封裝經驗最成熟</td><td>🔴高</td></tr>
+<tr><td>邁威爾 Marvell</td><td>—</td><td>AWS Trainium、Microsoft Maia案；傳聞中客戶偏好的「成熟量產廠」之一</td><td>🟡中</td></tr>
+<tr><td>世芯-KY（3661）／創意（3443）</td><td>—</td><td>台積電生態系內的設計服務，AWS等案</td><td>🟡中</td></tr>
+<tr><td>客戶自研（Google內部團隊）</td><td>—</td><td>長期可能把更多設計收回內部</td><td>🟡中</td></tr>
+</table></div>
+<p class="note">聯發科自述2027年約佔AI加速器ASIC市場20% ✅；各家精確市佔本次未取得，不填數字。</p>
+<h3>戰場二：手機SoC</h3>
+<div class="tbl-wrap"><table>
+<tr><th>公司</th><th>市佔</th><th>優勢</th><th>威脅度</th></tr>
+<tr><td>高通 Qualcomm</td><td>—</td><td>旗艦品牌力、三星Galaxy旗艦主力、PC/車用延伸</td><td>🔴高</td></tr>
+<tr><td>Apple（自研A系列＋自研基頻）</td><td>—（不對外銷售）</td><td>擠壓整體Android高階市場</td><td>🟡中</td></tr>
+<tr><td>紫光展銳 Unisoc</td><td>—</td><td>低階價格戰、中國在地化</td><td>🟡中</td></tr>
+<tr><td>華為海思／三星Exynos</td><td>—</td><td>自家品牌自用</td><td>🟢低～🟡中</td></tr>
+</table></div>
+<h3>戰場三：智慧裝置（電視／Wi-Fi／車用）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>公司</th><th>優勢</th><th>威脅度</th></tr>
+<tr><td>瑞昱（2379）</td><td>網通、電視SoC、PC音效，成本控制強</td><td>🟡中</td></tr>
+<tr><td>聯詠（3034）</td><td>電視SoC與驅動IC</td><td>🟢低</td></tr>
+<tr><td>高通／博通（Wi-Fi）</td><td>高階Wi-Fi 7路由器</td><td>🟡中</td></tr>
+</table></div>
+</section>
+
+<section id="s1-quad">
+<h2 class="sec-title">成長象限判斷與護城河評估</h2>
+<div class="tbl-wrap"><table>
+<tr><th>判斷依據</th><th>數據</th><th>指向</th></tr>
+<tr><td>過去兩年EPS成長</td><td>2024年66.92 → 2025年66.16元（−1.1%）</td><td>穩定成長／循環股</td></tr>
+<tr><td>2026E→2027E EPS成長</td><td>約73元 → 法人125～187元（+70%～+155%）</td><td>高速成長股</td></tr>
+<tr><td>營收驅動來源</td><td>Q4起ASIC佔約30%，手機年減</td><td>新業務取代舊業務，轉型期</td></tr>
+<tr><td>手機業務週期性</td><td>2022Q4～2023Q1營收從1,557億掉到957億（−39%）</td><td>景氣循環性仍在</td></tr>
+</table></div>
+<p><b>判斷：轉型中的高速成長股，但帶著景氣循環股的體質。</b>Peter Lynch提醒：高速成長股最怕「成長放緩但仍用高速成長股本益比定價」；聯發科的成長幾乎完全取決於單一客戶的單一產品，屬於高成長、高集中度型態。</p>
+
+<h3>護城河五維度</h3>
+<div class="moat-row"><span class="label">不可替代性</span><span class="stars">★★★☆☆</span><span>Google有博通可選，聯發科是第二供應商；手機有高通替代</span></div>
+<div class="moat-row"><span class="label">網路效應</span><span class="stars">★★☆☆☆</span><span>晶片業網路效應弱；NVLink Fusion／UALink生態略有加分</span></div>
+<div class="moat-row"><span class="label">客戶黏著度</span><span class="stars">★★★★☆</span><span>ASIC一旦合作跨三代（v8→v9→v10），轉換成本極高</span></div>
+<div class="moat-row"><span class="label">成本優勢</span><span class="stars">★★★☆☆</span><span>台灣工程師成本、量產規模；但ASIC毛利低於平均</span></div>
+<div class="moat-row"><span class="label">規模效應</span><span class="stars">★★★★☆</span><span>年研發費用約1,600億元級（Q3單季422億），可同時打多條戰線</span></div>
+<p class="note">合計16/25 → ★★★☆☆（中上）。</p>
+
+<div class="action-box">
+<h4>建議動作（深度研究觀點）</h4>
+<ul class="tight">
+  <li><b>當前建議：</b>持有／觀望，不追價。</li>
+  <li><b>加碼觸發：</b>2027年2月Q4法說確認ASIC Q4營收≥US$25億且2027營益率指引≥20%，<u>同時</u>股價回到3,300元以下（≈基準2027E 25倍）。</li>
+  <li><b>賣出觸發：</b>2代TPU量產延至2028Q2以後；或2027 ASIC指引降至US$120億以下；或股價跌破2,990元（2026年7月低點）且Thesis支柱1轉⚠️。</li>
+  <li><b>每季監控：</b>ASIC營收（美元）、毛利率（≥43%）、營益率、存貨天數、OCF、外資連續賣超天數、Google資本支出指引。</li>
+</ul>
+</div>
+</section>
+
+<h1 class="part">② 最新財報解析（2026Q3，10/30公布）</h1>
+
+<section id="s2-beat">
+<h2 class="sec-title">Beat/Miss表</h2>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th class="num">實際值</th><th class="num">預期／財測</th><th class="num">差異</th><th class="num">YoY</th><th>判定</th></tr>
+<tr><td>營收</td><td class="num">1,680.6億</td><td class="num">財測上緣約1,598億</td><td class="num">+5.2%（超過上緣）</td><td class="num">+18.3%</td><td><span class="badge b-ok">✅Beat</span></td></tr>
+<tr><td>毛利率</td><td class="num">46.3%</td><td class="num">46%±1.5ppt</td><td class="num">+0.3ppt</td><td class="num">−0.2ppt</td><td><span class="badge b-ok">✅符合</span></td></tr>
+<tr><td>營益率</td><td class="num">16.1%</td><td class="num">—</td><td class="num">—</td><td class="num">+0.5ppt</td><td>—（預期值未取得）</td></tr>
+<tr><td>EPS</td><td class="num">17.50元</td><td class="num">市場共識—</td><td class="num">—</td><td class="num">+10.8%（淨利）</td><td><span class="badge b-ok">✅優於預期</span>（美系外資與Investing.com稱beat，共識數字未取得）</td></tr>
+<tr><td>手機營收</td><td class="num">佔37%</td><td class="num">—</td><td class="num">—</td><td class="num">−17%</td><td><span class="badge b-bad">❌疲弱</span></td></tr>
+<tr><td>智慧裝置平台</td><td class="num">佔58%</td><td class="num">—</td><td class="num">—</td><td class="num">+63%</td><td><span class="badge b-ok">✅強勁</span></td></tr>
+<tr><td>電源管理IC</td><td class="num">佔5%</td><td class="num">—</td><td class="num">—</td><td class="num">+18%</td><td><span class="badge b-ok">✅</span></td></tr>
+<tr><td>營業現金流</td><td class="num">−42.6億</td><td class="num">—</td><td class="num">—</td><td class="num">去年同期+391.8億</td><td><span class="badge b-bad">❌轉負</span></td></tr>
+</table></div>
+<p class="note">財測上緣1,598億為依「超過上緣5.2%」反推 ⚠️。</p>
+</section>
+
+<section id="s2-guide">
+<h2 class="sec-title">指引變化</h2>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th>舊指引（7月法說）</th><th>新指引（10/30法說）</th><th>方向</th></tr>
+<tr><td>2026全年營收（美元）</td><td>高個位數成長上緣</td><td>超越高個位數成長</td><td><span class="badge b-ok">上調</span></td></tr>
+<tr><td>2026年AI加速器營收</td><td>可望超過US$20億</td><td>Q4單季US$25億</td><td><span class="badge b-ok">上調</span></td></tr>
+<tr><td>2027年AI ASIC營收</td><td>可服務市場US$800億×15～20%（≈US$120～160億）</td><td>目標區間高標約US$160億</td><td><span class="badge b-ok">上調至高標</span></td></tr>
+<tr><td>2027年營益率</td><td>—</td><td>20%或略高</td><td><span class="badge b-info">新增</span></td></tr>
+<tr><td>Q4營收</td><td>—</td><td>2,101～2,218億元（季增25～32%，年增40～48%，匯率31.7）</td><td><span class="badge b-info">新</span></td></tr>
+<tr><td>Q4毛利率</td><td>—</td><td>45%±1.5ppt（Q3為46.3%）</td><td><span class="badge b-warn">下滑</span></td></tr>
+<tr><td>Q4營業費用率</td><td>—</td><td>26%±2ppt</td><td><span class="badge b-ok">改善</span>（Q3 30.2%）</td></tr>
+<tr><td>2026全球手機出貨</td><td>衰退約15%</td><td>未更新</td><td>維持</td></tr>
+</table></div>
+<p>⚠️推算：Q4財測中位數2,160億扣除ASIC約790億 → 非ASIC業務約1,370億，比Q3全公司1,681億少約18%（含季節性與手機轉弱）。也就是說，<b>傳統業務正在萎縮，成長全部來自ASIC</b>。</p>
+</section>
+
+<section id="s2-price">
+<h2 class="sec-title">股價反應</h2>
+<div class="tbl-wrap"><table>
+<tr><th>時點</th><th class="num">股價</th><th>原因</th></tr>
+<tr><td>2026/09高點</td><td class="num">5,480</td><td>AI ASIC題材＋NVIDIA認購可轉債（9月8日發行，轉換價4,513.75元）</td></tr>
+<tr><td>9月底～10月中</td><td class="num">10月中盤中低4,195</td><td>傳Google TPU v9設計變動、tape-out延後一季，公司稱不實；外資6天賣超1.83萬張、連7黑</td></tr>
+<tr><td>10/30法說當天</td><td class="num">盤中跌逾4%</td><td>法說前避險賣壓；10月全月跌約18.5%（月收3,915）</td></tr>
+<tr><td>法說後（11月初）</td><td class="num">站回4,000以上</td><td>法說確認ASIC不延遲、Q4 US$25億；花旗／瑞銀／高盛等重申買進</td></tr>
+<tr><td>11月區間</td><td class="num">3,115～4,235</td><td>今周刊報導外資連16賣超約4萬張；美股科技股回檔</td></tr>
+<tr><td>11/16盤中（分析日）</td><td class="num">3,910（−5.1%）</td><td>單日原因未查到專門報導，不臆測</td></tr>
+</table></div>
+<p class="note">月K資料：Yahoo Finance ✅；事件：時報、今周刊、壹蘋、旺得富報導 ✅。財報前一日精確收盤未取得。</p>
+</section>
+
+<section id="s2-dcf">
+<h2 class="sec-title">三情境DCF估值</h2>
+<p>方法：2027年起逐年自由現金流（億元）折現8年＋永續價值；加回現金及流動金融資產2,783億；可轉債視為將轉股，股數用稀釋後約16.24億股（1,604.95M＋可轉債最多約27.4M股）。⚠️全為本報告自估。</p>
+<div class="scenario-grid">
+  <div class="scenario-card bear"><h4>🐻 熊市情境</h4>
+  <ul><li>ASIC 2027年僅US$120億，2代延遲</li><li>非ASIC營收再減10%，2027營收約8,800億</li><li>營益率17%，2027E EPS約88元</li><li>FCF 1,100→1,300→1,400億，後續6%→3%</li><li>WACC 10.5%，永續成長2.5%</li></ul>
+  <div class="target">約 1,240 元</div><div class="note">距現價 −68%</div></div>
+  <div class="scenario-card base"><h4>📊 基準情境</h4>
+  <ul><li>ASIC 2027年US$160億，2028年第二客戶加入</li><li>2027營收約1.07兆，毛利率約42%</li><li>營益率約20.5%，2027E EPS約130元</li><li>FCF 1,700→2,600→3,100→3,450億，後續8%→5%</li><li>WACC 10%，永續成長3%</li></ul>
+  <div class="target">約 3,105 元</div><div class="note">距現價 −21%</div></div>
+  <div class="scenario-card bull"><h4>🐂 牛市情境</h4>
+  <ul><li>ASIC 2027年US$190億、2028年US$440億以上（歐系外資路徑）</li><li>營益率25%（2027）→31%（2028）</li><li>2027E EPS約185元</li><li>FCF 2,400→4,200→5,200→5,900億，後續10%→6%</li><li>WACC 9.5%，永續成長3.5%</li></ul>
+  <div class="target">約 6,180 元</div><div class="note">距現價 +58%</div></div>
+</div>
+<h3>敏感度（基準情境，元／股）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>WACC ＼ 永續成長</th><th class="num">2.5%</th><th class="num">3.0%</th><th class="num">3.5%</th></tr>
+<tr><td>9%</td><td class="num">3,437</td><td class="num">3,629</td><td class="num">3,856</td></tr>
+<tr><td>10%</td><td class="num">2,971</td><td class="num">3,105</td><td class="num">3,259</td></tr>
+<tr><td>11%</td><td class="num">2,616</td><td class="num">2,713</td><td class="num">2,823</td></tr>
+</table></div>
+<p><b>最敏感的變數不是WACC，而是2028年以後的ASIC規模</b>：熊、牛情境價值差約5倍，主因是2028年FCF假設（1,300億 vs 4,200億）。永續價值佔企業價值61～69%，代表估值大部分押在遠期。現價3,910元落在基準與牛市之間，市場隱含的假設比基準樂觀約25%。</p>
+</section>
+
+<section id="s2-valuation">
+<h2 class="sec-title">股價位階評估</h2>
+<div class="tbl-wrap"><table>
+<tr><th>指標</th><th class="num">數值</th><th>判讀</th></tr>
+<tr><td>TTM PE</td><td class="num">62.7倍</td><td>2017年以來第98百分位附近；2026年9月24日高點87.3倍 <span class="badge b-bad">偏貴</span></td></tr>
+<tr><td>Forward PE（2026E 73.4元）</td><td class="num">53.3倍</td><td>今年EPS只成長約11%，撐不起 <span class="badge b-bad">偏貴</span></td></tr>
+<tr><td>Forward PE（2027E基準130元）</td><td class="num">30.1倍</td><td>高於5年平均18.8倍 <span class="badge b-warn">偏高</span></td></tr>
+<tr><td>Forward PE（2027E法人區間125～187元）</td><td class="num">20.9～31.3倍</td><td>若最樂觀法人數字成真，接近合理</td></tr>
+<tr><td>PB</td><td class="num">13.4倍（證交所11/13：14.14倍）</td><td>2017～2026逐日資料第99.6百分位 <span class="badge b-bad">歷史極端</span></td></tr>
+<tr><td>PEG（30.1倍 ÷ 2026→2028 EPS年化成長約60%⚠️）</td><td class="num">約0.5</td><td>以成長看不貴，但前提是2028 EPS約200元以上成真</td></tr>
+</table></div>
+<h3>EPS成長趨勢（單季YoY）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>季度</th><th class="num">EPS</th><th class="num">淨利YoY</th><th>判讀</th></tr>
+<tr><td>2025Q4</td><td class="num">14.39</td><td class="num">−3.6%</td><td rowspan="4">淨利YoY由負轉正、Q3＋10.8%；Q4E約25.5元（YoY約+77%）才是加速起點。<b>目前處於「PE先擴張、EPS才開始追」的階段，尚非戴維斯雙擊的成熟期</b>——若EPS如期翻倍，PE需要收斂；若EPS不如預期，則是戴維斯雙殺風險。</td></tr>
+<tr><td>2026Q1</td><td class="num">15.16⚠️</td><td class="num">−17.4%</td></tr>
+<tr><td>2026Q2</td><td class="num">15.28</td><td class="num">−12.3%</td></tr>
+<tr><td>2026Q3</td><td class="num">17.50</td><td class="num">+10.8%</td></tr>
+</table></div>
+<p class="note">淨利YoY以Yahoo單季稅後淨利（含非控制權益）計算 ✅。Q4E：營收中位數2,160億×毛利率45%−費用率26%＝營益約410億，加業外約60億、稅率約13% ⚠️。</p>
+</section>
+
+<section id="s2-anchor">
+<h2 class="sec-title">估值歷史錨點</h2>
+<h3>多年期EPS：實際值 vs 預估值（元）</h3>
+<div class="bars">
+  <div class="bar"><div class="val">66.92</div><div class="fill" style="height:41px"></div></div>
+  <div class="bar"><div class="val">66.16</div><div class="fill" style="height:40px"></div></div>
+  <div class="bar"><div class="val">73.4E</div><div class="fill est" style="height:45px"></div></div>
+  <div class="bar"><div class="val">130E</div><div class="fill est" style="height:79px"></div></div>
+  <div class="bar"><div class="val">245.8E</div><div class="fill est" style="height:150px"></div></div>
+</div>
+<div class="barlab"><span>2024A</span><span>2025A</span><span>2026E本報告</span><span>2027E本報告基準</span><span>2028E FactSet</span></div>
+<div class="tbl-wrap"><table>
+<tr><th>來源</th><th class="num">2024A</th><th class="num">2025A</th><th class="num">2026E</th><th class="num">2027E</th><th class="num">2028E</th></tr>
+<tr><td>實際值（公司財報）</td><td class="num">66.92 ✅</td><td class="num">66.16 ✅</td><td class="num">前三季47.94 ✅</td><td class="num">—</td><td class="num">—</td></tr>
+<tr><td>本報告自估</td><td class="num">—</td><td class="num">—</td><td class="num">73.4 ⚠️</td><td class="num">88／130／185（熊／基／牛）</td><td class="num">—</td></tr>
+<tr><td>FactSet中位數（24位，日期未標示）</td><td class="num">—</td><td class="num">—</td><td class="num">66.55</td><td class="num">125.37</td><td class="num">245.81</td></tr>
+<tr><td>國內投顧（龍頭金控旗下，法說後）</td><td class="num">—</td><td class="num">—</td><td class="num">73.57</td><td class="num">150.48（原115.04）</td><td class="num">—</td></tr>
+<tr><td>摩根士丹利</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">146.97</td><td class="num">—</td></tr>
+<tr><td>美系外資B</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">168.93</td><td class="num">404.32</td></tr>
+<tr><td>瑞銀</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">181.91</td><td class="num">—</td></tr>
+<tr><td>高盛（11月中，⚠️未核原文）</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">186.75</td><td class="num">—</td></tr>
+<tr><td>高盛（5月）</td><td class="num">—</td><td class="num">—</td><td class="num">63.29</td><td class="num">132.18</td><td class="num">—</td></tr>
+</table></div>
+<p class="note"><span class="badge b-bad">區間跨度極大／分歧大</span> 2027E從125到187元（差49%），2028E從246到404元（差64%）。分歧全來自ASIC出貨量與營益率假設。</p>
+
+<h3>歷史本益比錨點（證交所逐日TTM PE，2017～2026）</h3>
+<div class="tbl-wrap"><table>
+<tr><th>年度</th><th class="num">最低PE</th><th>最低日</th><th class="num">平均PE</th><th class="num">最高PE</th><th class="num">PB區間</th></tr>
+<tr><td>2017</td><td class="num">12.58</td><td>05/23</td><td class="num">18.0</td><td class="num">27.40</td><td class="num">1.30～2.18</td></tr>
+<tr><td><b>2018</b></td><td class="num"><b>12.52</b></td><td>10/26</td><td class="num">19.9</td><td class="num">28.42</td><td class="num">1.23～2.19</td></tr>
+<tr><td>2019</td><td class="num">12.67</td><td>01/04</td><td class="num">24.1</td><td class="num">35.53</td><td class="num">1.27～2.39</td></tr>
+<tr><td>2020</td><td class="num">21.14</td><td>03/19</td><td class="num">33.7</td><td class="num">45.69</td><td class="num">1.39～3.55</td></tr>
+<tr><td>2021</td><td class="num">16.27</td><td>11/12</td><td class="num">27.8</td><td class="num">47.71</td><td class="num">3.42～5.04</td></tr>
+<tr><td><b>2022</b></td><td class="num"><b>6.80</b></td><td>09/29</td><td class="num">10.9</td><td class="num">19.45</td><td class="num">2.12～4.70</td></tr>
+<tr><td>2023</td><td class="num">7.74</td><td>01/05</td><td class="num">13.1</td><td class="num">23.72</td><td class="num">2.35～4.22</td></tr>
+<tr><td>2024</td><td class="num">17.21</td><td>08/05</td><td class="num">21.3</td><td class="num">26.06</td><td class="num">3.57～6.47</td></tr>
+<tr><td>2025</td><td class="num">17.21</td><td>11/21</td><td class="num">20.6</td><td class="num">23.01</td><td class="num">4.35～6.50</td></tr>
+<tr><td>2026（至11/13）</td><td class="num">21.34</td><td>01/09</td><td class="num">—</td><td class="num">87.28（09/24）</td><td class="num">5.39～19.89</td></tr>
+</table></div>
+<p><b>錨點彙總</b>：5年平均PE（2021～2025）＝<b>18.8倍</b>；2022年最低＝<b>6.8倍</b>（手機庫存修正谷底）；2018年最低＝<b>12.5倍</b>。近年無虧損，所有年度皆可計算。</p>
+
+<h3>反推試算</h3>
+<div class="tbl-wrap"><table>
+<tr><th>情境</th><th class="num">PE</th><th class="num">EPS</th><th class="num">反推股價</th><th class="num">vs 現價3,910</th></tr>
+<tr><td>2022谷底PE × 熊市2027E</td><td class="num">6.8</td><td class="num">88</td><td class="num">598</td><td class="num">−85%</td></tr>
+<tr><td>2018低點PE × 熊市2027E</td><td class="num">12.5</td><td class="num">88</td><td class="num">1,102</td><td class="num">−72%</td></tr>
+<tr><td>5年平均PE × 熊市2027E</td><td class="num">18.8</td><td class="num">88</td><td class="num">1,654</td><td class="num">−58%</td></tr>
+<tr><td>5年平均PE × 基準2027E</td><td class="num">18.8</td><td class="num">130</td><td class="num">2,444</td><td class="num">−37%</td></tr>
+<tr><td>5年平均PE × 牛市2027E</td><td class="num">18.8</td><td class="num">185</td><td class="num">3,478</td><td class="num">−11%</td></tr>
+<tr><td>5年平均PE × FactSet 2028E</td><td class="num">18.8</td><td class="num">245.81</td><td class="num">4,621</td><td class="num">+18%</td></tr>
+<tr><td>現價隱含：3,910 ÷ 18.8</td><td class="num">18.8</td><td class="num">208</td><td class="num">3,910</td><td class="num">—</td></tr>
+</table></div>
+<div class="action-box">
+<h4>結論：靠EPS成長還是靠本益比擴張？</h4>
+<p><b>兩者都有，但目前以本益比擴張為主。</b>即使用最樂觀的牛市2027E EPS 185元，配上5年平均PE 18.8倍，也只有3,478元，仍低於現價。要撐住3,910元，必須(1)市場願意長期給30倍以上，或(2)2028年EPS達到約208元以上。也就是股價已經在折現2028年、且是第二家客戶也順利貢獻的情境。這屬於「題材已部分泡沫化、但有真實訂單支撐」的位階——與2020～2021年高點（PE 45～48倍、隨後2022年跌到6.8倍）有相似的危險特徵。</p>
+</div>
+</section>
+
+<section id="s2-comps">
+<h2 class="sec-title">可比公司(Comps)分析</h2>
+<div class="tbl-wrap"><table>
+<tr><th>公司</th><th class="num">市值</th><th class="num">PE(TTM)</th><th class="num">PB</th><th class="num">殖利率</th><th>成長類型</th></tr>
+<tr><td><b>聯發科 2454</b></td><td class="num">US$約1,980億</td><td class="num">62.7</td><td class="num">13.4</td><td class="num">1.25%</td><td>手機＋ASIC轉型</td></tr>
+<tr><td>博通 AVGO</td><td class="num">US$1.66兆</td><td class="num">44.3</td><td class="num">16.6</td><td class="num">0.73%</td><td>ASIC龍頭＋軟體</td></tr>
+<tr><td>邁威爾 MRVL</td><td class="num">US$1,375億</td><td class="num">51.9</td><td class="num">7.4</td><td class="num">0.15%</td><td>ASIC／光通訊</td></tr>
+<tr><td>高通 QCOM</td><td class="num">US$1,845億</td><td class="num">13.6</td><td class="num">6.1</td><td class="num">2.10%</td><td>手機SoC，成長慢</td></tr>
+<tr><td>世芯-KY 3661</td><td class="num">股價3,725元</td><td class="num">44.5</td><td class="num">5.45</td><td class="num">0.81%</td><td>ASIC設計服務</td></tr>
+<tr><td>創意 3443</td><td class="num">股價7,750元</td><td class="num">173.9</td><td class="num">73.4</td><td class="num">0.23%</td><td>ASIC設計服務</td></tr>
+<tr><td>台積電 2330</td><td class="num">—</td><td class="num">23.9</td><td class="num">8.7</td><td class="num">0.94%</td><td>晶圓代工龍頭</td></tr>
+</table></div>
+<p class="note">美股：Futu OpenD快照（11/15美東時間）✅；台股：證交所11/13本益比資料、Yahoo行情 ✅。EV/Revenue與FCF Yield本次未一致取得，填—。</p>
+<p><b>溢價合理性</b>：聯發科TTM PE比博通高約40%，但博通已是成熟ASIC龍頭、獲利率高。聯發科的溢價來自「從高通型估值（13.6倍）跳到博通型估值」的重新評價。若2027年ASIC如期達US$160億，PE將回落到約30倍、接近博通；若不如預期，估值錨會回到高通（13.6倍）——兩者落差巨大，正是高波動的來源。</p>
+</section>
+
+<section id="s2-extra">
+<h2 class="sec-title">額外優勢／風險</h2>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th>內容</th><th>評價</th></tr>
+<tr><td>股利</td><td>半年配，2025下半年24.5元、2026上半年24.5元；2026上半年配發率約81%（393億／485億淨利）</td><td><span class="badge b-ok">✅穩定</span></td></tr>
+<tr><td>股票回購</td><td>庫藏股7,794,085股（母子公司持有）；近期回購計畫未查到</td><td>—</td></tr>
+<tr><td>策略投資人</td><td>NVIDIA認購可轉債US$35億（約89.7%），Alphabet亦參與（金額未公布）</td><td><span class="badge b-ok">✅背書</span></td></tr>
+<tr><td>內部人</td><td>董事長蔡明介持股4,186萬股；董監經理人設質0%；蔡力行、陳冠州持股較選任時增加</td><td><span class="badge b-ok">✅無質押</span></td></tr>
+<tr><td>外資動向</td><td>10月中6天賣超1.83萬張；今周刊報導11月初前外資連16賣超約4萬張</td><td><span class="badge b-warn">⚠️籌碼鬆動</span></td></tr>
+<tr><td>可轉債稀釋</td><td>轉換價4,513.75元，最大稀釋約1.67%；現價低於轉換價15%</td><td><span class="badge b-info">低</span></td></tr>
+</table></div>
+</section>
+
+<section id="s2-target">
+<h2 class="sec-title">投行目標價與操作建議</h2>
+<div class="tbl-wrap"><table>
+<tr><th>機構</th><th>評等</th><th class="num">目標價</th><th class="num">2027E EPS</th><th class="num">隱含2027E PE</th><th>時間／理由</th></tr>
+<tr><td>瑞銀（歐系）</td><td>買進</td><td class="num">7,300</td><td class="num">181.91</td><td class="num">40.1⚠️</td><td>法說後；TPU v8t需求強，TPU相關營收2028年US$440億、2029年US$530億；營益率2027年25.2%</td></tr>
+<tr><td>高盛</td><td>買進</td><td class="num">7,100</td><td class="num">186.75</td><td class="num">38.0⚠️</td><td>11月中（⚠️未核原文）；2027淨利年增181%。5月時TP 5,000、2027E 132.18</td></tr>
+<tr><td>花旗</td><td>買進</td><td class="num">6,800</td><td class="num">—</td><td class="num">—</td><td>法說前後維持；2028 AI ASIC營收US$400億</td></tr>
+<tr><td>國內投顧（龍頭金控旗下）</td><td>—</td><td class="num">6,250（原5,500）</td><td class="num">150.48</td><td class="num">41.5⚠️</td><td>法說後10天內二度翻修，2027E上修逾3成</td></tr>
+<tr><td>美系外資B</td><td>買進</td><td class="num">6,200</td><td class="num">168.93</td><td class="num">36.7⚠️</td><td>2027年資料中心營收US$190億、2028年US$530億，2H28加入xAI</td></tr>
+<tr><td>摩根士丹利</td><td>加碼</td><td class="num">6,188</td><td class="num">146.97</td><td class="num">42.1⚠️</td><td>維持</td></tr>
+<tr><td>日系外資D</td><td>買進</td><td class="num">5,500（原5,200）</td><td class="num">上修1～6%</td><td class="num">—</td><td>AI營收2026年US$27億、2027年US$160億、2028年US$260億</td></tr>
+</table></div>
+<p class="note">各篇原文未揭露「EPS×倍數」計算公式；「隱含PE」為本報告以目標價÷2027E自算 ⚠️，非機構原始公式。</p>
+
+<h3>主要分歧點</h3>
+<div class="tbl-wrap"><table>
+<tr><th>議題</th><th>樂觀派</th><th>謹慎派</th></tr>
+<tr><td>TPU v9（2代）</td><td>2028Q1量產不變，可能有兩個版本、首版11月tape-out</td><td>最大die tape-out晚數週；傳客戶偏好博通/Marvell</td></tr>
+<tr><td>2028年ASIC規模</td><td>US$400～530億（花旗、瑞銀、美系B）</td><td>日系US$260億；公司拒絕給2028指引</td></tr>
+<tr><td>獲利率</td><td>營益率2028年可達31%（瑞銀）</td><td>ASIC毛利率低於平均、載板瓶頸、需漲價轉嫁成本</td></tr>
+<tr><td>手機</td><td>2奈米旗艦市佔提升</td><td>記憶體成本推升、全球手機衰退15%</td></tr>
+</table></div>
+
+<h3>上行空間彙總</h3>
+<div class="tbl-wrap"><table>
+<tr><th>參考點</th><th class="num">目標價</th><th class="num">距現價3,910</th></tr>
+<tr><td>最高法人目標價（瑞銀）</td><td class="num">7,300</td><td class="num">+87%</td></tr>
+<tr><td>法人目標價中位（7家）</td><td class="num">6,250</td><td class="num">+60%</td></tr>
+<tr><td>可轉債轉換價</td><td class="num">4,514</td><td class="num">+15%</td></tr>
+<tr><td>本報告DCF基準</td><td class="num">3,105</td><td class="num">−21%</td></tr>
+<tr><td>5年平均PE×基準2027E</td><td class="num">2,444</td><td class="num">−37%</td></tr>
+<tr><td>本報告DCF熊市</td><td class="num">1,240</td><td class="num">−68%</td></tr>
+</table></div>
+<p>⚠️提醒：法人目標價隱含36～42倍2027E PE，是5年平均PE的2倍以上；本報告的合理價明顯低於法人，因為本報告不假設市場會長期維持AI溢價。</p>
+
+<div class="action-box">
+<h4>操作建議（財報解析觀點）</h4>
+<ul class="tight">
+  <li><b>已持有：</b>續抱，但若部位已大幅獲利，可考慮先收回成本（例如減碼1/4～1/3），符合「今年獲利不回吐」原則。</li>
+  <li><b>考慮建倉：</b>2,800～3,100元分批（約基準2027E的22～24倍），每批不超過預定部位1/3。</li>
+  <li><b>加碼觸發：</b>Q4財報ASIC≥US$25億、毛利率≥44%、OCF轉正，且股價≤3,300元。</li>
+  <li><b>停損警示：</b>收盤跌破2,990元（7月低點）且出現TPU時程延後消息；或11月低點3,115元失守後一週內無法站回。</li>
+</ul>
+</div>
+</section>
+
+<h1 class="part">③ 財務風險健檢</h1>
+
+<section id="s3-data">
+<h2 class="sec-title">財務數據填表（億元）</h2>
+<div class="tbl-wrap"><table>
+<tr><th>項目</th><th class="num">2024年</th><th class="num">2025年</th><th class="num">TTM（至2026Q3）</th><th>狀態</th></tr>
+<tr><td>營收</td><td class="num">5,305.9</td><td class="num">5,959.7</td><td class="num">6,195.8</td><td>✅</td></tr>
+<tr><td>營業利益（EBIT代理）</td><td class="num">1,024.1</td><td class="num">1,034.7</td><td class="num">947.1</td><td>✅</td></tr>
+<tr><td>利息支出</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td>❌未取得（可轉債為零息）</td></tr>
+<tr><td>折舊攤銷 D&A</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td>❌未取得</td></tr>
+<tr><td>稅後淨利（含非控制）</td><td class="num">1,071.4</td><td class="num">1,061.2</td><td class="num">1,002.5</td><td>✅</td></tr>
+<tr><td>總資產</td><td class="num">—</td><td class="num">—</td><td class="num">9,665.0（Q3）</td><td>✅</td></tr>
+<tr><td>總負債</td><td class="num">—</td><td class="num">—</td><td class="num">4,922.9（Q3）</td><td>✅</td></tr>
+<tr><td>流動資產／流動負債</td><td class="num">—</td><td class="num">—</td><td class="num">5,467.4／3,412.2</td><td>✅</td></tr>
+<tr><td>計息負債</td><td class="num">—</td><td class="num">—</td><td class="num">約1,236（可轉債）</td><td>⚠️估（其他借款未取得）</td></tr>
+<tr><td>現金及流動金融資產</td><td class="num">—</td><td class="num">—</td><td class="num">2,783.2（Q2：1,984.0）</td><td>✅</td></tr>
+<tr><td>存貨</td><td class="num">—</td><td class="num">—</td><td class="num">1,535.3（去年同期569.6）</td><td>✅</td></tr>
+<tr><td>營業現金流 OCF</td><td class="num">1,560.5</td><td class="num">1,627.9</td><td class="num">668.5</td><td>✅</td></tr>
+<tr><td>投資現金流（CapEx代理）</td><td class="num">−359.3</td><td class="num">−377.5</td><td class="num">−637.4</td><td>⚠️含金融投資</td></tr>
+<tr><td>FCF（OCF＋投資CF）</td><td class="num">1,201.3</td><td class="num">1,250.4</td><td class="num">31.1</td><td>⚠️</td></tr>
+</table></div>
+<p class="note">2024／2025年由Yahoo單季數字加總 ✅；2025年營業利益1,034.7億與富果法說整理一致 ✅。</p>
+</section>
+
+<section id="s3-ratio">
+<h2 class="sec-title">六大比率診斷</h2>
+<div class="tbl-wrap"><table>
+<tr><th>比率</th><th>公式</th><th class="num">結果</th><th>狀態</th><th>警戒標準</th></tr>
+<tr><td>利息覆蓋率</td><td>EBIT ÷ 利息支出</td><td class="num">—（利息極低）</td><td><span class="badge b-ok">✅</span></td><td>&lt;3倍警戒；零息可轉債，實質利息負擔近零</td></tr>
+<tr><td>負債比率</td><td>總負債 ÷ 總資產</td><td class="num">50.9%</td><td><span class="badge b-warn">⚠️</span></td><td>&gt;60%警戒；多數為應付帳款／流動負債，非借款</td></tr>
+<tr><td>淨負債／EBITDA</td><td>（計息負債−現金）÷ EBITDA</td><td class="num">淨現金約1,547億</td><td><span class="badge b-ok">✅</span></td><td>&gt;3倍警戒</td></tr>
+<tr><td>OCF／總計息負債</td><td>TTM OCF ÷ 計息負債</td><td class="num">0.54倍</td><td><span class="badge b-ok">✅</span></td><td>&lt;0.2倍警戒；但2025年為無債狀態，比率由無限大降至0.54</td></tr>
+<tr><td>現金流覆蓋比率</td><td>TTM OCF ÷ 流動負債</td><td class="num">0.20倍</td><td><span class="badge b-warn">⚠️</span></td><td>&lt;0.2倍警戒；處於邊緣</td></tr>
+<tr><td>兩年內到期牆覆蓋</td><td>現金 ÷ 兩年內到期計息負債</td><td class="num">已知到期＝0</td><td><span class="badge b-ok">✅</span></td><td>&lt;1倍警戒；可轉債2031年到期</td></tr>
+</table></div>
+<p>補充：流動比率＝5,467÷3,412＝<b>1.60倍</b>（健康），存貨週轉天數127天（去年同期68天）<span class="badge b-warn">⚠️</span>。</p>
+</section>
+
+<section id="s3-debt">
+<h2 class="sec-title">債務到期時程</h2>
+<div class="tbl-wrap"><table>
+<tr><th>年度</th><th class="num">到期金額</th><th>內容</th></tr>
+<tr><td>2026～2030</td><td class="num">—</td><td>未查到公司債或長期借款到期資料；短期借款明細未取得（估算，建議查年報／季報附註）</td></tr>
+<tr><td>2031/09/08</td><td class="num">US$39億（約1,236億元）</td><td>海外第一次無擔保可轉換公司債，票面0%，轉換價4,513.75元 ✅</td></tr>
+</table></div>
+<p class="note">可轉債是否有提前賣回權（put）條款本次未取得 ❌。若股價長期低於轉換價，到期需以現金償還，但以現金2,783億足以覆蓋。</p>
+</section>
+
+<section id="s3-capex">
+<h2 class="sec-title">CapEx分析</h2>
+<div class="tbl-wrap"><table>
+<tr><th>指標</th><th class="num">2024年</th><th class="num">2025年</th><th class="num">TTM</th></tr>
+<tr><td>投資現金流 ÷ 營收（代理）</td><td class="num">6.8%</td><td class="num">6.3%</td><td class="num">10.3%</td></tr>
+<tr><td>投資現金流 ÷ OCF（代理）</td><td class="num">23%</td><td class="num">23%</td><td class="num">95%</td></tr>
+</table></div>
+<p><b>判讀：輕資產（Fabless）模式不變</b>，沒有晶圓廠折舊壓力；真正的「資本支出」藏在營運資金裡——為了ASIC備貨，存貨一季增加551億元，比任何一年的投資現金流都大。TTM投資CF÷OCF升到95%，是因為OCF萎縮，而非投資暴增。管理層也提到會考慮對合適客戶提供vendor financing，未來應收帳款／融資需求可能進一步增加。</p>
+</section>
+
+<section id="s3-peer">
+<h2 class="sec-title">同業對比</h2>
+<div class="tbl-wrap"><table>
+<tr><th>比率</th><th>聯發科</th><th>博通</th><th>高通</th><th>邁威爾</th></tr>
+<tr><td>淨現金／淨負債</td><td>淨現金約1,547億元</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>負債比率</td><td>50.9%</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>PB（槓桿與溢價綜合）</td><td>13.4</td><td>16.6</td><td>6.1</td><td>7.4</td></tr>
+</table></div>
+<p class="note">❌ 本次未取得同業最新資產負債表數據（Futu快照未含債務欄位），不填推測值。定性背景：博通因併購VMware承擔大量債務，屬槓桿型；聯發科為淨現金型，財務彈性在四家中屬前段。</p>
+</section>
+
+<section id="s3-final">
+<h2 class="sec-title">綜合診斷</h2>
+<div class="card-grid">
+  <div class="card"><h4>定性分類</h4><div class="big" style="font-size:18px">優良淨現金型<br>→營運資金警戒中</div></div>
+  <div class="card"><h4>最大風險點</h4><div class="big" style="font-size:18px">存貨與OCF</div><div class="note">存貨天數＞150天＋OCF連續兩季負＝警報</div></div>
+  <div class="card"><h4>安全邊際</h4><div class="big" style="font-size:18px">EBIT幾乎不受債務威脅</div><div class="note">淨現金狀態，EBIT下滑100%也不觸及償債警戒</div></div>
+</div>
+<p><b>結論</b>：聯發科沒有傳統的「債務風險」，零息可轉債到期在2031年，現金足以覆蓋。真正要看的是<b>營運資金</b>：2026年前三季OCF合計只有24億元（去年同期983億），存貨暴增170%。若ASIC如預期在Q4大量出貨，存貨應轉成營收與應收帳款、OCF回正；若Q4後存貨仍高掛，代表出貨不如預期或客戶拉貨放緩——這會比任何損益數字更早示警。</p>
+</section>
+
+<section id="final-action">
+<h2 class="sec-title">最終操作建議</h2>
+<div class="action-box">
+<h4>以使用者風格（寧少賺不大賠、年化10～20%、今年獲利不可回吐）綜合判斷</h4>
+<ul class="tight">
+  <li><b>已持有：</b>續抱核心部位；獲利豐厚者先減碼1/4～1/3鎖住利潤。停損／減碼線：收盤跌破2,990元，或TPU 2代時程延後。</li>
+  <li><b>未持有：</b>不追價。2,800～3,100元分三批布局；若Q4財報（約2027年2月初）驗證ASIC與OCF，再允許在3,300元以下加碼。</li>
+  <li><b>長期3～5年：</b>若2028年第二客戶與TPU v9順利放量，聯發科有機會從「手機晶片廠」重新定位為「第二大AI ASIC廠」，EPS可能數倍成長；但這是集中押注型Thesis，不宜佔總資產過高比重（建議單一個股≤5～8%，放在戰術池而非核心池）。</li>
+  <li><b>核心催化劑：</b>①2027年2月Q4法說（ASIC實績、2027指引）②TPU v9 tape-out確認 ③第二家ASIC客戶名稱揭露 ④Google資本支出指引 ⑤外資賣超是否止歇。</li>
+</ul>
+</div>
+</section>
+
+<section id="gaps">
+<h2 class="sec-title">資料缺口清單</h2>
+<ul class="tight">
+  <li>Q3 EPS的市場共識數字、營益率財測（Beat/Miss只能以公司財測比較）❌</li>
+  <li>利息支出、折舊攤銷、資本支出明細（需查季報附註）❌</li>
+  <li>短期借款與可轉債賣回條款 ❌</li>
+  <li>FactSet共識的發布日期；高盛11月報告原文 ⚠️</li>
+  <li>同業（博通／高通／邁威爾）資產負債數據 ❌</li>
+  <li>各家AI ASIC與手機SoC精確市佔 ❌</li>
+  <li>11/16單日下跌原因 ❌</li>
+  <li>各家目標價的原始「EPS×倍數」公式（原文未揭露）❌</li>
+</ul>
+</section>
+
+<footer>
+<p><b>資料來源：</b>證交所OpenAPI（綜合損益表、資產負債表、月營收、股利分派、董監持股、本益比／淨值比日資料）、Yahoo Finance行情、Yahoo股市單季財報、Futu OpenD（美股同業快照）、聯發科2026Q3法說會報導（壹蘋新聞、TVBS、工商時報、時報資訊、GuruFocus、TelecomLead、淘金脈絡／vocus）、外資報告報導（工商時報、經濟日報、旺得富、鏡週刊、今周刊）、鉅亨網FactSet調查、東森／MoneyDJ（可轉債條件）、富果／ETtoday（2025年財報）。</p>
+<p>本報告僅供個人研究參考，不構成投資建議。投資有風險，請自行判斷。</p>
+</footer>
+
+</div>
+</body>
+</html>
