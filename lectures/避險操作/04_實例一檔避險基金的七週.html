@@ -1,0 +1,459 @@
+<title>實例：一檔避險基金的七週</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a trading-desk study notebook — sticky lesson tabs, one reading column, ticket-like data blocks. Red = long/up, green = short/down (Taiwan convention). */
+:root{
+  --paper:#f5f6f8; --sheet:#ffffff; --ink:#1b2230; --muted:#5d6676; --rule:#d9dde5;
+  --accent:#1f4fa3; --accent-soft:#e6edf9;
+  --long:#c8292f; --long-soft:#fbe9ea; --short:#1d8a4a; --short-soft:#e5f4ea; --warn:#a86a00; --warn-soft:#fbf1dc;
+  --f-display:"Noto Serif TC","Songti TC",serif;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#11151c; --sheet:#181d26; --ink:#e6e9ef; --muted:#9aa3b2; --rule:#2c3340;
+  --accent:#7ea6f2; --accent-soft:#1d2a44;
+  --long:#ff6b70; --long-soft:#3a1c1f; --short:#4fcf86; --short-soft:#163023; --warn:#e8b04a; --warn-soft:#3a2e15; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11151c; --sheet:#181d26; --ink:#e6e9ef; --muted:#9aa3b2; --rule:#2c3340;
+  --accent:#7ea6f2; --accent-soft:#1d2a44;
+  --long:#ff6b70; --long-soft:#3a1c1f; --short:#4fcf86; --short-soft:#163023; --warn:#e8b04a; --warn-soft:#3a2e15; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sheet)}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{background:var(--sheet);border-bottom:1px solid var(--rule)}
+header.top .wrap{padding-block:40px 28px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.3;margin:0}
+h1{font-size:clamp(28px,5vw,40px);font-weight:900;margin-top:8px}
+.lede{color:var(--muted);max-width:62ch;margin:12px 0 0}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--sheet);border-bottom:1px solid var(--rule)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto}
+nav.tabs a{flex:0 0 auto;padding:12px 14px;color:var(--muted);text-decoration:none;font-weight:500;border-bottom:3px solid transparent;font-size:15px}
+nav.tabs a:hover{color:var(--ink)}
+nav.tabs a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+main .wrap{padding-block:12px 64px}
+section.lesson{padding-top:40px;scroll-margin-top:56px}
+.lesson-head{display:grid;gap:6px;padding-bottom:16px;border-bottom:2px solid var(--ink);margin-bottom:24px}
+.lesson-head .num{font-family:var(--f-mono);font-size:13px;color:var(--accent);letter-spacing:.08em}
+.lesson-head h2{font-size:clamp(24px,4vw,30px);font-weight:900}
+.lesson-head p{margin:0;color:var(--muted)}
+h3{font-size:20px;font-weight:600;margin:36px 0 10px}
+p{margin:0 0 14px;max-width:66ch}
+ul,ol{margin:0 0 14px;padding-left:1.4em;max-width:64ch}
+li{margin-bottom:6px}
+strong{font-weight:700}
+.l{color:var(--long);font-weight:700}.s{color:var(--short);font-weight:700}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.tbl{overflow-x:auto;margin:8px 0 20px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet)}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:480px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:700;background:var(--accent-soft);font-size:14px}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.note{background:var(--accent-soft);border-radius:6px;padding:14px 16px;margin:16px 0 20px}
+.note.warn{background:var(--warn-soft)}
+.note p:last-child,.note ul:last-child{margin-bottom:0}
+.note .tag{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:4px}
+.note.warn .tag{color:var(--warn)}
+.debate{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 20px}
+.debate > div{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;min-width:0}
+.debate h4{margin:0 0 6px;font-size:15px}
+.debate p{font-size:15px;margin-bottom:8px}
+.verdict{border-top:1px dashed var(--rule);padding-top:8px;font-size:14px;color:var(--muted)}
+@media (max-width:620px){.debate{grid-template-columns:1fr}}
+figure{margin:16px 0 24px;background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:12px}
+figure .svgbox{overflow-x:auto}
+figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+svg text{font-family:var(--f-body)}
+.calc{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:16px;margin:12px 0 24px}
+.calc .row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:560px){.calc .row{grid-template-columns:1fr}}
+.calc label{display:grid;gap:4px;font-size:14px;color:var(--muted)}
+.calc input{font-family:var(--f-mono);font-size:16px;padding:8px 10px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink);width:100%;box-sizing:border-box}
+.calc input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.calc .out{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+.calc .big{font-family:var(--f-mono);font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.check{list-style:none;padding:0}
+.check li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--rule);margin:0}
+.check input{margin-top:6px;width:18px;height:18px;accent-color:var(--accent);flex:0 0 auto}
+.check label{min-width:0}
+.check small{display:block;color:var(--muted);font-size:13px}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.pill.use{background:var(--short-soft);color:var(--short)}
+.pill.discount{background:var(--warn-soft);color:var(--warn)}
+.pill.ignore{background:var(--long-soft);color:var(--long)}
+.sources{font-size:13px;color:var(--muted)}
+.sources a{color:var(--accent)}
+footer .wrap{padding-block:24px 48px;border-top:1px solid var(--rule);font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0}
+[hidden]{display:none!important}
+nav.tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.lede a{color:var(--accent);margin-left:6px;white-space:nowrap}
+.prevnext{display:flex;justify-content:space-between;gap:12px;margin:48px 0 0;padding-top:20px;border-top:1px solid var(--rule)}
+.prevnext a{display:grid;gap:2px;text-decoration:none;color:var(--ink);background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:12px 16px;max-width:48%;min-width:0}
+.prevnext a:hover{border-color:var(--accent)}
+.prevnext .pn-label{font-size:13px;color:var(--accent)}
+.prevnext .next{text-align:right;margin-left:auto}</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+
+
+<header class="top"><div class="wrap">
+  <div class="eyebrow">專題報告 · 避險操作 · 第 4 堂（共 6 堂）</div>
+  <h1>避險操作</h1>
+  <p class="lede">台指期籌碼判讀與避險實務，以 2026/11/18 盤勢和一檔避險基金的週報為案例。<a href="../../index.html#lectures">回專題報告</a></p>
+</div></header>
+
+<nav class="tabs" aria-label="課程章節"><div class="wrap">
+  <a href="01_期貨是什麼多單空單與零和.html">1 · 期貨是什麼</a>
+  <a href="02_誰站在哪一邊市場角色地圖.html">2 · 誰站在哪一邊</a>
+  <a href="03_外資空單沒減少怎麼判斷.html">3 · 外資空單怎麼判斷</a>
+  <a href="04_實例一檔避險基金的七週.html" aria-current="page">4 · 避險基金實例</a>
+  <a href="05_長期投資人怎麼用這些數字.html">5 · 長期投資人怎麼用</a>
+  <a href="06_負Gamma與選擇權到期日暴跌.html">6 · 負 Gamma 與到期日</a>
+</div></nav>
+
+<main><div class="wrap">
+
+<!-- ========== CASE STUDY ========== -->
+<section class="lesson" id="case">
+  <div class="lesson-head">
+    <span class="num">第 4 堂 · 實例</span>
+    <h2>一檔避險基金的七週：9/28～11/13</h2>
+    <p>用一個公開週報的台股帳戶（TWDS），看「持股＋期貨空單＋選擇權」在一段 20% 的下跌裡怎麼一起運作。</p>
+  </div>
+
+  <h3>先看結果</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>9/28～11/13</th><th>加權指數</th><th>這個帳戶</th></tr></thead>
+    <tbody>
+      <tr><td>期間報酬</td><td class="num s">−9.06%</td><td class="num s">約 −0.55%</td></tr>
+      <tr><td>最大回撤（至 11/6）</td><td class="num s">−20.31%（自 10/6 高點）</td><td class="num s">−8.10%（自 10/21 高點）</td></tr>
+      <tr><td>11/2～11/6 崩跌週</td><td class="num s">−12.19%</td><td class="num s">−5.85%</td></tr>
+      <tr><td>11/9～11/13 反彈週</td><td class="num l">+10.01%</td><td class="num l">+4.62%</td></tr>
+    </tbody>
+  </table></div>
+  <p>大跌時只跌一半不到，大漲時也只賺不到一半。這就是避險的取捨。期間報酬由七週週報酬連乘推算，其餘數字取自週報原文。</p>
+
+  <h3>這檔基金在做什麼：三層結構</h3>
+  <div class="note"><span class="tag">先看懂這三層</span>
+    <ul>
+      <li><span class="l">現股</span>：分散的中小型股，占淨值五到八成。</li>
+      <li><span class="s">期貨空單</span>：跟著現股等比例增減。</li>
+      <li><strong>每週重建的選擇權區間</strong>：買賣權防跌，賣買權收權利金。</li>
+    </ul>
+    <p>扣掉空單之後，<strong>實際淨曝險只有 5～30%</strong>。所以大跌時只跌一半不到，反彈時也只賺不到一半。</p>
+  </div>
+  <p>下表是各層的細節：</p>
+  <div class="tbl"><table>
+    <thead><tr><th>層</th><th>內容</th><th>占淨值</th><th>規則</th></tr></thead>
+    <tbody>
+      <tr><td><span class="l">現股</span><br><small>方向性部位</small></td><td>分散的中小型股</td><td class="num">約 50～80%</td><td>依進場訊號進出，不看指數點位。</td></tr>
+      <tr><td><span class="s">指數期貨空單</span><br><small>避險部位</small></td><td>放空台指期，加上買進賣權的 delta</td><td class="num">約 30～75%</td><td>隨現股等比例縮放，維持固定的 beta 目標。</td></tr>
+      <tr><td><strong>選擇權區間</strong><br><small>Collar</small></td><td>買價外賣權防跌，賣價外買權收權利金</td><td class="num">—</td><td>幾乎每週到期重建，指數移動就跟著上移或下移。</td></tr>
+      <tr><td>貨幣市場基金</td><td>現金管理</td><td class="num">35% → 0% → 10%</td><td>不計入曝險。崩跌期間一路用完，拿去買股票。</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>淨曝險 ＝ 現股 − 避險</strong>，大多數時間在 5～30% 之間。也就是說，這個帳戶雖然持有六、七成的股票，對大盤的實際曝險只有一兩成。</p>
+
+  <figure>
+    <div class="svgbox"><svg id="expChart" viewBox="0 0 720 320" width="100%" style="min-width:560px" role="img" aria-label="9/29 到 11/13 每日現股、避險與淨曝險比例"></svg></div>
+    <figcaption>每日曝險比例（占淨值）。<span class="l">紅線</span>是現股，<span class="s">綠線</span>是避險，藍色區塊是淨曝險。標記點是賣權 delta 擴大、淨曝險自動下降的日子。</figcaption>
+  </figure>
+
+  <h3>先精讀一週：11/9～11/13 週報逐句解讀</h3>
+  <p>先把一週的操作說明一句一句翻成白話，再看七週的全貌，會比較好懂。這一週剛好是國安基金進場、指數大漲 10% 的那週。</p>
+  <div class="note"><span class="tag">一句話</span><p>這一週它做了兩件事，都是在<strong>降低風險</strong>：股票減少約三成，之後新建的部位也會比較小；選擇權架了一個<strong>領口（Collar）</strong>，買遠一點的賣權防大跌，賣近一點的買權收權利金，代價是放棄一部分上漲。</p></div>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">第一件事：機械式降低持股</h4>
+  <div class="tbl"><table>
+    <thead><tr><th style="width:42%">原文</th><th>白話</th></tr></thead>
+    <tbody>
+      <tr><td>方向性部位依規則進出場</td><td>進出場由模型或規則決定，不是經理人憑感覺判斷。</td></tr>
+      <tr><td>出場部位的規模大於新進場部位，現股總額逐日下降，至週五減少約三成</td><td>賣出的多、新買的少，持股一週少了三成（每日曝險表：76.97% → 52.69%）。這是規則觸發後自然收縮，不是一次砍光。</td></tr>
+      <tr><td>各帳戶幅度相近</td><td>所有帳戶跑同一套模型，是系統化操作。</td></tr>
+      <tr><td>避險部位隨之同步調整</td><td>期貨空單跟著等比例減少（45.93% → 35.13%），讓避險比例維持不變。</td></tr>
+      <tr><td>依風控層級，下調新進場部位規模，既有部位不受影響</td><td>風控警戒升了一級，之後每筆新部位都會開得比較小。舊部位不強制砍，等它們依規則出場、被新部位取代後，整體曝險才慢慢降下來。</td></tr>
+    </tbody>
+  </table></div>
+  <p>這就是第 2 堂講的「期貨空單不一定是看空」：它的空單跟著現股走，現股減三成，空單也跟著減。如果只看期貨，會以為「空單減少＝轉多」，其實它是整體在降低曝險。</p>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">第二件事：建立領口，再往上調整</h4>
+  <div class="tbl"><table>
+    <thead><tr><th style="width:16%">時間</th><th>做了什麼</th><th>白話</th></tr></thead>
+    <tbody>
+      <tr><td><strong>週一</strong></td><td>續持 11/11 到期的週選，指數反彈後買進的賣權轉為價外。</td><td>保險離現價越來越遠，保護效果變差，時間價值也在流失。</td></tr>
+      <tr><td><strong>週二</strong></td><td>提前結清，改用 11/18 月選建立區間：<span class="s">買進賣權</span>距價平 −11.6～12.3%，<span class="l">賣出買權</span>距價平 +5.5～6.2%。</td><td>買賣權是防「大跌超過 12%」的災難保險，離得遠所以便宜。賣買權是收權利金來付保險費，代價是漲超過 6% 的部分賺不到。</td></tr>
+      <tr><td><strong>週三</strong></td><td>指數續漲到 44,257 點，兩端一起上移：賣權到 −8.7～9.4%，買權到 +4.2～4.9%。</td><td>賣權往上調，保護變近，更早開始發揮作用。原本賣出的買權越來越接近價平，風險變大，所以先買回（這一步通常是賠錢的），再往上賣新的。</td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:14px;color:var(--muted)">距離寫成一個範圍，是因為分散在幾個不同的履約價，或不同帳戶建倉的時點略有不同。這個帳戶持有的是中小型股，賣的卻是台指買權，所以不是標準的 Covered Call，前面風險表裡的「買權沒有真正被掩護」就是在講這件事。</p>
+
+  <div class="tbl"><table>
+    <thead><tr><th>區間</th><th>下方保護</th><th>上方封頂</th><th>區間寬度</th></tr></thead>
+    <tbody>
+      <tr><td>週二</td><td class="num s">約 −12%</td><td class="num l">約 +6%</td><td class="num">約 17～18%</td></tr>
+      <tr><td>週三</td><td class="num s">約 −9%</td><td class="num l">約 +4.5%</td><td class="num">約 13～14%</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>區間收窄代表什麼？</strong>保護拉近、封頂壓低，等於接受放棄更多上漲空間，換取更早開始的下跌保護。這套系統是按規則運作的，所以這不是經理人在猜方向，而是規則對「波動變大」的反應。搭配同一週減碼三成，整體是在降低波動、等待。</p>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">套回 11/18 的結算</h4>
+  <div class="tbl"><table>
+    <thead><tr><th>部位</th><th>推算履約價</th><th>11/18 的結果</th></tr></thead>
+    <tbody>
+      <tr><td><span class="s">買進賣權</span>（44,257 × (1 − 8.7～9.4%)）</td><td class="num">約 40,100～40,400</td><td>11/18 收 40,194.91 點，大約在價平附近結算，賠付不多。</td></tr>
+      <tr><td><span class="l">賣出買權</span>（44,257 × (1 + 4.2～4.9%)）</td><td class="num">約 46,100～46,400</td><td>指數遠低於履約價，全數歸零，權利金全收。</td></tr>
+    </tbody>
+  </table></div>
+  <p>所以這週真正避開後面下跌的，主要是<strong>先減碼三成股票</strong>，選擇權比較像附加的災難保險。履約價是按週報的比例推算的近似值，週報本身沒有寫出確切履約價。</p>
+
+  <h3>逐週操作紀錄</h3>
+  <div class="tbl"><table style="min-width:720px">
+    <thead><tr><th>週</th><th>指數 / 帳戶</th><th>平均曝險（股 / 避 / 淨）</th><th>操作重點</th></tr></thead>
+    <tbody>
+      <tr><td>9/28–10/2</td><td class="num"><span class="l">+0.94%</span><br><span class="l">+1.98%</span></td><td class="num">54 / 37 / 17</td><td>訊號增加，現股多約三成，<strong>期貨空單同步增加約二成三</strong>。週選區間：賣權 −2.1～2.7%、買權 +3.2～3.8%。指數走高後賣權上移。</td></tr>
+      <tr><td>10/5–10/8</td><td class="num"><span class="l">+1.73%</span><br><span class="l">+1.05%</span></td><td class="num">57 / 40 / 17</td><td>區間兩端都向價平靠近。<strong>國慶連假前加買賣權</strong>，避險升到 51%，淨曝險降到 7%。</td></tr>
+      <tr><td>10/12–10/16</td><td class="num"><span class="s">−4.47%</span><br><span class="l">+0.24%</span></td><td class="num">63 / 43 / 21</td><td>改用 10 月月選。週四急跌，賣權轉為價內，delta 從 −0.1～−0.2 擴大到 −0.6～−0.8。<strong>隱含波動率大升時，賣出更低的賣權組成價差</strong>，鎖住保險的獲利。</td></tr>
+      <tr><td>10/19–10/22</td><td class="num"><span class="s">−2.27%</span><br><span class="s">−1.01%</span></td><td class="num">61 / 50 / 11</td><td>週一加買遠價外賣權當尾端保護。週二賣權 delta 接近 −1，淨曝險只剩 2.9%。週三先賣掉尾端保護，再重建區間。另外建了約 1% 的期現貨逆價差套利。</td></tr>
+      <tr><td>10/26–10/30</td><td class="num"><span class="s">−1.80%</span><br><span class="s">−1.26%</span></td><td class="num">71 / 47 / 24</td><td>訊號擴大，<strong>下跌中現股加碼約一成五</strong>，避險按相同比例增加。指數大漲時區間上移，回落時下移。</td></tr>
+      <tr><td>11/2–11/6</td><td class="num"><span class="s">−12.19%</span><br><span class="s">−5.85%</span></td><td class="num">77 / 60 / 17</td><td>崩跌週。週二賣權 delta 到 −1.0，<strong>11/3 淨曝險轉為 −4%（淨空）</strong>。週三繼續加碼現股，貨幣基金用到幾乎為零。週五賣權再度轉為價內。</td></tr>
+      <tr><td>11/9–11/13</td><td class="num"><span class="l">+10.01%</span><br><span class="l">+4.62%</span></td><td class="num">64 / 42 / 23</td><td>國安基金進場、限空令上路的那一週。<strong>出場多於進場，現股減少約三成</strong>，風控層級下調新部位規模。區間改用 11/18 月選：賣權 −11.6～12.3%、買權 +5.5～6.2%。週三上移到 −8.7～9.4% 和 +4.2～4.9%。</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>從七週看出的五條規則</h3>
+  <div class="note"><p style="font-size:17px"><strong>大跌時只跌一半不到，反彈時也只賺不到一半。</strong>這五條規則就是它做到這件事的方法。</p></div>
+  <ol>
+    <li><strong>空單跟著持股走，不跟著看法走。</strong>10/26 那週現股加碼一成五，空單也同步增加。這就是「空單不等於看空」最直接的例子。</li>
+    <li><strong>賣權是自動煞車。</strong>指數越跌，賣權的 delta 越大，淨曝險自動下降：10/20 只剩 3%，11/3 甚至變成淨空 −4%。它不需要預測崩盤。</li>
+    <li><strong>保護區間跟著指數移動。</strong>漲了上移、跌了下移，連假前另外加買保險。</li>
+    <li><strong>恐慌時收割保險。</strong>10/15 大跌後隱含波動率飆高，它賣出更低的賣權組成價差，先把保險的獲利鎖起來。</li>
+    <li><strong>波動變大就縮部位，不管方向。</strong>11/9 那週指數大漲 10%，它反而減碼三成，依據是回撤和波動，不是對漲跌的判斷。</li>
+  </ol>
+
+  <div class="note warn"><span class="tag">代價</span><p>11/9～11/13 反彈週，指數上漲四天合計 +12.43%，這個帳戶只賺 +5.61%，上檔只抓到約 45%。避險和選擇權的虧損，抵掉了現股獲利的約 54%。平穩上漲的 10/5～10/8 也落後大盤 0.67 個百分點。少賠的代價，就是少賺。</p></div>
+
+  <h3>對照 11/18 的盤勢</h3>
+  <ul>
+    <li><strong>國安基金早在 11/9 就進場了</strong>，限空令也是同一天上路（依週報記載）。當週外資現貨還是賣超 968 億，期貨淨空最高到 104,271 口，週五才結束連續 11 天的現貨賣超。</li>
+    <li>11/11 加權指數收 44,257 點。依週三調整後的距離推算，11/18 月選的<strong>買進賣權履約價大約在 40,100～40,400</strong>，<strong>賣出買權大約在 46,100～46,400</strong>。</li>
+    <li>11/18 加權指數收 40,194.91 點，所以這批賣權大約在價平附近結算，賠付不多；賣出的買權則全數歸零，權利金全收。這是用比例推算的近似值，實際履約價以原報告為準。</li>
+    <li>這個帳戶在期交所的統計裡是「期貨淨空＋買權淨空」，但它本身持股偏多。這正好說明，籌碼統計上的空方不一定是在看空。</li>
+  </ul>
+
+  <h3>這套結構的風險：會不會多空雙巴？</h3>
+  <p><strong>會，而且這套結構有幾種雙巴特別容易發生。</strong></p>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">1. 選股和避險工具不一致：最典型的雙巴</h4>
+  <p>這個帳戶持有的是<strong>分散的中小型股</strong>，避險用的卻是<strong>台指期</strong>，而台指期約四成是台積電。所以只要出現「台積電大漲、中小型股下跌」，它就是兩邊一起賠：</p>
+  <ul>
+    <li>現股跌了，賠錢。</li>
+    <li>期貨空單跟著台積電漲，也賠錢。</li>
+  </ul>
+  <p>週報裡已經看得到這個現象：9 月全月帳戶 +1.78%，指數 +3.93%；10/1 那週，週三和週四由權值股帶動上漲，帳戶的超額報酬是負的。反過來，11/9 反彈週是中小型股漲得比較多，它才佔到便宜。這個風險看大盤是看不出來的，要看權值股和中小型股之間的強弱。</p>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">2. 選擇權來回調整的磨損</h4>
+  <p>V 型或劇烈震盪的盤，對這種結構最傷：</p>
+  <ul>
+    <li><strong>指數急漲</strong>：賣出的買權被突破，只能先買回來（認賠），再往上賣新的。</li>
+    <li><strong>指數又跌回來</strong>：剛上移的賣權保護不夠，又得重新調整。</li>
+  </ul>
+  <p>10/26 那週就是例子：週三上移、週四下移、週五賣權又接近價平。每一次調整都是一筆成本。</p>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">3. 賣出的買權其實沒有被股票「掩護」</h4>
+  <p>一般 Covered Call 是持有指數、賣指數的買權。但它持有的是中小型股，賣的卻是台指的買權。如果台積電單獨跳空大漲，指數衝過履約價，這批買權的虧損理論上沒有上限，手上的中小型股也不會同步漲來抵銷。</p>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">4. 現金和保證金的壓力（一般人最容易忽略）</h4>
+  <ul>
+    <li>11/5～11/6 貨幣基金只剩 <strong>0.02%</strong>，現金幾乎全部拿去買股票了。</li>
+    <li>下一個交易日（11/9）指數大漲 4.94%。期貨空單每天結算盈虧，空單的虧損必須當天用現金補保證金。</li>
+    <li>現金用完的時候碰上急漲，就可能被迫賣股票來補。那一週現股減少三成，有沒有部分是這個原因，週報沒寫，這是推測。但這個機制確實存在。</li>
+  </ul>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">5. 其他一般人看不到的問題</h4>
+  <div class="tbl"><table>
+    <thead><tr><th style="width:24%">風險</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td>總槓桿不低</td><td>11/3 現股 70% 加避險 74%，總曝險約 144%。淨曝險很小，不代表總部位很小。</td></tr>
+      <tr><td>流動性和處置股</td><td>中小型股在崩盤時可能賣不掉。週報自己也提到，8 月的注意及處置新制直接影響它的進出場條件。</td></tr>
+      <tr><td>期貨逆價差</td><td>放空的期貨如果是逆價差，到期收斂時空方會賠。除息旺季這筆避險成本特別明顯。</td></tr>
+      <tr><td>模型風險</td><td>規則是用過去的資料訓練出來的。市場結構一變（例如 6/11 之後的 Covered Call ETF），規則可能失效。</td></tr>
+      <tr><td>資料可信度</td><td>週報從 2026 年 4 月開始，只有半年多的紀錄，而且是自己公布、單一帳戶。</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>如果碰到長期多頭（例如 2025 年 4 月到 2026 年 4 月）</h3>
+  <p><strong>會明顯落後大盤，而且投資人很可能撐不住。</strong>週報從 2026 年 4 月才開始，沒有那段期間的實際績效，下面用結構推演。</p>
+  <h4 style="font-size:17px;margin:24px 0 8px">推演</h4>
+  <p>淨曝險 15～20%，代表大盤漲 100%，它從大盤拿到的大約只有 15～20%。再來是：</p>
+  <ul>
+    <li><strong>賣出的買權反覆被突破</strong>：多頭裡幾乎每週都要認賠、往上調。</li>
+    <li><strong>買進的賣權每週到期歸零</strong>：保險費一直在付。</li>
+    <li>剩下的只能靠<strong>選股的超額報酬</strong>來追。</li>
+  </ul>
+  <div class="tbl"><table>
+    <thead><tr><th>情境</th><th>0050 這類不避險的</th><th>這套結構（粗估）</th></tr></thead>
+    <tbody>
+      <tr><td>大盤 +50% 的多頭</td><td class="num l">約 +50%</td><td>約 +10%，加選股超額報酬，扣掉選擇權成本</td></tr>
+      <tr><td>大盤 −20% 的空頭</td><td class="num s">約 −20%</td><td>約 −8%（這次實際最大回撤 −8.1%）</td></tr>
+    </tbody>
+  </table></div>
+  <h4 style="font-size:17px;margin:24px 0 8px">週報裡的證據</h4>
+  <p>它的<strong>累計超額報酬</strong>很能說明問題：</p>
+  <ul>
+    <li>8 月下旬到 9 月，大盤溫和上漲，超額報酬<strong>連續五週收斂</strong>。</li>
+    <li>10～11 月大跌，超額報酬從 +20% 衝到 +34%。</li>
+    <li>11/9 反彈週，又掉回 +29.8%。</li>
+  </ul>
+  <p><strong>它的超額報酬幾乎都是在下跌時賺到的。</strong>在一年漲很多的多頭裡，它的報酬可能只有大盤的零頭。大部分投資人看到別人賺 50%、自己賺 10%，很難繼續持有。這套結構適合「最怕大跌」的資金，不適合「想抓住多頭」的資金。</p>
+  <div class="note"><span class="tag">下一步</span><p>這套做法怎麼翻成「只持有台積電、0050 和現金」的版本，放在第 5 堂「長期投資人怎麼用這些數字」的後半段，附計算器。</p></div>
+  <p style="font-size:13px;color:var(--muted)">資料來源為該帳戶自行公布的週報，未經獨立查核，而且只是單一帳戶，不代表外資或其他法人的整體行為。</p>
+</section>
+
+
+<div class="prevnext"><a class="prev" href="03_外資空單沒減少怎麼判斷.html"><span class="pn-label">← 上一堂</span><span>外資空單沒減少，怎麼判斷？</span></a><a class="next" href="05_長期投資人怎麼用這些數字.html"><span class="pn-label">下一堂 →</span><span>長期投資人怎麼用這些數字</span></a></div>
+
+<section class="lesson" id="sources">
+  <div class="lesson-head"><span class="num">REFERENCES</span><h2>資料來源</h2></div>
+  <ul class="sources">
+    <li>案例數據：永豐期貨〈台指期籌碼快訊〉、康和期貨〈大額交易人部位變化〉〈台指期技術線型〉，2026/11/18。</li>
+    <li>三大法人期貨部位：<a href="https://www.taifex.com.tw/cht/3/futContractsDate" target="_blank" rel="noopener">臺灣期貨交易所「三大法人：區分各期貨契約」</a>，臺股期貨（大台），2026/09/01～11/18。</li>
+    <li>00631L 受益權單位數與期貨部位：<a href="https://www.yuantaetfs.com/tradeInfo/pcf/00631L" target="_blank" rel="noopener">元大投信申購買回清單</a>，2026/09/01～11/18 每日資料。</li>
+    <li>其他正2 申購買回淨單位數：玩股網淨值及折溢價頁（<a href="https://www.wantgoo.com/stock/etf/00685l/discount-premium" target="_blank" rel="noopener">00685L</a>、<a href="https://www.wantgoo.com/stock/etf/00675l/discount-premium" target="_blank" rel="noopener">00675L</a>、<a href="https://www.wantgoo.com/stock/etf/00663l/discount-premium" target="_blank" rel="noopener">00663L</a>）。</li>
+    <li>00631L 三大法人買賣超：<a href="https://goodinfo.tw/tw/ShowBuySaleChart.asp?STOCK_ID=00631L" target="_blank" rel="noopener">Goodinfo</a>。</li>
+    <li>融資餘額：<a href="https://www.twse.com.tw/zh/trading/margin/mi-margn.html" target="_blank" rel="noopener">證交所融資融券餘額</a>、<a href="https://www.tpex.org.tw/zh-tw/mainboard/trading/margin-trading/transactions.html" target="_blank" rel="noopener">櫃買中心融資融券餘額</a>。融資維持率：<a href="https://www.wantgoo.com/blog/383464/post/189" target="_blank" rel="noopener">玩股網部落格</a>（作者自行計算）。</li>
+    <li>避險基金實例：<a href="https://monitor.silkenport.com/report/" target="_blank" rel="noopener">投資組合週報（TWDS）</a>，2026/09/28～11/13 共七期。</li>
+    <li>網路討論文：〈什麼叫做「外資還有九萬口空單」？「壓低結算」？〉及其留言（使用者提供）。</li>
+    <li>結算價算法：<a href="https://www.wantgoo.com/blog/122878/post/783" target="_blank" rel="noopener">玩股網：大台、小台、選擇權結算價怎麼算</a>。以臺灣期貨交易所官方契約規格為準。</li>
+    <li>00406A 策略與 25% 上限：<a href="https://technews.tw/2026/05/12/00406a/" target="_blank" rel="noopener">科技新報</a>、<a href="https://www.moneyweekly.com.tw/_Article?AID=258300" target="_blank" rel="noopener">理財周刊</a>、<a href="https://udn.com/news/story/7239/9629643" target="_blank" rel="noopener">聯合新聞網</a>。</li>
+    <li>正2 每日再平衡與期貨部位：<a href="https://www.stockfeel.com.tw/00631l-00663l-00675l-00685l/" target="_blank" rel="noopener">股感</a>、<a href="https://www.pocket.tw/school/articles/article-mwacxmbg/" target="_blank" rel="noopener">口袋學堂</a>、<a href="https://www.businesstoday.com.tw/article/category/183013/post/202607070021/" target="_blank" rel="noopener">今周刊</a>。</li>
+    <li>契約每點價值（大台 200、小台 50、微台 10 元）、期交稅與證交稅稅率、融資斷頭線 130%：一般市場常識，請以期交所、證交所公告為準。</li>
+  </ul>
+</section>
+
+</div></main>
+
+<footer><div class="wrap">避險操作 · 2026/11/18 案例版。本頁是籌碼判讀的教學框架，不是個人化的投資建議。</div></footer>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const fmt = n => (n<0?'−':(n>0?'+':'')) + Math.abs(Math.round(n)).toLocaleString('en-US');
+  function calc(){
+    const f = +$('c-foreign').value||0, t = +$('c-trust').value||0, d = +$('c-dealer').value||0, idx = +$('c-index').value||0;
+    const sum = f+t+d;
+    $('c-sum').textContent = fmt(sum);
+    $('c-sum').style.color = sum<0 ? 'var(--short)' : (sum>0 ? 'var(--long)' : 'var(--ink)');
+    $('c-retail').textContent = fmt(-sum);
+    const v = Math.abs(f)*200*idx;
+    $('c-value').textContent = (v/1e8).toLocaleString('en-US',{maximumFractionDigits:0}) + ' 億';
+    const share = f!==0 ? Math.min(100, Math.abs(t+d)/Math.abs(f)*100) : 0;
+    $('c-read').textContent = f<0
+      ? `外資的空單約有 ${share.toFixed(0)}% 被投信和自營的多單抵銷。真正要看的是合計 ${fmt(sum)} 口的 20 日變化，而不是外資單一數字。`
+      : '外資目前是淨多，對作關係反過來看即可。';
+  }
+  if ($('c-foreign')) { ['c-foreign','c-trust','c-dealer','c-index'].forEach(id => $(id).addEventListener('input', calc)); calc(); }
+
+  // Exposure chart (TWDS weekly reports)
+  (function(){
+    const D = [
+      ['9/29',48.47,33.87,14.59],['9/30',53.12,34.90,18.21],['10/1',59.31,43.77,15.54],['10/2',55.31,35.27,20.04],
+      ['10/5',57.89,35.19,22.70],['10/6',51.64,31.98,19.67],['10/7',59.00,39.48,19.53],['10/8',58.65,51.43,7.22],
+      ['10/12',62.72,39.50,23.21],['10/13',61.45,39.89,21.56],['10/14',67.84,42.10,25.74],['10/15',62.39,53.83,8.56],['10/16',62.37,38.20,24.18],
+      ['10/19',58.24,53.76,4.48],['10/20',56.96,54.09,2.87],['10/21',64.59,44.96,19.63],['10/22',63.92,46.63,17.28],
+      ['10/27',72.91,45.57,27.34],['10/28',70.38,44.49,25.89],['10/29',69.15,45.34,23.81],['10/30',70.87,52.91,17.96],
+      ['11/2',74.43,52.22,22.21],['11/3',70.05,74.02,-3.98],['11/4',82.04,48.94,33.10],['11/5',80.03,53.43,26.60],['11/6',78.12,71.81,6.31],
+      ['11/9',76.97,45.93,31.04],['11/10',69.70,43.07,26.64],['11/11',62.74,44.52,18.22],['11/12',58.54,39.09,19.45],['11/13',52.69,35.13,17.55]
+    ];
+    const svg = document.getElementById('expChart'); if(!svg) return;
+    const W=720,H=320,L=44,R=14,T=16,B=44, ymin=-10, ymax=90;
+    const x = i => L + i*(W-L-R)/(D.length-1);
+    const y = v => T + (ymax-v)*(H-T-B)/(ymax-ymin);
+    let s='';
+    for(let v=-10; v<=90; v+=20){ s+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule)" stroke-width="${v===0?1.5:1}"/>`;
+      s+=`<text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" font-family="IBM Plex Mono, monospace">${v}%</text>`; }
+    const area = `M${x(0)},${y(0)} ` + D.map((d,i)=>`L${x(i)},${y(d[3])}`).join(' ') + ` L${x(D.length-1)},${y(0)} Z`;
+    s+=`<path d="${area}" fill="var(--accent-soft)" stroke="none"/>`;
+    const line=(k,c,w)=>`<polyline fill="none" stroke="${c}" stroke-width="${w}" stroke-linejoin="round" points="${D.map((d,i)=>x(i)+','+y(d[k])).join(' ')}"/>`;
+    s+=line(1,'var(--long)',2)+line(2,'var(--short)',2)+line(3,'var(--accent)',2.5);
+    const ticks=['9/29','10/5','10/12','10/19','10/27','11/2','11/9','11/13'];
+    D.forEach((d,i)=>{ if(ticks.includes(d[0])) s+=`<text x="${x(i)}" y="${H-B+18}" text-anchor="middle" font-size="11" fill="var(--muted)">${d[0]}</text>`; });
+    const ev={'10/8':'連假加買賣權','10/15':'急跌','10/20':'淨曝險 3%','11/3':'轉淨空','11/6':'崩跌週'};
+    D.forEach((d,i)=>{ if(ev[d[0]]){ s+=`<circle cx="${x(i)}" cy="${y(d[3])}" r="4" fill="var(--sheet)" stroke="var(--accent)" stroke-width="2"/>`;
+      s+=`<text x="${x(i)}" y="${y(d[3])+(d[3]<5?-10:18)}" text-anchor="middle" font-size="10.5" fill="var(--ink)">${ev[d[0]]}</text>`; }});
+    s+=`<text x="${x(D.length-1)-4}" y="${y(52.69)-8}" text-anchor="end" font-size="11" fill="var(--long)" font-weight="700">現股</text>`;
+    s+=`<text x="${x(D.length-1)-4}" y="${y(35.13)-8}" text-anchor="end" font-size="11" fill="var(--short)" font-weight="700">避險</text>`;
+    s+=`<text x="${x(D.length-1)-4}" y="${y(17.55)-8}" text-anchor="end" font-size="11" fill="var(--accent)" font-weight="700">淨曝險</text>`;
+    s+=`<text x="${x(26)}" y="${y(88)}" text-anchor="middle" font-size="10.5" fill="var(--muted)">11/9 國安基金進場</text>`;
+    s+=`<line x1="${x(26)}" x2="${x(26)}" y1="${y(85)}" y2="${y(-10)}" stroke="var(--muted)" stroke-dasharray="3 4"/>`;
+    svg.innerHTML = s;
+  })();
+
+  // Foreign short vs investment-trust long (TAIFEX, TXF only)
+  (function(){
+    const svg=document.getElementById('oiChart'); if(!svg) return;
+    const D=[['9/1',-78706,76027],['9/2',-85329,75062],['9/3',-81575,74389],['9/4',-82389,76174],['9/7',-79399,75446],['9/8',-82262,74598],['9/9',-81066,74819],['9/10',-83918,74483],['9/11',-85067,74687],['9/14',-82658,74448],['9/15',-83223,72417],['9/16',-76351,73046],['9/17',-78674,74026],['9/18',-76110,75110],['9/21',-74081,74019],['9/22',-75568,73977],['9/23',-76084,73559],['9/24',-77031,72864],['9/29',-79029,72812],['9/30',-78151,73839],['10/1',-79554,74615],['10/2',-80304,74669],['10/5',-77004,75144],['10/6',-79517,76208],['10/7',-79101,76268],['10/8',-83194,76339],['10/12',-82806,76848],['10/13',-87239,77838],['10/14',-86814,78417],['10/15',-97582,78929],['10/16',-93675,82464],['10/19',-91145,84100],['10/20',-89748,84389],['10/21',-86072,83778],['10/22',-87297,83601],['10/27',-86043,85052],['10/28',-84917,87179],['10/29',-89522,87218],['10/30',-92241,89211],['11/2',-89379,89139],['11/3',-91812,86998],['11/4',-93647,89500],['11/5',-95651,90283],['11/6',-99930,90437],['11/9',-101771,95551],['11/10',-103473,98519],['11/11',-104271,101870],['11/12',-99573,98901],['11/13',-100870,99923],['11/16',-96787,92406],['11/17',-97896,91226],['11/18',-99438,93573]];
+    const W=720,H=300,L=56,R=16,T=16,B=40,ymin=70000,ymax=106000;
+    const x=i=>L+i*(W-L-R)/(D.length-1), y=v=>T+(ymax-v)*(H-T-B)/(ymax-ymin);
+    let s='';
+    for(let v=70000;v<=105000;v+=5000){s+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" font-family="IBM Plex Mono, monospace">${(v/1000)}k</text>`;}
+    const pl=(k,c)=>`<polyline fill="none" stroke="${c}" stroke-width="2.5" stroke-linejoin="round" points="${D.map((d,i)=>x(i)+','+y(Math.abs(d[k]))).join(' ')}"/>`;
+    s+=pl(1,'var(--short)')+pl(2,'var(--long)');
+    ['9/1','9/21','10/5','10/19','11/2','11/18'].forEach(t=>{const i=D.findIndex(d=>d[0]===t);s+=`<text x="${x(i)}" y="${H-B+18}" text-anchor="middle" font-size="11" fill="var(--muted)">${t}</text>`;});
+    const i11=D.findIndex(d=>d[0]==='11/11');
+    s+=`<text x="${x(i11)-6}" y="${y(104271)-6}" text-anchor="end" font-size="11" fill="var(--short)" font-weight="700">外資 −104,271</text>`;
+    s+=`<text x="${x(i11)+4}" y="${y(101870)+16}" text-anchor="start" font-size="11" fill="var(--long)" font-weight="700">投信 +101,870</text>`;
+    s+=`<text x="${x(0)+4}" y="${y(79500)-8}" font-size="11" fill="var(--short)" font-weight="700">外資淨空</text>`;
+    s+=`<text x="${x(0)+4}" y="${y(72400)+16}" font-size="11" fill="var(--long)" font-weight="700">投信淨多</text>`;
+    svg.innerHTML=s;
+  })();
+
+  // Exposure & ladder calculator
+  (function(){
+    const ids=['k-assets','k-stock','k-dd','k-maxdrop','k-high','k-index'];
+    if(!$('k-assets')) return;
+    const pct = v => (v*100).toFixed(1)+'%';
+    const wan = v => Math.round(v).toLocaleString('en-US')+' 萬';
+    function run(){
+      const A=Math.max(1,+$('k-assets').value||1), S=Math.max(0,+$('k-stock').value||0);
+      const d=Math.max(0.01,(+$('k-dd').value||15)/100), m=Math.min(0.9,Math.max(0.05,(+$('k-maxdrop').value||40)/100));
+      const H=Math.max(1,+$('k-high').value||1), P=Math.max(1,+$('k-index').value||1);
+      const allow = x => { if(x>=m) return 1; const r=1-(1-m)/(1-x); return r<=0?1:Math.min(1,d/r); };
+      const dd=Math.max(0,1-P/H), now=S/A, cap=allow(dd);
+      $('k-curdd').textContent = '−'+pct(dd);
+      $('k-now').textContent = pct(now);
+      $('k-allow').textContent = pct(cap);
+      const room = cap*A - S;
+      $('k-read').textContent = now>cap
+        ? `目前曝險高於這個位置的上限，超出約 ${wan(-room)}。如果指數跌到你假設的最大跌幅，虧損會超過你設定的 ${pct(d)}。`
+        : `在這個位置，持股最多可以到約 ${wan(cap*A)}，和目前相比還有約 ${wan(room)} 的空間。這是上限，不是目標；依加碼表分批，不必一次投入。`;
+      const levels=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7].filter(x=>x<m);
+      if(!levels.includes(m)) levels.push(m);
+      $('k-ladder').innerHTML = levels.map(x=>{
+        const e=allow(x), passed = x<dd-1e-9;
+        return `<tr style="${passed?'opacity:.45':''}"><td class="num">−${(x*100).toFixed(0)}%</td><td class="num">${Math.round(H*(1-x)).toLocaleString('en-US')}</td><td class="num">${pct(e)}</td><td class="num">${wan(e*A)}</td></tr>`;
+      }).join('');
+    }
+    ids.forEach(id=>$(id).addEventListener('input',run));
+    run();
+  })();
+
+  const KEY = 'taifex-course-checklist';
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { saved = {}; }
+  document.querySelectorAll('#checklist input').forEach(cb => {
+    cb.checked = !!saved[cb.id];
+    cb.addEventListener('change', () => {
+      saved[cb.id] = cb.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e) {}
+    });
+  });
+})();
+</script>

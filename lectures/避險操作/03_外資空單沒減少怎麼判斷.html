@@ -1,0 +1,397 @@
+<title>外資空單沒減少，怎麼判斷？</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a trading-desk study notebook — sticky lesson tabs, one reading column, ticket-like data blocks. Red = long/up, green = short/down (Taiwan convention). */
+:root{
+  --paper:#f5f6f8; --sheet:#ffffff; --ink:#1b2230; --muted:#5d6676; --rule:#d9dde5;
+  --accent:#1f4fa3; --accent-soft:#e6edf9;
+  --long:#c8292f; --long-soft:#fbe9ea; --short:#1d8a4a; --short-soft:#e5f4ea; --warn:#a86a00; --warn-soft:#fbf1dc;
+  --f-display:"Noto Serif TC","Songti TC",serif;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#11151c; --sheet:#181d26; --ink:#e6e9ef; --muted:#9aa3b2; --rule:#2c3340;
+  --accent:#7ea6f2; --accent-soft:#1d2a44;
+  --long:#ff6b70; --long-soft:#3a1c1f; --short:#4fcf86; --short-soft:#163023; --warn:#e8b04a; --warn-soft:#3a2e15; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11151c; --sheet:#181d26; --ink:#e6e9ef; --muted:#9aa3b2; --rule:#2c3340;
+  --accent:#7ea6f2; --accent-soft:#1d2a44;
+  --long:#ff6b70; --long-soft:#3a1c1f; --short:#4fcf86; --short-soft:#163023; --warn:#e8b04a; --warn-soft:#3a2e15; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sheet)}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{background:var(--sheet);border-bottom:1px solid var(--rule)}
+header.top .wrap{padding-block:40px 28px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.3;margin:0}
+h1{font-size:clamp(28px,5vw,40px);font-weight:900;margin-top:8px}
+.lede{color:var(--muted);max-width:62ch;margin:12px 0 0}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--sheet);border-bottom:1px solid var(--rule)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto}
+nav.tabs a{flex:0 0 auto;padding:12px 14px;color:var(--muted);text-decoration:none;font-weight:500;border-bottom:3px solid transparent;font-size:15px}
+nav.tabs a:hover{color:var(--ink)}
+nav.tabs a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+main .wrap{padding-block:12px 64px}
+section.lesson{padding-top:40px;scroll-margin-top:56px}
+.lesson-head{display:grid;gap:6px;padding-bottom:16px;border-bottom:2px solid var(--ink);margin-bottom:24px}
+.lesson-head .num{font-family:var(--f-mono);font-size:13px;color:var(--accent);letter-spacing:.08em}
+.lesson-head h2{font-size:clamp(24px,4vw,30px);font-weight:900}
+.lesson-head p{margin:0;color:var(--muted)}
+h3{font-size:20px;font-weight:600;margin:36px 0 10px}
+p{margin:0 0 14px;max-width:66ch}
+ul,ol{margin:0 0 14px;padding-left:1.4em;max-width:64ch}
+li{margin-bottom:6px}
+strong{font-weight:700}
+.l{color:var(--long);font-weight:700}.s{color:var(--short);font-weight:700}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.tbl{overflow-x:auto;margin:8px 0 20px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet)}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:480px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:700;background:var(--accent-soft);font-size:14px}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.note{background:var(--accent-soft);border-radius:6px;padding:14px 16px;margin:16px 0 20px}
+.note.warn{background:var(--warn-soft)}
+.note p:last-child,.note ul:last-child{margin-bottom:0}
+.note .tag{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:4px}
+.note.warn .tag{color:var(--warn)}
+.debate{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 20px}
+.debate > div{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;min-width:0}
+.debate h4{margin:0 0 6px;font-size:15px}
+.debate p{font-size:15px;margin-bottom:8px}
+.verdict{border-top:1px dashed var(--rule);padding-top:8px;font-size:14px;color:var(--muted)}
+@media (max-width:620px){.debate{grid-template-columns:1fr}}
+figure{margin:16px 0 24px;background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:12px}
+figure .svgbox{overflow-x:auto}
+figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+svg text{font-family:var(--f-body)}
+.calc{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:16px;margin:12px 0 24px}
+.calc .row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:560px){.calc .row{grid-template-columns:1fr}}
+.calc label{display:grid;gap:4px;font-size:14px;color:var(--muted)}
+.calc input{font-family:var(--f-mono);font-size:16px;padding:8px 10px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink);width:100%;box-sizing:border-box}
+.calc input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.calc .out{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+.calc .big{font-family:var(--f-mono);font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.check{list-style:none;padding:0}
+.check li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--rule);margin:0}
+.check input{margin-top:6px;width:18px;height:18px;accent-color:var(--accent);flex:0 0 auto}
+.check label{min-width:0}
+.check small{display:block;color:var(--muted);font-size:13px}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.pill.use{background:var(--short-soft);color:var(--short)}
+.pill.discount{background:var(--warn-soft);color:var(--warn)}
+.pill.ignore{background:var(--long-soft);color:var(--long)}
+.sources{font-size:13px;color:var(--muted)}
+.sources a{color:var(--accent)}
+footer .wrap{padding-block:24px 48px;border-top:1px solid var(--rule);font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0}
+[hidden]{display:none!important}
+nav.tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.lede a{color:var(--accent);margin-left:6px;white-space:nowrap}
+.prevnext{display:flex;justify-content:space-between;gap:12px;margin:48px 0 0;padding-top:20px;border-top:1px solid var(--rule)}
+.prevnext a{display:grid;gap:2px;text-decoration:none;color:var(--ink);background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:12px 16px;max-width:48%;min-width:0}
+.prevnext a:hover{border-color:var(--accent)}
+.prevnext .pn-label{font-size:13px;color:var(--accent)}
+.prevnext .next{text-align:right;margin-left:auto}</style>
+<link rel="stylesheet" href="../../assets/gsfox-annotate.css">
+<script src="../../assets/gsfox-annotate.js" defer></script>
+<!-- gsfox-annotate:injected -->
+
+
+<header class="top"><div class="wrap">
+  <div class="eyebrow">專題報告 · 避險操作 · 第 3 堂（共 6 堂）</div>
+  <h1>避險操作</h1>
+  <p class="lede">台指期籌碼判讀與避險實務，以 2026/11/18 盤勢和一檔避險基金的週報為案例。<a href="../../index.html#lectures">回專題報告</a></p>
+</div></header>
+
+<nav class="tabs" aria-label="課程章節"><div class="wrap">
+  <a href="01_期貨是什麼多單空單與零和.html">1 · 期貨是什麼</a>
+  <a href="02_誰站在哪一邊市場角色地圖.html">2 · 誰站在哪一邊</a>
+  <a href="03_外資空單沒減少怎麼判斷.html" aria-current="page">3 · 外資空單怎麼判斷</a>
+  <a href="04_實例一檔避險基金的七週.html">4 · 避險基金實例</a>
+  <a href="05_長期投資人怎麼用這些數字.html">5 · 長期投資人怎麼用</a>
+  <a href="06_負Gamma與選擇權到期日暴跌.html">6 · 負 Gamma 與到期日</a>
+</div></nav>
+
+<main><div class="wrap">
+
+<section class="lesson" id="lesson-2b">
+  <div class="lesson-head">
+    <span class="num">第 3 堂</span>
+    <h2>外資空單沒減少，怎麼判斷？</h2>
+    <p>用期交所、元大投信、證交所的實際數據，拆解 10 萬口外資空單背後是誰。</p>
+  </div>
+
+  <p>指數從 10/6 的高點跌了兩成，中間反彈 10%，國安基金也進場了，外資大台淨空單卻一直維持在 10 萬口上下。光看這個數字，會以為外資還在看空。用期交所的「三大法人：區分各期貨契約」把它拆開來看。</p>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">第一步：拿投信部位對照</h4>
+  <div class="tbl"><table>
+    <thead><tr><th>日期</th><th>外資</th><th>投信</th><th>自營</th><th>三大法人合計</th><th>加權指數</th></tr></thead>
+    <tbody>
+      <tr><td>9/1</td><td class="num s">−78,706</td><td class="num l">+76,027</td><td class="num">−990</td><td class="num">−3,669</td><td class="num">—</td></tr>
+      <tr><td>10/2</td><td class="num s">−80,304</td><td class="num l">+74,669</td><td class="num">−1,006</td><td class="num">−6,641</td><td class="num">48,476</td></tr>
+      <tr><td>10/15</td><td class="num s">−97,582</td><td class="num l">+78,929</td><td class="num">+6,894</td><td class="num">−11,759</td><td class="num">—</td></tr>
+      <tr><td>11/6</td><td class="num s">−99,930</td><td class="num l">+90,437</td><td class="num">+1,680</td><td class="num">−7,813</td><td class="num">39,702</td></tr>
+      <tr><td>11/11</td><td class="num s">−104,271</td><td class="num l">+101,870</td><td class="num">+33</td><td class="num">−2,368</td><td class="num">44,257</td></tr>
+      <tr><td>11/16</td><td class="num s">−96,787</td><td class="num l">+92,406</td><td class="num">+1,159</td><td class="num">−3,222</td><td class="num">—</td></tr>
+      <tr><td>11/18</td><td class="num s">−99,438</td><td class="num l">+93,573</td><td class="num">−1,457</td><td class="num">−7,322</td><td class="num">40,195</td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:14px;color:var(--muted)">只計大台（臺股期貨），單位是口。11/16 的數字和原文完全一致。</p>
+
+  <figure>
+    <div class="svgbox"><svg id="oiChart" viewBox="0 0 720 300" width="100%" style="min-width:560px" role="img" aria-label="9 月到 11/18 外資淨空單與投信淨多單比較"></svg></div>
+    <figcaption><span class="s">綠線</span>是外資淨空單（取絕對值），<span class="l">紅線</span>是投信淨多單。兩條線幾乎一起走，中間的差距就是三大法人合計。</figcaption>
+  </figure>
+
+  <div class="note"><span class="tag">查到的結果</span>
+    <p><strong>9/1 到 11/11，外資空單增加 25,565 口，投信多單增加 25,843 口，幾乎是一口對一口。</strong>三大法人合計從頭到尾只在 −11,759 到 +2,745 之間擺動。</p>
+    <p>所以外資多出來的空單，幾乎全部是在接投信多出來的多單。投信多單會增加，最可能的原因是正2 這類 ETF 在下跌中被大量申購。換句話說，<strong>「外資空單沒減少」真正的意思是「散戶透過 ETF 的槓桿沒減少」</strong>。</p>
+    <p>連 11/11 之後「外資回補 4,833 口」也一樣：同一段時間投信多單減少了 8,297 口。外資是跟著對手方一起縮，不是轉多。</p>
+  </div>
+  <h4 style="font-size:17px;margin:24px 0 8px">查證：00631L 受益權單位數</h4>
+  <p>用元大投信公布的每日申購買回清單，查最大的正2 ETF（00631L 元大台灣50正2）9/1～11/18 的變化：</p>
+  <div class="tbl"><table>
+    <thead><tr><th>日期</th><th>已發行單位數</th><th>當日增減</th><th>淨值</th><th>基金規模</th><th>持有大台</th></tr></thead>
+    <tbody>
+      <tr><td>9/1</td><td class="num">72.32 億</td><td class="num s">−1.44 億</td><td class="num">37.50</td><td class="num">2,712 億</td><td class="num">44,555 口</td></tr>
+      <tr><td>10/2</td><td class="num">68.73 億</td><td class="num">+0.03 億</td><td class="num">39.52</td><td class="num">2,716 億</td><td class="num">43,200 口</td></tr>
+      <tr><td>10/15 急跌</td><td class="num">73.10 億</td><td class="num l">+3.24 億</td><td class="num">36.80</td><td class="num">2,691 億</td><td class="num">44,750 口</td></tr>
+      <tr><td>11/6 崩跌週五</td><td class="num">97.62 億</td><td class="num l">+6.32 億</td><td class="num">26.28</td><td class="num">2,566 億</td><td class="num">51,515 口</td></tr>
+      <tr><td>11/11 反彈高點</td><td class="num">97.93 億</td><td class="num s">−0.39 億</td><td class="num">32.53</td><td class="num">3,186 億</td><td class="num">57,650 口</td></tr>
+      <tr><td>11/13</td><td class="num">97.29 億</td><td class="num s">−0.23 億</td><td class="num">31.92</td><td class="num">3,105 億</td><td class="num">56,175 口</td></tr>
+      <tr><td>11/18</td><td class="num"><strong>102.64 億</strong></td><td class="num l">+2.20 億</td><td class="num">26.82</td><td class="num">2,753 億</td><td class="num">53,205 口</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="tbl"><table>
+    <thead><tr><th>期間</th><th>盤勢</th><th>00631L 申購減贖回（估算）</th></tr></thead>
+    <tbody>
+      <tr><td>9/1～10/2</td><td>指數創新高</td><td class="num s">約 −196 億（淨贖回）</td></tr>
+      <tr><td>10/5～11/6</td><td>從高點跌兩成</td><td class="num l">約 +941 億（淨申購）</td></tr>
+      <tr><td>11/9～11/13</td><td>反彈 10%</td><td class="num s">約 −12 億（小幅贖回）</td></tr>
+      <tr><td>11/16～11/18</td><td>再跌回 4 萬點</td><td class="num l">約 +144 億（淨申購）</td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:14px;color:var(--muted)">申購贖回金額用「每日單位增減 × 當日淨值」加總估算，不是官方數字。</p>
+
+  <div class="note warn"><span class="tag">查證結果</span>
+    <p><strong>散戶越跌越用槓桿買，漲了就贖回。</strong>指數創高的 9 月淨贖回，跌兩成的 10 月到 11 月初淨申購約 941 億，光 11/6 一天就約 166 億。11/18 單位數來到 102.64 億，是這段期間的新高。這正是「浮額沒清、散戶還沒投降」的直接證據。</p>
+    <p><strong>00631L 一檔就解釋了投信多單增加的一半左右。</strong>9/1 到 11/11，00631L 持有的大台增加 13,095 口，投信整體增加 25,843 口。剩下的可能來自其他正2（00675L、00663L、00685L 等）和其他基金，這幾檔我沒有查。</p>
+    <p><strong>單位數增加四成，期貨口數只增加約兩成。</strong>因為淨值跌了三分之一，每個單位需要的期貨變少。這就是每日再平衡：跌越多，正2 要賣掉越多期貨。</p>
+    <p><strong>11/11 之後的「外資回補」也對得上。</strong>11/11 到 11/18，00631L 的大台從 57,650 口減到 53,205 口，減少 4,445 口。這段期間散戶仍在申購，期貨卻減少，是指數下跌後的再平衡。外資空單跟著縮，不是轉多。</p>
+  </div>
+  <p><strong>底部要看什麼：</strong>指數下跌時，正2 單位數開始<strong>減少</strong>，代表散戶開始認賠贖回、不再攤平。在那之前，這個數字每創一次新高，就代表上方多壓了一批想解套的槓桿多單。</p>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">其他三檔正2也一樣</h4>
+  <div class="tbl"><table>
+    <thead><tr><th>ETF</th><th>10/5～11/18 淨申購（估算）</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>00631L 元大台灣50正2</td><td class="num l">約 +1,073 億</td><td>元大官網每日資料</td></tr>
+      <tr><td>00685L 群益臺灣加權正2</td><td class="num l">約 +499 億</td><td>11/10 單日申購 8.2 億單位</td></tr>
+      <tr><td>00675L 富邦臺灣加權正2</td><td class="num l">約 +51 億</td><td></td></tr>
+      <tr><td>00663L 國泰臺灣加權正2</td><td class="num l">約 +42 億</td><td></td></tr>
+      <tr><td><strong>合計</strong></td><td class="num l"><strong>約 +1,665 億</strong></td><td></td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:14px;color:var(--muted)">後三檔用玩股網整理的每日申購買回淨單位數 × 當日淨值估算，只有最近 30 個交易日的資料。</p>
+  <p>四檔正2 在下跌的六週裡合計淨流入約 1,665 億，而且都集中在急跌的日子。</p>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">誰在買正2？</h4>
+  <p>證交所每天公布每檔股票的三大法人買賣超。00631L 最近一個月的數字（Goodinfo 整理）：</p>
+  <div class="tbl"><table>
+    <thead><tr><th>10/20～11/18</th><th>買賣超（張）</th><th>金額（估）</th></tr></thead>
+    <tbody>
+      <tr><td>外資</td><td class="num s">−12.7 萬</td><td class="num s">約 −38 億</td></tr>
+      <tr><td>投信</td><td class="num l">+1.8 萬</td><td class="num l">約 +5 億</td></tr>
+      <tr><td>自營商</td><td class="num s">−230 萬</td><td class="num s">約 −698 億</td></tr>
+      <tr><td><strong>三大法人合計</strong></td><td class="num s"><strong>−241 萬</strong></td><td class="num s"><strong>約 −730 億</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note warn"><span class="tag">答案：散戶</span>
+    <p><strong>外資不但沒買，還是賣方。</strong>11/18 外資只持有 23,713 張，占 0.23%。</p>
+    <p><strong>自營商一個月賣了 230 萬張。</strong>這裡的自營商主要是造市和參與申購的券商：它們向元大申購新的單位，再在交易所賣出。230 萬張就是 23 億單位，同期 00631L 的單位數也增加了約 25 億，兩邊對得上。</p>
+    <p>三大法人合計賣超約 730 億，<strong>另一邊接手的就是散戶（第四法人）</strong>。11/6 崩跌那天，自營商單日賣超 46 萬張，散戶單日買進約 120 億。</p>
+  </div>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">正2 本身也被融資買</h4>
+  <div class="tbl"><table>
+    <thead><tr><th>00631L 融資餘額</th><th>10/2</th><th>11/6</th><th>11/13</th><th>11/17</th></tr></thead>
+    <tbody>
+      <tr><td>張數</td><td class="num">184,070</td><td class="num">377,128</td><td class="num">314,104</td><td class="num">366,826</td></tr>
+    </tbody>
+  </table></div>
+  <p>一個月翻倍，11/17 約 98 億。正2 本身已經是兩倍槓桿，再用融資買，等於槓桿上再加槓桿。這是散戶槓桿裡最脆弱的一塊。</p>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">第二步：看三大法人合計的 20 日趨勢</h4>
+  <p>三大法人合計的 20 日平均，從 10 月初的約 <span class="mono">−6,000</span> 口，收斂到 11/18 的約 <span class="mono">−2,400</span> 口。指數越跌，合計淨空越小，和原文說的「跌到 40000 點淨空單會變少」一致。這個數字反映的是位階和情緒，是同步或落後指標，不能拿來預測方向。</p>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">判斷流程表</h4>
+  <div class="tbl"><table style="min-width:680px">
+    <thead><tr><th style="width:10%">步驟</th><th style="width:24%">要問的問題</th><th>怎麼查</th><th>如果「是」</th><th>如果「否」</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>投信多單有沒有同步增加？</td><td>期交所「三大法人：區分各期貨契約」，比較同一段期間外資和投信的變化。</td><td>外資空單是 ETF 的對手方。<strong>跳到步驟 4</strong>，改看散戶槓桿。<br><small>（這段期間就是這種情況）</small></td><td>多出來的空單是外資自己的，進入步驟 2。</td></tr>
+      <tr><td><strong>2</strong></td><td>外資現貨是不是也在賣？</td><td>證交所三大法人買賣超、外資持股比例。</td><td>現貨賣了、空單卻沒減，代表不只是避險，進入步驟 3。</td><td>空單是在保護沒賣掉的持股，屬於避險盤，不必過度解讀。</td></tr>
+      <tr><td><strong>3</strong></td><td>指數是不是還在季線下方、高點一路下降？</td><td>日線圖的均線和高低點。</td><td>趨勢盤（CTA）還在空方，要等趨勢翻轉才會回補，屬於落後指標。</td><td>可能是套利盤，看期貨的逆價差大小。</td></tr>
+      <tr><td><strong>4</strong></td><td>散戶的總槓桿有沒有退？</td><td>正2 受益權單位數、融資餘額和維持率、小台和微台散戶多空比。</td><td>浮額清掉了，比較接近底部。</td><td>散戶還在加碼，底部還沒做完。</td></tr>
+    </tbody>
+  </table></div>
+
+  <h4 style="font-size:17px;margin:24px 0 8px">真正的回補長什麼樣子</h4>
+  <p><strong>「空單不再增加」和「空單開始回補」是兩回事。</strong>有意義的回補，通常幾個訊號會一起出現：</p>
+  <ul>
+    <li>外資淨空單幾天內連續減少 5,000～10,000 口以上，而且<strong>投信多單沒有同步減少</strong>。如果投信也一起減，那只是對手方在縮。</li>
+    <li>外資現貨轉為買超，並且連續好幾天。</li>
+    <li>台幣止貶回升。</li>
+    <li>期貨的逆價差收斂（空方回補會把期貨價格推高）。</li>
+    <li>指數站回 60 分線的壓力區（41,000～41,500）以上。</li>
+  </ul>
+  <div class="note warn"><span class="tag">對長期投資人</span><p>外資期貨空單是落後指標，不要等它降下來才行動。這次查到的結果更說明，它主要反映的是散戶透過 ETF 的槓桿。該盯的順序是：外資現貨和台幣、散戶總槓桿，最後才是外資期貨空單。</p></div>
+</section>
+
+
+<div class="prevnext"><a class="prev" href="02_誰站在哪一邊市場角色地圖.html"><span class="pn-label">← 上一堂</span><span>誰站在哪一邊：市場角色地圖</span></a><a class="next" href="04_實例一檔避險基金的七週.html"><span class="pn-label">下一堂 →</span><span>實例：一檔避險基金的七週</span></a></div>
+
+<section class="lesson" id="sources">
+  <div class="lesson-head"><span class="num">REFERENCES</span><h2>資料來源</h2></div>
+  <ul class="sources">
+    <li>案例數據：永豐期貨〈台指期籌碼快訊〉、康和期貨〈大額交易人部位變化〉〈台指期技術線型〉，2026/11/18。</li>
+    <li>三大法人期貨部位：<a href="https://www.taifex.com.tw/cht/3/futContractsDate" target="_blank" rel="noopener">臺灣期貨交易所「三大法人：區分各期貨契約」</a>，臺股期貨（大台），2026/09/01～11/18。</li>
+    <li>00631L 受益權單位數與期貨部位：<a href="https://www.yuantaetfs.com/tradeInfo/pcf/00631L" target="_blank" rel="noopener">元大投信申購買回清單</a>，2026/09/01～11/18 每日資料。</li>
+    <li>其他正2 申購買回淨單位數：玩股網淨值及折溢價頁（<a href="https://www.wantgoo.com/stock/etf/00685l/discount-premium" target="_blank" rel="noopener">00685L</a>、<a href="https://www.wantgoo.com/stock/etf/00675l/discount-premium" target="_blank" rel="noopener">00675L</a>、<a href="https://www.wantgoo.com/stock/etf/00663l/discount-premium" target="_blank" rel="noopener">00663L</a>）。</li>
+    <li>00631L 三大法人買賣超：<a href="https://goodinfo.tw/tw/ShowBuySaleChart.asp?STOCK_ID=00631L" target="_blank" rel="noopener">Goodinfo</a>。</li>
+    <li>融資餘額：<a href="https://www.twse.com.tw/zh/trading/margin/mi-margn.html" target="_blank" rel="noopener">證交所融資融券餘額</a>、<a href="https://www.tpex.org.tw/zh-tw/mainboard/trading/margin-trading/transactions.html" target="_blank" rel="noopener">櫃買中心融資融券餘額</a>。融資維持率：<a href="https://www.wantgoo.com/blog/383464/post/189" target="_blank" rel="noopener">玩股網部落格</a>（作者自行計算）。</li>
+    <li>避險基金實例：<a href="https://monitor.silkenport.com/report/" target="_blank" rel="noopener">投資組合週報（TWDS）</a>，2026/09/28～11/13 共七期。</li>
+    <li>網路討論文：〈什麼叫做「外資還有九萬口空單」？「壓低結算」？〉及其留言（使用者提供）。</li>
+    <li>結算價算法：<a href="https://www.wantgoo.com/blog/122878/post/783" target="_blank" rel="noopener">玩股網：大台、小台、選擇權結算價怎麼算</a>。以臺灣期貨交易所官方契約規格為準。</li>
+    <li>00406A 策略與 25% 上限：<a href="https://technews.tw/2026/05/12/00406a/" target="_blank" rel="noopener">科技新報</a>、<a href="https://www.moneyweekly.com.tw/_Article?AID=258300" target="_blank" rel="noopener">理財周刊</a>、<a href="https://udn.com/news/story/7239/9629643" target="_blank" rel="noopener">聯合新聞網</a>。</li>
+    <li>正2 每日再平衡與期貨部位：<a href="https://www.stockfeel.com.tw/00631l-00663l-00675l-00685l/" target="_blank" rel="noopener">股感</a>、<a href="https://www.pocket.tw/school/articles/article-mwacxmbg/" target="_blank" rel="noopener">口袋學堂</a>、<a href="https://www.businesstoday.com.tw/article/category/183013/post/202607070021/" target="_blank" rel="noopener">今周刊</a>。</li>
+    <li>契約每點價值（大台 200、小台 50、微台 10 元）、期交稅與證交稅稅率、融資斷頭線 130%：一般市場常識，請以期交所、證交所公告為準。</li>
+  </ul>
+</section>
+
+</div></main>
+
+<footer><div class="wrap">避險操作 · 2026/11/18 案例版。本頁是籌碼判讀的教學框架，不是個人化的投資建議。</div></footer>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const fmt = n => (n<0?'−':(n>0?'+':'')) + Math.abs(Math.round(n)).toLocaleString('en-US');
+  function calc(){
+    const f = +$('c-foreign').value||0, t = +$('c-trust').value||0, d = +$('c-dealer').value||0, idx = +$('c-index').value||0;
+    const sum = f+t+d;
+    $('c-sum').textContent = fmt(sum);
+    $('c-sum').style.color = sum<0 ? 'var(--short)' : (sum>0 ? 'var(--long)' : 'var(--ink)');
+    $('c-retail').textContent = fmt(-sum);
+    const v = Math.abs(f)*200*idx;
+    $('c-value').textContent = (v/1e8).toLocaleString('en-US',{maximumFractionDigits:0}) + ' 億';
+    const share = f!==0 ? Math.min(100, Math.abs(t+d)/Math.abs(f)*100) : 0;
+    $('c-read').textContent = f<0
+      ? `外資的空單約有 ${share.toFixed(0)}% 被投信和自營的多單抵銷。真正要看的是合計 ${fmt(sum)} 口的 20 日變化，而不是外資單一數字。`
+      : '外資目前是淨多，對作關係反過來看即可。';
+  }
+  if ($('c-foreign')) { ['c-foreign','c-trust','c-dealer','c-index'].forEach(id => $(id).addEventListener('input', calc)); calc(); }
+
+  // Exposure chart (TWDS weekly reports)
+  (function(){
+    const D = [
+      ['9/29',48.47,33.87,14.59],['9/30',53.12,34.90,18.21],['10/1',59.31,43.77,15.54],['10/2',55.31,35.27,20.04],
+      ['10/5',57.89,35.19,22.70],['10/6',51.64,31.98,19.67],['10/7',59.00,39.48,19.53],['10/8',58.65,51.43,7.22],
+      ['10/12',62.72,39.50,23.21],['10/13',61.45,39.89,21.56],['10/14',67.84,42.10,25.74],['10/15',62.39,53.83,8.56],['10/16',62.37,38.20,24.18],
+      ['10/19',58.24,53.76,4.48],['10/20',56.96,54.09,2.87],['10/21',64.59,44.96,19.63],['10/22',63.92,46.63,17.28],
+      ['10/27',72.91,45.57,27.34],['10/28',70.38,44.49,25.89],['10/29',69.15,45.34,23.81],['10/30',70.87,52.91,17.96],
+      ['11/2',74.43,52.22,22.21],['11/3',70.05,74.02,-3.98],['11/4',82.04,48.94,33.10],['11/5',80.03,53.43,26.60],['11/6',78.12,71.81,6.31],
+      ['11/9',76.97,45.93,31.04],['11/10',69.70,43.07,26.64],['11/11',62.74,44.52,18.22],['11/12',58.54,39.09,19.45],['11/13',52.69,35.13,17.55]
+    ];
+    const svg = document.getElementById('expChart'); if(!svg) return;
+    const W=720,H=320,L=44,R=14,T=16,B=44, ymin=-10, ymax=90;
+    const x = i => L + i*(W-L-R)/(D.length-1);
+    const y = v => T + (ymax-v)*(H-T-B)/(ymax-ymin);
+    let s='';
+    for(let v=-10; v<=90; v+=20){ s+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule)" stroke-width="${v===0?1.5:1}"/>`;
+      s+=`<text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" font-family="IBM Plex Mono, monospace">${v}%</text>`; }
+    const area = `M${x(0)},${y(0)} ` + D.map((d,i)=>`L${x(i)},${y(d[3])}`).join(' ') + ` L${x(D.length-1)},${y(0)} Z`;
+    s+=`<path d="${area}" fill="var(--accent-soft)" stroke="none"/>`;
+    const line=(k,c,w)=>`<polyline fill="none" stroke="${c}" stroke-width="${w}" stroke-linejoin="round" points="${D.map((d,i)=>x(i)+','+y(d[k])).join(' ')}"/>`;
+    s+=line(1,'var(--long)',2)+line(2,'var(--short)',2)+line(3,'var(--accent)',2.5);
+    const ticks=['9/29','10/5','10/12','10/19','10/27','11/2','11/9','11/13'];
+    D.forEach((d,i)=>{ if(ticks.includes(d[0])) s+=`<text x="${x(i)}" y="${H-B+18}" text-anchor="middle" font-size="11" fill="var(--muted)">${d[0]}</text>`; });
+    const ev={'10/8':'連假加買賣權','10/15':'急跌','10/20':'淨曝險 3%','11/3':'轉淨空','11/6':'崩跌週'};
+    D.forEach((d,i)=>{ if(ev[d[0]]){ s+=`<circle cx="${x(i)}" cy="${y(d[3])}" r="4" fill="var(--sheet)" stroke="var(--accent)" stroke-width="2"/>`;
+      s+=`<text x="${x(i)}" y="${y(d[3])+(d[3]<5?-10:18)}" text-anchor="middle" font-size="10.5" fill="var(--ink)">${ev[d[0]]}</text>`; }});
+    s+=`<text x="${x(D.length-1)-4}" y="${y(52.69)-8}" text-anchor="end" font-size="11" fill="var(--long)" font-weight="700">現股</text>`;
+    s+=`<text x="${x(D.length-1)-4}" y="${y(35.13)-8}" text-anchor="end" font-size="11" fill="var(--short)" font-weight="700">避險</text>`;
+    s+=`<text x="${x(D.length-1)-4}" y="${y(17.55)-8}" text-anchor="end" font-size="11" fill="var(--accent)" font-weight="700">淨曝險</text>`;
+    s+=`<text x="${x(26)}" y="${y(88)}" text-anchor="middle" font-size="10.5" fill="var(--muted)">11/9 國安基金進場</text>`;
+    s+=`<line x1="${x(26)}" x2="${x(26)}" y1="${y(85)}" y2="${y(-10)}" stroke="var(--muted)" stroke-dasharray="3 4"/>`;
+    svg.innerHTML = s;
+  })();
+
+  // Foreign short vs investment-trust long (TAIFEX, TXF only)
+  (function(){
+    const svg=document.getElementById('oiChart'); if(!svg) return;
+    const D=[['9/1',-78706,76027],['9/2',-85329,75062],['9/3',-81575,74389],['9/4',-82389,76174],['9/7',-79399,75446],['9/8',-82262,74598],['9/9',-81066,74819],['9/10',-83918,74483],['9/11',-85067,74687],['9/14',-82658,74448],['9/15',-83223,72417],['9/16',-76351,73046],['9/17',-78674,74026],['9/18',-76110,75110],['9/21',-74081,74019],['9/22',-75568,73977],['9/23',-76084,73559],['9/24',-77031,72864],['9/29',-79029,72812],['9/30',-78151,73839],['10/1',-79554,74615],['10/2',-80304,74669],['10/5',-77004,75144],['10/6',-79517,76208],['10/7',-79101,76268],['10/8',-83194,76339],['10/12',-82806,76848],['10/13',-87239,77838],['10/14',-86814,78417],['10/15',-97582,78929],['10/16',-93675,82464],['10/19',-91145,84100],['10/20',-89748,84389],['10/21',-86072,83778],['10/22',-87297,83601],['10/27',-86043,85052],['10/28',-84917,87179],['10/29',-89522,87218],['10/30',-92241,89211],['11/2',-89379,89139],['11/3',-91812,86998],['11/4',-93647,89500],['11/5',-95651,90283],['11/6',-99930,90437],['11/9',-101771,95551],['11/10',-103473,98519],['11/11',-104271,101870],['11/12',-99573,98901],['11/13',-100870,99923],['11/16',-96787,92406],['11/17',-97896,91226],['11/18',-99438,93573]];
+    const W=720,H=300,L=56,R=16,T=16,B=40,ymin=70000,ymax=106000;
+    const x=i=>L+i*(W-L-R)/(D.length-1), y=v=>T+(ymax-v)*(H-T-B)/(ymax-ymin);
+    let s='';
+    for(let v=70000;v<=105000;v+=5000){s+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" font-family="IBM Plex Mono, monospace">${(v/1000)}k</text>`;}
+    const pl=(k,c)=>`<polyline fill="none" stroke="${c}" stroke-width="2.5" stroke-linejoin="round" points="${D.map((d,i)=>x(i)+','+y(Math.abs(d[k]))).join(' ')}"/>`;
+    s+=pl(1,'var(--short)')+pl(2,'var(--long)');
+    ['9/1','9/21','10/5','10/19','11/2','11/18'].forEach(t=>{const i=D.findIndex(d=>d[0]===t);s+=`<text x="${x(i)}" y="${H-B+18}" text-anchor="middle" font-size="11" fill="var(--muted)">${t}</text>`;});
+    const i11=D.findIndex(d=>d[0]==='11/11');
+    s+=`<text x="${x(i11)-6}" y="${y(104271)-6}" text-anchor="end" font-size="11" fill="var(--short)" font-weight="700">外資 −104,271</text>`;
+    s+=`<text x="${x(i11)+4}" y="${y(101870)+16}" text-anchor="start" font-size="11" fill="var(--long)" font-weight="700">投信 +101,870</text>`;
+    s+=`<text x="${x(0)+4}" y="${y(79500)-8}" font-size="11" fill="var(--short)" font-weight="700">外資淨空</text>`;
+    s+=`<text x="${x(0)+4}" y="${y(72400)+16}" font-size="11" fill="var(--long)" font-weight="700">投信淨多</text>`;
+    svg.innerHTML=s;
+  })();
+
+  // Exposure & ladder calculator
+  (function(){
+    const ids=['k-assets','k-stock','k-dd','k-maxdrop','k-high','k-index'];
+    if(!$('k-assets')) return;
+    const pct = v => (v*100).toFixed(1)+'%';
+    const wan = v => Math.round(v).toLocaleString('en-US')+' 萬';
+    function run(){
+      const A=Math.max(1,+$('k-assets').value||1), S=Math.max(0,+$('k-stock').value||0);
+      const d=Math.max(0.01,(+$('k-dd').value||15)/100), m=Math.min(0.9,Math.max(0.05,(+$('k-maxdrop').value||40)/100));
+      const H=Math.max(1,+$('k-high').value||1), P=Math.max(1,+$('k-index').value||1);
+      const allow = x => { if(x>=m) return 1; const r=1-(1-m)/(1-x); return r<=0?1:Math.min(1,d/r); };
+      const dd=Math.max(0,1-P/H), now=S/A, cap=allow(dd);
+      $('k-curdd').textContent = '−'+pct(dd);
+      $('k-now').textContent = pct(now);
+      $('k-allow').textContent = pct(cap);
+      const room = cap*A - S;
+      $('k-read').textContent = now>cap
+        ? `目前曝險高於這個位置的上限，超出約 ${wan(-room)}。如果指數跌到你假設的最大跌幅，虧損會超過你設定的 ${pct(d)}。`
+        : `在這個位置，持股最多可以到約 ${wan(cap*A)}，和目前相比還有約 ${wan(room)} 的空間。這是上限，不是目標；依加碼表分批，不必一次投入。`;
+      const levels=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7].filter(x=>x<m);
+      if(!levels.includes(m)) levels.push(m);
+      $('k-ladder').innerHTML = levels.map(x=>{
+        const e=allow(x), passed = x<dd-1e-9;
+        return `<tr style="${passed?'opacity:.45':''}"><td class="num">−${(x*100).toFixed(0)}%</td><td class="num">${Math.round(H*(1-x)).toLocaleString('en-US')}</td><td class="num">${pct(e)}</td><td class="num">${wan(e*A)}</td></tr>`;
+      }).join('');
+    }
+    ids.forEach(id=>$(id).addEventListener('input',run));
+    run();
+  })();
+
+  const KEY = 'taifex-course-checklist';
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { saved = {}; }
+  document.querySelectorAll('#checklist input').forEach(cb => {
+    cb.checked = !!saved[cb.id];
+    cb.addEventListener('change', () => {
+      saved[cb.id] = cb.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e) {}
+    });
+  });
+})();
+</script>
